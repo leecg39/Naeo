@@ -170,3 +170,14 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 수집: 요청 주소는 `https://rss.blog.naver.com/{검증된 블로그 ID}.xml`만(사용자 URL 미사용으로 SSRF 차단), 리디렉션 거부, 10초 제한, 2MB 상한. 404·빈 채널은 `BLOG_NOT_FOUND`(재시도 안 함), 연결 실패·429·5xx는 `FETCH_FAILED`(재시도). 글은 `blog.naver.com/{id}/{글번호}`인 것만 정규 주소로 저장하고, 블로그·글 번호 기준으로 넣거나 갱신한다(수집 시각 보존, RSS에서 빠진 글은 유지).
 
 분석(`rules-v1`, 새 규칙): 발행 빈도(최근 30일 12개 만점)·최근성(3일 이내 만점)·제목 구체성(15~45자 비율)·태그 활용(3개 이상 비율)·주제 일관성(최다 분류 60% 이상 만점) 각 20점. 근거 수치, 14점 미만 기준의 할 일, 새 규칙 고지를 보고서에 저장한다. AI 브리핑 인용 근거는 공식 API·공급자가 없어 `aiCitation.status='not_configured'`로 저장하고 지어내지 않는다.
+
+## P3.4 무료 진단(메이트) API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/mate/diagnose` | POST | 공개(로그인 시 내 기록 연결) | `{blog}`: 블로그 ID 또는 `blog.naver.com`·`m.blog.naver.com` 주소만. RSS 즉시 수집·분석, 공유 토큰(22자) 발급, 30일 보관. 제한: IP 10분 5회, 블로그 시간당 10회, 전체 시간당 300회 | 400 `INVALID_BLOG`, 404 `BLOG_NOT_FOUND`, 502 `FETCH_FAILED`, 429 |
+| `/api/mate/reports/:token` | GET | 공개(공유 링크) | 만료 전 리포트. 작성자 정보 없음 | 404 |
+| `/api/mate/reports` | GET | 회원 | 내 진단 기록(만료 제외) | 401 |
+| `/api/mate/reports/:token` | DELETE | 회원(작성자) | 삭제 후 공유 링크도 404 | 404 |
+
+화면: `/mate`·`/mate/s` 입력은 실제 진단(예시 리포트·localStorage 제거), `/mate/s?r=토큰`은 공유 리포트 열기, `/dashboard/mate`는 내 기록 목록·삭제(없으면 빈 상태), `/dashboard/ai-picks`는 원본 계정 인용 목록·지표를 지우고 미설정 상태. 하루 진단 한도(회원 20회/KST)는 `/api/scans`에 적용.

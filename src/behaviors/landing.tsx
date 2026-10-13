@@ -2,6 +2,9 @@
 
 import type { InstallBehavior } from "@/lib/behavior";
 import { text } from "@/lib/behavior";
+import { api } from "@/lib/api-client";
+import MateReportView from "@/components/content/MateReportView";
+import type { MateReport } from "@/server/mate/mate";
 
 const CRITERIA = [
   ["독자·목적(누구에게)", "누구를 위해, 왜 쓴 글인지 분명하게 밝혀요", 3],
@@ -72,6 +75,12 @@ export const installLanding: InstallBehavior = (root, tools) => {
     const el = document.createElement(tag); el.textContent = content; el.style.cssText = css; parent.append(el); return el;
   };
 
+  // 로그인하지 않았으면 /dashboard/mate가 서버에서 로그인 화면으로 보낸다(세션 쿠키는 HttpOnly라 여기서 읽지 않는다).
+  const showReport = (report: MateReport) => tools.openDialog("내 블로그 진단 리포트", <MateReportView report={report} onContinue={() => { tools.closeDialog(); tools.navigate("/dashboard/mate"); }} />);
+  const sharedToken = tools.pathname === "/mate/s" ? new URLSearchParams(window.location.search).get("r") : null;
+  if (sharedToken && /^[A-Za-z0-9_-]{22}$/.test(sharedToken)) {
+    api<MateReport>(`/api/mate/reports/${sharedToken}`).then(showReport).catch(error => tools.toast(error instanceof Error ? error.message : "리포트를 열지 못했습니다."));
+  }
   const blogInputs = [...root.querySelectorAll<HTMLInputElement>('input[placeholder*="blog.naver.com"]')];
   let pending = false;
   const runDiagnosis = (input?: HTMLInputElement) => {
@@ -85,19 +94,16 @@ export const installLanding: InstallBehavior = (root, tools) => {
     }
     pending = true;
     blogInputs.forEach(el => el.setAttribute("aria-invalid", "false"));
-    tools.openDialog("블로그 진단", <div role="status" aria-live="polite"><p>{id} 블로그의 예시 진단 리포트를 준비하고 있어요.</p><progress aria-label="예시 진단 준비 중" style={{width:"100%",accentColor:"#03c75a"}} /><p style={{color:"var(--muted)",fontSize:13,marginTop:12}}>이 체험은 샘플 데이터로 동작합니다.</p></div>);
-    later(() => {
-      pending = false;
-      const result = { blogId: id, createdAt: new Date().toISOString(), demo: true, matched: 2, total: 5, criteria: CRITERIA.map(([label,description,score]) => ({label,description,matched:score,total:10})), nextAction: "다음 글엔 선택지 2개 이상을 나란히 놓은 비교 표를 하나 넣어보세요." };
-      try { localStorage.setItem("naeo-clone:diagnosis", JSON.stringify(result)); window.dispatchEvent(new Event("naeo-store")); } catch { /* The report remains available when storage is disabled. */ }
-      tools.openDialog("내 블로그 진단 리포트", <div>
-        <p style={{fontSize:13,color:"var(--muted)",marginBottom:16}}>{id} · 예시 리포트 · 실제 블로그 분석 결과가 아닙니다.</p>
-        <p style={{fontSize:28,fontWeight:800,color:"#03c75a",marginBottom:16}}>공식 5가지 기준 중 2개 충족</p>
-        <div style={{display:"grid",gap:10}}>{CRITERIA.map(([label,description,score]) => <div className="naeo-panel" key={label} style={{padding:12}}><div style={{display:"flex",justifyContent:"space-between",gap:12,fontWeight:700}}><span>{label}</span><span style={{color:"#03c75a",whiteSpace:"nowrap"}}>{score} / 10</span></div><p style={{fontSize:13,color:"var(--muted)",marginTop:4}}>{description}</p><progress max={10} value={score} aria-label={label} style={{width:"100%",height:5,accentColor:"#03c75a"}} /></div>)}</div>
-        <p style={{margin:"20px 0",fontSize:14}}>{result.nextAction}</p>
-        <button className="naeo-button" onClick={() => { tools.closeDialog(); tools.navigate("/dashboard/mate"); }}>대시보드에서 계속하기</button>
-      </div>);
-    }, 850);
+    tools.openDialog("블로그 진단", <div role="status" aria-live="polite"><p>{id} 블로그의 공개 글을 네이버 RSS에서 불러와 진단하고 있어요.</p><progress aria-label="진단 중" style={{width:"100%",accentColor:"#03c75a"}} /></div>);
+    void (async () => {
+      try {
+        const report = await api<MateReport>("/api/mate/diagnose", { method: "POST", body: { blog: value } });
+        showReport(report);
+      } catch (error) {
+        tools.closeDialog();
+        tools.toast(error instanceof Error ? error.message : "진단하지 못했습니다. 잠시 후 다시 시도해주세요.");
+      } finally { pending = false; }
+    })();
   };
   on(root, "input", event => {
     const input = event.target;

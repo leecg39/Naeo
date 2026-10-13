@@ -1,9 +1,10 @@
 import { database, type Database } from './database';
-import { register, login, logout, requireUser, requireAdmin, requireTerms } from './auth';
+import { register, login, logout, requireUser, requireAdmin, requireTerms, sessionUser } from './auth';
 import {accountApi} from './account-api';
 import {contentApi} from './content/content-api';
 import {inquiryApi,publicInquiryApi} from './inquiries/inquiry-api';
 import {scanApi} from './jobs/scan-api';
+import {memberMateApi,publicMateApi} from './mate/mate-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -35,6 +36,8 @@ export function createApi(getDatabase:()=>Database=database) {
     }
     const publicInquiry=await publicInquiryApi(db,request);
     if(publicInquiry)return publicInquiry;
+    const publicMate=await publicMateApi(db,request,sessionUser(db,cookieToken(request)));
+    if(publicMate)return publicMate;
     const user=requireUser(db,cookieToken(request));
     if(path==='/api/auth/me'&&method==='GET') return json({data:{user,profile:getProfile(db,user.id)}});
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
@@ -48,6 +51,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(inquiryResponse)return inquiryResponse;
     const scanResponse=await scanApi(db,request,user);
     if(scanResponse)return scanResponse;
+    const mateResponse=memberMateApi(db,request,user);
+    if(mateResponse)return mateResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

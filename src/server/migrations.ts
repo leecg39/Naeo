@@ -401,4 +401,21 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX scan_results_blog ON scan_results(blog_id,measured_at DESC);
   `,
+}, {
+  version: 12,
+  name: 'mate_reports',
+  sql: `
+    CREATE TABLE mate_reports (
+      token TEXT PRIMARY KEY NOT NULL CHECK(length(token)=22),
+      owner_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+      naver_id TEXT NOT NULL CHECK(length(naver_id) BETWEEN 2 AND 50),
+      score INTEGER NOT NULL CHECK(score BETWEEN 0 AND 100),
+      report_json TEXT NOT NULL CHECK(json_valid(report_json)),
+      post_count INTEGER NOT NULL CHECK(post_count>=0),
+      created_at INTEGER NOT NULL,
+      expires_at INTEGER NOT NULL CHECK(expires_at>created_at)
+    ) STRICT;
+    CREATE INDEX mate_reports_owner ON mate_reports(owner_id,created_at DESC);
+    CREATE INDEX mate_reports_expiry ON mate_reports(expires_at);
+  `,
 }];

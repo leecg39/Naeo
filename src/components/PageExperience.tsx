@@ -12,9 +12,10 @@ import { installAnalysis } from '@/behaviors/analysis';
 import { installContent } from '@/behaviors/content';
 import { installRanking } from '@/behaviors/ranking';
 import { installAuxiliary } from '@/behaviors/auxiliary';
+import { installMateHistory } from '@/behaviors/mate-history';
 const install:InstallBehavior=(root,tools)=>{
  const page=tools.pathname;
- const adapter=(page==='/'||page==='/mate')?installLanding:page==='/dashboard/recommendations'?installRecommendations:page==='/dashboard/write'?installWrite:page==='/dashboard/settings'?installSettings:page==='/ranking'?installRanking:(page==='/dashboard'||page==='/dashboard/ai-picks'||page==='/dashboard/competitors')?installAnalysis:(page.startsWith('/blog')||page==='/updates'||page==='/contact')?installContent:undefined;
+ const adapter=(page==='/'||page==='/mate'||page==='/mate/s')?installLanding:page==='/dashboard/recommendations'?installRecommendations:page==='/dashboard/mate'?installMateHistory:page==='/dashboard/write'?installWrite:page==='/dashboard/settings'?installSettings:page==='/ranking'?installRanking:(page==='/dashboard'||page==='/dashboard/ai-picks'||page==='/dashboard/competitors')?installAnalysis:(page.startsWith('/blog')||page==='/updates'||page==='/contact')?installContent:undefined;
  const cleanup=adapter?.(root,tools), shared=installAuxiliary(root,tools);
  return()=>{cleanup?.();shared?.()};
 };
