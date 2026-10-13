@@ -63,13 +63,23 @@ function growth(box:El,d:DashboardData):El{
  })[0] as El;
 }
 
-/** 랭킹은 측정 데이터와 집계(P5) 전이라 원본 계정의 순위를 지우고 '데이터 없음'으로 둔다. */
+/** 랭킹 카드(전체·월간·주간): 랭킹 공개 회원이면 실제 순위, 아니면 '랭킹 비공개'. 원본 계정의 순위는 남기지 않는다. */
 function ranking(box:El,d:DashboardData):El{
+ let card=0;
+ const rankCard=(n:El)=>{
+  const r=d.rankings[card++];
+  const show=r?.public&&r.rank!==null;
+  const desc=!r?.public?'랭킹 비공개 · 설정에서 공개할 수 있어요':r.rank===null?'이 기간 진단 기록 없음':`${r.participants}명 중 · 상위 ${Math.max(1,Math.round(r.rank/r.participants*100))}%`;
+  return mapTree([n],x=>{
+   if(cls('mui-1c2fwzk')(x))return[set(x,show?String(r.rank):'-')];
+   if(cls('mui-16eue6i')(x))return show?[x]:[withAttrs(set(x,''),{style:'display:none'})];
+   if(cls('mui-qtwa3i')(x))return[set(x,desc)];
+   if(cls('mui-1r1o9d4')(x))return[set(x,show?'순위 화면에서 자세히 보기':'랭킹 공개 후 집계됩니다')];
+   return undefined;
+  })[0] as El;
+ };
  return mapTree([box],n=>{
-  if(cls('mui-1c2fwzk')(n))return[set(n,'-')];
-  if(cls('mui-16eue6i')(n))return[withAttrs(set(n,''),{style:'display:none'})];
-  if(cls('mui-qtwa3i')(n))return[set(n,'순위 데이터 없음')];
-  if(cls('mui-1r1o9d4')(n))return[set(n,'랭킹 집계 전입니다')];
+  if(cls('mui-tprmff')(n))return[rankCard(n)];
   if(n.attrs['aria-label']==='랭킹 범위'){const [first,second]=n.children.filter(isEl);return[withChildren(n,[first,set(second,d.blog?.category||'내 분류')])];}
   return undefined;
  })[0] as El;

@@ -50,7 +50,9 @@ export const installRanking: InstallBehavior = (root, tools) => {
   let mateOnly = false;
   let sortIndex = 0;
   let descending = true;
-  let period = "전체 랭킹";
+  // 서버가 그린 화면이면 선택된 탭이 현재 기간이다.
+  let period = periodTabs.find(tab => tab.getAttribute("aria-selected") === "true")?.textContent?.trim() || "전체 랭킹";
+  const serverRendered = periodTabs.some(tab => tab.dataset.period);
 
   const status = document.createElement("p");
   status.setAttribute("role", "status");
@@ -112,8 +114,8 @@ export const installRanking: InstallBehavior = (root, tools) => {
       if (arrow) style(arrow, { opacity: index === sortIndex ? "1" : ".4", transform: index === sortIndex && !descending ? "rotate(180deg)" : "" });
     }
     status.style.display = "block";
-    status.textContent = `${selectedTopic === "전체" ? "전체 분야" : selectedTopic}${mateOnly ? " · 네이버 메이트" : ""} · 저장된 ${rows.length}명 중 ${matching.length}명` +
-      (period === "전체 랭킹" ? "" : ` · ${periodDescription()} ${period} 미리보기 — 공개 캡처의 전체 랭킹 기록을 표시합니다.`);
+    status.textContent = `${selectedTopic === "전체" ? "전체 분야" : selectedTopic}${mateOnly ? " · 네이버 메이트" : ""} · ${serverRendered ? "" : "저장된 "}${rows.length}명 중 ${matching.length}명` +
+      (serverRendered || period === "전체 랭킹" ? "" : ` · ${periodDescription()} ${period} 미리보기 — 공개 캡처의 전체 랭킹 기록을 표시합니다.`);
     empty.style.display = matching.length ? "none" : "block";
     if (moreButton) style(moreButton, { display: matching.length === rows.length ? "" : "none" });
   };
@@ -148,7 +150,9 @@ export const installRanking: InstallBehavior = (root, tools) => {
       event.preventDefault(); mateOnly = !mateOnly; update(); return;
     }
     if (button && periodTabs.includes(button)) {
-      event.preventDefault(); period = text(button); update(); return;
+      event.preventDefault();
+      if (button.dataset.period) { tools.navigate(`/ranking?period=${button.dataset.period}`); return; }
+      period = text(button); update(); return;
     }
     if (button === moreButton) {
       event.preventDefault();

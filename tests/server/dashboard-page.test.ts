@@ -114,3 +114,15 @@ test('user-controlled text is never interpreted as HTML',async t=>{
  assert.equal(all(page.body,n=>n.tag==='script').length,0);
  assert.ok(!JSON.stringify(page.body).includes('"onerror"'));
 });
+
+test('ranking cards show my real rank when I opted into the public ranking',async t=>{
+ const {db,user}=await fixture(t);
+ const blog=createBlog(db,user,{naverId:'dash_blog',title:'블로그',category:'여행',isPrimary:true});
+ saveResult(db,user,blog.id,[{title:'제주 3박4일 여행 코스 총정리',category:'여행',tags:['a','b','c'],publishedAt:NOW-DAY}],NOW-3600_000);
+ const hidden=await buildDashboardPage(db,user,NOW);
+ assert.ok(byClass(hidden.body,'mui-qtwa3i').every(n=>/비공개/.test(text(n))),'private by default');
+ db.prepare('UPDATE profiles SET ranking_public=1 WHERE user_id=?').run(user);
+ const page=await buildDashboardPage(db,user,NOW);
+ assert.deepEqual(byClass(page.body,'mui-1c2fwzk').map(text),['1','1','1']);
+ assert.ok(byClass(page.body,'mui-qtwa3i').every(n=>/1명 중/.test(text(n))));
+});

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect, redirect } from 'next/navigation';
 import { getCapturedPage } from '@/lib/pages';
 import PageExperience from '@/components/PageExperience';
-import { pageUser,adminPageUser } from '@/server/current-user';
+import { pageUser,adminPageUser,currentUser } from '@/server/current-user';
 import { cache } from 'react';
 import { contentDatabase,resolveDatabasePage } from '@/server/content/public-pages';
 import { activeAnnouncement } from '@/server/content/announcements';
@@ -13,6 +13,8 @@ import { buildRecommendationsPage } from '@/server/keywords/recommendations-page
 import { buildCompetitorsPage } from '@/server/competitors/competitors-page';
 import DraftsWorkspace from '@/components/writing/DraftsWorkspace';
 import { ImagesLibrary,SharedImages } from '@/components/writing/ImagePages';
+import { buildRankingPage } from '@/server/ranking/ranking-page';
+import { ensureConfirmed } from '@/server/ranking/ranking-api';
 import { database } from '@/server/database';
 import AnnouncementBar from '@/components/content/AnnouncementBar';
 import type { CapturedPageData } from '@/types/site';
@@ -41,6 +43,11 @@ export default async function Page({params,searchParams}:Props){
  if(path==='/admin'||path.startsWith('/admin/')){await adminPageUser(path);notFound();}
  if(path.startsWith('/social/banner-preview'))redirect('/');
  if(path==='/auth/google')redirect('/login?provider=google&demo=1');
+ if(path==='/ranking'){
+  const sp=await searchParams,viewer=await currentUser(),db=database();
+  ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
+  return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
+ }
  const fromDb=await databasePage(path);
  if(fromDb===null)notFound();
  if(fromDb)return withNotice(path,fromDb);

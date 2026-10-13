@@ -600,4 +600,35 @@ export const migrations = [{
       updated_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 18,
+  name: 'ranking_snapshots',
+  sql: `
+    CREATE TABLE ranking_periods (
+      period_type TEXT NOT NULL CHECK(period_type IN ('week','month')),
+      period_key TEXT NOT NULL CHECK(length(period_key) BETWEEN 7 AND 10),
+      starts_at INTEGER NOT NULL,
+      ends_at INTEGER NOT NULL CHECK(ends_at>starts_at),
+      entries INTEGER NOT NULL CHECK(entries>=0),
+      confirmed_at INTEGER NOT NULL,
+      PRIMARY KEY(period_type,period_key)
+    ) STRICT;
+    CREATE TABLE ranking_snapshots (
+      period_type TEXT NOT NULL,
+      period_key TEXT NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      nickname TEXT NOT NULL,
+      naver_id TEXT NOT NULL,
+      category TEXT NOT NULL DEFAULT '',
+      rank INTEGER NOT NULL CHECK(rank>0),
+      score INTEGER NOT NULL CHECK(score BETWEEN 0 AND 100),
+      total INTEGER NOT NULL CHECK(total>0),
+      measured_at INTEGER NOT NULL,
+      criteria_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(criteria_json)),
+      PRIMARY KEY(period_type,period_key,user_id),
+      FOREIGN KEY(period_type,period_key) REFERENCES ranking_periods(period_type,period_key) ON DELETE CASCADE
+    ) STRICT;
+    CREATE INDEX ranking_snapshots_rank ON ranking_snapshots(period_type,period_key,rank);
+    CREATE INDEX ranking_snapshots_user ON ranking_snapshots(user_id);
+  `,
 }];
