@@ -205,3 +205,16 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/actions/:id` | PATCH | 회원(본인) | `{status:'open'|'done',version}` 완료·해제 | 404, 409 |
 
 `/dashboard/competitors`는 원본 계정의 키워드별 상위 노출 표(다른 블로그 글 제목)를 지우고 내 경쟁 블로그 표·추가 폼·내 점수 대비 차이를 보여준다. 키워드별 상위 노출 비교는 네이버 검색 API 미설정으로 표시. 운영 주의: worker는 코드 배포 뒤 다시 시작해야 새 로직(예: 할 일 생성)이 적용된다.
+
+## P4.1·P4.3 초안·사진·공유 링크 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/drafts` | GET·POST | 회원 | 목록: `q`(제목·키워드)·`status`·페이지, 본문 제외·사진 수 포함. 생성: `title≤200`, `keyword≤60`, `category≤30`, `body≤10만 자`(512KB 요청) | 400, 401 |
+| `/api/drafts/:id` | GET·PATCH·DELETE | 회원(본인) | 상세는 수정 이력 포함. 상태 전이 draft→ready/archived, ready→draft/published/archived, published→archived, archived→draft. 본문 없으면 ready·published 불가. 삭제 시 사진은 내 사진함에 남고 공유 링크는 삭제 | 404, 409 `VERSION_CONFLICT`·`INVALID_TRANSITION`·`DRAFT_EMPTY` |
+| `/api/drafts/:id/restore` | POST | 회원(본인) | `{revision,version}` 제목·본문만 되돌림 | 404 |
+| `/api/media` | GET·POST | 회원 | 업로드는 multipart(`file`, `draftId?`). 형식은 파일 서명으로만 판정(JPG·PNG·WEBP), 10MB, 글당 20장·계정당 500장, 시간당 120회. 디스크에는 무작위 이름으로 저장(`NAEO_UPLOAD_DIR`, 기본 `var/uploads`) | 413, 415, 409 `TOO_MANY_IMAGES` |
+| `/api/media/:publicId` | GET·PATCH·DELETE | 회원(본인) | 공개 id는 22자 무작위. 응답 `nosniff`·`CSP sandbox`·`private, no-store`. PATCH `{draftId|null}` 연결 변경, DELETE는 파일도 삭제 | 401, 404 |
+| `/api/drafts/:id/shares` | GET·POST | 회원(본인) | 공유 링크 `{days:1~30}` | 404 |
+| `/api/shares/:token` | GET(공개)·DELETE(본인) | — | 글 제목·사진 목록. DELETE는 철회 | 404 `SHARE_EXPIRED` |
+| `/api/shares/:token/media/:publicId` | GET(공개) | — | 그 글에 연결된 사진만 | 404 |

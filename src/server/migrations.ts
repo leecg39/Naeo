@@ -490,4 +490,56 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX action_items_owner ON action_items(owner_id,created_at DESC);
   `,
+}, {
+  version: 15,
+  name: 'drafts_media',
+  sql: `
+    CREATE TABLE drafts (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 200),
+      keyword TEXT NOT NULL DEFAULT '' CHECK(length(keyword)<=60),
+      category TEXT NOT NULL DEFAULT '' CHECK(length(category)<=30),
+      body TEXT NOT NULL DEFAULT '' CHECK(length(body)<=100000),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','ready','published','archived')),
+      published_at INTEGER,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX drafts_owner ON drafts(owner_id,updated_at DESC);
+    CREATE TABLE draft_revisions (
+      id TEXT PRIMARY KEY NOT NULL,
+      draft_id TEXT NOT NULL REFERENCES drafts(id) ON DELETE CASCADE,
+      version INTEGER NOT NULL CHECK(version>0),
+      title TEXT NOT NULL,
+      body TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      UNIQUE(draft_id,version)
+    ) STRICT;
+    CREATE TABLE media_files (
+      id TEXT PRIMARY KEY NOT NULL,
+      public_id TEXT NOT NULL UNIQUE CHECK(length(public_id)=22),
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      draft_id TEXT REFERENCES drafts(id) ON DELETE SET NULL,
+      mime TEXT NOT NULL CHECK(mime IN ('image/jpeg','image/png','image/webp')),
+      size INTEGER NOT NULL CHECK(size BETWEEN 1 AND 10485760),
+      storage_key TEXT NOT NULL UNIQUE CHECK(length(storage_key) BETWEEN 10 AND 80),
+      original_name TEXT NOT NULL DEFAULT '' CHECK(length(original_name)<=120),
+      source TEXT NOT NULL DEFAULT 'upload' CHECK(source IN ('upload','ai')),
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX media_owner ON media_files(owner_id,created_at DESC);
+    CREATE INDEX media_draft ON media_files(draft_id);
+    CREATE TABLE share_links (
+      token TEXT PRIMARY KEY NOT NULL CHECK(length(token)=22),
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      draft_id TEXT NOT NULL REFERENCES drafts(id) ON DELETE CASCADE,
+      expires_at INTEGER NOT NULL,
+      revoked_at INTEGER,
+      created_at INTEGER NOT NULL,
+      CHECK(expires_at>created_at)
+    ) STRICT;
+    CREATE INDEX share_links_draft ON share_links(draft_id);
+  `,
 }];
