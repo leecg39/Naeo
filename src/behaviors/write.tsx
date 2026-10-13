@@ -1,46 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { text, type BehaviorTools, type InstallBehavior } from '@/lib/behavior';
-import { saveDraft } from '@/lib/demo-store';
-import type { Draft } from '@/types/site';
+import { api, ApiError } from '@/lib/api-client';
+import { uploadPhoto } from '@/components/writing/DraftMedia';
+import { OPEN_DRAFT_EVENT } from '@/components/writing/DraftsWorkspace';
 
 // Exact writing subcategories and order observed in the source dropdown.
-// Generation is local and never calls the source API.
+// 생성은 이 서비스의 /api/generations(서버 AI 공급자)로 요청한다. 원본 서비스 API는 호출하지 않는다.
 const TOPICS = ['영화','방송','스타·연예인','애니메이션','IT·테크','상품리뷰','자동차','교육','어학·외국어','경제','사회','일상·생각','(미분류)','리빙','원예·재배','반려동물','건강','육아','레시피','스포츠','게임','취미','사진','좋은글·이미지','공연·전시','음악','책','예술','패션','뷰티','국내여행','해외여행','푸드'];
-
-function DraftPreview({ draft, tools }: { draft: Draft; tools: BehaviorTools }) {
-  const [title, setTitle] = useState(draft.title);
-  const [content, setContent] = useState(draft.content);
-  const [saved, setSaved] = useState(false);
-  const valid = !!title.trim() && !!content.trim();
-  const asMarkdown = () => `# ${title.trim()}\n\n${content.trim()}\n`;
-  return <div style={{ display: 'grid', gap: 16 }}>
-    <p style={{ margin: 0, color: 'var(--muted)', fontSize: 13 }}>체험용 샘플 글이에요. 내용을 직접 수정하고 이 브라우저의 발행 대기함에 저장할 수 있어요.</p>
-    <label style={{ display: 'grid', gap: 6 }}>제목<input className="naeo-field" value={title} onChange={e => { setTitle(e.target.value); setSaved(false); }} /></label>
-    <label style={{ display: 'grid', gap: 6 }}>본문<textarea className="naeo-field" value={content} rows={15} style={{ resize: 'vertical', lineHeight: 1.8 }} onChange={e => { setContent(e.target.value); setSaved(false); }} /></label>
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-      <button className="naeo-button" disabled={!valid} onClick={() => {
-        saveDraft({ ...draft, title: title.trim(), content: content.trim() });
-        setSaved(true);
-        tools.toast('이 브라우저의 발행 대기함에 저장했어요.');
-      }}>{saved ? '저장 완료' : '발행 대기함에 저장'}</button>
-      <button className="naeo-button" disabled={!valid} onClick={async () => {
-        try { await navigator.clipboard.writeText(asMarkdown()); tools.toast('글을 복사했어요.'); }
-        catch { tools.toast('복사 권한을 확인하거나 본문을 선택해 복사해 주세요.'); }
-      }}>글 복사</button>
-      <button className="naeo-button" disabled={!valid} onClick={() => {
-        const url = URL.createObjectURL(new Blob([asMarkdown()], { type: 'text/markdown;charset=utf-8' }));
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${title.trim().replace(/[\\/:*?"<>|]/g, '-').slice(0,80) || 'naeo-draft'}.md`;
-        link.click();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }}>다운로드</button>
-    </div>
-    {saved && <p role="status" style={{ margin: 0, color: 'var(--primary)' }}>수정한 글을 저장했어요. 실제 블로그에 발행되지는 않아요.</p>}
-  </div>;
-}
 
 export const installWrite: InstallBehavior = (root, tools) => {
   const main = root.querySelector('main') || root;
@@ -209,38 +176,57 @@ export const installWrite: InstallBehavior = (root, tools) => {
     fieldState(combo, !!category, true);
     (menu.querySelector<HTMLButtonElement>('[aria-selected="true"]') || menu.querySelector('button'))?.focus();
   };
+  type Job = { id: string; state: string; draftId: string | null; errorMessage: string | null };
+  const finish = (message: string) => {
+    generating = false;
+    generate.removeAttribute('aria-busy');
+    progress.style.display = 'none';
+    sync();
+    tools.toast(message);
+  };
+  const poll = (jobId: string, round = 0) => {
+    if (round > 120) { finish('생성이 오래 걸리고 있어요. 아래 "최근 AI 생성"에서 결과를 확인해 주세요.'); return; }
+    later(async () => {
+      try {
+        const job = await api<Job>(`/api/generations/${jobId}`);
+        if (job.state === 'queued' || job.state === 'running') {
+          progress.textContent = job.state === 'queued' ? '대기 중 · 작업을 차례로 처리하고 있어요' : 'AI가 글을 쓰고 있어요';
+          poll(jobId, round + 1); return;
+        }
+        if (job.state === 'succeeded' && job.draftId) {
+          finish('글을 만들었어요. 아래 "내 초안"에서 고쳐 쓰세요.');
+          window.dispatchEvent(new CustomEvent(OPEN_DRAFT_EVENT, { detail: job.draftId }));
+          return;
+        }
+        finish(job.state === 'canceled' ? '생성을 취소했어요. 토큰은 환급됐어요.' : `${job.errorMessage || '생성에 실패했어요.'} 토큰은 환급됐어요.`);
+      } catch (error) { finish(error instanceof Error ? error.message : '생성 상태를 확인하지 못했어요.'); }
+    }, round === 0 ? 500 : 2000);
+  };
   const generateDraft = () => {
     if (generating || !keyword.value.trim() || !category) return;
     generating = true;
     sync();
     progress.style.display = 'block';
-    progress.textContent = '1/3 · 지시서를 준비하고 있어요';
-    generate.textContent = '샘플 글 생성 중…';
+    progress.textContent = photos.length ? `내 사진 ${photos.length}장을 올리고 있어요` : '생성을 요청하고 있어요';
+    generate.textContent = 'AI 글 생성 요청 중…';
     generate.setAttribute('aria-busy', 'true');
-    const chosenKeyword = keyword.value.trim();
-    const chosenTitle = titleInput?.value.trim() || `${chosenKeyword}, 알아두면 좋은 핵심 정리`;
-    const chosenExperience = experience?.value.trim();
-    const chosenInstructions = instructions?.value.trim();
-    const chosenCategory = category;
-    const chosenImages = Math.max(imageCount, photos.length);
-    later(() => { progress.textContent = '2/3 · 입력한 경험과 요청사항을 글에 담고 있어요'; }, 400);
-    later(() => { progress.textContent = '3/3 · 편집 가능한 샘플 글을 완성하고 있어요'; }, 800);
-    later(() => {
-      generating = false;
-      generate.removeAttribute('aria-busy');
-      progress.style.display = 'none';
-      sync();
-      const content = [
-        '※ NAEO 클론에서 만든 체험용 샘플 글입니다. 실제 정보는 확인 후 수정해 주세요.',
-        `## ${chosenKeyword}을(를) 알아보는 이유\n\n${chosenCategory} 주제로 ${chosenKeyword}에 관해 정리하는 글입니다. 독자가 궁금해할 핵심부터 차근차근 설명해 볼게요.`,
-        `## 먼저 확인할 내용\n\n- ${chosenKeyword}의 기본 개념과 필요한 준비물을 확인해요.\n- 직접 비교한 정보와 출처를 추가해요.\n- 실제로 적용할 때 주의할 점을 정리해요.`,
-        chosenExperience ? `## 내 경험·생각\n\n${chosenExperience}` : '## 직접 경험한 내용을 더해 주세요\n\n직접 확인한 내용이나 나만의 팁을 이곳에 적으면 독자에게 더 유용한 글이 돼요.',
-        chosenInstructions ? `## 작성 요청사항\n\n${chosenInstructions}\n\n위 요청에 맞는 실제 내용을 확인하여 보완해 주세요.` : '',
-        `## 마무리\n\n${chosenKeyword}에 관한 정보를 실제 상황에 맞게 확인하고, 새로 알게 된 내용을 덧붙여 보세요.`,
-      ].filter(Boolean).join('\n\n');
-      const draft: Draft = { id: `draft-${Date.now()}-${Math.random().toString(36).slice(2,7)}`, title: chosenTitle, keyword: chosenKeyword, content, createdAt: new Date().toISOString(), status: 'draft', imageCount: chosenImages };
-      tools.openDialog('완성된 글 미리보기', <DraftPreview draft={draft} tools={tools} />);
-    }, 1200);
+    const request = {
+      keyword: keyword.value.trim(), category, title: titleInput?.value.trim() || '',
+      experience: experience?.value.trim() || '', instructions: instructions?.value.trim() || '',
+      aiImages: aiImages(), idempotencyKey: crypto.randomUUID(),
+    };
+    void (async () => {
+      try {
+        const photoIds: string[] = [];
+        for (const photo of photos) photoIds.push((await uploadPhoto(photo.file)).publicId);
+        progress.textContent = '생성 작업을 등록했어요';
+        const job = await api<Job>('/api/generations', { method: 'POST', body: { ...request, photoIds } });
+        poll(job.id);
+      } catch (error) {
+        const notConfigured = error instanceof ApiError && /NOT_CONFIGURED/.test(error.code);
+        finish(notConfigured ? `${error.message}` : error instanceof Error ? error.message : '생성을 요청하지 못했어요.');
+      }
+    })();
   };
   const onClick = (event: MouseEvent) => {
     if (event.defaultPrevented || !(event.target instanceof Element)) return;

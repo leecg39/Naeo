@@ -11,6 +11,8 @@ import { buildMateDashboardPage } from '@/server/mate/mate-dashboard';
 import { buildAiPicksPage } from '@/server/analysis/ai-picks-page';
 import { buildRecommendationsPage } from '@/server/keywords/recommendations-page';
 import { buildCompetitorsPage } from '@/server/competitors/competitors-page';
+import DraftsWorkspace from '@/components/writing/DraftsWorkspace';
+import { ImagesLibrary,SharedImages } from '@/components/writing/ImagePages';
 import { database } from '@/server/database';
 import AnnouncementBar from '@/components/content/AnnouncementBar';
 import type { CapturedPageData } from '@/types/site';
@@ -32,6 +34,7 @@ export default async function Page({params,searchParams}:Props){
   if(path==='/dashboard/mate')return <PageExperience data={await buildMateDashboardPage(database(),user.id)}/>;
   if(path==='/dashboard/ai-picks')return <PageExperience data={await buildAiPicksPage()}/>;
   if(path==='/dashboard/competitors')return <PageExperience data={await buildCompetitorsPage(database(),user.id)}/>;
+  if(path==='/dashboard/write'){const captured=await getCapturedPage(path);if(captured)return <><PageExperience data={captured}/><DraftsWorkspace/></>;}
   if(path==='/dashboard/recommendations'){const sp=await searchParams;return <PageExperience data={await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)})}/>;}
  }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
@@ -42,8 +45,10 @@ export default async function Page({params,searchParams}:Props){
  if(fromDb===null)notFound();
  if(fromDb)return withNotice(path,fromDb);
  const data=await getCapturedPage(path);
+ if(data&&path==='/images')return <>{withNotice(path,data)}<ImagesLibrary/></>;
  if(data)return withNotice(path,data);
  if(path.startsWith('/dashboard/events/')){const event=await getCapturedPage('/event/'+path.split('/').at(-1));if(event)return <PageExperience data={{...event,path}}/>;redirect('/dashboard/events')}
- if(/^\/p\/[^/]+\/images$/.test(path)){const images=await getCapturedPage('/images');if(images)return <PageExperience data={{...images,path}}/>}
+ const shareToken=path.match(/^\/p\/([A-Za-z0-9_-]{22})\/images$/)?.[1];
+ if(shareToken){const images=await getCapturedPage('/images');if(images)return <><PageExperience data={{...images,path}}/><SharedImages token={shareToken}/></>}
  notFound();
 }
