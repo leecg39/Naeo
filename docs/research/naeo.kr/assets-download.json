@@ -1,0 +1,914 @@
+[
+  {
+    "url": "https://www.naeo.kr/mcp/post/economy-process.webp",
+    "local": "/assets/846d7c5919643f40.webp",
+    "ok": true,
+    "bytes": 49550
+  },
+  {
+    "url": "https://www.naeo.kr/naver-cafe-icon.png",
+    "local": "/assets/204b48f3804764d5.png",
+    "ok": true,
+    "bytes": 1023
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/thumbs/stock.jpg",
+    "local": "/assets/b25a34ca1ac53e22.jpg",
+    "ok": true,
+    "bytes": 86138
+  },
+  {
+    "url": "https://www.naeo.kr/landing/thennow/dehumidifier.webp",
+    "local": "/assets/66d6d4d02fb287b0.webp",
+    "ok": true,
+    "bytes": 7058
+  },
+  {
+    "url": "https://www.naeo.kr/landing/thennow/laundry.webp",
+    "local": "/assets/dd6d1d99a31f4e14.webp",
+    "ok": true,
+    "bytes": 11506
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/travel.webp",
+    "local": "/assets/5ccc6e8ee09e5b45.webp",
+    "ok": true,
+    "bytes": 6964
+  },
+  {
+    "url": "https://www.naeo.kr/landing/thennow/window.webp",
+    "local": "/assets/0db9116fb98a0142.webp",
+    "ok": true,
+    "bytes": 9328
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/desk.webp",
+    "local": "/assets/8ad0322c864304a5.webp",
+    "ok": true,
+    "bytes": 5470
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/flower.webp",
+    "local": "/assets/2d2a754601825cc8.webp",
+    "ok": true,
+    "bytes": 5594
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/book.webp",
+    "local": "/assets/ae917ee6acc76e0e.webp",
+    "ok": true,
+    "bytes": 6026
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/keyboard.webp",
+    "local": "/assets/8c7290653bc354df.webp",
+    "ok": true,
+    "bytes": 4858
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1540000000000",
+    "local": "/assets/9dbb98fdf0aaf429.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-1-main.webp?v=1540000000000",
+    "local": "/assets/6021bd8d5fb03d9d.webp",
+    "ok": true,
+    "bytes": 84084
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/golden-keywords-guide/golden-section.webp?v=1540000000000",
+    "local": "/assets/f68d75993f8453a5.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/mate/examples/biz.jpg",
+    "local": "/assets/0a7a6dde3c45252b.jpg",
+    "ok": true,
+    "bytes": 41027
+  },
+  {
+    "url": "https://i.ytimg.com/vi/JkFo4oX-PQE/hqdefault.jpg",
+    "local": "/assets/7f8cbc33b828b525.jpg",
+    "ok": true,
+    "bytes": 22204
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000",
+    "local": "/assets/a5dcf36fec307ebf.webp",
+    "ok": true,
+    "bytes": 52094
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1540000000000",
+    "local": "/assets/d7490519774e4fff.webp",
+    "ok": true,
+    "bytes": 49442
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000",
+    "local": "/assets/62bb40fa60703290.webp",
+    "ok": true,
+    "bytes": 77118
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/thumbnail.webp?v=1540000000000",
+    "local": "/assets/4042e5218fd5fd91.webp",
+    "ok": true,
+    "bytes": 51046
+  },
+  {
+    "url": "https://www.naeo.kr/blog-default-thumb.webp",
+    "local": "/assets/e50bf2ed9bf8580a.webp",
+    "ok": true,
+    "bytes": 4734
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/thumbnail.webp?v=1540000000000",
+    "local": "/assets/c0a1b134214fc178.webp",
+    "ok": true,
+    "bytes": 71100
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/thumbnail.webp?v=1540000000000",
+    "local": "/assets/26aa6adf37eb9243.webp",
+    "ok": true,
+    "bytes": 85412
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1540000000000",
+    "local": "/assets/b4e773cba9a4d724.webp",
+    "ok": true,
+    "bytes": 24304
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-food-playbook/thumbnail.webp?v=1540000000000",
+    "local": "/assets/dbbece974a874dd2.webp",
+    "ok": true,
+    "bytes": 45040
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-cited-posts/thumbnail.webp?v=1540000000000",
+    "local": "/assets/87adc838e21144d4.webp",
+    "ok": true,
+    "bytes": 48538
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/77f63a18de738bd9.webp",
+    "ok": true,
+    "bytes": 56602
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/219002fd6c502afe.webp",
+    "ok": true,
+    "bytes": 50856
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/715992de98cee4d4.webp",
+    "ok": true,
+    "bytes": 53118
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/11c1e04df8593739.webp",
+    "ok": true,
+    "bytes": 54808
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/b6e78012e9c9e32c.webp",
+    "ok": true,
+    "bytes": 57592
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/7157d754419b01ee.webp",
+    "ok": true,
+    "bytes": 46834
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/what-is-ai-briefing/thumbnail.webp?v=1540000000000",
+    "local": "/assets/d4e0e07a764a66e2.webp",
+    "ok": true,
+    "bytes": 50346
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-1-main.webp?v=1540000000000&w=3044&h=2204",
+    "local": "/assets/0cf7d6ef2e8bfc03.webp",
+    "ok": true,
+    "bytes": 84084
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-2-overview.webp?v=1540000000000&w=3044&h=2204",
+    "local": "/assets/14f419eab22eb003.webp",
+    "ok": true,
+    "bytes": 98836
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-4-awards.webp?v=1540000000000&w=3044&h=2204",
+    "local": "/assets/c98b4a437f3e1cca.webp",
+    "ok": true,
+    "bytes": 103410
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/86ebda198a50ebba.webp",
+    "ok": true,
+    "bytes": 56602
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-overview.webp?v=1540000000000&w=2752&h=1534",
+    "local": "/assets/135cbcae624882d2.webp",
+    "ok": true,
+    "bytes": 100058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-category-row.webp?v=1540000000000&w=1058&h=144",
+    "local": "/assets/e2819ae2671d77b4.webp",
+    "ok": true,
+    "bytes": 5722
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-legend.webp?v=1540000000000&w=1648&h=420",
+    "local": "/assets/b2eb1b98e0314912.webp",
+    "ok": true,
+    "bytes": 13116
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-category-bar.webp?v=1540000000000&w=1112&h=414",
+    "local": "/assets/804611902631f221.webp",
+    "ok": true,
+    "bytes": 18420
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-image-sources.webp?v=1540000000000&w=1464&h=580",
+    "local": "/assets/1f5509daffc620ba.webp",
+    "ok": true,
+    "bytes": 18880
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-text-questions.webp?v=1540000000000&w=1468&h=1230",
+    "local": "/assets/cce1c1cb8a21d1f5.webp",
+    "ok": true,
+    "bytes": 40714
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-briefing.webp?v=1540000000000&w=1472&h=394",
+    "local": "/assets/948106cc8d20179c.webp",
+    "ok": true,
+    "bytes": 34888
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-keywords.webp?v=1540000000000&w=1540&h=1546",
+    "local": "/assets/d627b5a37a3076c0.webp",
+    "ok": true,
+    "bytes": 100558
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/52a1eaa1c0bcceb1.webp",
+    "ok": true,
+    "bytes": 50856
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/1.webp?v=1540000000000&w=3142&h=1680",
+    "local": "/assets/a2d160666433156f.webp",
+    "ok": true,
+    "bytes": 150526
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/3.webp?v=1540000000000&w=2750&h=678",
+    "local": "/assets/dee6c92096ea832c.webp",
+    "ok": true,
+    "bytes": 63894
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/2.webp?v=1540000000000&w=2746&h=538",
+    "local": "/assets/d5625ac9824aeba0.webp",
+    "ok": true,
+    "bytes": 53234
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/2.webp?v=1540000000000&w=2768&h=178",
+    "local": "/assets/8bd6b67525acd6a3.webp",
+    "ok": true,
+    "bytes": 28236
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/5262f0b86ed3971f.webp",
+    "ok": true,
+    "bytes": 57592
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/1.webp?v=1540000000000&w=3152&h=1668",
+    "local": "/assets/dbdded3be3f5a3a9.webp",
+    "ok": true,
+    "bytes": 211350
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/3.webp?v=1540000000000&w=2756&h=568",
+    "local": "/assets/907ce89c87a96dda.webp",
+    "ok": true,
+    "bytes": 94034
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/1.webp?v=1540000000000&w=3418&h=1660",
+    "local": "/assets/9198d7769f315819.webp",
+    "ok": true,
+    "bytes": 36024
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/2.webp?v=1540000000000&w=2640&h=1594",
+    "local": "/assets/1104174e98dcaf9e.webp",
+    "ok": true,
+    "bytes": 24402
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/73f9c7a5d3f7ce21.webp",
+    "ok": true,
+    "bytes": 46834
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/3.webp?v=1540000000000&w=2656&h=684",
+    "local": "/assets/5f680d65ff867119.webp",
+    "ok": true,
+    "bytes": 29334
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-1.webp",
+    "local": "/assets/9a111562357e9b20.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/4.webp?v=1540000000000&w=2732&h=922",
+    "local": "/assets/fa79f1b9c053e249.webp",
+    "ok": true,
+    "bytes": 22800
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-2.webp",
+    "local": "/assets/9bd0e513aef24dc4.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-3.webp",
+    "local": "/assets/2f9bb5f204335af0.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/7-1.webp",
+    "local": "/assets/0f9ece320a01af91.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/7-2.webp",
+    "local": "/assets/1c06b7834e30e02d.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/5.webp?v=1540000000000&w=2356&h=1378",
+    "local": "/assets/5d7e80389493bdac.webp",
+    "ok": true,
+    "bytes": 86254
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/c54c9bb3442dd991.webp",
+    "ok": true,
+    "bytes": 54808
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/golden-keywords-guide/golden-section.webp?v=1540000000000&w=2792&h=1572",
+    "local": "/assets/46e3332b681b5f7c.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-overview.webp?v=1540000000000&w=2750&h=1588",
+    "local": "/assets/74e82736c042fe71.webp",
+    "ok": true,
+    "bytes": 91196
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-stats-panel.webp?v=1540000000000&w=2732&h=308",
+    "local": "/assets/1e1f664277bb2a96.webp",
+    "ok": true,
+    "bytes": 14494
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-signal-tag-color-spec.webp?v=1540000000000&w=2540&h=476",
+    "local": "/assets/466617f6f6482afe.webp",
+    "ok": true,
+    "bytes": 29670
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-card-detail.webp?v=1540000000000&w=2508&h=132",
+    "local": "/assets/59df689e33543275.webp",
+    "ok": true,
+    "bytes": 7882
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-expanded.webp?v=1540000000000&w=2664&h=1072",
+    "local": "/assets/1b40ebb8ed16acb4.webp",
+    "ok": true,
+    "bytes": 71208
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-filter.webp?v=1540000000000&w=2750&h=828",
+    "local": "/assets/a14b29f0942a8183.webp",
+    "ok": true,
+    "bytes": 48454
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/7bfd745a374abb9f.webp",
+    "ok": true,
+    "bytes": 53118
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-kpi-animated.webp?v=1540000000000&w=2732&h=1436",
+    "local": "/assets/ce0aa9df2f525711.webp",
+    "ok": true,
+    "bytes": 96326
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-related-keyword-chips.webp?v=1540000000000&w=1768&h=436",
+    "local": "/assets/dbe4cbe6a5568164.webp",
+    "ok": true,
+    "bytes": 39176
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-today-task-panel.webp?v=1540000000000&w=2744&h=1252",
+    "local": "/assets/187f87f536deefcd.webp",
+    "ok": true,
+    "bytes": 104028
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-cited-post-card.webp?v=1540000000000&w=1400&h=572",
+    "local": "/assets/59d0cfabfb478aae.webp",
+    "ok": true,
+    "bytes": 43188
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-change-feed.webp?v=1540000000000&w=2738&h=1394",
+    "local": "/assets/d0559d0be49e890f.webp",
+    "ok": true,
+    "bytes": 63306
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-food-playbook/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/0b5874bfecd37b01.webp",
+    "ok": true,
+    "bytes": 45040
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-cited-posts/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/c3128e8751a8182f.webp",
+    "ok": true,
+    "bytes": 48538
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/562da0b1783201df.webp",
+    "ok": true,
+    "bytes": 51046
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/archetype-a.webp?v=1540000000000&w=1744&h=2336",
+    "local": "/assets/683f5206d0c3d328.webp",
+    "ok": true,
+    "bytes": 216892
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/archetype-b.webp?v=1540000000000&w=1744&h=2336",
+    "local": "/assets/5af08bd10a3b9c5c.webp",
+    "ok": true,
+    "bytes": 268762
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/d84c2d6be0629458.webp",
+    "ok": true,
+    "bytes": 77118
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/archetype-c.webp?v=1540000000000&w=2048&h=2048",
+    "local": "/assets/d8cf7c2ced7f073e.webp",
+    "ok": true,
+    "bytes": 98362
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/02-overseas-travel.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/71203a1988db08ac.webp",
+    "ok": true,
+    "bytes": 216906
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/01-domestic-travel.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/692f24643d8f5332.webp",
+    "ok": true,
+    "bytes": 137530
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/04-recipe.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/6f86d40318e7c930.webp",
+    "ok": true,
+    "bytes": 132262
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/03-food.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/6e2224be347ad20e.webp",
+    "ok": true,
+    "bytes": 157504
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/05-fashion.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/654b3f2b59f7b4da.webp",
+    "ok": true,
+    "bytes": 103224
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/06-beauty.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/91ce3b0d84773309.webp",
+    "ok": true,
+    "bytes": 118444
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/08-pet.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/cdf76e69b662d0d2.webp",
+    "ok": true,
+    "bytes": 111058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/07-living.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/fe940b693fa4f232.webp",
+    "ok": true,
+    "bytes": 140376
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/thumbnail.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/8f74393e43a40f8b.webp",
+    "ok": true,
+    "bytes": 71100
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/03-health.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/75a2957c3adbd826.webp",
+    "ok": true,
+    "bytes": 110802
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/04-parenting.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/b7050435cf7c6909.webp",
+    "ok": true,
+    "bytes": 114296
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/05-movie.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/a958e133258c5f78.webp",
+    "ok": true,
+    "bytes": 114392
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/06-tv.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/bcddf4d03804800e.webp",
+    "ok": true,
+    "bytes": 117854
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/07-animation.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/24f2624bd089dfc3.webp",
+    "ok": true,
+    "bytes": 242996
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/09-music.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/28650dad6685afbf.webp",
+    "ok": true,
+    "bytes": 111350
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/10-book.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/b01f0814e0b3879e.webp",
+    "ok": true,
+    "bytes": 109938
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/08-exhibition.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/57b24b467eb84a58.webp",
+    "ok": true,
+    "bytes": 119450
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/thumbnail.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/7e6c551430a7ed87.webp",
+    "ok": true,
+    "bytes": 85412
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/03-art.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/0d45682c47e4947c.webp",
+    "ok": true,
+    "bytes": 129542
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/05-car.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/7339e34b951f7570.webp",
+    "ok": true,
+    "bytes": 124468
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/06-education.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/b1ac0ac98294e74e.webp",
+    "ok": true,
+    "bytes": 127696
+  },
+  {
+    "url": "https://www.naeo.kr/mate/score-card-sample.webp",
+    "local": "/assets/1a6cbb195f69b507.webp",
+    "ok": true,
+    "bytes": 10714
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/08-society.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/af4ec63217012ca7.webp",
+    "ok": true,
+    "bytes": 107180
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/04-it-tech.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/b174481f000d7cab.webp",
+    "ok": true,
+    "bytes": 103424
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/07-economy.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/ed6befec22db990f.webp",
+    "ok": true,
+    "bytes": 117454
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/10-game.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/674f04a616638d77.webp",
+    "ok": true,
+    "bytes": 127816
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/09-sports.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/9df68d09ccbeb915.webp",
+    "ok": true,
+    "bytes": 135564
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1540000000000&w=2792&h=1572",
+    "local": "/assets/a5bc460022d27d17.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate2.webp?v=1540000000000&w=1784&h=1354",
+    "local": "/assets/57a28e17b06fbede.webp",
+    "ok": true,
+    "bytes": 71156
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/11-hobby.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/9d520c313fc2faa5.webp",
+    "ok": true,
+    "bytes": 131510
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1540000000000&w=1200&h=630",
+    "local": "/assets/6fbac07888b443b9.webp",
+    "ok": true,
+    "bytes": 24304
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/44c9e2129efacdeb.webp",
+    "ok": true,
+    "bytes": 52094
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate3.webp?v=1540000000000&w=1776&h=1350",
+    "local": "/assets/71debebc254d8131.webp",
+    "ok": true,
+    "bytes": 88662
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/what-is-ai-briefing/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/cf8d4c3264e5f2b1.webp",
+    "ok": true,
+    "bytes": 50346
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate1.webp?v=1540000000000&w=3110&h=1670",
+    "local": "/assets/9ef8ac4d2d060afb.webp",
+    "ok": true,
+    "bytes": 32196
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/26da5822706836e9.webp",
+    "ok": true,
+    "bytes": 49442
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/1.webp?v=1540000000000&w=1836&h=1306",
+    "local": "/assets/6b9d63c7ef132e6a.webp",
+    "ok": true,
+    "bytes": 47622
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/1.webp?v=1540000000000&w=1366&h=1164",
+    "local": "/assets/678f1fa375f3ffe8.webp",
+    "ok": true,
+    "bytes": 29558
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/og-v3.png",
+    "local": "/assets/fc2151ea8a854a0d.png",
+    "ok": true,
+    "bytes": 258350
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/og.png",
+    "local": "/assets/2e11be7158d9feb4.png",
+    "ok": true,
+    "bytes": 237260
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/prize-tablet-v2.png",
+    "local": "/assets/792fe767e9de4054.png",
+    "ok": true,
+    "bytes": 1020902
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/brand-blog-transparent.png",
+    "local": "/assets/c4aaadb04e1ca9d8.png",
+    "ok": true,
+    "bytes": 517732
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/login-google.svg?dpl=dpl_9JkUHcfckNptPUSPon7HDkNLtaPA",
+    "local": "/assets/2411bdc2bde11547.svg",
+    "ok": true,
+    "bytes": 2326
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-ramen.webp",
+    "local": "/assets/8170966d4860d154.webp",
+    "ok": true,
+    "bytes": 6902
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/ai-favored.webp",
+    "local": "/assets/2d258a6737a2a686.webp",
+    "ok": true,
+    "bytes": 22820
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-jeju.webp",
+    "local": "/assets/4ef8962d5e5f18d5.webp",
+    "ok": true,
+    "bytes": 4132
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/consistent.webp",
+    "local": "/assets/695bceece764e1a0.webp",
+    "ok": true,
+    "bytes": 11848
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-plant.webp",
+    "local": "/assets/d259e75f4fff5197.webp",
+    "ok": true,
+    "bytes": 4318
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/rising.webp",
+    "local": "/assets/f4d04a2cf8ff8c74.webp",
+    "ok": true,
+    "bytes": 14562
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-cat.webp",
+    "local": "/assets/2848da71e47bb359.webp",
+    "ok": true,
+    "bytes": 4026
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/login-naver.png",
+    "local": "/assets/189373a5941ac49d.png",
+    "ok": true,
+    "bytes": 4892
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/prize-coffee-v2.png",
+    "local": "/assets/8fdbbb4c5106f903.png",
+    "ok": true,
+    "bytes": 1107555
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-baby.webp",
+    "local": "/assets/636322a4c993d052.webp",
+    "ok": true,
+    "bytes": 3588
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-popcorn.webp",
+    "local": "/assets/392820aacb78d530.webp",
+    "ok": true,
+    "bytes": 3036
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-book.webp",
+    "local": "/assets/09c8eedd994f1ef7.webp",
+    "ok": true,
+    "bytes": 4490
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-sunset.webp",
+    "local": "/assets/e92a39b1cf2a9bae.webp",
+    "ok": true,
+    "bytes": 3726
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-dog.webp",
+    "local": "/assets/88f63f016f7c5dd2.webp",
+    "ok": true,
+    "bytes": 6284
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/prize-earbuds-v2.png",
+    "local": "/assets/48611647ef1f2d47.png",
+    "ok": true,
+    "bytes": 969255
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-latte.webp",
+    "local": "/assets/4216040e2d9ceb7b.webp",
+    "ok": true,
+    "bytes": 5294
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-camera.webp",
+    "local": "/assets/3b29f9461459db08.webp",
+    "ok": true,
+    "bytes": 5976
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-hiking.webp",
+    "local": "/assets/e4e62d74d64e656d.webp",
+    "ok": true,
+    "bytes": 8196
+  },
+  {
+    "url": "https://www.naeo.kr/naeo-icon.png",
+    "local": "/assets/44e5cf7ab8fce912.png",
+    "ok": true,
+    "bytes": 3626
+  },
+  {
+    "url": "https://www.naeo.kr/icon.png",
+    "local": "/seo/icon.png",
+    "ok": true,
+    "bytes": 36846
+  },
+  {
+    "url": "https://www.naeo.kr/apple-icon.png",
+    "local": "/seo/apple-icon.png",
+    "ok": true,
+    "bytes": 36846
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/icon-coffee.webp",
+    "local": "/assets/c2edc0b1766ef241.webp",
+    "ok": true,
+    "bytes": 2334
+  },
+  {
+    "url": "https://www.naeo.kr/guide/write-demo-poster.jpg",
+    "local": "/assets/7ac5ada108c54c24.jpg",
+    "ok": true,
+    "bytes": 158252
+  },
+  {
+    "url": "https://www.naeo.kr/guide/write-demo.mp4",
+    "local": "/assets/1c45bef2cd02a3ff.mp4",
+    "ok": true,
+    "bytes": 5799937
+  }
+]

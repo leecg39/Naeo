@@ -1,0 +1,8 @@
+{
+  "name": "naeo-local-clone",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {"dev": "next dev --hostname 127.0.0.1 --port 3000", "build": "next build", "start": "next start --hostname 127.0.0.1 --port 3000", "typecheck": "tsc --noEmit", "test": "node --test tests/*.test.mjs"},
+  "dependencies": {"next": "16.4.0", "react": "19.3.0", "react-dom": "19.3.0", "clsx": "^2.1.1", "tailwind-merge": "^3.3.1", "lucide-react": "^0.577.0"},
+  "devDependencies": {"typescript": "^5.9.3", "@types/node": "^22.0.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "tailwindcss": "4.3.3", "@tailwindcss/postcss": "4.3.3", "cheerio": "^1.2.0"}
+}
