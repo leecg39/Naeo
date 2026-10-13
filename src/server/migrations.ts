@@ -271,4 +271,27 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX site_updates_public ON site_updates(status,published_on DESC,position);
   `,
+}, {
+  version: 8,
+  name: 'announcements',
+  sql: `
+    CREATE TABLE announcements (
+      id TEXT PRIMARY KEY NOT NULL,
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 80),
+      body TEXT NOT NULL DEFAULT '' CHECK(length(body)<=300),
+      link_url TEXT NOT NULL DEFAULT '' CHECK(length(link_url)<=300),
+      link_label TEXT NOT NULL DEFAULT '' CHECK(length(link_label)<=30),
+      target TEXT NOT NULL DEFAULT 'landing' CHECK(target IN ('landing','all')),
+      starts_at INTEGER,
+      ends_at INTEGER,
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published')),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      CHECK(starts_at IS NULL OR ends_at IS NULL OR ends_at>starts_at)
+    ) STRICT;
+    CREATE INDEX announcements_active ON announcements(status,updated_at DESC);
+  `,
 }];

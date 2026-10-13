@@ -11,7 +11,7 @@
     "test": "node --test tests/*.test.mjs && node --import tsx --test tests/server/*.test.ts",
     "test:server": "node --import tsx --test tests/server/*.test.ts",
     "admin": "node --import tsx scripts/admin.ts",
-    "lint": "eslint src/server src/components/account src/components/admin src/components/contact src/lib/api-client.ts src/lib/inquiry-labels.ts src/lib/safe-next.ts src/app/api src/app/login src/app/auth src/app/admin src/app/dashboard/settings tests/server scripts/admin.ts scripts/content",
+    "lint": "eslint src/server src/components/account src/components/admin src/components/contact src/components/content src/lib/api-client.ts src/lib/inquiry-labels.ts src/lib/safe-next.ts src/app/api src/app/login src/app/auth src/app/admin src/app/dashboard/settings tests/server scripts/admin.ts scripts/content",
     "content:extract": "node --import tsx scripts/content/extract-articles.ts"
   },
   "dependencies": {

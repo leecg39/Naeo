@@ -4,6 +4,7 @@ import {requireAdmin,type User} from '../auth';
 import {body,json,rateLimit} from '../http';
 import {createArticle,createCategory,deleteArticle,deleteCategory,getAdminArticle,listAdminArticles,listAdminCategories,previewMarkdown,restoreArticleRevision,updateArticle,updateCategory} from './admin-articles';
 import {createUpdate,deleteUpdate,getAdminUpdate,listAdminUpdates,updateUpdate} from './admin-updates';
+import {createAnnouncement,deleteAnnouncement,listAdminAnnouncements,updateAnnouncement} from './admin-announcements';
 import {createFaq,deleteFaq,listAdminFaq,updateFaq} from './admin-faq';
 import {createDocument,deleteDocument,getAdminDocument,listAdminDocuments,restoreDocumentRevision,updateDocument} from './admin-documents';
 
@@ -14,7 +15,7 @@ const ID='([a-f0-9-]{36})';
 
 export async function contentApi(db:Database,request:Request,user:User):Promise<Response|null>{
  const {pathname:path,searchParams}=new URL(request.url),method=request.method;
- if(!['/api/admin/articles','/api/admin/article-categories','/api/admin/documents','/api/admin/faq','/api/admin/updates'].some(p=>path===p||path.startsWith(p+'/')))return null;
+ if(!['/api/admin/articles','/api/admin/article-categories','/api/admin/documents','/api/admin/faq','/api/admin/updates','/api/admin/announcements'].some(p=>path===p||path.startsWith(p+'/')))return null;
  requireAdmin(user);
  if(method!=='GET')rateLimit(db,`content:${user.id}`,300,15*60*1000);
  const input=(max?:number)=>body(request,anyJson,max);
@@ -41,7 +42,7 @@ export async function contentApi(db:Database,request:Request,user:User):Promise<
   if(method==='PATCH')return json({data:updateCategory(db,user.id,category[1],await input())});
   if(method==='DELETE')return json({data:deleteCategory(db,user.id,category[1],await input())});
  }
- return (await faqRoutes(db,user,path,method,searchParams,input))??(await updateRoutes(db,user,path,method,searchParams,input))??documentRoutes(db,user,path,method,searchParams,input);
+ return (await announcementRoutes(db,user,path,method,searchParams,input))??(await faqRoutes(db,user,path,method,searchParams,input))??(await updateRoutes(db,user,path,method,searchParams,input))??documentRoutes(db,user,path,method,searchParams,input);
 }
 
 /** 업데이트 소식 관리자 CRUD. 본문은 마크다운이라 1MB까지 받는다. */
@@ -55,6 +56,20 @@ async function updateRoutes(db:Database,user:User,path:string,method:string,sear
   if(method==='GET')return json({data:getAdminUpdate(db,user.id,item[1])});
   if(method==='PATCH')return json({data:updateUpdate(db,user.id,item[1],await input(ARTICLE_BODY_MAX))});
   if(method==='DELETE')return json({data:deleteUpdate(db,user.id,item[1],await input())});
+ }
+ return null;
+}
+
+/** 공지 관리자 CRUD. */
+async function announcementRoutes(db:Database,user:User,path:string,method:string,searchParams:URLSearchParams,input:(max?:number)=>Promise<unknown>):Promise<Response|null>{
+ if(path==='/api/admin/announcements'){
+  if(method==='GET')return json(listAdminAnnouncements(db,user.id,Object.fromEntries(searchParams)));
+  if(method==='POST')return json({data:createAnnouncement(db,user.id,await input())},201);
+ }
+ const item=path.match(new RegExp(`^/api/admin/announcements/${ID}$`));
+ if(item){
+  if(method==='PATCH')return json({data:updateAnnouncement(db,user.id,item[1],await input())});
+  if(method==='DELETE')return json({data:deleteAnnouncement(db,user.id,item[1],await input())});
  }
  return null;
 }

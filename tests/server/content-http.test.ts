@@ -135,3 +135,18 @@ test('updates admin API: permissions, CRUD, unsafe body and slug conflict over H
  assert.equal((await f.send(`/api/admin/updates/${u.id}`,'DELETE',{version:2},admin)).status,200);
  assert.equal((await f.send(`/api/admin/updates/${u.id}`,'GET',undefined,admin)).status,404);
 });
+
+test('announcement admin API: permissions, CRUD, unsafe links and conflicts over HTTP',async t=>{
+ const f=fixture(t);const member=await account(f,'member@example.test');const admin=await account(f,'admin@example.test',true);
+ assert.equal((await f.send('/api/admin/announcements')).status,401);
+ assert.equal((await f.send('/api/admin/announcements','POST',{title:'x'},member)).status,403);
+ const created=await f.send('/api/admin/announcements','POST',{title:'HTTP 공지',linkUrl:'/updates',linkLabel:'보기',status:'published'},admin);
+ assert.equal(created.status,201);
+ const a=(await created.json()).data;
+ assert.equal((await f.send('/api/admin/announcements','POST',{title:'x',linkUrl:'javascript:alert(1)',linkLabel:'y'},admin)).status,400);
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{linkLabel:'',version:1},admin)).status,400,'link without label after merge');
+ assert.equal((await (await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{title:'바뀐 공지',version:1},admin)).json()).data.version,2);
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{title:'x',version:1},admin)).status,409);
+ assert.equal((await (await f.send('/api/admin/announcements?q=바뀐','GET',undefined,admin)).json()).pagination.total,1);
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'DELETE',{version:2},admin)).status,200);
+});

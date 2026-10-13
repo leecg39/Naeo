@@ -1,0 +1,59 @@
+import {test,type TestContext} from 'node:test';
+import assert from 'node:assert/strict';
+import {openDatabase,type Database} from '../../src/server/database';
+import {register} from '../../src/server/auth';
+import {activeAnnouncement} from '../../src/server/content/announcements';
+import {listAdminAnnouncements,createAnnouncement,updateAnnouncement,deleteAnnouncement} from '../../src/server/content/admin-announcements';
+
+async function fixture(t:TestContext){
+ const db=openDatabase(':memory:');t.after(()=>db.close());
+ const admin=(await register(db,{email:'admin@example.test',password:'admin-long-password',nickname:'관리자',termsAccepted:true})).user;
+ const member=(await register(db,{email:'member@example.test',password:'member-long-password',nickname:'회원',termsAccepted:true})).user;
+ db.prepare("UPDATE users SET role='admin' WHERE id=?").run(admin.id);
+ return{db,admin:admin.id,member:member.id};
+}
+const iso=(ms:number)=>new Date(ms).toISOString();
+const HOUR=3600_000;
+const notice=(over:Record<string,unknown>={})=>({title:'점검 안내',body:'10월 20일 새벽 2시~4시 점검합니다.',linkUrl:'/updates',linkLabel:'자세히',target:'landing',status:'published',...over});
+const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
+
+test('only admins manage announcements',async t=>{
+ const {db,member}=await fixture(t);
+ assert.throws(()=>listAdminAnnouncements(db,member,{}),{status:403});
+ assert.throws(()=>createAnnouncement(db,member,notice()),{status:403});
+});
+
+test('active announcement respects status, period and target',async t=>{
+ const {db,admin}=await fixture(t);
+ const now=Date.now();
+ assert.equal(activeAnnouncement(db,'/',now),null,'no announcement: landing stays identical to the capture');
+ const draft=createAnnouncement(db,admin,notice({status:'draft'}));
+ assert.equal(activeAnnouncement(db,'/',now),null,'drafts hidden');
+ updateAnnouncement(db,admin,draft.id,{status:'published',startsAt:iso(now+HOUR),version:1});
+ assert.equal(activeAnnouncement(db,'/',now),null,'not started yet');
+ assert.equal(activeAnnouncement(db,'/',now+2*HOUR)?.id,draft.id,'shown after start');
+ const ended=createAnnouncement(db,admin,notice({title:'끝난 공지',endsAt:iso(now-HOUR)}));
+ assert.notEqual(activeAnnouncement(db,'/',now+2*HOUR)?.id,ended.id,'ended hidden');
+ assert.equal(activeAnnouncement(db,'/pricing',now+2*HOUR),null,'landing-only target');
+ const all=createAnnouncement(db,admin,notice({title:'전체 공지',target:'all'}));
+ assert.equal(activeAnnouncement(db,'/pricing',now)?.id,all.id);
+ assert.equal(activeAnnouncement(db,'/dashboard',now),null,'never on dashboard');
+ assert.equal(activeAnnouncement(db,'/admin/users',now),null,'never on admin');
+ assert.equal(activeAnnouncement(db,'/',now)?.id,all.id,'most recently updated active one wins');
+});
+
+test('announcement CRUD with versions, validation and audit',async t=>{
+ const {db,admin}=await fixture(t);
+ const a=createAnnouncement(db,admin,notice());
+ const edited=updateAnnouncement(db,admin,a.id,{title:'점검 시간 변경',version:1});
+ assert.equal(edited.version,2);
+ assert.throws(()=>updateAnnouncement(db,admin,a.id,{title:'x',version:1}),{status:409,code:'VERSION_CONFLICT'});
+ assert.equal(listAdminAnnouncements(db,admin,{q:'변경'}).pagination.total,1);
+ for(const bad of [notice({title:''}),notice({body:'x'.repeat(301)}),notice({linkUrl:'javascript:alert(1)'}),notice({linkUrl:'//evil.example'}),notice({linkUrl:'http://insecure.example'}),notice({target:'everyone'}),notice({extra:1}),notice({startsAt:iso(Date.now()),endsAt:iso(Date.now()-HOUR)}),notice({linkUrl:'/x',linkLabel:''})])
+  assert.throws(()=>createAnnouncement(db,admin,bad),{name:'ZodError'});
+ assert.equal(createAnnouncement(db,admin,notice({linkUrl:'',linkLabel:''})).linkUrl,'');
+ assert.equal(createAnnouncement(db,admin,notice({linkUrl:'https://www.naeo.kr/updates'})).linkUrl,'https://www.naeo.kr/updates');
+ deleteAnnouncement(db,admin,a.id,{version:2});
+ assert.equal(listAdminAnnouncements(db,admin,{q:'변경'}).pagination.total,0);
+ for(const x of ['content.announcement.create','content.announcement.update','content.announcement.delete'])assert.ok(audits(db,x)>=1,x);
+});

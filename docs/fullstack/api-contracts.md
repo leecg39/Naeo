@@ -120,3 +120,13 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/updates/:id` | GET·PATCH·DELETE | 관리자 | PATCH는 바뀐 필드 + `version`, DELETE는 `{version}` | 404, 409 |
 
 공개 `/updates`는 공개 항목을 날짜 최신순·월별 묶음으로 캡처 틀에 다시 그리고, 필터 개수(새 기능·개선·버그 수정)를 DB에서 계산한다. `/updates/:slug`는 `/updates?focus=:slug`로 308, focus 항목은 펼쳐서 스크롤한다. '버그 수정' 칩은 캡처 예가 없어 '개선' 칩 모양을 쓴다(새 규칙). 시드 `updates-v1` 1회.
+
+## P2.5 공지 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/announcements` | GET | 관리자 | `q`(제목·내용), `status`, `page`, `pageSize≤100`. 최근 수정순 | 401·403 |
+| `/api/admin/announcements` | POST | 관리자 | `title≤80`, `body≤300`, `linkUrl`(빈 값·`/경로`(`//` 금지)·https), `linkLabel≤30`(링크가 있으면 필수), `target`(landing/all), `startsAt`·`endsAt`(ISO, 종료>시작), `status` | 400 |
+| `/api/admin/announcements/:id` | PATCH·DELETE | 관리자 | 바뀐 필드 + `version`. 수정 후 전체 값으로 링크 문구·기간 규칙 재검사 | 400, 404, 409 |
+
+공개: 공개 상태·기간·대상이 맞는 공지 중 가장 최근 수정된 1건을 화면 하단 고정 바로 표시한다(`/`는 landing·all, 다른 공개 화면은 all, 대시보드·관리자·로그인·결제·OAuth 경로는 표시 안 함). 방문자에게는 id·제목·내용·링크·version만 보낸다. 닫기는 방문자 브라우저에 `id:version`으로 기억하며 공지를 수정하면 다시 보인다. 원본 사이트에는 공지 영역이 없어 공지가 없으면 화면이 캡처와 같다(시드 없음).
