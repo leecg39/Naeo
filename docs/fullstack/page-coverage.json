@@ -1,1285 +1,3807 @@
 [
-  {
-    "path": "/",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P2/P8",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements",
-      "audit_logs",
-      "scan_jobs"
-    ],
-    "operations": "운영 현황 및 콘텐츠·공지·FAQ·법적 문서 CRUD와 감사 로그",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/blog",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사·카테고리 CRUD, 발행·비공개, 공개 URL 미리보기",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/event",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "이벤트 편집기, 참가 조건·기간·보상 설정 CRUD",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/events",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "이벤트 목록·참가 심사·반려·보상 지급",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/inquiries",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P2",
-    "models": [
-      "inquiries",
-      "inquiry_messages"
-    ],
-    "operations": "문의 검색·상세·상태·답변·삭제",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/inquiries/templates",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P2",
-    "models": [
-      "inquiry_templates"
-    ],
-    "operations": "답변 템플릿 CRUD와 문의에 적용",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/keywords",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P3",
-    "models": [
-      "keywords",
-      "keyword_metrics",
-      "recommendations"
-    ],
-    "operations": "키워드·주제·검색 지표 CRUD, 출처·측정일 표시",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/rewards",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P5/P6",
-    "models": [
-      "reward_claims",
-      "coupons",
-      "coupon_redemptions",
-      "credit_ledger"
-    ],
-    "operations": "쿠폰·보상 정책 CRUD·지급/철회, 원장 반대 분개",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/scan-health",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P3",
-    "models": [
-      "scan_jobs",
-      "scan_results"
-    ],
-    "operations": "작업 상태·실패 원인·재시도·취소·실행 로그",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/users",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P1",
-    "models": [
-      "users",
-      "profiles",
-      "sessions",
-      "audit_logs"
-    ],
-    "operations": "계정 검색·조회·역할/상태 변경·삭제, 마지막 관리자 보호",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/admin/writing",
-    "kind": "concrete",
-    "domain": "admin",
-    "phase": "P4",
-    "models": [
-      "drafts",
-      "draft_revisions",
-      "generation_jobs",
-      "media_assets"
-    ],
-    "operations": "생성 작업·작성 템플릿·비용 정책 CRUD, 실패 재시도",
-    "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/auth/extension",
-    "kind": "concrete",
-    "domain": "auth",
-    "phase": "P1/P7",
-    "models": [
-      "users",
-      "sessions",
-      "oauth_accounts",
-      "oauth_grants",
-      "extension_tokens"
-    ],
-    "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
-    "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/auth/google",
-    "kind": "concrete",
-    "domain": "auth",
-    "phase": "P1/P7",
-    "models": [
-      "users",
-      "sessions",
-      "oauth_accounts",
-      "oauth_grants",
-      "extension_tokens"
-    ],
-    "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
-    "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/event/naeo-review-event",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/ai-picks-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/channel-analysis-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/competitor-analysis-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/dashboard-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/golden-keywords-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/keyword-recommendation-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/guide/today-action-guide",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-cited-posts",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-food-playbook",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-image-citation",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-tips-1-travel-life",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-tips-2-life-culture",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/golden-keywords",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/mate-free-diagnosis",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/marketing/what-is-ai-briefing",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/news/across-modu-startup-ditoday",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/news/across-modu-startup-mt",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/news/naver-mate-naeo-byline",
-    "kind": "concrete",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/contact",
-    "kind": "concrete",
-    "domain": "contact",
-    "phase": "P2",
-    "models": [
-      "inquiries",
-      "inquiry_messages",
-      "inquiry_templates"
-    ],
-    "operations": "문의 생성·본인 조회/수정/삭제, 관리자 답변·상태·템플릿 CRUD",
-    "acceptance": "빈값/과다 요청, 계정 격리, 답변 후 수정 정책",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard",
-    "kind": "concrete",
-    "domain": "analysis",
-    "phase": "P3",
-    "models": [
-      "blogs",
-      "blog_posts",
-      "scan_jobs",
-      "scan_results",
-      "citations",
-      "action_items"
-    ],
-    "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
-    "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/ai-picks",
-    "kind": "concrete",
-    "domain": "analysis",
-    "phase": "P3",
-    "models": [
-      "blogs",
-      "blog_posts",
-      "scan_jobs",
-      "scan_results",
-      "citations",
-      "action_items"
-    ],
-    "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
-    "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/competitors",
-    "kind": "concrete",
-    "domain": "competitors",
-    "phase": "P3",
-    "models": [
-      "competitors",
-      "blogs",
-      "scan_results"
-    ],
-    "operations": "추가·목록·메모 수정·삭제·비교",
-    "acceptance": "중복 주소·한도·두 계정 격리·실제 결과 비교",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/events",
-    "kind": "concrete",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/mate",
-    "kind": "concrete",
-    "domain": "analysis",
-    "phase": "P3",
-    "models": [
-      "blogs",
-      "blog_posts",
-      "scan_jobs",
-      "scan_results",
-      "citations",
-      "action_items"
-    ],
-    "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
-    "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/recommendations",
-    "kind": "concrete",
-    "domain": "keywords",
-    "phase": "P3",
-    "models": [
-      "keywords",
-      "keyword_metrics",
-      "recommendations",
-      "saved_keywords"
-    ],
-    "operations": "추천 조회/필터, 저장/완료/해제 CRUD, 관리 키워드 CRUD",
-    "acceptance": "검색·필터·페이지 이동, 재로그인 보존, 권한·중복",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/settings",
-    "kind": "concrete",
-    "domain": "settings",
-    "phase": "P1/P6/P7",
-    "models": [
-      "profiles",
-      "blogs",
-      "contact_details",
-      "notification_preferences",
-      "subscriptions",
-      "coupon_redemptions"
-    ],
-    "operations": "프로필/블로그/연락처/공개 설정 CRUD, 구독·쿠폰·탈퇴",
-    "acceptance": "새 세션 보존, version, 권한·잔액 변경 차단, 실제 연락처 인증",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/write",
-    "kind": "concrete",
-    "domain": "writing",
-    "phase": "P4",
-    "models": [
-      "drafts",
-      "draft_revisions",
-      "generation_jobs",
-      "media_assets",
-      "share_links"
-    ],
-    "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
-    "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dev/event-preview",
-    "kind": "concrete",
-    "domain": "preview",
-    "phase": "P2/P7",
-    "models": [
-      "content_revisions",
-      "creative_projects"
-    ],
-    "operations": "미리보기·임시 저장·공개 샘플",
-    "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dev/nav-preview",
-    "kind": "concrete",
-    "domain": "preview",
-    "phase": "P2/P7",
-    "models": [
-      "content_revisions",
-      "creative_projects"
-    ],
-    "operations": "미리보기·임시 저장·공개 샘플",
-    "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/event",
-    "kind": "concrete",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/event/naeo-review",
-    "kind": "concrete",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/event/ranking-reward",
-    "kind": "concrete",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/faq",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/features",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/guide/extension-publish",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/guide/writing",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/images",
-    "kind": "concrete",
-    "domain": "writing",
-    "phase": "P4",
-    "models": [
-      "drafts",
-      "draft_revisions",
-      "generation_jobs",
-      "media_assets",
-      "share_links"
-    ],
-    "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
-    "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/login",
-    "kind": "concrete",
-    "domain": "auth",
-    "phase": "P1/P7",
-    "models": [
-      "users",
-      "sessions",
-      "oauth_accounts",
-      "oauth_grants",
-      "extension_tokens"
-    ],
-    "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
-    "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/mate",
-    "kind": "concrete",
-    "domain": "analysis",
-    "phase": "P3",
-    "models": [
-      "blogs",
-      "blog_posts",
-      "scan_jobs",
-      "scan_results",
-      "citations",
-      "action_items"
-    ],
-    "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
-    "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/mate/s",
-    "kind": "concrete",
-    "domain": "analysis",
-    "phase": "P3",
-    "models": [
-      "blogs",
-      "blog_posts",
-      "scan_jobs",
-      "scan_results",
-      "citations",
-      "action_items"
-    ],
-    "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
-    "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/mcp",
-    "kind": "concrete",
-    "domain": "integrations",
-    "phase": "P7",
-    "models": [
-      "oauth_clients",
-      "oauth_grants",
-      "api_tokens",
-      "mcp_calls"
-    ],
-    "operations": "클라이언트 등록·연결·토큰 조회/철회·MCP 도구 실행",
-    "acceptance": "실제 클라이언트 연결, scope, 일회 코드·PKCE, 감사 기록",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/oauth/consent",
-    "kind": "concrete",
-    "domain": "auth",
-    "phase": "P1/P7",
-    "models": [
-      "users",
-      "sessions",
-      "oauth_accounts",
-      "oauth_grants",
-      "extension_tokens"
-    ],
-    "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
-    "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/payment/complete",
-    "kind": "concrete",
-    "domain": "billing",
-    "phase": "P6",
-    "models": [
-      "plans",
-      "subscriptions",
-      "payments",
-      "refunds",
-      "credit_ledger",
-      "coupons"
-    ],
-    "operations": "상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불",
-    "acceptance": "금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/preview",
-    "kind": "concrete",
-    "domain": "preview",
-    "phase": "P2/P7",
-    "models": [
-      "content_revisions",
-      "creative_projects"
-    ],
-    "operations": "미리보기·임시 저장·공개 샘플",
-    "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/pricing",
-    "kind": "concrete",
-    "domain": "billing",
-    "phase": "P6",
-    "models": [
-      "plans",
-      "subscriptions",
-      "payments",
-      "refunds",
-      "credit_ledger",
-      "coupons"
-    ],
-    "operations": "상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불",
-    "acceptance": "금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/privacy",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/privacy/extension",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/ranking",
-    "kind": "concrete",
-    "domain": "ranking",
-    "phase": "P5",
-    "models": [
-      "ranking_periods",
-      "ranking_entries",
-      "champions"
-    ],
-    "operations": "공개 기간·주제·내 순위·히스토리, 관리자 스냅샷 CRUD",
-    "acceptance": "동점·기간·공개 설정, 실제 측정 근거, 관리 반영",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/refund",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/aeo-carousel",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/aeo-carousel/export",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/banner-preview",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/banner-preview/frame",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/mate-ad",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/social/mate-ad/export",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/terms",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/updates",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/updates/2026-06-10-ranking-archive-hall-of-fame",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/updates/2026-06-11-mate-free-diagnosis",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/updates/2026-06-24-golden-keywords",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/updates/2026-09-16-post-level-exposure",
-    "kind": "concrete",
-    "domain": "public",
-    "phase": "P2",
-    "models": [
-      "content_pages",
-      "content_revisions",
-      "announcements"
-    ],
-    "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
-    "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/youtube/aeo-intro",
-    "kind": "concrete",
-    "domain": "creative",
-    "phase": "P7",
-    "models": [
-      "creative_projects",
-      "creative_slides",
-      "export_jobs"
-    ],
-    "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
-    "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/blog/:category/:slug",
-    "kind": "dynamic",
-    "domain": "articles",
-    "phase": "P2",
-    "models": [
-      "articles",
-      "article_categories",
-      "content_revisions"
-    ],
-    "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
-    "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/dashboard/events/:slug",
-    "kind": "dynamic",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/event/:slug",
-    "kind": "dynamic",
-    "domain": "events",
-    "phase": "P5",
-    "models": [
-      "events",
-      "event_entries",
-      "reward_claims"
-    ],
-    "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
-    "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
-    "status": "pending",
-    "evidence": []
-  },
-  {
-    "path": "/p/:id/images",
-    "kind": "dynamic",
-    "domain": "writing",
-    "phase": "P4",
-    "models": [
-      "drafts",
-      "draft_revisions",
-      "generation_jobs",
-      "media_assets",
-      "share_links"
-    ],
-    "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
-    "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
-    "status": "pending",
-    "evidence": []
-  }
+ {
+  "path": "/",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/announcements.test.ts",
+     "tests/server/seo.test.ts",
+     "tests/server/mate.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 랜딩 공지"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P2/P8",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements",
+   "audit_logs",
+   "scan_jobs"
+  ],
+  "operations": "운영 현황 및 콘텐츠·공지·FAQ·법적 문서 CRUD와 감사 로그",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/foundation.test.ts",
+     "tests/server/account-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "기반 구현"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/blog",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사·카테고리 CRUD, 발행·비공개, 공개 URL 미리보기",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/blog",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fblog"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/admin-articles.test.ts",
+     "tests/server/articles.test.ts",
+     "tests/server/content-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/event",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "이벤트 편집기, 참가 조건·기간·보상 설정 CRUD",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/event",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fevent"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts",
+     "tests/server/event-pages.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/events",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "이벤트 목록·참가 심사·반려·보상 지급",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/events",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fevents"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts",
+     "tests/server/event-pages.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/inquiries",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P2",
+  "models": [
+   "inquiries",
+   "inquiry_messages"
+  ],
+  "operations": "문의 검색·상세·상태·답변·삭제",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/inquiries",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Finquiries"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/inquiries.test.ts",
+     "tests/server/inquiry-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/inquiries/templates",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P2",
+  "models": [
+   "inquiry_templates"
+  ],
+  "operations": "답변 템플릿 CRUD와 문의에 적용",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/inquiries/templates",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Finquiries%2Ftemplates"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/inquiries.test.ts",
+     "tests/server/inquiry-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/keywords",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P3",
+  "models": [
+   "keywords",
+   "keyword_metrics",
+   "recommendations"
+  ],
+  "operations": "키워드·주제·검색 지표 CRUD, 출처·측정일 표시",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/keywords",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fkeywords"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/keywords.test.ts",
+     "tests/server/keywords-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/rewards",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P5/P6",
+  "models": [
+   "reward_claims",
+   "coupons",
+   "coupon_redemptions",
+   "credit_ledger"
+  ],
+  "operations": "쿠폰·보상 정책 CRUD·지급/철회, 원장 반대 분개",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/rewards",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Frewards"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts",
+     "tests/server/event-pages.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/scan-health",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P3",
+  "models": [
+   "scan_jobs",
+   "scan_results"
+  ],
+  "operations": "작업 상태·실패 원인·재시도·취소·실행 로그",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/scan-health",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fscan-health"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/scan-queue.test.ts",
+     "tests/server/scan-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.1"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/users",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P1",
+  "models": [
+   "users",
+   "profiles",
+   "sessions",
+   "audit_logs"
+  ],
+  "operations": "계정 검색·조회·역할/상태 변경·삭제, 마지막 관리자 보호",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/users",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fusers"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/accounts.test.ts",
+     "tests/server/account-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P1 계정 보안"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/admin/writing",
+  "kind": "concrete",
+  "domain": "admin",
+  "phase": "P4",
+  "models": [
+   "drafts",
+   "draft_revisions",
+   "generation_jobs",
+   "media_assets"
+  ],
+  "operations": "생성 작업·작성 템플릿·비용 정책 CRUD, 실패 재시도",
+  "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/admin/writing",
+    "access": "admin",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fadmin%2Fwriting"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/writing-admin.test.ts",
+     "tests/server/generation-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P4.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/auth/extension",
+  "kind": "concrete",
+  "domain": "auth",
+  "phase": "P1/P7",
+  "models": [
+   "users",
+   "sessions",
+   "oauth_accounts",
+   "oauth_grants",
+   "extension_tokens"
+  ],
+  "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
+  "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/auth/extension",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/oauth-server.test.ts",
+     "tests/server/mcp.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.2·P7.3"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "실제 크롬 확장 프로그램 코드가 저장소에 없음"
+   }
+  ]
+ },
+ {
+  "path": "/auth/google",
+  "kind": "concrete",
+  "domain": "auth",
+  "phase": "P1/P7",
+  "models": [
+   "users",
+   "sessions",
+   "oauth_accounts",
+   "oauth_grants",
+   "extension_tokens"
+  ],
+  "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
+  "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/auth/google",
+    "access": "redirect",
+    "anonymous": {
+     "status": 307,
+     "location": "/api/auth/oauth/google/start"
+    },
+    "admin": {
+     "status": 307,
+     "location": "/api/auth/oauth/google/start"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/oauth.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.1"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "Google·네이버 앱 키(NAEO_GOOGLE_*/NAEO_NAVER_*)"
+   }
+  ]
+ },
+ {
+  "path": "/blog",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/event/naeo-review-event",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/event/naeo-review-event",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/ai-picks-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/ai-picks-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/channel-analysis-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/channel-analysis-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/competitor-analysis-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/competitor-analysis-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/dashboard-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/dashboard-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/golden-keywords-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/golden-keywords-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/keyword-recommendation-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/keyword-recommendation-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/guide/today-action-guide",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/today-action-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-cited-posts",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-cited-posts",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-food-playbook",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-food-playbook",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-image-citation",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-image-citation",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-tips-1-travel-life",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-tips-1-travel-life",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-tips-2-life-culture",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-tips-2-life-culture",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/golden-keywords",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/golden-keywords",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/mate-free-diagnosis",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/mate-free-diagnosis",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/marketing/what-is-ai-briefing",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/marketing/what-is-ai-briefing",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/news/across-modu-startup-ditoday",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/news/across-modu-startup-ditoday",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/news/across-modu-startup-mt",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/news/across-modu-startup-mt",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/news/naver-mate-naeo-byline",
+  "kind": "concrete",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/news/naver-mate-naeo-byline",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/contact",
+  "kind": "concrete",
+  "domain": "contact",
+  "phase": "P2",
+  "models": [
+   "inquiries",
+   "inquiry_messages",
+   "inquiry_templates"
+  ],
+  "operations": "문의 생성·본인 조회/수정/삭제, 관리자 답변·상태·템플릿 CRUD",
+  "acceptance": "빈값/과다 요청, 계정 격리, 답변 후 수정 정책",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/contact",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/inquiries.test.ts",
+     "tests/server/inquiry-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard",
+  "kind": "concrete",
+  "domain": "analysis",
+  "phase": "P3",
+  "models": [
+   "blogs",
+   "blog_posts",
+   "scan_jobs",
+   "scan_results",
+   "citations",
+   "action_items"
+  ],
+  "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
+  "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/dashboard-page.test.ts",
+     "tests/server/analysis.test.ts",
+     "tests/server/scan-queue.test.ts",
+     "tests/server/ranking.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.4 대시보드"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/ai-picks",
+  "kind": "concrete",
+  "domain": "analysis",
+  "phase": "P3",
+  "models": [
+   "blogs",
+   "blog_posts",
+   "scan_jobs",
+   "scan_results",
+   "citations",
+   "action_items"
+  ],
+  "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
+  "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/ai-picks",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fai-picks"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/ai-picks-page.test.ts",
+     "tests/server/analysis.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.4 무료 진단"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "AI 인용 확인 공급자"
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/competitors",
+  "kind": "concrete",
+  "domain": "competitors",
+  "phase": "P3",
+  "models": [
+   "competitors",
+   "blogs",
+   "scan_results"
+  ],
+  "operations": "추가·목록·메모 수정·삭제·비교",
+  "acceptance": "중복 주소·한도·두 계정 격리·실제 결과 비교",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/competitors",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fcompetitors"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/competitors.test.ts",
+     "tests/server/competitors-http.test.ts",
+     "tests/server/competitors-page.test.ts",
+     "tests/server/action-items.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/events",
+  "kind": "concrete",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/events",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fevents"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/mate",
+  "kind": "concrete",
+  "domain": "analysis",
+  "phase": "P3",
+  "models": [
+   "blogs",
+   "blog_posts",
+   "scan_jobs",
+   "scan_results",
+   "citations",
+   "action_items"
+  ],
+  "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
+  "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/mate",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fmate"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/mate.test.ts",
+     "tests/server/mate-dashboard.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.4 무료 진단"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/recommendations",
+  "kind": "concrete",
+  "domain": "keywords",
+  "phase": "P3",
+  "models": [
+   "keywords",
+   "keyword_metrics",
+   "recommendations",
+   "saved_keywords"
+  ],
+  "operations": "추천 조회/필터, 저장/완료/해제 CRUD, 관리 키워드 CRUD",
+  "acceptance": "검색·필터·페이지 이동, 재로그인 보존, 권한·중복",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/recommendations",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Frecommendations"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/recommendations-page.test.ts",
+     "tests/server/keywords.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/settings",
+  "kind": "concrete",
+  "domain": "settings",
+  "phase": "P1/P6/P7",
+  "models": [
+   "profiles",
+   "blogs",
+   "contact_details",
+   "notification_preferences",
+   "subscriptions",
+   "coupon_redemptions"
+  ],
+  "operations": "프로필/블로그/연락처/공개 설정 CRUD, 구독·쿠폰·탈퇴",
+  "acceptance": "새 세션 보존, version, 권한·잔액 변경 차단, 실제 연락처 인증",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/settings",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fsettings"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/accounts.test.ts",
+     "tests/server/account-http.test.ts",
+     "tests/server/billing.test.ts",
+     "tests/server/oauth.test.ts",
+     "tests/server/oauth-server.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P1 계정 보안",
+     "P6",
+     "P7.1",
+     "P7.2·P7.3"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "메일·SMS 인증(P1.6·P1.7)"
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/write",
+  "kind": "concrete",
+  "domain": "writing",
+  "phase": "P4",
+  "models": [
+   "drafts",
+   "draft_revisions",
+   "generation_jobs",
+   "media_assets",
+   "share_links"
+  ],
+  "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
+  "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/write",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fwrite"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/drafts.test.ts",
+     "tests/server/writing-http.test.ts",
+     "tests/server/generation.test.ts",
+     "tests/server/generation-http.test.ts",
+     "tests/server/media.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P4.4",
+     "P4.6"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "AI 글 생성 공급자 키(ANTHROPIC_API_KEY)"
+   }
+  ]
+ },
+ {
+  "path": "/dev/event-preview",
+  "kind": "concrete",
+  "domain": "preview",
+  "phase": "P2/P7",
+  "models": [
+   "content_revisions",
+   "creative_projects"
+  ],
+  "operations": "미리보기·임시 저장·공개 샘플",
+  "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dev/event-preview",
+    "access": "dev",
+    "anonymous": {
+     "status": 404,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": []
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dev/nav-preview",
+  "kind": "concrete",
+  "domain": "preview",
+  "phase": "P2/P7",
+  "models": [
+   "content_revisions",
+   "creative_projects"
+  ],
+  "operations": "미리보기·임시 저장·공개 샘플",
+  "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dev/nav-preview",
+    "access": "dev",
+    "anonymous": {
+     "status": 404,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": []
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/event",
+  "kind": "concrete",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/event",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/event/naeo-review",
+  "kind": "concrete",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/event/naeo-review",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/event/ranking-reward",
+  "kind": "concrete",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/event/ranking-reward",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/faq",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/faq",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/faq.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 FAQ"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/features",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/features",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/page-settings.test.ts",
+     "tests/server/seo.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 고정 디자인"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/guide/extension-publish",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/guide/extension-publish",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/page-settings.test.ts",
+     "tests/server/seo.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 고정 디자인"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/guide/writing",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/guide/writing",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/page-settings.test.ts",
+     "tests/server/seo.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 고정 디자인"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/images",
+  "kind": "concrete",
+  "domain": "writing",
+  "phase": "P4",
+  "models": [
+   "drafts",
+   "draft_revisions",
+   "generation_jobs",
+   "media_assets",
+   "share_links"
+  ],
+  "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
+  "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/images",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/media.test.ts",
+     "tests/server/writing-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P4.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/login",
+  "kind": "concrete",
+  "domain": "auth",
+  "phase": "P1/P7",
+  "models": [
+   "users",
+   "sessions",
+   "oauth_accounts",
+   "oauth_grants",
+   "extension_tokens"
+  ],
+  "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
+  "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/login",
+    "access": "guest",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 307,
+     "location": "/dashboard/settings"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/accounts.test.ts",
+     "tests/server/account-http.test.ts",
+     "tests/server/oauth.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P1 계정 보안",
+     "P7.1"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/mate",
+  "kind": "concrete",
+  "domain": "analysis",
+  "phase": "P3",
+  "models": [
+   "blogs",
+   "blog_posts",
+   "scan_jobs",
+   "scan_results",
+   "citations",
+   "action_items"
+  ],
+  "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
+  "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/mate",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/mate.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.4 무료 진단"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/mate/s",
+  "kind": "concrete",
+  "domain": "analysis",
+  "phase": "P3",
+  "models": [
+   "blogs",
+   "blog_posts",
+   "scan_jobs",
+   "scan_results",
+   "citations",
+   "action_items"
+  ],
+  "operations": "블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정",
+  "acceptance": "실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/mate/s",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/mate.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P3.4 무료 진단"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/mcp",
+  "kind": "concrete",
+  "domain": "integrations",
+  "phase": "P7",
+  "models": [
+   "oauth_clients",
+   "oauth_grants",
+   "api_tokens",
+   "mcp_calls"
+  ],
+  "operations": "클라이언트 등록·연결·토큰 조회/철회·MCP 도구 실행",
+  "acceptance": "실제 클라이언트 연결, scope, 일회 코드·PKCE, 감사 기록",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/mcp",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/mcp.test.ts",
+     "tests/server/oauth-server.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.2·P7.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/oauth/consent",
+  "kind": "concrete",
+  "domain": "auth",
+  "phase": "P1/P7",
+  "models": [
+   "users",
+   "sessions",
+   "oauth_accounts",
+   "oauth_grants",
+   "extension_tokens"
+  ],
+  "operations": "가입·로그인·정보 변경·탈퇴, 동의·발급/철회",
+  "acceptance": "유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/oauth/consent",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/oauth-server.test.ts",
+     "tests/server/mcp.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.2·P7.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/payment/complete",
+  "kind": "concrete",
+  "domain": "billing",
+  "phase": "P6",
+  "models": [
+   "plans",
+   "subscriptions",
+   "payments",
+   "refunds",
+   "credit_ledger",
+   "coupons"
+  ],
+  "operations": "상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불",
+  "acceptance": "금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/payment/complete",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fpayment%2Fcomplete"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/payments.test.ts",
+     "tests/server/billing-pages.test.ts",
+     "tests/server/billing-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P6"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "토스페이먼츠 실제 키(NAEO_TOSS_*)"
+   }
+  ]
+ },
+ {
+  "path": "/preview",
+  "kind": "concrete",
+  "domain": "preview",
+  "phase": "P2/P7",
+  "models": [
+   "content_revisions",
+   "creative_projects"
+  ],
+  "operations": "미리보기·임시 저장·공개 샘플",
+  "acceptance": "미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/preview",
+    "access": "redirect",
+    "anonymous": {
+     "status": 307,
+     "location": "/dashboard/write"
+    },
+    "admin": {
+     "status": 307,
+     "location": "/dashboard/write"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/drafts.test.ts",
+     "tests/server/writing-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/pricing",
+  "kind": "concrete",
+  "domain": "billing",
+  "phase": "P6",
+  "models": [
+   "plans",
+   "subscriptions",
+   "payments",
+   "refunds",
+   "credit_ledger",
+   "coupons"
+  ],
+  "operations": "상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불",
+  "acceptance": "금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복",
+  "status": "external_pending",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/pricing",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/billing-pages.test.ts",
+     "tests/server/billing.test.ts",
+     "tests/server/billing-http.test.ts",
+     "tests/server/payments.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P6"
+    ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "토스페이먼츠 실제 키(NAEO_TOSS_*)"
+   }
+  ]
+ },
+ {
+  "path": "/privacy",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/privacy",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/documents.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 정책 문서"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/privacy/extension",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/privacy/extension",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/documents.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 정책 문서"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/ranking",
+  "kind": "concrete",
+  "domain": "ranking",
+  "phase": "P5",
+  "models": [
+   "ranking_periods",
+   "ranking_entries",
+   "champions"
+  ],
+  "operations": "공개 기간·주제·내 순위·히스토리, 관리자 스냅샷 CRUD",
+  "acceptance": "동점·기간·공개 설정, 실제 측정 근거, 관리 반영",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/ranking",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/ranking.test.ts",
+     "tests/server/ranking-page.test.ts",
+     "tests/server/ranking-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.1·P5.2"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/refund",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/refund",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/documents.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 정책 문서"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/aeo-carousel",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/aeo-carousel",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/creative.test.ts",
+     "tests/server/creative-http.test.ts",
+     "tests/server/exports.test.ts",
+     "tests/server/export-formats.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4",
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/aeo-carousel/export",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/aeo-carousel/export",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/creative.test.ts",
+     "tests/server/creative-http.test.ts",
+     "tests/server/exports.test.ts",
+     "tests/server/export-formats.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4",
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/banner-preview",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/banner-preview",
+    "access": "redirect",
+    "anonymous": {
+     "status": 307,
+     "location": "/"
+    },
+    "admin": {
+     "status": 307,
+     "location": "/"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": []
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/banner-preview/frame",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/banner-preview/frame",
+    "access": "redirect",
+    "anonymous": {
+     "status": 307,
+     "location": "/"
+    },
+    "admin": {
+     "status": 307,
+     "location": "/"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": []
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/mate-ad",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/mate-ad",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/creative.test.ts",
+     "tests/server/creative-http.test.ts",
+     "tests/server/exports.test.ts",
+     "tests/server/export-formats.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4",
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/social/mate-ad/export",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/social/mate-ad/export",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/creative.test.ts",
+     "tests/server/creative-http.test.ts",
+     "tests/server/exports.test.ts",
+     "tests/server/export-formats.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4",
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/terms",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/terms",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/documents.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 정책 문서"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/updates",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/updates",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/updates.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 업데이트"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/updates/2026-06-10-ranking-archive-hall-of-fame",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/updates/2026-06-10-ranking-archive-hall-of-fame",
+    "access": "redirect",
+    "anonymous": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-10-ranking-archive-hall-of-fame"
+    },
+    "admin": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-10-ranking-archive-hall-of-fame"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/updates.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 업데이트"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/updates/2026-06-11-mate-free-diagnosis",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/updates/2026-06-11-mate-free-diagnosis",
+    "access": "redirect",
+    "anonymous": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-11-mate-free-diagnosis"
+    },
+    "admin": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-11-mate-free-diagnosis"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/updates.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 업데이트"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/updates/2026-06-24-golden-keywords",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/updates/2026-06-24-golden-keywords",
+    "access": "redirect",
+    "anonymous": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-24-golden-keywords"
+    },
+    "admin": {
+     "status": 308,
+     "location": "/updates?focus=2026-06-24-golden-keywords"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/updates.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 업데이트"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/updates/2026-09-16-post-level-exposure",
+  "kind": "concrete",
+  "domain": "public",
+  "phase": "P2",
+  "models": [
+   "content_pages",
+   "content_revisions",
+   "announcements"
+  ],
+  "operations": "관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기",
+  "acceptance": "관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/updates/2026-09-16-post-level-exposure",
+    "access": "redirect",
+    "anonymous": {
+     "status": 308,
+     "location": "/updates?focus=2026-09-16-post-level-exposure"
+    },
+    "admin": {
+     "status": 308,
+     "location": "/updates?focus=2026-09-16-post-level-exposure"
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/updates.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.5 업데이트"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/youtube/aeo-intro",
+  "kind": "concrete",
+  "domain": "creative",
+  "phase": "P7",
+  "models": [
+   "creative_projects",
+   "creative_slides",
+   "export_jobs"
+  ],
+  "operations": "프로젝트/슬라이드 CRUD·정렬·복제·내보내기",
+  "acceptance": "재접속 보존, 출력 파일 실제 열기, 소유권·공유·실패",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/youtube/aeo-intro",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/creative.test.ts",
+     "tests/server/creative-http.test.ts",
+     "tests/server/exports.test.ts",
+     "tests/server/export-formats.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P7.4",
+     "P7.5"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/blog/:category/:slug",
+  "kind": "dynamic",
+  "domain": "articles",
+  "phase": "P2",
+  "models": [
+   "articles",
+   "article_categories",
+   "content_revisions"
+  ],
+  "operations": "기사/카테고리 CRUD·검색·발행/비공개·미리보기",
+  "acceptance": "20개 seed, 새 URL, 수정/삭제 반영, 필터·페이지 이동",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/blog/guide/dashboard-guide",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/articles.test.ts",
+     "tests/server/blog-pages.test.ts",
+     "tests/server/article-seed.test.ts",
+     "tests/server/admin-articles.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P2.1",
+     "P2.2·P2.3"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/dashboard/events/:slug",
+  "kind": "dynamic",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/dashboard/events/naeo-review",
+    "access": "member",
+    "anonymous": {
+     "status": 307,
+     "location": "/login?next=%2Fdashboard%2Fevents%2Fnaeo-review"
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/event/:slug",
+  "kind": "dynamic",
+  "domain": "events",
+  "phase": "P5",
+  "models": [
+   "events",
+   "event_entries",
+   "reward_claims"
+  ],
+  "operations": "관리 이벤트 CRUD, 사용자 참가 CRUD, 심사·지급/취소",
+  "acceptance": "기간/중복/소유권/심사 상태, 중복 보상 방지",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/event/naeo-review",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/event-pages.test.ts",
+     "tests/server/events.test.ts",
+     "tests/server/events-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P5.3–P5.6"
+    ]
+   }
+  ]
+ },
+ {
+  "path": "/p/:id/images",
+  "kind": "dynamic",
+  "domain": "writing",
+  "phase": "P4",
+  "models": [
+   "drafts",
+   "draft_revisions",
+   "generation_jobs",
+   "media_assets",
+   "share_links"
+  ],
+  "operations": "초안 CRUD·버전·생성·미디어 업로드/삭제·공유/철회·내보내기",
+  "acceptance": "저장/재로그인/충돌/삭제, 생성 실패/취소, 파일 권한·실제 다운로드",
+  "status": "verified",
+  "evidence": [
+   {
+    "type": "http",
+    "at": "2026-10-13T19:41:59.230Z",
+    "url": "/p/AAAAAAAAAAAAAAAAAAAAAA/images",
+    "access": "public",
+    "anonymous": {
+     "status": 200,
+     "location": ""
+    },
+    "admin": {
+     "status": 200,
+     "location": ""
+    },
+    "ok": true
+   },
+   {
+    "type": "tests",
+    "files": [
+     "tests/server/media.test.ts",
+     "tests/server/writing-http.test.ts"
+    ]
+   },
+   {
+    "type": "verification",
+    "sections": [
+     "P4.1·P4.3"
+    ]
+   }
+  ]
+ }
 ]

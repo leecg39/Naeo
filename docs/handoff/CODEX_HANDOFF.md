@@ -1,7 +1,7 @@
 # Codex 인계 문서 (Claude Code → Codex)
 
 Claude Code가 사용 한도에 걸리면 Codex가 이 문서만 보고 이어서 작업한다. 커밋할 때마다 갱신한다.
-마지막 갱신: 2026-10-14, P7.5까지 커밋.
+마지막 갱신: 2026-10-14, P8.3·P8.4까지 커밋.
 
 ## 목표(사용자 원문 요지)
 clone-website로 만든 naeo.kr 복제본에 REA 역공학 분석대로 **전 메뉴 페이지의 데이터 모델·CRUD·화면·백엔드**를 구현하고, 추론하지 말고 실제로 작동하는지 하나씩 검증한다. 계획은 `TASKS.md`(P0–P8), 설계는 `docs/fullstack/*.md`.
@@ -33,8 +33,8 @@ P0–P6 대부분 완료(체크 상태는 `TASKS.md`가 기준). 최근 커밋: 
 키가 없어 미완료로 남긴 항목: P1.6(메일), P1.7(SMS), P1.8(스크린샷 비교), P3.3/P3.7(AI 인용), P4.2(실제 Anthropic 왕복), P6.3/P6.5(실제 토스 샌드박스), P7.1(실제 Google·네이버 앱 왕복).
 
 ## 지금 하던 작업
-P7.5 완료(내보내기·/preview·/dev 권한). P7.6은 키·확장 코드가 필요한 부분만 남음. 다음은 P8(운영·완료 감사).
-브라우저(ego)는 관리자로 로그인된 상태.
+P8.3(경로 감사 `scripts/route-audit.ts`)·P8.4(데모 제거) 완료. 남은 P8: P8.1 방문·체류 집계와 관리 통계·정리 정책, P8.2 .env 예시·실행·백업/복원 문서와 실행 검증, P8.5 Ego 데스크톱/태블릿/모바일 경로 흐름·브라우저 오류, P8.6 최종 감사·README·CHANGELOG.
+경로 감사 실행: `NAEO_AUDIT_EMAIL=… NAEO_AUDIT_PASSWORD=… node --import tsx scripts/route-audit.ts`(QA 서버 실행 중이어야 함).
 
 ## 그 다음
 - P7.4 소셜 프로젝트/슬라이드 CRUD(캡처 /social/*·/youtube/aeo-intro 구조부터 확인, 마이그레이션 23)(/social/*, /youtube/aeo-intro), P7.5 이미지·PDF 내보내기와 /preview·/dev/* 권한, P7.6 E2E.
