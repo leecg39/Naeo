@@ -18,7 +18,7 @@ async function fixture(t:TestContext){
  return{db,admin,a};
 }
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
-const configured={provider:'anthropic',model:'m',apiKey:'k'} as const;
+const configured={provider:'anthropic',model:'m',apiKey:'k',baseUrl:'https://api.anthropic.com'} as const;
 
 test('export turns markdown into safe HTML, markdown or plain text',async t=>{
  const {db,a}=await fixture(t);

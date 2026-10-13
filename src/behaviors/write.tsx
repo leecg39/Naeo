@@ -70,7 +70,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
     if (legend) legend.style.maxWidth = filled || focused ? '100%' : '';
   };
   const aiImages = () => Math.max(0, imageCount - photos.length);
-  const tokens = () => 10 + 3 * aiImages();
+  // AI 이미지 공급자가 미설정이라 글 생성 비용(10토큰)만 받는다. AI 이미지가 필요한 선택은 생성 전에 막는다.
+  const tokens = () => 10;
   const sync = () => {
     const valid = keyword.value.trim().length > 0 && category.length > 0;
     generate.disabled = !valid || generating;
@@ -83,8 +84,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
       button.classList.toggle('Mui-selected', selected);
     }
     if (imageSummary) imageSummary.textContent = photos.length
-      ? `→ 총 ${Math.max(imageCount, photos.length)}장 예상 = 내 사진 ${photos.length} + AI ${aiImages()}${aiImages() ? '(썸네일 포함)' : ''}`
-      : `→ 총 ${imageCount}장 예상 = AI ${imageCount}(썸네일 포함)`;
+      ? `→ 내 사진 ${photos.length}장이 들어가요${aiImages() ? ` · AI 이미지 ${aiImages()}장은 미설정이라 만들지 않아요` : ''}`
+      : `→ AI 이미지 ${imageCount}장은 미설정이라 만들지 않아요. 글만 만들어지고, 내 사진을 올리면 함께 들어가요.`;
     if (photoCounter) photoCounter.textContent = `사진 ${photos.length}/20`;
   };
   const renderPhotos = () => {
@@ -204,6 +205,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
   };
   const generateDraft = () => {
     if (generating || !keyword.value.trim() || !category) return;
+    const skippedAiImages = aiImages();
+    if (skippedAiImages > 0) tools.toast(`AI 이미지 ${skippedAiImages}장은 미설정이라 빼고, 글${photos.length ? `과 내 사진 ${photos.length}장` : ''}만 만들어요.`);
     generating = true;
     sync();
     progress.style.display = 'block';
@@ -213,7 +216,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
     const request = {
       keyword: keyword.value.trim(), category, title: titleInput?.value.trim() || '',
       experience: experience?.value.trim() || '', instructions: instructions?.value.trim() || '',
-      aiImages: aiImages(), idempotencyKey: crypto.randomUUID(),
+      // AI 이미지 공급자가 미설정이라 AI 이미지는 요청하지 않는다(서버도 0보다 크면 503으로 거절).
+      aiImages: 0, idempotencyKey: crypto.randomUUID(),
       ...(() => { const id = document.querySelector<HTMLSelectElement>('#writing-template')?.value; return id ? { templateId: id } : {}; })(),
     };
     void (async () => {

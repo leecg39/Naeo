@@ -35,11 +35,11 @@ export function splitTitle(text:string,fallback:string):GenerationOutput{
  return first?{title:first[1].trim().slice(0,200),body:lines.slice(1).join('\n').trim()}:{title:fallback.slice(0,200),body:text.trim()};
 }
 
-export function anthropicProvider({apiKey,model}:{apiKey:string;model:string},fetchImpl:FetchLike=fetch):Provider{
+export function anthropicProvider({apiKey,model,baseUrl='https://api.anthropic.com'}:{apiKey:string;model:string;baseUrl?:string},fetchImpl:FetchLike=fetch):Provider{
  return async input=>{
   let res:Response;
   try{
-   res=await fetchImpl('https://api.anthropic.com/v1/messages',{method:'POST',signal:AbortSignal.timeout(120_000),
+   res=await fetchImpl(`${baseUrl}/v1/messages`,{method:'POST',signal:AbortSignal.timeout(120_000),
     headers:{'content-type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01'},body:JSON.stringify(buildRequest(input,model))});
   }catch{throw new ProviderError('PROVIDER_UNAVAILABLE','AI 공급자에 연결하지 못했습니다.',true);}
   if(res.status===401||res.status===403)throw new ProviderError('PROVIDER_AUTH','AI 공급자 인증에 실패했습니다. 관리자에게 키 설정을 확인해달라고 알려주세요.',false);

@@ -17,7 +17,7 @@ async function fixture(t:TestContext){
  db.prepare("UPDATE users SET role='admin' WHERE id=?").run(admin);
  return{db,admin,a,b};
 }
-const configured={provider:'anthropic',model:'test-model',apiKey:'test-key'} as const;
+const configured={provider:'anthropic',model:'test-model',apiKey:'test-key',baseUrl:'https://api.anthropic.com'} as const;
 const req=(over:Record<string,unknown>={})=>({keyword:'제주 여행',category:'여행',title:'',experience:'렌터카로 3일 다녔어요',instructions:'',aiImages:0,idempotencyKey:'k-1',...over});
 const okProvider=async()=>({title:'제주 3일 여행 코스',body:'## 첫날\n\n공항에서 렌터카를 빌렸어요.'});
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
@@ -36,9 +36,12 @@ test('ledger: admin grants, balance is the sum, members cannot grant',async t=>{
 test('without a provider key the request fails before any token is charged',async t=>{
  const {db,admin,a}=await fixture(t);
  grantCredits(db,admin,a,{delta:50,note:'QA'});
- assert.throws(()=>requestGeneration(db,a,req(),{provider:'anthropic',model:'m',apiKey:''},NOW),{status:503,code:'PROVIDER_NOT_CONFIGURED'});
+ assert.throws(()=>requestGeneration(db,a,req(),{provider:'anthropic',model:'m',apiKey:'',baseUrl:'https://api.anthropic.com'},NOW),{status:503,code:'PROVIDER_NOT_CONFIGURED'});
  assert.equal(balance(db,a),50);
  assert.equal(providerConfig({}).apiKey,'','no key in env');
+ assert.equal(providerConfig({NAEO_AI_BASE_URL:'http://169.254.169.254'}).baseUrl,'https://api.anthropic.com','non-local http is refused');
+ assert.equal(providerConfig({NAEO_AI_BASE_URL:'http://127.0.0.1:3199/x'}).baseUrl,'http://127.0.0.1:3199','local stub allowed');
+ assert.equal(providerConfig({NAEO_AI_BASE_URL:'javascript:alert(1)'}).baseUrl,'https://api.anthropic.com');
  assert.throws(()=>requestGeneration(db,a,req({aiImages:2}),configured,NOW),{status:503,code:'IMAGE_PROVIDER_NOT_CONFIGURED'});
  assert.equal(balance(db,a),50);
 });

@@ -8,8 +8,14 @@ import {templateGuidance} from './templates';
 
 /** 글 1편 생성 비용(원본 화면의 "10토큰"). AI 이미지는 공급자 미설정. */
 export const GENERATION_COST=10;
-export type ProviderConfig={provider:'anthropic';model:string;apiKey:string};
-export const providerConfig=(env:Record<string,string|undefined>=process.env):ProviderConfig=>({provider:'anthropic',model:env.NAEO_AI_MODEL||'claude-sonnet-4-6',apiKey:env.ANTHROPIC_API_KEY||''});
+export type ProviderConfig={provider:'anthropic';model:string;apiKey:string;baseUrl:string};
+const DEFAULT_BASE='https://api.anthropic.com';
+/** 운영자 설정 API 주소(프록시용). https 또는 이 서버 안(localhost) http만 허용하고, 아니면 기본 주소를 쓴다. */
+export function safeBaseUrl(value:string|undefined):string{
+ if(!value)return DEFAULT_BASE;
+ try{const u=new URL(value);const local=u.protocol==='http:'&&['127.0.0.1','localhost'].includes(u.hostname);return u.protocol==='https:'||local?u.origin:DEFAULT_BASE;}catch{return DEFAULT_BASE;}
+}
+export const providerConfig=(env:Record<string,string|undefined>=process.env):ProviderConfig=>({provider:'anthropic',model:env.NAEO_AI_MODEL||'claude-sonnet-4-6',apiKey:env.ANTHROPIC_API_KEY||'',baseUrl:safeBaseUrl(env.NAEO_AI_BASE_URL)});
 export type GenerationJob={id:string;state:'queued'|'running'|'succeeded'|'failed'|'canceled';cost:number;draftId:string|null;attempt:number;errorCode:string|null;errorMessage:string|null;cancelRequested:boolean;createdAt:number;updatedAt:number;completedAt:number|null};
 export type JobRow={id:string;owner_id:string;draft_id:string|null;state:GenerationJob['state'];cost:number;input_json:string;attempt:number;max_attempts:number;cancel_requested:number;error_code:string|null;error_message:string|null;created_at:number;updated_at:number;completed_at:number|null;lease_owner:string|null};
 export const toJob=(r:JobRow):GenerationJob=>({id:r.id,state:r.state,cost:r.cost,draftId:r.draft_id,attempt:r.attempt,errorCode:r.error_code,errorMessage:r.error_message,cancelRequested:r.cancel_requested===1,createdAt:r.created_at,updatedAt:r.updated_at,completedAt:r.completed_at});
