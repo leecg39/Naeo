@@ -59,3 +59,5 @@ HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO
 ## 구조
 
 `src/data/pages`·`src/components/captured`는 캡처 화면, `src/behaviors`는 화면 상호작용, `src/components`는 API와 연결된 UI, `src/server`는 DB·도메인·API·공급자, `scripts`는 운영·검증, `docs/fullstack`은 계약·설계·증거를 담습니다. `var`의 DB·업로드·백업 및 환경 비밀값은 Git에서 제외합니다.
+
+최신 적대적 QA와 반복 개선 결과: [감사 보고서](docs/audit/audit-report-2026-10-14.md). 요청 스트림 제한·사진 삭제 자동 복구·외부 앱 접근 철회 보강과 293개 회귀 테스트를 포함한다.

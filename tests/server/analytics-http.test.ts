@@ -36,5 +36,5 @@ test('analytics API: server-issued visitor cookie, privacy opt-outs, admin-only 
  assert.equal(stats.daily.reduce((a:number,d:{views:number})=>a+d.views,0),2);
  assert.deepEqual(stats.referrers.map((x:{host:string})=>x.host),['m.search.naver.com']);
  const health=(await (await f.send('/api/admin/health','GET',undefined,{Cookie:admin})).json()).data;
- assert.equal(health.schemaVersion,25);assert.ok(!JSON.stringify(health).includes('KEY'),'no secrets in health output');
+ assert.equal(health.schemaVersion,26);assert.ok(!JSON.stringify(health).includes('KEY'),'no secrets in health output');
 });

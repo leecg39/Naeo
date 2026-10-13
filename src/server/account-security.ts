@@ -4,6 +4,7 @@ import { createSession, hashPassword, userById, verifyPassword, tokenHash, requi
 import { AppError } from './errors';
 import { audit } from './audit';
 import { changePasswordInput, deleteAccountInput, acceptTermsInput } from './validation';
+import {revokeUserGrants} from './oauth/grants';
 
 export async function reauthenticate(db:Database,userId:string,password:string) {
   const row=db.prepare('SELECT password_hash,status FROM users WHERE id=?').get(userId) as {password_hash:string;status:string}|undefined;
@@ -36,6 +37,7 @@ export async function changePassword(db:Database,userId:string,input:unknown) {
     assertReauthenticated(db,userId,previous);
     db.prepare('UPDATE users SET password_hash=?,version=version+1,updated_at=? WHERE id=?').run(next,Date.now(),userId);
     db.prepare('DELETE FROM sessions WHERE user_id=?').run(userId);
+    revokeUserGrants(db,userId);
     audit(db,userId,'password.change','user',userId);
     return createSession(db,userId);
   });

@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import type {Database} from '../database';
 import type {User} from '../auth';
-import {body,json,rateLimit} from '../http';
+import {body,json,rateLimit,readRequestBytes} from '../http';
 import {addSlide,createProject,deleteProject,deleteSlide,duplicateProject,duplicateSlide,getProject,listProjects,moveSlide,updateProject,updateSlide} from './projects';
 import {slideSvg} from './svg';
 import {addPage,completeExport,listExports,MAX_PAGE_BYTES,readExportFile,startExport} from './exports';
@@ -11,10 +11,7 @@ import {uploadDir} from '../writing/writing-api';
 /** PNG 본문(최대 12MB)을 그대로 읽는다. */
 async function pngBody(request:Request):Promise<Buffer>{
  if(!/^image\/png$/i.test(request.headers.get('content-type')||''))throw new AppError(415,'PNG_REQUIRED','image/png로 보내주세요.');
- if(Number(request.headers.get('content-length')||0)>MAX_PAGE_BYTES)throw new AppError(413,'PAGE_TOO_LARGE','페이지 이미지가 너무 큽니다.');
- const buf=Buffer.from(await request.arrayBuffer());
- if(buf.length>MAX_PAGE_BYTES)throw new AppError(413,'PAGE_TOO_LARGE','페이지 이미지가 너무 큽니다.');
- return buf;
+ return readRequestBytes(request,MAX_PAGE_BYTES,new AppError(413,'PAGE_TOO_LARGE','페이지 이미지가 너무 큽니다.'));
 }
 const download=(f:{bytes:Buffer;mime:string;filename:string})=>new Response(new Uint8Array(f.bytes),{headers:{'Content-Type':f.mime,'Content-Disposition':`attachment; filename="naeo-export.${f.filename.split('.').pop()}"; filename*=UTF-8''${encodeURIComponent(f.filename)}`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});
 

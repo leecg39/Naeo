@@ -20,7 +20,7 @@ test('backup: consistent DB snapshot while open, uploads copy, manifest with che
  const out=createBackup(db,{uploadsDir:uploads,destDir:join(root,'backups')},Date.parse('2026-10-14T03:00:00Z'));
  assert.match(out.dir,/naeo-2026-10-14T03-00-00Z$/);
  const manifest=JSON.parse(readFileSync(join(out.dir,'manifest.json'),'utf8'));
- assert.equal(manifest.schemaVersion,25);assert.equal(manifest.counts.users,1);assert.equal(manifest.files,2);
+ assert.equal(manifest.schemaVersion,26);assert.equal(manifest.counts.users,1);assert.equal(manifest.files,2);
  assert.ok(existsSync(join(out.dir,'uploads','exports','a.pdf')));
  assert.deepEqual(verifyBackup(out.dir).ok,true);
  writeFileSync(join(out.dir,'db.sqlite'),'tampered');

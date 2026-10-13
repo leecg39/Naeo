@@ -1,0 +1,14 @@
+{
+  "retry": {
+    "text": "서비스 상태\n\nDB 스키마 26 · 작업자 2개 동작 중 (마지막 신호 2026. 10. 14. 오전 6:35:21)\n\n진단 큐 대기 0·진행 0·24시간 실패 0 / 글 생성 대기 0·진행 0·24시간 실패 1 / 내보내기 수집 중 0\n\n사진 파일 삭제 대기 1건 · 재시도 1건\n\n삭제하지 못한 사진 파일이 있습니다. 업로드 폴더의 접근 권한과 작업자 로그를 확인해주세요. 파일 삭제는 자동으로 재시도됩니다.\n\nAI 글 생성: 미설정\nAI 인용 확인: 미설정\n결제(토스): 미설정\nGoogle 로그인: 미설정\n네이버 로그인: 미설정\n메일 발송: 미설정\n문자 인증: 미설정",
+    "overflow": 0,
+    "errors": 0
+  },
+  "recovered": {
+    "text": "서비스 상태\n\nDB 스키마 26 · 작업자 1개 동작 중 (마지막 신호 2026. 10. 14. 오전 6:38:06)\n\n진단 큐 대기 0·진행 0·24시간 실패 0 / 글 생성 대기 0·진행 0·24시간 실패 1 / 내보내기 수집 중 0\n\n사진 파일 삭제 대기 0건 · 재시도 0건\n\nAI 글 생성: 미설정\nAI 인용 확인: 미설정\n결제(토스): 미설정\nGoogle 로그인: 미설정\n네이버 로그인: 미설정\n메일 발송: 미설정\n문자 인증: 미설정",
+    "overflow": 0,
+    "warning": false,
+    "errors": 0
+  },
+  "observation": "Navigation load wait timed out once; inspection of the same page confirmed readyState complete and recovered state. No navigation retry or server restart was needed."
+}

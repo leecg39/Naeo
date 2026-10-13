@@ -85,6 +85,7 @@ export function decideAuthorization(db:Database,userId:string,input:unknown,now=
 }
 
 function issue(db:Database,g:{clientId:string;userId:string;scope:string;resource:string;family:string},now:number){
+ if(!db.prepare("SELECT 1 FROM users WHERE id=? AND status='active' AND terms_accepted_at>0").get(g.userId))throw oauthError(400,'invalid_grant','계정을 확인하고 다시 연결해주세요.');
  const access=secret('naeo_at_'),refresh=secret('naeo_rt_');
  const insert=db.prepare('INSERT INTO oauth_tokens(token_hash,kind,client_id,user_id,scope,resource,family_id,expires_at,created_at) VALUES(?,?,?,?,?,?,?,?,?)');
  insert.run(sha(access),'access',g.clientId,g.userId,g.scope,g.resource,g.family,now+ACCESS_TTL,now);
@@ -114,6 +115,7 @@ export function exchangeToken(db:Database,input:unknown,now=Date.now()){
    // 재사용 감지: 계열 철회는 커밋되어야 하므로 오류는 트랜잭션 밖에서 던진다.
    if(t.revokedAt!==null){db.prepare('UPDATE oauth_tokens SET revoked_at=coalesce(revoked_at,?) WHERE family_id=?').run(now,t.family);audit(db,t.userId,'oauth.refresh.reuse','oauth_client',t.clientId);return{reused:true as const};}
    if(t.expiresAt<=now)throw invalidGrant('리프레시 토큰이 만료되었습니다.');
+   if(f.resource&&f.resource!==t.resource)throw oauthError(400,'invalid_target','대상이 인가 요청과 다릅니다.');
    db.prepare('UPDATE oauth_tokens SET revoked_at=? WHERE token_hash=?').run(now,sha(f.refresh_token!));
    db.prepare("UPDATE oauth_tokens SET revoked_at=coalesce(revoked_at,?) WHERE family_id=? AND kind='access'").run(now,t.family);
    return issue(db,t,now);
@@ -141,10 +143,13 @@ export function revokeToken(db:Database,input:unknown,now=Date.now()){
  return{revoked:true};
 }
 export function revokeAppForUser(db:Database,userId:string,clientId:string,now=Date.now()){
- const r=db.prepare('UPDATE oauth_tokens SET revoked_at=coalesce(revoked_at,?) WHERE user_id=? AND client_id=?').run(now,userId,clientId);
- if(!r.changes)throw new AppError(404,'NOT_FOUND','연결된 앱이 없습니다.');
- audit(db,userId,'oauth.app.revoke','oauth_client',clientId);
- return{revoked:true};
+ return transaction(db,()=>{
+  const r=db.prepare('UPDATE oauth_tokens SET revoked_at=coalesce(revoked_at,?) WHERE user_id=? AND client_id=?').run(now,userId,clientId);
+  const codes=db.prepare('DELETE FROM oauth_codes WHERE user_id=? AND client_id=?').run(userId,clientId);
+  if(!r.changes&&!codes.changes)throw new AppError(404,'NOT_FOUND','연결된 앱이 없습니다.');
+  audit(db,userId,'oauth.app.revoke','oauth_client',clientId);
+  return{revoked:true};
+ });
 }
 export type AuthorizedApp={clientId:string;name:string;kind:'mcp'|'extension';scopes:Scope[];connectedAt:number;lastUsedAt:number|null;calls:number};
 /** 연결된 앱: 유효한 리프레시 토큰이 남아 있는 클라이언트. */

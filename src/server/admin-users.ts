@@ -6,6 +6,7 @@ import {audit} from './audit';
 import {AppError} from './errors';
 import {createUserInput,updateUserInput,deleteUserInput,userQueryInput,paginationInput} from './validation';
 import {reauthenticate,assertReauthenticated,protectLastAdmin,eraseAccount} from './account-security';
+import {revokeUserGrants} from './oauth/grants';
 
 export type ManagedUser=User&{nickname:string;blogCount:number;sessionCount:number};
 function authorize(db:Database,actorId:string){return requireAdmin(userById(db,actorId));}
@@ -49,7 +50,7 @@ export async function updateUser(db:Database,actorId:string,id:string,input:unkn
     protectLastAdmin(db,current,role,status);
     db.prepare('UPDATE users SET role=?,status=?,version=version+1,updated_at=? WHERE id=? AND version=?').run(role,status,Date.now(),id,valid.version);
     if(valid.nickname!==undefined)db.prepare('UPDATE profiles SET nickname=?,version=version+1,updated_at=? WHERE user_id=?').run(valid.nickname,Date.now(),id);
-    if(role!==current.role||status!==current.status)db.prepare('DELETE FROM sessions WHERE user_id=?').run(id);
+    if(role!==current.role||status!==current.status){db.prepare('DELETE FROM sessions WHERE user_id=?').run(id);revokeUserGrants(db,id);}
     audit(db,actorId,'admin.user.update','user',id,{fields:Object.keys(valid).filter(k=>!['currentPassword','version'].includes(k)),role,status});
     return {...userById(db,id),nickname:getProfile(db,id).nickname};
   });

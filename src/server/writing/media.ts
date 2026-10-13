@@ -6,6 +6,7 @@ import {transaction,type Database} from '../database';
 import {AppError} from '../errors';
 import {paginationInput} from '../validation';
 import {ownedDraft} from './drafts';
+import {deleteStoredMedia} from './media-cleanup';
 
 export const MAX_IMAGE_BYTES=10*1024*1024;
 export const MAX_PER_DRAFT=20;
@@ -47,10 +48,10 @@ export function saveUpload(db:Database,dir:string,ownerId:string,input:{bytes:Bu
  const draftId=input.draftId??null;
  if(draftId)ownedDraft(db,ownerId,draftId);
  const publicId=randomBytes(16).toString('base64url'),key=`${randomUUID()}${EXT[mime]}`;
- mkdirSync(dir,{recursive:true});
+ mkdirSync(dir,{recursive:true,mode:0o700});
  return transaction(db,()=>{
   assertRoom(db,ownerId,draftId);
-  writeFileSync(filePath(dir,key),input.bytes,{flag:'wx'});
+  writeFileSync(filePath(dir,key),input.bytes,{flag:'wx',mode:0o600});
   try{
    db.prepare('INSERT INTO media_files(id,public_id,owner_id,draft_id,mime,size,storage_key,original_name,source,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
     .run(randomUUID(),publicId,ownerId,draftId,mime,input.bytes.length,key,input.name.slice(0,120),input.source??'upload',now);
@@ -84,10 +85,10 @@ export function attachMedia(db:Database,ownerId:string,publicId:string,input:unk
  });
 }
 
-/** 기록과 파일을 함께 지운다(파일이 이미 없으면 기록만 지운다). */
+/** Access ends immediately; the durable tombstone retries physical deletion if the filesystem is unavailable. */
 export function deleteMedia(db:Database,dir:string,ownerId:string,publicId:string){
  const r=ownedRow(db,ownerId,publicId);
  db.prepare('DELETE FROM media_files WHERE public_id=?').run(publicId);
- try{unlinkSync(filePath(dir,r.storage_key));}catch(e){if((e as NodeJS.ErrnoException).code!=='ENOENT')throw e;}
+ deleteStoredMedia(db,dir,r.storage_key);
  return{deleted:true};
 }

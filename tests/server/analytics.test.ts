@@ -65,7 +65,7 @@ test('retention policy and service health',async t=>{
  assert.equal((db.prepare("SELECT count(*) AS n FROM audit_logs WHERE id IN ('old-audit','new-audit')").get() as {n:number}).n,1);
  db.prepare("INSERT INTO worker_heartbeats(worker_id,started_at,last_seen_at) VALUES('w1',?,?)").run(NOW-DAY,NOW-30_000);
  const h=serviceHealth(db,admin,NOW);
- assert.equal(h.workers[0].alive,true);assert.equal(h.schemaVersion,25);
+ assert.equal(h.workers[0].alive,true);assert.equal(h.schemaVersion,26);
  assert.equal(typeof h.queues.scan.queued,'number');
  assert.equal(h.integrations.payments,false);
  assert.equal(serviceHealth(db,admin,NOW+10*60_000).workers[0].alive,false,'stale heartbeat');

@@ -2,7 +2,7 @@ import {z} from 'zod';
 import type {Database} from '../database';
 import type {User} from '../auth';
 import {AppError} from '../errors';
-import {body,clientPeer,json,rateLimit} from '../http';
+import {body,clientPeer,json,rateLimit,readRequestBytes} from '../http';
 import {decideAuthorization,exchangeToken,listAuthorizedApps,registerClient,revokeAppForUser,revokeToken} from './authz';
 
 /** 서버 간 호출이라 Origin 검사를 하지 않는 경로(본문의 일회 코드·PKCE·토큰으로 인증). */
@@ -11,8 +11,7 @@ const MAX=16*1024;
 /** OAuth 요청 본문: application/x-www-form-urlencoded(표준) 또는 JSON. */
 async function readForm(request:Request):Promise<Record<string,unknown>>{
  const type=request.headers.get('content-type')||'';
- const text=await request.text();
- if(text.length>MAX)throw new AppError(413,'invalid_request','요청이 너무 큽니다.');
+ const text=(await readRequestBytes(request,MAX,new AppError(413,'invalid_request','요청이 너무 큽니다.'))).toString('utf8');
  if(/application\/json/i.test(type)){try{return JSON.parse(text) as Record<string,unknown>;}catch{throw new AppError(400,'invalid_request','JSON이 올바르지 않습니다.');}}
  return Object.fromEntries(new URLSearchParams(text));
 }

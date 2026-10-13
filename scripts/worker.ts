@@ -13,6 +13,7 @@ import {billingMaintenance} from '../src/server/billing/maintenance';
 import {cleanupExports} from '../src/server/creative/exports';
 import {runRetention} from '../src/server/ops/retention';
 import {uploadDir} from '../src/server/writing/writing-api';
+import {cleanupMedia} from '../src/server/writing/media-cleanup';
 
 async function main(){
  const workerId=`${hostname()}-${process.pid}`;
@@ -27,6 +28,7 @@ async function main(){
  let maintained=0,retained=0;
  while(!controller.signal.aborted){
   const billing=billingMaintenance(db,maintained);
+  if(billing){const media=cleanupMedia(db,uploadDir(),billing.at);if(media.removed||media.failed||media.scanError)process.stdout.write(`[worker] media cleanup ${JSON.stringify(media)}\n`);}
   if(billing&&billing.at-retained>=3600_000){retained=billing.at;const r=runRetention(db,billing.at);process.stdout.write(`[worker] retention ${JSON.stringify(r)}\n`);}
   if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const ran=(await runWorkerOnce(db,workerId,scans))??(await runGenerationOnce(db,workerId,provider));

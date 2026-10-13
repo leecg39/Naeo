@@ -2,7 +2,7 @@ import {randomUUID} from 'node:crypto';
 import {z} from 'zod';
 import type {Database} from '../database';
 import {AppError} from '../errors';
-import {appOrigin,json,rateLimit} from '../http';
+import {appOrigin,json,rateLimit,readRequestBytes} from '../http';
 import {authenticateBearer,mcpResource} from '../oauth/authz';
 import {callTool,toolList} from './tools';
 
@@ -27,8 +27,9 @@ export async function mcpApi(db:Database,request:Request,now=Date.now()):Promise
  let who;
  try{who=authenticateBearer(db,request.headers.get('authorization'),mcpResource(),now);}catch(e){if(e instanceof AppError)return unauthorized(e);throw e;}
  rateLimit(db,`mcp:${who.userId}:${who.clientId}`,120,60_000,now);
+ const bytes=await readRequestBytes(request,512*1024);
  let message:z.infer<typeof rpc>;
- try{message=rpc.parse(JSON.parse(await request.text()));}catch{return reply(null,{error:{code:-32700,message:'Parse error'}});}
+ try{message=rpc.parse(JSON.parse(bytes.toString('utf8')));}catch{return reply(null,{error:{code:-32700,message:'Parse error'}});}
  if(message.id===undefined)return new Response(null,{status:202});
  const id=message.id,p=message.params??{};
  switch(message.method){

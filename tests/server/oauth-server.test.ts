@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {openDatabase} from '../../src/server/database';
 import {register} from '../../src/server/auth';
+import {changePassword} from '../../src/server/account-security';
+import {updateUser} from '../../src/server/admin-users';
 import {registerClient,ensureExtensionClient,validateAuthorizeRequest,decideAuthorization,exchangeToken,authenticateBearer,revokeToken,revokeAppForUser,listAuthorizedApps,mcpResource} from '../../src/server/oauth/authz';
 
 process.env.NAEO_APP_URL='http://127.0.0.1:3000';
@@ -84,4 +86,41 @@ test('refresh tokens rotate; replaying an old one revokes the whole family; user
  assert.throws(()=>authenticateBearer(db,`Bearer ${fresh.access_token}`,mcpResource(),NOW),{status:401});
  assert.throws(()=>exchangeToken(db,{grant_type:'refresh_token',refresh_token:fresh.refresh_token,client_id:client.client_id},NOW),{code:'invalid_grant'});
  assert.equal(listAuthorizedApps(db,user).length,0);
+});
+
+test('disconnecting an app also invalidates every outstanding authorization code',async t=>{
+ const {db,user,client}=await fixture(t);await tokens(db,user,client);
+ const pending=codeFrom(decideAuthorization(db,user,{...params(client),decision:'approve'},NOW));
+ revokeAppForUser(db,user,client.client_id,NOW+1);
+ assert.throws(()=>exchangeToken(db,{grant_type:'authorization_code',code:pending.code!,client_id:client.client_id,redirect_uri:params(client).redirect_uri,code_verifier:verifier},NOW+2),{code:'invalid_grant'});
+});
+
+test('suspension and password changes invalidate app grants, including codes pending exchange',async t=>{
+ const {db,user,client}=await fixture(t),first=await tokens(db,user,client);
+ const admin=(await register(db,{email:'admin-grants@example.test',password:'authz-admin-password',nickname:'Admin',termsAccepted:true})).user.id;
+ db.prepare("UPDATE users SET role='admin' WHERE id=?").run(admin);
+ const pending=codeFrom(decideAuthorization(db,user,{...params(client),decision:'approve'},NOW));
+ await updateUser(db,admin,user,{status:'suspended',version:1,currentPassword:'authz-admin-password'});
+ assert.throws(()=>exchangeToken(db,{grant_type:'refresh_token',refresh_token:first.refresh_token,client_id:client.client_id},NOW+1),{code:'invalid_grant'});
+ assert.throws(()=>exchangeToken(db,{grant_type:'authorization_code',code:pending.code!,client_id:client.client_id,redirect_uri:params(client).redirect_uri,code_verifier:verifier},NOW+1),{code:'invalid_grant'});
+ await updateUser(db,admin,user,{status:'active',version:2,currentPassword:'authz-admin-password'});
+ assert.throws(()=>authenticateBearer(db,`Bearer ${first.access_token}`,mcpResource(),NOW+2),{status:401},'reactivating an account does not reactivate old access tokens');
+ const fresh=await tokens(db,user,client);
+ await changePassword(db,user,{currentPassword:'authz-long-password',newPassword:'changed-authz-password'});
+ assert.throws(()=>authenticateBearer(db,`Bearer ${fresh.access_token}`,mcpResource(),NOW+3),{status:401});
+});
+
+test('refresh audience mismatch is rejected without consuming the current refresh token',async t=>{
+ const {db,user,client}=await fixture(t),first=await tokens(db,user,client);
+ const grant={grant_type:'refresh_token',refresh_token:first.refresh_token,client_id:client.client_id};
+ assert.throws(()=>exchangeToken(db,{...grant,resource:'https://unrelated.example/mcp'},NOW+1),{code:'invalid_target'});
+ assert.ok(exchangeToken(db,grant,NOW+2).access_token);
+});
+
+test('legacy grants owned by an inactive account cannot issue new tokens',async t=>{
+ const {db,user,client}=await fixture(t),first=await tokens(db,user,client);
+ db.prepare("UPDATE users SET status='suspended' WHERE id=?").run(user);
+ const before=db.prepare('SELECT count(*) AS n FROM oauth_tokens').get()?.n;
+ assert.throws(()=>exchangeToken(db,{grant_type:'refresh_token',refresh_token:first.refresh_token,client_id:client.client_id},NOW+1),{code:'invalid_grant'});
+ assert.equal(db.prepare('SELECT count(*) AS n FROM oauth_tokens').get()?.n,before);
 });

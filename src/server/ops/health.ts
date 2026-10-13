@@ -15,6 +15,7 @@ export function serviceHealth(db:Database,actorId:string,now=Date.now()){
   schemaVersion:count(db,'SELECT max(version) AS n FROM schema_migrations'),
   workers:(db.prepare('SELECT worker_id AS workerId,started_at AS startedAt,last_seen_at AS lastSeenAt,processed,failed FROM worker_heartbeats ORDER BY last_seen_at DESC LIMIT 10').all() as {workerId:string;startedAt:number;lastSeenAt:number;processed:number;failed:number}[]).map(w=>({...w,alive:now-w.lastSeenAt<WORKER_STALE})),
   queues:{scan:queue('scan_jobs'),generation:queue('generation_jobs'),exportsCollecting:count(db,"SELECT count(*) AS n FROM export_jobs WHERE state='collecting'")},
+  mediaDeletion:{pending:count(db,'SELECT count(*) AS n FROM media_deletions'),retrying:count(db,'SELECT count(*) AS n FROM media_deletions WHERE attempts>0')},
   integrations:{ai:!!providerConfig().apiKey,aiCitation:false,payments:tossProvider()!==null,google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null,mail:false,sms:false},
  };
 }

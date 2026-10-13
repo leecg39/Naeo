@@ -1007,5 +1007,20 @@ export const migrations = [{
       salt TEXT NOT NULL CHECK(length(salt)=64)
     ) STRICT;
   `,
+}, {
+  version: 26,
+  name: 'durable_media_deletion',
+  sql: `
+    CREATE TABLE media_deletions (
+      storage_key TEXT PRIMARY KEY NOT NULL,
+      queued_at INTEGER NOT NULL DEFAULT (unixepoch()*1000),
+      attempts INTEGER NOT NULL DEFAULT 0 CHECK(attempts>=0),
+      last_attempt_at INTEGER,
+      last_error_code TEXT NOT NULL DEFAULT ''
+    ) STRICT;
+    CREATE TRIGGER media_delete_file AFTER DELETE ON media_files BEGIN
+      INSERT INTO media_deletions(storage_key) VALUES(OLD.storage_key) ON CONFLICT DO NOTHING;
+    END;
+  `,
 }];
 

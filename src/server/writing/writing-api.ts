@@ -2,7 +2,7 @@ import {z} from 'zod';
 import type {Database} from '../database';
 import type {User} from '../auth';
 import {AppError} from '../errors';
-import {body,json,rateLimit} from '../http';
+import {body,json,rateLimit,readRequestBytes} from '../http';
 import {createDraft,deleteDraft,getDraft,listDrafts,restoreDraftRevision,updateDraft} from './drafts';
 import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,listMedia,readMedia,saveUpload} from './media';
 import {createShareLink,listShareLinks,readShared,revokeShareLink} from './shares';
@@ -21,8 +21,8 @@ function imageResponse(bytes:Buffer,mime:string,cache:string){
 
 async function uploadForm(request:Request){
  if(!/^multipart\/form-data/i.test(request.headers.get('content-type')||''))throw new AppError(415,'MULTIPART_REQUIRED','사진은 multipart/form-data로 올려주세요.');
- if(Number(request.headers.get('content-length')||0)>MAX_IMAGE_BYTES+64*1024)throw new AppError(413,'IMAGE_TOO_LARGE','사진은 10MB 이하만 올릴 수 있습니다.');
- const form=await request.formData().catch(()=>{throw new AppError(400,'INVALID_FORM','업로드 형식을 확인해주세요.');});
+ const bytes=await readRequestBytes(request,MAX_IMAGE_BYTES+64*1024,new AppError(413,'IMAGE_TOO_LARGE','사진은 10MB 이하만 올릴 수 있습니다.'));
+ const form=await new Response(new Uint8Array(bytes),{headers:{'Content-Type':request.headers.get('content-type')!}}).formData().catch(()=>{throw new AppError(400,'INVALID_FORM','업로드 형식을 확인해주세요.');});
  const file=form.get('file');
  if(!(file instanceof File))throw new AppError(400,'FILE_REQUIRED','사진 파일을 선택해주세요.');
  if(file.size>MAX_IMAGE_BYTES)throw new AppError(413,'IMAGE_TOO_LARGE','사진은 10MB 이하만 올릴 수 있습니다.');
