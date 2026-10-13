@@ -140,3 +140,14 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/page-settings/:id/restore` | POST | 관리자 | `{revision,version}`. 제목·설명만 되돌리고 공개 여부 유지 | 404 |
 
 이 세 페이지는 레이아웃이 디자인 자체라 본문은 캡처 그대로 두고, 생성·삭제 대신 숨김(404)을 쓴다. 제목은 `제목 | NAEO`로, 설명은 meta description으로 나간다(모든 DB 화면이 description을 내보내도록 메타데이터도 확장). 시드 `page-settings-v1`은 캡처 제목을 읽어 1회 적용.
+
+## P2.6 robots·sitemap·RSS·llms.txt (2026-10-13)
+
+| 경로 | 형식 | 규칙 |
+|---|---|---|
+| `/robots.txt` | text/plain | 기본 `Disallow: /`(복제 사이트가 원본 대신 검색되지 않도록). `NAEO_ALLOW_INDEXING=1`이면 공개 화면 허용, 관리자·API·대시보드·로그인·OAuth·결제·개발·소셜 내보내기 경로 차단, sitemap 주소 포함 |
+| `/sitemap.xml` | application/xml | 공개 화면 12개 + 공개 고정 페이지 + 공개 정책 문서 + 게시된 매거진 글. 초안·예약·비공개·숨김·삭제, 예전 `/updates/:slug`, 대시보드·관리자 제외. lastModified는 DB 수정 시각 |
+| `/rss.xml` | application/rss+xml | 매거진 최신 공개 글 20개(RSS 2.0, 절대 주소, XML 이스케이프·제어 문자 제거) |
+| `/llms.txt` | text/plain | 안내·공개 고정 페이지·매거진(제목·요약)·정책 문서를 절대 주소 마크다운 링크로 색인. 소개 문구는 새로 작성 |
+
+모두 요청마다 DB를 읽고(`dynamic='force-dynamic'`), RSS·llms는 `Cache-Control: no-cache`라 비공개 전환이 바로 반영된다.
