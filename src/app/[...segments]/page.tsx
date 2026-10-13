@@ -6,6 +6,8 @@ import { pageUser,adminPageUser } from '@/server/current-user';
 import { cache } from 'react';
 import { contentDatabase,resolveDatabasePage } from '@/server/content/public-pages';
 import { activeAnnouncement } from '@/server/content/announcements';
+import { buildDashboardPage } from '@/server/analysis/dashboard-page';
+import { database } from '@/server/database';
 import AnnouncementBar from '@/components/content/AnnouncementBar';
 import type { CapturedPageData } from '@/types/site';
 type Props={params:Promise<{segments:string[]}>};
@@ -18,7 +20,11 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{const p
 function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
 export default async function Page({params}:Props){
  const path='/'+(await params).segments.join('/');
- if(path==='/dashboard'||path.startsWith('/dashboard/'))await pageUser(path);
+ if(path==='/dashboard'||path.startsWith('/dashboard/')){
+  const user=await pageUser(path);
+  // 대시보드는 로그인 회원 본인의 블로그·진단 결과로 채운다(원본 계정 데이터 미노출).
+  if(path==='/dashboard')return <PageExperience data={await buildDashboardPage(database(),user.id)}/>;
+ }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
  if(path==='/admin'||path.startsWith('/admin/')){await adminPageUser(path);notFound();}
  if(path.startsWith('/social/banner-preview'))redirect('/');

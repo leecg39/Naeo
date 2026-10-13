@@ -6,6 +6,17 @@ import {paginationInput} from '../validation';
 import {JOB_SELECT,toJob,type JobRow,type ScanJob} from './records';
 
 export {LEASE_MS,backoffMs} from './timing';
+/** 새 규칙(원본 미확인): 회원 1명이 하루(KST)에 시작할 수 있는 진단 수. 재시도도 1회로 센다. */
+export const DAILY_SCAN_LIMIT=20;
+const KST_OFFSET=9*3600_000,DAY=86_400_000;
+export const kstDayStart=(now:number)=>Math.floor((now+KST_OFFSET)/DAY)*DAY-KST_OFFSET;
+export function remainingScansToday(db:Database,ownerId:string,now=Date.now()):number{
+ const {n}=db.prepare('SELECT count(*) AS n FROM scan_jobs WHERE owner_id=? AND created_at>=?').get(ownerId,kstDayStart(now)) as {n:number};
+ return Math.max(0,DAILY_SCAN_LIMIT-n);
+}
+function assertQuota(db:Database,ownerId:string,now:number){
+ if(remainingScansToday(db,ownerId,now)<=0)throw new AppError(429,'SCAN_QUOTA_EXCEEDED',`오늘 진단 ${DAILY_SCAN_LIMIT}회를 모두 사용했습니다. 내일 0시(한국 시간)에 다시 채워집니다.`);
+}
 const enqueueInput=z.object({blogId:z.uuid(),idempotencyKey:z.string().trim().min(1).max(100).optional()}).strict();
 const retryInput=z.object({idempotencyKey:z.string().trim().min(1).max(100).optional()}).strict();
 const listInput=paginationInput.extend({blogId:z.uuid().optional(),state:z.enum(['queued','running','succeeded','failed','canceled']).optional()});
@@ -37,6 +48,7 @@ export function enqueueScan(db:Database,ownerId:string,input:unknown,now=Date.no
    if(same)return toJob(same);
   }
   assertNoActive(db,v.blogId);
+  assertQuota(db,ownerId,now);
   return insertJob(db,ownerId,v.blogId,v.idempotencyKey??null,null,now);
  });
 }
@@ -70,7 +82,7 @@ export function retryJob(db:Database,r:JobRow,key:string|null,now=Date.now()):Sc
 }
 export function retryScan(db:Database,ownerId:string,id:string,input:unknown,now=Date.now()):ScanJob{
  const {idempotencyKey}=retryInput.parse(input);
- return transaction(db,()=>retryJob(db,ownedRow(db,ownerId,id),idempotencyKey??null,now));
+ return transaction(db,()=>{assertQuota(db,ownerId,now);return retryJob(db,ownedRow(db,ownerId,id),idempotencyKey??null,now);});
 }
 
 export {claimNextScan,reportProgress,completeScan,failScan,isCancelRequested} from './lease';

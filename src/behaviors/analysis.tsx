@@ -1,4 +1,5 @@
 import React from "react";
+import { api, ApiError } from "@/lib/api-client";
 import { type BehaviorTools, type InstallBehavior, text } from "@/lib/behavior";
 
 type Cleanup = () => void;
@@ -272,40 +273,48 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
   const categoryActive = categoryTabs[0]?.className; const categoryInactive = categoryTabs[1]?.className;
   const feedActive = feedTabs[1]?.className; const feedInactive = feedTabs[0]?.className;
   const rank = root.querySelector<HTMLElement>(".mui-63uc4g");
-  const scanButton = elements(root, "button").find(el => text(el) === "블로그 스캔") as HTMLButtonElement | undefined;
-  let scanning = false;
+  // 실제 진단: 서버가 넣어 준 data-scan-blog/data-scan-job으로 작업을 만들고 상태를 폴링한다.
+  const scanButton = root.querySelector<HTMLButtonElement>("button[data-scan-blog]") || undefined;
+  let polling = false;
   const timers: ReturnType<typeof setTimeout>[] = [];
   cleanup.push(() => timers.forEach(clearTimeout));
-  const credits = elements(root, "p,span").find(el => /^\d+회 남음$/.test(text(el)));
-  const scanTime = elements(root, "p,span").find(el => text(el).startsWith("마지막 스캔:"));
-  let scans = 0;
-  try { scans = Math.max(0, Math.min(20, Number(localStorage.getItem("naeo-clone:analysis-scans")) || 0)); } catch { /* Storage can be disabled. */ }
-  const updateCredits = () => {
-    mutate.content(credits || null, `${20 - scans}회 남음`);
-    elements(root, "p,span").filter(el => /^스캔 \d+회$/.test(text(el))).forEach(el => mutate.content(el, `스캔 ${20 - scans}회`));
+  const setScanLabel = (label: string) => {
+    if (!scanButton) return;
+    const textNode = [...scanButton.childNodes].reverse().find(node => node.nodeType === Node.TEXT_NODE);
+    if (textNode) textNode.textContent = label; else scanButton.append(label);
   };
-  const formatScanTime = (date: Date) => date.toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
-  if (scans) {
-    updateCredits();
+  const busy = (on: boolean) => { mutate.attr(scanButton || null, "aria-busy", on ? "true" : "false"); mutate.attr(scanButton || null, "disabled", on ? "" : null); };
+  type ScanStatus = { id: string; state: "queued" | "running" | "succeeded" | "failed" | "canceled"; progress: number; errorMessage: string | null; result: { score?: number; postCount?: number } | null };
+  const poll = (jobId: string, round = 0) => {
+    polling = true; busy(true);
+    if (round >= 200) { polling = false; busy(false); setScanLabel("블로그 스캔"); tools.toast("진단이 오래 걸리고 있습니다. 잠시 후 새로고침해주세요."); return; }
+    timers.push(setTimeout(async () => {
+      try {
+        const job = await api<ScanStatus>(`/api/scans/${jobId}`);
+        if (job.state === "queued" || job.state === "running") { setScanLabel(job.state === "queued" ? "대기 중…" : `진단 중… ${job.progress}%`); poll(jobId, round + 1); return; }
+        polling = false; busy(false); setScanLabel("블로그 스캔");
+        if (job.state === "succeeded") { tools.toast(`진단 완료 · ${job.result?.score ?? 0}점, 글 ${job.result?.postCount ?? 0}개를 분석했습니다.`); timers.push(setTimeout(() => window.location.reload(), 800)); }
+        else tools.toast(job.state === "canceled" ? "진단이 취소되었습니다." : job.errorMessage || "진단에 실패했습니다.");
+      } catch (error) {
+        polling = false; busy(false); setScanLabel("블로그 스캔");
+        tools.toast(error instanceof Error ? error.message : "진단 상태를 확인하지 못했습니다.");
+      }
+    }, round === 0 ? 300 : 1500));
+  };
+  const scan = async () => {
+    if (!scanButton || polling) return;
+    const blogId = scanButton.dataset.scanBlog;
+    if (!blogId) { tools.toast("먼저 설정에서 네이버 블로그를 연결해주세요."); tools.navigate("/dashboard/settings"); return; }
+    busy(true); setScanLabel("대기 중…");
     try {
-      const saved = localStorage.getItem("naeo-clone:analysis-last-scan");
-      if (saved && !Number.isNaN(Date.parse(saved))) mutate.content(scanTime || null, `마지막 스캔: ${formatScanTime(new Date(saved))}`);
-    } catch { /* Stored scan data is optional. */ }
-  }
-  const setScanLabel = (label: string) => mutate.content(scanButton || null, label);
-  const scan = () => {
-    if (!scanButton || scanning) return;
-    if (scans >= 20) { tools.toast("데모 스캔 횟수를 모두 사용했습니다."); return; }
-    scanning = true; mutate.attr(scanButton, "disabled", ""); mutate.attr(scanButton, "aria-busy", "true"); setScanLabel("블로그 확인 중…");
-    timers.push(setTimeout(() => setScanLabel("AI 인용 분석 중…"), 500));
-    timers.push(setTimeout(() => {
-      scans++; scanning = false; updateCredits(); setScanLabel("블로그 스캔"); mutate.attr(scanButton, "disabled", null); mutate.attr(scanButton, "aria-busy", "false");
-      const now = new Date(); const stamp = formatScanTime(now);
-      mutate.content(scanTime || null, `마지막 스캔: ${stamp} (방금 전)`);
-      try { localStorage.setItem("naeo-clone:analysis-scans", String(scans)); localStorage.setItem("naeo-clone:analysis-last-scan", now.toISOString()); } catch { /* Non-persistent demo still works. */ }
-      tools.toast("데모 분석 완료 · 글 50개, 통합검색 노출 7개, AI 인용 1개를 확인했습니다.");
-    }, 1500));
+      const job = await api<ScanStatus>("/api/scans", { method: "POST", body: { blogId, idempotencyKey: crypto.randomUUID() } });
+      poll(job.id);
+    } catch (error) {
+      busy(false); setScanLabel("블로그 스캔");
+      tools.toast(error instanceof ApiError || error instanceof Error ? error.message : "진단을 시작하지 못했습니다.");
+    }
   };
+  if (scanButton?.dataset.scanJob) poll(scanButton.dataset.scanJob);
   return (target: HTMLElement) => {
     const button = target.closest<HTMLElement>("button");
     if (button && chartTabs.includes(button)) {
@@ -357,7 +366,7 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
       mutate.content(root.querySelector(".mui-1wh8gjw"), `${days === Infinity ? "전체 기간" : `최근 ${days}일`} 변화 ${count}건을 시간순으로 보여드립니다`);
       return true;
     }
-    if (button === scanButton) { scan(); return true; }
+    if (button === scanButton) { void scan(); return true; }
     if (button && text(button) === "변경") { tools.navigate("/dashboard/settings"); return true; }
     const card = target.closest<HTMLElement>("[role='button'][aria-label$='AI 브리핑 캡처 상세보기']");
     if (card) {
