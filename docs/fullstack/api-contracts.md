@@ -346,3 +346,14 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/creative/exports/:job/file` | GET | 소유자 | `attachment; filename*=UTF-8''제목.pdf` | 404, 410 `EXPORT_EXPIRED` |
 
 화면: `/social/aeo-carousel/export?project=`·`/social/mate-ad/export?project=`·`/youtube/aeo-intro/export?project=`(진행 n/전체, 실패 이유, 내려받기). 영상 파일 인코딩은 지원하지 않음(인코더 필요). `/preview?id=`는 내 초안을 샌드박스 iframe(허용 목록 HTML)으로 미리보기, id 없으면 `/dashboard/write`. `/dev/*`는 관리자만(그 외 404). localStorage 미리보기 데모(DemoPreview) 제거.
+
+## P8.1 방문·체류 집계와 운영 상태 (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/api/analytics/view` | POST | 공개(사이트 Origin) | `{path,referrer?}` 경로 정규화(쿼리·해시 제거, 공유 토큰은 패턴), 유입은 호스트만(이 사이트 제외). 방문자 id는 서버가 발급한 HttpOnly 쿠키 `naeo_vid`(경로 /api/analytics)만 사용 → `{viewId}` 201. DNT·GPC·봇·`/admin`·`/api`·`/dev`는 204 | 403, 400 |
+| `/api/analytics/dwell` | POST | 공개 | `{viewId,ms}` 방문당 한 번·최대 30분 | 404, 409 `DWELL_RECORDED` |
+| `/api/admin/analytics` | GET | 관리자 | `days`(1–90): 일별 보기·고유 방문자, 많이 본 페이지(평균 체류), 유입 호스트 | 403 |
+| `/api/admin/health` | GET | 관리자 | 스키마 버전, 작업자 생존(2분), 진단·생성 큐와 24시간 실패, 내보내기 수집 중, 외부 연동 설정 여부(비밀값 없음) | 403 |
+
+화면: `/admin` 운영 현황에 '최근 7일 방문'과 '서비스 상태'(작업자 신호가 없으면 경고). 작업자가 한 시간마다 보관 정책 실행.

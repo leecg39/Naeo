@@ -973,5 +973,39 @@ export const migrations = [{
       PRIMARY KEY(job_id,position)
     ) STRICT;
   `,
+}, {
+  version: 25,
+  name: 'analytics_ops',
+  sql: `
+    CREATE TABLE page_views (
+      id TEXT PRIMARY KEY NOT NULL,
+      day TEXT NOT NULL CHECK(length(day)=10),
+      path TEXT NOT NULL CHECK(length(path) BETWEEN 1 AND 200),
+      visitor_hash TEXT NOT NULL CHECK(length(visitor_hash)=64),
+      referrer_host TEXT NOT NULL DEFAULT '' CHECK(length(referrer_host)<=100),
+      dwell_ms INTEGER CHECK(dwell_ms IS NULL OR dwell_ms BETWEEN 0 AND 1800000),
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX page_views_day ON page_views(day,path);
+    CREATE TABLE page_stats (
+      day TEXT NOT NULL,
+      path TEXT NOT NULL,
+      views INTEGER NOT NULL CHECK(views>=0),
+      visitors INTEGER NOT NULL CHECK(visitors>=0),
+      dwell_total_ms INTEGER NOT NULL DEFAULT 0,
+      dwell_samples INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY(day,path)
+    ) STRICT;
+    CREATE TABLE referrer_stats (
+      day TEXT NOT NULL,
+      host TEXT NOT NULL,
+      views INTEGER NOT NULL,
+      PRIMARY KEY(day,host)
+    ) STRICT;
+    CREATE TABLE analytics_salts (
+      day TEXT PRIMARY KEY NOT NULL,
+      salt TEXT NOT NULL CHECK(length(salt)=64)
+    ) STRICT;
+  `,
 }];
 

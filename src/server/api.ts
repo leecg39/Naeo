@@ -16,6 +16,7 @@ import {memberOAuthApi,publicOAuthApi} from './oauth/oauth-api';
 import {memberAuthzApi,publicAuthzApi,SERVER_TO_SERVER} from './oauth/authz-api';
 import {mcpApi} from './mcp/mcp-api';
 import {creativeApi} from './creative/creative-api';
+import {adminOpsApi,publicAnalyticsApi} from './ops/analytics-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -46,6 +47,8 @@ export function createApi(getDatabase:()=>Database=database) {
       logout(db,cookieToken(request));
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
+    const analytics=await publicAnalyticsApi(db,request);
+    if(analytics)return analytics;
     const mcp=await mcpApi(db,request);
     if(mcp)return mcp;
     const publicAuthz=await publicAuthzApi(db,request);
@@ -95,6 +98,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(rankingResponse)return rankingResponse;
     const eventsResponse=await memberEventsApi(db,request,user)??await adminEventsApi(db,request,user);
     if(eventsResponse)return eventsResponse;
+    const opsResponse=adminOpsApi(db,request,user);
+    if(opsResponse)return opsResponse;
     const creativeResponse=await creativeApi(db,request,user);
     if(creativeResponse)return creativeResponse;
     const billingResponse=await memberBillingApi(db,request,user)??await adminBillingApi(db,request,user);

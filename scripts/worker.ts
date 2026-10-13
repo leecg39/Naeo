@@ -11,6 +11,7 @@ import {providerConfig} from '../src/server/generation/generation';
 import {scanHandler} from '../src/server/analysis/scan-handler';
 import {billingMaintenance} from '../src/server/billing/maintenance';
 import {cleanupExports} from '../src/server/creative/exports';
+import {runRetention} from '../src/server/ops/retention';
 import {uploadDir} from '../src/server/writing/writing-api';
 
 async function main(){
@@ -23,9 +24,10 @@ async function main(){
  // 키가 없으면 남은 작업을 실패·환급으로 정리한다(요청 단계에서 이미 거절하므로 보통 생기지 않는다).
  const provider:Provider=config.apiKey?anthropicProvider(config):async()=>{throw new ProviderError('PROVIDER_NOT_CONFIGURED','AI 글 생성 공급자가 설정되지 않았습니다.',false);};
  const scans=scanHandler(db),idleMs=Number(process.env.NAEO_WORKER_IDLE_MS)||2000;
- let maintained=0;
+ let maintained=0,retained=0;
  while(!controller.signal.aborted){
   const billing=billingMaintenance(db,maintained);
+  if(billing&&billing.at-retained>=3600_000){retained=billing.at;const r=runRetention(db,billing.at);process.stdout.write(`[worker] retention ${JSON.stringify(r)}\n`);}
   if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const ran=(await runWorkerOnce(db,workerId,scans))??(await runGenerationOnce(db,workerId,provider));
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
