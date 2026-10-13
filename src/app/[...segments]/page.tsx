@@ -12,6 +12,8 @@ import { buildAiPicksPage } from '@/server/analysis/ai-picks-page';
 import { buildRecommendationsPage } from '@/server/keywords/recommendations-page';
 import { buildCompetitorsPage } from '@/server/competitors/competitors-page';
 import DraftsWorkspace from '@/components/writing/DraftsWorkspace';
+import { buildWritingPage } from '@/server/writing/writing-page';
+import { memberChrome } from '@/server/content/member-chrome';
 import { ImagesLibrary,SharedImages } from '@/components/writing/ImagePages';
 import { buildRankingPage } from '@/server/ranking/ranking-page';
 import { ensureConfirmed } from '@/server/ranking/ranking-api';
@@ -91,16 +93,17 @@ export default async function Page({params,searchParams}:Props){
  const path='/'+(await params).segments.join('/');
  if(path==='/dashboard'||path.startsWith('/dashboard/')){
   const user=await pageUser(path);
+  const memberView=(data:CapturedPageData)=><PageExperience data={memberChrome(database(),user.id,data)}/>;
   // 대시보드는 로그인 회원 본인의 블로그·진단 결과로 채운다(원본 계정 데이터 미노출).
-  if(path==='/dashboard')return <PageExperience data={await buildDashboardPage(database(),user.id)}/>;
-  if(path==='/dashboard/mate')return <PageExperience data={await buildMateDashboardPage(database(),user.id)}/>;
-  if(path==='/dashboard/ai-picks')return <PageExperience data={await buildAiPicksPage()}/>;
-  if(path==='/dashboard/competitors')return <PageExperience data={await buildCompetitorsPage(database(),user.id)}/>;
-  if(path==='/dashboard/events')return <PageExperience data={await buildDashboardEventsPage(contentDatabase(),user.id)}/>;
+  if(path==='/dashboard')return memberView(await buildDashboardPage(database(),user.id));
+  if(path==='/dashboard/mate')return memberView(await buildMateDashboardPage(database(),user.id));
+  if(path==='/dashboard/ai-picks')return memberView(await buildAiPicksPage());
+  if(path==='/dashboard/competitors')return memberView(await buildCompetitorsPage(database(),user.id));
+  if(path==='/dashboard/events')return memberView(await buildDashboardEventsPage(contentDatabase(),user.id));
   const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
-  if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <><PageExperience data={detail}/><EventEntryPanel/></>;}
-  if(path==='/dashboard/write'){const captured=await getCapturedPage(path);if(captured)return <><PageExperience data={captured}/><DraftsWorkspace/></>;}
-  if(path==='/dashboard/recommendations'){const sp=await searchParams;return <PageExperience data={await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)})}/>;}
+  if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <>{memberView(detail)}<EventEntryPanel/></>;}
+  if(path==='/dashboard/write')return <><PageExperience data={await buildWritingPage(database(),user.id)}/><DraftsWorkspace/></>;
+  if(path==='/dashboard/recommendations'){const sp=await searchParams;return memberView(await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)}));}
  }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
  if(path==='/admin'||path.startsWith('/admin/')){await adminPageUser(path);notFound();}

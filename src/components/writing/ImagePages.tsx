@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -40,7 +41,7 @@ function Library(){
    onChange={e=>{const files=[...e.target.files??[]];e.target.value='';void run(async()=>{for(const f of files)await uploadPhoto(f);return`사진 ${files.length}장을 올렸습니다.`;});}}/>
   {message&&<p role="status" style={{margin:0}}>{message}</p>}
   <ul style={grid}>{items?.map(m=><li key={m.publicId} style={{display:'grid',gap:6}}>
-   {/* eslint-disable-next-line @next/next/no-img-element -- 로그인한 본인만 받는 개인 사진 */}
+   {/* 로그인한 본인만 받는 개인 사진 */}
    <img src={`/api/media/${m.publicId}`} alt={m.originalName||'내 사진'} style={img}/>
    <span style={{fontSize:12,color:'#a3a3a3'}}>{m.draftId?'초안에 연결됨':'연결 안 됨'} · {KB(m.size)}</span>
    <button type="button" className="naeo-button" disabled={busy} onClick={()=>{if(window.confirm('사진을 삭제할까요?'))void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'DELETE'});return'사진을 삭제했습니다.';});}}>삭제<span className="sr-only"> {m.originalName}</span></button>
@@ -63,9 +64,9 @@ function SharedGallery({token}:{token:string}){
  if(!view)return <p role="status">불러오는 중…</p>;
  return <div style={{display:'grid',gap:12}}>
   <h2 style={{margin:0,fontSize:20,overflowWrap:'anywhere'}}>{view.title}</h2>
-  <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>공유 사진 {view.images.length}장 · {new Date(view.expiresAt).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'})}까지 열 수 있습니다.</p>
+  <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>공유 사진 {view.images.length}장 · {kstDateTime(view.expiresAt)}까지 열 수 있습니다.</p>
   <ul style={grid}>{view.images.map((m,i)=><li key={m.publicId}>
-   {/* eslint-disable-next-line @next/next/no-img-element -- 공유 토큰으로만 받는 사진 */}
+   {/* 공유 토큰으로만 받는 사진 */}
    <img src={`/api/shares/${token}/media/${m.publicId}`} alt={`공유 사진 ${i+1}`} style={img}/>
   </li>)}</ul>
   {!view.images.length&&<p style={{color:'#a3a3a3'}}>이 글에 연결된 사진이 없습니다.</p>}

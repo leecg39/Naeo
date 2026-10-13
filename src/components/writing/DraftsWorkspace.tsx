@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState,type FormEvent} from 'react';
 import {createPortal} from 'react-dom';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -8,7 +9,7 @@ import DraftEditor,{type DraftDetail} from './DraftEditor';
 
 const STATUS:Record<DraftSummary['status'],string>={draft:'초안',ready:'발행 준비',published:'발행함',archived:'보관'};
 const JOB:Record<GenerationJob['state'],string>={queued:'대기',running:'생성 중',succeeded:'완료',failed:'실패',canceled:'취소'};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'short',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms,{date:'short'});
 const field={padding:'8px 12px',borderRadius:8,border:'1px solid rgba(255,255,255,.2)',background:'transparent',color:'inherit',font:'inherit'} as const;
 export const OPEN_DRAFT_EVENT='naeo:open-draft';
 
@@ -21,6 +22,7 @@ function Workspace(){
    const query=new URLSearchParams({page:String(p),pageSize:'10',q,...(status?{status}:{})});
    const [list,gens,credit,tpl]=await Promise.all([apiResponse<PageResult<DraftSummary>>(`/api/drafts?${query}`),apiResponse<PageResult<GenerationJob>>('/api/generations?pageSize=5'),apiResponse<{balance:number}>('/api/credits?pageSize=1'),api<{id:string;name:string}[]>('/api/writing-templates')]);
    setResult(list);setJobs(gens.data);setTokens(credit.balance);setTemplates(tpl);setPage(p);
+   document.querySelectorAll('[data-credit-balance="true"]').forEach(el=>{el.textContent=`잔액 ${credit.balance}토큰`;});
   }catch(e){if(e instanceof ApiError&&e.status===401)setSignedOut(true);else setError(e instanceof Error?e.message:'불러오지 못했습니다.');}
  },[page,q,status]);
  const open=useCallback(async(id:string)=>{try{setSelected(await api<DraftDetail>(`/api/drafts/${id}`));setNotice('');}catch(e){setError(e instanceof Error?e.message:'초안을 열지 못했습니다.');}},[]);

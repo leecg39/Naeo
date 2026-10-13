@@ -1,11 +1,12 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
 import type {SiteDocument} from '@/server/content/documents';
 import DocumentEditor,{type DocumentDetail} from './DocumentEditor';
 
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 export default function DocumentsManager({initial}:{initial:PageResult<SiteDocument>}){
  const router=useRouter();

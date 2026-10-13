@@ -1,9 +1,10 @@
+import {kstDateTime} from '@/lib/kst-time';
 import type {analyticsSummary} from '@/server/ops/analytics';
 import type {serviceHealth} from '@/server/ops/health';
 
 type Summary=ReturnType<typeof analyticsSummary>;type Health=ReturnType<typeof serviceHealth>;
 const LABEL:Record<keyof Health['integrations'],string>={ai:'AI 글 생성',aiCitation:'AI 인용 확인',payments:'결제(토스)',google:'Google 로그인',naver:'네이버 로그인',mail:'메일 발송',sms:'문자 인증'};
-const time=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+const time=(ms:number)=>kstDateTime(ms,{seconds:true});
 /** 운영 현황: 방문 통계(개인정보 최소화 집계)와 서비스 상태. 서버에서 그린다. */
 export default function OpsOverview({summary,health}:{summary:Summary;health:Health}){
  const total=summary.daily.reduce((a,d)=>({views:a.views+d.views,visitors:a.visitors+d.visitors}),{views:0,visitors:0});

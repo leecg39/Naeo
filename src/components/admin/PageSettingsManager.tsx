@@ -1,11 +1,12 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api} from '@/lib/api-client';
 import type {PageSetting} from '@/server/content/page-settings';
 import type {PageSettingRevision} from '@/server/content/admin-page-settings';
 
 type Detail=PageSetting&{revisions:PageSettingRevision[]};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 function Editor({item,busy,run,onSaved,onClose}:{item:Detail;busy:boolean;run:(a:()=>Promise<void>)=>Promise<void>;onSaved:(d:Detail,m:string)=>Promise<void>;onClose:()=>void}){
  const [title,setTitle]=useState(item.title),[description,setDescription]=useState(item.description),[status,setStatus]=useState(item.status);

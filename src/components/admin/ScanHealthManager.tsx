@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -6,7 +7,7 @@ import type {AdminScanJob,scanHealth} from '@/server/jobs/admin-scans';
 
 type Health=ReturnType<typeof scanHealth>;
 const STATE:Record<AdminScanJob['state'],string>={queued:'대기',running:'실행 중',succeeded:'완료',failed:'실패',canceled:'취소'};
-const fmt=(ms:number|null)=>ms?new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'short',timeStyle:'medium'}):'—';
+const fmt=(ms:number|null)=>ms!==null?kstDateTime(ms,{date:'short',seconds:true}):'—';
 const ago=(ms:number|null)=>ms===null?'—':ms<60_000?`${Math.round(ms/1000)}초`:`${Math.round(ms/60_000)}분`;
 
 function Summary({h}:{h:Health}){

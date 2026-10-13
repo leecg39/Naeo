@@ -1,17 +1,18 @@
+import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
 import {api} from '@/lib/api-client';
 import type {ShareLink} from '@/server/writing/shares';
 
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 /** 초안 사진 묶음 공유 링크(/p/:token/images): 만들기(1~30일)·복사·철회. */
 export default function DraftShares({draftId}:{draftId:string}){
  const [links,setLinks]=useState<ShareLink[]>([]),[days,setDays]=useState(7),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
- const load=useCallback(async()=>setLinks(await api<ShareLink[]>(`/api/drafts/${draftId}/shares`)),[draftId]);
- useEffect(()=>{let live=true;void api<ShareLink[]>(`/api/drafts/${draftId}/shares`).then(r=>{if(live)setLinks(r);}).catch(()=>{});return()=>{live=false;};},[draftId]);
+ const [now,setNow]=useState(0);
+ const load=useCallback(async()=>{const next=await api<ShareLink[]>(`/api/drafts/${draftId}/shares`);setLinks(next);setNow(Date.now());},[draftId]);
+ useEffect(()=>{let live=true;void api<ShareLink[]>(`/api/drafts/${draftId}/shares`).then(r=>{if(live){setLinks(r);setNow(Date.now());}}).catch(()=>{});return()=>{live=false;};},[draftId]);
  async function run(action:()=>Promise<string>){setBusy(true);try{setMessage(await action());await load();}catch(e){setMessage(e instanceof Error?e.message:'처리하지 못했습니다.');}finally{setBusy(false);}}
  const url=(token:string)=>`${window.location.origin}/p/${token}/images`;
- const now=Date.now();
  return <div style={{display:'grid',gap:8}}>
   <strong>사진 공유 링크</strong>
   <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>

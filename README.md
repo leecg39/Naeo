@@ -1,51 +1,61 @@
-# NAEO 클론 · 풀스택 구현 진행 중
+# NAEO 클론 · 풀스택 검증 현황
 
-[실행 화면](http://127.0.0.1:3000) · [원본 페이지 목록](../reverse-engineering/page.md) · [페이지별 구현 범위](docs/PAGES.md) · [검증 기록](docs/QA.md)
+[전체 작업](TASKS.md) · [검증 기록](docs/fullstack/verification.md) · [운영 안내](docs/fullstack/operations.md) · [최종 감사](docs/fullstack/final-audit.md)
 
-`reverse-engineering/page.md`의 79개 구체 URL과 4개 동적 패턴을 대상으로 구현합니다. 기존 캡처 화면 61개의 시각적 재구성을 바탕으로 서버 기능을 연결하고 있습니다. 전체 계획은 [TASKS.md](TASKS.md), [경로별 CRUD](docs/fullstack/page-crud-matrix.md), [설계](docs/fullstack/architecture.md), [검증](docs/fullstack/verification.md)에 기록합니다.
+NAEO의 79개 구체 URL과 4개 동적 경로를 바탕으로 만든 로컬 재현 프로젝트입니다. 캡처한 DOM·CSS를 React로 렌더링하고 SQLite의 실제 계정·콘텐츠·작업·결제 모델에 연결합니다. 외부 연동과 일부 요구사항이 남아 있어 전체 완료 또는 운영 준비 완료로 표시하지 않습니다.
 
-현재 실제 서버에 연결된 기능: 이메일 가입/로그인/로그아웃, 약관 동의·권한 검사, 프로필·블로그·연락처 관리, 알림 수신 설정, 비밀번호 변경·로그인 세션 철회·회원 탈퇴, 관리자 사용자 CRUD·감사 로그. 데이터는 SQLite 파일에 보존됩니다. 분석·작성·문의·랭킹·결제·OAuth 등은 후속 단계이며 아직 전체 풀스택 완료 상태가 아닙니다.
+## 구현된 기능
+
+- 계정: 이메일 가입·로그인·세션·약관 동의, 프로필·블로그·연락처·알림 설정, 비밀번호 변경·세션 철회·탈퇴, 관리자 사용자 관리·감사 로그.
+- 콘텐츠: 매거진·카테고리·정책·FAQ·업데이트·공지·고정 페이지 CMS, 버전 충돌 검사·이력 복구·발행/비공개, 문의·답변·답변 템플릿.
+- 분석: 네이버 RSS 수집, 지속 작업 큐와 재시도, `rules-v1` 진단·근거·할 일·리포트·공유, 키워드·추천·경쟁 블로그. AI 인용 여부는 공급자 미설정으로 표시합니다.
+- 작성: 초안 CRUD·버전 복구·템플릿, 개인 사진 업로드·다운로드·공유 철회, 안전한 HTML/Markdown/텍스트 내보내기. AI 글 생성 어댑터·작업 큐·멱등 차감·실패 환급은 구현되었고 실제 공급자 호출은 키가 필요합니다.
+- 랭킹·이벤트: 기간별 스냅숏·동점 규칙·공개 설정, 이벤트·참여·심사·보상·회수·쿠폰·원장.
+- 요금제·결제: 체험·쿠폰·기간 지급/소멸·해지/재개, 토스 주문·승인·웹훅 재조회·환불·회계 기록 보호. 결제사 스텁 검증과 실제 샌드박스 검증을 구분합니다.
+- 연동·제작: Google/네이버 OAuth 어댑터, OAuth 동의·확장 연결·철회, MCP 도구 6개, 소셜 프로젝트·슬라이드 CRUD, PNG/PDF/ZIP 내보내기, 소유자 미리보기·관리자 개발 화면.
+- 운영: 개인정보를 최소화한 방문 집계, 서비스/작업자 상태, 보관 정책, 일관된 DB 백업·업로드 복사·검증 후 복원.
 
 ## 실행
 
+Node.js는 `package.json`의 `engines`(`^22.16.0 || >=24.0.0`)를 따릅니다. 검증 환경은 Node 25.4.0입니다. SQLite 파일과 업로드 폴더를 보존하는 서버에서 실행하세요.
+
 ```bash
-cd /Users/user01/Desktop/NAEO/naeo-clone
-npm install
+npm ci
 cp .env.example .env.local
+# .env.local의 주소·DB·업로드 경로를 환경에 맞게 설정
 npm run build
 npm start
 ```
 
-Node.js 22.16 이상(node:sqlite 지원)이 필요합니다. 검증 환경은 Node 25.4.0입니다. 서비스 주소를 바꾸면 `NAEO_APP_URL`도 같은 origin으로 설정하세요. 기본 DB는 `var/naeo.sqlite`이며 Git에서 제외합니다. 지속 볼륨이 없는 serverless 환경에 배포하지 마세요.
+작업자는 별도 터미널에서 같은 환경 변수로 `npm run worker`를 실행합니다. CLI 실행 시 환경 파일을 자동으로 읽지 않으므로, `.env.local`을 사용하는 경우 `node --env-file=.env.local --import tsx scripts/worker.ts`로 실행하세요. 기본 웹 주소는 `http://127.0.0.1:3000`입니다. 인계받은 QA 서버는 별도 DB로 `http://127.0.0.1:3100`에서 실행합니다.
 
-개발: `npm run dev` · 타입 검사: `npm run typecheck` · 새 서버/계정 UI 정적 검사: `npm run lint` · 테스트: `npm test`. 기존 `scripts/verify-routes.mjs`는 로그인 전 접근이 가능했던 클론용 검사라 변경된 인증 경로를 포함하는 전체 기능 완료 증거로 사용하지 않습니다.
+`/login`에서 가입한 뒤 `npm run admin -- promote 이메일`로 관리자로 승격하고 다시 로그인합니다. CLI에도 웹과 동일한 DB 환경 변수를 전달해야 합니다. 기본 관리자나 공유 비밀번호는 만들지 않습니다.
 
-먼저 `/login`에서 계정을 만드세요. 관리자로 사용할 기존 계정은 `npm run admin -- promote 이메일`로 명시적으로 승격할 수 있습니다. 승격하면 기존 세션이 종료되므로 다시 로그인한 뒤 `/admin/users`에서 사용자를 관리하세요. 기본 관리자 계정이나 공유 비밀번호는 생성하지 않습니다. 마지막 활성·약관 동의 관리자는 삭제·정지·권한 강등할 수 없습니다. 관리자가 만든 새 계정도 본인이 첫 로그인 때 약관에 동의해야 합니다.
+## 검증
 
-비밀번호 재설정 메일, 이메일·휴대폰 검증, 이메일 알림의 실제 발송과 자동 스캔 실행은 후속 단계입니다. 저장한 휴대폰 번호를 인증된 것으로 표시하지 않습니다. 개인정보 변경·삭제 및 관리 작업에는 현재 비밀번호 재확인과 수정 버전 검사를 적용합니다.
+```bash
+npm test
+npm run lint
+npm run typecheck
+npm run build
+# 실행 중인 QA 서버의 HTTP 접근 규칙 감사(관리자 계정은 환경 변수)
+npm run audit:routes
+# Ego Lite에서 기존 인계 작업 공간을 재사용, batch 0~8 각각 실행
+node scripts/run-browser-qa.mjs 0
+```
+
+HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO_AUDIT_BASE`입니다. 비밀번호를 명령 기록이나 저장소에 적지 마세요. 브라우저 검증은 관리자 로그인 상태의 Ego 작업 공간을 사용합니다(`NAEO_QA_SPACE`, 기본 7). [경로 증거](docs/fullstack/page-coverage.json)와 [브라우저 결과](docs/fullstack/browser-qa/)에 범위와 제한을 기록합니다.
+
+`scripts/qa-browser.mjs`와 기존 캡처용 스크립트는 초기 데모 단계 자료이므로 현재 풀스택 기능 검증에는 사용하지 않습니다. 앱의 localStorage에는 테마·공지 닫기 등 브라우저 편의 상태만 남겨 두었습니다.
+
+## 남은 구현·검증
+
+메일 기반 비밀번호 재설정·이메일 인증·실제 알림 발송, SMS 인증, AI 인용/검색 지표 공급자, AI 이미지 생성은 추가 연동 구현이 필요합니다. Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 실제 확장 프로그램 코드는 이 저장소에 없고, 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
+
+소셜 견본과 소개 영상의 캡처 콘텐츠는 유지하며, `/social/banner-preview`는 캡처 부재로 홈으로 이동합니다. 원본에서도 없었던 대시보드 가이드 이미지 5개는 현재도 404로 표시됩니다. 원본 대비 전 화면 시각적 일치 검증은 완료하지 않았습니다.
+
+이 프로젝트는 NAEO 공식 서비스가 아닙니다. 실제 운영 전에 원본에서 가져온 정책·FAQ·기사, 브랜드·SNS 링크·연락 메일, 요금제 가격과 혜택을 교체·확정해야 합니다.
 
 ## 구조
 
-- `src/data/pages/`: 실제 페이지의 텍스트, SVG, DOM 구조와 CSS를 추출한 데이터. 이미지로 화면을 덮지 않고 React DOM으로 렌더링합니다.
-- `src/components/captured/`: 노드 렌더러, 공통 테마·모달·메뉴·아코디언.
-- `src/behaviors/`: 홈·메이트, 매거진·업데이트·문의, 랭킹, 분석, 추천, 글쓰기, 설정의 로컬 동작.
-- `src/server/`: 버전 마이그레이션, 관계형 DB, 인증·세션·약관, 프로필·블로그·연락처·알림·관리자 서비스, HTTP 검증·권한·rate limit.
-- `src/components/account/`: 실제 API와 연결된 로그인·회원가입·설정 화면.
-- `src/components/admin/`: 사용자 CRUD·검색·상태·권한 관리, 감사 로그 화면.
-- `src/components/StatefulExperience.tsx`: ChatGPT/Claude 연결 안내, 소셜 캐러셀 10장, AEO 영상 23장.
-- `public/assets/`: 내려받은 이미지·영상·폰트·아이콘. 원본 SVG 134종은 `public/assets/icons/`에 있습니다.
-- `docs/research/components/`: 구현 전 작성한 컴포넌트 명세. `docs/research/BEHAVIORS.md`: 동작 근거.
-- `docs/design-references/`: 원본과 로컬 화면의 데스크톱·태블릿·모바일 비교 자료.
-- `scripts/`: 수집·변환·자산 다운로드·URL 검사·Ego 브라우저 검증 스크립트.
-
-## 동작과 범위
-
-탭, 검색, 분류, 표 정렬, 아코디언, 캐러셀, 모바일 메뉴, 입력 검증, 이미지 선택, 샘플 글 생성·편집·저장·복사·다운로드를 사용할 수 있습니다. 상태는 `naeo-clone:` 접두어의 브라우저 localStorage에 저장합니다.
-
-위에 명시한 실제 계정·관리 기능을 제외한 기존 adapter는 아직 데모입니다. AI 분석·생성, 결제, 문자 발송, 문의 전송은 연결하지 않았습니다. 남은 데모 코드를 각 단계에서 교체하며, 이를 실제 성공으로 간주하지 않습니다. 원본 계정 정보는 화면 데이터에서 예시 값으로 치환했습니다.
-
-원본 관리자 내부 기능은 접근할 수 없어 신규 설계했습니다. `/admin`과 `/admin/users`는 실제 서버에 연결했고, 나머지 관리자 메뉴는 후속 구현 전까지 관리자 권한 확인 후 404로 응답합니다. Google 인증은 외부 Google 로그인 대신 로컬 로그인으로 연결합니다. `/preview`는 저장된 로컬 초안을 관리하는 데모 화면입니다.
-
-랭킹 데이터는 조사 시점의 200명입니다. 월간·주간·더보기는 미수집 데이터를 실제 최신 데이터처럼 만들지 않고 데모 범위를 안내합니다. 원본의 긴 AI 글쓰기 시연 애니메이션 일부는 정적 캡처로 유지합니다. 라이트 테마·미관찰 모달은 공통 토큰으로 근사했습니다.
-
-원본 서버에서 404로 응답한 대시보드 가이드 이미지 5개는 대체 이미지로 꾸미지 않고 기존 공간과 대체 텍스트를 유지합니다. 이 클론은 NAEO 공식 서비스가 아닌 로컬 재현물입니다.
+`src/data/pages`·`src/components/captured`는 캡처 화면, `src/behaviors`는 화면 상호작용, `src/components`는 API와 연결된 UI, `src/server`는 DB·도메인·API·공급자, `scripts`는 운영·검증, `docs/fullstack`은 계약·설계·증거를 담습니다. `var`의 DB·업로드·백업 및 환경 비밀값은 Git에서 제외합니다.

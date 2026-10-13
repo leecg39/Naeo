@@ -24,7 +24,7 @@ export default function DraftMedia({draftId}:{draftId:string}){
   {message&&<p role="status" style={{margin:0,fontSize:13}}>{message}</p>}
   <ul style={{listStyle:'none',padding:0,margin:0,display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(110px,1fr))',gap:10}}>
    {items.map(m=><li key={m.publicId} style={{display:'grid',gap:4}}>
-    {/* eslint-disable-next-line @next/next/no-img-element -- 인증이 필요한 개인 사진이라 최적화 서버를 거치지 않는다 */}
+    {/* 인증이 필요한 개인 사진이라 최적화 서버를 거치지 않는다. */}
     <img src={`/api/media/${m.publicId}`} alt={m.originalName||'초안 사진'} style={{width:'100%',aspectRatio:'1',objectFit:'cover',borderRadius:8}}/>
     <div style={{display:'flex',gap:4}}>
      <button type="button" className="naeo-button" style={{fontSize:12,padding:'2px 6px'}} disabled={busy} onClick={()=>void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'PATCH',body:{draftId:null}});return'초안에서 뺐습니다(사진함에는 남습니다).';})}>빼기</button>

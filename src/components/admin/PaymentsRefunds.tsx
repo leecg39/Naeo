@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {api,apiResponse,type PageResult} from '@/lib/api-client';
 import type {Payment} from '@/server/billing/payments';
@@ -8,7 +9,7 @@ type PayRow=Payment&{email:string};
 type RefundRow=Refund&{email:string;orderId:string;orderName:string};
 const PAY:Record<Payment['status'],string>={ready:'결제 대기',paid:'결제 완료',failed:'실패',expired:'만료',canceled:'환불됨',partial_canceled:'부분 환불'};
 const REFUND:Record<Refund['status'],string>={requested:'요청',approved:'처리 중',rejected:'거절',completed:'완료',failed:'결제사 실패'};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+const fmt=(ms:number)=>kstDateTime(ms,{seconds:true});
 
 export default function PaymentsRefunds({initialPayments,initialRefunds,configured}:{initialPayments:PageResult<PayRow>;initialRefunds:PageResult<RefundRow>;configured:boolean}){
  const [payments,setPayments]=useState(initialPayments),[refunds,setRefunds]=useState(initialRefunds),[status,setStatus]=useState(''),[q,setQ]=useState('');

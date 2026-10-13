@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -7,7 +8,7 @@ import ArticleEditor,{type ArticleDetail} from './ArticleEditor';
 import CategoriesManager from './CategoriesManager';
 
 const STATUS:Record<Article['status'],string>={draft:'초안',published:'공개',archived:'비공개'};
-const fmt=(ms:number|null)=>ms?new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'}):'—';
+const fmt=(ms:number|null)=>ms!==null?kstDateTime(ms):'—';
 function publicState(a:Article,now:number){
  if(a.status!=='published')return STATUS[a.status];
  return a.publishedAt&&a.publishedAt>now?`예약 (${fmt(a.publishedAt)})`:'공개';

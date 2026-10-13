@@ -1,9 +1,10 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {AuthorizedApp} from '@/server/oauth/authz';
 
-const day=(ms:number)=>new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'}).format(ms);
+const day=(ms:number)=>kstDateTime(ms);
 /** 외부 앱(MCP 클라이언트·확장 프로그램) 연결 목록과 해제. 해제하면 그 앱의 모든 토큰이 즉시 무효가 된다. */
 export default function ConnectedApps({initial,mcpUrl}:{initial:AuthorizedApp[];mcpUrl:string}){
  const [apps,setApps]=useState(initial),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');

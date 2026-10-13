@@ -1,3 +1,4 @@
+import {kstDateTime} from '@/lib/kst-time';
 import {useEffect,useMemo,useState,type FormEvent} from 'react';
 import {api} from '@/lib/api-client';
 import type {SiteDocument} from '@/server/content/documents';
@@ -12,7 +13,7 @@ const formOf=(d:DocumentDetail|null):Form=>d
  :{path:'',title:'',effectiveLabel:'',body:'## 제1조 (목적)\n',closingNote:'',status:'draft',position:'0'};
 const payload=(f:Form)=>({path:f.path.trim(),title:f.title,effectiveLabel:f.effectiveLabel,body:f.body,closingNote:f.closingNote,status:f.status,position:Number(f.position||0)});
 const changed=(before:ReturnType<typeof payload>,after:ReturnType<typeof payload>)=>Object.fromEntries(Object.entries(after).filter(([k,v])=>v!==(before as Record<string,unknown>)[k]));
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 function Revisions({doc,busy,dirty,restore}:{doc:DocumentDetail;busy:boolean;dirty:boolean;restore:(v:number)=>void}){
  if(!doc.revisions.length)return null;

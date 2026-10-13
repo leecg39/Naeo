@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,apiResponse,type PageResult} from '@/lib/api-client';
 import type {Plan} from '@/server/billing/plans';
@@ -9,7 +10,7 @@ const planForm=(p?:Plan):PlanForm=>({code:p?.code??'',name:p?.name??'',descripti
 const KIND:Record<Coupon['kind'],string>={tokens:'토큰 지급',percent_off:'% 할인',amount_off:'원 할인'};
 const kst=(ms:number)=>new Date(ms+9*3600_000).toISOString().slice(0,16);
 const iso=(local:string)=>`${local}:00+09:00`;
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+const fmt=(ms:number)=>kstDateTime(ms,{seconds:true});
 
 /** now: 새 쿠폰 기본 기간(지금~30일)의 기준 시각, 서버가 넘긴다. */
 export default function PlansCoupons({initialPlans,initialCoupons,now}:{initialPlans:Plan[];initialCoupons:PageResult<Coupon>;now:number}){

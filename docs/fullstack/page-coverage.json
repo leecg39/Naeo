@@ -41,6 +41,20 @@
     "sections": [
      "P2.5 랜딩 공지"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:15.187Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -87,6 +101,20 @@
     "sections": [
      "기반 구현"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:17.756Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -132,6 +160,20 @@
     "sections": [
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:19.406Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -177,6 +219,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:20.962Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -222,6 +278,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:22.176Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -265,6 +335,20 @@
     "sections": [
      "P2.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:23.643Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -307,6 +391,20 @@
     "sections": [
      "P2.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:24.974Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -351,6 +449,20 @@
     "sections": [
      "P3.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:26.142Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -397,6 +509,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:27.471Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -440,6 +566,20 @@
     "sections": [
      "P3.1"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:28.706Z",
+    "file": "docs/fullstack/browser-qa/batch-0.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -485,6 +625,20 @@
     "sections": [
      "P1 계정 보안"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:09.024Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -530,6 +684,20 @@
     "sections": [
      "P4.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:10.187Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -580,6 +748,20 @@
    {
     "type": "external_pending",
     "reason": "실제 크롬 확장 프로그램 코드가 저장소에 없음"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:11.177Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -629,6 +811,20 @@
    {
     "type": "external_pending",
     "reason": "Google·네이버 앱 키(NAEO_GOOGLE_*/NAEO_NAVER_*)"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:12.542Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -676,6 +872,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:14.204Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -723,6 +933,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:16.270Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -770,6 +994,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:18.187Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -817,6 +1055,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:19.954Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -864,6 +1116,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:21.688Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -911,6 +1177,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:23.570Z",
+    "file": "docs/fullstack/browser-qa/batch-1.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -958,6 +1238,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:26.255Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1005,6 +1299,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:28.785Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1052,6 +1360,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:30.436Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1099,6 +1421,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:32.252Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1146,6 +1482,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:34.119Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1193,6 +1543,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:36.172Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1240,6 +1604,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:45.159Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1287,6 +1665,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:48.424Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1334,6 +1726,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:53.773Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1381,6 +1787,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T20:56:56.520Z",
+    "file": "docs/fullstack/browser-qa/batch-2.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1428,6 +1848,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:09.884Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1475,6 +1909,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:14.460Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1522,6 +1970,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:16.833Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1569,6 +2031,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:19.389Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1616,6 +2092,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:21.469Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1660,6 +2150,20 @@
     "sections": [
      "P2.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:28.432Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1701,7 +2205,8 @@
      "tests/server/dashboard-page.test.ts",
      "tests/server/analysis.test.ts",
      "tests/server/scan-queue.test.ts",
-     "tests/server/ranking.test.ts"
+     "tests/server/ranking.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1709,6 +2214,20 @@
     "sections": [
      "P3.4 대시보드"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:31.301Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1748,7 +2267,8 @@
     "type": "tests",
     "files": [
      "tests/server/ai-picks-page.test.ts",
-     "tests/server/analysis.test.ts"
+     "tests/server/analysis.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1760,6 +2280,20 @@
    {
     "type": "external_pending",
     "reason": "AI 인용 확인 공급자"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:35.946Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1798,7 +2332,8 @@
      "tests/server/competitors.test.ts",
      "tests/server/competitors-http.test.ts",
      "tests/server/competitors-page.test.ts",
-     "tests/server/action-items.test.ts"
+     "tests/server/action-items.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1806,6 +2341,20 @@
     "sections": [
      "P3.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:39.652Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1843,7 +2392,8 @@
     "files": [
      "tests/server/event-pages.test.ts",
      "tests/server/events.test.ts",
-     "tests/server/events-http.test.ts"
+     "tests/server/events-http.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1851,6 +2401,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:41.247Z",
+    "file": "docs/fullstack/browser-qa/batch-3.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1890,7 +2454,8 @@
     "type": "tests",
     "files": [
      "tests/server/mate.test.ts",
-     "tests/server/mate-dashboard.test.ts"
+     "tests/server/mate-dashboard.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1898,6 +2463,20 @@
     "sections": [
      "P3.4 무료 진단"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:44.681Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -1935,7 +2514,8 @@
     "type": "tests",
     "files": [
      "tests/server/recommendations-page.test.ts",
-     "tests/server/keywords.test.ts"
+     "tests/server/keywords.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -1943,6 +2523,20 @@
     "sections": [
      "P3.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:48.247Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2000,6 +2594,20 @@
    {
     "type": "external_pending",
     "reason": "메일·SMS 인증(P1.6·P1.7)"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:49.944Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2041,7 +2649,9 @@
      "tests/server/writing-http.test.ts",
      "tests/server/generation.test.ts",
      "tests/server/generation-http.test.ts",
-     "tests/server/media.test.ts"
+     "tests/server/media.test.ts",
+     "tests/server/member-chrome.test.ts",
+     "tests/server/writing-page.test.ts"
     ]
    },
    {
@@ -2054,6 +2664,20 @@
    {
     "type": "external_pending",
     "reason": "AI 글 생성 공급자 키(ANTHROPIC_API_KEY)"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:17:54.673Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2094,6 +2718,20 @@
     "sections": [
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:00.651Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2134,6 +2772,20 @@
     "sections": [
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:02.572Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2179,6 +2831,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:06.113Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2224,6 +2890,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:08.740Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2269,6 +2949,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:11.383Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2312,6 +3006,20 @@
     "sections": [
      "P2.5 FAQ"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:14.584Z",
+    "file": "docs/fullstack/browser-qa/batch-4.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2356,6 +3064,20 @@
     "sections": [
      "P2.5 고정 디자인"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:31.773Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2400,6 +3122,20 @@
     "sections": [
      "P2.5 고정 디자인"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:33.406Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2444,6 +3180,20 @@
     "sections": [
      "P2.5 고정 디자인"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:34.854Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2490,6 +3240,20 @@
     "sections": [
      "P4.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:41.947Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2538,6 +3302,20 @@
      "P1 계정 보안",
      "P7.1"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:43.439Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2584,6 +3362,20 @@
     "sections": [
      "P3.4 무료 진단"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:45.688Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2630,6 +3422,20 @@
     "sections": [
      "P3.4 무료 진단"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:47.287Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2675,6 +3481,20 @@
     "sections": [
      "P7.2·P7.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:51.689Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2721,6 +3541,20 @@
     "sections": [
      "P7.2·P7.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:53.059Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2773,6 +3607,20 @@
    {
     "type": "external_pending",
     "reason": "토스페이먼츠 실제 키(NAEO_TOSS_*)"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:03:54.123Z",
+    "file": "docs/fullstack/browser-qa/batch-5.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2816,6 +3664,20 @@
     "sections": [
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:25.453Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2869,6 +3731,20 @@
    {
     "type": "external_pending",
     "reason": "토스페이먼츠 실제 키(NAEO_TOSS_*)"
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:31.288Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2912,6 +3788,20 @@
     "sections": [
      "P2.5 정책 문서"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:33.817Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -2955,6 +3845,20 @@
     "sections": [
      "P2.5 정책 문서"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:35.558Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3000,6 +3904,20 @@
     "sections": [
      "P5.1·P5.2"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:39.461Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3043,6 +3961,20 @@
     "sections": [
      "P2.5 정책 문서"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:41.132Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3090,6 +4022,20 @@
      "P7.4",
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:43.270Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3137,6 +4083,20 @@
      "P7.4",
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:44.854Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3178,6 +4138,20 @@
     "sections": [
      "P7.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:18:53.987Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3219,6 +4193,20 @@
     "sections": [
      "P7.4"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:19:01.673Z",
+    "file": "docs/fullstack/browser-qa/batch-6.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3266,6 +4254,20 @@
      "P7.4",
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:34.791Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3313,6 +4315,20 @@
      "P7.4",
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:36.157Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3356,6 +4372,20 @@
     "sections": [
      "P2.5 정책 문서"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:37.371Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3399,6 +4429,20 @@
     "sections": [
      "P2.5 업데이트"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:41.493Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3442,6 +4486,20 @@
     "sections": [
      "P2.5 업데이트"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:44.470Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3485,6 +4543,20 @@
     "sections": [
      "P2.5 업데이트"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:47.259Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3528,6 +4600,20 @@
     "sections": [
      "P2.5 업데이트"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:50.314Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3571,6 +4657,20 @@
     "sections": [
      "P2.5 업데이트"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:53.407Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3618,6 +4718,20 @@
      "P7.4",
      "P7.5"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:57.204Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3665,6 +4779,20 @@
      "P2.1",
      "P2.2·P2.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:04:59.465Z",
+    "file": "docs/fullstack/browser-qa/batch-7.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3702,7 +4830,8 @@
     "files": [
      "tests/server/event-pages.test.ts",
      "tests/server/events.test.ts",
-     "tests/server/events-http.test.ts"
+     "tests/server/events-http.test.ts",
+     "tests/server/member-chrome.test.ts"
     ]
    },
    {
@@ -3710,6 +4839,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:19:07.072Z",
+    "file": "docs/fullstack/browser-qa/batch-8.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3755,6 +4898,20 @@
     "sections": [
      "P5.3–P5.6"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:19:15.291Z",
+    "file": "docs/fullstack/browser-qa/batch-8.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": false,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  },
@@ -3801,6 +4958,20 @@
     "sections": [
      "P4.1·P4.3"
     ]
+   },
+   {
+    "type": "browser-render",
+    "at": "2026-10-13T21:19:23.135Z",
+    "file": "docs/fullstack/browser-qa/batch-8.json",
+    "views": [
+     "desktop",
+     "tablet",
+     "mobile"
+    ],
+    "horizontalOverflow": false,
+    "pageCrash": false,
+    "expectedMissingShare": true,
+    "scope": "Rendering and captured console/network events; external-integration status unchanged."
    }
   ]
  }

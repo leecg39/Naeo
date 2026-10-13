@@ -1,4 +1,5 @@
 'use client';
+import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {Subscription} from '@/server/billing/subscriptions';
@@ -9,7 +10,7 @@ import type {Refund} from '@/server/billing/refunds';
 export type BillingState={subscription:Subscription|null;payments:Payment[];refunds:Refund[];paymentsConfigured:boolean;balance:number;now:number};
 const PAY:Record<Payment['status'],string>={ready:'결제 대기',paid:'결제 완료',failed:'실패',expired:'만료',canceled:'환불됨',partial_canceled:'부분 환불'};
 const REFUND:Record<Refund['status'],string>={requested:'환불 심사 중',approved:'환불 처리 중',rejected:'환불 거절',completed:'환불 완료',failed:'환불 처리 실패(재처리 대기)'};
-const day=(ms:number)=>new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium'}).format(ms);
+const day=(ms:number)=>kstDate(ms);
 const WEEK=7*86_400_000;
 /** 이벤트 처리기에서만 부르는 현재 시각(렌더 중에는 읽지 않는다). */
 const clock=()=>Date.now();

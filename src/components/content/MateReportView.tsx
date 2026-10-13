@@ -1,9 +1,10 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import type {MateReport} from '@/server/mate/mate';
 
 const muted={fontSize:13,color:'var(--muted, #a3a3a3)'} as const;
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 /** 무료 진단 리포트(실제 RSS 분석 결과). 모든 글자는 텍스트로만 렌더링한다. */
 export default function MateReportView({report,onContinue}:{report:MateReport;onContinue:()=>void}){

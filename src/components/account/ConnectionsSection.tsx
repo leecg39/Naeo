@@ -1,4 +1,5 @@
 'use client';
+import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {Connection} from '@/server/oauth/oauth';
@@ -7,7 +8,7 @@ import {OAUTH_ERRORS} from './SocialLogin';
 
 export type ConnectionsState={connections:Connection[];hasPassword:boolean;configured:Record<OAuthProviderName,boolean>};
 const NAME:Record<OAuthProviderName,string>={google:'Google',naver:'네이버'};
-const day=(ms:number)=>new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium'}).format(ms);
+const day=(ms:number)=>kstDate(ms);
 
 export default function ConnectionsSection({initial,linked,error:initialError}:{initial:ConnectionsState;linked?:string;error?:string}){
  const [state,setState]=useState(initial),[password,setPassword]=useState('');

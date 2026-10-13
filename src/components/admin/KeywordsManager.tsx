@@ -1,4 +1,5 @@
 'use client';
+import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -7,7 +8,7 @@ import {classify} from '@/server/keywords/records';
 
 type Row=Keyword&{latest:Metric|null};
 type Detail=Keyword&{metrics:Metric[];latest:Metric|null};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium'});
+const fmt=(ms:number)=>kstDate(ms);
 const num=(n:number|null|undefined)=>n==null?'—':n.toLocaleString('ko-KR');
 
 function MetricForm({keyword,busy,run,onSaved}:{keyword:Detail;busy:boolean;run:(a:()=>Promise<void>)=>Promise<void>;onSaved:(m:string)=>Promise<void>}){

@@ -21,6 +21,8 @@ npm run worker                     # 작업자: 진단·글 생성 큐, 1분마�
 ```
 웹과 작업자는 같은 `NAEO_DATABASE_PATH`·`NAEO_UPLOAD_DIR`을 써야 한다. 관리자 계정은 `/login`에서 가입한 뒤 `npm run admin -- promote 이메일`로 승격한다(기본 관리자·공유 비밀번호 없음).
 
+Next.js 웹 서버는 `.env.local`을 읽지만 위 Node CLI들은 자동으로 읽지 않는다. 셸에서 환경 변수를 전달하거나, 환경 파일을 사용한다면 `node --env-file=.env.local --import tsx scripts/worker.ts`처럼 명시한다. 관리자·백업·복원 CLI에도 같은 방식으로 올바른 DB·업로드 경로를 전달한다.
+
 ## 마이그레이션
 DB를 열 때 `src/server/migrations.ts`의 새 버전이 한 트랜잭션으로 자동 적용된다. 적용된 버전은 체크섬으로 고정되어, 이미 적용된 마이그레이션을 고치면 서버가 시작을 거부한다(새 번호로 추가해야 한다). 현재 상태는 `GET /api/health`의 `schemaVersion`과 관리자 운영 현황에서 확인한다.
 
@@ -43,4 +45,5 @@ npm run restore -- /srv/naeo/backups/naeo-YYYY-MM-DDTHH-MM-SSZ --force
 ## 점검
 - `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`
 - 경로 감사: `NAEO_AUDIT_EMAIL=… NAEO_AUDIT_PASSWORD=… npm run audit:routes`(서버 실행 중, 관리자 계정) → `docs/fullstack/page-coverage.json`
+- Ego 화면 점검: `node scripts/run-browser-qa.mjs 0`부터 `8`까지(기존 작업 공간 기본 7, 관리자 로그인). 셸 환경은 Ego 내부 Node로 자동 전달되지 않으므로 이 실행기가 주소·경로·배치 번호만 명시적으로 전달한다. 결과는 `docs/fullstack/browser-qa/`.
 - 운영 전 교체: 원본 사이트에서 가져온 정책 문서·FAQ·기사·바닥글 SNS 링크·연락 메일, 요금제 가격·혜택

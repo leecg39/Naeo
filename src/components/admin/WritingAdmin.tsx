@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -6,7 +7,7 @@ import type {WritingTemplate} from '@/server/generation/templates';
 import type {AdminGeneration} from '@/server/generation/admin-generations';
 
 const STATE:Record<AdminGeneration['state'],string>={queued:'대기',running:'생성 중',succeeded:'완료',failed:'실패',canceled:'취소'};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'short',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms,{date:'short'});
 
 function TemplateEditor({item,busy,run,onDone}:{item:WritingTemplate|null;busy:boolean;run:(a:()=>Promise<void>)=>Promise<void>;onDone:(m:string)=>Promise<void>}){
  const [name,setName]=useState(item?.name??''),[category,setCategory]=useState(item?.category??''),[guidance,setGuidance]=useState(item?.guidance??''),[status,setStatus]=useState<WritingTemplate['status']>(item?.status??'active');

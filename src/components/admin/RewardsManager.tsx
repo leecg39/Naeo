@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -6,7 +7,7 @@ import type {Reward} from '@/server/events/rewards';
 
 type Row=Reward&{email:string;nickname:string};
 const KIND:Record<Reward['kind'],string>={event:'이벤트',ranking:'랭킹',manual:'수동',gift:'상품·쿠폰'};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+const fmt=(ms:number)=>kstDateTime(ms,{seconds:true});
 
 export default function RewardsManager({initial}:{initial:PageResult<Row>}){
  const router=useRouter();

@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {Project} from '@/server/creative/projects';
@@ -35,7 +36,7 @@ export default function ExportPanel({project,initial}:{project:Project;initial:E
   }catch(e){setError(e instanceof Error?e.message:'내보내지 못했습니다.');setProgress('');}
   finally{setJobs(await api<ExportJob[]>(`/api/creative/projects/${project.id}/exports`).catch(()=>jobs));setBusy(false);}
  }
- const day=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+ const day=(ms:number)=>kstDateTime(ms,{seconds:true});
  return <main className="account-login" style={{maxWidth:760}}>
   <div className="panel account-card">
    <p className="eyebrow">EXPORT</p><h1 className="page-heading">{project.title} 내보내기</h1>

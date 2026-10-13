@@ -1,7 +1,7 @@
 # Codex 인계 문서 (Claude Code → Codex)
 
 Claude Code가 사용 한도에 걸리면 Codex가 이 문서만 보고 이어서 작업한다. 커밋할 때마다 갱신한다.
-마지막 갱신: 2026-10-14, P8.1–P8.4까지 커밋.
+마지막 갱신: 2026-10-14, Claude 사용 한도 이후 Codex가 P8.5 검증·오류 수정·P8.6 문서 감사를 이어받음.
 
 ## 목표(사용자 원문 요지)
 clone-website로 만든 naeo.kr 복제본에 REA 역공학 분석대로 **전 메뉴 페이지의 데이터 모델·CRUD·화면·백엔드**를 구현하고, 추론하지 말고 실제로 작동하는지 하나씩 검증한다. 계획은 `TASKS.md`(P0–P8), 설계는 `docs/fullstack/*.md`.
@@ -25,18 +25,36 @@ clone-website로 만든 naeo.kr 복제본에 REA 역공학 분석대로 **전 �
   재시작: `lsof -ti tcp:3100 -sTCP:LISTEN`로 PID 확인 후 종료. 상태: `curl http://127.0.0.1:3100/api/health`.
 - 작업자: `NAEO_DATABASE_PATH=var/qa/foundation.sqlite NAEO_UPLOAD_DIR=var/qa/uploads NAEO_WORKER_IDLE_MS=1000 nohup node --import tsx scripts/worker.ts > var/qa/worker.log 2>&1 &` (코드 바꾸면 재시작).
 - QA DB 스냅숏은 서버 실행 중엔 파일 복사 대신 `VACUUM INTO`로 만든다(WAL 누락 방지). `var/`는 git 제외.
-- 브라우저 검증: ego-browser(task space 7, page p1). 관리자 계정으로 로그인되어 있다(계정 정보는 저장소 밖에서 사용자에게 확인).
+- 브라우저 검증: Ego Lite의 task space 7, p1에서 관리자 세션으로 실행했고 검증 후 `task.finish({keep:[]})`로 종료했다. 다음 실행에서는 새 작업 공간을 만들고 ID를 `NAEO_QA_SPACE`로 전달한다. 계정 정보를 저장소에 넣지 않는다.
 - 외부 키가 필요한 흐름은 로컬 스텁(커밋하지 않음)으로 실제 HTTP 왕복을 검증했다: 토스 결제(`NAEO_TOSS_API_BASE`), OAuth(`NAEO_OAUTH_ENDPOINT_BASE`, localhost만 허용).
 
 ## 완료 현황
-P0–P6 대부분 완료(체크 상태는 `TASKS.md`가 기준). 최근 커밋: P5 이벤트·리워드 `9f5208a`, P6 결제 `eb04d49`, P7.1 OAuth 로그인 `020a5e9`.
-키가 없어 미완료로 남긴 항목: P1.6(메일), P1.7(SMS), P1.8(스크린샷 비교), P3.3/P3.7(AI 인용), P4.2(실제 Anthropic 왕복), P6.3/P6.5(실제 토스 샌드박스), P7.1(실제 Google·네이버 앱 왕복).
 
-## 지금 하던 작업
-P8.1(방문 집계·운영 상태·보관 정책)·P8.3(경로 감사 `scripts/route-audit.ts`)·P8.4(데모 제거) 완료. P8.2(운영 문서·백업/복원) 완료. 남은 P8: P8.5 Ego 데스크톱/태블릿/모바일 경로 흐름·브라우저 오류, P8.6 최종 감사·README·CHANGELOG.
-경로 감사 실행: `NAEO_AUDIT_EMAIL=… NAEO_AUDIT_PASSWORD=… node --import tsx scripts/route-audit.ts`(QA 서버 실행 중이어야 함).
+Claude 인계 기준 HEAD는 `0f55dba`(P8.2). P0–P8.4의 구현·검증 기록은 `TASKS.md`와 `docs/fullstack/verification.md`에 보존했다. 초기 인계 문서의 '그 다음 P7.4/P7.5' 안내는 이미 완료된 내용이라 삭제했다.
 
-## 그 다음
-- P7.4 소셜 프로젝트/슬라이드 CRUD(캡처 /social/*·/youtube/aeo-intro 구조부터 확인, 마이그레이션 23)(/social/*, /youtube/aeo-intro), P7.5 이미지·PDF 내보내기와 /preview·/dev/* 권한, P7.6 E2E.
-- P8: 분석·운영 문서·백업/복원, 83개 경로 증거(page-coverage.json), localStorage 데모 제거 감사(`src/lib/demo-store.ts`, `src/behaviors/settings.tsx`는 /dashboard/settings가 앱 라우트라 사용되지 않는 코드), 전체 검증, README/CHANGELOG.
-- 마지막 보고: 한국어, 결과 파일 링크와 폴더 절대 경로, 키가 없어 막힌 항목 목록.
+Codex가 이어서 처리한 작업:
+- 미커밋 `src/lib/kst-time.ts`·테스트를 인계, `/admin/blog`의 React #418을 재현하고 공통 KST 포맷을 실제 화면에 연결.
+- locale 차이·연도 경계·윤일 회귀 테스트, 글쓰기 UI lint 범위 보강 및 렌더 중 시각 계산 제거.
+- 90개 경로 × 3개 화면 폭 점검, 6개 경로의 가로 넘침 수정. 원본 1080px 내보내기 캔버스는 내부 스크롤로 유지.
+- 최신 검증 수치와 증거는 `docs/fullstack/browser-qa/summary.json`, `verification.md`의 P8.5 기록을 기준으로 한다.
+- P8.4 추가 결함 수정: 대시보드 공통 메뉴의 잔액·체험·프로필과 글쓰기의 추천·구독 정보를 현재 회원 DB로 연결.
+- README·CHANGELOG·최종 감사·운영 안내 갱신. 프로젝트 전체 완료 판정은 보류.
+
+## 다음 작업
+
+`docs/fullstack/final-audit.md`의 남은 항목 표를 기준으로 진행한다. 키 입력만 필요한 항목과 공급자 어댑터 자체가 없는 항목을 구분한다.
+
+- 메일 재설정·이메일 인증, SMS 인증, AI 인용/검색 지표, AI 이미지 생성: 공급자 선정 및 구현 필요.
+- Anthropic 글 생성, 토스 결제, Google/네이버 OAuth: 실제 키·앱 등록 후 왕복 검증 필요.
+- 실제 확장 코드·등록 ID, 배포 주소의 ChatGPT/Claude MCP 연결: 추가 자료/환경 필요.
+- 전체 원본 화면 시각 비교, MP4 인코딩 요구사항: 미완료/미지원 상태를 유지.
+- 원본 정책·FAQ·기사·브랜드 연락처·SNS와 요금제 운영값 교체.
+
+외부 검증이 남아 있으므로 P8.6과 프로젝트 전체를 완료로 바꾸지 않는다. goal은 사용자가 해제를 요청했으므로 별도 활성화하지 않는다.
+
+## 재현 명령
+
+`npm test`, `npm run lint`, `npm run typecheck`, `npm run build`.
+Ego 점검은 `node scripts/run-browser-qa.mjs 0`부터 `8`까지. 이 실행기는 셸 설정을 Ego 내부 Node로 전달한다. 원시 브라우저 코드를 셸 환경 변수만 붙여 실행하면 배치 번호가 전달되지 않을 수 있다.
+
+최종 보고에는 한국어로 현재 완료 범위·미완료 범위를 구분하고, 결과 파일과 결과 폴더의 절대 경로 링크를 제공한다.

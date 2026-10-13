@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-13T21:21:20.316711+00:00",
+  "routeCount": 90,
+  "viewportChecks": 270,
+  "viewports": {
+    "desktop": [
+      1440,
+      900
+    ],
+    "tablet": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "finalDocumentStatus200": 270,
+  "horizontalOverflowChecks": 0,
+  "pageCrashes": 0,
+  "unexpectedRuntimeErrors": [],
+  "unexpectedFailedResponses": [],
+  "expectedMissingShareResponses": [
+    {
+      "route": "/p/:id/images",
+      "view": "desktop",
+      "status": 404,
+      "url": "/api/shares/AAAAAAAAAAAAAAAAAAAAAA",
+      "type": "Fetch"
+    },
+    {
+      "route": "/p/:id/images",
+      "view": "mobile",
+      "status": 404,
+      "url": "/api/shares/AAAAAAAAAAAAAAAAAAAAAA",
+      "type": "Fetch"
+    }
+  ],
+  "analyticsRateLimitResponses": [],
+  "testResults": {
+    "total": 275,
+    "passed": 275,
+    "failed": 0
+  },
+  "interactionEvidence": "interaction.json",
+  "scope": "Authenticated render checks after load and captured-page hydration; events are limited to the observation window. Dynamic routes use representative URLs. Missing-share 404 was observed in two of three viewports; the tablet event was not captured. This sweep is not an all-features CRUD or external-provider end-to-end audit.",
+  "retest": "Affected batches were rerun after fixes. Per-row at timestamps are retained; earlier HTTP audit evidence is separate."
+}

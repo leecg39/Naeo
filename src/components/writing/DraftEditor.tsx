@@ -1,3 +1,4 @@
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {Draft,DraftStatus} from '@/server/writing/drafts';
@@ -8,7 +9,7 @@ import DraftExport from './DraftExport';
 export type DraftDetail=Draft&{revisions:{version:number;createdAt:number}[]};
 const STATUS:Record<DraftStatus,string>={draft:'초안',ready:'발행 준비',published:'발행함',archived:'보관'};
 const NEXT:Record<DraftStatus,DraftStatus[]>={draft:['ready','archived'],ready:['draft','published','archived'],published:['archived'],archived:['draft']};
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 const field={width:'100%',padding:'10px 12px',borderRadius:8,border:'1px solid rgba(255,255,255,.2)',background:'transparent',color:'inherit',font:'inherit'} as const;
 const label={display:'grid',gap:6,fontSize:14} as const;
 

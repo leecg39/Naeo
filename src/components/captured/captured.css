@@ -1,5 +1,17 @@
 /* Original page geometry is provided by its captured stylesheet, without wrapper spacing. */
 [data-naeo-captured-root] { display: contents; }
+/* Reveal animations stay inside their section until they enter the viewport. */
+[data-naeo-captured-root="/features"] .mui-1i43dhb { overflow-x: clip; }
+/* Long policy URLs must wrap instead of widening the whole page. */
+[data-naeo-captured-root="/privacy"] p { overflow-wrap: anywhere; }
+/* Keep the original 1080px export canvas in a locally scrollable viewport. */
+[data-naeo-captured-root="/social/aeo-carousel/export"],
+[data-naeo-captured-root="/social/mate-ad/export"] { display: block; width: 100%; overflow-x: auto; }
+@media (max-width: 599px) {
+  [data-naeo-captured-root="/guide/extension-publish"] .mui-13p1cft > .mui-asxfei { flex-basis: 100%; }
+  [data-naeo-captured-root="/social/mate-ad"] > div { padding: 16px !important; }
+  [data-naeo-captured-root="/social/mate-ad"] > div > div > div { flex-wrap: wrap; max-width: 100%; overflow-x: auto; }
+}
 [data-naeo-captured-root] img[data-asset-unavailable="true"] { color: var(--muted); background: var(--surface); font-size: 12px; }
 [data-naeo-captured-root] [data-copied="true"] { position: relative; }
 [data-naeo-captured-root] [data-copied="true"]::after { content: "복사됨"; position: absolute; z-index: 10; top: calc(100% + 5px); left: 50%; transform: translateX(-50%); padding: 4px 8px; border-radius: 5px; color: #fff; background: #03a74c; font-size: 12px; white-space: nowrap; }

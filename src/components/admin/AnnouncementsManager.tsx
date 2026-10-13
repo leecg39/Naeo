@@ -1,4 +1,5 @@
 'use client';
+import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -6,9 +7,9 @@ import type {Announcement} from '@/server/content/announcements';
 
 type Form={title:string;body:string;linkUrl:string;linkLabel:string;target:Announcement['target'];startsAt:string;endsAt:string;status:Announcement['status']};
 /** datetime-local 값은 브라우저 현지 시각이라 저장할 때 ISO(UTC)로 바꾼다. */
-const toLocal=(ms:number|null)=>ms?new Date(ms-new Date(ms).getTimezoneOffset()*60000).toISOString().slice(0,16):'';
+const toLocal=(ms:number|null)=>ms!==null?new Date(ms-new Date(ms).getTimezoneOffset()*60000).toISOString().slice(0,16):'';
 const toIso=(v:string)=>v?new Date(v).toISOString():null;
-const fmt=(ms:number|null)=>ms?new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'}):'제한 없음';
+const fmt=(ms:number|null)=>ms!==null?kstDateTime(ms):'제한 없음';
 const formOf=(a:Announcement|null):Form=>a?{title:a.title,body:a.body,linkUrl:a.linkUrl,linkLabel:a.linkLabel,target:a.target,startsAt:toLocal(a.startsAt),endsAt:toLocal(a.endsAt),status:a.status}
  :{title:'',body:'',linkUrl:'',linkLabel:'',target:'landing',startsAt:'',endsAt:'',status:'draft'};
 const payload=(f:Form)=>({...f,startsAt:toIso(f.startsAt),endsAt:toIso(f.endsAt)});

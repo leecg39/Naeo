@@ -1,3 +1,4 @@
+import {kstDateTime} from '@/lib/kst-time';
 import {useEffect,useMemo,useState,type FormEvent} from 'react';
 import {api,ApiError} from '@/lib/api-client';
 import type {Article,Category} from '@/server/content/articles';
@@ -23,7 +24,7 @@ function payload(f:Form){
 function changed(before:ReturnType<typeof payload>,after:ReturnType<typeof payload>){
  return Object.fromEntries(Object.entries(after).filter(([k,v])=>JSON.stringify(v)!==JSON.stringify((before as Record<string,unknown>)[k])));
 }
-const fmt=(ms:number)=>new Date(ms).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'});
+const fmt=(ms:number)=>kstDateTime(ms);
 
 export default function ArticleEditor({article,categories,now,busy,run,onSaved,onClose}:Props){
  const initial=useMemo(()=>formOf(article,categories),[article,categories]);
