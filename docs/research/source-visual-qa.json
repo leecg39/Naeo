@@ -1,0 +1,850 @@
+[
+  {
+    "path": "/pricing",
+    "width": 1440,
+    "file": "pricing-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 286.5,
+          "y": 176,
+          "width": 852,
+          "height": 52.2734375,
+          "top": 176,
+          "right": 1138.5,
+          "bottom": 228.2734375,
+          "left": 286.5
+        },
+        "font": "44.8px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 286.5,
+          "y": 2950.5390625,
+          "width": 852,
+          "height": 49.59375,
+          "top": 2950.5390625,
+          "right": 1138.5,
+          "bottom": 3000.1328125,
+          "left": 286.5
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 286.5,
+          "y": 3001.1328125,
+          "width": 852,
+          "height": 49.59375,
+          "top": 3001.1328125,
+          "right": 1138.5,
+          "bottom": 3050.7265625,
+          "left": 286.5
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/pricing",
+    "width": 390,
+    "file": "pricing-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 16,
+          "y": 176,
+          "width": 358,
+          "height": 74.6875,
+          "top": 176,
+          "right": 374,
+          "bottom": 250.6875,
+          "left": 16
+        },
+        "font": "32px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 16,
+          "y": 3957.4453125,
+          "width": 358,
+          "height": 49.59375,
+          "top": 3957.4453125,
+          "right": 374,
+          "bottom": 4007.0390625,
+          "left": 16
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 16,
+          "y": 4008.0390625,
+          "width": 358,
+          "height": 49.59375,
+          "top": 4008.0390625,
+          "right": 374,
+          "bottom": 4057.6328125,
+          "left": 16
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/pricing",
+    "width": 768,
+    "file": "pricing-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 24,
+          "y": 176,
+          "width": 705,
+          "height": 37.34375,
+          "top": 176,
+          "right": 729,
+          "bottom": 213.34375,
+          "left": 24
+        },
+        "font": "32px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 24,
+          "y": 3305.0546875,
+          "width": 705,
+          "height": 49.59375,
+          "top": 3305.0546875,
+          "right": 729,
+          "bottom": 3354.6484375,
+          "left": 24
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 24,
+          "y": 3355.6484375,
+          "width": 705,
+          "height": 49.59375,
+          "top": 3355.6484375,
+          "right": 729,
+          "bottom": 3405.2421875,
+          "left": 24
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/mcp",
+    "width": 1440,
+    "file": "mcp-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 136.5,
+          "y": 195.99781799316406,
+          "width": 1152,
+          "height": 117.10935974121094,
+          "top": 195.99781799316406,
+          "right": 1288.5,
+          "bottom": 313.107177734375,
+          "left": 136.5
+        },
+        "font": "48px"
+      }
+    ]
+  },
+  {
+    "path": "/mcp",
+    "width": 390,
+    "file": "mcp-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 16,
+          "y": 162.6929473876953,
+          "width": 358,
+          "height": 122.97654724121094,
+          "top": 162.6929473876953,
+          "right": 374,
+          "bottom": 285.66949462890625,
+          "left": 16
+        },
+        "font": "33.6px"
+      }
+    ]
+  },
+  {
+    "path": "/mcp",
+    "width": 768,
+    "file": "mcp-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 24,
+          "y": 165.22727966308594,
+          "width": 705,
+          "height": 81.984375,
+          "top": 165.22727966308594,
+          "right": 729,
+          "bottom": 247.21165466308594,
+          "left": 24
+        },
+        "font": "33.6px"
+      }
+    ]
+  },
+  {
+    "path": "/ranking",
+    "width": 1440,
+    "file": "ranking-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 136.5,
+          "y": 112,
+          "width": 341.9609375,
+          "height": 52.2734375,
+          "top": 112,
+          "right": 478.4609375,
+          "bottom": 164.2734375,
+          "left": 136.5
+        },
+        "font": "44.8px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 445.5,
+          "y": 16489.640625,
+          "width": 534,
+          "height": 29.15625,
+          "top": 16489.640625,
+          "right": 979.5,
+          "bottom": 16518.796875,
+          "left": 445.5
+        },
+        "font": "21.6px"
+      }
+    ]
+  },
+  {
+    "path": "/ranking",
+    "width": 390,
+    "file": "ranking-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 16,
+          "y": 112,
+          "width": 244.2578125,
+          "height": 37.34375,
+          "top": 112,
+          "right": 260.2578125,
+          "bottom": 149.34375,
+          "left": 16
+        },
+        "font": "32px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 37,
+          "y": 19331.3671875,
+          "width": 316,
+          "height": 24.8359375,
+          "top": 19331.3671875,
+          "right": 353,
+          "bottom": 19356.203125,
+          "left": 37
+        },
+        "font": "18.4px"
+      }
+    ]
+  },
+  {
+    "path": "/ranking",
+    "width": 768,
+    "file": "ranking-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 24,
+          "y": 112,
+          "width": 244.2578125,
+          "height": 37.34375,
+          "top": 112,
+          "right": 268.2578125,
+          "bottom": 149.34375,
+          "left": 24
+        },
+        "font": "32px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 97.5,
+          "y": 15205.1875,
+          "width": 558,
+          "height": 24.8359375,
+          "top": 15205.1875,
+          "right": 655.5,
+          "bottom": 15230.0234375,
+          "left": 97.5
+        },
+        "font": "18.4px"
+      }
+    ]
+  },
+  {
+    "path": "/blog",
+    "width": 1440,
+    "file": "blog-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/blog",
+    "width": 390,
+    "file": "blog-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "AI 답변에 인용되는 글이 되고 있나요?",
+        "rect": {
+          "x": 16,
+          "y": 96,
+          "width": 358,
+          "height": 85,
+          "top": 96,
+          "right": 374,
+          "bottom": 181,
+          "left": 16
+        },
+        "font": "34px"
+      }
+    ]
+  },
+  {
+    "path": "/blog",
+    "width": 768,
+    "file": "blog-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "AI 답변에 인용되는 글이 되고 있나요?",
+        "rect": {
+          "x": 24,
+          "y": 96,
+          "width": 705,
+          "height": 42.5,
+          "top": 96,
+          "right": 729,
+          "bottom": 138.5,
+          "left": 24
+        },
+        "font": "34px"
+      }
+    ]
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 1440,
+    "file": "blog--guide--dashboard-guide-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 353,
+          "y": 681.5234375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 681.5234375,
+          "right": 1128,
+          "bottom": 726.8359375,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 353,
+          "y": 853.4296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 853.4296875,
+          "right": 1128,
+          "bottom": 898.7421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ]
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 390,
+    "file": "blog--guide--dashboard-guide-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 33,
+          "y": 220.515625,
+          "width": 324,
+          "height": 72.796875,
+          "top": 220.515625,
+          "right": 357,
+          "bottom": 293.3125,
+          "left": 33
+        },
+        "font": "28px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 33,
+          "y": 1014.078125,
+          "width": 324,
+          "height": 39.5625,
+          "top": 1014.078125,
+          "right": 357,
+          "bottom": 1053.640625,
+          "left": 33
+        },
+        "font": "19.2px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 33,
+          "y": 1259.4375,
+          "width": 324,
+          "height": 39.5625,
+          "top": 1259.4375,
+          "right": 357,
+          "bottom": 1299,
+          "left": 33
+        },
+        "font": "19.2px"
+      }
+    ]
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 768,
+    "file": "blog--guide--dashboard-guide-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 49,
+          "y": 206.7578125,
+          "width": 655,
+          "height": 36.3984375,
+          "top": 206.7578125,
+          "right": 704,
+          "bottom": 243.15625,
+          "left": 49
+        },
+        "font": "28px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 49,
+          "y": 939.921875,
+          "width": 655,
+          "height": 45.3125,
+          "top": 939.921875,
+          "right": 704,
+          "bottom": 985.234375,
+          "left": 49
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 49,
+          "y": 1140.625,
+          "width": 655,
+          "height": 45.3125,
+          "top": 1140.625,
+          "right": 704,
+          "bottom": 1185.9375,
+          "left": 49
+        },
+        "font": "22.4px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard",
+    "width": 1440,
+    "file": "dashboard-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/dashboard",
+    "width": 390,
+    "file": "dashboard-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "AI 추천률 2% · 추천된 글 1건을 확인하세요",
+        "rect": {
+          "x": 16,
+          "y": 356.1953125,
+          "width": 358,
+          "height": 54,
+          "top": 356.1953125,
+          "right": 374,
+          "bottom": 410.1953125,
+          "left": 16
+        },
+        "font": "21.6px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard",
+    "width": 768,
+    "file": "dashboard-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "AI 추천률 2% · 추천된 글 1건을 확인하세요",
+        "rect": {
+          "x": 24,
+          "y": 350.1953125,
+          "width": 705,
+          "height": 30.9921875,
+          "top": 350.1953125,
+          "right": 729,
+          "bottom": 381.1875,
+          "left": 24
+        },
+        "font": "24.8px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 1440,
+    "file": "dashboard--write-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 265,
+          "y": 1068.0703125,
+          "width": 763,
+          "height": 48,
+          "top": 1068.0703125,
+          "right": 1028,
+          "bottom": 1116.0703125,
+          "left": 265
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 390,
+    "file": "dashboard--write-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 17,
+          "y": 1209.2578125,
+          "width": 356,
+          "height": 48,
+          "top": 1209.2578125,
+          "right": 373,
+          "bottom": 1257.2578125,
+          "left": 17
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 768,
+    "file": "dashboard--write-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 25,
+          "y": 1121.9140625,
+          "width": 703,
+          "height": 48,
+          "top": 1121.9140625,
+          "right": 728,
+          "bottom": 1169.9140625,
+          "left": 25
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 1440,
+    "file": "dashboard--settings-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 390,
+    "file": "dashboard--settings-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": []
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 768,
+    "file": "dashboard--settings-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": []
+  },
+  {
+    "path": "/contact",
+    "width": 1440,
+    "file": "contact-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/contact",
+    "width": 390,
+    "file": "contact-viewport-390.png",
+    "scrollWidth": 390,
+    "heading": []
+  },
+  {
+    "path": "/contact",
+    "width": 768,
+    "file": "contact-viewport-768.png",
+    "scrollWidth": 753,
+    "heading": []
+  },
+  {
+    "path": "/event",
+    "width": 1440,
+    "file": "event-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "이벤트",
+        "rect": {
+          "x": 420.5,
+          "y": 115.07215881347656,
+          "width": 584,
+          "height": 39.515625,
+          "top": 115.07215881347656,
+          "right": 1004.5,
+          "bottom": 154.58778381347656,
+          "left": 420.5
+        },
+        "font": "32px"
+      },
+      {
+        "text": "매주 월요일 랭킹 리워드",
+        "rect": {
+          "x": 437.5,
+          "y": 612.0863037109375,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 612.0863037109375,
+          "right": 951.5,
+          "bottom": 636.0003662109375,
+          "left": 437.5
+        },
+        "font": "18.4px"
+      },
+      {
+        "text": "NAEO 사용 후기 이벤트",
+        "rect": {
+          "x": 437.5,
+          "y": 1112.19189453125,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 1112.19189453125,
+          "right": 951.5,
+          "bottom": 1136.10595703125,
+          "left": 437.5
+        },
+        "font": "18.4px"
+      }
+    ]
+  },
+  {
+    "path": "/event/naeo-review",
+    "width": 1440,
+    "file": "event--naeo-review-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "NAEO 한 줄 평 쓰고 커피 받기블로그로블로그로후기 쓰면AirPods · iPad까지!",
+        "rect": {
+          "x": 216.5,
+          "y": 173.1953125,
+          "width": 992,
+          "height": 191,
+          "top": 173.1953125,
+          "right": 1208.5,
+          "bottom": 364.1953125,
+          "left": 216.5
+        },
+        "font": "44px"
+      },
+      {
+        "text": "당첨자 발표",
+        "rect": {
+          "x": 286.5,
+          "y": 818.59375,
+          "width": 139.4921875,
+          "height": 51.1953125,
+          "top": 818.59375,
+          "right": 425.9921875,
+          "bottom": 869.7890625,
+          "left": 286.5
+        },
+        "font": "32px"
+      },
+      {
+        "text": "아이패드 에어",
+        "rect": {
+          "x": 686.3984375,
+          "y": 1043.984375,
+          "width": 419.1015625,
+          "height": 28.796875,
+          "top": 1043.984375,
+          "right": 1105.5,
+          "bottom": 1072.78125,
+          "left": 686.3984375
+        },
+        "font": "18px"
+      }
+    ]
+  },
+  {
+    "path": "/event/ranking-reward",
+    "width": 1440,
+    "file": "event--ranking-reward-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": [
+      {
+        "text": "블로그만 등록했는데커피가?",
+        "rect": {
+          "x": 216.5,
+          "y": 137.1953125,
+          "width": 992,
+          "height": 121.7890625,
+          "top": 137.1953125,
+          "right": 1208.5,
+          "bottom": 258.984375,
+          "left": 216.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "유의사항",
+        "rect": {
+          "x": 296.5,
+          "y": 1052.1953125,
+          "width": 832,
+          "height": 25.59375,
+          "top": 1052.1953125,
+          "right": 1128.5,
+          "bottom": 1077.7890625,
+          "left": 296.5
+        },
+        "font": "16px"
+      }
+    ]
+  },
+  {
+    "path": "/privacy",
+    "width": 1440,
+    "file": "privacy-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/privacy/extension",
+    "width": 1440,
+    "file": "privacy--extension-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/refund",
+    "width": 1440,
+    "file": "refund-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  },
+  {
+    "path": "/terms",
+    "width": 1440,
+    "file": "terms-viewport-1440.png",
+    "scrollWidth": 1425,
+    "heading": []
+  }
+]

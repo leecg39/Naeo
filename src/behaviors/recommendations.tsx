@@ -8,6 +8,8 @@ type Keyword = {
   mobileWrapper: HTMLElement | null;
   cells: string[];
   day: number;
+  golden: boolean;
+  opportunity: boolean;
 };
 const COMPLETED_KEY = "naeo-clone:recommendations:completed";
 const CHECKED_PATH = "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z";
@@ -48,7 +50,7 @@ export const installRecommendations: InstallBehavior = (root, tools) => {
     const card = cardInput?.closest<HTMLElement>('[id^="kw-card-"]') || null;
     const cells = [...row.querySelectorAll('[role="cell"]')].map(text);
     const date = cells[1]?.match(/(\d+)월\s*(\d+)일/);
-    return { name, row, card, mobileWrapper: card?.parentElement || null, cells, day: date ? Date.UTC(2026, Number(date[1]) - 1, Number(date[2])) : 0 };
+    return { name, row, card, mobileWrapper: card?.parentElement || null, cells, golden: /🏆|황금/.test(cells[2] || ''), opportunity: /선점기회/.test(cells.at(-1) || ''), day: date ? Date.UTC(2026, Number(date[1]) - 1, Number(date[2])) : 0 };
   }).filter((record) => record.name);
   if (!records.length) return;
   const rowParent = records[0].row.parentElement;
@@ -113,7 +115,7 @@ export const installRecommendations: InstallBehavior = (root, tools) => {
     for (const record of records) attribute(record.row, "aria-label", `${record.name} ${completed.has(record.name) ? "작성 완료" : "미작성"}`);
   };
   const render = () => {
-    const filtered = records.filter((record) => filter !== "opportunity" && (period === "전체기간" || record.day >= (period === "이번 주" ? weekStart : monthStart)));
+    const filtered = records.filter((record) => (filter === 'all' || filter === 'golden' && record.golden || filter === 'opportunity' && record.opportunity) && (period === "전체기간" || record.day >= (period === "이번 주" ? weekStart : monthStart)));
     const visible = new Set(filtered);
     for (const record of records) {
       remember(record.row, "style");

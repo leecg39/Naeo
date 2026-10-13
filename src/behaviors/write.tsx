@@ -290,6 +290,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
     listeners(row, 'keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); row.click(); } });
     cleanups.push(() => prior === null ? row.removeAttribute('tabindex') : row.setAttribute('tabindex', prior));
   }
+  const requestedKeyword = new URLSearchParams(window.location.search).get('keyword');
+  if (requestedKeyword) { keyword.value = requestedKeyword.slice(0,60); fieldState(keyword, true); sync(); }
   return () => {
     disposed = true;
     cleanups.forEach(fn => fn());

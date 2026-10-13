@@ -1,0 +1,798 @@
+{
+  "base": "http://127.0.0.1:3000",
+  "checkedAt": "2026-10-13T04:22:39.020Z",
+  "count": 79,
+  "passed": 79,
+  "routes": [
+    {
+      "path": "/",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO | 네이버 블로그 AI 브리핑 인용 진단",
+      "bytes": 3120643
+    },
+    {
+      "path": "/admin",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5800
+    },
+    {
+      "path": "/admin/blog",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5814
+    },
+    {
+      "path": "/admin/event",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5816
+    },
+    {
+      "path": "/admin/events",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5818
+    },
+    {
+      "path": "/admin/inquiries",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5824
+    },
+    {
+      "path": "/admin/inquiries/templates",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5848
+    },
+    {
+      "path": "/admin/keywords",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5822
+    },
+    {
+      "path": "/admin/rewards",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5820
+    },
+    {
+      "path": "/admin/scan-health",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5828
+    },
+    {
+      "path": "/admin/users",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5816
+    },
+    {
+      "path": "/admin/writing",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5820
+    },
+    {
+      "path": "/auth/extension",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 95731
+    },
+    {
+      "path": "/auth/google",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/login?provider=google&demo=1",
+      "title": "NAEO | NAEO",
+      "bytes": 5849
+    },
+    {
+      "path": "/blog",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "매거진 | NAEO",
+      "bytes": 416203
+    },
+    {
+      "path": "/blog/event/naeo-review-event",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지 | NAEO",
+      "bytes": 424517
+    },
+    {
+      "path": "/blog/guide/ai-picks-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 인용 현황 사용법, 카테고리별 인용률 정확히 읽기 | NAEO",
+      "bytes": 436254
+    },
+    {
+      "path": "/blog/guide/channel-analysis-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "채널 분석 사용법, 키워드별 채널 전략 세우기 | NAEO",
+      "bytes": 426947
+    },
+    {
+      "path": "/blog/guide/competitor-analysis-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "경쟁 콘텐츠 사용법, 누가 1등이고, AI는 누구를 추천하는지 | NAEO",
+      "bytes": 425082
+    },
+    {
+      "path": "/blog/guide/dashboard-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 대시보드 사용법, 처음부터 끝까지 | NAEO",
+      "bytes": 440498
+    },
+    {
+      "path": "/blog/guide/golden-keywords-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법 | NAEO",
+      "bytes": 427304
+    },
+    {
+      "path": "/blog/guide/keyword-recommendation-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "키워드 추천 사용법, 다음에 쓸 글을 1분 만에 정하기 | NAEO",
+      "bytes": 432277
+    },
+    {
+      "path": "/blog/guide/today-action-guide",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "새 대시보드 활용법, 한 화면에서 다음 행동까지 | NAEO",
+      "bytes": 435817
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-cited-posts",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것 | NAEO",
+      "bytes": 421364
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-food-playbook",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개 | NAEO",
+      "bytes": 423847
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-image-citation",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형 | NAEO",
+      "bytes": 422798
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-tips-1-travel-life",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지 | NAEO",
+      "bytes": 437293
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-tips-2-life-culture",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지 | NAEO",
+      "bytes": 434611
+    },
+    {
+      "path": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지 | NAEO",
+      "bytes": 437312
+    },
+    {
+      "path": "/blog/marketing/golden-keywords",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "내 주제에서 아직 비어 있는 &#x27;황금 키워드&#x27;를 찾아드려요 | NAEO",
+      "bytes": 416554
+    },
+    {
+      "path": "/blog/marketing/mate-free-diagnosis",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요 | NAEO",
+      "bytes": 417068
+    },
+    {
+      "path": "/blog/marketing/what-is-ai-briefing",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 브리핑이란? 블로거가 알아야 할 모든 것 | NAEO",
+      "bytes": 410277
+    },
+    {
+      "path": "/blog/news/across-modu-startup-ditoday",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "[디지털 인사이트] 어크로스, &#x27;모두의 창업&#x27; AI 솔루션 공급기업 선정 | NAEO",
+      "bytes": 410136
+    },
+    {
+      "path": "/blog/news/across-modu-startup-mt",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "[머니투데이] 어크로스, &#x27;모두의 창업&#x27; AI 솔루션 공급기업 선정 | NAEO",
+      "bytes": 409037
+    },
+    {
+      "path": "/blog/news/naver-mate-naeo-byline",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "[바이라인네트워크] 네이버 메이트 겨냥한 어크로스 &#x27;NAEO&#x27;…AI 브리핑 인용 여부 확인 | NAEO",
+      "bytes": 409731
+    },
+    {
+      "path": "/contact",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "문의하기 | NAEO",
+      "bytes": 234534
+    },
+    {
+      "path": "/dashboard",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "Dashboard | NAEO",
+      "bytes": 391913
+    },
+    {
+      "path": "/dashboard/ai-picks",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 인용 현황 | NAEO",
+      "bytes": 578718
+    },
+    {
+      "path": "/dashboard/competitors",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "경쟁 블로그 | NAEO",
+      "bytes": 437527
+    },
+    {
+      "path": "/dashboard/events",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "이벤트 | NAEO",
+      "bytes": 214487
+    },
+    {
+      "path": "/dashboard/mate",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "메이트 진단 결과 | NAEO",
+      "bytes": 233757
+    },
+    {
+      "path": "/dashboard/recommendations",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "키워드 추천 | NAEO",
+      "bytes": 624071
+    },
+    {
+      "path": "/dashboard/settings",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "설정 | NAEO",
+      "bytes": 501303
+    },
+    {
+      "path": "/dashboard/write",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 글쓰기 | NAEO",
+      "bytes": 361458
+    },
+    {
+      "path": "/dev/event-preview",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 191467
+    },
+    {
+      "path": "/dev/nav-preview",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 192687
+    },
+    {
+      "path": "/event",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 이벤트 | NAEO",
+      "bytes": 95747
+    },
+    {
+      "path": "/event/naeo-review",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 사용 후기 이벤트 — 당첨자 발표 | NAEO",
+      "bytes": 153590
+    },
+    {
+      "path": "/event/ranking-reward",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 랭킹 리워드 | 매주 월요일, 커피 받는 랭킹 | NAEO",
+      "bytes": 235788
+    },
+    {
+      "path": "/faq",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "자주 묻는 질문 | NAEO",
+      "bytes": 267366
+    },
+    {
+      "path": "/features",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 기능 소개 | 네이버 AI 브리핑 모니터링 &amp; AEO 진단 | NAEO",
+      "bytes": 256310
+    },
+    {
+      "path": "/guide/extension-publish",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI로 쓴 글, 네이버 블로그에 발행하기 | NAEO",
+      "bytes": 225386
+    },
+    {
+      "path": "/guide/writing",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 글쓰기 사용법 | NAEO",
+      "bytes": 197824
+    },
+    {
+      "path": "/images",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "발행용 사진 올리기 | NAEO",
+      "bytes": 97543
+    },
+    {
+      "path": "/login",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 142652
+    },
+    {
+      "path": "/mate",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "내 블로그, 네이버 메이트 될 수 있을까? 30초 무료 진단 | NAEO",
+      "bytes": 216097
+    },
+    {
+      "path": "/mate/s",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "내 블로그 AI 진단 | NAEO",
+      "bytes": 216773
+    },
+    {
+      "path": "/mcp",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO",
+      "bytes": 977466
+    },
+    {
+      "path": "/oauth/consent",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 97730
+    },
+    {
+      "path": "/payment/complete",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+      "bytes": 106532
+    },
+    {
+      "path": "/preview",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "Landing v2 Preview | NAEO",
+      "bytes": 288380
+    },
+    {
+      "path": "/pricing",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO",
+      "bytes": 342246
+    },
+    {
+      "path": "/privacy",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "개인정보처리방침 | NAEO",
+      "bytes": 138514
+    },
+    {
+      "path": "/privacy/extension",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "개인정보 처리방침 (NAEO Chrome Extension) | NAEO",
+      "bytes": 107481
+    },
+    {
+      "path": "/ranking",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "AI 추천 순위 리더보드 | NAEO",
+      "bytes": 2304510
+    },
+    {
+      "path": "/refund",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "환불 규정 | NAEO",
+      "bytes": 109170
+    },
+    {
+      "path": "/social/aeo-carousel",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "검색은 끝났다, 인스타 캐러셀 | NAEO",
+      "bytes": 1069391
+    },
+    {
+      "path": "/social/aeo-carousel/export",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "Carousel Slide Export | NAEO",
+      "bytes": 101575
+    },
+    {
+      "path": "/social/banner-preview",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5836
+    },
+    {
+      "path": "/social/banner-preview/frame",
+      "mode": "리디렉션",
+      "status": 307,
+      "expected": 307,
+      "ok": true,
+      "location": "/",
+      "title": "NAEO | NAEO",
+      "bytes": 5852
+    },
+    {
+      "path": "/social/mate-ad",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "네이버 메이트 광고 시안 | NAEO",
+      "bytes": 165003
+    },
+    {
+      "path": "/social/mate-ad/export",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "mate-ad export | NAEO",
+      "bytes": 100293
+    },
+    {
+      "path": "/terms",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "이용약관 | NAEO",
+      "bytes": 112866
+    },
+    {
+      "path": "/updates",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "업데이트 | NAEO",
+      "bytes": 472326
+    },
+    {
+      "path": "/updates/2026-06-10-ranking-archive-hall-of-fame",
+      "mode": "리디렉션",
+      "status": 308,
+      "expected": 308,
+      "ok": true,
+      "location": "/updates?focus=2026-06-10-ranking-archive-hall-of-fame",
+      "title": "NAEO | NAEO",
+      "bytes": 5941
+    },
+    {
+      "path": "/updates/2026-06-11-mate-free-diagnosis",
+      "mode": "리디렉션",
+      "status": 308,
+      "expected": 308,
+      "ok": true,
+      "location": "/updates?focus=2026-06-11-mate-free-diagnosis",
+      "title": "NAEO | NAEO",
+      "bytes": 5914
+    },
+    {
+      "path": "/updates/2026-06-24-golden-keywords",
+      "mode": "리디렉션",
+      "status": 308,
+      "expected": 308,
+      "ok": true,
+      "location": "/updates?focus=2026-06-24-golden-keywords",
+      "title": "NAEO | NAEO",
+      "bytes": 5902
+    },
+    {
+      "path": "/updates/2026-09-16-post-level-exposure",
+      "mode": "리디렉션",
+      "status": 308,
+      "expected": 308,
+      "ok": true,
+      "location": "/updates?focus=2026-09-16-post-level-exposure",
+      "title": "NAEO | NAEO",
+      "bytes": 5914
+    },
+    {
+      "path": "/youtube/aeo-intro",
+      "mode": "화면",
+      "status": 200,
+      "expected": 200,
+      "ok": true,
+      "location": null,
+      "title": "검색은 끝났다, 이제 AI가 답한다 | NAEO",
+      "bytes": 2213386
+    }
+  ]
+}

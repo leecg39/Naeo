@@ -1,0 +1,3158 @@
+[
+  {
+    "path": "/",
+    "width": 1440,
+    "title": "NAEO | 네이버 블로그 AI 브리핑 인용 진단",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "본문 바로가기\nNAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n네이버 블로그 AEO\n내 블로그 포스팅\n내 블로그 포스팅_\nAI에 선택되고 있을까?\n\n내 글이 AI에 인용될 준비가 됐는지,\n네이버 공식 5기준으로 채점해 알려드려요.\n\n무료로 내 블로그 진단받기\nAI 인용이란?\n내 글이 AI의 답변 속",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 포스팅내 블로그 포스팅_AI에 선택되고 있을까?",
+        "rect": {
+          "x": 332.5,
+          "y": 342.875,
+          "width": 760,
+          "height": 144,
+          "top": 342.875,
+          "right": 1092.5,
+          "bottom": 486.875,
+          "left": 332.5
+        },
+        "font": "60px"
+      },
+      {
+        "text": "내 글이 AI의 답변 속 '출처'로 표시되는 것이에요",
+        "rect": {
+          "x": 152.5,
+          "y": 1135.1953125,
+          "width": 1120,
+          "height": 46.796875,
+          "top": 1135.1953125,
+          "right": 1272.5,
+          "bottom": 1181.9921875,
+          "left": 152.5
+        },
+        "font": "36px"
+      },
+      {
+        "text": "검색 순위가 높지 않더라도 AI에게 선택받으면 글이 노출돼요",
+        "rect": {
+          "x": 152.5,
+          "y": 2123.4921875,
+          "width": 1120,
+          "height": 46.796875,
+          "top": 2123.4921875,
+          "right": 1272.5,
+          "bottom": 2170.2890625,
+          "left": 152.5
+        },
+        "font": "36px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "home-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog",
+    "width": 1440,
+    "title": "매거진 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 답변에 인용되는 글이 되고 있나요?",
+        "rect": {
+          "x": 312,
+          "y": 112,
+          "width": 1089,
+          "height": 42.5,
+          "top": 112,
+          "right": 1401,
+          "bottom": 154.5,
+          "left": 312
+        },
+        "font": "34px"
+      }
+    ],
+    "assets": 10,
+    "screenshot": "blog-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/contact",
+    "width": 1440,
+    "title": "문의하기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n문의하기\n\nNAEO 서비스 이용, 기업 도입, 파트너십 등 어떤 문의든 환영합니다.\n\n이메일 문의\nask@naeo.kr\n\n서비스 이용, 기술 문의, 기업/B2B 도입 문의\n\n상담 가능 시간\n평일 10:00 ~ 18:00\n\n주말·공휴일 ",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "contact-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/event",
+    "width": 1440,
+    "title": "NAEO 이벤트 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n이벤트\n\n진행 중인 이벤트와 매주 돌아오는 랭킹 리워드예요.\n\n진행 중 · 1\n진행 중\n매주 월요일 랭킹 리워드\n상시 진행\n종료된 이벤트\n종료\nNAEO 사용 후기 이벤트\n9월 27일 마감\n이용약관\n개인정보처리방침\n환불규정\n주식회사 어크로스 | 대표: ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "이벤트",
+        "rect": {
+          "x": 420.5,
+          "y": 112,
+          "width": 584,
+          "height": 39.515625,
+          "top": 112,
+          "right": 1004.5,
+          "bottom": 151.515625,
+          "left": 420.5
+        },
+        "font": "32px"
+      },
+      {
+        "text": "매주 월요일 랭킹 리워드",
+        "rect": {
+          "x": 437.5,
+          "y": 604.7734375,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 604.7734375,
+          "right": 951.5,
+          "bottom": 628.6875,
+          "left": 437.5
+        },
+        "font": "18.4px"
+      },
+      {
+        "text": "NAEO 사용 후기 이벤트",
+        "rect": {
+          "x": 437.5,
+          "y": 1099.265625,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 1099.265625,
+          "right": 951.5,
+          "bottom": 1123.1796875,
+          "left": 437.5
+        },
+        "font": "18.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "event-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/event/naeo-review",
+    "width": 1440,
+    "title": "NAEO 사용 후기 이벤트 — 당첨자 발표 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n이용약관\n개인정보처리방침\n환불규정\n주식회사 어크로스 | 대표: 이재홍 | 사업자등록번호: 288-86-03687\n주소: 서울특별시 강남구 테헤란로63길 9, 1801\n문의: ask@naeo.kr\nNAEO는 네이버(주)와 무관한 독립 서비스입니다.\n© ",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "event--naeo-review-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/event/ranking-reward",
+    "width": 1440,
+    "title": "NAEO 랭킹 리워드 | 매주 월요일, 커피 받는 랭킹 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n\nNAEO 랭킹 리워드\n\n블로그만 등록했는데\n커피가?\n\n블로그·이벤트 등록하고 일주일에 한 번만 들어오세요\n매주 월요일, 주제마다 커피를 드려요\n\n주간 랭킹\n\n주제별\n\n전체\n맛집\n1\n\n하루한편\n\nAI의 총애\n맛집\n188점\n2\n\n느린여행자\n\n꾸준왕\n맛집",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "블로그만 등록했는데커피가?",
+        "rect": {
+          "x": 216.5,
+          "y": 137.1953125,
+          "width": 992,
+          "height": 121.7890625,
+          "top": 137.1953125,
+          "right": 1208.5,
+          "bottom": 258.984375,
+          "left": 216.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "유의사항",
+        "rect": {
+          "x": 296.5,
+          "y": 1052.1953125,
+          "width": 832,
+          "height": 25.59375,
+          "top": 1052.1953125,
+          "right": 1128.5,
+          "bottom": 1077.7890625,
+          "left": 296.5
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 4,
+    "screenshot": "event--ranking-reward-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/faq",
+    "width": 1440,
+    "title": "자주 묻는 질문 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n자주 묻는 질문\n\nNAEO 서비스 이용과 ChatGPT·Claude 연결에 대해 자주 묻는 질문을 모았습니다.\n\n서비스 이용\n\n조회수를 올려주는 건가요?\n\nAI 브리핑이 뭔가요?\n\n블로그 주소만 있으면 되나요?\n\n분석에 시간이 얼마나 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "자주 묻는 질문",
+        "rect": {
+          "x": 286.5,
+          "y": 128,
+          "width": 852,
+          "height": 41.984375,
+          "top": 128,
+          "right": 1138.5,
+          "bottom": 169.984375,
+          "left": 286.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "서비스 이용",
+        "rect": {
+          "x": 352.5,
+          "y": 275.578125,
+          "width": 720,
+          "height": 32,
+          "top": 275.578125,
+          "right": 1072.5,
+          "bottom": 307.578125,
+          "left": 352.5
+        },
+        "font": "20px"
+      },
+      {
+        "text": "조회수를 올려주는 건가요?",
+        "rect": {
+          "x": 352.5,
+          "y": 323.578125,
+          "width": 720,
+          "height": 61.59375,
+          "top": 323.578125,
+          "right": 1072.5,
+          "bottom": 385.171875,
+          "left": 352.5
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "faq-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/features",
+    "width": 1440,
+    "title": "NAEO 기능 소개 | 네이버 AI 브리핑 모니터링 & AEO 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\nFEATURES\nAI가 답하는 시대,\n데이터로 증명합니다\n\n네이버 AI 브리핑에서 내 콘텐츠가 추천되고 있는지, 어떤 키워드가 기회인지,\nNAEO가 자동으로 분석하고 시각화합니다.\n\nCORE FEATURE 01\n내 블로그 포스팅 AI가",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI가 답하는 시대,데이터로 증명합니다",
+        "rect": {
+          "x": 286.5,
+          "y": 216,
+          "width": 852,
+          "height": 122.875,
+          "top": 216,
+          "right": 1138.5,
+          "bottom": 338.875,
+          "left": 286.5
+        },
+        "font": "51.2px"
+      },
+      {
+        "text": "내 블로그 포스팅 AI가 추천하고 있을까?",
+        "rect": {
+          "x": 136.5,
+          "y": 656.2578125,
+          "width": 1152,
+          "height": 48,
+          "top": 656.2578125,
+          "right": 1288.5,
+          "bottom": 704.2578125,
+          "left": 136.5
+        },
+        "font": "40px"
+      },
+      {
+        "text": "키워드 분석, AI가 알아서",
+        "rect": {
+          "x": 136.5,
+          "y": 1513.140625,
+          "width": 1152,
+          "height": 48,
+          "top": 1513.140625,
+          "right": 1288.5,
+          "bottom": 1561.140625,
+          "left": 136.5
+        },
+        "font": "40px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "features-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/guide/extension-publish",
+    "width": 1440,
+    "title": "AI로 쓴 글, 네이버 블로그에 발행하기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n저장한 글, 네이버 블로그에 발행하기\n\nNAEO 크롬 확장이 글을 조각마다 복사해 주고 들어갈 자리로 커서를 옮겨 줍니다. 붙여넣기는 직접 하시면 되고, 표·인용구·소제목 서식은 그대로 따라옵니다.\n\n어떤 글을 발행하시나요?\n\nNAEO",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "저장한 글, 네이버 블로그에 발행하기",
+        "rect": {
+          "x": 286.5,
+          "y": 128,
+          "width": 852,
+          "height": 41.984375,
+          "top": 128,
+          "right": 1138.5,
+          "bottom": 169.984375,
+          "left": 286.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "확장 설치하고 로그인",
+        "rect": {
+          "x": 359.5,
+          "y": 429.125,
+          "width": 754,
+          "height": 26.875,
+          "top": 429.125,
+          "right": 1113.5,
+          "bottom": 456,
+          "left": 359.5
+        },
+        "font": "16.8px"
+      },
+      {
+        "text": "네이버 글쓰기 화면에서 “내 글” 열기",
+        "rect": {
+          "x": 359.5,
+          "y": 593.1171875,
+          "width": 754,
+          "height": 26.875,
+          "top": 593.1171875,
+          "right": 1113.5,
+          "bottom": 619.9921875,
+          "left": 359.5
+        },
+        "font": "16.8px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "guide--extension-publish-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/guide/writing",
+    "width": 1440,
+    "title": "AI 글쓰기 사용법 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\nAI 글쓰기 사용법\n\n키워드만 고르면 NAEO가 글과 이미지를 만들어 드립니다. AI 계정을 따로 만들 필요도, 프롬프트를 쓸 필요도 없어요. 발행하고 인용까지 확인하는 전 과정을 안내합니다.\n\nSTEP 1\n\n추천 키워드는 내가 이미 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 글쓰기 사용법",
+        "rect": {
+          "x": 286.5,
+          "y": 128,
+          "width": 852,
+          "height": 41.984375,
+          "top": 128,
+          "right": 1138.5,
+          "bottom": 169.984375,
+          "left": 286.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "키워드 고르기",
+        "rect": {
+          "x": 359.5,
+          "y": 924.3515625,
+          "width": 754,
+          "height": 26.875,
+          "top": 924.3515625,
+          "right": 1113.5,
+          "bottom": 951.2265625,
+          "left": 359.5
+        },
+        "font": "16.8px"
+      },
+      {
+        "text": "사진 넣기 (선택)",
+        "rect": {
+          "x": 359.5,
+          "y": 1165.6015625,
+          "width": 754,
+          "height": 26.875,
+          "top": 1165.6015625,
+          "right": 1113.5,
+          "bottom": 1192.4765625,
+          "left": 359.5
+        },
+        "font": "16.8px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "guide--writing-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/mate",
+    "width": 1440,
+    "title": "내 블로그, 네이버 메이트 될 수 있을까? 30초 무료 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n매달 2,605명이 받아요\n최대 월 691만원\n\n네이버가 AI에 인용된 블로거에게 주는 활동비, 기본 30만원부터. 나만 빼고 받는 건 아닌지 30초면 확인.\n\n​\n블로그 확인하기 →\n기준 5가지 충족도 · 내 주제 맞춤 글감 · 지금",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "매달 2,605명이 받아요최대 월 691만원",
+        "rect": {
+          "x": 436.5,
+          "y": 136,
+          "width": 552,
+          "height": 97.59375,
+          "top": 136,
+          "right": 988.5,
+          "bottom": 233.59375,
+          "left": 436.5
+        },
+        "font": "40px"
+      },
+      {
+        "text": "기준만 지키면, 네이버 메이트",
+        "rect": {
+          "x": 436.5,
+          "y": 923.4607543945312,
+          "width": 552,
+          "height": 32.015625,
+          "top": 923.4607543945312,
+          "right": 988.5,
+          "bottom": 955.4763793945312,
+          "left": 436.5
+        },
+        "font": "24px"
+      },
+      {
+        "text": "네이버 AI는 이런 글을 골라요",
+        "rect": {
+          "x": 436.5,
+          "y": 1171.4296875,
+          "width": 552,
+          "height": 32.015625,
+          "top": 1171.4296875,
+          "right": 988.5,
+          "bottom": 1203.4453125,
+          "left": 436.5
+        },
+        "font": "24px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "mate-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/mcp",
+    "width": 1440,
+    "title": "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n\nAI WRITING\n\n내 블로그 글, 이제\nChatGPT\nClaude\nNAEO\n가 씁니다\n\n두 방법 모두 오늘 0원으로 시작합니다. 발행 후 AI 인용 추적은 어느 쪽이든 똑같이 따라와요.\n\nNAEO가 다 써주기\n7일 무료 체험\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 136.5,
+          "y": 194.4375,
+          "width": 1152,
+          "height": 117.109375,
+          "top": 194.4375,
+          "right": 1288.5,
+          "bottom": 311.546875,
+          "left": 136.5
+        },
+        "font": "48px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "mcp-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/pricing",
+    "width": 1440,
+    "title": "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n요금제\n내 블로그에 맞는 요금제를 선택하세요\n\n분석은 무료로 시작하고, 글쓰기는 베이직으로.\n베이직은 매월 750토큰으로 AI가 글·이미지를 만들어 발행 대기함까지 보내드립니다. 매일 1편꼴입니다.\n\n카드가 등록돼 있지 않아 자동 결제",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 286.5,
+          "y": 176,
+          "width": 852,
+          "height": 52.2734375,
+          "top": 176,
+          "right": 1138.5,
+          "bottom": 228.2734375,
+          "left": 286.5
+        },
+        "font": "44.8px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 286.5,
+          "y": 2950.5390625,
+          "width": 852,
+          "height": 49.59375,
+          "top": 2950.5390625,
+          "right": 1138.5,
+          "bottom": 3000.1328125,
+          "left": 286.5
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 286.5,
+          "y": 3001.1328125,
+          "width": 852,
+          "height": 49.59375,
+          "top": 3001.1328125,
+          "right": 1138.5,
+          "bottom": 3050.7265625,
+          "left": 286.5
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "pricing-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/privacy",
+    "width": 1440,
+    "title": "개인정보처리방침 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n개인정보처리방침\n\n시행일자: 2026년 10월 13일\n\n1. 개인정보의 수집 및 이용 목적\n\n회사는 다음의 목적을 위하여 개인정보를 처리합니다.\n\n• 회원 가입 및 관리: 회원 가입의사 확인, 본인 식별·인증, 회원자격 유지·관리, 서비스 부정이용 방",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "privacy-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/privacy/extension",
+    "width": 1440,
+    "title": "개인정보 처리방침 (NAEO Chrome Extension) | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n개인정보 처리방침 (NAEO Chrome Extension)\n\n시행일자: 2026년 7월 8일\n\n1. 수집하는 정보\n\nNAEO 확장은 로그인 없이 이용할 수 있으며, 로그인하지 않는 경우 사용자 식별 정보를 수집하지 않습니다.\n\n• 이름·전화번호 등 ",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "privacy--extension-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/ranking",
+    "width": 1440,
+    "title": "AI 추천 순위 리더보드 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n도전! AI인용 랭킹왕\n\n오후 12:12 업데이트\n\n네이버 AI가 내 글을 얼마나 인용하는지, 검색에 잘 노출되는지, 좋은 키워드를 공략하고 있는지, 꾸준히 활동하는지를 종합한 순위입니다\n\n산정 기준 보기\n전체 랭킹\n월간 랭킹\n주간 랭",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 136.5,
+          "y": 112.09027099609375,
+          "width": 341.9609375,
+          "height": 52.2734375,
+          "top": 112.09027099609375,
+          "right": 478.4609375,
+          "bottom": 164.36370849609375,
+          "left": 136.5
+        },
+        "font": "44.8px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 445.5,
+          "y": 17470.08203125,
+          "width": 534,
+          "height": 29.15625,
+          "top": 17470.08203125,
+          "right": 979.5,
+          "bottom": 17499.23828125,
+          "left": 445.5
+        },
+        "font": "21.6px"
+      }
+    ],
+    "assets": 13,
+    "screenshot": "ranking-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/refund",
+    "width": 1440,
+    "title": "환불 규정 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n환불 규정\n\n시행일자: 2026년 8월 24일\n\n1. 기본 원칙\n\nNAEO(이하 \"회사\")는 이용자의 정당한 환불 요청을 적극적으로 수용하며, 「전자상거래 등에서의 소비자보호에 관한 법률」 및 「소비자기본법」에 따라 신속하고 투명하게 처리합니다.\n\n2",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "refund-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/terms",
+    "width": 1440,
+    "title": "이용약관 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\n시작하기\n이용약관\n\n시행일자: 2026년 8월 24일\n\n제1조 (목적)\n\n본 약관은 NAEO(이하 \"회사\")가 제공하는 네이버 AI 검색 최적화 진단 서비스(이하 \"서비스\")의 이용 조건 및 절차, 회사와 회원 간의 권리·의무 및 책임사항, 기타 필요한 사항을",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "terms-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/updates",
+    "width": 1440,
+    "title": "업데이트 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n업데이트\n\nNAEO의 새 기능, 개선, 버그 수정 기록\n\n전체\n새 기능 (14)\n개선 (12)\n버그 수정 (0)\n2026년 9월\nv1.15.0\n개선\n2026년 9월 16일\n검색 노출을 글 단위로 판정해요. 일부 글의 노출 표시가 내려간",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "업데이트",
+        "rect": {
+          "x": 286.5,
+          "y": 112,
+          "width": 852,
+          "height": 41.984375,
+          "top": 112,
+          "right": 1138.5,
+          "bottom": 153.984375,
+          "left": 286.5
+        },
+        "font": "34px"
+      },
+      {
+        "text": "2026년 9월",
+        "rect": {
+          "x": 326.5,
+          "y": 273.96875,
+          "width": 71.9140625,
+          "height": 21.3515625,
+          "top": 273.96875,
+          "right": 398.4140625,
+          "bottom": 295.3203125,
+          "left": 326.5
+        },
+        "font": "13.6px"
+      },
+      {
+        "text": "검색 노출을 글 단위로 판정해요. 일부 글의 노출 표시가 내려간 이유",
+        "rect": {
+          "x": 351.5,
+          "y": 366.3203125,
+          "width": 730,
+          "height": 28,
+          "top": 366.3203125,
+          "right": 1081.5,
+          "bottom": 394.3203125,
+          "left": 351.5
+        },
+        "font": "20px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "updates-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/auth/extension",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "유효하지 않은 요청입니다\n\n확장 프로그램 인증 주소가 올바르지 않아 로그인을 진행할 수 없습니다.",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "auth--extension-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/ai-picks",
+    "width": 1440,
+    "title": "AI 인용 현황 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--ai-picks-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/competitors",
+    "width": 1440,
+    "title": "경쟁 블로그 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--competitors-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/events",
+    "width": 1440,
+    "title": "이벤트 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n이벤트\n\n진행 중인 이벤트와",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "이벤트",
+        "rect": {
+          "x": 540.5,
+          "y": 40.00108337402344,
+          "width": 584,
+          "height": 39.515625,
+          "top": 40.00108337402344,
+          "right": 1124.5,
+          "bottom": 79.51670837402344,
+          "left": 540.5
+        },
+        "font": "32px"
+      },
+      {
+        "text": "매주 월요일 랭킹 리워드",
+        "rect": {
+          "x": 557.5,
+          "y": 532.7764892578125,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 532.7764892578125,
+          "right": 1071.5,
+          "bottom": 556.6905517578125,
+          "left": 557.5
+        },
+        "font": "18.4px"
+      },
+      {
+        "text": "NAEO 사용 후기 이벤트",
+        "rect": {
+          "x": 557.5,
+          "y": 1027.272216796875,
+          "width": 514,
+          "height": 23.9140625,
+          "top": 1027.272216796875,
+          "right": 1071.5,
+          "bottom": 1051.186279296875,
+          "left": 557.5
+        },
+        "font": "18.4px"
+      }
+    ],
+    "assets": 3,
+    "screenshot": "dashboard--events-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/mate",
+    "width": 1440,
+    "title": "메이트 진단 결과 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--mate-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/recommendations",
+    "width": 1440,
+    "title": "키워드 추천 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "키워드 추천",
+        "rect": {
+          "x": 264,
+          "y": 129.796875,
+          "width": 90.921875,
+          "height": 32,
+          "top": 129.796875,
+          "right": 354.921875,
+          "bottom": 161.796875,
+          "left": 264
+        },
+        "font": "20px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard--recommendations-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 1440,
+    "title": "설정 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--settings-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 1440,
+    "title": "AI 글쓰기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 265,
+          "y": 1068.0703125,
+          "width": 763,
+          "height": 48,
+          "top": 1068.0703125,
+          "right": 1028,
+          "bottom": 1116.0703125,
+          "left": 265
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard--write-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard",
+    "width": 1440,
+    "title": "Dashboard | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n대시보드\n\n대시보드\n\n키워드 추천\n\n베이직 체험\n\nAI 글쓰기\n\n베이직 체험\n\n이벤트\n\n분석 도구\n\nAI 인용 현황\n\n경쟁 블로그\n\n베이직 체험\n\n메이트 진단\n\n계정\n\n설정\n\n병\n\nNAEO 블로거\n\n베이직 체험\n\n스캔 20회\n\n글쓰기\n\n175토큰\n\n요금제 안내\n\n이용약관\n\n문의하기\n\n10월 5일부터 매주 NAE",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 추천률 2% · 추천된 글 1건을 확인하세요",
+        "rect": {
+          "x": 264,
+          "y": 268.3515625,
+          "width": 1137,
+          "height": 30.9921875,
+          "top": 268.3515625,
+          "right": 1401,
+          "bottom": 299.34375,
+          "left": 264
+        },
+        "font": "24.8px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dev/event-preview",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n\n404\n\n페이지를 찾을 수 없습니다\n\n요청하신 페이지가 삭제되었거나\n주소가 변경되었을 수 있습니다.\n\n홈으로\n블로그 보기\nNAEO\n\n네이버 AI 검색(AEO) 최적화 분석 솔루션\n\n서비스\nFAQ\n문의하기\n매거진\n업데이트\n법적 고지\n이",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "페이지를 찾을 수 없습니다",
+        "rect": {
+          "x": 485.5,
+          "y": 493.671875,
+          "width": 454,
+          "height": 32.015625,
+          "top": 493.671875,
+          "right": 939.5,
+          "bottom": 525.6875,
+          "left": 485.5
+        },
+        "font": "24px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dev--event-preview-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/dev/nav-preview",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n\n404\n\n페이지를 찾을 수 없습니다\n\n요청하신 페이지가 삭제되었거나\n주소가 변경되었을 수 있습니다.\n\n홈으로\n블로그 보기\nNAEO\n\n네이버 AI 검색(AEO) 최적화 분석 솔루션\n\n서비스\nFAQ\n문의하기\n매거진\n업데이트\n법적 고지\n이",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "페이지를 찾을 수 없습니다",
+        "rect": {
+          "x": 485.5,
+          "y": 493.671875,
+          "width": 454,
+          "height": 32.015625,
+          "top": 493.671875,
+          "right": 939.5,
+          "bottom": 525.6875,
+          "left": 485.5
+        },
+        "font": "24px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dev--nav-preview-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/images",
+    "width": 1440,
+    "title": "발행용 사진 올리기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "발행용 사진 올리기\n\n여기 올린 사진의 마크다운을 복사해 AI 채팅에 붙여넣으면, 글에 이미지 자리가 들어가고 발행 시 익스텐션이 자동으로 가져와요. (자동 1600px 최적화)\n\n탭해서 사진 선택 (여러 장 가능)",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "images-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/login",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "시작하기\n네이버로 시작하기\n구글로 시작하기\n다른 네이버 아이디로 로그인\n계속하면 이용약관 및 개인정보처리방침에 동의하는 것으로 봅니다.\n\n이메일 로그인\n\n이메일로 로그인",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "login-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/mate/s",
+    "width": 1440,
+    "title": "내 블로그 AI 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n매달 0명이 받아요\n최대 월 0만원\n\n네이버가 AI에 인용된 블로거에게 주는 활동비, 기본 30만원부터. 나만 빼고 받는 건 아닌지 30초면 확인.\n\n​\n블로그 확인하기 →\n기준 5가지 충족도 · 내 주제 맞춤 글감 · 지금은 무료\n\n",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "매달 0명이 받아요최대 월 0만원",
+        "rect": {
+          "x": 436.5,
+          "y": 136,
+          "width": 552,
+          "height": 97.59375,
+          "top": 136,
+          "right": 988.5,
+          "bottom": 233.59375,
+          "left": 436.5
+        },
+        "font": "40px"
+      },
+      {
+        "text": "기준만 지키면, 네이버 메이트",
+        "rect": {
+          "x": 436.5,
+          "y": 935.6328125,
+          "width": 552,
+          "height": 32.015625,
+          "top": 935.6328125,
+          "right": 988.5,
+          "bottom": 967.6484375,
+          "left": 436.5
+        },
+        "font": "24px"
+      },
+      {
+        "text": "네이버 AI는 이런 글을 골라요",
+        "rect": {
+          "x": 436.5,
+          "y": 1171.4296875,
+          "width": 552,
+          "height": 32.015625,
+          "top": 1171.4296875,
+          "right": 988.5,
+          "bottom": 1203.4453125,
+          "left": 436.5
+        },
+        "font": "24px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "mate--s-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/oauth/consent",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n\n연결 요청을 처리할 수 없습니다\n\n요청 정보가 올바르지 않습니다. 앱에서 다시 연결을 시도해 주세요.",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "oauth--consent-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/payment/complete",
+    "width": 1440,
+    "title": "NAEO: 네이버 AI 검색(AEO) 최적화 진단 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "결제에 실패했습니다\n요금제 페이지로",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "payment--complete-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/preview",
+    "width": 1440,
+    "title": "Landing v2 Preview | NAEO",
+    "scrollWidth": 1440,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\n대시보드로 돌아가기 →\n\n로컬 데모\n\n내 글 · 발행 대기함\n\nAI 글쓰기에서 만든 샘플 글을 검토하고 수정하세요.\n\n고용산재 토탈서비스, 알아두면 좋은 핵심 정리\n\n고용산재 토탈서비스 · 369자 · 초안\n\n고용산재 토탈서비스, 알아두면 좋은 핵심 정리\n\n고용산재 토탈서비스 · 369자 · 초안",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 글 · 발행 대기함",
+        "rect": {
+          "x": 254,
+          "y": 145.59375,
+          "width": 932,
+          "height": 41.59375,
+          "top": 145.59375,
+          "right": 1186,
+          "bottom": 187.1875,
+          "left": 254
+        },
+        "font": "32px"
+      },
+      {
+        "text": "고용산재 토탈서비스, 알아두면 좋은 핵심 정리",
+        "rect": {
+          "x": 271,
+          "y": 269.78125,
+          "width": 898,
+          "height": 32,
+          "top": 269.78125,
+          "right": 1169,
+          "bottom": 301.78125,
+          "left": 271
+        },
+        "font": "20px"
+      },
+      {
+        "text": "고용산재 토탈서비스, 알아두면 좋은 핵심 정리",
+        "rect": {
+          "x": 271,
+          "y": 377.375,
+          "width": 898,
+          "height": 32,
+          "top": 377.375,
+          "right": 1169,
+          "bottom": 409.375,
+          "left": 271
+        },
+        "font": "20px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "preview-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/social/aeo-carousel/export",
+    "width": 1440,
+    "title": "Carousel Slide Export | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "#INTRO\n01 / 10\n블로거가 알아야 할 5가지\n검색은 끝났다,\n이제 AI가 답한다\n\n네이버 블로그 유입 구조가\n통째로 바뀌고 있습니다\n\nN\n@naeo.kr\n넘겨서 보기 →",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "검색은 끝났다,\n이제 AI가 답한다",
+        "rect": {
+          "x": 80,
+          "y": 458.640625,
+          "width": 840,
+          "height": 282.71875,
+          "top": 458.640625,
+          "right": 920,
+          "bottom": 741.359375,
+          "left": 80
+        },
+        "font": "124px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "social--aeo-carousel--export-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/social/mate-ad/export",
+    "width": 1440,
+    "title": "mate-ad export | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "N\nnaeo.kr\n네이버 메이트 · 6월 4일 시작\n월 1,000만 원\n내 블로그는?\n\nAI 브리핑에 인용될수록 받는 지원금.\n내 블로그는 지금 어떤지 확인해보세요.\n\n무료로 확인하기",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그는?",
+        "rect": {
+          "x": 288.515625,
+          "y": 602.6171875,
+          "width": 502.96875,
+          "height": 114.3984375,
+          "top": 602.6171875,
+          "right": 791.484375,
+          "bottom": 717.015625,
+          "left": 288.515625
+        },
+        "font": "104px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "social--mate-ad--export-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/social/mate-ad",
+    "width": 1440,
+    "title": "네이버 메이트 광고 시안 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "A\nN\nnaeo.kr\n네이버 메이트 · 6월 4일 시작\n월 1,000만 원\n내 블로그는?\n\nAI 브리핑에 인용될수록 받는 지원금.\n내 블로그는 지금 어떤지 확인해보세요.\n\n무료로 확인하기 → naeo.kr\nA\nN\nnaeo.kr\n네이버 메이트 · 6월 4일 시작\n월 1,000만 원\n내 블로그는?\n\nAI 브리핑에 인용될수록 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그는?",
+        "rect": {
+          "x": 132.3249969482422,
+          "y": 232.96499633789062,
+          "width": 160.9499969482422,
+          "height": 36.607513427734375,
+          "top": 232.96499633789062,
+          "right": 293.2749938964844,
+          "bottom": 269.572509765625,
+          "left": 132.3249969482422
+        },
+        "font": "104px"
+      },
+      {
+        "text": "내 블로그는?",
+        "rect": {
+          "x": 482.2515563964844,
+          "y": 234.20843505859375,
+          "width": 157.08218383789062,
+          "height": 35.72625732421875,
+          "top": 234.20843505859375,
+          "right": 639.333740234375,
+          "bottom": 269.9346923828125,
+          "left": 482.2515563964844
+        },
+        "font": "116px"
+      },
+      {
+        "text": "내 글은 AI에\n인용되고 있을까?",
+        "rect": {
+          "x": 104.89250183105469,
+          "y": 778.5537109375,
+          "width": 215.81248474121094,
+          "height": 73.21502685546875,
+          "top": 778.5537109375,
+          "right": 320.7049865722656,
+          "bottom": 851.7687377929688,
+          "left": 104.89250183105469
+        },
+        "font": "104px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "social--mate-ad-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/",
+    "width": 390,
+    "title": "NAEO | 네이버 블로그 AI 브리핑 인용 진단",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "본문 바로가기\nNAEO\n네이버 블로그 AEO\n내 블로그 포스팅\n내 블로그 포스팅_\nAI에 선택되고 있을까?\n\n내 글이 AI에 인용될 준비가 됐는지,\n네이버 공식 5기준으로 채점해 알려드려요.\n\n무료로 내 블로그 진단받기\nAI 인용이란?\n내 글이 AI의 답변 속 '출처'로 표시되는 것이에요\n\n네이버 AI 브리핑은 검색 결과",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 포스팅내 블로그 포스팅_AI에 선택되고 있을까?",
+        "rect": {
+          "x": 16,
+          "y": 377.375,
+          "width": 358,
+          "height": 76.796875,
+          "top": 377.375,
+          "right": 374,
+          "bottom": 454.171875,
+          "left": 16
+        },
+        "font": "32px"
+      },
+      {
+        "text": "내 글이 AI의 답변 속 '출처'로 표시되는 것이에요",
+        "rect": {
+          "x": 32,
+          "y": 1111.1953125,
+          "width": 326,
+          "height": 67.59375,
+          "top": 1111.1953125,
+          "right": 358,
+          "bottom": 1178.7890625,
+          "left": 32
+        },
+        "font": "26px"
+      },
+      {
+        "text": "검색 순위가 높지 않더라도 AI에게 선택받으면 글이 노출돼요",
+        "rect": {
+          "x": 32,
+          "y": 2111.4609375,
+          "width": 326,
+          "height": 101.390625,
+          "top": 2111.4609375,
+          "right": 358,
+          "bottom": 2212.8515625,
+          "left": 32
+        },
+        "font": "26px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "home-390.png",
+    "ok": true
+  },
+  {
+    "path": "/",
+    "width": 768,
+    "title": "NAEO | 네이버 블로그 AI 브리핑 인용 진단",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "본문 바로가기\nNAEO\n네이버 블로그 AEO\n내 블로그 포스팅\n내 블로그 포스팅_\nAI에 선택되고 있을까?\n\n내 글이 AI에 인용될 준비가 됐는지,\n네이버 공식 5기준으로 채점해 알려드려요.\n\n무료로 내 블로그 진단받기\nAI 인용이란?\n내 글이 AI의 답변 속 '출처'로 표시되는 것이에요\n\n네이버 AI 브리핑은 검색 결과",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 포스팅내 블로그 포스팅_AI에 선택되고 있을까?",
+        "rect": {
+          "x": 24,
+          "y": 362.9765625,
+          "width": 705,
+          "height": 105.59375,
+          "top": 362.9765625,
+          "right": 729,
+          "bottom": 468.5703125,
+          "left": 24
+        },
+        "font": "44px"
+      },
+      {
+        "text": "내 글이 AI의 답변 속 '출처'로 표시되는 것이에요",
+        "rect": {
+          "x": 40,
+          "y": 1111.1953125,
+          "width": 673,
+          "height": 33.796875,
+          "top": 1111.1953125,
+          "right": 713,
+          "bottom": 1144.9921875,
+          "left": 40
+        },
+        "font": "26px"
+      },
+      {
+        "text": "검색 순위가 높지 않더라도 AI에게 선택받으면 글이 노출돼요",
+        "rect": {
+          "x": 40,
+          "y": 1976.1640625,
+          "width": 673,
+          "height": 33.796875,
+          "top": 1976.1640625,
+          "right": 713,
+          "bottom": 2009.9609375,
+          "left": 40
+        },
+        "font": "26px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "home-768.png",
+    "ok": true
+  },
+  {
+    "path": "/pricing",
+    "width": 390,
+    "title": "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\n요금제\n내 블로그에 맞는 요금제를 선택하세요\n\n분석은 무료로 시작하고, 글쓰기는 베이직으로.\n베이직은 매월 750토큰으로 AI가 글·이미지를 만들어 발행 대기함까지 보내드립니다. 매일 1편꼴입니다.\n\n카드가 등록돼 있지 않아 자동 결제되지 않습니다. 체험은 2026년 10월 20일까지이며, 이후 무료 플랜으로 돌",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 16,
+          "y": 176,
+          "width": 358,
+          "height": 74.6875,
+          "top": 176,
+          "right": 374,
+          "bottom": 250.6875,
+          "left": 16
+        },
+        "font": "32px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 16,
+          "y": 3957.4453125,
+          "width": 358,
+          "height": 49.59375,
+          "top": 3957.4453125,
+          "right": 374,
+          "bottom": 4007.0390625,
+          "left": 16
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 16,
+          "y": 4008.0390625,
+          "width": 358,
+          "height": 49.59375,
+          "top": 4008.0390625,
+          "right": 374,
+          "bottom": 4057.6328125,
+          "left": 16
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "pricing-390.png",
+    "ok": true
+  },
+  {
+    "path": "/pricing",
+    "width": 768,
+    "title": "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\n요금제\n내 블로그에 맞는 요금제를 선택하세요\n\n분석은 무료로 시작하고, 글쓰기는 베이직으로.\n베이직은 매월 750토큰으로 AI가 글·이미지를 만들어 발행 대기함까지 보내드립니다. 매일 1편꼴입니다.\n\n카드가 등록돼 있지 않아 자동 결제되지 않습니다. 체험은 2026년 10월 20일까지이며, 이후 무료 플랜으로 돌",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그에 맞는 요금제를 선택하세요",
+        "rect": {
+          "x": 24,
+          "y": 176,
+          "width": 705,
+          "height": 37.34375,
+          "top": 176,
+          "right": 729,
+          "bottom": 213.34375,
+          "left": 24
+        },
+        "font": "32px"
+      },
+      {
+        "text": "AI 글쓰기 토큰은 어떻게 차감되나요?",
+        "rect": {
+          "x": 24,
+          "y": 3305.0546875,
+          "width": 705,
+          "height": 49.59375,
+          "top": 3305.0546875,
+          "right": 729,
+          "bottom": 3354.6484375,
+          "left": 24
+        },
+        "font": "16px"
+      },
+      {
+        "text": "AI가 쓴 글은 어떻게 발행하나요?",
+        "rect": {
+          "x": 24,
+          "y": 3355.6484375,
+          "width": 705,
+          "height": 49.59375,
+          "top": 3355.6484375,
+          "right": 729,
+          "bottom": 3405.2421875,
+          "left": 24
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "pricing-768.png",
+    "ok": true
+  },
+  {
+    "path": "/mcp",
+    "width": 390,
+    "title": "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\n\nAI WRITING\n\n내 블로그 글, 이제\nChatGPT\nClaude\nNAEO\n가 씁니다\n\n두 방법 모두 오늘 0원으로 시작합니다. 발행 후 AI 인용 추적은 어느 쪽이든 똑같이 따라와요.\n\nNAEO가 다 써주기\n7일 무료 체험\n내 AI로 직접 쓰기\n평생 무료\n\n키워드를 고르고 내 경험 한 줄을 적으면 내 블로",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 16,
+          "y": 162.4375,
+          "width": 358,
+          "height": 122.9765625,
+          "top": 162.4375,
+          "right": 374,
+          "bottom": 285.4140625,
+          "left": 16
+        },
+        "font": "33.6px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "mcp-390.png",
+    "ok": true
+  },
+  {
+    "path": "/mcp",
+    "width": 768,
+    "title": "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\n\nAI WRITING\n\n내 블로그 글, 이제\nChatGPT\nClaude\nNAEO\n가 씁니다\n\n두 방법 모두 오늘 0원으로 시작합니다. 발행 후 AI 인용 추적은 어느 쪽이든 똑같이 따라와요.\n\nNAEO가 다 써주기\n7일 무료 체험\n내 AI로 직접 쓰기\n평생 무료\n\n키워드를 고르고 내 경험 한 줄을 적으면 내 블로",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 블로그 글, 이제ChatGPTClaudeNAEO가 씁니다",
+        "rect": {
+          "x": 24,
+          "y": 162.4375,
+          "width": 705,
+          "height": 81.984375,
+          "top": 162.4375,
+          "right": 729,
+          "bottom": 244.421875,
+          "left": 24
+        },
+        "font": "33.6px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "mcp-768.png",
+    "ok": true
+  },
+  {
+    "path": "/ranking",
+    "width": 390,
+    "title": "AI 추천 순위 리더보드 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\n도전! AI인용 랭킹왕\n\n오후 12:12 업데이트\n\n네이버 AI가 내 글을 얼마나 인용하는지, 검색에 잘 노출되는지, 좋은 키워드를 공략하고 있는지, 꾸준히 활동하는지를 종합한 순위입니다\n\n산정 기준 보기\n전체 랭킹\n월간 랭킹\n주간 랭킹\n\n총 15,214명 · 지난 7일간 160명 이 새로 랭킹에 진입했어요\n\n이",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 16,
+          "y": 112,
+          "width": 244.2578125,
+          "height": 37.34375,
+          "top": 112,
+          "right": 260.2578125,
+          "bottom": 149.34375,
+          "left": 16
+        },
+        "font": "32px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 37,
+          "y": 20246.9453125,
+          "width": 316,
+          "height": 24.8359375,
+          "top": 20246.9453125,
+          "right": 353,
+          "bottom": 20271.78125,
+          "left": 37
+        },
+        "font": "18.4px"
+      }
+    ],
+    "assets": 16,
+    "screenshot": "ranking-390.png",
+    "ok": true
+  },
+  {
+    "path": "/ranking",
+    "width": 768,
+    "title": "AI 추천 순위 리더보드 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\n도전! AI인용 랭킹왕\n\n오후 12:12 업데이트\n\n네이버 AI가 내 글을 얼마나 인용하는지, 검색에 잘 노출되는지, 좋은 키워드를 공략하고 있는지, 꾸준히 활동하는지를 종합한 순위입니다\n\n산정 기준 보기\n전체 랭킹\n월간 랭킹\n주간 랭킹\n\n총 15,214명 · 지난 7일간 160명 이 새로 랭킹에 진입했어요\n\n이",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "도전! AI인용 랭킹왕",
+        "rect": {
+          "x": 24,
+          "y": 112.09027099609375,
+          "width": 244.2578125,
+          "height": 37.34375,
+          "top": 112.09027099609375,
+          "right": 268.2578125,
+          "bottom": 149.43402099609375,
+          "left": 24
+        },
+        "font": "32px"
+      },
+      {
+        "text": "내 순위는 지금 어디쯤일까요?",
+        "rect": {
+          "x": 97.5,
+          "y": 15205.27734375,
+          "width": 558,
+          "height": 24.8359375,
+          "top": 15205.27734375,
+          "right": 655.5,
+          "bottom": 15230.11328125,
+          "left": 97.5
+        },
+        "font": "18.4px"
+      }
+    ],
+    "assets": 16,
+    "screenshot": "ranking-768.png",
+    "ok": true
+  },
+  {
+    "path": "/blog",
+    "width": 390,
+    "title": "매거진 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\nAI 답변에 인용되는 글이 되고 있나요?\n\n네이버 AI 검색 시대의 콘텐츠 전략 · 알고리즘 · 실전 사례\n\n이벤트\n자세히 보기 →\n\nNAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지\n\nNAEO를 써본 소감 한 줄이면 선착순 500명 스타벅스 아메리카노. 블로그·릴스·쇼츠 후기",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 답변에 인용되는 글이 되고 있나요?",
+        "rect": {
+          "x": 16,
+          "y": 96,
+          "width": 358,
+          "height": 85,
+          "top": 96,
+          "right": 374,
+          "bottom": 181,
+          "left": 16
+        },
+        "font": "34px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog-390.png",
+    "ok": true
+  },
+  {
+    "path": "/blog",
+    "width": 768,
+    "title": "매거진 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\nAI 답변에 인용되는 글이 되고 있나요?\n\n네이버 AI 검색 시대의 콘텐츠 전략 · 알고리즘 · 실전 사례\n\n이벤트\n자세히 보기 →\n\nNAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지\n\nNAEO를 써본 소감 한 줄이면 선착순 500명 스타벅스 아메리카노. 블로그·릴스·쇼츠 후기",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 답변에 인용되는 글이 되고 있나요?",
+        "rect": {
+          "x": 24,
+          "y": 96,
+          "width": 705,
+          "height": 42.5,
+          "top": 96,
+          "right": 729,
+          "bottom": 138.5,
+          "left": 24
+        },
+        "font": "34px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog-768.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard",
+    "width": 390,
+    "title": "Dashboard | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위·32개 주제마다 1명·신규 등록 10명\n\n참여하기\n\n베이직 체험\n\n·\n\n20회 남음\n\n·\n\nD-7\n\n요금제\n\n일상을 기록하는 나의 블로그\n\n@NAEO 블로거\n\n비즈니스·경제\n\n변경\n마지막 스캔: 10-13 11:05 (1시간",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 추천률 2% · 추천된 글 1건을 확인하세요",
+        "rect": {
+          "x": 16,
+          "y": 356.1953125,
+          "width": 358,
+          "height": 54,
+          "top": 356.1953125,
+          "right": 374,
+          "bottom": 410.1953125,
+          "left": 16
+        },
+        "font": "21.6px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard-390.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard",
+    "width": 768,
+    "title": "Dashboard | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위\n32개 주제마다 1명\n신규 등록 10명\n\n참여하기\n\n베이직 체험\n\n·\n\n20회 남음\n\n·\n\nD-7\n\n요금제\n\n일상을 기록하는 나의 블로그\n\n@NAEO 블로거\n\n비즈니스·경제\n\n변경\n마지막 스캔: 10-13 11:05 (1시간",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 추천률 2% · 추천된 글 1건을 확인하세요",
+        "rect": {
+          "x": 24,
+          "y": 350.1953125,
+          "width": 705,
+          "height": 30.9921875,
+          "top": 350.1953125,
+          "right": 729,
+          "bottom": 381.1875,
+          "left": 24
+        },
+        "font": "24.8px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard-768.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 390,
+    "title": "AI 글쓰기 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위·32개 주제마다 1명·신규 등록 10명\n\n참여하기\nAI 글쓰기\n베타\n잔여 175토큰\n\n키워드를 고르고 사진을 올리면, 내 블로그의 말투와 데이터로 완성된 글이 발행 대기함에 도착해요.\n\n무료 체험 중 · 7일 남음 (2026",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 17,
+          "y": 1209.2578125,
+          "width": 356,
+          "height": 48,
+          "top": 1209.2578125,
+          "right": 373,
+          "bottom": 1257.2578125,
+          "left": 17
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard--write-390.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/write",
+    "width": 768,
+    "title": "AI 글쓰기 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위\n32개 주제마다 1명\n신규 등록 10명\n\n참여하기\nAI 글쓰기\n베타\n잔여 175토큰\n\n키워드를 고르고 사진을 올리면, 내 블로그의 말투와 데이터로 완성된 글이 발행 대기함에 도착해요.\n\n무료 체험 중 · 7일 남음 (2026",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "세부 옵션요청사항 · 제목",
+        "rect": {
+          "x": 25,
+          "y": 1121.9140625,
+          "width": 703,
+          "height": 48,
+          "top": 1121.9140625,
+          "right": 728,
+          "bottom": 1169.9140625,
+          "left": 25
+        },
+        "font": "16px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "dashboard--write-768.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 390,
+    "title": "설정 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위·32개 주제마다 1명·신규 등록 10명\n\n참여하기\n대시보드로 돌아가기\n설정\n\n계정 및 블로그 설정을 관리합니다.\n\n프로필 정보\n\n대시보드에 표시될 닉네임을 설정합니다.\n\n​\n변경 저장\n이벤트 등록 (연락처)\n\n이벤트·랭킹 리",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--settings-390.png",
+    "ok": true
+  },
+  {
+    "path": "/dashboard/settings",
+    "width": 768,
+    "title": "설정 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?\n\n매주 월요일 발표\n\n주간 랭킹 1~5위\n32개 주제마다 1명\n신규 등록 10명\n\n참여하기\n대시보드로 돌아가기\n설정\n\n계정 및 블로그 설정을 관리합니다.\n\n프로필 정보\n\n대시보드에 표시될 닉네임을 설정합니다.\n\n​\n변경 저장\n이벤트 등록 (연락처)\n\n이벤트·랭킹 리",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 1,
+    "screenshot": "dashboard--settings-768.png",
+    "ok": true
+  },
+  {
+    "path": "/contact",
+    "width": 390,
+    "title": "문의하기 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\n문의하기\n\nNAEO 서비스 이용, 기업 도입, 파트너십 등 어떤 문의든 환영합니다.\n\n이메일 문의\nask@naeo.kr\n\n서비스 이용, 기술 문의, 기업/B2B 도입 문의\n\n상담 가능 시간\n평일 10:00 ~ 18:00\n\n주말·공휴일 제외, 이메일은 24시간 접수 가능\n\n문의 유형\n기타\n문의 유형\n회신받을 이메일",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "contact-390.png",
+    "ok": true
+  },
+  {
+    "path": "/contact",
+    "width": 768,
+    "title": "문의하기 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\n문의하기\n\nNAEO 서비스 이용, 기업 도입, 파트너십 등 어떤 문의든 환영합니다.\n\n이메일 문의\nask@naeo.kr\n\n서비스 이용, 기술 문의, 기업/B2B 도입 문의\n\n상담 가능 시간\n평일 10:00 ~ 18:00\n\n주말·공휴일 제외, 이메일은 24시간 접수 가능\n\n문의 유형\n기타\n문의 유형\n회신받을 이메일",
+    "brokenImages": [],
+    "heading": [],
+    "assets": 0,
+    "screenshot": "contact-768.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/event/naeo-review-event",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "🎉 NAEO 사용 후기 이벤트",
+        "rect": {
+          "x": 353,
+          "y": 2563.78125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2563.78125,
+          "right": 1128,
+          "bottom": 2609.09375,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "🏆 경품 및 혜택",
+        "rect": {
+          "x": 353,
+          "y": 2681.890625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2681.890625,
+          "right": 1128,
+          "bottom": 2727.203125,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 4,
+    "screenshot": "blog--event--naeo-review-event-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/ai-picks-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "AI 인용 현황 사용법, 카테고리별 인용률 정확히 읽기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 인용 현황 사용법, 카테고리별 인용률 정확히 읽기",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "AI 인용 현황이란?",
+        "rect": {
+          "x": 353,
+          "y": 1261.5234375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1261.5234375,
+          "right": 1128,
+          "bottom": 1306.8359375,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1. 두 가지 지표를 같은 행에서 비교",
+        "rect": {
+          "x": 353,
+          "y": 1927.1015625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1927.1015625,
+          "right": 1128,
+          "bottom": 1972.4140625,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog--guide--ai-picks-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/channel-analysis-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "채널 분석 사용법, 키워드별 채널 전략 세우기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "채널 분석 사용법, 키워드별 채널 전략 세우기",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "채널 분석이란?",
+        "rect": {
+          "x": 353,
+          "y": 1235.9296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1235.9296875,
+          "right": 1128,
+          "bottom": 1281.2421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "테이블 읽는 법",
+        "rect": {
+          "x": 353,
+          "y": 1452.6328125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1452.6328125,
+          "right": 1128,
+          "bottom": 1497.9453125,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 4,
+    "screenshot": "blog--guide--channel-analysis-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/competitor-analysis-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "경쟁 콘텐츠 사용법, 누가 1등이고, AI는 누구를 추천하는지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "경쟁 콘텐츠 사용법, 누가 1등이고, AI는 누구를 추천하는지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "경쟁 콘텐츠란?",
+        "rect": {
+          "x": 353,
+          "y": 1189.9453125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1189.9453125,
+          "right": 1128,
+          "bottom": 1235.2578125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "테이블 읽는 법",
+        "rect": {
+          "x": 353,
+          "y": 1406.6484375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1406.6484375,
+          "right": 1128,
+          "bottom": 1451.9609375,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 4,
+    "screenshot": "blog--guide--competitor-analysis-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "NAEO 대시보드 사용법, 처음부터 끝까지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 353,
+          "y": 1261.5234375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1261.5234375,
+          "right": 1128,
+          "bottom": 1306.8359375,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 353,
+          "y": 1433.4296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1433.4296875,
+          "right": 1128,
+          "bottom": 1478.7421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--guide--dashboard-guide-1440.png",
+    "ok": true,
+    "visualNote": "첫 본문 이미지 디코딩 완료 전 촬영된 빈 박스가 있음. 같은 이미지의 390px·768px 캡처는 정상 표시. 데스크톱 이미지 완료 시점 재촬영은 미수행."
+  },
+  {
+    "path": "/blog/guide/golden-keywords-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "황금 키워드란?",
+        "rect": {
+          "x": 353,
+          "y": 905.96875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 905.96875,
+          "right": 1128,
+          "bottom": 951.28125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1. 통계 카드: 한 줄로 현황 보기",
+        "rect": {
+          "x": 353,
+          "y": 1141.859375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1141.859375,
+          "right": 1128,
+          "bottom": 1187.171875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "blog--guide--golden-keywords-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/keyword-recommendation-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "키워드 추천 사용법, 다음에 쓸 글을 1분 만에 정하기 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "키워드 추천 사용법, 다음에 쓸 글을 1분 만에 정하기",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "키워드 추천이란?",
+        "rect": {
+          "x": 353,
+          "y": 1168.7421875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1168.7421875,
+          "right": 1128,
+          "bottom": 1214.0546875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1. 상단 통계 패널: 5개 카드로 한눈에",
+        "rect": {
+          "x": 353,
+          "y": 1849.8125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1849.8125,
+          "right": 1128,
+          "bottom": 1895.125,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog--guide--keyword-recommendation-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/today-action-guide",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "새 대시보드 활용법, 한 화면에서 다음 행동까지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "새 대시보드 활용법, 한 화면에서 다음 행동까지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "새 대시보드, 무엇이 달라졌나요?",
+        "rect": {
+          "x": 353,
+          "y": 1168.7421875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1168.7421875,
+          "right": 1128,
+          "bottom": 1214.0546875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1. 첫인상: KPI 4카드와 부드러운 숫자 트랜지션",
+        "rect": {
+          "x": 353,
+          "y": 1449.4296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1449.4296875,
+          "right": 1128,
+          "bottom": 1494.7421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--guide--today-action-guide-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-cited-posts",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "결론부터: 인용 공식",
+        "rect": {
+          "x": 353,
+          "y": 1381.9140625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1381.9140625,
+          "right": 1128,
+          "bottom": 1427.2265625,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "숫자로 보면 이렇게 다릅니다",
+        "rect": {
+          "x": 353,
+          "y": 1757.6015625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1757.6015625,
+          "right": 1128,
+          "bottom": 1802.9140625,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "blog--marketing--ai-briefing-cited-posts-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-food-playbook",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "맛집은 '본문 인용을 노릴 만한' 주제입니다",
+        "rect": {
+          "x": 353,
+          "y": 1289.1328125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1289.1328125,
+          "right": 1128,
+          "bottom": 1334.4453125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "인용되는 맛집 글 vs 놓치는 맛집 글",
+        "rect": {
+          "x": 353,
+          "y": 1985.421875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1985.421875,
+          "right": 1128,
+          "bottom": 2030.734375,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "blog--marketing--ai-briefing-food-playbook-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-image-citation",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "인용되는 이미지의 3가지 원형",
+        "rect": {
+          "x": 353,
+          "y": 1455.5078125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1455.5078125,
+          "right": 1128,
+          "bottom": 1500.8203125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "원형 A: 표지/카드뉴스 그래픽",
+        "rect": {
+          "x": 353,
+          "y": 1565.6171875,
+          "width": 775,
+          "height": 33.1171875,
+          "top": 1565.6171875,
+          "right": 1128,
+          "bottom": 1598.734375,
+          "left": 353
+        },
+        "font": "18.4px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--marketing--ai-briefing-image-citation-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-tips-1-travel-life",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "국내여행: 여행글은 ‘숫자’가 있어야 뽑힙니다",
+        "rect": {
+          "x": 353,
+          "y": 2033.9296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2033.9296875,
+          "right": 1128,
+          "bottom": 2079.2421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "해외여행: 사진 말고 ‘계산’을 보여주세요",
+        "rect": {
+          "x": 353,
+          "y": 3216.7890625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 3216.7890625,
+          "right": 1128,
+          "bottom": 3262.1015625,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog--marketing--ai-briefing-tips-1-travel-life-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-tips-2-life-culture",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "건강: 진행 순서대로 적으세요",
+        "rect": {
+          "x": 353,
+          "y": 2033.9296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2033.9296875,
+          "right": 1128,
+          "bottom": 2079.2421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "육아: 시기·횟수를 수치로",
+        "rect": {
+          "x": 353,
+          "y": 3079.2109375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 3079.2109375,
+          "right": 1128,
+          "bottom": 3124.5234375,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog--marketing--ai-briefing-tips-2-life-culture-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "예술: 직접 본 해석이 인용됩니다",
+        "rect": {
+          "x": 353,
+          "y": 2033.9296875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2033.9296875,
+          "right": 1128,
+          "bottom": 2079.2421875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "IT·테크: 직접 써본 수치가 뽑힙니다",
+        "rect": {
+          "x": 353,
+          "y": 3005.6171875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 3005.6171875,
+          "right": 1128,
+          "bottom": 3050.9296875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 6,
+    "screenshot": "blog--marketing--ai-briefing-tips-3-knowledge-hobby-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/golden-keywords",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "\"어떤 글을 더 써야 하지?\"의 가장 답답한 부분",
+        "rect": {
+          "x": 353,
+          "y": 905.96875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 905.96875,
+          "right": 1128,
+          "bottom": 951.28125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "황금 키워드란?",
+        "rect": {
+          "x": 353,
+          "y": 1097.671875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1097.671875,
+          "right": 1128,
+          "bottom": 1142.984375,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "blog--marketing--golden-keywords-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/mate-free-diagnosis",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "네이버 메이트, 왜 다들 이야기할까요",
+        "rect": {
+          "x": 353,
+          "y": 923.359375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 923.359375,
+          "right": 1128,
+          "bottom": 968.671875,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "그래서 만들었습니다: 30초 무료 진단",
+        "rect": {
+          "x": 353,
+          "y": 1254.25,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1254.25,
+          "right": 1128,
+          "bottom": 1299.5625,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--marketing--mate-free-diagnosis-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/marketing/what-is-ai-briefing",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "AI 브리핑이란? 블로거가 알아야 할 모든 것 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "AI 브리핑이란? 블로거가 알아야 할 모든 것",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 46.796875,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 285.5546875,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "AI 브리핑이 뭔가요?",
+        "rect": {
+          "x": 353,
+          "y": 1143.1484375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1143.1484375,
+          "right": 1128,
+          "bottom": 1188.4609375,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "왜 블로거에게 중요한가요?",
+        "rect": {
+          "x": 353,
+          "y": 1290.0546875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1290.0546875,
+          "right": 1128,
+          "bottom": 1335.3671875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 2,
+    "screenshot": "blog--marketing--what-is-ai-briefing-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/news/across-modu-startup-ditoday",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "[디지털 인사이트] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "[디지털 인사이트] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "보도 요약",
+        "rect": {
+          "x": 353,
+          "y": 1892.2265625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1892.2265625,
+          "right": 1128,
+          "bottom": 1937.5390625,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "원문 보기",
+        "rect": {
+          "x": 353,
+          "y": 2186.3203125,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2186.3203125,
+          "right": 1128,
+          "bottom": 2231.6328125,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 3,
+    "screenshot": "blog--news--across-modu-startup-ditoday-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/news/across-modu-startup-mt",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "[머니투데이] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "[머니투데이] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "보도 요약",
+        "rect": {
+          "x": 353,
+          "y": 1783.390625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1783.390625,
+          "right": 1128,
+          "bottom": 1828.703125,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "원문 보기",
+        "rect": {
+          "x": 353,
+          "y": 2077.484375,
+          "width": 775,
+          "height": 45.3125,
+          "top": 2077.484375,
+          "right": 1128,
+          "bottom": 2122.796875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 3,
+    "screenshot": "blog--news--across-modu-startup-mt-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/news/naver-mate-naeo-byline",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "[바이라인네트워크] 네이버 메이트 겨냥한 어크로스 'NAEO'…AI 브리핑 인용 여부 확인 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "NAEO\nAI 글쓰기\n랭킹\n네이버 메이트\n이벤트\n매거진\n요금제\nNAEO 블로거\n대시보드\n마케팅\n여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지\n지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지\n내 ",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "[바이라인네트워크] 네이버 메이트 겨냥한 어크로스 'NAEO'…AI 브리핑 인용 여부 확인",
+        "rect": {
+          "x": 353,
+          "y": 238.7578125,
+          "width": 775,
+          "height": 93.59375,
+          "top": 238.7578125,
+          "right": 1128,
+          "bottom": 332.3515625,
+          "left": 353
+        },
+        "font": "36px"
+      },
+      {
+        "text": "보도 요약",
+        "rect": {
+          "x": 353,
+          "y": 483.5390625,
+          "width": 775,
+          "height": 45.3125,
+          "top": 483.5390625,
+          "right": 1128,
+          "bottom": 528.8515625,
+          "left": 353
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "원문 보기",
+        "rect": {
+          "x": 353,
+          "y": 1052.8046875,
+          "width": 775,
+          "height": 45.3125,
+          "top": 1052.8046875,
+          "right": 1128,
+          "bottom": 1098.1171875,
+          "left": 353
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 1,
+    "screenshot": "blog--news--naver-mate-naeo-byline-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/social/aeo-carousel",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "검색은 끝났다, 인스타 캐러셀 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "#INTRO\n01 / 10\n블로거가 알아야 할 5가지\n검색은 끝났다,\n이제 AI가 답한다\n\n네이버 블로그 유입 구조가\n통째로 바뀌고 있습니다\n\nN\n@naeo.kr\n넘겨서 보기 →\n←\n→\n01 / 10\n1080 × 1440 · ← → 이동",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "검색은 끝났다,\n이제 AI가 답한다",
+        "rect": {
+          "x": 515.4027709960938,
+          "y": 358.0146789550781,
+          "width": 359.91644287109375,
+          "height": 121.13705444335938,
+          "top": 358.0146789550781,
+          "right": 875.3192138671875,
+          "bottom": 479.1517333984375,
+          "left": 515.4027709960938
+        },
+        "font": "124px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "social--aeo-carousel-1440.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 390,
+    "videoSlideVisible": true,
+    "title": "NAEO 대시보드 사용법, 처음부터 끝까지 | NAEO",
+    "scrollWidth": 390,
+    "viewportWidth": 390,
+    "bodyText": "NAEO\n블로그\n사용 가이드\nNAEO 대시보드 사용법, 처음부터 끝까지\n사용 가이드\n2026년 3월 30일\n· 13 min read\nNAEO 대시보드 사용법, 처음부터 끝까지\n\n회원가입부터 블로그 연동, AI 추천 분석, 차트 해석, 설정까지. NAEO 대시보드를 200% 활용하는 방법을 단계별로 안내합니다.\n\n📢 20",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 33,
+          "y": 220.515625,
+          "width": 324,
+          "height": 72.796875,
+          "top": 220.515625,
+          "right": 357,
+          "bottom": 293.3125,
+          "left": 33
+        },
+        "font": "28px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 33,
+          "y": 1014.078125,
+          "width": 324,
+          "height": 39.5625,
+          "top": 1014.078125,
+          "right": 357,
+          "bottom": 1053.640625,
+          "left": 33
+        },
+        "font": "19.2px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 33,
+          "y": 1259.4375,
+          "width": 324,
+          "height": 39.5625,
+          "top": 1259.4375,
+          "right": 357,
+          "bottom": 1299,
+          "left": 33
+        },
+        "font": "19.2px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--guide--dashboard-guide-390.png",
+    "ok": true
+  },
+  {
+    "path": "/blog/guide/dashboard-guide",
+    "width": 768,
+    "videoSlideVisible": true,
+    "title": "NAEO 대시보드 사용법, 처음부터 끝까지 | NAEO",
+    "scrollWidth": 753,
+    "viewportWidth": 768,
+    "bodyText": "NAEO\n블로그\n사용 가이드\nNAEO 대시보드 사용법, 처음부터 끝까지\n사용 가이드\n2026년 3월 30일\n· 13 min read\nNAEO 대시보드 사용법, 처음부터 끝까지\n\n회원가입부터 블로그 연동, AI 추천 분석, 차트 해석, 설정까지. NAEO 대시보드를 200% 활용하는 방법을 단계별로 안내합니다.\n\n📢 20",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "NAEO 대시보드 사용법, 처음부터 끝까지",
+        "rect": {
+          "x": 49,
+          "y": 206.7578125,
+          "width": 655,
+          "height": 36.3984375,
+          "top": 206.7578125,
+          "right": 704,
+          "bottom": 243.15625,
+          "left": 49
+        },
+        "font": "28px"
+      },
+      {
+        "text": "시작하기 전에",
+        "rect": {
+          "x": 49,
+          "y": 1202.921875,
+          "width": 655,
+          "height": 45.3125,
+          "top": 1202.921875,
+          "right": 704,
+          "bottom": 1248.234375,
+          "left": 49
+        },
+        "font": "22.4px"
+      },
+      {
+        "text": "1단계: 회원가입 및 로그인",
+        "rect": {
+          "x": 49,
+          "y": 1403.625,
+          "width": 655,
+          "height": 45.3125,
+          "top": 1403.625,
+          "right": 704,
+          "bottom": 1448.9375,
+          "left": 49
+        },
+        "font": "22.4px"
+      }
+    ],
+    "assets": 5,
+    "screenshot": "blog--guide--dashboard-guide-768.png",
+    "ok": true
+  },
+  {
+    "path": "/youtube/aeo-intro",
+    "width": 1440,
+    "videoSlideVisible": true,
+    "title": "검색은 끝났다, 이제 AI가 답한다 | NAEO",
+    "scrollWidth": 1425,
+    "viewportWidth": 1440,
+    "bodyText": "N\nNAEO\n블로그 운영자를 위한 5가지\n검색은 끝났다,\n이제 AI가 답한다\n\n네이버 유입 구조가 통째로 바뀌고 있습니다\n\n01 / 23\n·\n0:00 / 9:40\n·\n▶ AUTO\nSPACE 일시정지 · ← → 이전/다음 · H HUD 토글",
+    "brokenImages": [],
+    "heading": [
+      {
+        "text": "검색은 끝났다,\n이제 AI가 답한다",
+        "rect": {
+          "x": 418.359375,
+          "y": 432.4921875,
+          "width": 588.28125,
+          "height": 204.28125,
+          "top": 432.4921875,
+          "right": 1006.640625,
+          "bottom": 636.7734375,
+          "left": 418.359375
+        },
+        "font": "91.2px"
+      }
+    ],
+    "assets": 0,
+    "screenshot": "youtube--aeo-intro-1440.png",
+    "ok": true
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+    "name": "AI 글쓰기 → 저장",
+    "ok": true,
+    "result": {
+      "keyword": "고용산재 토탈서비스",
+      "button": "글 생성하기 (19토큰)",
+      "savedTitle": "고용산재 토탈서비스, 알아두면 좋은 핵심 정리"
+    }
+  },
+  {
+    "name": "매거진 분류·검색",
+    "ok": true,
+    "result": {
+      "selected": [
+        "마케팅 (1)"
+      ],
+      "visibleArticles": [
+        "마케팅2026년 6월 24일 · 6 min read내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요내 주제 전체에서 아직 안 쓴·경쟁 낮은·검색량 적정대 "
+      ]
+    }
+  },
+  {
+    "name": "업데이트 상세23개·필터",
+    "ok": true,
+    "result": {
+      "first": {
+        "expanded": "true",
+        "height": 886.203125
+      },
+      "bugfixRows": 0
+    }
+  },
+  {
+    "name": "AI 인용현황 필터",
+    "ok": true,
+    "result": {
+      "visibleRows": 1
+    }
+  },
+  {
+    "name": "추천 키워드 체크 동기화",
+    "ok": true,
+    "result": {
+      "checked": [
+        false,
+        false
+      ]
+    }
+  },
+  {
+    "name": "랭킹 맛집·메이트 필터",
+    "ok": true,
+    "result": {
+      "status": [
+        "맛집 · 네이버 메이트 · 저장된 200명 중 6명"
+      ],
+      "rows": 7
+    }
+  },
+  {
+    "name": "MCP ChatGPT/Claude 전환",
+    "ok": true,
+    "result": {
+      "claude": true
+    }
+  },
+  {
+    "name": "홈 제목·공식 기준 캐러셀",
+    "ok": true,
+    "result": {
+      "hero": true,
+      "secondCard": true
+    }
+  },
+  {
+    "name": "설정 닉네임 저장·재접속",
+    "ok": true,
+    "result": {
+      "persisted": true,
+      "restored": true
+    }
+  },
+  {
+    "name": "문의 폼 로컬 저장",
+    "ok": true,
+    "result": {
+      "localEntries": 2
+    }
+  },
+  {
+    "name": "390px 모바일 메뉴",
+    "ok": true,
+    "result": {
+      "links": 6
+    }
+  },
+  {
+    "name": "영상 첫 장면·일시정지·HUD·다음 장면",
+    "ok": true,
+    "result": {
+      "firstSlideVisible": true,
+      "pauseLabel": true,
+      "hudToggle": true,
+      "advanced": true
+    }
+  },
+  {
+    "name": "블로그 주소 입력 → 예시 진단",
+    "ok": true,
+    "result": {
+      "report": true,
+      "criteria": 5
+    }
+  },
+  {
+    "name": "매거진 상세 이미지·목차",
+    "ok": true,
+    "result": {
+      "toc": 6,
+      "image": "/assets/4816aafefcc1abe1.webp",
+      "skeletons": 0
+    }
+  }
+]

@@ -80,9 +80,20 @@ function safeUrl(value: string, attribute: string): string | undefined {
 function imageUnavailable(event: SyntheticEvent<HTMLImageElement>) {
   const element = event.currentTarget;
   element.dataset.assetUnavailable = 'true';
+  element.classList.add('loaded');
+  element.closest('.mdx-img-skeleton')?.classList.add('loaded');
   element.title = element.alt || '이미지를 불러올 수 없습니다';
   // Retain the captured box and show the real alt text, including missing intrinsic-size assets.
   if (element.getBoundingClientRect().height < 24) element.style.minHeight = '48px';
+}
+
+function imageLoaded(event: SyntheticEvent<HTMLImageElement>) {
+  const element = event.currentTarget;
+  const wrapper = element.closest('.mdx-img-skeleton');
+  if (wrapper) {
+    element.classList.add('loaded');
+    wrapper.classList.add('loaded');
+  }
 }
 
 function renderNode(node: CapturedNode, key: string): ReactNode {
@@ -110,7 +121,7 @@ function renderNode(node: CapturedNode, key: string): ReactNode {
     if (name === 'value' && ['input', 'textarea', 'select'].includes(tag)) name = 'defaultValue';
     props[name] = value;
   }
-  if (tag === 'img') props.onError = imageUnavailable;
+  if (tag === 'img') { props.onError = imageUnavailable; props.onLoad = imageLoaded; }
   if (tag === 'a' && props.target === '_blank') props.rel = 'noopener noreferrer';
   if (tag === 'button' && !props.type) props.type = 'button';
   if (tag === 'textarea') {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { DEFAULT_PROFILE, writeStore } from '@/lib/demo-store';
 
@@ -20,6 +20,8 @@ const navigation = [
 ];
 
 export default function SharedDialogs({ dialog, menuOpen, toast, onClose, onNavigate, onAuth }: SharedDialogsProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const container = useRef<HTMLDivElement>(null);
   const open = !!dialog || menuOpen;
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function SharedDialogs({ dialog, menuOpen, toast, onClose, onNavi
     };
   }, [open, onClose]);
 
-  if (typeof document === 'undefined') return null;
+  if (!mounted) return null;
   return createPortal(<div className="naeo-shared-overlays">
     {open && <div className={`naeo-overlay ${menuOpen ? 'naeo-menu-overlay' : ''}`} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
       <div ref={container} role="dialog" aria-modal="true" aria-labelledby="naeo-shared-dialog-title" className={menuOpen ? 'naeo-mobile-menu' : 'naeo-shared-dialog'}>

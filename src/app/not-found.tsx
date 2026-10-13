@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <main className="naeo-empty" style={{minHeight:'100vh',display:'grid',placeContent:'center',gap:20,textAlign:'center'}}><Link href="/" style={{color:'#03c75a',fontSize:26,fontWeight:900}}>NAEO</Link><h1 style={{fontSize:28}}>페이지를 찾을 수 없습니다</h1><p>주소를 확인하거나 홈으로 돌아가 주세요.</p><Link className="naeo-button" href="/">홈으로 돌아가기</Link></main>}

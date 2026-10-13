@@ -8,8 +8,10 @@ const width=typeof captureWidth==='undefined'?1440:captureWidth;
 await page.cdp('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width<600});
 for(const route of routes){
  const slug=(route==='/'?'home':route.slice(1).replaceAll('/','--'))+`-${width}`;
- await page.goto('https://www.naeo.kr'+route);
+ await page.goto('https://www.naeo.kr'+route,{waitUntil:'domcontentloaded',timeout:20000});
  await page.waitForFunction(()=>document.body.innerText.length>80&&!document.querySelector('[aria-label="대시보드 로딩 중"]'),undefined,{timeout:12000}).catch(()=>{});
+ if(route==='/')await page.waitForFunction(()=>!!document.querySelector('#landing-v2-main'),undefined,{timeout:45000}).catch(()=>{});
+ if(route==='/dashboard/recommendations')await page.waitForFunction(()=>!!document.querySelector('table'),undefined,{timeout:30000}).catch(()=>{});
  const data=await page.evaluate(()=>{
   const clone=document.body.cloneNode(true);
   clone.querySelectorAll('script,iframe,noscript,next-route-announcer').forEach(e=>e.remove());

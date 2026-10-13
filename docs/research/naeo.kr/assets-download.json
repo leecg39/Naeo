@@ -36,16 +36,16 @@
     "bytes": 6964
   },
   {
-    "url": "https://www.naeo.kr/landing/thennow/window.webp",
-    "local": "/assets/0db9116fb98a0142.webp",
-    "ok": true,
-    "bytes": 9328
-  },
-  {
     "url": "https://www.naeo.kr/landing/profiles/desk.webp",
     "local": "/assets/8ad0322c864304a5.webp",
     "ok": true,
     "bytes": 5470
+  },
+  {
+    "url": "https://www.naeo.kr/landing/thennow/window.webp",
+    "local": "/assets/0db9116fb98a0142.webp",
+    "ok": true,
+    "bytes": 9328
   },
   {
     "url": "https://www.naeo.kr/landing/profiles/flower.webp",
@@ -54,22 +54,28 @@
     "bytes": 5594
   },
   {
-    "url": "https://www.naeo.kr/landing/profiles/book.webp",
-    "local": "/assets/ae917ee6acc76e0e.webp",
-    "ok": true,
-    "bytes": 6026
-  },
-  {
     "url": "https://www.naeo.kr/landing/profiles/keyboard.webp",
     "local": "/assets/8c7290653bc354df.webp",
     "ok": true,
     "bytes": 4858
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1540000000000",
-    "local": "/assets/9dbb98fdf0aaf429.webp",
+    "url": "https://www.naeo.kr/mate/examples/biz.jpg",
+    "local": "/assets/0a7a6dde3c45252b.jpg",
     "ok": true,
-    "bytes": 99058
+    "bytes": 41027
+  },
+  {
+    "url": "https://www.naeo.kr/landing/profiles/book.webp",
+    "local": "/assets/ae917ee6acc76e0e.webp",
+    "ok": true,
+    "bytes": 6026
+  },
+  {
+    "url": "https://i.ytimg.com/vi/JkFo4oX-PQE/hqdefault.jpg",
+    "local": "/assets/7f8cbc33b828b525.jpg",
+    "ok": true,
+    "bytes": 22204
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-1-main.webp?v=1540000000000",
@@ -84,40 +90,10 @@
     "bytes": 99058
   },
   {
-    "url": "https://www.naeo.kr/mate/examples/biz.jpg",
-    "local": "/assets/0a7a6dde3c45252b.jpg",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1540000000000",
+    "local": "/assets/9dbb98fdf0aaf429.webp",
     "ok": true,
-    "bytes": 41027
-  },
-  {
-    "url": "https://i.ytimg.com/vi/JkFo4oX-PQE/hqdefault.jpg",
-    "local": "/assets/7f8cbc33b828b525.jpg",
-    "ok": true,
-    "bytes": 22204
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000",
-    "local": "/assets/a5dcf36fec307ebf.webp",
-    "ok": true,
-    "bytes": 52094
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1540000000000",
-    "local": "/assets/d7490519774e4fff.webp",
-    "ok": true,
-    "bytes": 49442
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000",
-    "local": "/assets/62bb40fa60703290.webp",
-    "ok": true,
-    "bytes": 77118
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/thumbnail.webp?v=1540000000000",
-    "local": "/assets/4042e5218fd5fd91.webp",
-    "ok": true,
-    "bytes": 51046
+    "bytes": 99058
   },
   {
     "url": "https://www.naeo.kr/blog-default-thumb.webp",
@@ -126,10 +102,34 @@
     "bytes": 4734
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000",
+    "local": "/assets/a5dcf36fec307ebf.webp",
+    "ok": true,
+    "bytes": 52094
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000",
+    "local": "/assets/62bb40fa60703290.webp",
+    "ok": true,
+    "bytes": 77118
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1540000000000",
+    "local": "/assets/d7490519774e4fff.webp",
+    "ok": true,
+    "bytes": 49442
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/thumbnail.webp?v=1540000000000",
     "local": "/assets/c0a1b134214fc178.webp",
     "ok": true,
     "bytes": 71100
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/thumbnail.webp?v=1540000000000",
+    "local": "/assets/4042e5218fd5fd91.webp",
+    "ok": true,
+    "bytes": 51046
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/thumbnail.webp?v=1540000000000",
@@ -138,16 +138,16 @@
     "bytes": 85412
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1540000000000",
-    "local": "/assets/b4e773cba9a4d724.webp",
-    "ok": true,
-    "bytes": 24304
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-food-playbook/thumbnail.webp?v=1540000000000",
     "local": "/assets/dbbece974a874dd2.webp",
     "ok": true,
     "bytes": 45040
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1540000000000",
+    "local": "/assets/b4e773cba9a4d724.webp",
+    "ok": true,
+    "bytes": 24304
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-cited-posts/thumbnail.webp?v=1540000000000",
@@ -162,10 +162,10 @@
     "bytes": 56602
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/thumbnail.webp?v=1540000000000",
-    "local": "/assets/219002fd6c502afe.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/11c1e04df8593739.webp",
     "ok": true,
-    "bytes": 50856
+    "bytes": 54808
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/thumbnail.webp?v=1540000000000",
@@ -174,22 +174,22 @@
     "bytes": 53118
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000",
-    "local": "/assets/11c1e04df8593739.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/219002fd6c502afe.webp",
     "ok": true,
-    "bytes": 54808
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/thumbnail.webp?v=1540000000000",
-    "local": "/assets/b6e78012e9c9e32c.webp",
-    "ok": true,
-    "bytes": 57592
+    "bytes": 50856
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/thumbnail.webp?v=1540000000000",
     "local": "/assets/7157d754419b01ee.webp",
     "ok": true,
     "bytes": 46834
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/thumbnail.webp?v=1540000000000",
+    "local": "/assets/b6e78012e9c9e32c.webp",
+    "ok": true,
+    "bytes": 57592
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/what-is-ai-briefing/thumbnail.webp?v=1540000000000",
@@ -204,16 +204,16 @@
     "bytes": 84084
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-2-overview.webp?v=1540000000000&w=3044&h=2204",
-    "local": "/assets/14f419eab22eb003.webp",
-    "ok": true,
-    "bytes": 98836
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-4-awards.webp?v=1540000000000&w=3044&h=2204",
     "local": "/assets/c98b4a437f3e1cca.webp",
     "ok": true,
     "bytes": 103410
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/event/naeo-review-event/poster-2-overview.webp?v=1540000000000&w=3044&h=2204",
+    "local": "/assets/14f419eab22eb003.webp",
+    "ok": true,
+    "bytes": 98836
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
@@ -246,6 +246,18 @@
     "bytes": 18420
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-keywords.webp?v=1540000000000&w=1540&h=1546",
+    "local": "/assets/d627b5a37a3076c0.webp",
+    "ok": true,
+    "bytes": 100558
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-briefing.webp?v=1540000000000&w=1472&h=394",
+    "local": "/assets/948106cc8d20179c.webp",
+    "ok": true,
+    "bytes": 34888
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-image-sources.webp?v=1540000000000&w=1464&h=580",
     "local": "/assets/1f5509daffc620ba.webp",
     "ok": true,
@@ -256,18 +268,6 @@
     "local": "/assets/cce1c1cb8a21d1f5.webp",
     "ok": true,
     "bytes": 40714
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-briefing.webp?v=1540000000000&w=1472&h=394",
-    "local": "/assets/948106cc8d20179c.webp",
-    "ok": true,
-    "bytes": 34888
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/ai-picks-guide/naeo-ai-picks-modal-keywords.webp?v=1540000000000&w=1540&h=1546",
-    "local": "/assets/d627b5a37a3076c0.webp",
-    "ok": true,
-    "bytes": 100558
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
@@ -282,22 +282,16 @@
     "bytes": 150526
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/3.webp?v=1540000000000&w=2750&h=678",
-    "local": "/assets/dee6c92096ea832c.webp",
-    "ok": true,
-    "bytes": 63894
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/2.webp?v=1540000000000&w=2746&h=538",
     "local": "/assets/d5625ac9824aeba0.webp",
     "ok": true,
     "bytes": 53234
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/2.webp?v=1540000000000&w=2768&h=178",
-    "local": "/assets/8bd6b67525acd6a3.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/channel-analysis-guide/3.webp?v=1540000000000&w=2750&h=678",
+    "local": "/assets/dee6c92096ea832c.webp",
     "ok": true,
-    "bytes": 28236
+    "bytes": 63894
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
@@ -312,10 +306,22 @@
     "bytes": 211350
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/2.webp?v=1540000000000&w=2768&h=178",
+    "local": "/assets/8bd6b67525acd6a3.webp",
+    "ok": true,
+    "bytes": 28236
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/competitor-analysis-guide/3.webp?v=1540000000000&w=2756&h=568",
     "local": "/assets/907ce89c87a96dda.webp",
     "ok": true,
     "bytes": 94034
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/73f9c7a5d3f7ce21.webp",
+    "ok": true,
+    "bytes": 46834
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/1.webp?v=1540000000000&w=3418&h=1660",
@@ -330,10 +336,10 @@
     "bytes": 24402
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
-    "local": "/assets/73f9c7a5d3f7ce21.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/4.webp?v=1540000000000&w=2732&h=922",
+    "local": "/assets/fa79f1b9c053e249.webp",
     "ok": true,
-    "bytes": 46834
+    "bytes": 22800
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/3.webp?v=1540000000000&w=2656&h=684",
@@ -342,16 +348,10 @@
     "bytes": 29334
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-1.webp",
-    "local": "/assets/9a111562357e9b20.webp",
-    "ok": false,
-    "error": "Error: HTTP 404"
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/4.webp?v=1540000000000&w=2732&h=922",
-    "local": "/assets/fa79f1b9c053e249.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/5.webp?v=1540000000000&w=2356&h=1378",
+    "local": "/assets/5d7e80389493bdac.webp",
     "ok": true,
-    "bytes": 22800
+    "bytes": 86254
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-2.webp",
@@ -372,28 +372,22 @@
     "error": "Error: HTTP 404"
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/7-2.webp",
-    "local": "/assets/1c06b7834e30e02d.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/6-1.webp",
+    "local": "/assets/9a111562357e9b20.webp",
     "ok": false,
     "error": "Error: HTTP 404"
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/5.webp?v=1540000000000&w=2356&h=1378",
-    "local": "/assets/5d7e80389493bdac.webp",
-    "ok": true,
-    "bytes": 86254
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
-    "local": "/assets/c54c9bb3442dd991.webp",
-    "ok": true,
-    "bytes": 54808
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/golden-keywords-guide/golden-section.webp?v=1540000000000&w=2792&h=1572",
     "local": "/assets/46e3332b681b5f7c.webp",
     "ok": true,
     "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/c54c9bb3442dd991.webp",
+    "ok": true,
+    "bytes": 54808
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/keyword-recommendation-guide/naeo-keyword-recommendation-overview.webp?v=1540000000000&w=2750&h=1588",
@@ -444,16 +438,16 @@
     "bytes": 96326
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-related-keyword-chips.webp?v=1540000000000&w=1768&h=436",
-    "local": "/assets/dbe4cbe6a5568164.webp",
-    "ok": true,
-    "bytes": 39176
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-today-task-panel.webp?v=1540000000000&w=2744&h=1252",
     "local": "/assets/187f87f536deefcd.webp",
     "ok": true,
     "bytes": 104028
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-related-keyword-chips.webp?v=1540000000000&w=1768&h=436",
+    "local": "/assets/dbe4cbe6a5568164.webp",
+    "ok": true,
+    "bytes": 39176
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/guide/today-action-guide/naeo-cited-post-card.webp?v=1540000000000&w=1400&h=572",
@@ -468,16 +462,16 @@
     "bytes": 63306
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-food-playbook/thumbnail.webp?v=1540000000000&w=2400&h=2400",
-    "local": "/assets/0b5874bfecd37b01.webp",
-    "ok": true,
-    "bytes": 45040
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-cited-posts/thumbnail.webp?v=1540000000000&w=2400&h=2400",
     "local": "/assets/c3128e8751a8182f.webp",
     "ok": true,
     "bytes": 48538
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-food-playbook/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/0b5874bfecd37b01.webp",
+    "ok": true,
+    "bytes": 45040
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/thumbnail.webp?v=1540000000000&w=2400&h=2400",
@@ -498,22 +492,16 @@
     "bytes": 268762
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/d84c2d6be0629458.webp",
-    "ok": true,
-    "bytes": 77118
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-image-citation/archetype-c.webp?v=1540000000000&w=2048&h=2048",
     "local": "/assets/d8cf7c2ced7f073e.webp",
     "ok": true,
     "bytes": 98362
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/02-overseas-travel.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/71203a1988db08ac.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/thumbnail.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/d84c2d6be0629458.webp",
     "ok": true,
-    "bytes": 216906
+    "bytes": 77118
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/01-domestic-travel.webp?v=1540000000000&w=1080&h=1447",
@@ -522,16 +510,22 @@
     "bytes": 137530
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/04-recipe.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/6f86d40318e7c930.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/02-overseas-travel.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/71203a1988db08ac.webp",
     "ok": true,
-    "bytes": 132262
+    "bytes": 216906
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/03-food.webp?v=1540000000000&w=1080&h=1447",
     "local": "/assets/6e2224be347ad20e.webp",
     "ok": true,
     "bytes": 157504
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/04-recipe.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/6f86d40318e7c930.webp",
+    "ok": true,
+    "bytes": 132262
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/05-fashion.webp?v=1540000000000&w=1080&h=1447",
@@ -546,16 +540,22 @@
     "bytes": 118444
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/07-living.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/fe940b693fa4f232.webp",
+    "ok": true,
+    "bytes": 140376
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/08-pet.webp?v=1540000000000&w=1080&h=1447",
     "local": "/assets/cdf76e69b662d0d2.webp",
     "ok": true,
     "bytes": 111058
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-1-travel-life/07-living.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/fe940b693fa4f232.webp",
+    "url": "https://www.naeo.kr/mate/score-card-sample.webp",
+    "local": "/assets/1a6cbb195f69b507.webp",
     "ok": true,
-    "bytes": 140376
+    "bytes": 10714
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/thumbnail.webp?v=1540000000000&w=1080&h=1447",
@@ -594,6 +594,12 @@
     "bytes": 242996
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/08-exhibition.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/57b24b467eb84a58.webp",
+    "ok": true,
+    "bytes": 119450
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/09-music.webp?v=1540000000000&w=1080&h=1447",
     "local": "/assets/28650dad6685afbf.webp",
     "ok": true,
@@ -604,12 +610,6 @@
     "local": "/assets/b01f0814e0b3879e.webp",
     "ok": true,
     "bytes": 109938
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-2-life-culture/08-exhibition.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/57b24b467eb84a58.webp",
-    "ok": true,
-    "bytes": 119450
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/thumbnail.webp?v=1540000000000&w=1080&h=1447",
@@ -624,6 +624,12 @@
     "bytes": 129542
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/04-it-tech.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/b174481f000d7cab.webp",
+    "ok": true,
+    "bytes": 103424
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/05-car.webp?v=1540000000000&w=1080&h=1447",
     "local": "/assets/7339e34b951f7570.webp",
     "ok": true,
@@ -636,10 +642,10 @@
     "bytes": 127696
   },
   {
-    "url": "https://www.naeo.kr/mate/score-card-sample.webp",
-    "local": "/assets/1a6cbb195f69b507.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/07-economy.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/ed6befec22db990f.webp",
     "ok": true,
-    "bytes": 10714
+    "bytes": 117454
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/08-society.webp?v=1540000000000&w=1080&h=1447",
@@ -648,16 +654,10 @@
     "bytes": 107180
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/04-it-tech.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/b174481f000d7cab.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/09-sports.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/9df68d09ccbeb915.webp",
     "ok": true,
-    "bytes": 103424
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/07-economy.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/ed6befec22db990f.webp",
-    "ok": true,
-    "bytes": 117454
+    "bytes": 135564
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/10-game.webp?v=1540000000000&w=1080&h=1447",
@@ -666,10 +666,10 @@
     "bytes": 127816
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/09-sports.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/9df68d09ccbeb915.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/11-hobby.webp?v=1540000000000&w=1080&h=1447",
+    "local": "/assets/9d520c313fc2faa5.webp",
     "ok": true,
-    "bytes": 135564
+    "bytes": 131510
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1540000000000&w=2792&h=1572",
@@ -678,28 +678,16 @@
     "bytes": 99058
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate2.webp?v=1540000000000&w=1784&h=1354",
-    "local": "/assets/57a28e17b06fbede.webp",
-    "ok": true,
-    "bytes": 71156
-  },
-  {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/11-hobby.webp?v=1540000000000&w=1080&h=1447",
-    "local": "/assets/9d520c313fc2faa5.webp",
-    "ok": true,
-    "bytes": 131510
-  },
-  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1540000000000&w=1200&h=630",
     "local": "/assets/6fbac07888b443b9.webp",
     "ok": true,
     "bytes": 24304
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000&w=2400&h=2400",
-    "local": "/assets/44c9e2129efacdeb.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate2.webp?v=1540000000000&w=1784&h=1354",
+    "local": "/assets/57a28e17b06fbede.webp",
     "ok": true,
-    "bytes": 52094
+    "bytes": 71156
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate3.webp?v=1540000000000&w=1776&h=1350",
@@ -708,16 +696,28 @@
     "bytes": 88662
   },
   {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate1.webp?v=1540000000000&w=3110&h=1670",
+    "local": "/assets/9ef8ac4d2d060afb.webp",
+    "ok": true,
+    "bytes": 32196
+  },
+  {
     "url": "https://www.naeo.kr/api/content-image/blog/marketing/what-is-ai-briefing/thumbnail.webp?v=1540000000000&w=2400&h=2400",
     "local": "/assets/cf8d4c3264e5f2b1.webp",
     "ok": true,
     "bytes": 50346
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate1.webp?v=1540000000000&w=3110&h=1670",
-    "local": "/assets/9ef8ac4d2d060afb.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1540000000000&w=2400&h=2400",
+    "local": "/assets/44c9e2129efacdeb.webp",
     "ok": true,
-    "bytes": 32196
+    "bytes": 52094
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/1.webp?v=1540000000000&w=1366&h=1164",
+    "local": "/assets/678f1fa375f3ffe8.webp",
+    "ok": true,
+    "bytes": 29558
   },
   {
     "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1540000000000&w=2400&h=2400",
@@ -732,12 +732,6 @@
     "bytes": 47622
   },
   {
-    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/1.webp?v=1540000000000&w=1366&h=1164",
-    "local": "/assets/678f1fa375f3ffe8.webp",
-    "ok": true,
-    "bytes": 29558
-  },
-  {
     "url": "https://www.naeo.kr/event/ranking-reward/og-v3.png",
     "local": "/assets/fc2151ea8a854a0d.png",
     "ok": true,
@@ -750,16 +744,34 @@
     "bytes": 237260
   },
   {
+    "url": "https://www.naeo.kr/event/review-2026-09/brand-blog-transparent.png",
+    "local": "/assets/c4aaadb04e1ca9d8.png",
+    "ok": true,
+    "bytes": 517732
+  },
+  {
     "url": "https://www.naeo.kr/event/review-2026-09/prize-tablet-v2.png",
     "local": "/assets/792fe767e9de4054.png",
     "ok": true,
     "bytes": 1020902
   },
   {
-    "url": "https://www.naeo.kr/event/review-2026-09/brand-blog-transparent.png",
-    "local": "/assets/c4aaadb04e1ca9d8.png",
+    "url": "https://www.naeo.kr/event/review-2026-09/prize-coffee-v2.png",
+    "local": "/assets/8fdbbb4c5106f903.png",
     "ok": true,
-    "bytes": 517732
+    "bytes": 1107555
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/prize-earbuds-v2.png",
+    "local": "/assets/48611647ef1f2d47.png",
+    "ok": true,
+    "bytes": 969255
+  },
+  {
+    "url": "https://www.naeo.kr/event/review-2026-09/login-naver.png",
+    "local": "/assets/189373a5941ac49d.png",
+    "ok": true,
+    "bytes": 4892
   },
   {
     "url": "https://www.naeo.kr/event/review-2026-09/login-google.svg?dpl=dpl_9JkUHcfckNptPUSPon7HDkNLtaPA",
@@ -810,28 +822,22 @@
     "bytes": 4026
   },
   {
-    "url": "https://www.naeo.kr/event/review-2026-09/login-naver.png",
-    "local": "/assets/189373a5941ac49d.png",
+    "url": "https://www.naeo.kr/event/review-2026-09/icon-coffee.webp",
+    "local": "/assets/c2edc0b1766ef241.webp",
     "ok": true,
-    "bytes": 4892
-  },
-  {
-    "url": "https://www.naeo.kr/event/review-2026-09/prize-coffee-v2.png",
-    "local": "/assets/8fdbbb4c5106f903.png",
-    "ok": true,
-    "bytes": 1107555
-  },
-  {
-    "url": "https://www.naeo.kr/event/ranking-reward/avatar-baby.webp",
-    "local": "/assets/636322a4c993d052.webp",
-    "ok": true,
-    "bytes": 3588
+    "bytes": 2334
   },
   {
     "url": "https://www.naeo.kr/event/ranking-reward/avatar-popcorn.webp",
     "local": "/assets/392820aacb78d530.webp",
     "ok": true,
     "bytes": 3036
+  },
+  {
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-baby.webp",
+    "local": "/assets/636322a4c993d052.webp",
+    "ok": true,
+    "bytes": 3588
   },
   {
     "url": "https://www.naeo.kr/event/ranking-reward/avatar-book.webp",
@@ -852,10 +858,10 @@
     "bytes": 6284
   },
   {
-    "url": "https://www.naeo.kr/event/review-2026-09/prize-earbuds-v2.png",
-    "local": "/assets/48611647ef1f2d47.png",
+    "url": "https://www.naeo.kr/event/ranking-reward/avatar-camera.webp",
+    "local": "/assets/3b29f9461459db08.webp",
     "ok": true,
-    "bytes": 969255
+    "bytes": 5976
   },
   {
     "url": "https://www.naeo.kr/event/ranking-reward/avatar-latte.webp",
@@ -864,22 +870,2290 @@
     "bytes": 5294
   },
   {
-    "url": "https://www.naeo.kr/event/ranking-reward/avatar-camera.webp",
-    "local": "/assets/3b29f9461459db08.webp",
-    "ok": true,
-    "bytes": 5976
-  },
-  {
     "url": "https://www.naeo.kr/event/ranking-reward/avatar-hiking.webp",
     "local": "/assets/e4e62d74d64e656d.webp",
     "ok": true,
     "bytes": 8196
   },
   {
+    "url": "https://www.naeo.kr/guide/write-demo.mp4",
+    "local": "/assets/1c45bef2cd02a3ff.mp4",
+    "ok": true,
+    "bytes": 5799937
+  },
+  {
+    "url": "https://www.naeo.kr/guide/write-demo-poster.jpg",
+    "local": "/assets/7ac5ada108c54c24.jpg",
+    "ok": true,
+    "bytes": 158252
+  },
+  {
     "url": "https://www.naeo.kr/naeo-icon.png",
     "local": "/assets/44e5cf7ab8fce912.png",
     "ok": true,
     "bytes": 3626
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=678be14d-ca5f-43a1-9a93-40e1abe8b992&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=05f0c649-ef5f-48a7-aa8f-e1a3aa20a609&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fauth%2Fextension&tw_engaged_ms=7&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/a8d42af93ba28862.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t1.d69e3515.woff2",
+    "local": "/assets/026f00b29ef8ac06.woff2",
+    "ok": true,
+    "bytes": 461812
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-00.0872551a.woff2",
+    "local": "/assets/a8709430984a5e3f.woff2",
+    "ok": true,
+    "bytes": 80988
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-01.1b9f2827.woff2",
+    "local": "/assets/7630bef9d895652c.woff2",
+    "ok": true,
+    "bytes": 97116
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-02.b96493db.woff2",
+    "local": "/assets/304784bd5744b1a5.woff2",
+    "ok": true,
+    "bytes": 80908
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-03.ad9e436f.woff2",
+    "local": "/assets/55bfe049cfdafafb.woff2",
+    "ok": true,
+    "bytes": 79432
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-04.6c78c595.woff2",
+    "local": "/assets/3ca929f7d252d1e0.woff2",
+    "ok": true,
+    "bytes": 85332
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-05.9ef73d37.woff2",
+    "local": "/assets/b84aa431c4307c66.woff2",
+    "ok": true,
+    "bytes": 85344
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-06.5030da78.woff2",
+    "local": "/assets/a42b990831bcb215.woff2",
+    "ok": true,
+    "bytes": 77848
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-07.ed5e0b6d.woff2",
+    "local": "/assets/b65686345f70f584.woff2",
+    "ok": true,
+    "bytes": 77252
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-08.e620fbb9.woff2",
+    "local": "/assets/6d5579e8b5e34a29.woff2",
+    "ok": true,
+    "bytes": 75068
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-09.b0133a30.woff2",
+    "local": "/assets/c07ca94ee84e1ac7.woff2",
+    "ok": true,
+    "bytes": 84872
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-10.07017e2c.woff2",
+    "local": "/assets/14c9e48f1a067a9c.woff2",
+    "ok": true,
+    "bytes": 93820
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-11.3b2667e0.woff2",
+    "local": "/assets/d801811b6332c1df.woff2",
+    "ok": true,
+    "bytes": 88272
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-12.c61eb7c2.woff2",
+    "local": "/assets/fd0aadea21431c2b.woff2",
+    "ok": true,
+    "bytes": 89264
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-13.cf8a8b69.woff2",
+    "local": "/assets/5ff2c3f14b628243.woff2",
+    "ok": true,
+    "bytes": 88120
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-14.81aa9543.woff2",
+    "local": "/assets/bc57cfc65526fb77.woff2",
+    "ok": true,
+    "bytes": 91164
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-15.3183c074.woff2",
+    "local": "/assets/b2f69db64eb0089b.woff2",
+    "ok": true,
+    "bytes": 85664
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-16.9f133a28.woff2",
+    "local": "/assets/4dd6ef1bd067595e.woff2",
+    "ok": true,
+    "bytes": 89500
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-17.59e5ca9a.woff2",
+    "local": "/assets/734e0f1ee36c3755.woff2",
+    "ok": true,
+    "bytes": 83712
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-18.2cf2a954.woff2",
+    "local": "/assets/0972ce83b9355ac9.woff2",
+    "ok": true,
+    "bytes": 77976
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t2-19.c6b35cdd.woff2",
+    "local": "/assets/d6a41c314548d0c2.woff2",
+    "ok": true,
+    "bytes": 95680
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-00.570f7bf0.woff2",
+    "local": "/assets/ceaeaa9b64041adb.woff2",
+    "ok": true,
+    "bytes": 37992
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-01.73203ebd.woff2",
+    "local": "/assets/f664a7bc844db374.woff2",
+    "ok": true,
+    "bytes": 47208
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-02.21b1ad01.woff2",
+    "local": "/assets/f23af40a58ddc44f.woff2",
+    "ok": true,
+    "bytes": 42544
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-03.f226b70d.woff2",
+    "local": "/assets/24beba47e6b03251.woff2",
+    "ok": true,
+    "bytes": 43256
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-04.c2b0e0f8.woff2",
+    "local": "/assets/cbd148d11c734855.woff2",
+    "ok": true,
+    "bytes": 26368
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-05.64bc2834.woff2",
+    "local": "/assets/0d839fd55aef4237.woff2",
+    "ok": true,
+    "bytes": 34272
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-06.6bc220f3.woff2",
+    "local": "/assets/6d7d320fdf3693f8.woff2",
+    "ok": true,
+    "bytes": 86388
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-07.6e101644.woff2",
+    "local": "/assets/3bd59e55de63d20d.woff2",
+    "ok": true,
+    "bytes": 42964
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-08.adeb0ad1.woff2",
+    "local": "/assets/ae3d439da35333e3.woff2",
+    "ok": true,
+    "bytes": 62252
+  },
+  {
+    "url": "https://ssl.pstatic.net/static/pwe/address/img_profile.png",
+    "local": "/assets/7cc1d97309d7d673.png",
+    "ok": true,
+    "bytes": 3395
+  },
+  {
+    "url": "https://www.naeo.kr/fonts/pretendard-t3-09.0a6d68f0.woff2",
+    "local": "/assets/34e526efeb39d19f.woff2",
+    "ok": true,
+    "bytes": 89984
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=e9c6d533-cb5b-4211-a9cf-3907ac3a5f20&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=377800a6-496f-4d2c-bd91-7523daa0b4f5&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog&tw_engaged_ms=4&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/7bb27e62b8491177.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&email_address=a438bbd27f0bb5252856730daebf627abef0779c96248e3d0344e46b313d4bcb&event=%7B%7D&event_id=c8d64eb2-ab52-4ccc-9a37-be7f524b7047&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=34e9bae3-320e-4787-8394-0aea8070c627&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fcontact&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/87e41b4f2417bf7b.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA2MTJfOSAg%2FMDAxNzE4MTE5MDAwNjE0.wPsw9O08f3pjMwvB9SyUOIAtKCOijN6BdOHhEB3KVe8g.NfdoYVVj_SSP4IwN1zOuwFmn3dlwKaHiB6AVtVu2GsIg.PNG%2Fdavid-profile-pic2.png%2Fdavid-profile-pic2.png&type=f160_160",
+    "local": "/assets/674ed81c3e87d4c3.bin",
+    "ok": true,
+    "bytes": 6221
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=0c5e5b42-ba47-4b5f-aa9e-c846bdfb490c&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=14e12379-30cf-46ba-890a-3977651f7607&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fai-picks&tw_engaged_ms=3&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/4265ee050cea0c9d.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=05d0f36b-df2c-497b-b462-d7e2b79eaaa7&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=cc3990f9-1d98-4faa-982a-600429c3c398&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fcompetitors&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/5f35a2b4190c2122.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=ec5d0108-0c5f-4cdc-bda2-313bc72d4889&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=91c12021-cf82-4bb6-b41a-3e2c106c92ba&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fevents&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/991de457bfb26900.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=c7a9fdc9-c372-4afe-b539-a72c9aae6a81&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=0919f828-1fcf-4217-8ac2-3a19b647a3e6&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fmate&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/edf34285eb8f27c3.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://static.nid.naver.com/oauth/button_g.PNG",
+    "local": "/assets/6441c55cff8be2eb.PNG",
+    "ok": true,
+    "bytes": 4892
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=6052c207-a6b2-4f78-be20-f785fba2a718&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=1e889ec3-d0e7-464a-b83e-e0303379b5ef&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fwrite&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/5dc2b492fe64edef.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=60ab98ef-c1e5-4750-861c-31ee8822730b&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=156bd071-e74b-4bb6-a313-f5889ea1fb8d&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard%2Fsettings&tw_engaged_ms=7&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/f7a567b7a0d768f2.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/7e691c250c8de2d9cfbc831abe956e88754cebb96efe67fceaf3c50930f77678.webp",
+    "local": "/assets/5762762b6b97d1f0.webp",
+    "ok": true,
+    "bytes": 65954
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/9d1d2400751c77e8727036ecf6e91f6a18833f75a0b9072e16ba3ce8fc047f42.webp",
+    "local": "/assets/e7260a4d8541f73c.webp",
+    "ok": true,
+    "bytes": 124390
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/b97c824112ad37f7c6af2e182d3f7d2f6f49247f3bd6ee94a8440d3b0a1c5099.webp",
+    "local": "/assets/4e6985d9336eebb5.webp",
+    "ok": true,
+    "bytes": 60326
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/49047574d66324c47719f0e655518f01770fc3be19d16adc1fff9d5c2e25de8b.webp",
+    "local": "/assets/a959e4bb2d8663c0.webp",
+    "ok": true,
+    "bytes": 83774
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/d5a1d05a79a50b6f8f64bfd498d18de635b0c0bcdd5e5733d9f75fe5980c1f5a.webp",
+    "local": "/assets/3d8083cbfe3e1d91.webp",
+    "ok": true,
+    "bytes": 97552
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/0f3f8e003fc7d25b9763e2e2cbd51883f935801278278f9573d48524f0699826.webp",
+    "local": "/assets/77edcdfbd38275ae.webp",
+    "ok": true,
+    "bytes": 112038
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/a3f1c4e5a8f7efeaab4620a2fc1d2679bd15a1c7438b52d8135726cb31c7a7ca.webp",
+    "local": "/assets/4a797c419c129796.webp",
+    "ok": true,
+    "bytes": 141988
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/8a58ad04b2d512fc9acf8a9f509f12623a40d87e70e1997c0740231bbdf8c3ed.webp",
+    "local": "/assets/bea73e58dbe51acd.webp",
+    "ok": true,
+    "bytes": 132426
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/36ddf3bd7094090e40a1e8637b5bd25bf461893968206de69a8c99d6c968d43b.webp",
+    "local": "/assets/600aa33b5a49cfd5.webp",
+    "ok": true,
+    "bytes": 67872
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/142780d0863f17c6eeb81acf6cde4264d41c882849512d46ed011c459f57043a.webp",
+    "local": "/assets/6b654a3facdcba22.webp",
+    "ok": true,
+    "bytes": 70676
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/73cd03075e585a2dcd6a2488bff3e3a7dcf69b6c11ad5a8b78b808d818601df0.webp",
+    "local": "/assets/3994df4f5d079b44.webp",
+    "ok": true,
+    "bytes": 94974
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/e62a0a118879ca354cc231addbf380da1148d7b9aeb82e9931424bbbd0854bcb.webp",
+    "local": "/assets/be1c4436fd56a31f.webp",
+    "ok": true,
+    "bytes": 138916
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/ebe9f2b51b03674004938232ea5d6bac066ff94d843b7829a5668c9a12c20b63.webp",
+    "local": "/assets/8a6f9d52a62748d0.webp",
+    "ok": true,
+    "bytes": 101602
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/7ceb4ea495fd3328f7bbcf759fa82c0dc9e19cf22ad7072466a388e74f5e6826.webp",
+    "local": "/assets/423e0a681bdfa537.webp",
+    "ok": true,
+    "bytes": 27230
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/b1abb01617690f1d6f2f4b41ca21002ed044976d939bd9717d8a5fb493115749.webp",
+    "local": "/assets/7a211af9061de2de.webp",
+    "ok": true,
+    "bytes": 111640
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/b2d70bfd5464499c0f692892eb8622410ade7b9187ca5ad8c82af1df25ef076a.webp",
+    "local": "/assets/4331813a6170e65c.webp",
+    "ok": true,
+    "bytes": 101482
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/3051461583ca3f88c9928dad68252c47e668cd7a7bf22bbb04920b763da50365.webp",
+    "local": "/assets/d44064f9f0217ac9.webp",
+    "ok": true,
+    "bytes": 107156
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/943ccafee1728fdb4ef31965a83862936a655e93e9cd5d4d9d76d00f50545b17.webp",
+    "local": "/assets/103e975a5ebe479c.webp",
+    "ok": true,
+    "bytes": 120460
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/06f120788bdc244d695530dc3e3c0c1a510f36bb5eccebe7d256dd9220da9c62.webp",
+    "local": "/assets/3351209189aac8c8.webp",
+    "ok": true,
+    "bytes": 124646
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/a441fb823c7f5ee477351e6cb9b29fff0dcacb4a6561bcf325e5d245caa3027a.webp",
+    "local": "/assets/0cc81e0ce3aecbf1.webp",
+    "ok": true,
+    "bytes": 102276
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/955e323f348ec1270ffe6b4d67f63623646e6432a8137e0b9c886d8a37b174ee.webp",
+    "local": "/assets/757371520d94fc75.webp",
+    "ok": true,
+    "bytes": 116754
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/e226a51584c65987f1955add351e2351bac0db24fd2619a9f1c6bd700729a7d1.webp",
+    "local": "/assets/c4e2578647a4e39a.webp",
+    "ok": true,
+    "bytes": 100714
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/39b2ba9aa2fcd46646578600659112f34a67a5248da22872022f7fd802f62982.webp",
+    "local": "/assets/c0f12c9e13398306.webp",
+    "ok": true,
+    "bytes": 126258
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/e2014ad058ecd68306369130f62000b12302034cc7f1988bd0ce98ca15fd1c11.webp",
+    "local": "/assets/a9663d587165fd91.webp",
+    "ok": true,
+    "bytes": 115470
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/e32f8354415086b3f353c69a94f21f84cdeb640ce9bbfd73fb3cb43efbec5250.webp",
+    "local": "/assets/51f9d4f2406421cd.webp",
+    "ok": true,
+    "bytes": 81028
+  },
+  {
+    "url": "https://storage.googleapis.com/moonlit-creek-489411-v9-ai-screenshots/ai/2026-10-13/b2e0cd9ffb170b14266098f25da7bf0284469681cec54280ad198a64cd5438d4.webp",
+    "local": "/assets/ca02b3ab9cf717df.webp",
+    "ok": true,
+    "bytes": 99244
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=496d0b44-9da6-4e22-b500-f51106302bb1&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=bf595b2d-95e1-4a7d-ab27-ebdf67cd8641&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fdashboard&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/e9b0e4d9636f9b1c.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=304e38c0-652d-4127-a801-ab3fed8a5eba&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=f52851ad-d90d-40bc-bd74-a5dd7201107e&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Ffaq&tw_engaged_ms=6&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/7c01f6bfd35013d3.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=73f231fb-68dc-481b-bd62-035d7b74497f&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=e02ba9bf-4a50-4e28-a09d-60c4ef7983cb&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Ffeatures&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/d56f3752a24e2014.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=d219d26b-c154-4849-ba12-35b37fd6314a&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=d06b39a2-ea53-443a-a161-7b1fe707c87b&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fguide%2Fextension-publish&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/8b30b9a2c224d1dc.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=476ac60c-2251-4205-ab20-4b78da144d28&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=2d508586-0b24-427d-adab-96b2c1622489&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fguide%2Fwriting&tw_engaged_ms=14&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/2966e4bb582f2372.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=b76a19d3-7567-407d-9ced-7548e165f4d7&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=5014ad07-d263-41ff-b060-5e9c8db57798&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fimages&tw_engaged_ms=3&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/2b5a6b07a7fd8ac9.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg",
+    "local": "/assets/756eab3df81c1727.svg",
+    "ok": true,
+    "bytes": 2326
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=2571cd5a-a319-45b3-8a45-946e108d5916&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=3f0c55cb-958f-467b-9da9-c1d24af4e759&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmate&tw_engaged_ms=71&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/02a66c6bdc275f96.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/demo-write-keyword.mp4",
+    "local": "/assets/859bbf6f469f0391.mp4",
+    "ok": true,
+    "bytes": 148111
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/demo-write-photos.mp4",
+    "local": "/assets/bea00b02d211ec51.mp4",
+    "ok": true,
+    "bytes": 311864
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=7045a288-5fb7-4549-b890-bc3ff5198d7a&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=c5942acc-3c77-497e-9dd1-47c0e3df22fb&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmcp&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/486243102b3d8657.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=f0d675d7-66e8-4fd0-a74a-581af4835f03&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=4ae92b4f-67f3-454a-ad7e-0a06a689f728&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Foauth%2Fconsent&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/8d5950ab6edffb51.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=2&event_id=17d0b436-e086-4072-b811-3c82cb754d01&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=4ae92b4f-67f3-454a-ad7e-0a06a689f728&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Foauth%2Fconsent&tw_engaged_ms=10958&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/d60b7f87d8093f5a.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=34564fcb-7c5d-4c91-b4ca-05472bef5a9a&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=06dac32e-39b6-4ead-afd0-c22c2e608fea&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fpayment%2Fcomplete&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/31a1cd2e3e6e0323.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=28417842-c4c1-446b-b49c-1129d6e19562&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=cf3a81bc-1467-471d-ace3-1a19965fb2f3&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fpreview&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/8393da4e19281fe1.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=2&event_id=ba15bd2a-e8d8-4c24-a08f-ad4a865e53da&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=cf3a81bc-1467-471d-ace3-1a19965fb2f3&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fpreview&tw_engaged_ms=10136&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/7ed1f9ee36e2a7e0.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/spotlight.webp",
+    "local": "/assets/26da0bfac62f39fd.webp",
+    "ok": true,
+    "bytes": 16436
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA4MDZfMjEg%2FMDAxNzU0NDQ2MTM1MTM1.s3t_ePtcLGa58qnNrYCd0JJmXaZuQaaehH2wy_3lgzAg.bUAmKA1eA69fMKK90pA9RS1FZuxm0awPir4VVO9kOUMg.JPEG%2FIMG_7684.jpg%2FIMG_7684.jpg&type=f160_160",
+    "local": "/assets/bf6599161589ecd8.bin",
+    "ok": true,
+    "bytes": 6870
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=7bd0207b-13b1-443a-8db9-b0f45907a653&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=fdb76e01-a34f-4dd7-8b35-4b195c99231d&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fpricing&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/56a814f0f5445363.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/guide/dashboard-guide/7-2.webp",
+    "local": "/assets/1c06b7834e30e02d.webp",
+    "ok": false,
+    "error": "Error: HTTP 404"
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA5MTRfMTI4%2FMDAxNzg5Mzk2NTcyNjUy.UTH94B-9-mjLA9Lj4XkX-n4GbLm5WiWRCFSRrG6goJ4g.QKlf-FSce5BTRMbh8kzuda7Jbkb9rJtw-xYXWLF8G6Ig.PNG%2F9_%25282%2529.png%2F9%2B%25282%2529.png&type=f160_160",
+    "local": "/assets/cff3a7c69e959688.bin",
+    "ok": true,
+    "bytes": 8607
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/month-2.webp",
+    "local": "/assets/82b5e6e2d3f33a3a.webp",
+    "ok": true,
+    "bytes": 17878
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTExMjFfMjM3%2FMDAxNzYzNzM0NDg3NjU1.2y6OTqackAJyq3qBogIwGqfxkAF6K22dmSN6-NZ-VDQg.26jik1v7tewBrHF7XdYIsTI2YRgg-DKtImHGEUHnV7og.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/fdaf3066db8965bc.bin",
+    "ok": true,
+    "bytes": 9121
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/month-1.webp",
+    "local": "/assets/567d94e559d6f675.webp",
+    "ok": true,
+    "bytes": 30040
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/weekly-champion.webp",
+    "local": "/assets/73f16223b1870477.webp",
+    "ok": true,
+    "bytes": 18852
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/rebound.webp",
+    "local": "/assets/d02d5caed066f171.webp",
+    "ok": true,
+    "bytes": 12130
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMjJfMTg0%2FMDAxNzcxNzM0OTgwNjE4.HKJVfHCl93_lFSOxD9fUrJZ7IQWh7SjNlcapVeJxY-Eg.sG_1rpgJ3JcQdOi1_vvBmb3e2p4uag4F4k4tF9usmisg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/de3cc36ce7c14e9b.bin",
+    "ok": true,
+    "bytes": 10007
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/month-3.webp",
+    "local": "/assets/a9cf2603b9ac20ab.webp",
+    "ok": true,
+    "bytes": 19292
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/rank-1.webp",
+    "local": "/assets/fa7e482256e0c129.webp",
+    "ok": true,
+    "bytes": 18968
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/search-front.webp",
+    "local": "/assets/b12be5bbf8f613c8.webp",
+    "ok": true,
+    "bytes": 18082
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA4MTJfMjI0%2FMDAxNzg2NTM5NDg3MDk1.76TDYMN2kzQhKwLa_Km9yuONd2xX4wDjotK1ojhSfRMg.3OZzWu28B1WIpFmMJco0OPIWDA6r3F8YIrYUJLJPBtwg.PNG%2FIMG_4051.PNG%2FIMG_4051.PNG&type=f160_160",
+    "local": "/assets/7ce6e2a8822acc83.bin",
+    "ok": true,
+    "bytes": 4707
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAzMTZfMTQ5%2FMDAxNjc4OTQwMDMyNzk4.UvjkUEwLP-GDMcUtibAcjQCC8uN6gmBMFGRb0tFaKKYg.6lnv612WZfV8TQIVk9O3vgUAOHdTj1jdnCBMRXfLFkQg.PNG.franksong0030%2FprofileImage.png&type=f160_160",
+    "local": "/assets/77760ea8086db544.bin",
+    "ok": true,
+    "bytes": 4226
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA0MDFfNyAg%2FMDAxNzQzNDk5MTYwMjE4.od-0CbGqWVzjRXPnkn5ozoPg3eafSVKrXdabHpwwtlcg.Pxg8Y4bcwlsXuDTJQ7Pa_6F6qi95aEIJBLsV73_L_-Qg.PNG%2FChatGPT_Image_2025%25EB%2585%2584_4%25EC%259B%2594_1%25EC%259D%25BC_%25EC%2598%25A4%25EC%25A0%2584_03_44_55.png%2FChatGPT%2BImage%2B2025%25EB%2585%2584%2B4%25EC%259B%2594%2B1%25EC%259D%25BC%2B%25EC%2598%25A4%25EC%25A0%2584%2B03_44_55.png&type=f160_160",
+    "local": "/assets/7e3daf26099ecc9c.bin",
+    "ok": true,
+    "bytes": 8542
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDExMjBfMjk3%2FMDAxNzMyMDk1OTkzMTYw.EC2Nbkyi8mdnP3QfANrNNMWHGZiPHr9D3RwgW-BgBvcg.BSr5ELlL9oFqHXrMH-Lf-j1di0kJKh4FibrLB1Q7DCMg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/db1d45c00f87011e.bin",
+    "ok": true,
+    "bytes": 7905
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxOTA3MTBfMTY1%2FMDAxNTYyNzIxOTY4NTc1.TqRu3Nml5YCJKzNtqExO2v4oS6sJEFNqfqJlPmcX_NIg._9LETp3wNSbvJhT0Zf2c8HwBd7AR_pc--aPNKbUXjGMg.PNG.dhel751%2FprofileImage.png&type=f160_160",
+    "local": "/assets/485bc8fba6cbb6d0.bin",
+    "ok": true,
+    "bytes": 4428
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MzFfMjA0%2FMDAxNzgwMTYxMzU3MDcx.zfBRMT_BRVopwDtyoqXEsoLZwbQ0sYjqHt8rUhoIAYAg.lJNLaSeuxo4JSt9EVDiw7r5gV1TtiFXveD0mFdtjdLIg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/c91573d92631549f.bin",
+    "ok": true,
+    "bytes": 5340
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAyMjRfMTMw%2FMDAxNzQwMzMwNzYwNDU2.eGzjv3gAiIKmhy5LpS2zjK0V7HP6l5yarHD13Is8dWQg.8Cj8kd7f2PHYHybLUU2nU5uHrtyzIs6ihrIN_m9UFzgg.JPEG%2Fimage.jpg&type=f160_160",
+    "local": "/assets/de23b50acf50c60a.bin",
+    "ok": true,
+    "bytes": 11578
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzExMDFfMjM1%2FMDAxNjk4ODM5NTM1NTEz.aY-NDsH87O-CM_hInb-GfCo_MJKxzRP2yOG_JQsM7EIg.bHMYCQP-kaH7Z-mCWnO6UzxXBdWB3x3piA0Figt57I8g.JPEG.feia1230%2FDSC00085.JPG%2FDSC00085.JPG&type=f160_160",
+    "local": "/assets/603fa3f32a87ab5a.bin",
+    "ok": true,
+    "bytes": 10062
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/keyword-hunter.webp",
+    "local": "/assets/cafac74f32bcf09f.webp",
+    "ok": true,
+    "bytes": 21460
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20200723_71%2Fnaettee_1595514162920c7aOK_JPEG%2Fimage.jpg&type=f160_160",
+    "local": "/assets/a6aed8cde4ca0eae.bin",
+    "ok": true,
+    "bytes": 8311
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA0MjVfMTY4%2FMDAxNzQ1NTgwODczMzY3.Klb3VVnC46Gqh-MwUiMe9CLarvqivOn4xDrJ4xEGztgg.7CBA3VZT2e5uMAdX_45wm4F7vzP9WBpCkI3J67BNXNog.PNG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001_-_2025-04-25T181846.681.png%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001%2B-%2B2025-04-25T181846.681.png&type=f160_160",
+    "local": "/assets/7b41b86a8db109e5.bin",
+    "ok": true,
+    "bytes": 7059
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20130617_79%2Fhamami10_1371472743796kPHt6_PNG%2F55.png&type=f160_160",
+    "local": "/assets/7e836c12f27fca0e.bin",
+    "ok": true,
+    "bytes": 4688
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyMzExMDJfMTMz/MDAxNjk4OTE1NzM0Nzgw.mEoMUO1HhIv32AW-oYOdXMnDeygbzpwGAI6Gljjraw8g.0ZmsFN4eoaXImLd60pog6cONoHP4wjBqKWjLkBH5Xdsg.JPEG.flute8248/gm.jpg/gm.jpg",
+    "local": "/assets/e6f23d81761a28d2.jpg",
+    "ok": true,
+    "bytes": 81347
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTExMjFfMjUg%2FMDAxNzYzNjU4MzY3OTQ2.n6T-fGD97TQ1OVTWCaDXOL2tWap5Xer5OiL4pKXvF9Ig.nIX5ONZ93ml6HrhPdewoE3FfbWLeUkssAxfDP4A8qtEg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/5bf54aaca928ca00.bin",
+    "ok": true,
+    "bytes": 11884
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/record.webp",
+    "local": "/assets/8819c8359fec1bf1.webp",
+    "ok": true,
+    "bytes": 19204
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MTNfMjM1%2FMDAxNzgzOTU0NDgwMTAz.UZMjCSAZX4oSjl0RjMsPyDC-pKaTkXXSp287lfhKWDcg.Lr-BvT8bP2zB1PjgxGfkfkdGvDx11FED_uxE-D_-Pdwg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/793b1f7a3939a4d1.bin",
+    "ok": true,
+    "bytes": 5190
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTAyMDJfMjAx%2FMDAxNjEyMjQ1NDg3NDYw.SqfErrEskg2MQDSSK_R3Hky20Z3yjVGm6KCCCCGzGFcg.lsizlYuGejoJ0p-IIVYS1R5l9B8AuRh1n_qyP0mIklMg.PNG.gasina5508%2FprofileImage.png&type=f160_160",
+    "local": "/assets/8387c7b35d5c0f26.bin",
+    "ok": true,
+    "bytes": 6437
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA1MDVfODYg%2FMDAxNzE0OTE2ODIyNjYx.KJjgXc1r2eFhoDAZNWEqBDwItct68OMO_1Bj7-lpTqkg.CKF2dB-yDfvBp6bKOgKwQNQZNFZaWi19Y2Ur1q9AiJIg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/4ec2c8f402337cb5.bin",
+    "ok": true,
+    "bytes": 6614
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA5MTlfMTY1%2FMDAxNjk1MDUxMzEyOTQ2.Wknnq4wNg1GFwoXkkInQzO0TAHpaeqjMfBe9IvN4Lmwg.N0OsuJWR-4UQ-OPR5Ek8jpMQVD_xziRB7XOWyldDixcg.JPEG.rywls92%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/368bef5bc0c9e58f.bin",
+    "ok": true,
+    "bytes": 7752
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDAyMDFfMjEx%2FMDAxNzA2Nzg5NjAxOTYy.giTvAcZNXQYRsmmPzVWxo99KbjTed2LPms_waDnwbaQg.TaocrK15JZq6vNsbYOpjU0Xyn55lKjshwQULOj0-l9Eg.JPEG.come4464%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/ced13f8f75cf9fdd.bin",
+    "ok": true,
+    "bytes": 7814
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/streak.webp",
+    "local": "/assets/3f65caeebb22153b.webp",
+    "ok": true,
+    "bytes": 15466
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAzMjFfMzAg%2FMDAxNjc5MzU5NDIzMjMw.YwIoFzabHMKKSqMIqvLfIQ_OOBiEnp0ogFjH_Sqs8jEg.d5wGyN7zfkJyXH0aFZkky4iEAws1WPRUptvqSqDWPhgg.PNG.pjihye4728%2FprofileImage.png&type=f160_160",
+    "local": "/assets/cf6d927bdc91b44b.bin",
+    "ok": true,
+    "bytes": 10106
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA2MjdfMTEz%2FMDAxNzgyNTYyMzE2ODI4.uFoRE9Gd2jeBLvb0xJdRlbida1gHX2N0oQFTc4Wi3FAg.eKf4a7ryKzqK5NoEWNCZNygN8OrRn2agfzjxZKVUHAsg.JPEG%2F%25EA%25BE%25B8%25EB%25AF%25B8%25EA%25B8%25B020260623_104534_%25281%2529.jpg%2F%255B%25EA%25BE%25B8%25EB%25AF%25B8%25EA%25B8%25B0%255D20260623_104534%2B%25281%2529.jpg&type=f160_160",
+    "local": "/assets/110e4b950453b4f0.bin",
+    "ok": true,
+    "bytes": 13310
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEyMjlfMjU0%2FMDAxNzY2OTc1MTI4NzYw.3MNyQUmIFH7OG3LGNBCKLyo148jm2QScHVSuQ0x-8u8g.x3xtKxgEcTADmG9tA407RSfFkKjQgx_dCD1Subh99lcg.JPEG%2F%25EB%258B%25A8%25EC%25B2%25B4%25EC%2582%25AC%25EC%25A7%2584_%25EC%2588%2598%25EC%25A0%2595.JPG%2F%25EB%258B%25A8%25EC%25B2%25B4%25EC%2582%25AC%25EC%25A7%2584%2B%25EC%2588%2598%25EC%25A0%2595.JPG&type=f160_160",
+    "local": "/assets/338bc378d48178ca.bin",
+    "ok": true,
+    "bytes": 12006
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MTlfMTg2%2FMDAxNzc2NTYxNzI0NDU3.7ALpYAupQk7BH1XKJaHM7F1C_ecb-kIXwi7eSxr4pREg.-lTrkuwjAoSHeN0JMM8qU6m2TvDGOLeQTMztBOMuC1og.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/45e2fa669a593088.bin",
+    "ok": true,
+    "bytes": 8225
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MjJfMjM2%2FMDAxNzQ3ODc3MzAwNTI2.rH9IF4Z44ZxoAQra0cWivsPs-x_ZNDABTXtXrHlg8dgg.X4H4QS8fcjnjmRx-9pcJ2Y9R6Xmq1txsNAjY00fT-DMg.JPEG%2FKakaoTalk_20250517_012509792_02.jpg%2FKakaoTalk_20250517_012509792_02.jpg&type=f160_160",
+    "local": "/assets/edcc755683454615.bin",
+    "ok": true,
+    "bytes": 6600
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAzMTNfMjYz%2FMDAxNzczMzc0MTQwNjEy.2TdIUisF8BkZDPOx8qV9WRGS4rh1jvUC4YHUmIt62Bkg.TQVfRLt7c5pgPLHGz6ZWWY4q8FOvzzQDhKTGHAGp9RUg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/1a5156b843738462.bin",
+    "ok": true,
+    "bytes": 10533
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA1MDRfNTAg%2FMDAxNTg4NTY0MTMyNjM0.S6KdeMPpmkOjqOg7Yq_eL4c4gJoVSHF8tfdM9C3CtcIg.VUlerVqh5eKOwtMvrRhD5Nyht9yzCKAGR-Qsk0RcKuAg.GIF.dean4001%2FKakaoTalk_20200504_124659779.gif&type=f160_160",
+    "local": "/assets/8924060abb1ac33a.bin",
+    "ok": true,
+    "bytes": 10313
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MjRfNyAg%2FMDAxNzc5NjIzMjg2NTcz.57Phe79NU0_pKfI2ynu2h2csGy6JSB7AHX1zuEUiZmcg.bXYlVnm49zqoKb5AmYx0RNtffq-xtmevtqM2AYfs_3wg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/3c19401e946f7a15.bin",
+    "ok": true,
+    "bytes": 13312
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjAyMjJfMjkg%2FMDAxNjQ1NDYwNjgzMDM5.mnaMR214mX4OwmRl7XZLldoj0v9Gpt1ZxZRrHkNX_-kg.dd9ZVse-lSrideHXo6tEXQllBeGxT93Bt_Vj6G59FGYg.JPEG.djusti%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/72984ce35f93dc01.bin",
+    "ok": true,
+    "bytes": 7332
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNTA0MDZfMTcx/MDAxNzQzODk0NDI1MDY2.jSSDH3UMD4f2o-5GV040aw2AUVXN7n64OYw_Q4QJUE0g.ndaYy3bnLHHWqXUAFvvHJMNF1JaHN6WUwLV6MDEUIkgg.JPEG/profileImage.jpg",
+    "local": "/assets/c6a6ee82da8ff2bb.jpg",
+    "ok": true,
+    "bytes": 561671
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA5MDZfMjQg%2FMDAxNzI1NTg3NDkxMzY5.k2DBJPskRudf2JOh0cPKD4-PXDCXm_Fz68iiYkKQZxMg.t2URCfbUfTOfNfSkfY1iS1EnY-mUZUNZyOIXpwgGHUYg.JPEG%2Fspeech-7228844_1280.jpg%2Fspeech-7228844_1280.jpg&type=f160_160",
+    "local": "/assets/1be783bc8374f6b1.bin",
+    "ok": true,
+    "bytes": 4515
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MDlfNzkg%2FMDAxNzgzNTM5MTQ5OTU4.Zs7D2PsADazZngR4371bGJtTUbl1RnkdHZAz3z_WDDMg.lJzCrR7ye-FQWjBJMY71IX_qPMtoIKDYEgRX1I9y6ygg.PNG%2FChatGPT_Image_2026%25EB%2585%2584_7%25EC%259B%2594_9%25EC%259D%25BC_%25EC%2598%25A4%25EC%25A0%2584_04_28_28.png%2FChatGPT%2BImage%2B2026%25EB%2585%2584%2B7%25EC%259B%2594%2B9%25EC%259D%25BC%2B%25EC%2598%25A4%25EC%25A0%2584%2B04_28_28.png&type=f160_160",
+    "local": "/assets/15c01fa7e08acdf6.bin",
+    "ok": true,
+    "bytes": 9446
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MjRfMTQ4%2FMDAxNzQ4MDg4NDgxOTc4.LeffT-J4AkINwu3Q-W_NsIvc8g0xq44FbBG8kKjBkzYg.JjHgs6VNVLqUwpn6jsoWLk0QcdN0eTHlTmhwOB_TAMog.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/3b1856199a1e5724.bin",
+    "ok": true,
+    "bytes": 13769
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA3MDFfMTYz%2FMDAxNTkzNjEzNTk4NDUy.Cl82Euqmn77JWTrp2dkAYWrjcYCSI_C8uyUHuvhrq2Qg.eBexF6azjViQEB1GSmCKSXwYzNtckQGnoivxmv4TsgQg.JPEG.companion_gecko%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/ddd7dbcf22b257c0.bin",
+    "ok": true,
+    "bytes": 11959
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMTFfOTAg%2FMDAxNzcwNzg5ODM2ODI0.d1T5A29wKg-QxgaZTtwpEjyDVxyuIQeAav8I46anGyUg.6kDxE1o6KNaZ7NbMG775X022KYW2nNRL0vRZ8KYfe3cg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/2f8a3a31ea1e11cb.bin",
+    "ok": true,
+    "bytes": 11504
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA2MTFfNTYg%2FMDAxNzE4MDc4NzU2NTIx.co32JZyeahNLm-NDrlmoEPQEDUKu7CiQOjMpAQJD03cg.4iHVnUIpKrRCF2cjvASt27Lf3yG-xxArm6ZXK6hrOKkg.JPEG%2FKakaoTalk_20240611_121715874.jpg%2FKakaoTalk_20240611_121715874.jpg&type=f160_160",
+    "local": "/assets/8e0a431fecee5e38.bin",
+    "ok": true,
+    "bytes": 11410
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA2MTJfOCAg%2FMDAxNzgxMTkyODA4MjAz.jXhFeVn3jvi79BIYjeQl6L62-lFYal-X5B9n9zykCdUg.L01yV3mjyTcan5r-SavJWj1a9bmssbXiFa5OTuBSGogg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/508bc0a146c534ab.bin",
+    "ok": true,
+    "bytes": 9474
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MDhfMjg1%2FMDAxNzQ2NzA4NTU2ODI2.SWIr0BtuE9yvhjw9XmQg9dlSUlkCSUwn4xgHnceMS74g.fZQ2Fwv20Avl_lQxzGF31DRfuibKwwPWp2K8GzkccKEg.JPEG%2FIMG_5879-2.jpg%2FIMG_5879-2.jpg&type=f160_160",
+    "local": "/assets/e7266607dbfe7a6d.bin",
+    "ok": true,
+    "bytes": 13526
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA4MjRfMTcx%2FMDAxNzU2MDIxMTA2MzY3.iYmb7mwqLX8-IA78aU1jjfmAzmk0fpNrKEjAhdECxD0g.KbH-kbzl__oZMo8gfdeD8nwty6pPs3mICNRbnnYW0zkg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/30e862a5df3f8e1b.bin",
+    "ok": true,
+    "bytes": 7639
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAxMjZfMjcw%2FMDAxNjc0NzQzNTY1ODg5.PODNMVP25V686S8fzegfBPOf7Z8cJ3mrEgTVKho6-NUg.BAMFb7oj9QSgKYQqM5v-y0o50fc4haVY4BpKibJqFF0g.JPEG.greedady%2F22DSC02875.jpg%2F22DSC02875.jpg&type=f160_160",
+    "local": "/assets/1de8b59a7e9e18ac.bin",
+    "ok": true,
+    "bytes": 6313
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA1MTJfMTEy%2FMDAxNTg5MjU2MDQ5NDk3.OhDLfrJjco0o1j4CtoswJ8zuxEOwQoB05SMYckhMC80g.gvEWv1zokCeOD9YMPzvhZw5JNMScSXLsmj6jeAeXdWgg.PNG.jwt2008%2Fmsp%2B%25C7%25C1%25B7%25CE%25C1%25A7%25C6%25AE%2B%25B7%25CE%25B0%25ED.png&type=f160_160",
+    "local": "/assets/1dd1262f5a3ade9c.bin",
+    "ok": true,
+    "bytes": 5846
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDExMjhfMTM5%2FMDAxNzMyNzgxNDgwNjAz.jfWt5wXmOAf9L5LNQps0kE1T6BR2jOVqokcEMBoEdhAg.y_55F8VE7VBt7zILsGXvw2gGabVuhz0oIRSmaq4XTXsg.JPEG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-002_%25281%2529.jpg%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-002%2B%25281%2529.jpg&type=f160_160",
+    "local": "/assets/27411065c3f9f770.bin",
+    "ok": true,
+    "bytes": 6726
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MTlfNzIg%2FMDAxNzc5MTc0Mjk3MzU0.BopTr9fsQsWh4ecjuDl4PyAZz3PQqMnbYVi5wx8uo_wg.TIKje0Ly2aJar9gnopOp61GsfCi2EkehDTH2w8q7xwIg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/c6bad36e0698347b.bin",
+    "ok": true,
+    "bytes": 11526
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAxMjdfNTkg%2FMDAxNzM3OTI5NTExMTc3.jxsmSlKx1uc8rlLN3A4onJPgugQt-UZa99dw1RXk858g._4JXH_e_Mf99pHhgf5cxNa0iDZGqphLqjIY-BaGD9Zwg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/7c1df1ee9d2f13a9.bin",
+    "ok": true,
+    "bytes": 12685
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTAzMjhfMjc2%2FMDAxNjE2OTQyMzYzNDMy.6qFU-zdoS0I0Ceh2IXwM4sFrPOwPoJsVbITE2Cz-Q_4g.gp-BX_PDQ7s4nxfb6fwq2R2apnKzLPvZogeb9MBlicsg.JPEG.viva5186%2FKakaoTalk_20210328_233630700.jpg&type=f160_160",
+    "local": "/assets/9619368c76d05f34.bin",
+    "ok": true,
+    "bytes": 4663
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDAzMjlfODcg%2FMDAxNzExNzIzODE1NjI3._h9Sn_y7Eoz9iX623-oSO0GPe_i7e7Xx65BvG6owLt8g.b0YeTkll__k_RMxwInnk9vLyqqtsn34EhNxAo8Tnnckg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/360dbaf1e34099ea.bin",
+    "ok": true,
+    "bytes": 2428
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAzMDdfMzAg%2FMDAxNzQxMzM3MjEyODI5.2d21UND2JnE41sn0S1KAlAhwscFp_QoJaelJvVF28Gkg.grSa6NhrFfMBZaxoLxIY1UlVYJPGA4vuZ-0ME2JIbEAg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/9312758841af1405.bin",
+    "ok": true,
+    "bytes": 20761
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzEyMjZfMTY4%2FMDAxNzAzNTc3NTI1NjM2.Rvqhi58z-xGKF7-3pWmltZgcsAtJCULrgX7I6Nc7W5Yg.2voLLW0r64WS4gcxvkEkDFmlf1pXFfwhwNZt5-lIG4Qg.JPEG.lemoni23%2F%25ED%2581%25AC%25EA%25B8%25B0%25EB%25B3%2580%25ED%2599%2598_20221012-DSC_9688.jpg%2F%25ED%2581%25AC%25EA%25B8%25B0%25EB%25B3%2580%25ED%2599%2598_20221012-DSC_9688.jpg&type=f160_160",
+    "local": "/assets/6c94b1ecd209d7c2.bin",
+    "ok": true,
+    "bytes": 11763
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTA3MDhfMjk4%2FMDAxNjI1NzA3NjAwNzk2.DL2Hk6FPs9DKlPZDPrnBcpWMlf75mv-ccrgJnTPKZaUg.l3TcHup6E6GY1ilP5V3NTvbISTcbMSsr_29046aRhCQg.JPEG.tjrkfka87%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/687af9659760466b.bin",
+    "ok": true,
+    "bytes": 6304
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAzMDJfMTMy%2FMDAxNTgzMTQ2MDg1Nzcx._8JJ0qdpEEZiUOXyAMKHrrAIN80T3v2NfcCoc_B56Qkg.hOSrXwCReN8z9aZ89PJIQ-w2cANzPZMwGcNOaL3ONtMg.JPEG.earthfood%2FKakaoTalk_20200224_191133844.jpg&type=f160_160",
+    "local": "/assets/6c9540bb0ec4b6b3.bin",
+    "ok": true,
+    "bytes": 5098
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAxMDFfMjM2%2FMDAxNTc3ODY3OTA2NTM4.5G7oSUdV-auNAYsWGxSNWF7EqC9cDBI61mkyPx9uERsg.YpmBs1ZIOo4_QwuILOlRqsmFmZPEOZDN19syOocsP2cg.JPEG.mortareg%2FKakaoTalk_20200101_173722000.jpg&type=f160_160",
+    "local": "/assets/4bef7ee91250c286.bin",
+    "ok": true,
+    "bytes": 7795
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMTBfMjM5%2FMDAxNzMzODIxMDAzMTMz.Lvk_rWZn94omC_0VOhcb9Hp_tEcQUinswCm7Z0TKXg0g.qCDBqViw6c9sRraESK1BQjkocbGSQyzq5OEJ4QYHoCwg.PNG%2FSE-47206e95-909c-4bf0-8f92-3b0d57325bfa_%25281%2529.png%2FSE-47206e95-909c-4bf0-8f92-3b0d57325bfa%2B%25281%2529.png&type=f160_160",
+    "local": "/assets/332ad719bb786dc9.bin",
+    "ok": true,
+    "bytes": 6937
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAzMDhfMjY0%2FMDAxNzcyOTQ2NDg4Njc4.gmENBwzwEwPYnvHPEe1Cx6pJOrAqbMrRut1Y5yZDc2og.TsO6NIvKkHa3xB46TsThoWmxdpagOZD12RBuK66vSs0g.PNG%2F%25EB%2586%2580%25EC%259C%25B0%25ED%2594%258C%25ED%2595%25842.png%2F%25E1%2584%2582%25E1%2585%25A9%25E1%2586%25AF%25E1%2584%258B%25E1%2585%25B2%25E1%2586%25B7%25E1%2584%2591%25E1%2585%25B3%25E1%2586%25AF%25E1%2584%2591%25E1%2585%25B5%25E1%2586%25AF2.png&type=f160_160",
+    "local": "/assets/296062ed54fd2f07.bin",
+    "ok": true,
+    "bytes": 3894
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA5MDhfMTIw%2FMDAxNzU3MzM2NzM0OTE2.RFtRvqnNWRuDnkrSiohJWkf5huPX5ZA2hPaSX1eKf80g.oI1LDtrV4KHvnRoItTB16YuFA_dvYCRDiGy9jNhvpdsg.PNG%2Fima.png%2Fima.png&type=f160_160",
+    "local": "/assets/bd77d47f3ed1b1ea.bin",
+    "ok": true,
+    "bytes": 12676
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAyMjZfNSAg%2FMDAxNzQwNTMwNDM5Mjc4.gNhccE43lKSn6rxbulyJvrXTA3BWmvqYv5P8fA6XKL4g.AJ2XAlccCZFOERIYoiUj33g5Tp2nnr3kmi42i1cxmFgg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/e18483748fe68405.bin",
+    "ok": true,
+    "bytes": 6660
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAzMTdfMjg1%2FMDAxNzQyMTgzMDc3NjI2.E5sKjNYHA9EHlWglbqHn-TwpR4Ywn5UriaDtmte5cwAg.BDyUugbUsfpPIV36VXmj006JkFkE9BKGmj7HhBsJMNMg.JPEG%2F%25ED%2599%2594%25EB%25B6%2584_%25EC%2598%2586%25EC%2597%2590_%25EC%25B1%2585_%25EC%2582%25AC%25EC%25A7%2584_%25281%2529.jpg%2F%25ED%2599%2594%25EB%25B6%2584%2B%25EC%2598%2586%25EC%2597%2590%2B%25EC%25B1%2585%2B%25EC%2582%25AC%25EC%25A7%2584%2B%25281%2529.jpg&type=f160_160",
+    "local": "/assets/a76fe4906a149045.bin",
+    "ok": true,
+    "bytes": 4940
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20141128_142%2Fdongi0508_1417157303160EkQQv_JPEG%2FKD_profile-2.jpg&type=f160_160",
+    "local": "/assets/91f9b61b3fd4b2bd.bin",
+    "ok": true,
+    "bytes": 9667
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA3MjBfMjA4%2FMDAxNzIxNDM1MTM0MjY3.ezlE_pRjl7F-t6fwq_PJsRv1DVTwd_bOyhxZnjSjPysg.-P435XBud6b7JpEpfaIiOVY7h7K-cFCtMiTV1YmZ5TEg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/7b6fb95874570e88.bin",
+    "ok": true,
+    "bytes": 16399
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA0MTZfODAg%2FMDAxNzQ0NzMxOTY2ODU3.nwlQJWKKVv6OqB-bMGWmzfVRe2tUZ_CBKvJx9gNQ2b0g.HP8unGbJTVoFBJPEdUQ0kvdkgwS-7FcHfLC6kQ7hPWQg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/8bedbac5d960381a.bin",
+    "ok": true,
+    "bytes": 9597
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA5MDJfMjUw%2FMDAxNzI1Mjc3NDY2MjA3.8-Pdu_CYEq2jhNtw0oMZ77dEXrWyX6nAL10zBp8i1Dsg.bFwY5oEGQLX81ToyvgogggQlkjKZHb8vcXpOkOw2Apgg.JPEG%2Fbeauty_1575220903752.JPG%2Fbeauty_1575220903752.JPG&type=f160_160",
+    "local": "/assets/c900a6c841bff335.bin",
+    "ok": true,
+    "bytes": 8237
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20141201_296%2Fsuntill0210_1417361533991KkYGB_JPEG%2F05.jpg&type=f160_160",
+    "local": "/assets/413ca9402616461f.bin",
+    "ok": true,
+    "bytes": 9561
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA5MDdfMjE5%2FMDAxNzU3MjQ4MjY4NDMy.nLBxXg0IkmBqLFx2tf4mztimhlX31rNCT6tHJi-xeM0g.I1GTmykEeQ5zOfObxcyEZHboX-Tws7j9m1YEX08pK1Qg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/38202e9221e6cd8d.bin",
+    "ok": true,
+    "bytes": 12144
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNDAxMThfNDcg/MDAxNzA1NTg1NDQ4OTYx.hrixA9ltPHXs753Mv9-q5LDq4N-Ms0ECCHBW6LzJeGUg.Jd19FomTrQ23x05WgM8psHtR_4T5eUMMBH3qN2lo-0gg.JPEG.gameinfor/_9c627be2-8ff4-45fe-9387-754d22821cfb.jpg/_9c627be2-8ff4-45fe-9387-754d22821cfb.jpg",
+    "local": "/assets/874ca9d9fa482014.jpg",
+    "ok": true,
+    "bytes": 125832
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzExMjZfMTQ5%2FMDAxNzAwOTk3MjkzMDMw.tCY2GM3nOxA4jps7mEpeUyeAoLCBs-WXTZErBoze2x8g.nPEfWmlK708L4XGoji3eF8itX3pOcDK0ckWnF6zcZ8kg.JPEG.heeri1212%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/d16930036ffb6cbd.bin",
+    "ok": true,
+    "bytes": 2847
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MjlfNzgg%2FMDAxNzc3NDMzNTg0NTY5.Am0l_vdBZ7Kwjmz4v57_SAm2H6JkwnIG0DzCf0r4fGIg.Xw45LBCliYWuWnjW6p3nOMCXtQ9acyq7jeipZLzDh0sg.PNG%2FChatGPT_Image_2026%25EB%2585%2584_4%25EC%259B%2594_29%25EC%259D%25BC_%25EC%2598%25A4%25ED%259B%2584_12_32_38.png%2FChatGPT%2BImage%2B2026%25EB%2585%2584%2B4%25EC%259B%2594%2B29%25EC%259D%25BC%2B%25EC%2598%25A4%25ED%259B%2584%2B12_32_38.png&type=f160_160",
+    "local": "/assets/f0daf9e7228d9b3e.bin",
+    "ok": true,
+    "bytes": 7191
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MDRfMjg4%2FMDAxNzc3ODg1NTQyMjAy.GHCJfqF1Rhi82jmj-dkB3X0eRMPGjuMZv8Ezqh5bUb0g.x9l3uEvNulB8buMVV8W3FJTeWE8El8Brr2TEAU_E0rAg.PNG%2FChatGPT_Image_2026%25EB%2585%2584_5%25EC%259B%2594_4%25EC%259D%25BC_%25EC%2598%25A4%25ED%259B%2584_06_05_32.png%2FChatGPT%2BImage%2B2026%25EB%2585%2584%2B5%25EC%259B%2594%2B4%25EC%259D%25BC%2B%25EC%2598%25A4%25ED%259B%2584%2B06_05_32.png&type=f160_160",
+    "local": "/assets/0f1b24ff9f71290e.bin",
+    "ok": true,
+    "bytes": 5452
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA1MDVfNTkg%2FMDAxNjgzMjgxMTQ4MzQy.ohW53rf4lQkHIRHyXFgUnRX821EYp-af2pckN1AqFScg.eN32RC3n48_cjeTwqjXtvwERyHUijt-f8CFHLy4Q3qMg.PNG.jamjma98%2F%25EB%25A1%259C%25EC%25BD%2594.png%2F%25EB%25A1%259C%25EC%25BD%2594.png&type=f160_160",
+    "local": "/assets/9347c087f6ef0369.bin",
+    "ok": true,
+    "bytes": 13082
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTA3MTNfMTA3%2FMDAxNjI2MTQwMTAyMTAw.aq6zcHlmYKPmflVrtekiWA5DEoztopNGahUrfXytG2Ug.Dp_tO9BkC5dU8YqbDnhbczf0s5ngkd3nJ1MyUJ3RJpYg.JPEG.musediet%2FPicture.jpg&type=f160_160",
+    "local": "/assets/bada4c9a46791941.bin",
+    "ok": true,
+    "bytes": 11083
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMDlfMjY1%2FMDAxNzMzNzM1ODQ4MzIw.ljJsp9PTJWEY2ehuYEKeJb52XfPb8p-Ph32HuBjfUHYg.MYi50jZVGklcyNkGX7oRSvEpiKr7IxI4KEGzMsbymZIg.JPEG%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.JPG%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.JPG&type=f160_160",
+    "local": "/assets/2ee1a29a135da37e.bin",
+    "ok": true,
+    "bytes": 11416
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA2MDlfMTY5%2FMDAxNzQ5NDExNTM0MDQ3.62AZVA43qf6mDCyUx-4p8yBdK1eNPbtf1GryKmtrjaog.KHBzArmXPjgJoL5olzdIx6lFl76EzJ3c6qAvUYj4D18g.PNG%2F%25EB%2584%25A4%25EC%259D%25B4%25EB%25B2%2584.png%2F%25EB%2584%25A4%25EC%259D%25B4%25EB%25B2%2584.png&type=f160_160",
+    "local": "/assets/90ba688e77dbf192.bin",
+    "ok": true,
+    "bytes": 3975
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAxMTVfMTgz%2FMDAxNjczNzYzMjc1MTU2.ZJk_jS1eOyftSynTc_rTdCvytcu68LGCgK0YhDUV_OQg.PBldWDC1xl1zKz4LDEmvPdVBdyrEg40BY80HE_MAESkg.JPEG.careerhyemi%2FDSJ_7651.jpg%2FDSJ_7651.jpg&type=f160_160",
+    "local": "/assets/f6c169b471741ffb.bin",
+    "ok": true,
+    "bytes": 7129
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAxMDhfOTQg%2FMDAxNTc4NDgzNDI1NzYw.aBPDYwlJsHhNf27WrUT5TXKbBW34w5bXTuKGMyXFGLAg.ckmmN3fbPnu8t5N1r778mY0ipc1SIZNMGN8lhvMzYFQg.PNG.kimshdesign%2FprofileImage.png&type=f160_160",
+    "local": "/assets/209d61f40e0e8049.bin",
+    "ok": true,
+    "bytes": 9151
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMDVfODUg%2FMDAxNzMzMzg5NzkxNTcw.ESM-y6yN0eN2GvXxt1WMYk8-qma2kmAQBw5HaUkX9k4g.lKu3qNu7Y6yI_AQMEQCe6iKGzcgHXomdGh2BhqykB4Ag.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/1b879f77bb36eba9.bin",
+    "ok": true,
+    "bytes": 8321
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA3MjRfODAg%2FMDAxNzUzMzM0OTAwNTE0.i6MapAcFOHkvs4yD-BKVyUYxfC3Ct0dVY20FMVPKNGcg._ksETUCu9z99Lnu9ak-0-_USvZUJp80i-f5LEko5vHsg.JPEG%2FKakaoTalk_20250713_154359739.jpg%2FKakaoTalk_20250713_154359739.jpg&type=f160_160",
+    "local": "/assets/e497cd9314dfc045.bin",
+    "ok": true,
+    "bytes": 7221
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA4MTNfNSAg%2FMDAxNzU1MDgzNTIyMDc1.H85tyKLAahWTecb3uuvoHBbD2O5fYirR0TVJWcQ3REkg.8WIl0-vKabEodfTRUVtL9RcAh6AcSFHfNvkbq73Xhh0g.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/31d293656057c04a.bin",
+    "ok": true,
+    "bytes": 12472
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTA5MDlfNzYg%2FMDAxNjMxMTU5NTAwNzEw.QvXpn8EHCK3H2DGFK9VomoGWkpq9Yh4TdyCLF-bHilQg.zO1ZnOb262fd5Al3aKyfPw9codjtaJiaDjUQkCiJAjcg.PNG.multizzang2%2F24.png&type=f160_160",
+    "local": "/assets/af21167c31dc36b6.bin",
+    "ok": true,
+    "bytes": 8648
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAzMDdfNDIg%2FMDAxNzcyODc3ODYxOTcx.5xFBPkiQIJV9wtYIbC5kHa1ZWtuDXN7i9hpqpfzmwbkg.6IxQxjww45HupnvTHtEHWLVar9zSz2kKl9Wi-WZ46hkg.PNG%2FGenerated_Image_March_07%252C_2026_-_7_03PM.png%2FGenerated%2BImage%2BMarch%2B07%252C%2B2026%2B-%2B7_03PM.png&type=f160_160",
+    "local": "/assets/ef681ec09cd4e8d5.bin",
+    "ok": true,
+    "bytes": 10296
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA3MTRfMTY2%2FMDAxNjg5MzE4MjkxNDY3.dSNnWJ_YiwsT85LNJu8HeeUDl-Z3p-r8916TG9gU5AMg.L_ooeYxvhR6J9hk1g_mZEI3JJhiXYVE5U3mBHu_IpyAg.PNG.rvingcampingcar%2F%25EA%25B3%25A0%25EC%2582%25B0%25EB%258F%2599%25EB%25A7%25A8%25EB%25B0%2591%25EB%25A1%259C%25EA%25B3%25A0.png%2F%25EA%25B3%25A0%25EC%2582%25B0%25EB%258F%2599%25EB%25A7%25A8%25EB%25B0%2591%25EB%25A1%259C%25EA%25B3%25A0.png&type=f160_160",
+    "local": "/assets/ff580d810d1e3dcb.bin",
+    "ok": true,
+    "bytes": 9700
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTA1MDdfMTI0%2FMDAxNjIwMzczMDQ5MjAy.vE7WMm6gVEIbZ9ba5d5Odcpbu4P_D5ZuCN8eu4Z9Cmcg.hdmJXKpcudD3TIyYs4WWWTonPHp207LbSfQ1t-EKi3Yg.PNG.zizonhjh%2FprofileImage.png&type=f160_160",
+    "local": "/assets/014c88c845b06486.bin",
+    "ok": true,
+    "bytes": 4112
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MTlfMTI4%2FMDAxNzc5MTY2NTk0NTM5.VDpymPgwUV18zwYOxzaV5k8BmM3HEbxsJWgC66tZ_f0g.Le8YS9HKZCTOHOt4l5SDnPqUMs4hhsRwE00Vu3BDgNUg.PNG%2F7.png%2F7.png&type=f160_160",
+    "local": "/assets/27a48a03a0ce690f.bin",
+    "ok": true,
+    "bytes": 4095
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA4MjFfMTYy%2FMDAxNzI0MjM0Mjg0NDM5.sz0SLTZxp6yT-NGdx2hgnwc8LqKxyRSpGuTVpWNMnpgg.T0cI1IjYA5aNpDm9KUKl8f5qB4v3cUm7ZyhcWZvuyjQg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/ad93d147144439de.bin",
+    "ok": true,
+    "bytes": 11882
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMDVfMjU5%2FMDAxNzMzNDA3ODc1MDY0.VWfGmJZzjLDL4sSwBmsoS4mpwu_6RzJsIIPvG9aSAXog.PuGV_K83RDtIaMOLNd35DeskDPlE045DsZNKE7uRHqUg.JPEG%2FprofileImage.jpg%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/43634b2ec7017e68.bin",
+    "ok": true,
+    "bytes": 5392
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMTBfMTI3%2FMDAxNzcwNzA0MDk3Mzkw.9K4Ak5TtR_HdVvACV4kEmSJLa3T70A3vWmAz-QMW70Yg.fKwL05B7GTCnV7wIdbvTgbVkLsVAJjz4_bG5xx0qeC0g.JPEG%2FprofileImage.jpg%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/7acfbed15c160ac7.bin",
+    "ok": true,
+    "bytes": 9608
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNDA5MjRfMjg4/MDAxNzI3MTU5MDE1OTM0.3aS3bhkX5CJ5HJHWupWkY-txOlmM_p8qnlnLgc7mx_Ug._QHaXJnC7kn4sV03lUa55txzqGuSgCdChv52IjkWIZEg.JPEG/profileImage.jpg",
+    "local": "/assets/6da8177d8fd5cf8e.jpg",
+    "ok": true,
+    "bytes": 5227476
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNDA3MTFfMjQw/MDAxNzIwNzA5MDM5NzUy._kIAUwJBC-KoOqxzBG6476K_97rWxm0vzSo48iDoktsg.-Yipf4r_WD5H3zMl6MHHe8FK4Ivqv3tF98_ClVpgUuog.JPEG/12_LSS_1243_%EC%8A%A4%ED%94%84%EB%A0%88%EB%93%9C-1.jpg/12_LSS_1243_%EC%8A%A4%ED%94%84%EB%A0%88%EB%93%9C-1.jpg",
+    "local": "/assets/e13148e1fb36d365.jpg",
+    "ok": true,
+    "bytes": 7743331
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMTZfMTY3%2FMDAxNzcxMjI2MTA3NzQx.VuqiawfJVlIDgV1_nqaE_kwoBhllKULngridJGHoBqMg.VwmkBugx4iyrU-cesmNVgKVNcVgOBj5WBHCEMS0pVyIg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/9e36e28171978b0d.bin",
+    "ok": true,
+    "bytes": 9754
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA2MTBfMTkw%2FMDAxNzgxMDkzODM3MzM5.4j4_70dI9SflU-KiVLsHi185UlMP6iOCuAJwq07z-Fgg.MEjEZtcNyGop9fEOjjWEqNuplgH1mmB88DU1LUF7SGEg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/6e44106fa2cdfdf2.bin",
+    "ok": true,
+    "bytes": 6142
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAxMjRfMTAg%2FMDAxNzY5MjYyNjk2ODIz.WTnSeICHNwktaYXTC1u9ATwDdSm8vWfmF3fHay-r0F8g.5Fp60rDSL_tEIGuy-XaLFaHR3Tpc26LJDFHOst3K2lYg.JPEG%2F333.jpg%2F333.jpg&type=f160_160",
+    "local": "/assets/e27e39af493fda66.bin",
+    "ok": true,
+    "bytes": 17772
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20151010_73%2Fwlalsl0212_1444461887695Q9jBw_JPEG%2F1.jpg&type=f160_160",
+    "local": "/assets/6ec051ad4dffdf52.bin",
+    "ok": true,
+    "bytes": 12563
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA3MzBfMjA5%2FMDAxNjkwNzAzOTA3MTAz.YaPgUVVHO-acjGA_6mxH3A7k-pzQjJVLy9csuT8vYaAg.o-d3ahctrFcdAjN_EZsD4CEgp7l9mNFZG3hVxgbJgQkg.PNG.shinemumucat%2FprofileImage.png&type=f160_160",
+    "local": "/assets/5405bb9d0a68a7e2.bin",
+    "ok": true,
+    "bytes": 6564
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAxMTdfOSAg%2FMDAxNzY4NjMwNTIyMzc4.zT175pkEIwVySQj74OQp1s2dNqY_wt4VLgLqAW4pXs8g.YihEWsmRntuAQaEGaitcRKCEuIQAeP7kzbcDK31iYgYg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/bff4696c801bb626.bin",
+    "ok": true,
+    "bytes": 4214
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMDNfODUg%2FMDAxNzMzMTg1NTc3NDAy.9fMAHcT62FQWphr2KpUWWA_cgt2z9Qhv8vaJJaa1fGsg.cbLAtiHawJTD7ceyZw_7U9BdthfV5okksrGtzM_2bL0g.PNG%2FKakaoTalk_20241203_092437862.png%2FKakaoTalk_20241203_092437862.png&type=f160_160",
+    "local": "/assets/f059c3cee21170bf.bin",
+    "ok": true,
+    "bytes": 8239
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA2MDlfNTQg%2FMDAxNzQ5NDU2MTMzNjk4.2MNH5i0MpI-XSU3S7zIyz7axto77lOgcty6rc1MLlsQg.M2BBdelzAl-IzMtAyqVeQgwPRhYf52rEhpy5G8-iMQEg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/56e329366293ffea.bin",
+    "ok": true,
+    "bytes": 15354
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxNzA0MjBfMTE5%2FMDAxNDkyNjI1MjU4MjU4.wUpUzKPkW1LL7vh4LykFVNX184haihuscSKVYP-Sfwog.1wGlkFjpc6XPFvPqoF4lBgyXs0-iTfL6VcmzjD8aTsUg.PNG.cool_calgary%2F%25C7%25C1%25B7%25CE%25C7%25CA2.png&type=f160_160",
+    "local": "/assets/f00e188f1791f54e.bin",
+    "ok": true,
+    "bytes": 8502
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjA3MTlfMTY4%2FMDAxNjU4MTg5NzUxNjAw.5E9lqdBFQ3I0QmaPKl19xT2Tm1Vf25xIS8-sQ_v4Wnkg.Xd1dQqsSkdOFBJ-KHZ3JQQ5Ti6MsJiauy_X2x9KFloAg.JPEG.meekcho%2FIMG_8133.JPG%2FIMG_8133.JPG&type=f160_160",
+    "local": "/assets/9b3892bdf1eb5459.bin",
+    "ok": true,
+    "bytes": 6456
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjA5MjZfNjUg%2FMDAxNjY0MTk0MDIxMjA5.xWz_urne4qhmU2hGbVWuWtE3B2TLvo2WDo2ao5o8Vnwg.N8OYXCs6D8-ZTFwd-UZ5Ly5oSfWFM2OWFCYsbJrFMEIg.JPEG.jongha3846%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001.jpg%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001.jpg&type=f160_160",
+    "local": "/assets/ba49ca19e4cd1fa7.bin",
+    "ok": true,
+    "bytes": 4638
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEyMTdfMTEg%2FMDAxNzY1OTU4NTM2NTQz.6iFn80QRNwF2it6VoISlVt92fkgVoTx3ir4ghkExZ4cg.rqYpePuDm0sanXtaERAYZm97gHehlZFAXrjV8ahijeIg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/f199696e0da72410.bin",
+    "ok": true,
+    "bytes": 5244
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjA5MTFfMTI2%2FMDAxNjYyODY5NTcxMzI1.MMpYSvHnEwyI9IQO1SKutb4dcruBeF7Iz74zMKRo_Bog.WW0guXR-xrmRJnYH_JQKqJTfkCuEfuu_SuI3KQzZVmgg.PNG.bugibugi3%2FprofileImage.png&type=f160_160",
+    "local": "/assets/92c879def616a60f.bin",
+    "ok": true,
+    "bytes": 11151
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/seedling.webp",
+    "local": "/assets/7f21eeeb6517ee75.webp",
+    "ok": true,
+    "bytes": 19200
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA0MDZfMTE4%2FMDAxNzQzODY4NTU3NjQz.Easzt0BQTPudo44uS3a_bdGAIgcbtMj2tH1Mmdk52GEg.wO1apohINnmefNisOKn3sp0xC5Bt3U2Sa8U-OPzpoGYg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/b0882285649a4fe9.bin",
+    "ok": true,
+    "bytes": 10099
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA2MjRfNzEg%2FMDAxNzUwNzMxNTkyMzcz.VsT-bV1PdIgovS-wewBVBYK-WJFT0vDK4Ww_Dwz_aTUg.B72IeaJiUWO4PUss7J8D7eE2Cnljza6zpBN6Pkn8RCAg.PNG%2F%25EC%2595%2584%25EB%25A6%2584%25EC%25B4%258C%25EC%259E%25A5_%25ED%2594%2584%25EC%2582%25AC.png%2F%25EC%2595%2584%25EB%25A6%2584%25EC%25B4%258C%25EC%259E%25A5%2B%25ED%2594%2584%25EC%2582%25AC.png&type=f160_160",
+    "local": "/assets/862e3e8786c48c30.bin",
+    "ok": true,
+    "bytes": 11113
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA3MThfNzkg%2FMDAxNTk1MDU1NDI5MTM3._nfnJbNWVU89v8xztOX8zECkChSnH79l5-0t270460cg.MivL3-8i0fvpPjRhc7rB-p1dPuFn5IQQ6aK0PK6Z5p0g.PNG.kim73g%2F%25C7%25D8%25B9%25FD%2B%25BC%25F6%25C7%25D0%2B%25B8%25B6%25C5%25A9-1.png&type=f160_160",
+    "local": "/assets/3d48c78179e70554.bin",
+    "ok": true,
+    "bytes": 7811
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAyMTdfODMg%2FMDAxNTgxOTIwMDAyMjg2.YYcNSDPiPAr9T2zzMRR9wtZufklrJYeWLaIlf8qEKEEg.dzcbjWzFsEqS9Bdx8wIug_MvwMkgg-QlzBVoXi7GHP8g.PNG.hypoid613%2FKakaoTalk_20200217_150857574.png&type=f160_160",
+    "local": "/assets/189c1eeba2898bdb.bin",
+    "ok": true,
+    "bytes": 7539
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA0MTZfODQg%2FMDAxNzEzMjY5MjYyNTgx.XqSdCNiE2snfS0tx19HGGSb-qXP4RrkqNOD4IOwu3GEg.HCfo9qS4o18njYZat5PSBh60IUT2A1qUP8tyIBjByyIg.JPEG%2FKakaoTalk_20240416_204858955.jpg%2FKakaoTalk_20240416_204858955.jpg&type=f160_160",
+    "local": "/assets/09cbd806437eb152.bin",
+    "ok": true,
+    "bytes": 8873
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MDFfMjYz%2FMDAxNzc3NjIyNjY4MzE2.ukYzYmGNIxUzD2QS4soxmxSxUK-vNsRJQAH1wTY_lrIg.Y2h-D2WaPqcrrAVyMoRfGNx-Qk1HF3zqdQU_uJ_3fYsg.PNG%2F%25EC%258A%25A4%25ED%2581%25AC%25EB%25A6%25B0%25EC%2583%25B7_2026-05-01_%25EC%2598%25A4%25ED%259B%2584_5.04.14.png%2F%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA%2B2026-05-01%2B%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE%2B5.04.14.png&type=f160_160",
+    "local": "/assets/0b6a1ea9bb2fd859.bin",
+    "ok": true,
+    "bytes": 9229
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAzMzFfMTY5%2FMDAxNzc0OTM2NTY1MDA4.eWloNWIgF2uZtaut6qWjyJYqu6Y6vtUKhEvE5Aw2lMwg.IgZF6IkPDCc692xNU6hcEoO7E1nHKPGTmVYDJ-orK2Ig.JPEG%2Fimage.jpg&type=f160_160",
+    "local": "/assets/9c912fdcf8d14a5c.bin",
+    "ok": true,
+    "bytes": 8559
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxNzA5MTNfMTg3%2FMDAxNTA1MzA3ODU5Njk1.hVeI1Pcg38wyoq-iFU3Z6b1OX7fdApjkzPZ8tp8Ilg0g.EQ-aBuqIKeCbWAjNbUgzuHbHeFFvF2S1odecy7xwBWAg.JPEG.photographersehyun%2FDSC_558211.jpg&type=f160_160",
+    "local": "/assets/67b90c1e920d5806.bin",
+    "ok": true,
+    "bytes": 5931
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAxMjBfMzQg%2FMDAxNzM3MzQ0Njg0Mzk4.qPyIdDHieAKE5c886bbysDnXhBBJdKULlsfee9JROSUg.x6UEoYZ-KIpGC0BYSSl-aDnzeO9nSdnjTfQzWw9RjXwg.PNG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%2598%25EC%2584%25B8%25EC%259A%2594_-_2025-01-20T124439.842.png%2F%25E1%2584%258C%25E1%2585%25A6%25E1%2584%2586%25E1%2585%25A9%25E1%2586%25A8%25E1%2584%258B%25E1%2585%25B3%25E1%2586%25AF%2B%25E1%2584%258B%25E1%2585%25B5%25E1%2586%25B8%25E1%2584%2585%25E1%2585%25A7%25E1%2586%25A8%25E1%2584%2592%25E1%2585%25A1%25E1%2584%2589%25E1%2585%25A6%25E1%2584%258B%25E1%2585%25AD%2B-%2B2025-01-20T124439.842.png&type=f160_160",
+    "local": "/assets/05acc6f1ae10eb1b.bin",
+    "ok": true,
+    "bytes": 9308
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxNzA2MjhfMTA4%2FMDAxNDk4NjYxOTI3NTQw.jDq48tJj9Dr-lrU051mrplokMxiJqIlVhAFmoHIe3Agg.p19E3OuxIchjC4WVdlA_KdsxuU70CrI3lbZ9pd9nwIIg.JPEG.hearts1012%2F%25C0%25B0%25C7%25CF%25B8%25C1%25C4%25A2.jpg&type=f160_160",
+    "local": "/assets/8d0ce050928dbf27.bin",
+    "ok": true,
+    "bytes": 4978
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjAyMjRfMTMy%2FMDAxNjQ1NjkwMzc5ODkx.ETpJ4OkQSuiFSf4ACMZXl2eN-xiWVQL_1Wh22ougt1wg.s15et1od8BDf-otVE2gT-cB1s26RjfX1sg_rgoBaLgog.PNG.tjqtjqdl333%2F%25EB%25A8%25B9%25EC%258A%25A4%25ED%2583%2580%25ED%2582%25B9%25EC%25BD%25A9%25EC%2588%2598%25EC%25A0%259C%25EC%2595%2588%25EA%25B2%25BD.png%2F%25EB%25A8%25B9%25EC%258A%25A4%25ED%2583%2580%25ED%2582%25B9%25EC%25BD%25A9%25EC%2588%2598%25EC%25A0%259C%25EC%2595%2588%25EA%25B2%25BD.png&type=f160_160",
+    "local": "/assets/4c1213f6207698e7.bin",
+    "ok": true,
+    "bytes": 10153
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20150702_300%2Ftaekstory_1435820660782rt2bE_JPEG%2FUntitled-3.jpg&type=f160_160",
+    "local": "/assets/1fea49580890c169.bin",
+    "ok": true,
+    "bytes": 11132
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjA4MzBfMjc3%2FMDAxNjYxODUxNTAzNDMw.KP48xaxl0vnul2S626VzPiWq8okgYl67Oqsmml3RAe8g.VKzhH-5bVrFT7KxfCJ5GMV2CasgogBljYZ-pMs98ja4g.JPEG.dessert1905%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/b3e702837b655f1e.bin",
+    "ok": true,
+    "bytes": 5826
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MDdfMjY4%2FMDAxNzc1NDg4MjI0MDQw.rm6Q6SByCpS_hoWbruN_gP2LPoQDRwwNhTXgOEAcVmIg.4Y4wbRK2CaTdWVD2xQ-Hh8beZY-Z4G4du4fSRkwynIog.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/6d1bc9a12767fe20.bin",
+    "ok": true,
+    "bytes": 11439
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA3MjlfMTQw%2FMDAxNTk2MDI5NDkyMDY3.YcKUH0OBfRPzwEz_RAu05MoHoDeuRMPicm_Ctnbv8uIg.H0UaRqpO2cqWD_6iwu6YyX4qGj8IwN-howjmzZ5JJn4g.JPEG.godopu333%2F%25EB%25B8%2594%25EB%25A1%259C%25EA%25B7%25B8-%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.jpg&type=f160_160",
+    "local": "/assets/af607897e85e07b4.bin",
+    "ok": true,
+    "bytes": 1784
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxOTAzMDlfMjc3%2FMDAxNTUyMTM4MTczMTk5.hLpmyJ9qRrTUYP0tJx2cNfkTr8_SQ06XRC_kKMBHBVEg.NtDxfUNAbQ-eTbzvHiJuhkS7BjmKQHClOpm1zySFOLEg.JPEG.bk32167%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/4001b59fed72190d.bin",
+    "ok": true,
+    "bytes": 7262
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAxMjBfMjQy%2FMDAxNzY4ODk0ODU1NDk5.JS-zt-9qzftGrDJ8qrfmG2x8BuGLVE5UJ5k4uqLfmV0g.LGN3oDd9lD8o5QWz_W3m9CsAd8wg8LF1ILV9kZe5Tjkg.JPEG%2F789.jpg%2F789.jpg&type=f160_160",
+    "local": "/assets/c316e7e0d667cb7c.bin",
+    "ok": true,
+    "bytes": 7735
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAxMTdfMjkw%2FMDAxNTc5MjYyMTIyNjc2.4GIAijboxrJw1-6_RBpx4yJxcMUbDfo2YUnCnLB7nhMg.gyc7nGp10N6RMiMOAsy_SFK3InO7zVPVuokhsPfXJm0g.JPEG.oceandy%2FIMG_0935.jpeg&type=f160_160",
+    "local": "/assets/e178a0cd1b0a82b5.bin",
+    "ok": true,
+    "bytes": 10655
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAxMjBfMyAg%2FMDAxNzM3MzY2NzYwNzE0.sFvO_q0HB_cq1pW-vOSisioPQL0ptnywuSKe0KtPW2cg.9PNz7kiG5BKvao_x1EjhyQeoRuN0ZeDCEo2oU81BCOYg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/e33d6099f1474a91.bin",
+    "ok": true,
+    "bytes": 10630
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA3MjlfMTQ5%2FMDAxNzUzNzc4MzYzNjU3.zcwix17pFLIqDnKmaCmbIzYUypp66w_263Ss4Qqlkiog.gL_fEFnY5mTeq8WRY6fuU5T6zc8a9lz8CCVAqOYovCYg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/c1c8880905d05673.bin",
+    "ok": true,
+    "bytes": 9061
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzEwMTBfMjU0%2FMDAxNjk2OTQwNjY0MTM2.URlLqBjTf57XKkto6IKplLrByE3bRsX2jBgR4OM3W80g.Op-hfvAAunARIJPTVpQ3mfH034cr3mmg_PNiHwDjzL8g.JPEG.daun1217%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/8fe53d30a0f527fd.bin",
+    "ok": true,
+    "bytes": 11636
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20120816_70%2Fetienne03_1345054147022_xEFD8H_JPG%2Fttttt%20121.JPG&type=f160_160",
+    "local": "/assets/b3ae286a5c5d37a5.bin",
+    "ok": true,
+    "bytes": 10297
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjExMTJfOTcg%2FMDAxNjY4MjQzNDM0OTQw.RnXEYSLoXbCCFZExVI3SIsQSB2Ch7BTVqDNIPoMvtR8g.pyGd_fdzUyuQAcDGkmz25FYxZ1cBOgDjoEMYpwH4XLsg.JPEG.sesool%2FKakaoTalk_20221112_175607250.jpg%2FKakaoTalk_20221112_175607250.jpg&type=f160_160",
+    "local": "/assets/4093a3538bad264b.bin",
+    "ok": true,
+    "bytes": 6249
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MDFfMTU0%2FMDAxNzgyOTExNzIxMzM1.w-06WaHQ1MqPe007e014DMR8biaQN5erX4A5dcSScR0g.VeElYxyrzDAI-LxZ1nj-cfe5_cZAqc6L4HmjgXpiEJYg.PNG%2FChatGPT_Image_2026%25EB%2585%2584_7%25EC%259B%2594_1%25EC%259D%25BC_%25EC%2598%25A4%25ED%259B%2584_10_14_43.png%2FChatGPT%2BImage%2B2026%25EB%2585%2584%2B7%25EC%259B%2594%2B1%25EC%259D%25BC%2B%25EC%2598%25A4%25ED%259B%2584%2B10_14_43.png&type=f160_160",
+    "local": "/assets/c3a723f4974fad10.bin",
+    "ok": true,
+    "bytes": 7557
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTA1MDJfMTk0%2FMDAxNjE5OTY2MzQyNTMz.yBGytddKEhZGFjSWSKT5y4cxh8jiv-PXpbY_gN8S5Dcg.SLkRpJW2UmaGCnpLl1fdyYKMeCrfOrf_dO5G4XQsGLIg.PNG.dawnmart%2F%25EC%2595%2584%25EB%25B9%25A0%25EA%25B7%25B8%25EB%25A6%25BC-%25EB%25B3%25B5%25EA%25B5%25AC%25EB%2590%25A8.png&type=f160_160",
+    "local": "/assets/86944c0cd2ba4c4b.bin",
+    "ok": true,
+    "bytes": 6593
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAzMThfMTIy%2FMDAxNzQyMjI3NDc5MDM3.LXHGzmrHBGt-jpTqKQeGE8Cab1C88-zcTzdd1Wv4lU8g.n-dsJPJSpuNBfPm-qnuYYYClohbIcg7WJdX-CZJCABQg.JPEG%2Fcats123123.jpg%2Fcats123123.jpg&type=f160_160",
+    "local": "/assets/0a4200a18f9b9b6c.bin",
+    "ok": true,
+    "bytes": 8831
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAyMjNfMjIz%2FMDAxNTgyMzg5OTU1MzA4.xJTAlpR5GwO40osKUQGivoEdGZOqYzqoToBk19AZ5wwg.P4gJC3NXZTvqWwrHLGPoqVFy54Yux4nQmLjEfMnp5VAg.PNG.supapa13%2F%253F%253F%253F%253F%253F%253F%253F%253F%253F%253F%2B2020-02-23%2B%253F%253F%253F%253F%253F%2B1.33.07.png&type=f160_160",
+    "local": "/assets/52345aba7322758b.bin",
+    "ok": true,
+    "bytes": 8212
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjAzMjZfMjAy%2FMDAxNjQ4MjIxNzMyNzE0.KSBsjtPAqXxRRTL2S1_nAUpmn7ZL1Kn50O72GxxM_Ngg.mS2ZxAaLIa9i5tPWuEpi8C_G5qgYFAOqbwWn9G2lhscg.PNG.ranto28%2F2022-03-23_07%253B05%253B10_.png%2F2022-03-23%2B07%253B05%253B10_.png&type=f160_160",
+    "local": "/assets/b1e8579dfe476914.bin",
+    "ok": true,
+    "bytes": 4904
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEwMTVfMTgy%2FMDAxNzYwNDkxNTE4MTE3.hGsJTXhxAPc7V7EOLTRk9ffeCQw5A1neQrfFmV_lOsIg.giZiwjplgbtuqSZp4zKjKCTDZDcNvBBc2QngE1DiWFYg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/d15687eae5131a4f.bin",
+    "ok": true,
+    "bytes": 5670
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEwMTVfMTc0%2FMDAxNzYwNDk1OTc0NTA2.FL_rcYmWnDSCONZCDAJrV6rKJRM7cYy_KghR7pBV3_Yg._roOuhc1rmwOov-5WI9B9E0QII_FCV_EnweMjqBYjSAg.PNG%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.png%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.png&type=f160_160",
+    "local": "/assets/8c4e1f401fbfd7de.bin",
+    "ok": true,
+    "bytes": 3045
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEyMjhfMjk4%2FMDAxNzM1Mzk1MTIyNDQw.AyByIte6bFCi9zjtjUMhvtqogi1d--Vi10vEwqUHh24g.RoUM1Mpv2ECI1vwj2g30C-zBqeGuCfRD1-C2UPxh1NIg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/8b2cd0c8fa0ee13a.bin",
+    "ok": true,
+    "bytes": 8039
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzExMDZfMTcy%2FMDAxNjk5MjUyMzg5MTc1.KzOi_sM0UIojgklAA_K3e5YWPsFJ3DxNdG0Q_2CUj5Ug.QZrsH3An67S9K-cvb_EKWy_1JQHDh2zIogDIe3Tot40g.PNG.sinsungcns%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.png%2F%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.png&type=f160_160",
+    "local": "/assets/47b2463f8933aa58.bin",
+    "ok": true,
+    "bytes": 3391
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDEwMDZfMTYy%2FMDAxNzI4MjA0MDk4NDY4.8RdxRW79u297r3b9yNg1AbMU1cVf7wL0n_u6bpwP71Eg.LMnS70EOw9Y4EA3PZHT0vqr6bO_P6cuxz1sTYLQSXl8g.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/da92f3291991c624.bin",
+    "ok": true,
+    "bytes": 6967
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA3MDJfNTMg%2FMDAxNjg4MzA5NzAxODg3.bOOggRaotFq_XXPKsn2QdKLYp6HVqxbUUEMV3z41Q5wg.GXW5Bd8hQu69UPNAnDmroHA0CvbABxjH-LMRh0OdvUog.PNG.caleb0901%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584-%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001.png%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584-%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001.png&type=f160_160",
+    "local": "/assets/c9b0966ec66ec557.bin",
+    "ok": true,
+    "bytes": 6811
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MDhfMjM4%2FMDAxNzc4MjE1OTAxODkw.VzctfzggJu-tqqezO79rGbEs-MHyvXEbyjpdizw27DEg.8wPbPadSTCoSmNnlFg-1z2teN0jDY0auQVIZsnGhcF8g.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/e9b96e3cc96f2606.bin",
+    "ok": true,
+    "bytes": 8444
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzEwMTBfMjMg%2FMDAxNjk2OTQ3NjY1MDg4.NE3rK2xban4o0Gaw7zwRiI2NBwZTGc9m6pP09DQcbaUg.3_AnRPY8ervi1Vdr7tw1K9zE0SvMCakw2oVmVIvrpFsg.JPEG.hanjh5064%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/e1a28065c4826db5.bin",
+    "ok": true,
+    "bytes": 7603
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MDJfNDUg%2FMDAxNzc1MTAyMTA1NTIw.COkRrXAueiyNxAFBUWdzh30B7_A-amJiN_Jn_3msqAUg.JSQHao_JokzG0PBfIlrgr9aadtk0OdW4mpHLGT40gPAg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/7e4999c41f2ae547.bin",
+    "ok": true,
+    "bytes": 9799
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA0MTBfNjkg%2FMDAxNjgxMTE3NDM3NjI5.9PGwuP8yOnplLWNL0d01PXRnFc0OBNGWaJU6R0-HxVUg.ghIh1cPiTnnhKSfwK4dfgfLGNUsRtYvEnbyDMNvvVEMg.JPEG.anarche69%2FKakaoTalk_20230410_180253212.jpg%2FKakaoTalk_20230410_180253212.jpg&type=f160_160",
+    "local": "/assets/2491d2c97802e831.bin",
+    "ok": true,
+    "bytes": 13565
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEyMDNfMjE3%2FMDAxNzY0NzY2Nzk2NTcy.6vagFtAYo9fQYkyT0Df67d8hZ4IDUZ3ryvXK6b9kCRsg.sczdsX6yWMesqw50f3GRpLKGvAwDqRTsviLQqbrHNjsg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/c6f5bd8207cd66cf.bin",
+    "ok": true,
+    "bytes": 6951
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEwMjZfMTAx%2FMDAxNzYxNDgzNTIwMjUx.nVZGqWGz40UihUsxOdBG_cs4Vvpj_r8a-GK0p3mNWv8g.J95DXkHXEaFMH8HkFfZFWuLcUphkDqRpJ4JdP_dISBsg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/1de59c2150e3662e.bin",
+    "ok": true,
+    "bytes": 9301
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDAxMDRfODkg%2FMDAxNzA0Mzc1MjAxMTgy.tGG3VSvGoh2sP6Y2auxlWNEYosy3EUi-ro6Cvq35vg8g.UGhVnmGZsWFcpdmbaTIZKzwLXw84uTYQULpEXKRzH3sg.PNG.soyoung6655%2FprofileImage.png&type=f160_160",
+    "local": "/assets/a85fd4dde25b98fc.bin",
+    "ok": true,
+    "bytes": 10354
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzEyMjlfMjQ2%2FMDAxNzAzODI5NzUwNDU4.uQ9w29ROswjFTi6cba8MkpLrEhBOGGcKnymWdw3tL08g.SnZBdjtp-Zisrg4T50uVhOPYG4tkd1mFS9RaR-g_-rIg.PNG.himawari_tw%2FprofileImage.png&type=f160_160",
+    "local": "/assets/86b6cd998de9b9a3.bin",
+    "ok": true,
+    "bytes": 4270
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA1MDhfMTE1%2FMDAxNzE1MTQ5MjgwODYy.Trt9BjaoiTdptHBwSFmNFjvFMHZRYCd__vEGBLyIrn0g.IPItgtesagAox-HEtd7f0-IyKmk-4nrpMZOogclfS1Qg.PNG%2FKakaoTalk_20240508_150841411_02.png%2FKakaoTalk_20240508_150841411_02.png&type=f160_160",
+    "local": "/assets/46e92871f0ecd9f4.bin",
+    "ok": true,
+    "bytes": 8749
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDA5MjRfMTIw%2FMDAxNjAwOTI5MjYxNDQ4.w5uRLVPCOAWhXi-NcPtIa5r-COmvKBZ1wO6hb_0pX3Ig.4tAUkko7FZ1NKh6Cxs85HW50VB2R0skxPCX863mMfTIg.JPEG.lllsoulz%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/5786bbf13619f62e.bin",
+    "ok": true,
+    "bytes": 4208
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzA1MjNfNzgg%2FMDAxNjg0ODI3MTI4MTIz.b2uRLd50eRHFW2KqmogYYKcJY3zQ3bjUYF3QPtE_bYUg.YC0vSxZVtwXwd0apOHu9qoq-OGF2Fj_iem88vbxj6xEg.PNG.korea_diary%2F%25EA%25B5%25AC%25EC%2584%259D%25EA%25B5%25AC%25EC%2584%259Db.png%2F%25EA%25B5%25AC%25EC%2584%259D%25EA%25B5%25AC%25EC%2584%259Db.png&type=f160_160",
+    "local": "/assets/047b2f5617591844.bin",
+    "ok": true,
+    "bytes": 6693
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxODAyMjJfMjAg%2FMDAxNTE5MjM1MDY0ODkz.i2BoSjFRypGRpjVBrBpcCmf0KbOMrqb2h3acteiK9B0g.6yvtDMntMLXlDV_DvEKFi3LO5JsBoDMCt7EAFBZ3-B4g.JPEG.daraksil_hyejin%2Ftumblr_p4hr4j9pNa1tptt5zo1_500.jpg&type=f160_160",
+    "local": "/assets/65c5bbb4153c58e8.bin",
+    "ok": true,
+    "bytes": 9456
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxOTAxMDdfMzMg%2FMDAxNTQ2ODE4MzU1ODE1.9SML1gBFOoZUC7ZXSO7zA9zFqLnQSVM9x3XwRp8fmWMg.Xy9bxaubfBg5v9Pic1W8VkB7OuL6w6Fu51_v_deG77Mg.JPEG.cookie1411%2FKakaoTalk_20190107_083936777.jpg&type=f160_160",
+    "local": "/assets/7d2000d8457f72cf.bin",
+    "ok": true,
+    "bytes": 8595
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAyMjhfMjI4%2FMDAxNjc3NTc1MzY0NzQz.OHmsBxJ-WZyRVCBX7128Y-wdnjyYInQbIDxZdVFGYTog.Z4_jNDiDNZytoig7O266iVNNRVawv5obCXsFrDNyk0gg.PNG.uni_do%2F%25ED%2599%2594%25EB%25A9%25B4_%25EC%25BA%25A1%25EC%25B2%2598_2023-02-28_180908.png%2F%25ED%2599%2594%25EB%25A9%25B4%2B%25EC%25BA%25A1%25EC%25B2%2598%2B2023-02-28%2B180908.png&type=f160_160",
+    "local": "/assets/984fea6a64d95387.bin",
+    "ok": true,
+    "bytes": 8219
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MTVfNTkg%2FMDAxNzc4NzgzMzYyNDQ1.SAsdjxaPf64pCKTsEndVPC4zFPomELY070G4r87pFaIg.F-8Adtzs9-rHRojivy8RY0wzs5BGpOhYayUZKBNEkkYg.PNG%2FGemini_Generated_Image_nz1t4ynz1t4ynz1t.png%2FGemini_Generated_Image_nz1t4ynz1t4ynz1t.png&type=f160_160",
+    "local": "/assets/894a6566b31a17cd.bin",
+    "ok": true,
+    "bytes": 11949
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzEyMTdfMTU3%2FMDAxNzAyNzUyMjY0MjYz.uGvWfvznc3oFTt4H6--wNtDT7II8bMT3JLBCU_B2ZRQg.RcpdSzfyBs9gOQ2mLaAbfk-RcpbT8heIugidC6WbMisg.JPEG.seoyj1027%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/86dc6d57b39c7e5e.bin",
+    "ok": true,
+    "bytes": 561
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAzMDNfNzkg%2FMDAxNzQwOTg1ODA2MDE5.y-6gtZb6Zgf6BkR_2_lCMEUgWR0lxofCh7Tzbdo8fzkg.8N7Zembzaq7T-lxXcb3reEbmKvZZn7eH2lANDQC_QNIg.PNG%2F%25EB%25A1%259C%25EA%25B3%25A0%25ED%258C%258C%25EC%259D%25BC%2528%25EA%25B2%2580%25EC%25A0%2595%2529.png%2F%25EB%25A1%259C%25EA%25B3%25A0%25ED%258C%258C%25EC%259D%25BC%2528%25EA%25B2%2580%25EC%25A0%2595%2529.png&type=f160_160",
+    "local": "/assets/02cfe3eaad0699c1.bin",
+    "ok": true,
+    "bytes": 2308
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA0MTBfMjc3%2FMDAxNzEyNzM0MjI5MDQ4.Mm8CWZUYx2X3__AWMmu7khVEL8UP2w04dyLFEFZyv9og.h4TKsgHu4G_sXvOqpMJVf9o2ZNaydJCjjWzhjFHai3kg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/3d0a188a20f95739.bin",
+    "ok": true,
+    "bytes": 12242
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MjdfNDYg%2FMDAxNzc5ODQzNDE3MjMx.QH_F3AKPk09t5WLNPDl0dpeOcy0YK_4IZRHBBOuWnkog.f1dWvEToaRqS4cVWob8Byhle3LpRGEtk_4JU5cTqb3Eg.PNG%2FGemini_Generated_Image_33vopp33vopp33vo.png%2FGemini_Generated_Image_33vopp33vopp33vo.png&type=f160_160",
+    "local": "/assets/43895798e4070219.bin",
+    "ok": true,
+    "bytes": 7068
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDAyMDFfODYg%2FMDAxNzA2NzIwMDMyOTA0.GGWiZV0xcvAI5vG0rSZdD4W7BQIjjF2Ga51e61MsN-og.klLdfbr8BoCb5Y_uMEjkGUSARiy3xZ0R6-xMVGYcUuwg.JPEG.gxon123%2FDSC06900.jpg%2FDSC06900.jpg&type=f160_160",
+    "local": "/assets/a6f140956a35d216.bin",
+    "ok": true,
+    "bytes": 2384
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA3MDVfMjE3%2FMDAxNzUxNjc1NDMxNTQ4.ruoX0ZozyGSxIpGW4dzByhxxF5oTg7nv_e_3irT9njEg.4paUq31MJExeHY9bZ9sR3syN6XSZa1GneUbh3X7MKYEg.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/1cbe99a35b1efa47.bin",
+    "ok": true,
+    "bytes": 8075
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzExMjBfMjAg%2FMDAxNzAwNDU5MDY2MTM2.eHIJWYQTJI0k7TXbpBQ1r4LJ13LQBCsXiPSRGs4ky7kg.UvrodmbLmDdB85SGCrdIVo9Zyd2JPGSxsl3E6M18ZbAg.PNG.mellongi123%2FprofileImage.png&type=f160_160",
+    "local": "/assets/eeca125c8c7cb1d1.bin",
+    "ok": true,
+    "bytes": 6179
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAzMTBfOCAg%2FMDAxNzczMDgyNjkyMzk1.NMKvadIN50KrqqIgs9RqDc_FbjgxhfgPHH1x7RtiWlQg.3JXgNWw9qFc7sXbO5hb35EVDP294dGBunsGhCYSTbP4g.PNG%2F%25EB%25A1%259C%25EA%25B3%25A0.png%2F%25EB%25A1%259C%25EA%25B3%25A0.JPG&type=f160_160",
+    "local": "/assets/ef79b0021fbce439.bin",
+    "ok": true,
+    "bytes": 9125
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MDdfMjY4%2FMDAxNzc4MTIwNjUwODE2.jCBxpttZaCQRmGoKWBDf9KaPWIHdvb45mkkOTYXKL5Yg.sCMYhflrzc9k7_T9O0J4yihsk4EeQKsEfv4ntx1pr0sg.JPEG%2F%25EC%2598%25B5%25EC%2585%2598-%25EC%258D%25B8%25EB%2584%25A4%25EC%259D%25BC.jpg%2F%25EC%2598%25B5%25EC%2585%2598-%25EC%258D%25B8%25EB%2584%25A4%25EC%259D%25BC.jpg&type=f160_160",
+    "local": "/assets/7e225e5be6ad7d02.bin",
+    "ok": true,
+    "bytes": 10525
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMDAyMTJfMTYz%2FMDAxNTgxNDk1MzQ2Njk3.NAs18xp9ZtAchKo6hoGDC2Gg2uRpb9NwcS475G0LgtUg.j4cG8tXHqusCJ4nSbT4JAic0fDXp-2AkO2SaWL3GkKog.JPEG.ilovezzangv2%2FIMG_9692-1.jpg&type=f160_160",
+    "local": "/assets/3161595480d2a843.bin",
+    "ok": true,
+    "bytes": 7343
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA5MjhfMjcx%2FMDAxNzI3NTA4NTU1MzUy.LqDqYZOCoL9J1W9n0MJdygk31_lcWAcAKlKbPQIJSd8g.YJ6Xq61PfuV3F7wyd9UgvaopOcSXgGFExiSfAMlBL9gg.PNG%2F%25EB%2593%259C%25EB%25A6%25BC%25ED%258C%258C%25EB%25A8%25B8%25EB%25A1%259C%25EA%25B3%25A0G.png%2F%25EB%2593%259C%25EB%25A6%25BC%25ED%258C%258C%25EB%25A8%25B8%25EB%25A1%259C%25EA%25B3%25A0G.png&type=f160_160",
+    "local": "/assets/3af73d02242e4da2.bin",
+    "ok": true,
+    "bytes": 9475
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzAyMTZfMjUw%2FMDAxNjc2NDc0NjM0MDgx.TyKbZTdvirsCzRWHR6lxIcSiZ4mgoQnD5nosgWhOcVwg.CdwAUK_m5o6zyU9dIMDD8uT6p5oCTLPqpZv1yN7qTd4g.JPEG.djeon0011%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/1b72f629b8359bc1.bin",
+    "ok": true,
+    "bytes": 11308
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MTJfMjk5%2FMDAxNzgzODE5NzMwMzY0.EhvDQR6ZFvO2pH10iUDxClnZPozUsywfEBPQ81ai99gg.M5Pendmw7ax8RqXGY5dCwP0F3oxC52X7uv-093-WBT0g.PNG%2FprofileA.png%2FprofileA.png&type=f160_160",
+    "local": "/assets/71c387faecf83c49.bin",
+    "ok": true,
+    "bytes": 4833
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNDA3MTZfNTYg%2FMDAxNzIxMTA0ODIyOTY3.QM-B4RTfqr41HkaBgXwBXLnv9n7Xo1I_KBsF9EH13Wog.1IrIcNGMmH1vjZjRnEsazmWA34G7OPIH_c6rbuXvWyIg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/091afba2d4c93254.bin",
+    "ok": true,
+    "bytes": 14503
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTExMjVfMTQy%2FMDAxNjM3ODE5NTg0NDY3.9F405gSITr7ryfmxvx7bGDABpPo4bCBHsr4S7xQs4rsg._0BOC8U49S9j4zzdmgSA9TTlAcQHYFQ_H_SxZGD0V58g.JPEG.whity89%2F%25EC%2595%2588%25EB%258F%2599_%25EC%25A7%2580%25EB%25A1%2580%25EC%2598%2588%25EC%2588%25A0%25EC%25B4%258C.jpg&type=f160_160",
+    "local": "/assets/93796ef60cc504ff.bin",
+    "ok": true,
+    "bytes": 8417
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MDhfMzIg%2FMDAxNzc4MTcxNTQyODA2.mlT0SH34DntZe6ciqRIx_rR4JRsLN5eQdHCYzw_uu3Ag.IOD1vdgIOoc-HxwMjwKv46NPz303liXiI2rlsN1oa8Yg.PNG%2F3AC06784-34A3-4313-AB50-D93ABE482843.png%2F3AC06784-34A3-4313-AB50-D93ABE482843.png&type=f160_160",
+    "local": "/assets/450688086c977e4c.bin",
+    "ok": true,
+    "bytes": 12077
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fssl.pstatic.net%2Fstatic%2Fblog%2Fimg_profile_default.png&type=f160_160",
+    "local": "/assets/d13e0360988650d7.bin",
+    "ok": true,
+    "bytes": 1941
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMjBfMjQg%2FMDAxNzcxNTE0NjE2Nzk2.Hi7iTBgN-I8kDa9TwDm_eKYch3IqvmWa9FvRBerValYg.fk8WI_XYbccuUKFzp5OVmQu6gSYCWULk3lTUrYHpiU0g.GIF%2FprofileImage.gif&type=f160_160",
+    "local": "/assets/090d383f7c672f28.bin",
+    "ok": true,
+    "bytes": 5381
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAxMzBfMTE1%2FMDAxNzY5NzYzOTMwOTIz.bjrKYhF-S4D3-mVuCKwxLTEqMbmxS0XHFbFF3tyaJIIg.X98qnWHbF6i0wsYY3OpO6KYSriePm5b3eIb1vAckBxQg.JPEG%2FIMG_6369.JPEG%2FIMG_6369.JPEG&type=f160_160",
+    "local": "/assets/eff1d32d99111a25.bin",
+    "ok": true,
+    "bytes": 11232
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MjVfMjA0%2FMDAxNzQ4MTY1MzQ5OTM2.XtUngT0a9ZphvzkBPmt_jLhACo01lvZLme6oGEczKZEg.PeNSKM_qdLl58f2dVjsI7sRv5Adk0jiu1ycCc-L4SHEg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/dfeb9811daf54491.bin",
+    "ok": true,
+    "bytes": 16884
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MjBfNTcg%2FMDAxNzc2Njk2MzM1MjYy.lfs_HUa1TBVRpWoxF62BcgFAHYKwTbS18k0V60LBWu0g.Dk67AO9aPlXrfHbZKQBAs1YQoIjjLW3bXln7siHWZHog.JPEG%2F%25EC%2586%2590%25EB%258F%258C%25EC%2583%2581%25ED%2591%259C%25EA%25B6%258C.jpg%2F%25EC%2586%2590%25EB%258F%258C%25EC%2583%2581%25ED%2591%259C%25EA%25B6%258C.jpg&type=f160_160",
+    "local": "/assets/dd1e5851b2ab01ab.bin",
+    "ok": true,
+    "bytes": 5741
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MDFfMjQg%2FMDAxNzQ2MTExMTUyMTI3.RbX-_IuzeqIA5oRKez1WAD6onfljbIjhJqTW6K8qblIg.Q4f35lCJZRpDZ_0FK4PWMeM8orH-iLcRdHZTPT4REksg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/5388f3a630016143.bin",
+    "ok": true,
+    "bytes": 9456
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA5MjlfMjAy%2FMDAxNzU5MTM5OTIwODYy.XUC6x4x1Enb39F-_u62cccaUkGWxqvE-q9nYGG5QsQgg.EbgNy3VG0hkkHkh7V4lk8yUQBdeDEQ_aHf6HJHiM9S8g.JPEG%2Fdd.jpg%2Fdd.jpg&type=f160_160",
+    "local": "/assets/bd29a2dc20b24723.bin",
+    "ok": true,
+    "bytes": 9234
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MjJfMjk2%2FMDAxNzc5NDI1MDcyMzcz.qD2C-WalL-UJA3o5Z0eKx02LW0moLiaCTCVniFoUQP4g.lfWJqZzWKGOlHreUiOS3lmb4vgbp9NW8l1xJQfS7js4g.JPEG%2F%25EA%25B1%25B8%25EC%259E%2591%25EB%25A1%259C%25EA%25B3%25A0%25EA%25B8%25B0%25EB%25B3%25B8.jpg%2F%25EA%25B1%25B8%25EC%259E%2591%25EB%25A1%259C%25EA%25B3%25A0%25EA%25B8%25B0%25EB%25B3%25B8.jpg&type=f160_160",
+    "local": "/assets/7405b8dcfd6eaf98.bin",
+    "ok": true,
+    "bytes": 5064
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA2MDFfMjI0%2FMDAxNzQ4NzA0MTE5NDU0.3ptQeK_roS04w7fOuKoYdswdqqeso_L6l_vh_NYW2AEg.uUot1OVTDg-Ep6yAJwM08_abFkC_MpCnXQ8R7MsUuNUg.JPEG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584-%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001_-_2025-06-01T000829.609.jpg%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584-%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001%2B-%2B2025-06-01T000829.609.jpg&type=f160_160",
+    "local": "/assets/b514e9e6f849b48d.bin",
+    "ok": true,
+    "bytes": 6285
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA4MjdfMjUg%2FMDAxNzU2MjY3MjY0OTAw.eJcr1FLOlTtKpTycubmIliqpVN2qfcGVo3tBW-nDDeAg.pac3NhAdjSdxXKEQlQthkBGbP3TqQSLJBDowgB1H3AYg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/36a3b211b2a6574a.bin",
+    "ok": true,
+    "bytes": 6722
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA5MTVfMjMg%2FMDAxNzU3OTExNDc1MTYx.EShaprgwLEIdN3yB7vjyyPvEByE447MUFEE7KCX9490g.JXy6KAVsatK_U1X1fmFVi19RpHkksaLNVQWWTAGNHDQg.JPEG%2F%25EC%259C%25A0%25EC%25A7%2580%25ED%2598%259C1_-_%25EB%25B3%25B5%25EC%2582%25AC%25EB%25B3%25B8.jpg%2F%25EC%259C%25A0%25EC%25A7%2580%25ED%2598%259C1%2B-%2B%25EB%25B3%25B5%25EC%2582%25AC%25EB%25B3%25B8.jpg&type=f160_160",
+    "local": "/assets/bfdc3f5c25022a00.bin",
+    "ok": true,
+    "bytes": 5270
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MTNfMjg1%2FMDAxNzgzOTQwMDg3NTkx.dFi5w4lg1oe0diDOZwaJU3a1gZDvhBR0mjJ3huI7aPcg.A0jTLBXsgvU6csjTzz-IeUH6q0wiKE8rCIqnSx1z7KMg.JPEG%2F%25EC%259A%25B0%25EB%25A6%25AC%25EA%25B0%2580%25EC%25A1%25B1.jpg%2F%25EC%259A%25B0%25EB%25A6%25AC%25EA%25B0%2580%25EC%25A1%25B1.jpg&type=f160_160",
+    "local": "/assets/350295c52083201d.bin",
+    "ok": true,
+    "bytes": 5916
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA2MDFfNiAg%2FMDAxNzgwMzE3ODcxOTQ2.iQPbV34QvBdcj_9dMwXDhgT2BHOOHromMhRgKO2-bhQg.4zY92Hwa8nC94seLrPBvpLB6UfPtqVb-3IRUsiTKeE8g.PNG%2FprofileImage.png&type=f160_160",
+    "local": "/assets/c1e0f32854e4a791.bin",
+    "ok": true,
+    "bytes": 8414
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MjVfMzAw%2FMDAxNzc3MDUxMjk0NDMx.WqqHG6WzZznUXmdcXbPsuVNOnxgcUfSvsahIpWxQjn4g.BZ4S4H8nzMPR4yXNG0w8DHTn7P0ZPxdVfmAcLBOTQiAg.JPEG%2F%25EC%259D%25B4%25EC%2584%259C%25EC%2598%2581_%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584_%25ED%258C%258C%25EB%25A6%25AC.jpg%2F%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2589%25E1%2585%25A5%25E1%2584%258B%25E1%2585%25A7%25E1%2586%25BC_%25E1%2584%2591%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25A9%25E1%2584%2591%25E1%2585%25B5%25E1%2586%25AF_%25E1%2584%2591%25E1%2585%25A1%25E1%2584%2585%25E1%2585%25B5.jpg&type=f160_160",
+    "local": "/assets/0fd727bea81d0106.bin",
+    "ok": true,
+    "bytes": 9331
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA1MjhfNDMg%2FMDAxNzc5ODk0MzI3NzUz.RXBa7iHAbKm_r4jTfzDejkc7uqkELmJbLx6pLVJYo6og.CIJIcHQpDEJe0FrqZMjCWbLOMSSLUxPp_o9GEklV8zEg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/7c5171971973e825.bin",
+    "ok": true,
+    "bytes": 7258
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNDExMTNfOTkg/MDAxNzMxNDI1MjgxNjcw.Ap7HLHMdC7BcFyzYadFCqClzaMwNVI1u0sIouGvoKicg.GHIYTRoG6-GV-z_R6bA5CdDwjXuHL2F5vTXtZNE2rOog.PNG/profileImage.png",
+    "local": "/assets/afa46687af8f1c61.png",
+    "ok": true,
+    "bytes": 3260928
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyMjAyMTNfMTUx/MDAxNjQ0NzUxNTg3NTk3.CGvyste4R0Zv9K1LMO8OCO9enrfPQEnHpDXUm9liUrIg.8Zj4eXPWltFme99DULxmvYVIpyxuotE2qpWgRq7evG8g.JPEG.kkwrkdrk2/croppedImage_VERSION2.jpg/croppedImage_VERSION2.jpg",
+    "local": "/assets/45a51fa2fd44358a.jpg",
+    "ok": true,
+    "bytes": 9267
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20130920_96%2Fjegalun_1379663459646JEz6K_JPEG%2F2013%EB%85%84%20%EC%97%AC%EB%A6%84.jpg&type=f160_160",
+    "local": "/assets/675f90586e625205.bin",
+    "ok": true,
+    "bytes": 8026
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAxMjRfNDIg%2FMDAxNzM3NjQ1NTMzMzIy.h5FyXUyugwc-108a3zgtnaNKzo8yI2bmJ_r-2p41Ubsg.xfMlUToLSjHAfJO889V2QNUNGoxr3x0zQxzqET8hV6kg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/1fed1c7e4a19054b.bin",
+    "ok": true,
+    "bytes": 6668
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTAzMTVfOTUg%2FMDAxNjE1NzczODYyOTIz.HZYRoOHRPj2BJwDHCPvu7CTUF3IIxTRV4mzd_FCYhBAg.2P79002EqypUZ240exNKT_XujLx7fTkJBtvEmUc_8O4g.PNG.kuidaz1%2FKakaoTalk_20190425_113855937.png&type=f160_160",
+    "local": "/assets/e002540b6a4f7bd3.bin",
+    "ok": true,
+    "bytes": 8120
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MDNfNDQg%2FMDAxNzc1MjA1NDQxNTkw.2mb0OsUiGM-uzquuKZ6ug7MR98u22Ir_8WkyFvcJDOcg.6Ul-kuFZVZjn0zr-hxzbBaj-kncz8dfKkjPPylVTSPsg.JPEG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594._%252839%2529.jpg%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594.%2B%252839%2529.jpg&type=f160_160",
+    "local": "/assets/4fe718c632b4d6d9.bin",
+    "ok": true,
+    "bytes": 9396
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjAyMDZfMjcg%2FMDAxNzcwMzg5MzE4Mzky.QdpAUuai5umuEGqI2YgFHe2iKasaI8mxtHwr33jX__cg.QAh2F45K3wEcBnYP-m0ykmCul944YhazAi2dCDSN1RIg.PNG%2FGemini_Generated_Image_x2r59nx2r59nx2r5.png%2FGemini_Generated_Image_x2r59nx2r59nx2r5.png&type=f160_160",
+    "local": "/assets/ad85548cc24da71b.bin",
+    "ok": true,
+    "bytes": 4731
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTAyMDVfMjU0%2FMDAxNzM4NzU5MjE4MzYw.5C1--qi3U5WGHfw8i2oAI0RhDjHoSz7ApaZNfs4vYf0g.W4huguxt5DXaPdT257Hx2FDQdO0TL7SrREphYWYq6bYg.PNG%2F002.png%2F002.png&type=f160_160",
+    "local": "/assets/acce332dabfb28bd.bin",
+    "ok": true,
+    "bytes": 4567
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNjA1MjJfMTY5/MDAxNzc5NDQ5NjQwNTI0.4AFAOUai65-Y8UUDkRtP9iuhZUXEiUZr818vrIeW83Yg.1NVkGMkWnaQGRm2OSVuq3bH0YQ-ZkFAm0hpjO43RGcAg.JPEG/profileImage.jpg",
+    "local": "/assets/744a6a222929c44f.jpg",
+    "ok": true,
+    "bytes": 949333
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxODA4MzFfMjMg%2FMDAxNTM1NzI2NTM1ODY2.W2sQRB2qZNlhx_Aa-y41ejc5DUyvR8YysRfK4Hy7zGUg.djZDSJojlluq3sOB944IA26sUkKDRZVRYxBNweAPOXUg.PNG.obama8775%2F%25B9%25AB%25C1%25A6-3_1.png&type=f160_160",
+    "local": "/assets/8efdf425b960441b.bin",
+    "ok": true,
+    "bytes": 6167
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNDA0MTRfMjU1/MDAxNzEzMDczNTMxNDky.qpwG4laytAYOYcime58IjTheA6b5w49VQqvzNA_ezx8g.UjPISlOkF6N77Q6z4rFTCMDTnzHj-siLmSyDc084QZwg.PNG/%EC%8B%A0%ED%9D%A5%EA%B8%B0%EC%88%A0%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8_%EB%B8%94%EB%A1%9C%EA%B7%B8_%ED%86%B1%EC%A7%88%EC%82%B4%EB%A1%B1.png/%E1%84%89%E1%85%B5%E1%86%AB%E1%84%92%E1%85%B3%E1%86%BC%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%A1%E1%84%83%E1%85%A6%E1%84%86%E1%85%B5+%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3+%E1%84%90%E1%85%A9%E1%86%B8%E1%84%8C%E1%85%B5%E1%86%AF%E1%84%89%E1%85%A1%E1%86%AF%E1%84%85%E1%85%A9%E1%86%BC.png",
+    "local": "/assets/a3f59a6637b58868.png",
+    "ok": true,
+    "bytes": 598021
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA0MDhfNDMg%2FMDAxNzQ0MDU1NDYxMDkw.LqjMdDSDyJV11UfsfiFyHJoVK8eTx2onDR8_Rjr08U0g.qDiIqdOn1RQoy6gv5Mbwl34l5J6B45nfk3pkEGf3SBMg.PNG%2Fcoffee-8596194_640.png%2Fcoffee-8596194_640.png&type=f160_160",
+    "local": "/assets/3ee71cf5d721f5cc.bin",
+    "ok": true,
+    "bytes": 7091
+  },
+  {
+    "url": "https://blogpfthumb-phinf.pstatic.net/MjAyNTExMjVfMTQy/MDAxNzY0MDIyMTEwNjQ0.ma1EfEaabuZf12lw8atzATUmVsxhthz9ubEE_6uDCIMg.fE7sfCdkUJb-tRZKl7SeVGei8cInC9-VGElZMa90yIQg.JPEG/profileImage.jpg",
+    "local": "/assets/0357ec76c3e1aece.jpg",
+    "ok": true,
+    "bytes": 3264710
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MjFfMTE3%2FMDAxNzg0NjQxMTQ0NDcw.gjERI01Lfvf5TyyPeMKVG2u7qmaiq3QncHBMe0zsg7cg.x1cDjjgB-hNtzLHxjYtciG6LP8v7kRHUOn9dPe-nuDQg.JPEG%2FprofileImage.jpg&type=f160_160",
+    "local": "/assets/b1eecf46becdb400.bin",
+    "ok": true,
+    "bytes": 11059
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMzExMDNfMjgx%2FMDAxNjk5MDA0NjExMzU5.Bro343zbk1D-E4qLZXtQqb0_nkYg_sQssBw7FmfGBG0g.GhiTLIq4QkJdG8-F_R_J8dyGUtYEEabHmFZ9yqgCck4g.PNG.rimiy%2F%25EC%25A0%259C%25EB%25AA%25A9-%25EC%2597%2586%25EC%259D%258C-1.png%2F%25EC%25A0%259C%25EB%25AA%25A9-%25EC%2597%2586%25EC%259D%258C-1.png&type=f160_160",
+    "local": "/assets/acac4610b1fde8b5.bin",
+    "ok": true,
+    "bytes": 3683
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTA1MTVfMTg1%2FMDAxNzQ3MjkzMjc4NTU3.X3ObzH5UvIVO4GVR6J6pTBnnItgGqHoEOLAqQ4xGV-og.DpKXPFzCYU_FImj0AyphoowYJJ4VeWvzjSOO8E8mzIAg.PNG%2F%25EC%259D%25B8%25EC%2583%259D%25EB%25A7%2588%25EC%2588%25A0_%25ED%2591%259C%25EC%25A7%2580.png%2F%25EC%259D%25B8%25EC%2583%259D%25EB%25A7%2588%25EC%2588%25A0%2B%25ED%2591%259C%25EC%25A7%2580.png&type=f160_160",
+    "local": "/assets/30539f59a2f13adf.bin",
+    "ok": true,
+    "bytes": 10517
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA3MjBfMjUy%2FMDAxNzg0NTMxMTIzNTI3.tfQ4XHdPLv-UpL6NEW8FCGqhLn1KXy5zzQokn_6dmbog.vs_C_Q_ZCi1thnfEjYxkHm1M3p0SPHyILBAa94xtGlEg.PNG%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594..png%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594..png&type=f160_160",
+    "local": "/assets/43dfec40adbaf5fb.bin",
+    "ok": true,
+    "bytes": 2098
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAxODAyMDJfOTUg%2FMDAxNTE3NTUzOTM4OTU4.xXgZqbtaDJXMBGzcuYZ_88C7NPODuo9-k5CoPoDXozMg.IUf6m6UEn4kZMjzI11g1xObBu7Ueed6gVZZBL9SHKsMg.JPEG.k7919226%2F26470_38144_3154.jpg&type=f160_160",
+    "local": "/assets/81a5d72e58231a55.bin",
+    "ok": true,
+    "bytes": 8591
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2F20140913_91%2Fhonestpsc17_1410593691145NcGHD_PNG%2F1%E3%84%B4%E3%85%87%E3%85%8D.png&type=f160_160",
+    "local": "/assets/4b10ae9e5b198f71.bin",
+    "ok": true,
+    "bytes": 3001
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMTAzMTZfNzUg%2FMDAxNjE1ODg4OTc1NzIx.-hnyFdvahGar80Eg0e8hRY39vkCC5E6b6zioMS1Xdqcg.PxBWCr6zmxhrEL0dxcDtQ-my8Gi6DU4pwiOCl8UJFw8g.JPEG.lynnring%2F%25EB%25B8%2594%25EB%25A1%259C%25EA%25B7%25B8%25ED%2594%2584%25EB%25A1%259C%25ED%2595%2584.jpg&type=f160_160",
+    "local": "/assets/51c48839f7ab2497.bin",
+    "ok": true,
+    "bytes": 4309
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA4MjdfMjk5%2FMDAxNzg3ODE0NDY2MjQx.p3MTRvTbM6i0bFyZivBG0sHTGjxrk6sUHt5lhLuIRaIg.CVdfDU5m6LpXLn0clFeNJmDSyisms5k4gB2vnG7akdwg.PNG%2FChatGPT_Image_2026%25EB%2585%2584_8%25EC%259B%2594_27%25EC%259D%25BC_%25EC%2598%25A4%25ED%259B%2584_04_07_32.png%2FChatGPT%2BImage%2B2026%25EB%2585%2584%2B8%25EC%259B%2594%2B27%25EC%259D%25BC%2B%25EC%2598%25A4%25ED%259B%2584%2B04_07_32.png&type=f160_160",
+    "local": "/assets/24d1aaf73c98d1a2.bin",
+    "ok": true,
+    "bytes": 8753
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyMjEwMjNfNTAg%2FMDAxNjY2NDUzMTM1Nzcy.LlcXC0Jc_UuLWVzhZIaZznbE8NBMTPCmRkz_qO-ILDYg.7mqSydpD8Lz8Q3lug80a9Qyt8kcIxoRqunckd-hRcxog.PNG.lovelyou29%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584_%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001_%25281%2529.png%2F%25EC%25A0%259C%25EB%25AA%25A9%25EC%259D%2584%2B%25EC%259E%2585%25EB%25A0%25A5%25ED%2595%25B4%25EC%25A3%25BC%25EC%2584%25B8%25EC%259A%2594_-001%2B%25281%2529.png&type=f160_160",
+    "local": "/assets/4b75533bbe8d0451.bin",
+    "ok": true,
+    "bytes": 3606
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNjA0MjdfNDQg%2FMDAxNzc3MjY2NTgxNjQ1.knDOSPOfPEIaAuHdPCHZJgjWzAKm3GUuqQgukbU10S4g.NipDAO7bHutXWIEUE1gQfrGKGMUSb-1AQzTy45ZsycQg.PNG%2F5e3920a0-51b4-420d-9e8e-42e8e2550bb6.png%2F5e3920a0-51b4-420d-9e8e-42e8e2550bb6.png&type=f160_160",
+    "local": "/assets/096b752fb5f173ef.bin",
+    "ok": true,
+    "bytes": 9011
+  },
+  {
+    "url": "https://www.naeo.kr/title-icons/challenger.webp",
+    "local": "/assets/5f5ce3a2dceb2c42.webp",
+    "ok": true,
+    "bytes": 17290
+  },
+  {
+    "url": "https://search.pstatic.net/common/?src=https%3A%2F%2Fblogpfthumb-phinf.pstatic.net%2FMjAyNTEyMDFfMjgz%2FMDAxNzY0NTIwNzcwMjAz.t71hw8ag3QdJa3Be0cbudYlbbDVviMmRnBu4oVcquXgg.YJ8M6gjtFtv7ggm6_ihk8cvor29ibCwVn5ewz-8VbYwg.PNG%2F%25EC%25BD%2594%25EC%25BD%2594%25EB%2594%2594%25EC%2598%25A4_%25ED%258C%258C%25EB%259E%2591%25EB%2582%25A8%25EC%259E%2590%25EC%2596%25BC%25EA%25B5%25B4.png%2F%25EC%25BD%2594%25EC%25BD%2594%25EB%2594%2594%25EC%2598%25A4_%25ED%258C%258C%25EB%259E%2591%25EB%2582%25A8%25EC%259E%2590%25EC%2596%25BC%25EA%25B5%25B4.png&type=f160_160",
+    "local": "/assets/0f4ba9a54dd8e89d.bin",
+    "ok": true,
+    "bytes": 9565
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=1717127b-c3dc-4e12-b3d2-2dcd2ab5e02e&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6f404a70-0d94-4a03-a584-9a0bed1f2455&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Franking&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/addd35d5c8bebd9d.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=bd18ec4e-f848-4353-b924-dfcd6f58efe5&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=fbea6db1-a4e0-4bc8-9626-37e8c7369b4d&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fsocial%2Faeo-carousel%2Fexport&tw_engaged_ms=7&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/21149261a04c52ad.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/social/mate-ad/hf/v2/a-money.png",
+    "local": "/assets/b6c879eeb02d2cf9.png",
+    "ok": true,
+    "bytes": 4364159
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=f3318d85-67a8-4c44-8ffe-64ecb88e3bf2&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=08290e34-252d-4f1a-a3f2-f3e3597b6a98&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fsocial%2Fmate-ad%2Fexport&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/39d34d7689061364.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=5ff4e38b-f037-4a05-868a-109191b6b9a5&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6d045aaa-d35d-4344-a8d5-910d8c6327e9&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fsocial%2Faeo-carousel&tw_engaged_ms=7&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/bc21517f5ac16fd2.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/updates/2026-06-24-golden-keywords/golden-section.webp?v=1540000000000&w=2792&h=1572",
+    "local": "/assets/ae36faed51db8552.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/updates/2026-03-30-blog/blog.webp?v=1540000000000&w=1280&h=800",
+    "local": "/assets/1e390d3b1265c455.webp",
+    "ok": true,
+    "bytes": 16244
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/updates/2026-03-30-blog/updates.webp?v=1540000000000&w=1280&h=800",
+    "local": "/assets/2c7f8450f3d80979.webp",
+    "ok": true,
+    "bytes": 9640
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/updates/2026-03-20-ranking/ranking.webp?v=1540000000000&w=1280&h=800",
+    "local": "/assets/dc54d6dbe0902ec9.webp",
+    "ok": true,
+    "bytes": 28936
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=ebcdd13a-7d5b-4110-8feb-121249e20c7c&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=2477a7ad-d926-42c8-a3d0-82d73c817d31&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fupdates&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/bd61413319e28f9e.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=14548535-6825-4c28-a27d-dbb3036489f7&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=2477a7ad-d926-42c8-a3d0-82d73c817d31&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fupdates&tw_engaged_ms=10023&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/9eef4a299a6558e4.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=3ce9e234-524d-46db-b3eb-6b7f69cc2dd3&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=ea807cd0-9099-46e1-9639-4218bca17f37&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fyoutube%2Faeo-intro&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/74e79249b325bdbe.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=84b4a99c-d95d-45d0-ac3e-9018cd55948f&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6a83f216-fd50-45e4-8ba0-3bdd7ffdee8f&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2F&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/9f248f6d5371be67.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=b3db5229-cbfb-4010-b524-1e83a66fbcd0&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6a83f216-fd50-45e4-8ba0-3bdd7ffdee8f&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2F&tw_engaged_ms=10009&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/e6bd868e01c1ecc6.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=4193339c-fb3f-4a85-80d1-090e0281ceb3&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=00288d99-1683-4d48-9fd5-ebc8e9c7195d&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2F&tw_engaged_ms=0&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/92d378c05b4a9c7a.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/thumbs/matjib.jpg",
+    "local": "/assets/2034c73b6db34754.jpg",
+    "ok": true,
+    "bytes": 110335
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/thumbs/travel.jpg",
+    "local": "/assets/4d8e11c353247625.jpg",
+    "ok": true,
+    "bytes": 108407
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/thumbs/parenting.jpg",
+    "local": "/assets/cc93ac2b612dc2ed.jpg",
+    "ok": true,
+    "bytes": 59045
+  },
+  {
+    "url": "https://www.naeo.kr/mcp/thumbs/living.jpg",
+    "local": "/assets/4f8aa72bf521b284.jpg",
+    "ok": true,
+    "bytes": 55051
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=d45f51cc-77e6-4280-9b99-cb5801fd04df&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=8820b95f-1135-42fa-9413-25d1f58c48bc&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmcp&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/40e1071ce2ab3c28.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=0b9d7039-2701-4d6b-86a9-1786b33e3e65&events=%5B%5B%22autobuttonclick%22%2C%7B%22value%22%3A%22%EB%82%B4%20AI%EB%A1%9C%20%EC%A7%81%EC%A0%91%20%EC%93%B0%EA%B8%B0%20%ED%8F%89%EC%83%9D%20%EB%AC%B4%EB%A3%8C%22%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=8820b95f-1135-42fa-9413-25d1f58c48bc&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmcp&tw_engaged_ms=5498&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/40d968fec1989c55.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=83b4414c-5df2-488b-b68b-49b167b4617d&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=8820b95f-1135-42fa-9413-25d1f58c48bc&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmcp&tw_engaged_ms=11392&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/0b7fab7cfc862485.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=b707ff69-f9a5-49a1-abd4-10583371cb09&events=%5B%5B%22autobuttonclick%22%2C%7B%22value%22%3A%22Claude%22%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=8820b95f-1135-42fa-9413-25d1f58c48bc&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fmcp&tw_engaged_ms=116062&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/20d08a42b618b45e.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=1f21a77f-268b-4ee4-a40f-fcd104a1ce7f&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=0c6557fd-2de4-4870-aef8-3f69cfd91165&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fsocial%2Faeo-carousel&tw_engaged_ms=23077&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/1acda43f38b902fa.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=b11aa8e3-1e97-48ce-a328-31c379c6c9d1&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=0c6557fd-2de4-4870-aef8-3f69cfd91165&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fsocial%2Faeo-carousel&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/97ce61deafcc96e9.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_005.png",
+    "local": "/assets/b80c8344491eec5c.png",
+    "ok": true,
+    "bytes": 672551
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_007.png",
+    "local": "/assets/5a871b84dd33d78a.png",
+    "ok": true,
+    "bytes": 85253
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_008.png",
+    "local": "/assets/661bab11986b9ca8.png",
+    "ok": true,
+    "bytes": 83707
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_010.png",
+    "local": "/assets/f895e20c706d772e.png",
+    "ok": true,
+    "bytes": 178466
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_012.png",
+    "local": "/assets/9fa3715be91a038e.png",
+    "ok": true,
+    "bytes": 341318
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_018.png",
+    "local": "/assets/8972657662d38b6b.png",
+    "ok": true,
+    "bytes": 86647
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=5c21e749-1957-4714-aa15-27b4b991bf46&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6be16414-a639-4295-9f2b-ac6268d5d08e&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fyoutube%2Faeo-intro&tw_engaged_ms=18&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/aeb90aad782f842b.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=1e6b4d87-e2ba-441d-bce3-e4c3e21906e2&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=6be16414-a639-4295-9f2b-ac6268d5d08e&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fyoutube%2Faeo-intro&tw_engaged_ms=28110&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/b4ffa546d4a0de42.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_011.png",
+    "local": "/assets/1f56d6938da82afb.png",
+    "ok": true,
+    "bytes": 36392
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_014.png",
+    "local": "/assets/727046d484d68ca1.png",
+    "ok": true,
+    "bytes": 89450
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_013.png",
+    "local": "/assets/47f74063733192e1.png",
+    "ok": true,
+    "bytes": 210165
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_015.png",
+    "local": "/assets/5bd351a6881995af.png",
+    "ok": true,
+    "bytes": 27143
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_016.png",
+    "local": "/assets/5e761baa401b746f.png",
+    "ok": true,
+    "bytes": 341318
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_017.png",
+    "local": "/assets/14a083cf681d4765.png",
+    "ok": true,
+    "bytes": 52459
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_001.png",
+    "local": "/assets/b686ea0a51cf8cc4.png",
+    "ok": true,
+    "bytes": 462680
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_019.png",
+    "local": "/assets/cfe4cda077d158d7.png",
+    "ok": true,
+    "bytes": 81484
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_020.png",
+    "local": "/assets/ef0a5cfc86c7a1b6.png",
+    "ok": true,
+    "bytes": 88005
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=3&event=%7B%7D&event_id=804f541d-920c-4907-bea4-e5ae64a55de0&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=0f649d8b-8a1e-42e7-97b1-550ce65e35d6&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fyoutube%2Faeo-intro&tw_engaged_ms=16&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/063003d62aafc794.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_021.png",
+    "local": "/assets/45df3bd63fafaf99.png",
+    "ok": true,
+    "bytes": 191914
+  },
+  {
+    "url": "https://t.co/i/adsct?bci=4&cv=100%261&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26870%260%26na&eci=2&event_id=ecac969f-e794-4c09-8674-7f9c6a4fbf9b&events=%5B%5B%22auto_long_site_dwell%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=0f649d8b-8a1e-42e7-97b1-550ce65e35d6&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fyoutube%2Faeo-intro&tw_engaged_ms=11699&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/639a6ff618672475.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_022.png",
+    "local": "/assets/f932c0748c2609a4.png",
+    "ok": true,
+    "bytes": 147630
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_004.png",
+    "local": "/assets/9d40c36bd8824fa5.png",
+    "ok": true,
+    "bytes": 64804
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_002.png",
+    "local": "/assets/8b34ca2a44b4a241.png",
+    "ok": true,
+    "bytes": 136067
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_006.png",
+    "local": "/assets/35ce072434e6aa8b.png",
+    "ok": true,
+    "bytes": 313195
+  },
+  {
+    "url": "https://www.naeo.kr/youtube/aeo-intro/images/image_009.png",
+    "local": "/assets/8a001f817e8230c7.png",
+    "ok": true,
+    "bytes": 40829
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=4527dc5d-d3d0-4779-a60b-8b7c1acc1e88&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=d6c3f3d6-a4c7-4692-8efa-564fe3cb0ac1&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fguide%2Fkeyword-recommendation-guide&tw_engaged_ms=6&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/e297ae162ddec361.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=d63b63ee-9938-45cf-a1a8-4880cb89e7e1&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=4aba8d83-12bb-4507-a873-cf31f8998b04&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fguide%2Fdashboard-guide&tw_engaged_ms=3&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/68e0450bc5546e22.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=0eae8b41-19ff-423c-90d1-0b530dfd6814&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=e0cb7745-40fb-47ad-8389-0a2593117149&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fmarketing%2Fai-briefing-tips-1-travel-life&tw_engaged_ms=4&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/3c4f85688abcc88c.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/thumbnail.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/0e924e396a6438d8.webp",
+    "ok": true,
+    "bytes": 85412
+  },
+  {
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=45ff8d42-19b1-4335-962d-1f4d0686d010&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=dec79576-2fbf-408b-8da1-d74dc175f01f&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fmarketing%2Fai-briefing-tips-2-life-culture&tw_engaged_ms=4&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/f7697ef5c0aee086.bin",
+    "ok": true,
+    "bytes": 43
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/05-car.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/51da015e735685da.webp",
+    "ok": true,
+    "bytes": 124468
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/06-education.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/bfc6a0c90738337f.webp",
+    "ok": true,
+    "bytes": 127696
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/03-art.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/914701a7f41a3142.webp",
+    "ok": true,
+    "bytes": 129542
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/04-it-tech.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/f8ac5c7601ab9bd6.webp",
+    "ok": true,
+    "bytes": 103424
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/09-sports.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/32b364f6ba645b8a.webp",
+    "ok": true,
+    "bytes": 135564
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/08-society.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/bb82eb80230b3a06.webp",
+    "ok": true,
+    "bytes": 107180
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/10-game.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/cac9d34030a4a7d5.webp",
+    "ok": true,
+    "bytes": 127816
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/07-economy.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/8320cb3df0934df3.webp",
+    "ok": true,
+    "bytes": 117454
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/thumbnail.webp?v=1791857004922&w=1200&h=630",
+    "local": "/assets/b068b97189166615.webp",
+    "ok": true,
+    "bytes": 24304
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/ai-briefing-tips-3-knowledge-hobby/11-hobby.webp?v=1791857004921&w=1080&h=1447",
+    "local": "/assets/664f8bafbaeb485a.webp",
+    "ok": true,
+    "bytes": 131510
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate2.webp?v=1791857004921&w=1784&h=1354",
+    "local": "/assets/4c4c843730339d81.webp",
+    "ok": true,
+    "bytes": 71156
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate3.webp?v=1791857004921&w=1776&h=1350",
+    "local": "/assets/6e3ad678a9765060.webp",
+    "ok": true,
+    "bytes": 88662
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/golden-keywords/golden-section.webp?v=1791857004921&w=2792&h=1572",
+    "local": "/assets/4816aafefcc1abe1.webp",
+    "ok": true,
+    "bytes": 99058
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/mate-free-diagnosis/mate1.webp?v=1791857004921&w=3110&h=1670",
+    "local": "/assets/b9395959b483d5d7.webp",
+    "ok": true,
+    "bytes": 32196
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/thumbnail.webp?v=1791857004922&w=2400&h=2400",
+    "local": "/assets/d188562a80d41f0c.webp",
+    "ok": true,
+    "bytes": 52094
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-ditoday/1.webp?v=1791857004922&w=1366&h=1164",
+    "local": "/assets/fcf038a5b83469b6.webp",
+    "ok": true,
+    "bytes": 29558
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/marketing/what-is-ai-briefing/thumbnail.webp?v=1791857004922&w=2400&h=2400",
+    "local": "/assets/4150fb8dadaeb675.webp",
+    "ok": true,
+    "bytes": 50346
+  },
+  {
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/1.webp?v=1791857004922&w=1836&h=1306",
+    "local": "/assets/c01451b74efb6601.webp",
+    "ok": true,
+    "bytes": 47622
   },
   {
     "url": "https://www.naeo.kr/icon.png",
@@ -894,21 +3168,21 @@
     "bytes": 36846
   },
   {
-    "url": "https://www.naeo.kr/event/review-2026-09/icon-coffee.webp",
-    "local": "/assets/c2edc0b1766ef241.webp",
+    "url": "https://www.naeo.kr/api/content-image/blog/news/across-modu-startup-mt/thumbnail.webp?v=1791857004922&w=2400&h=2400",
+    "local": "/assets/3b22d44c7ee32de2.webp",
     "ok": true,
-    "bytes": 2334
+    "bytes": 49442
   },
   {
-    "url": "https://www.naeo.kr/guide/write-demo-poster.jpg",
-    "local": "/assets/7ac5ada108c54c24.jpg",
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=9554fa11-a7b5-46e9-973c-2d8bccdf1294&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=a3a99517-fcf3-465e-a866-75bcf3b54f4d&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fmarketing%2Fai-briefing-tips-3-knowledge-hobby&tw_engaged_ms=1&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/957708268bd4fa01.bin",
     "ok": true,
-    "bytes": 158252
+    "bytes": 43
   },
   {
-    "url": "https://www.naeo.kr/guide/write-demo.mp4",
-    "local": "/assets/1c45bef2cd02a3ff.mp4",
+    "url": "https://t.co/1/i/adsct?bci=4&dv=Asia%2FSeoul%26ko-KR%2Cko%2Cen-US%2Cen%26Google%20Inc.%26MacIntel%26127%261440%26900%268%2630%261440%26900%260%26na&eci=3&event=%7B%7D&event_id=71e9ea49-7416-4f72-bc39-d6f5145a56b7&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=adba47b2-619d-44a3-ade2-f416571c3196&tw_ch_fvl=Not%3FA_Brand%2F24.0.0.0%2CChromium%2F152.0.7977.54&tw_ch_pv=26.6.2&tw_document_href=https%3A%2F%2Fwww.naeo.kr%2Fblog%2Fnews%2Facross-modu-startup-ditoday&tw_engaged_ms=2&tw_iframe_status=0&tw_pid_src=2&tw_session_count=7&tw_session_id=1791860720453-205777964&twpid=tw.1791792890728.129765575142801491&txn_id=rf11j&type=javascript&version=2.4.11",
+    "local": "/assets/1ddb69dd8ed39bd7.bin",
     "ok": true,
-    "bytes": 5799937
+    "bytes": 43
   }
 ]

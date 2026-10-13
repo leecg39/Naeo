@@ -18,7 +18,7 @@ function asset(value){
  assets.set(u.href,{url:u.href,local});return local;
 }
 function cssAssets(css){return css.replace(/url\(["']?([^)'"\s]+)["']?\)/g,(all,url)=>`url("${asset(url)}")`)}
-function link(href){if(!href)return href;try{const u=new URL(href,'https://www.naeo.kr');return ['naeo.kr','www.naeo.kr'].includes(u.hostname)?u.pathname+u.search+u.hash:href}catch{return href}}
+function link(href){if(!href||href.startsWith('#'))return href;try{const u=new URL(href,'https://www.naeo.kr');return ['naeo.kr','www.naeo.kr'].includes(u.hostname)?u.pathname+u.search+u.hash:href}catch{return href}}
 function node(n){
  if(n.type==='text')return n.data;
  if(n.type!=='tag')return null;
@@ -39,9 +39,23 @@ const index={};
 for(const item of inventory.pages.filter(p=>p.status===200)){
  const html=await fs.readFile(path.join(source,item.file),'utf8');const $=cheerio.load(html);
  const css=cssAssets($('style').toArray().map(e=>$(e).html()).join('\n'));
- // React streaming containers carry actual SSR content. Unwrap them; remove empty suspense placeholders.
- $('div[id^="S:"]').each((_,e)=>$(e).replaceWith($(e).contents()));
- $('template[id^="B:"]').remove();
+ // Resolve React's streamed Suspense boundaries in place. Appending the streamed
+ // content leaves loading skeletons above the actual article and duplicates layouts.
+ $('template[id^="B:"]').each((_,placeholder)=>{
+  const id=placeholder.attribs.id.slice(2);
+  const source=$('div[id^="S:"]').filter((_,el)=>el.attribs.id===`S:${id}`).first();
+  if(!source.length)return;
+  let current=placeholder.next,depth=0;
+  while(current){
+   const next=current.next;
+   if(current.type==='comment'&&current.data==='/$'){
+    if(depth===0)break;
+    depth--;
+   }else if(current.type==='comment'&&/^\$(?:\?|!)?$/.test(current.data))depth++;
+   $(current).remove();current=next;
+  }
+  $(placeholder).replaceWith(source.contents());source.remove();
+ });
  $('body > div[hidden]').each((_,e)=>{if(!$(e).text().trim())$(e).remove()});
  const body=$('body').contents().toArray().map(node).filter(x=>x!==null && (typeof x!=='string'||x.trim()));
  const slug=item.path==='/'?'home':item.path.slice(1).replaceAll('/','--');

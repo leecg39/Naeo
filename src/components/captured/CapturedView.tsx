@@ -88,6 +88,13 @@ export default function CapturedView({ data, install }: { data: CapturedPageData
     };
     // The page adapter gets the first chance to handle its own controls.
     const cleanup = install?.(element, tools);
+    element.querySelectorAll<HTMLImageElement>('.mdx-img-skeleton img').forEach(image => {
+      if (image.complete && image.naturalWidth > 0) {
+        image.classList.add('loaded');
+        image.closest('.mdx-img-skeleton')?.classList.add('loaded');
+      }
+    });
+    element.dataset.naeoReady = 'true';
     const isApp = /^\/(?:dashboard|admin)(?:\/|$)/.test(data.path);
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || !(event.target instanceof Element)) return;
@@ -180,6 +187,7 @@ export default function CapturedView({ data, install }: { data: CapturedPageData
     element.addEventListener('click', onClick);
     element.addEventListener('submit', onSubmit);
     return () => {
+      delete element.dataset.naeoReady;
       cleanup?.();
       element.removeEventListener('click', onClick);
       element.removeEventListener('submit', onSubmit);
