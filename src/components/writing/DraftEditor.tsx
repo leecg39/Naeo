@@ -3,6 +3,7 @@ import {api,ApiError} from '@/lib/api-client';
 import type {Draft,DraftStatus} from '@/server/writing/drafts';
 import DraftMedia from './DraftMedia';
 import DraftShares from './DraftShares';
+import DraftExport from './DraftExport';
 
 export type DraftDetail=Draft&{revisions:{version:number;createdAt:number}[]};
 const STATUS:Record<DraftStatus,string>={draft:'초안',ready:'발행 준비',published:'발행함',archived:'보관'};
@@ -50,6 +51,7 @@ export default function DraftEditor({draft,onChanged,onClosed}:{draft:DraftDetai
     <button className="naeo-button" type="button" disabled={busy} onClick={()=>{if(!dirty||window.confirm('저장하지 않은 변경을 버릴까요?'))onClosed();}}>닫기</button>
    </div>
   </form>
+  <DraftExport draftId={draft.id} dirty={dirty}/>
   <DraftMedia draftId={draft.id}/>
   <DraftShares draftId={draft.id}/>
   {draft.revisions.length>1&&<details><summary>수정 이력 {draft.revisions.length}개</summary><ul style={{listStyle:'none',padding:0,display:'grid',gap:6,marginTop:8}}>{draft.revisions.map(r=><li key={r.version} style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>

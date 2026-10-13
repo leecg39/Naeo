@@ -229,3 +229,14 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/generations/:id` · `/cancel` | GET·POST | 회원(본인) | 대기 작업 취소는 즉시 환급, 실행 중이면 결과 대신 취소·환급(초안 없음) | 404, 409 `GENERATION_FINISHED` |
 
 worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공급자: `ANTHROPIC_API_KEY`가 있을 때만 Anthropic Messages API(`NAEO_AI_MODEL`, 기본 `claude-sonnet-4-6`, 최대 4000토큰, 120초 제한). 사용자 입력은 사용자 메시지의 경계 태그 안에만 넣고 시스템 지시에는 넣지 않는다. 성공하면 초안 생성·사진 연결·작업 완료를 한 트랜잭션으로 처리, 실패(재시도 불가 또는 2회 초과)는 작업당 1회 환급(원장 유일 제약).
+
+## P4.5 글쓰기 관리·내보내기 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/drafts/:id/export` | GET | 회원(본인) | `format=html|markdown|text`, `download=1`이면 첨부. HTML은 안전 렌더러 노드를 허용 태그·속성만 직렬화(글자·속성 이스케이프, 스크립트·javascript: 제외), 응답 `CSP sandbox`·`no-store` | 400, 404 |
+| `/api/writing-templates` | GET | 회원 | 노출 템플릿의 id·이름·주제(지침 본문은 서버에서만) | 401 |
+| `/api/admin/writing-templates` · `/:id` | GET·POST·PATCH·DELETE | 관리자 | `name≤60`(대소문자 무시 unique), `category`, `guidance≤2000`, `status`, `version` | 403, 409 |
+| `/api/admin/generations` · `/:id/cancel` | GET·POST | 관리자 | 전체 회원 생성 작업(이메일·키워드·오류 코드 검색, 상태 필터), 취소 시 대기 작업 즉시 환급·실행 중 취소 요청(감사) | 403, 409 |
+
+생성 요청의 `templateId`는 요청 시점의 지침을 작업에 복사해 두고, 운영자 지침은 시스템 지시에, 회원 입력은 사용자 메시지 경계 태그 안에만 넣는다. 확장 프로그램용 내보내기는 서식째 복사(text/html + text/plain)와 파일 받기로 제공한다(확장 프로그램 본체는 P7.2).

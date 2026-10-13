@@ -51,3 +51,25 @@ test('drafts, media upload/download and share links over HTTP',async t=>{
  assert.equal((await f.send(`/api/media/${m.publicId}`,'DELETE',undefined,a)).status,200);
  assert.equal((await f.send(`/api/drafts/${d.id}`,'DELETE',{version:2},a)).status,200);
 });
+
+test('export, writing templates and admin generations over HTTP',async t=>{
+ const f=fixture(t);const a=await account(f,'a@example.test');const admin=await account(f,'admin@example.test');
+ const adminId=(f.db.prepare("SELECT id FROM users WHERE email='admin@example.test'").get() as {id:string}).id;
+ f.db.prepare("UPDATE users SET role='admin' WHERE id=?").run(adminId);
+ const d=(await (await f.send('/api/drafts','POST',{title:'내보내기 <글>',body:'## 소제목\n\n**굵게**'},a)).json()).data;
+ const html=await f.raw(`/api/drafts/${d.id}/export?format=html`,a);
+ assert.equal(html.status,200);assert.match(html.headers.get('content-type')??'',/text\/html/);
+ assert.match(html.headers.get('content-security-policy')??'',/sandbox/);
+ assert.match(await html.text(),/<h1>내보내기 &lt;글&gt;<\/h1>/);
+ const dl=await f.raw(`/api/drafts/${d.id}/export?format=markdown&download=1`,a);
+ assert.match(dl.headers.get('content-disposition')??'',/attachment/);
+ assert.equal((await f.raw(`/api/drafts/${d.id}/export?format=pdf`,a)).status,400);
+ assert.equal((await f.raw(`/api/drafts/${d.id}/export`,admin)).status,404,'admins cannot export members\' drafts');
+ assert.equal((await f.send('/api/admin/writing-templates','POST',{name:'x',guidance:'y'},a)).status,403);
+ const tpl=(await (await f.send('/api/admin/writing-templates','POST',{name:'여행 후기',guidance:'날짜별로 정리'},admin)).json()).data;
+ const list=(await (await f.send('/api/writing-templates','GET',undefined,a)).json()).data;
+ assert.deepEqual(list.map((x:{name:string})=>x.name),['여행 후기']);assert.equal('guidance' in list[0],false,'guidance stays server-side');
+ assert.equal((await f.send(`/api/admin/writing-templates/${tpl.id}`,'DELETE',{version:1},admin)).status,200);
+ assert.equal((await f.send('/api/admin/generations','GET',undefined,a)).status,403);
+ assert.equal((await f.send('/api/admin/generations','GET',undefined,admin)).status,200);
+});

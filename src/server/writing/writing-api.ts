@@ -6,6 +6,7 @@ import {body,json,rateLimit} from '../http';
 import {createDraft,deleteDraft,getDraft,listDrafts,restoreDraftRevision,updateDraft} from './drafts';
 import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,listMedia,readMedia,saveUpload} from './media';
 import {createShareLink,listShareLinks,readShared,revokeShareLink} from './shares';
+import {exportDraft} from './export';
 
 const ID='([a-f0-9-]{36})',TOKEN='([A-Za-z0-9_-]{22})';
 const anyJson=z.unknown();
@@ -50,6 +51,14 @@ async function draftRoutes(db:Database,request:Request,user:User,path:string,met
   if(method==='GET')return json({data:getDraft(db,user.id,one[1])});
   if(method==='PATCH'){rateLimit(db,`draft-write:${user.id}`,300,15*60_000);return json({data:updateDraft(db,user.id,one[1],await body(request,anyJson,DRAFT_BODY_MAX))});}
   if(method==='DELETE')return json({data:deleteDraft(db,user.id,one[1],await body(request,anyJson))});
+ }
+ const exp=path.match(new RegExp(`^/api/drafts/${ID}/export$`));
+ if(exp&&method==='GET'){
+  const format=z.enum(['html','markdown','text']).parse(params.get('format')??'html');
+  const out=exportDraft(db,user.id,exp[1],format);
+  const headers:Record<string,string>={'Content-Type':out.contentType,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; img-src https: data:; style-src 'unsafe-inline'; sandbox"};
+  if(params.get('download')==='1')headers['Content-Disposition']=`attachment; filename="${out.filename}"`;
+  return new Response(out.body,{headers});
  }
  const restore=path.match(new RegExp(`^/api/drafts/${ID}/restore$`));
  if(restore&&method==='POST')return json({data:restoreDraftRevision(db,user.id,restore[1],await body(request,anyJson))});

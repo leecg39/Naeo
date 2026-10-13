@@ -214,6 +214,7 @@ export const installWrite: InstallBehavior = (root, tools) => {
       keyword: keyword.value.trim(), category, title: titleInput?.value.trim() || '',
       experience: experience?.value.trim() || '', instructions: instructions?.value.trim() || '',
       aiImages: aiImages(), idempotencyKey: crypto.randomUUID(),
+      ...(() => { const id = document.querySelector<HTMLSelectElement>('#writing-template')?.value; return id ? { templateId: id } : {}; })(),
     };
     void (async () => {
       try {

@@ -1,5 +1,5 @@
 /** AI 글 생성 공급자. 키가 있을 때만 실제 Anthropic Messages API를 호출한다. */
-export type GenerationInput={keyword:string;category:string;title:string;experience:string;instructions:string};
+export type GenerationInput={keyword:string;category:string;title:string;experience:string;instructions:string;guidance?:string};
 export type GenerationOutput={title:string;body:string};
 export type Provider=(input:GenerationInput)=>Promise<GenerationOutput>;
 export type FetchLike=(url:string,init?:RequestInit)=>Promise<Response>;
@@ -14,7 +14,8 @@ const SYSTEM=[
 /** 입력 블록 경계를 깨는 문자열은 무력화한다(프롬프트 주입 완화). */
 const fence=(s:string)=>s.replace(/<\/?user_input>/gi,'[태그 제거]').slice(0,2000);
 
-export function buildRequest(input:GenerationInput,model:string){
+/** 운영자 템플릿 지침(신뢰 가능)은 시스템 지시에, 회원 입력은 사용자 메시지의 경계 태그 안에만 넣는다. */
+export function buildRequest(input:GenerationInput,model:string,guidance=input.guidance??''){
  const user=[
   '아래 자료로 블로그 글 초안을 써주세요.',
   '<user_input>',
@@ -23,7 +24,8 @@ export function buildRequest(input:GenerationInput,model:string){
   `내 경험: ${fence(input.experience)||'(없음)'}`,`추가 요청: ${fence(input.instructions)||'(없음)'}`,
   '</user_input>'
  ].join('\n');
- return{model,max_tokens:4000,system:SYSTEM,messages:[{role:'user',content:user}]};
+ const system=guidance.trim()?`${SYSTEM}\n\n운영자 작성 지침:\n${guidance.trim().slice(0,2000)}`:SYSTEM;
+ return{model,max_tokens:4000,system,messages:[{role:'user',content:user}]};
 }
 
 /** 응답 마크다운에서 "# 제목" 줄을 제목으로, 나머지를 본문으로 나눈다. */

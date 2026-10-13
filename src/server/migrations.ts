@@ -585,4 +585,19 @@ export const migrations = [{
     CREATE INDEX generation_jobs_claim ON generation_jobs(state,run_after);
     CREATE INDEX generation_jobs_owner ON generation_jobs(owner_id,created_at DESC);
   `,
+}, {
+  version: 17,
+  name: 'writing_templates',
+  sql: `
+    CREATE TABLE writing_templates (
+      id TEXT PRIMARY KEY NOT NULL,
+      name TEXT NOT NULL UNIQUE COLLATE NOCASE CHECK(length(name) BETWEEN 1 AND 60),
+      category TEXT NOT NULL DEFAULT '' CHECK(length(category)<=30),
+      guidance TEXT NOT NULL CHECK(length(guidance) BETWEEN 1 AND 2000),
+      status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','hidden')),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+  `,
 }];

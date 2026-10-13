@@ -15,12 +15,12 @@ export const OPEN_DRAFT_EVENT='naeo:open-draft';
 function Workspace(){
  const [result,setResult]=useState<PageResult<DraftSummary>|null>(null),[q,setQ]=useState(''),[status,setStatus]=useState(''),[page,setPage]=useState(1);
  const [selected,setSelected]=useState<DraftDetail|null>(null),[jobs,setJobs]=useState<GenerationJob[]>([]),[tokens,setTokens]=useState<number|null>(null);
- const [notice,setNotice]=useState(''),[error,setError]=useState(''),[signedOut,setSignedOut]=useState(false);
+ const [notice,setNotice]=useState(''),[error,setError]=useState(''),[signedOut,setSignedOut]=useState(false),[templates,setTemplates]=useState<{id:string;name:string}[]>([]);
  const load=useCallback(async(p=page)=>{
   try{
    const query=new URLSearchParams({page:String(p),pageSize:'10',q,...(status?{status}:{})});
-   const [list,gens,credit]=await Promise.all([apiResponse<PageResult<DraftSummary>>(`/api/drafts?${query}`),apiResponse<PageResult<GenerationJob>>('/api/generations?pageSize=5'),apiResponse<{balance:number}>('/api/credits?pageSize=1')]);
-   setResult(list);setJobs(gens.data);setTokens(credit.balance);setPage(p);
+   const [list,gens,credit,tpl]=await Promise.all([apiResponse<PageResult<DraftSummary>>(`/api/drafts?${query}`),apiResponse<PageResult<GenerationJob>>('/api/generations?pageSize=5'),apiResponse<{balance:number}>('/api/credits?pageSize=1'),api<{id:string;name:string}[]>('/api/writing-templates')]);
+   setResult(list);setJobs(gens.data);setTokens(credit.balance);setTemplates(tpl);setPage(p);
   }catch(e){if(e instanceof ApiError&&e.status===401)setSignedOut(true);else setError(e instanceof Error?e.message:'불러오지 못했습니다.');}
  },[page,q,status]);
  const open=useCallback(async(id:string)=>{try{setSelected(await api<DraftDetail>(`/api/drafts/${id}`));setNotice('');}catch(e){setError(e instanceof Error?e.message:'초안을 열지 못했습니다.');}},[]);
@@ -40,6 +40,8 @@ function Workspace(){
    <h2 style={{margin:0,fontSize:20}}>내 초안</h2>
    <span style={{fontSize:13,color:'#a3a3a3'}}>토큰 잔액 {tokens??'—'} · 글 생성 10토큰(실패·취소 시 환급)</span>
   </div>
+  {templates.length>0&&<label style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap',fontSize:14}}>AI 글 생성 템플릿
+   <select id="writing-template" style={field} defaultValue=""><option value="">템플릿 없이</option>{templates.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select></label>}
   <div aria-live="polite">{notice&&<p role="status" style={{margin:0,color:'#03c75a'}}>{notice}</p>}{error&&<p role="alert" style={{margin:0,color:'#f87171'}}>{error}</p>}</div>
   {jobs.length>0&&<div className="naeo-panel" style={{padding:12,fontSize:13,display:'grid',gap:4}}><strong>최근 AI 생성</strong>{jobs.map(j=><div key={j.id} style={{display:'flex',gap:8,flexWrap:'wrap'}}>
    <span>{fmt(j.createdAt)} · {JOB[j.state]}{j.errorMessage&&j.state==='failed'?` · ${j.errorMessage}`:''}</span>

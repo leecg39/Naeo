@@ -4,6 +4,7 @@ import {transaction,type Database} from '../database';
 import {AppError} from '../errors';
 import {paginationInput} from '../validation';
 import {balance,record} from '../credits/ledger';
+import {templateGuidance} from './templates';
 
 /** 글 1편 생성 비용(원본 화면의 "10토큰"). AI 이미지는 공급자 미설정. */
 export const GENERATION_COST=10;
@@ -14,8 +15,9 @@ export type JobRow={id:string;owner_id:string;draft_id:string|null;state:Generat
 export const toJob=(r:JobRow):GenerationJob=>({id:r.id,state:r.state,cost:r.cost,draftId:r.draft_id,attempt:r.attempt,errorCode:r.error_code,errorMessage:r.error_message,cancelRequested:r.cancel_requested===1,createdAt:r.created_at,updatedAt:r.updated_at,completedAt:r.completed_at});
 const text=(max:number)=>z.string().trim().max(max);
 const requestInput=z.object({keyword:text(60).min(1),category:text(30).default(''),title:text(200).default(''),experience:text(1000).default(''),instructions:text(1000).default(''),
- photoIds:z.array(z.string().regex(/^[A-Za-z0-9_-]{22}$/)).max(20).default([]),aiImages:z.number().int().min(0).max(20).default(0),idempotencyKey:text(100).min(1)}).strict();
-export type StoredInput=Omit<z.infer<typeof requestInput>,'idempotencyKey'|'aiImages'>;
+ photoIds:z.array(z.string().regex(/^[A-Za-z0-9_-]{22}$/)).max(20).default([]),aiImages:z.number().int().min(0).max(20).default(0),templateId:z.uuid().optional(),idempotencyKey:text(100).min(1)}).strict();
+/** 저장 입력: 템플릿 지침은 요청 시점의 내용을 복사해 둔다(나중에 템플릿을 고쳐도 기존 작업은 그대로). */
+export type StoredInput=Omit<z.infer<typeof requestInput>,'idempotencyKey'|'aiImages'|'templateId'>&{guidance:string};
 
 export function ownedJob(db:Database,ownerId:string,id:string):JobRow{
  const r=db.prepare('SELECT * FROM generation_jobs WHERE id=? AND owner_id=?').get(id,ownerId) as JobRow|undefined;
@@ -34,7 +36,8 @@ export function requestGeneration(db:Database,ownerId:string,input:unknown,confi
   for(const p of v.photoIds)if(!db.prepare('SELECT 1 FROM media_files WHERE public_id=? AND owner_id=?').get(p,ownerId))throw new AppError(404,'PHOTO_NOT_FOUND','선택한 사진을 찾을 수 없습니다.');
   if(balance(db,ownerId)<GENERATION_COST)throw new AppError(402,'INSUFFICIENT_TOKENS',`토큰이 부족합니다(필요 ${GENERATION_COST}).`);
   const id=randomUUID();
-  const stored:StoredInput={keyword:v.keyword,category:v.category,title:v.title,experience:v.experience,instructions:v.instructions,photoIds:v.photoIds};
+  const guidance=v.templateId?templateGuidance(db,v.templateId):'';
+  const stored:StoredInput={keyword:v.keyword,category:v.category,title:v.title,experience:v.experience,instructions:v.instructions,photoIds:v.photoIds,guidance};
   db.prepare("INSERT INTO generation_jobs(id,owner_id,state,cost,input_json,provider,model,idempotency_key,run_after,created_at,updated_at) VALUES(?,?,'queued',?,?,?,?,?,?,?,?)")
    .run(id,ownerId,GENERATION_COST,JSON.stringify(stored),config.provider,config.model,v.idempotencyKey,now,now,now);
   record(db,{ownerId,delta:-GENERATION_COST,reason:'generation',refType:'generation',refId:id,note:v.keyword},now);
