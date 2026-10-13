@@ -8,9 +8,9 @@ import { registerInput, loginInput } from './validation';
 
 export const SESSION_COOKIE = 'naeo_session';
 export const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
-export type User = {id:string;email:string;role:'admin'|'member';status:'active'|'suspended';createdAt:number};
+export type User = {id:string;email:string;role:'admin'|'member';status:'active'|'suspended';createdAt:number;version:number;termsAcceptedAt:number;emailVerifiedAt:number|null};
 type Credentials = User & {password_hash:string};
-const userColumns = 'id,email,role,status,created_at AS createdAt';
+const userColumns = 'id,email,role,status,created_at AS createdAt,version,terms_accepted_at AS termsAcceptedAt,email_verified_at AS emailVerifiedAt';
 const derive = (password:string,salt:string) => new Promise<Buffer>((resolve,reject)=>{
   scrypt(password,salt,64,{N:16384,r:8,p:1,maxmem:64*1024*1024},(error,key)=>error?reject(error):resolve(key));
 });
@@ -28,13 +28,14 @@ export const tokenHash = (value:string) => createHash('sha256').update(value).di
 export function userById(db:Database,id:string):User {
   const user=db.prepare(`SELECT ${userColumns} FROM users WHERE id=?`).get(id) as User|undefined;
   if(!user) throw new AppError(404,'NOT_FOUND','계정을 찾을 수 없습니다.');
-  return user;
+  // node:sqlite rows have a null prototype; RSC client props require plain objects.
+  return {...user};
 }
 export function createSession(db:Database,userId:string) {
   const token=randomBytes(32).toString('base64url');
   const now=Date.now();
   db.prepare('DELETE FROM sessions WHERE expires_at<=?').run(now);
-  db.prepare('INSERT INTO sessions VALUES(?,?,?,?)').run(tokenHash(token),userId,now,now+SESSION_TTL);
+  db.prepare('INSERT INTO sessions(token_hash,user_id,created_at,expires_at,public_id) VALUES(?,?,?,?,?)').run(tokenHash(token),userId,now,now+SESSION_TTL,randomUUID());
   return {token,expiresAt:now+SESSION_TTL};
 }
 export async function register(db:Database,input:z.infer<typeof registerInput>) {
@@ -45,6 +46,8 @@ export async function register(db:Database,input:z.infer<typeof registerInput>) 
     const id=randomUUID(),now=Date.now();
     db.prepare('INSERT INTO users(id,email,password_hash,terms_accepted_at,created_at,updated_at) VALUES(?,?,?,?,?,?)').run(id,valid.email,passwordHash,now,now,now);
     db.prepare('INSERT INTO profiles(user_id,nickname,updated_at) VALUES(?,?,?)').run(id,valid.nickname,now);
+    db.prepare('INSERT INTO notification_preferences(user_id,updated_at) VALUES(?,?)').run(id,now);
+    db.prepare("INSERT INTO consent_history VALUES(?,?,'terms',1,?)").run(randomUUID(),id,now);
     const session=createSession(db,id);
     audit(db,id,'account.register','user',id);
     return {user:userById(db,id),session};
@@ -59,7 +62,8 @@ export async function login(db:Database,input:z.infer<typeof loginInput>) {
   if(!user||!matches||user.status!=='active') throw new AppError(401,'INVALID_CREDENTIALS','이메일 또는 비밀번호를 확인해주세요.');
   return transaction(db,()=>{
     const current=userById(db,user.id);
-    if(current.status!=='active') throw new AppError(401,'INVALID_CREDENTIALS','이메일 또는 비밀번호를 확인해주세요.');
+    const credentials=db.prepare('SELECT password_hash FROM users WHERE id=?').get(user.id);
+    if(current.status!=='active'||credentials?.password_hash!==user.password_hash) throw new AppError(401,'INVALID_CREDENTIALS','이메일 또는 비밀번호를 확인해주세요.');
     const session=createSession(db,user.id);
     audit(db,user.id,'account.login','user',user.id);
     return {user:current,session};
@@ -81,6 +85,9 @@ export function requireUser(db:Database,token:string|undefined):User {
   return user;
 }
 export function requireAdmin(user:User) {
-  if(user.role!=='admin') throw new AppError(403,'FORBIDDEN','관리자 권한이 필요합니다.');
+  if(user.role!=='admin'||user.status!=='active') throw new AppError(403,'FORBIDDEN','관리자 권한이 필요합니다.');
   return user;
+}
+export function requireTerms(user:User) {
+  if(!user.termsAcceptedAt) throw new AppError(403,'TERMS_REQUIRED','이용약관과 개인정보 처리방침에 동의해주세요.');
 }

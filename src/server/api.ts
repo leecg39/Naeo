@@ -1,8 +1,10 @@
 import { database, type Database } from './database';
-import { register, login, logout, requireUser, requireAdmin } from './auth';
+import { register, login, logout, requireUser, requireAdmin, requireTerms } from './auth';
+import {accountApi} from './account-api';
+import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
-import { registerInput, loginInput, profileInput, createBlogInput, updateBlogInput, deleteInput } from './validation';
+import { registerInput, loginInput, profileInput, createBlogInput, updateBlogInput, deleteInput,acceptTermsInput } from './validation';
 import { AppError } from './errors';
 import { endpoint, requireOrigin, cookieToken, sessionCookie, body, json, authRateLimit } from './http';
 
@@ -30,6 +32,11 @@ export function createApi(getDatabase:()=>Database=database) {
     }
     const user=requireUser(db,cookieToken(request));
     if(path==='/api/auth/me'&&method==='GET') return json({data:{user,profile:getProfile(db,user.id)}});
+    if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
+    // Withdrawal and session management remain available even before consent.
+    if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const accountResponse=await accountApi(db,request,user);
+    if(accountResponse)return accountResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

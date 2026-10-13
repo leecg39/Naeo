@@ -11,7 +11,8 @@ if(command!=='promote'||!email) {
     transaction(db,()=>{
       const user=db.prepare('SELECT id,status FROM users WHERE email=?').get(email.trim().toLowerCase()) as {id:string;status:string}|undefined;
       if(!user||user.status!=='active') throw Error('An existing active account is required. Register through /login first.');
-      db.prepare("UPDATE users SET role='admin',updated_at=? WHERE id=?").run(Date.now(),user.id);
+      db.prepare("UPDATE users SET role='admin',version=version+1,updated_at=? WHERE id=?").run(Date.now(),user.id);
+      db.prepare('DELETE FROM sessions WHERE user_id=?').run(user.id);
       audit(db,null,'admin.bootstrap','user',user.id,{source:'local-cli'});
       console.log('Administrator role granted to the specified account.');
     });

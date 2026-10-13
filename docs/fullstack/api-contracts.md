@@ -36,3 +36,22 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | P8 | /api/track /track/dwell /api/admin/metrics | 방문·체류·집계, 익명 식별자·입력 제한·보존 정책 |
 
 각 단계에서 필드별 Zod 스키마와 HTTP 테스트를 구현해 이 계약을 구체화한다. 위 목록은 API 구현 완료 선언이 아니다.
+
+## P1 계정·관리 구현 계약 (2026-10-13)
+
+| 경로 | 실제 메서드·필드 |
+|---|---|
+| `/api/auth/terms` | POST `termsAccepted:true`; 최초 동의 시각·이력 저장. 관리자가 대신 동의할 수 없음 |
+| `/api/auth/password` | PATCH `currentPassword,newPassword`; 전체 세션 종료 후 현재 요청에 새 세션 쿠키 발급 |
+| `/api/auth/sessions` | GET 본인 유효 세션의 공개 ID·생성/만료·현재 여부, DELETE 현재 세션 외 모두 종료 |
+| `/api/auth/sessions/:id` | DELETE 본인 세션만 철회. 현재 세션이면 쿠키 삭제; 세션 토큰/해시 미노출 |
+| `/api/auth/account` | DELETE `currentPassword,confirmEmail,version`; 재인증·마지막 관리자 보호·개인 자원 cascade·쿠키 삭제 |
+| `/api/contact-details` | GET (없으면 null), POST `name,email,phone`, PATCH 같은 필드+`version`, DELETE `version` |
+| `/api/preferences` | GET, PATCH `marketingEmail,scanEmail,autoscan` 중 변경 필드+`version`; 선택 동의 변경 이력 저장 |
+| `/api/admin/users` | GET `q,role,status,page,pageSize`, POST `email,nickname,password,role,currentPassword`; 신규 계정은 약관 미동의·메일 미인증 |
+| `/api/admin/users/:id` | GET 상세, PATCH `nickname,role,status` 중 변경 필드+`version,currentPassword`, DELETE `confirmEmail,version,currentPassword` |
+| `/api/admin/audit` | GET `q,page,pageSize`; 작업명 검색, 개인정보·비밀번호·토큰을 payload에 기록하지 않음 |
+
+약관 미동의 계정은 동의·탈퇴·비밀번호·세션 관리만 가능하다. 관리자 권한/계정 정지를 바꾸면 대상 계정 세션을 모두 철회한다. 마지막 관리자 수에는 활성 상태이며 약관 동의를 마친 관리자만 포함한다. 관리자 쓰기·비밀번호 변경·탈퇴는 사용자별 15분 20회 제한이다. 프로필 닉네임 변경도 사용자 버전을 갱신해 관리자 편집과의 충돌을 감지한다.
+
+연락처의 `phoneVerifiedAt`은 클라이언트에서 설정할 수 없으며 번호가 바뀌면 null로 초기화한다. SMS 공급자·이메일 발송·비밀번호 재설정·이메일 검증은 아직 구현하지 않았다. 동의/알림 설정 저장이 외부 발송 성공을 의미하지 않는다.

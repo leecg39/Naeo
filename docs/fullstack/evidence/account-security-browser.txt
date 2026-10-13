@@ -1,0 +1,156 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 전체 풀스택 CRUD 검증"(7): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    container
+      anchor [ref=271, url=http://127.0.0.1:3100/]
+        text "NAEO"
+        text "●"
+      text "관리자 수정 검증"
+      button [ref=272]
+        text "로그아웃"
+    container
+      container
+        container "대시보드 메뉴"
+          anchor [ref=273, loc=href:/dashboard, url=http://127.0.0.1:3100/dashboard]
+            text "대시보드"
+          anchor [ref=274, loc=href:/dashboard/ai-picks, url=http://127.0.0.1:3100/dashboard/ai-picks]
+            text "AI 인용 현황"
+          anchor [ref=275, loc=href:/dashboard/recommendations, url=http://127.0.0.1:3100/dashboard/recommendations]
+            text "키워드 추천"
+          anchor [ref=276, loc=href:/dashboard/competitors, url=http://127.0.0.1:3100/dashboard/competitors]
+            text "경쟁 블로그"
+          anchor [ref=277, loc=href:/dashboard/write, url=http://127.0.0.1:3100/dashboard/write]
+            text "AI 글쓰기"
+          anchor [ref=278, loc=href:/dashboard/mate, url=http://127.0.0.1:3100/dashboard/mate]
+            text "네이버 메이트"
+          anchor [ref=279, loc=href:/dashboard/events, url=http://127.0.0.1:3100/dashboard/events]
+            text "이벤트"
+          anchor [ref=280, loc=href:/dashboard/settings, url=http://127.0.0.1:3100/dashboard/settings]
+            text "계정 설정"
+        anchor [ref=281, url=http://127.0.0.1:3100/]
+          text "사이트로 돌아가기 ↗"
+      container
+        paragraph
+          text "MY NAEO"
+        heading
+          text "계정 설정"
+        container
+          container
+            heading
+              text "내 프로필"
+            paragraph
+              text "로그인 계정:"
+              text "qa.managed.20261013@example.test"
+            form
+              container
+                text "닉네임"
+                textbox [ref=282, loc=css:input[name="nickname"]]
+                  text "관리자 수정 검증"
+              container
+                checkbox [ref=283, loc=css:input[name="rankingPublic"]]
+                text "랭킹에 내 프로필 공개"
+              button [ref=284]
+                text "프로필 저장"
+          container
+            heading
+              text "내 블로그"
+            paragraph
+              text "등록한 블로그를 관리하고 대표 블로그를 선택하세요."
+            paragraph
+              text "등록한 블로그가 없습니다. 아래에서 첫 블로그를 추가하세요."
+            heading
+              text "블로그 추가"
+            form
+              container
+                text "네이버 블로그 ID"
+                textbox [ref=285, loc=css:input[name="naverId"]]
+                  text "my_blog"
+              container
+                text "블로그 이름"
+                textbox [ref=286, loc=css:input[name="title"]]
+              container
+                text "주제"
+                textbox [ref=287, loc=css:input[name="category"]]
+                  text "예: 일상·생각"
+              container
+                checkbox [ref=288, loc=css:input[name="isPrimary"]]
+                text "대표 블로그로 설정"
+              button [ref=289]
+                text "블로그 등록"
+          container
+            heading
+              text "연락처와 알림"
+            form
+              container
+                text "이름"
+                textbox [ref=290, loc=css:input[name="name"]]
+              container
+                text "연락 이메일"
+                textbox [ref=291, loc=css:input[name="email"]]
+              container
+                text "휴대폰 번호 (선택)"
+                textbox [ref=292, loc=css:input[name="phone"]]
+              button [ref=293]
+                text "연락처 저장"
+            heading
+              text "알림 수신 설정"
+            form
+              container
+                checkbox [ref=294, loc=css:input[name="marketingEmail"]]
+                text "혜택·이벤트 이메일 수신 (선택)"
+              container
+                checkbox [ref=295, loc=css:input[name="scanEmail"]]
+                text "분석 완료 이메일 수신 (선택)"
+              container
+                checkbox [ref=296, loc=css:input[name="autoscan"]]
+                text "자동 스캔 요청"
+              button [ref=297]
+                text "알림 설정 저장"
+          container
+            heading
+              text "계정 보안"
+            status
+              text "비밀번호를 변경하고 다른 기기에서 로그아웃했습니다."
+            heading
+              text "비밀번호 변경"
+            form
+              container
+                text "현재 비밀번호"
+                textbox [ref=307, loc=css:input[name="currentPassword"]]
+              container
+                text "새 비밀번호"
+                textbox [ref=308, loc=css:input[name="newPassword"]]
+              container
+                text "새 비밀번호 확인"
+                textbox [ref=309, loc=css:input[name="confirmPassword"]]
+              button [ref=310]
+                text "비밀번호 변경"
+            heading
+              text "로그인한 기기"
+            unordered_list
+              list_item
+                container
+                  text "현재 로그인"
+                  container
+                    text "로그인:"
+                    container
+                      text "2026-10-13 06:37"
+                      text "UTC"
+                  container
+                    text "만료:"
+                    text "2026-10-20"
+                button [ref=311]
+                  text "로그인 종료"
+                  text "현재"
+            container
+              button [ref=304]
+                text "다른 기기 모두 로그아웃"
+              button [ref=305]
+                text "로그인 목록 새로고침"
+            heading
+              text "회원 탈퇴"
+            paragraph
+              text "탈퇴하면 프로필·등록한 블로그·연락처·알림 설정과 모든 로그인 세션이 삭제됩니다. 삭제한 데이터는 복구할 수 없습니다."
+            button [ref=306]
+              text "회원 탈퇴"
+  alert

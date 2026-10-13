@@ -58,4 +58,41 @@ export const migrations = [{
       reset_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 2,
+  name: 'account_security_and_preferences',
+  sql: `
+    ALTER TABLE users ADD COLUMN version INTEGER NOT NULL DEFAULT 1 CHECK(version > 0);
+    ALTER TABLE users ADD COLUMN email_verified_at INTEGER;
+    ALTER TABLE sessions ADD COLUMN public_id TEXT NOT NULL DEFAULT '';
+    UPDATE sessions SET public_id=lower(hex(randomblob(16)));
+    CREATE UNIQUE INDEX sessions_public_id ON sessions(public_id);
+    CREATE TABLE contact_details (
+      user_id TEXT PRIMARY KEY NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name TEXT NOT NULL DEFAULT '' CHECK(length(name)<=80),
+      email TEXT NOT NULL DEFAULT '' CHECK(length(email)<=254),
+      phone TEXT NOT NULL DEFAULT '' CHECK(length(phone)<=20),
+      phone_verified_at INTEGER,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE notification_preferences (
+      user_id TEXT PRIMARY KEY NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      marketing_email INTEGER NOT NULL DEFAULT 0 CHECK(marketing_email IN (0,1)),
+      scan_email INTEGER NOT NULL DEFAULT 0 CHECK(scan_email IN (0,1)),
+      autoscan INTEGER NOT NULL DEFAULT 0 CHECK(autoscan IN (0,1)),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE consent_history (
+      id TEXT PRIMARY KEY NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK(kind IN ('terms','marketing_email','scan_email')),
+      accepted INTEGER NOT NULL CHECK(accepted IN (0,1)),
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    INSERT INTO notification_preferences(user_id,updated_at) SELECT id,updated_at FROM users;
+    INSERT INTO consent_history(id,user_id,kind,accepted,created_at)
+      SELECT lower(hex(randomblob(16))),id,'terms',1,terms_accepted_at FROM users WHERE terms_accepted_at>0;
+  `,
 }];

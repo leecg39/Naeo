@@ -1,0 +1,105 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 전체 풀스택 CRUD 검증"(7): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    container
+      anchor [ref=486, url=http://127.0.0.1:3100/admin]
+        text "NAEO"
+        text "●"
+        text "관리자"
+      container
+        anchor [ref=487, loc=href:/dashboard/settings, url=http://127.0.0.1:3100/dashboard/settings]
+          text "내 계정"
+        button [ref=488]
+          text "로그아웃"
+    container
+      container "관리자 메뉴"
+        anchor [ref=489, url=http://127.0.0.1:3100/admin]
+          text "운영 현황"
+        anchor [ref=490, url=http://127.0.0.1:3100/admin/users]
+          text "사용자"
+        anchor [ref=491, loc=href:/admin/blog, url=http://127.0.0.1:3100/admin/blog]
+          text "매거진"
+        anchor [ref=492, loc=href:/admin/events, url=http://127.0.0.1:3100/admin/events]
+          text "이벤트 관리"
+        anchor [ref=493, loc=href:/admin/event, url=http://127.0.0.1:3100/admin/event]
+          text "이벤트 편집"
+        anchor [ref=494, loc=href:/admin/inquiries, url=http://127.0.0.1:3100/admin/inquiries]
+          text "문의"
+        anchor [ref=495, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3100/admin/inquiries/templates]
+          text "답변 템플릿"
+        anchor [ref=496, loc=href:/admin/keywords, url=http://127.0.0.1:3100/admin/keywords]
+          text "키워드"
+        anchor [ref=497, loc=href:/admin/rewards, url=http://127.0.0.1:3100/admin/rewards]
+          text "보상"
+        anchor [ref=498, loc=href:/admin/scan-health, url=http://127.0.0.1:3100/admin/scan-health]
+          text "스캔 상태"
+        anchor [ref=499, loc=href:/admin/writing, url=http://127.0.0.1:3100/admin/writing]
+          text "글쓰기"
+      container
+        paragraph
+          text "NAEO ADMIN"
+        heading
+          text "운영 현황"
+        container
+          container
+            heading
+              text "사용자"
+              text "1"
+              text "명"
+            paragraph
+              text "계정 생성·권한·이용 상태와 관리 작업을 확인하세요."
+            anchor [ref=500, url=http://127.0.0.1:3100/admin/users]
+              text "사용자 관리"
+          container
+            heading
+              text "관리 작업 기록"
+            form
+              container
+                text "작업 검색"
+                textbox [ref=501, loc=css:input[placeholder="예: admin.user"]]
+                  text "account.delete"
+              button [ref=502]
+                text "기록 검색"
+            table
+              table_row
+                table_cell
+                  text "관리 작업 감사 기록"
+              table_row
+                table_cell
+                  text "시간 (UTC)"
+                table_cell
+                  text "작업"
+                table_cell
+                  text "대상"
+                table_cell
+                  text "실행자"
+              table_row
+                table_cell
+                  text "2026-10-13 06:40:44"
+                table_cell
+                  text "account.delete"
+                table_cell
+                  text "user"
+                  text "b8eeabf5-88da-4e91-be71-cb7c95ffc892"
+                table_cell
+                  text "94ebbdd0-6a9b-49bd-9b52-47b5c157664d"
+              table_row
+                table_cell
+                  text "2026-10-13 06:37:54"
+                table_cell
+                  text "account.delete"
+                table_cell
+                  text "user"
+                  text "a55072e9-8c47-4650-9514-ad6720c56ad1"
+                table_cell
+                  text "삭제된 계정 / 시스템"
+            container
+              button [ref=503]
+                text "이전 기록"
+              container
+                text "1"
+                text "/"
+                text "1"
+              button [ref=504]
+                text "다음 기록"
+  alert

@@ -16,6 +16,7 @@ export function updateProfile(db:Database,userId:string,input:unknown):Profile {
     const current=getProfile(db,userId);
     if(current.version!==valid.version) throw new AppError(409,'VERSION_CONFLICT','다른 화면에서 수정했습니다. 새로고침 후 다시 시도해주세요.');
     db.prepare('UPDATE profiles SET nickname=?,avatar_url=?,ranking_public=?,version=version+1,updated_at=? WHERE user_id=? AND version=?').run(valid.nickname??current.nickname,valid.avatarUrl??current.avatarUrl,Number(valid.rankingPublic??current.rankingPublic),Date.now(),userId,valid.version);
+    db.prepare('UPDATE users SET version=version+1,updated_at=? WHERE id=?').run(Date.now(),userId);
     audit(db,userId,'profile.update','profile',userId,{fields:Object.keys(valid).filter(k=>k!=='version')});
     return getProfile(db,userId);
   });

@@ -4,6 +4,7 @@ import {openDatabase} from '../../src/server/database';
 import {createApi} from '../../src/server/api';
 
 const origin='http://127.0.0.1:3000';
+process.env.NAEO_APP_URL=origin;
 const registration={email:'http@example.test',password:'a-long-test-password',nickname:'HTTP 테스트',termsAccepted:true};
 function fixture(t:TestContext){
  const db=openDatabase(':memory:');t.after(()=>db.close());const api=createApi(()=>db);

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./account.css";
+@import "./admin.css";
 @font-face{font-family:Pretendard;src:url('/fonts/pretendard.woff2') format('woff2');font-weight:100 900;font-display:swap}
 :root{--background:#121212;--foreground:#e0e0e0;--primary:#03c75a;--primary-hover:#029f48;--primary-foreground:#fff;--muted:#a3a3a3;--muted-foreground:#a3a3a3;--card:#1a1a1a;--border:rgba(255,255,255,.1);--radius:8px;--shell-header:80px;--surface:#171717;--danger:#f97066;--max-width:1200px;color-scheme:dark}
 :root.light{--background:#fff;--foreground:#111827;--muted:#6b7280;--card:#fff;--border:#e5e7eb;--surface:#f7f9fa;color-scheme:light}

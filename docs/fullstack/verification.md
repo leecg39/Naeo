@@ -30,3 +30,25 @@ DB·마이그레이션·자체 가입/로그인·세션·로그아웃·프로필
 비밀번호 변경/재설정, 메일·휴대폰 검증, 계정 탈퇴, 관리자 CRUD, 연락처·설정 확장은 남아 있다. P2–P8 콘텐츠·문의·수집/분석·추천·경쟁자·글쓰기·이미지·랭킹·이벤트·보상·결제·OAuth·MCP·소셜 내보내기도 미완료다. 과거 clone QA의 79 URL 성공은 이 기능들의 구현 완료를 뜻하지 않는다. `page-coverage.json`은 전체 요구가 끝나지 않은 경로를 pending 상태로 유지한다.
 
 AI/OAuth/결제/SMS/메일 개발 설정은 미확인이다. 원본 로그인 세션이나 GitHub 로그인은 공급자 앱 설정을 대체하지 않는다. DB·CRUD 구현은 계속 진행할 수 있다.
+
+## 2026-10-13 — P1 계정 보안·관리자 (P1.3, P1.5–P1.7)
+
+환경: 동일 production build를 `127.0.0.1:3100`, `NAEO_DATABASE_PATH=var/qa/foundation.sqlite`로 실행. Ego 공간 7, 페이지 p1.
+
+| 명령·검증 | 결과 | 범위 |
+|---|---|---|
+| `npm test` | 33/33 통과 | 기존 6 + 서버/HTTP/계정 27 |
+| `npm run lint` / `npm run typecheck` / `npm run build` / `git diff --check` | 모두 exit 0 | 반응형 CSS 수정 후 재실행 |
+| 약관 동의 | 통과 | 관리자 생성 계정 첫 로그인 → `/auth/terms` 동의 → 대시보드. SQLite 행 직렬화 오류 수정 후 재확인 |
+| 권한 차단 | 통과 | 일반 회원 `/admin/users` 화면 403, API 차단 |
+| 연락처·알림 | 통과 | 생성·수정·새로고침 보존·삭제(`contact_details` 0행, `contact.delete` 감사), 휴대폰은 "인증되지 않은 번호" 표시, 선택 수신 설정 보존 |
+| 비밀번호·세션 | 통과 | 개별 세션 종료, 비밀번호 변경 후 이전 비밀번호 거부·새 비밀번호 로그인, 다른 기기 모두 로그아웃 |
+| 회원 탈퇴 | 통과 | 재인증 탈퇴 후 `/api/auth/me` 401, 같은 계정 재로그인 401 |
+| 관리자 CRUD | 통과 | 사용자 생성·닉네임 수정·정지/복구·검색, 삭제 시 이메일 불일치 거절, 정상 삭제 후 새로고침 목록에서 제거(총 1명) |
+| 마지막 관리자 보호 | 통과 | 약관 미동의 관리자는 집계 제외. 유일한 동의 관리자 본인 강등 시 409 LAST_ADMIN, DB role 유지 |
+| 반응형 | 수정 후 통과 | 수정 전 `/admin/users` 390px 레이아웃 폭 681(→622), 768px scrollWidth 961; `/admin` 922/1202. 원인: `.settings-sections` grid 열이 nowrap 표 폭으로 확장, 행 버튼의 `sr-only`(absolute)가 스크롤 컨테이너 밖으로 탈출. `admin.css`에 `grid-template-columns:minmax(0,1fr)`와 `.responsive-table{position:relative}` 추가. 수정 후 390/768/1440px 세 화면 모두 scrollWidth ≤ innerWidth, 표만 가로 스크롤 |
+| 스크린샷 시각 비교 | 미완료 | Ego `Page.captureScreenshot` 시간 초과 지속 |
+
+브라우저 기록: `evidence/account-security-browser.txt`, `evidence/admin-users-created-updated.txt`, `evidence/admin-audit-deletions.txt`, `evidence/account-responsive.json`, `evidence/admin-responsive.json`(반응형 수정 전 측정, 경로 미기재 — 위 표의 수정 후 수치가 최신).
+
+미구현: 비밀번호 재설정 메일, 이메일 검증, SMS 휴대폰 인증, 이메일 알림 실제 발송. 메일·SMS 공급자 설정이 필요하며 저장 성공을 발송·인증 성공으로 간주하지 않는다.
