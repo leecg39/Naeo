@@ -10,6 +10,8 @@ import {anthropicProvider,ProviderError,type Provider} from '../src/server/gener
 import {providerConfig} from '../src/server/generation/generation';
 import {scanHandler} from '../src/server/analysis/scan-handler';
 import {billingMaintenance} from '../src/server/billing/maintenance';
+import {cleanupExports} from '../src/server/creative/exports';
+import {uploadDir} from '../src/server/writing/writing-api';
 
 async function main(){
  const workerId=`${hostname()}-${process.pid}`;
@@ -24,7 +26,7 @@ async function main(){
  let maintained=0;
  while(!controller.signal.aborted){
   const billing=billingMaintenance(db,maintained);
-  if(billing){maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
+  if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const ran=(await runWorkerOnce(db,workerId,scans))??(await runGenerationOnce(db,workerId,provider));
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
  }

@@ -335,3 +335,14 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `.../slides/:sid.svg` | GET | 소유자 | 서버가 그린 SVG(글자 이스케이프·줄바꿈), `CSP sandbox`·`nosniff`·`no-store` | 404 |
 
 화면: `/dashboard/social` 편집기(계정 메뉴 '소셜 제작'), `/social/aeo-carousel?project=`·`/social/mate-ad?project=`·`/youtube/aeo-intro?project=` 내 프로젝트 보기(←/→), 쿼리가 없으면 캡처 견본 유지.
+
+## P7.5 내보내기·미리보기 (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/api/creative/projects/:id/exports` | GET·POST | 소유자 | 최근 10개 / `{format:'pdf'|'zip'}` 시작(시간당 20회) | 404, 429 |
+| `/api/creative/exports/:job/pages/:n` | PUT `image/png` | 소유자 | 브라우저가 그린 PNG(최대 12MB): 서명·청크 CRC·8비트 RGB/RGBA·비인터레이스·프로젝트 크기 확인, 같은 자리는 교체 | 415, 413, 400 `INVALID_PNG`·`UNSUPPORTED_PNG`·`SIZE_MISMATCH`·`BAD_POSITION`(작업 실패로 기록), 409 `EXPORT_EXPIRED`·`EXPORT_CLOSED` |
+| `/api/creative/exports/:job/complete` | POST | 소유자 | PDF 1.4(장마다 한 페이지, 픽셀×0.75pt, RGB Flate) 또는 ZIP(slide-01.png…, 무압축 저장) 생성, 7일 보관 | 409 `PAGES_MISSING` |
+| `/api/creative/exports/:job/file` | GET | 소유자 | `attachment; filename*=UTF-8''제목.pdf` | 404, 410 `EXPORT_EXPIRED` |
+
+화면: `/social/aeo-carousel/export?project=`·`/social/mate-ad/export?project=`·`/youtube/aeo-intro/export?project=`(진행 n/전체, 실패 이유, 내려받기). 영상 파일 인코딩은 지원하지 않음(인코더 필요). `/preview?id=`는 내 초안을 샌드박스 iframe(허용 목록 HTML)으로 미리보기, id 없으면 `/dashboard/write`. `/dev/*`는 관리자만(그 외 404). localStorage 미리보기 데모(DemoPreview) 제거.

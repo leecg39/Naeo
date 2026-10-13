@@ -1,7 +1,7 @@
 # Codex 인계 문서 (Claude Code → Codex)
 
 Claude Code가 사용 한도에 걸리면 Codex가 이 문서만 보고 이어서 작업한다. 커밋할 때마다 갱신한다.
-마지막 갱신: 2026-10-14, P7.4까지 커밋.
+마지막 갱신: 2026-10-14, P7.5까지 커밋.
 
 ## 목표(사용자 원문 요지)
 clone-website로 만든 naeo.kr 복제본에 REA 역공학 분석대로 **전 메뉴 페이지의 데이터 모델·CRUD·화면·백엔드**를 구현하고, 추론하지 말고 실제로 작동하는지 하나씩 검증한다. 계획은 `TASKS.md`(P0–P8), 설계는 `docs/fullstack/*.md`.
@@ -33,8 +33,8 @@ P0–P6 대부분 완료(체크 상태는 `TASKS.md`가 기준). 최근 커밋: 
 키가 없어 미완료로 남긴 항목: P1.6(메일), P1.7(SMS), P1.8(스크린샷 비교), P3.3/P3.7(AI 인용), P4.2(실제 Anthropic 왕복), P6.3/P6.5(실제 토스 샌드박스), P7.1(실제 Google·네이버 앱 왕복).
 
 ## 지금 하던 작업
-P7.4 완료(소셜 프로젝트·슬라이드). 다음은 P7.5 내보내기: 슬라이드 SVG(`src/server/creative/svg.ts`)를 브라우저 캔버스로 PNG로 바꿔 업로드 → 서버가 PNG 서명·크기 검증 후 저장, PNG들을 묶어 PDF 생성(외부 라이브러리 없이 PNG IDAT를 FlateDecode+Predictor로 삽입), 내보내기 작업 진행/실패 표시, /social/*/export?project= 화면. 영상 인코딩은 범위 밖(사유 기록). /preview·/dev/* 권한 정리.
-브라우저(ego)는 관리자로 로그인된 상태(QA DB를 복원하면 세션이 사라지니 정리는 화면에서 지우는 방식 권장).
+P7.5 완료(내보내기·/preview·/dev 권한). P7.6은 키·확장 코드가 필요한 부분만 남음. 다음은 P8(운영·완료 감사).
+브라우저(ego)는 관리자로 로그인된 상태.
 
 ## 그 다음
 - P7.4 소셜 프로젝트/슬라이드 CRUD(캡처 /social/*·/youtube/aeo-intro 구조부터 확인, 마이그레이션 23)(/social/*, /youtube/aeo-intro), P7.5 이미지·PDF 내보내기와 /preview·/dev/* 권한, P7.6 E2E.

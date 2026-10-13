@@ -1,5 +1,4 @@
 'use client';
-import DemoPreview from '@/components/DemoPreview';
 import CapturedView from '@/components/captured/CapturedView';
 import StatefulExperience from '@/components/StatefulExperience';
 import type { CapturedPageData } from '@/types/site';
@@ -21,4 +20,4 @@ const install:InstallBehavior=(root,tools)=>{
  const cleanup=adapter?.(root,tools), shared=installAuxiliary(root,tools);
  return()=>{cleanup?.();shared?.()};
 };
-export default function PageExperience({data}:{data:CapturedPageData}) { return data.path==='/preview'?<DemoPreview/>:['/mcp','/social/aeo-carousel','/youtube/aeo-intro'].includes(data.path)?<StatefulExperience key={data.path} data={data}/>:<CapturedView key={data.path} data={data} install={install}/> }
+export default function PageExperience({data}:{data:CapturedPageData}) { return ['/mcp','/social/aeo-carousel','/youtube/aeo-intro'].includes(data.path)?<StatefulExperience key={data.path} data={data}/>:<CapturedView key={data.path} data={data} install={install}/> }

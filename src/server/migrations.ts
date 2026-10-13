@@ -943,5 +943,35 @@ export const migrations = [{
       UNIQUE(project_id,position)
     ) STRICT;
   `,
+}, {
+  version: 24,
+  name: 'creative_exports',
+  sql: `
+    CREATE TABLE export_jobs (
+      id TEXT PRIMARY KEY NOT NULL,
+      project_id TEXT NOT NULL REFERENCES creative_projects(id) ON DELETE CASCADE,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      format TEXT NOT NULL CHECK(format IN ('pdf','zip')),
+      state TEXT NOT NULL DEFAULT 'collecting' CHECK(state IN ('collecting','succeeded','failed')),
+      slide_count INTEGER NOT NULL CHECK(slide_count BETWEEN 1 AND 20),
+      width INTEGER NOT NULL,
+      height INTEGER NOT NULL,
+      error TEXT NOT NULL DEFAULT '' CHECK(length(error)<=300),
+      file_key TEXT CHECK(file_key IS NULL OR length(file_key)<=60),
+      file_size INTEGER,
+      expires_at INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX export_jobs_project ON export_jobs(project_id,created_at DESC);
+    CREATE INDEX export_jobs_expiry ON export_jobs(expires_at);
+    CREATE TABLE export_pages (
+      job_id TEXT NOT NULL REFERENCES export_jobs(id) ON DELETE CASCADE,
+      position INTEGER NOT NULL CHECK(position BETWEEN 0 AND 19),
+      storage_key TEXT NOT NULL CHECK(length(storage_key)<=60),
+      size INTEGER NOT NULL,
+      PRIMARY KEY(job_id,position)
+    ) STRICT;
+  `,
 }];
 

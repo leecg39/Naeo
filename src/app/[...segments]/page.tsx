@@ -29,6 +29,9 @@ import { AppError } from '@/server/errors';
 import Link from 'next/link';
 import ConsentForm from '@/components/account/ConsentForm';
 import CreativeViewer from '@/components/creative/CreativeViewer';
+import ExportPanel from '@/components/creative/ExportPanel';
+import { listExports } from '@/server/creative/exports';
+import { getDraft } from '@/server/writing/drafts';
 import { getProject } from '@/server/creative/projects';
 import { ensureExtensionClient,problemRedirect,requestProblem,SCOPE_LABEL,validateAuthorizeRequest,type AuthorizeRequest } from '@/server/oauth/authz';
 import type { CapturedPageData } from '@/types/site';
@@ -40,7 +43,7 @@ export const dynamic='force-dynamic';
 const databasePage=cache(resolveDatabasePage);
 /** 이벤트 상세는 DB의 이벤트 제목·요약을 메타데이터로 쓴다(원본 캡처 문구 대신). */
 function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|event)\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];const e=slug?getPublicEvent(contentDatabase(),slug):null;return e?{title:`${e.title} | NAEO`,description:e.summary}:undefined;}
-export async function generateMetadata({params,searchParams}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');if(['/social/aeo-carousel','/social/mate-ad','/youtube/aeo-intro'].includes(path)&&first((await searchParams).project))return{title:'소셜 프로젝트 보기',robots:{index:false,follow:false}};const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
+export async function generateMetadata({params,searchParams}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');if(['/social/aeo-carousel','/social/mate-ad','/youtube/aeo-intro'].includes(path.replace(/\/export$/,''))&&first((await searchParams).project))return{title:path.endsWith('/export')?'소셜 프로젝트 내보내기':'소셜 프로젝트 보기',robots:{index:false,follow:false}};const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
 /** 공개 화면에는 '전체' 대상 공지를 함께 띄운다(대시보드·관리자 등은 activeAnnouncement가 제외). */
 function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
 /** 결제창에서 돌아온 결과: 성공이면 서버에서 승인(멱등), 실패면 주문 실패 처리. 화면은 저장된 주문 상태로 그린다. */
@@ -73,6 +76,17 @@ function extensionRedirect(sp:Record<string,string|string[]|undefined>):string|n
  const client=ensureExtensionClient(contentDatabase(),q.extension_id);
  return `/oauth/consent?${new URLSearchParams({response_type:'code',client_id:client.client_id,redirect_uri:client.redirect_uris[0],state:q.state??'',code_challenge:q.code_challenge,code_challenge_method:q.code_challenge_method??'S256',scope:q.scope??'naeo:read naeo:write'})}`;
 }
+/** /preview?id=: 내 초안 미리보기(서버 저장본, 허용 목록 HTML을 샌드박스 iframe으로). id가 없으면 글쓰기로. */
+async function draftPreview(sp:Record<string,string|string[]|undefined>){
+ const id=first(sp.id);
+ if(!id||!/^[a-f0-9-]{36}$/.test(id))redirect('/dashboard/write');
+ const user=await pageUser(`/preview?id=${id}`);
+ let draft:{title:string};
+ try{draft=getDraft(database(),user.id,id) as {title:string};}catch{notFound();}
+ return <main className="account-login" style={{maxWidth:980}}><Link className="account-logo" href="/">NAEO<span>●</span></Link><div className="panel account-card"><p className="eyebrow">PREVIEW</p><h1 className="page-heading">{draft.title}</h1>
+  <iframe title="초안 미리보기" src={`/api/drafts/${id}/export?format=html`} style={{width:'100%',minHeight:'70vh',border:'1px solid #e5e5e5',borderRadius:12,background:'#fff'}}/>
+  <div className="account-actions"><a className="button" href={`/dashboard/write?draft=${id}`}>이어서 편집</a><a className="button secondary" href={`/api/drafts/${id}/export?format=html&download=1`}>HTML 내려받기</a></div></div></main>;
+}
 export default async function Page({params,searchParams}:Props){
  const path='/'+(await params).segments.join('/');
  if(path==='/dashboard'||path.startsWith('/dashboard/')){
@@ -97,8 +111,11 @@ export default async function Page({params,searchParams}:Props){
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
   return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
  }
- const viewKind={'/social/aeo-carousel':'carousel','/social/mate-ad':'ad','/youtube/aeo-intro':'video'}[path];
- if(viewKind){const sp=await searchParams,id=first(sp.project);if(id){const user=await pageUser(`${path}?project=${encodeURIComponent(id)}`);let project;try{project=getProject(database(),user.id,id);}catch{notFound();}if(project.kind!==viewKind)notFound();return <CreativeViewer project={project}/>;}}
+ const exporting=path.endsWith('/export'),viewKind={'/social/aeo-carousel':'carousel','/social/mate-ad':'ad','/youtube/aeo-intro':'video'}[exporting?path.slice(0,-7):path];
+ if(viewKind){const sp=await searchParams,id=first(sp.project);if(id){const user=await pageUser(`${path}?project=${encodeURIComponent(id)}`);let project;try{project=getProject(database(),user.id,id);}catch{notFound();}if(project.kind!==viewKind)notFound();return exporting?<ExportPanel project={project} initial={listExports(database(),user.id,project.id)}/>:<CreativeViewer project={project}/>;}}
+ if(path==='/preview')return draftPreview(await searchParams);
+ // 개발용 미리보기는 관리자만(다른 회원·비로그인에게는 존재하지 않는 페이지).
+ if(path.startsWith('/dev/')){const viewer=await currentUser();if(viewer?.role!=='admin')notFound();}
  if(path==='/oauth/consent')return consentPage(await searchParams);
  if(path==='/auth/extension'){const to=extensionRedirect(await searchParams);if(to)redirect(to);}
  if(path==='/pricing'){const viewer=await currentUser();return withNotice(path,await buildPricingPage(contentDatabase(),viewer?.id??null,tossProvider()!==null));}
