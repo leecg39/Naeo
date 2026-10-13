@@ -20,6 +20,12 @@ import AnnouncementBar from '@/components/content/AnnouncementBar';
 import EventEntryPanel from '@/components/events/EventEntryPanel';
 import { buildDashboardEventsPage,buildEventDetailPage,buildEventListPage } from '@/server/events/event-pages';
 import { getPublicEvent } from '@/server/events/events';
+import { buildPricingPage } from '@/server/billing/pricing-page';
+import { buildPaymentCompletePage } from '@/server/billing/payment-complete-page';
+import { abandonCheckout,confirmPayment,paymentForOwner,type Payment } from '@/server/billing/payments';
+import { currentSubscription } from '@/server/billing/subscriptions';
+import { tossProvider } from '@/server/billing/provider';
+import { AppError } from '@/server/errors';
 import type { CapturedPageData } from '@/types/site';
 type Props={params:Promise<{segments:string[]}>;searchParams:Promise<Record<string,string|string[]|undefined>>};
 const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
@@ -32,6 +38,17 @@ function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|e
 export async function generateMetadata({params}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
 /** 공개 화면에는 '전체' 대상 공지를 함께 띄운다(대시보드·관리자 등은 activeAnnouncement가 제외). */
 function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
+/** 결제창에서 돌아온 결과: 성공이면 서버에서 승인(멱등), 실패면 주문 실패 처리. 화면은 저장된 주문 상태로 그린다. */
+async function paymentCompletePage(sp:Record<string,string|string[]|undefined>){
+ const query=new URLSearchParams(Object.entries(sp).flatMap(([k,v])=>typeof v==='string'?[[k,v]]:[]));
+ const user=await pageUser(`/payment/complete${query.size?`?${query}`:''}`),db=contentDatabase();
+ const orderId=first(sp.orderId),paymentKey=first(sp.paymentKey);
+ let error:string|null=null,payment:Payment|null=null;
+ if(orderId&&paymentKey){try{await confirmPayment(db,tossProvider(),user.id,{paymentKey,orderId,amount:first(sp.amount)});}catch(e){error=e instanceof AppError?e.message:'결제 정보를 확인하지 못했습니다.';}}
+ else if(orderId&&first(sp.code)){abandonCheckout(db,user.id,orderId,{code:first(sp.code),message:first(sp.message)});error=(first(sp.message)??'결제가 취소되었습니다.').slice(0,300);}
+ if(orderId){try{payment=paymentForOwner(db,user.id,orderId);}catch{payment=null;}}
+ return buildPaymentCompletePage({payment,subscription:currentSubscription(db,user.id),error});
+}
 export default async function Page({params,searchParams}:Props){
  const path='/'+(await params).segments.join('/');
  if(path==='/dashboard'||path.startsWith('/dashboard/')){
@@ -56,6 +73,8 @@ export default async function Page({params,searchParams}:Props){
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
   return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
  }
+ if(path==='/pricing'){const viewer=await currentUser();return withNotice(path,await buildPricingPage(contentDatabase(),viewer?.id??null,tossProvider()!==null));}
+ if(path==='/payment/complete')return <PageExperience data={await paymentCompletePage(await searchParams)}/>;
  if(path==='/event')return withNotice(path,await buildEventListPage(contentDatabase()));
  if(path.startsWith('/event/')){
   const slug=path.match(/^\/event\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];

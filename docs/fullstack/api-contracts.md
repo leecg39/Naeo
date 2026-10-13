@@ -272,3 +272,25 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/admin/rewards/ranking` | POST | 관리자 | `{period,offset:-1~-52,top,tokens,eventSlug?}` 확정 기간 상위 N명 지급(같은 기간·회원 1회) | 409 `PERIOD_NOT_CONFIRMED` |
 
 규칙: 기간은 시작 포함·종료 제외(관리자 입력은 KST). 당첨 내역(이벤트 상세)은 유효 리워드만, 닉네임은 첫 글자 외 가림. 모든 관리자 변경·참여 제출/수정/철회는 감사 기록. 쿠폰(할인)은 P6 결제 모델과 연결 예정이며 지금은 상품·쿠폰명을 기록하는 상품 리워드로 지급 내역만 관리한다(발송은 별도).
+
+## P6 요금제·쿠폰·구독·결제·환불 API (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/api/billing/plans` | GET | 공개 | 판매 요금제(첫 호출 시 캡처 가격 카드로 시드), `paymentsConfigured` | — |
+| `/api/billing/webhooks/toss` | POST | 결제사(Origin 없음) | `PAYMENT_STATUS_CHANGED` 등. 본문을 믿지 않고 paymentKey로 결제사 재조회 후 주문 번호·금액 대조, DONE→승인, CANCELED/PARTIAL_CANCELED→취소 반영, ABORTED/EXPIRED→실패. 같은 이벤트는 `duplicate` | 400 형식, 503 미설정(결제사가 재전송) |
+| `/api/billing/me` | GET | 회원 | 구독·결제·환불·결제 설정 여부 | 401 |
+| `/api/billing/trial` | POST | 회원 | `{planCode}` 체험(대표 블로그 필요, 일수 비례 토큰) | 400 `BLOG_REQUIRED`, 409 `TRIAL_ALREADY_USED`·`ALREADY_SUBSCRIBED`·`TRIAL_NOT_AVAILABLE` |
+| `/api/billing/subscription/cancel`·`/resume` | POST | 회원 | `{version}` 기간 종료 해지 예약·취소 | 404 `NO_SUBSCRIPTION`, 409 |
+| `/api/billing/coupons/redeem` | POST | 회원 | `{code}` 토큰 쿠폰(대소문자 무시) | 404, 409 `COUPON_ALREADY_USED`·`COUPON_EXHAUSTED`·`COUPON_NOT_ACTIVE`, 400 `COUPON_CHECKOUT_ONLY` |
+| `/api/billing/checkout` | POST | 회원 | `{planCode,couponCode?}` 서버가 금액 계산·할인 쿠폰 예약·주문 30분 유효. 0원은 즉시 확정. 이전 대기 주문은 만료 | 503 `PAYMENT_PROVIDER_NOT_CONFIGURED`, 409 `ALREADY_SUBSCRIBED`(종료 3일 전부터 연장)·`RENEWAL_ALREADY_PAID`·`PLAN_CHANGE_UNSUPPORTED`, 400 `FREE_PLAN` |
+| `/api/billing/confirm` | POST | 회원 | `{paymentKey,orderId,amount}` 주인·상태·금액 대조 후 `Idempotency-Key: confirm-{orderId}`로 승인. 같은 주문 재승인은 같은 결과 | 404, 400 `AMOUNT_MISMATCH`(결제사 호출 없음), 402 `PAYMENT_FAILED`, 409 `ORDER_ALREADY_PAID`·`PAYMENT_EXPIRED`, 502 `PROVIDER_MISMATCH` |
+| `/api/billing/payments/:orderId` | GET | 본인 | 저장된 주문 상태 | 404 |
+| `/api/billing/payments/:id/refund` | POST | 본인 | `{reason}` 승인 후 7일 안 남은 금액 전부 요청 | 409 `REFUND_WINDOW_CLOSED`·`REFUND_PENDING`·`NOTHING_TO_REFUND` |
+| `/api/admin/plans` | GET·POST·PATCH·DELETE | 관리자 | 요금제 CRUD(버전 잠금, 구독·결제에 쓰인 요금제 삭제 금지) | 409 `CODE_EXISTS`·`PLAN_IN_USE` |
+| `/api/admin/coupons` | GET·POST·PATCH | 관리자 | 쿠폰 생성·중지/재개·한도·종료 수정(코드·종류·값은 불변) | 409 `CODE_EXISTS` |
+| `/api/admin/payments` | GET | 관리자 | 결제 목록(`status`,`q`) | 403 |
+| `/api/admin/payments/:id/refund` | POST | 관리자 | `{amount?,reason}` 직접 환불(부분 가능) 후 즉시 처리 | 400 `AMOUNT_TOO_LARGE`, 409 |
+| `/api/admin/refunds` · `/:id/decide` | GET·POST | 관리자 | `{decision,note,version}` 승인 시 `Idempotency-Key: refund-{id}`로 결제사 취소, 실패는 failed(같은 키로 재승인) | 502 `REFUND_FAILED`, 503 미설정, 409 |
+
+결제사: 토스페이먼츠 코어 API(`NAEO_TOSS_CLIENT_KEY`, `NAEO_TOSS_SECRET_KEY`, 선택 `NAEO_TOSS_API_BASE`). 키가 없으면 결제 버튼은 '결제 미설정'. 화면: /pricing(DB 요금제·상태별 버튼·체험/쿠폰/결제창 v2 SDK), /payment/complete(성공 시 서버 승인, 실패 복귀 시 주문 실패 처리, 저장된 상태로 표시), 설정 '구독·결제', /admin/billing, /admin/payments. 작업자가 1분마다 기간 종료 처리(미사용 기간 토큰 소멸·예약 갱신·종료)와 버려진 주문 만료.

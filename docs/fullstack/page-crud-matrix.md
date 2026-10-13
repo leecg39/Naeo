@@ -63,7 +63,7 @@
 | `/mate/s` | P3 | blogs, blog_posts, scan_jobs, scan_results, citations, action_items | 블로그 CRUD, 수집/분석 작업·취소/재시도, 결과 조회, 할 일 수정 | 실제 수집 출처, 재시작/실패 복구, SSRF 차단, 계정 격리 |
 | `/mcp` | P7 | oauth_clients, oauth_grants, api_tokens, mcp_calls | 클라이언트 등록·연결·토큰 조회/철회·MCP 도구 실행 | 실제 클라이언트 연결, scope, 일회 코드·PKCE, 감사 기록 |
 | `/oauth/consent` | P1/P7 | users, sessions, oauth_accounts, oauth_grants, extension_tokens | 가입·로그인·정보 변경·탈퇴, 동의·발급/철회 | 유지/만료/로그아웃, 비로그인 차단, OAuth state/PKCE |
-| `/payment/complete` | P6 | plans, subscriptions, payments, refunds, credit_ledger, coupons | 상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불 | 금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복 |
+| `/payment/complete` | P6 | plans, subscriptions, payments, refunds, credit_ledger, coupons, coupon_redemptions, payment_events | 상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불 | 금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복 |
 | `/preview` | P2/P7 | content_revisions, creative_projects | 미리보기·임시 저장·공개 샘플 | 미리보기는 공개 데이터를 변경하지 않음, 비공개 미노출 |
 | `/pricing` | P6 | plans, subscriptions, payments, refunds, credit_ledger, coupons | 상품 관리·체험/구독/해지·쿠폰 CRUD·사용·환불 | 금액/서명 검증, 중복 결제·차감 차단, 실제 샌드박스 왕복 |
 | `/privacy` | P2 | content_pages, content_revisions, announcements | 관리자 콘텐츠 CRUD·발행/비공개·미리보기, 공개 화면 읽기 | 관리 변경의 공개 반영, 초안 비공개, 삭제 404, 충돌 409 |

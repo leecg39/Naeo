@@ -7,6 +7,7 @@ import updatesSeed from '../../data/content/updates.seed.json';
 import {getCapturedPage} from '../../lib/pages';
 import {MANAGED_PAGES,displayTitle} from './page-settings';
 import {seedEvents} from '../events/seed';
+import {seedPlans} from '../billing/seed';
 
 const ARTICLES_SEED='articles-v1';
 const DOCUMENTS_SEED='documents-v1';
@@ -28,6 +29,7 @@ export function applySeeds(db:Database,now=Date.now()):void{
 
 /** 고정 디자인 페이지 설정은 캡처 파일을 읽어야 해서 비동기로 한 번만 넣는다. */
 export async function applyPageSettingSeeds(db:Database,now=Date.now()):Promise<void>{
+ await seedPlans(db,now);
  if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(PAGES_SEED))return;
  const pages=await Promise.all(MANAGED_PAGES.map(async path=>({path,page:await getCapturedPage(path)})));
  transaction(db,()=>{

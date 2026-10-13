@@ -1,6 +1,5 @@
 'use client';
 import type { InstallBehavior } from '@/lib/behavior';
-import { profile, writeStore } from '@/lib/demo-store';
 import { useEffect, useState } from 'react';
 import { apiResponse, ApiError, type PageResult } from '@/lib/api-client';
 import type { DraftSummary } from '@/server/writing/drafts';
@@ -20,7 +19,6 @@ export const installAuxiliary:InstallBehavior=(root,tools)=>{
  if(tools.pathname!=='/'){observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){const el=entry.target as HTMLElement;el.style.transition='opacity 400ms ease, transform 400ms ease';el.style.opacity='1';el.style.transform='none';observer?.unobserve(el)}},{threshold:.05});root.querySelectorAll<HTMLElement>('[style]').forEach(el=>{if(el.style.opacity==='0'&&/translate/.test(el.style.transform)&&!el.closest('[aria-hidden=true],.MuiCollapse-root'))observer?.observe(el)});timers.push(window.setTimeout(()=>observer?.disconnect(),90000));}
  const onClick=(e:MouseEvent)=>{if(e.defaultPrevented||!(e.target instanceof Element))return;const b=e.target.closest<HTMLElement>('button,[role=button]');if(!b)return;const label=b.getAttribute('aria-label')||'',text=b.textContent?.replace(/\s+/g,' ').trim()||'';
   if(label==='더보기 메뉴'||label==='MY 메뉴'||text==='NAEO 블로거'){e.preventDefault();tools.openDialog('내 계정',<div style={{display:'grid',gap:12}}><a className="naeo-button" href="/dashboard">대시보드</a><a className="naeo-button secondary" href="/dashboard/settings">계정 설정</a><button className="naeo-button secondary" onClick={()=>tools.openDialog('내 글 · 발행 대기함',<DraftList/>)}>내 글 · 발행 대기함</button><LogoutButton/></div>);return}
-  if(tools.pathname==='/pricing'&&/구독|체험|요금제|결제/.test(text)){e.preventDefault();tools.openDialog('베이직 체험',<div><p>월 750토큰으로 AI 글쓰기와 분석 기능을 체험하세요.</p><p>이 로컬 데모에서는 카드 등록이나 결제가 발생하지 않습니다.</p><button className="naeo-button" onClick={()=>{writeStore('profile',{...profile(),plan:'basic'});tools.navigate('/dashboard/write')}}>데모 체험 시작하기</button></div>);return}
   if(/^\/(login|auth|oauth)/.test(tools.pathname)&&/네이버|Google|구글|로그인|허용|시작/.test(text)){e.preventDefault();tools.openAuth();return}
   if(tools.pathname==='/preview'&&/다시|돌아|글|대시보드/.test(text)){e.preventDefault();tools.openDialog('내 글 · 발행 대기함',<DraftList/>);return}
  };

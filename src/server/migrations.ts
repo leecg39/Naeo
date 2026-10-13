@@ -692,4 +692,147 @@ export const migrations = [{
     CREATE INDEX rewards_user ON rewards(user_id,created_at DESC);
     CREATE INDEX rewards_event ON rewards(event_id,created_at DESC);
   `,
+}, {
+  version: 20,
+  name: 'billing',
+  sql: `
+    CREATE TABLE credit_ledger_v20 (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      delta INTEGER NOT NULL CHECK(delta<>0 AND delta BETWEEN -1000000 AND 1000000),
+      reason TEXT NOT NULL CHECK(reason IN ('grant','generation','refund','adjust','subscription','expire','coupon')),
+      ref_type TEXT NOT NULL DEFAULT '' CHECK(length(ref_type)<=30),
+      ref_id TEXT NOT NULL DEFAULT '' CHECK(length(ref_id)<=60),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=200),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    INSERT INTO credit_ledger_v20 SELECT id,owner_id,delta,reason,ref_type,ref_id,note,created_by,created_at FROM credit_ledger;
+    DROP TABLE credit_ledger;
+    ALTER TABLE credit_ledger_v20 RENAME TO credit_ledger;
+    CREATE UNIQUE INDEX credit_ledger_once ON credit_ledger(ref_type,ref_id,reason) WHERE ref_id<>'';
+    CREATE INDEX credit_ledger_owner ON credit_ledger(owner_id,created_at DESC);
+    CREATE TABLE plans (
+      id TEXT PRIMARY KEY NOT NULL,
+      code TEXT NOT NULL UNIQUE CHECK(length(code) BETWEEN 2 AND 30),
+      name TEXT NOT NULL CHECK(length(name) BETWEEN 1 AND 40),
+      description TEXT NOT NULL DEFAULT '' CHECK(length(description)<=300),
+      price_krw INTEGER NOT NULL CHECK(price_krw BETWEEN 0 AND 10000000),
+      monthly_tokens INTEGER NOT NULL DEFAULT 0 CHECK(monthly_tokens BETWEEN 0 AND 1000000),
+      trial_days INTEGER NOT NULL DEFAULT 0 CHECK(trial_days BETWEEN 0 AND 30),
+      status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','hidden')),
+      position INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE coupons (
+      id TEXT PRIMARY KEY NOT NULL,
+      code TEXT NOT NULL UNIQUE CHECK(length(code) BETWEEN 4 AND 32),
+      kind TEXT NOT NULL CHECK(kind IN ('tokens','percent_off','amount_off')),
+      value INTEGER NOT NULL CHECK(value>0 AND (kind<>'percent_off' OR value<=100)),
+      plan_id TEXT REFERENCES plans(id) ON DELETE SET NULL,
+      max_redemptions INTEGER CHECK(max_redemptions IS NULL OR max_redemptions>0),
+      starts_at INTEGER NOT NULL,
+      ends_at INTEGER NOT NULL CHECK(ends_at>starts_at),
+      status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','disabled')),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=200),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE coupon_redemptions (
+      id TEXT PRIMARY KEY NOT NULL,
+      coupon_id TEXT NOT NULL REFERENCES coupons(id) ON DELETE CASCADE,
+      user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      status TEXT NOT NULL CHECK(status IN ('reserved','used','released')),
+      payment_id TEXT,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE UNIQUE INDEX coupon_redemptions_once ON coupon_redemptions(coupon_id,user_id) WHERE status<>'released';
+    CREATE TABLE subscriptions (
+      id TEXT PRIMARY KEY NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      plan_id TEXT NOT NULL REFERENCES plans(id),
+      status TEXT NOT NULL CHECK(status IN ('trialing','active','canceled','expired')),
+      trial INTEGER NOT NULL DEFAULT 0 CHECK(trial IN (0,1)),
+      current_period_start INTEGER NOT NULL,
+      current_period_end INTEGER NOT NULL CHECK(current_period_end>current_period_start),
+      cancel_at_period_end INTEGER NOT NULL DEFAULT 0 CHECK(cancel_at_period_end IN (0,1)),
+      period_tokens INTEGER NOT NULL DEFAULT 0 CHECK(period_tokens>=0),
+      period_payment_id TEXT,
+      renewal_payment_id TEXT,
+      ended_at INTEGER,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE UNIQUE INDEX subscriptions_live ON subscriptions(user_id) WHERE status IN ('trialing','active');
+    CREATE INDEX subscriptions_due ON subscriptions(status,current_period_end);
+    CREATE TABLE trial_fingerprints (
+      kind TEXT NOT NULL CHECK(kind IN ('user','email','blog')),
+      value_hash TEXT NOT NULL CHECK(length(value_hash)=64),
+      created_at INTEGER NOT NULL,
+      PRIMARY KEY(kind,value_hash)
+    ) STRICT;
+    CREATE TABLE payments (
+      id TEXT PRIMARY KEY NOT NULL,
+      user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      order_id TEXT NOT NULL UNIQUE CHECK(length(order_id) BETWEEN 6 AND 64),
+      order_name TEXT NOT NULL CHECK(length(order_name) BETWEEN 1 AND 100),
+      plan_id TEXT NOT NULL REFERENCES plans(id),
+      list_amount INTEGER NOT NULL CHECK(list_amount>=0),
+      amount INTEGER NOT NULL CHECK(amount>=0 AND amount<=list_amount),
+      coupon_redemption_id TEXT REFERENCES coupon_redemptions(id) ON DELETE SET NULL,
+      provider TEXT NOT NULL CHECK(provider IN ('toss','none')),
+      status TEXT NOT NULL DEFAULT 'ready' CHECK(status IN ('ready','paid','failed','expired','canceled','partial_canceled')),
+      payment_key TEXT UNIQUE CHECK(payment_key IS NULL OR length(payment_key)<=200),
+      method TEXT NOT NULL DEFAULT '' CHECK(length(method)<=40),
+      canceled_amount INTEGER NOT NULL DEFAULT 0 CHECK(canceled_amount BETWEEN 0 AND amount),
+      failure_code TEXT NOT NULL DEFAULT '' CHECK(length(failure_code)<=60),
+      failure_message TEXT NOT NULL DEFAULT '' CHECK(length(failure_message)<=300),
+      subscription_id TEXT REFERENCES subscriptions(id) ON DELETE SET NULL,
+      approved_at INTEGER,
+      expires_at INTEGER NOT NULL,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX payments_user ON payments(user_id,created_at DESC);
+    CREATE TRIGGER payments_immutable_amount BEFORE UPDATE OF order_id,list_amount,amount,plan_id,created_at ON payments BEGIN
+      SELECT RAISE(ABORT,'payment amounts are immutable');
+    END;
+    CREATE TRIGGER payments_no_delete BEFORE DELETE ON payments BEGIN
+      SELECT RAISE(ABORT,'payments are accounting records');
+    END;
+    CREATE TABLE refunds (
+      id TEXT PRIMARY KEY NOT NULL,
+      payment_id TEXT NOT NULL REFERENCES payments(id),
+      user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      amount INTEGER NOT NULL CHECK(amount>0),
+      reason TEXT NOT NULL CHECK(length(reason) BETWEEN 1 AND 300),
+      status TEXT NOT NULL DEFAULT 'requested' CHECK(status IN ('requested','approved','rejected','completed','failed')),
+      decision_note TEXT NOT NULL DEFAULT '' CHECK(length(decision_note)<=300),
+      decided_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      decided_at INTEGER,
+      failure_message TEXT NOT NULL DEFAULT '' CHECK(length(failure_message)<=300),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE UNIQUE INDEX refunds_open ON refunds(payment_id) WHERE status IN ('requested','approved');
+    CREATE TRIGGER refunds_no_delete BEFORE DELETE ON refunds BEGIN
+      SELECT RAISE(ABORT,'refunds are accounting records');
+    END;
+    CREATE TABLE payment_events (
+      id TEXT PRIMARY KEY NOT NULL,
+      provider TEXT NOT NULL,
+      dedupe_key TEXT NOT NULL UNIQUE CHECK(length(dedupe_key)<=300),
+      event_type TEXT NOT NULL CHECK(length(event_type)<=60),
+      order_id TEXT NOT NULL DEFAULT '',
+      result TEXT NOT NULL DEFAULT '' CHECK(length(result)<=60),
+      received_at INTEGER NOT NULL
+    ) STRICT;
+  `,
 }];

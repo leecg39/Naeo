@@ -6,7 +6,7 @@ import {audit} from '../audit';
 import {AppError} from '../errors';
 import {paginationInput} from '../validation';
 
-export type LedgerEntry={id:string;delta:number;reason:'grant'|'generation'|'refund'|'adjust';refType:string;refId:string;note:string;createdAt:number};
+export type LedgerEntry={id:string;delta:number;reason:'grant'|'generation'|'refund'|'adjust'|'subscription'|'expire'|'coupon';refType:string;refId:string;note:string;createdAt:number};
 const grantInput=z.object({delta:z.number().int().min(-100000).max(100000).refine(v=>v!==0,'0은 지급할 수 없습니다.'),note:z.string().trim().min(1).max(200)}).strict();
 
 /** 잔액 = 원장 합계(지급·차감·환급). 별도 잔액 칸을 두지 않아 원장과 어긋날 수 없다. */

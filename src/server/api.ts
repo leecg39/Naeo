@@ -11,6 +11,7 @@ import {publicShareApi,writingApi} from './writing/writing-api';
 import {generationApi} from './generation/generation-api';
 import {memberRankingApi,publicRankingApi} from './ranking/ranking-api';
 import {adminEventsApi,memberEventsApi,publicEventsApi} from './events/events-api';
+import {adminBillingApi,memberBillingApi,publicBillingApi,WEBHOOK_PATH} from './billing/billing-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -23,7 +24,8 @@ export function createApi(getDatabase:()=>Database=database) {
   return endpoint(async request=>{
     const url=new URL(request.url),path=url.pathname,method=request.method;
     const db=getDatabase();
-    if(!['GET','HEAD','OPTIONS'].includes(method)) requireOrigin(request);
+    // 결제사 웹훅은 서버 간 호출이라 Origin이 없다(본문을 믿지 않고 결제사에 다시 조회한다).
+    if(!['GET','HEAD','OPTIONS'].includes(method)&&path!==WEBHOOK_PATH) requireOrigin(request);
     if(path==='/api/health'&&method==='GET') {
       const {version}=db.prepare('SELECT max(version) AS version FROM schema_migrations').get() as {version:number};
       return json({data:{status:'ok',schemaVersion:version}});
@@ -50,6 +52,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(publicRanking)return publicRanking;
     const publicEvents=publicEventsApi(db,request);
     if(publicEvents)return publicEvents;
+    const publicBilling=await publicBillingApi(db,request);
+    if(publicBilling)return publicBilling;
     const user=requireUser(db,cookieToken(request));
     if(path==='/api/auth/me'&&method==='GET') return json({data:{user,profile:getProfile(db,user.id)}});
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
@@ -77,6 +81,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(rankingResponse)return rankingResponse;
     const eventsResponse=await memberEventsApi(db,request,user)??await adminEventsApi(db,request,user);
     if(eventsResponse)return eventsResponse;
+    const billingResponse=await memberBillingApi(db,request,user)??await adminBillingApi(db,request,user);
+    if(billingResponse)return billingResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});
