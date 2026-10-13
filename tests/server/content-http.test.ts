@@ -73,3 +73,28 @@ test('category endpoints and revision restore over HTTP',async t=>{
  const preview=(await (await f.send('/api/admin/articles/preview','POST',{bodyMarkdown:'## 제목'},admin)).json()).data;
  assert.deepEqual(preview.headings.map((h:{id:string})=>h.id),['제목']);
 });
+
+test('document admin API: permissions, CRUD, path conflicts and restore over HTTP',async t=>{
+ const f=fixture(t);const member=await account(f,'member@example.test');const admin=await account(f,'admin@example.test',true);
+ assert.equal((await f.send('/api/admin/documents')).status,401);
+ assert.equal((await f.send('/api/admin/documents','GET',undefined,member)).status,403);
+ const list=await (await f.send('/api/admin/documents','GET',undefined,admin)).json();
+ assert.deepEqual(list.data.map((d:{path:string})=>d.path),['/terms','/privacy','/privacy/extension','/refund']);
+ const created=await f.send('/api/admin/documents','POST',{path:'/youth-policy',title:'청소년 보호정책',body:'## 목적\n본문'},admin);
+ assert.equal(created.status,201);
+ const d=(await created.json()).data;
+ assert.equal(d.status,'draft');
+ const dup=await f.send('/api/admin/documents','POST',{path:'/refund',title:'중복'},admin);
+ assert.equal(dup.status,409);assert.equal((await dup.json()).error.code,'PATH_EXISTS');
+ const reserved=await f.send('/api/admin/documents','POST',{path:'/pricing',title:'가로채기'},admin);
+ assert.equal((await reserved.json()).error.code,'PATH_RESERVED');
+ const bad=await f.send('/api/admin/documents','POST',{path:'no-slash',title:'x'},admin);
+ assert.equal(bad.status,400);
+ const edited=await f.send(`/api/admin/documents/${d.id}`,'PATCH',{title:'바뀐 제목',status:'published',version:1},admin);
+ assert.equal((await edited.json()).data.version,2);
+ assert.equal((await f.send(`/api/admin/documents/${d.id}`,'PATCH',{title:'x',version:1},admin)).status,409);
+ const restored=await f.send(`/api/admin/documents/${d.id}/restore`,'POST',{revision:1,version:2},admin);
+ assert.equal((await restored.json()).data.title,'청소년 보호정책');
+ assert.equal((await f.send(`/api/admin/documents/${d.id}`,'DELETE',{version:3},admin)).status,200);
+ assert.equal((await f.send(`/api/admin/documents/${d.id}`,'GET',undefined,admin)).status,404);
+});

@@ -1,14 +1,21 @@
 import {randomUUID} from 'node:crypto';
 import {transaction,type Database} from '../database';
 import seed from '../../data/content/articles.seed.json';
+import documentSeed from '../../data/content/documents.seed.json';
 
 const ARTICLES_SEED='articles-v1';
+const DOCUMENTS_SEED='documents-v1';
 
 /**
  * 캡처한 기사 20개를 한 번만 넣는다. 실행 기록을 seed_runs에 남겨
  * 관리자가 이후 수정·삭제한 글을 덮어쓰거나 되살리지 않는다.
  */
 export function applySeeds(db:Database,now=Date.now()):void{
+ seedArticles(db,now);
+ seedDocuments(db,now);
+}
+
+function seedArticles(db:Database,now:number):void{
  transaction(db,()=>{
   if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(ARTICLES_SEED))return;
   const categoryIds=new Map<string,string>();
@@ -25,5 +32,16 @@ export function applySeeds(db:Database,now=Date.now()):void{
    insertArticle.run(randomUUID(),categoryIds.get(a.category)!,a.slug,a.title,a.summary,a.showSummary?1:0,a.bodyMarkdown,JSON.stringify(a.tags),a.coverImage,a.featured?1:0,Date.parse(a.publishedAt),a.readMinutes,a.position,now,now);
   }
   db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(ARTICLES_SEED,now);
+ });
+}
+
+/** 캡처한 정책 문서 4개(약관·개인정보·확장 개인정보·환불)를 한 번만 넣는다. 이후 삭제·수정은 덮어쓰지 않는다. */
+function seedDocuments(db:Database,now:number):void{
+ transaction(db,()=>{
+  if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(DOCUMENTS_SEED))return;
+  const insert=db.prepare(`INSERT INTO site_documents(id,path,title,effective_label,body,closing_note,status,position,created_at,updated_at)
+   VALUES(?,?,?,?,?,?,'published',?,?,?) ON CONFLICT(path) DO NOTHING`);
+  for(const d of documentSeed.documents)insert.run(randomUUID(),d.path,d.title,d.effectiveLabel,d.body,d.closingNote,d.position,now,now);
+  db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(DOCUMENTS_SEED,now);
  });
 }

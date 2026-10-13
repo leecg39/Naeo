@@ -189,4 +189,44 @@ export const migrations = [{
       updated_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 5,
+  name: 'site_documents',
+  sql: `
+    DROP TRIGGER articles_delete_revisions;
+    CREATE TABLE content_revisions_v5 (
+      id TEXT PRIMARY KEY NOT NULL,
+      resource_type TEXT NOT NULL CHECK(resource_type IN ('article','category','document','faq','update','announcement')),
+      resource_id TEXT NOT NULL,
+      version INTEGER NOT NULL CHECK(version>0),
+      snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),
+      author_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      UNIQUE(resource_type,resource_id,version)
+    ) STRICT;
+    INSERT INTO content_revisions_v5 SELECT id,resource_type,resource_id,version,snapshot_json,author_id,created_at FROM content_revisions;
+    DROP TABLE content_revisions;
+    ALTER TABLE content_revisions_v5 RENAME TO content_revisions;
+    CREATE TRIGGER articles_delete_revisions AFTER DELETE ON articles BEGIN
+      DELETE FROM content_revisions WHERE resource_type='article' AND resource_id=old.id;
+    END;
+    CREATE TABLE site_documents (
+      id TEXT PRIMARY KEY NOT NULL,
+      path TEXT NOT NULL UNIQUE CHECK(length(path) BETWEEN 2 AND 80 AND path GLOB '/[a-z0-9]*' AND path NOT GLOB '*[^a-z0-9/-]*'),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 120),
+      effective_label TEXT NOT NULL DEFAULT '' CHECK(length(effective_label)<=120),
+      body TEXT NOT NULL DEFAULT '' CHECK(length(body)<=100000),
+      closing_note TEXT NOT NULL DEFAULT '' CHECK(length(closing_note)<=2000),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published')),
+      position INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TRIGGER site_documents_delete_revisions AFTER DELETE ON site_documents BEGIN
+      DELETE FROM content_revisions WHERE resource_type='document' AND resource_id=old.id;
+    END;
+  `,
 }];

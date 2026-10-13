@@ -86,3 +86,16 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/inquiry-templates` (`/:id`) | GET 목록(이름순), POST `name(1–60, 중복 409 TEMPLATE_EXISTS),subject,body`, PATCH 바뀐 필드 + `version`, DELETE `version` |
 
 관리자 쓰기는 사용자별 15분 300회. 감사 로그(`inquiry.create/update/delete`, `admin.inquiry.status`, `admin.inquiry.reply.create/update/delete`, `admin.inquiry.delete`, `admin.inquiry_template.*`)에는 이메일·본문을 남기지 않는다.
+
+## P2.5 정책 문서 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/documents` | GET | 관리자 | `q`(제목·주소, LIKE 이스케이프), `status`(draft/published), `page`, `pageSize≤100`. 순서 `position,path` | 401 비로그인, 403 일반 회원 |
+| `/api/admin/documents` | POST | 관리자 | `path`(`/영문소문자-숫자`, 최대 3단계·80자), `title≤120`, `effectiveLabel≤120`, `body≤10만 자`, `closingNote≤2000`, `status`, `position`. 1MB까지 받음 | 400 검증, 409 `PATH_EXISTS`(같은 주소), 409 `PATH_RESERVED`(api·admin·dashboard·blog·updates 등 예약 경로, 다른 캡처 화면 주소) |
+| `/api/admin/documents/:id` | GET | 관리자 | 문서 + 수정 이력(`revisions`) | 404 |
+| `/api/admin/documents/:id` | PATCH | 관리자 | 바뀐 필드 + `version` | 409 `VERSION_CONFLICT`, 409 주소 충돌 |
+| `/api/admin/documents/:id` | DELETE | 관리자 | `{version}`. 수정 이력도 삭제 | 409 버전 |
+| `/api/admin/documents/:id/restore` | POST | 관리자 | `{revision,version}`. 내용(주소·제목·시행일·본문·맺음말)만 되돌리고 공개 상태·순서는 유지 | 404 `REVISION_NOT_FOUND` |
+
+공개 화면: `/terms` `/privacy` `/privacy/extension` `/refund`와 관리자가 만든 문서 주소는 DB 공개본을 `/terms` 캡처 틀로 렌더링한다. 본문은 `## 소제목` 줄로 조항을 나누는 일반 텍스트이며 모든 글자를 텍스트 노드로만 넣는다(HTML 해석 없음). 초안·삭제된 문서는 404이고, 시드 문서 4개는 삭제 후에도 캡처 화면으로 되돌아가지 않는다. 시드는 `seed_runs('documents-v1')`로 한 번만 적용한다. 미리보기 `/admin/pages/preview/:id`는 관리자 전용.

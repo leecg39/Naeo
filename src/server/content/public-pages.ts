@@ -4,6 +4,8 @@ import {appOrigin} from '../http';
 import {getPublishedArticle} from './articles';
 import {blogArticleRoute,buildArticlePage,buildBlogIndexPage} from './blog-pages';
 import {applySeeds} from './seed';
+import {documentRouteState,getPublishedDocument} from './documents';
+import {buildDocumentPage} from './document-pages';
 
 let seeded=false;
 /** 콘텐츠 화면은 첫 접근 때 캡처 기사 시드를 한 번 적용한 DB를 쓴다(이미 적용됐으면 조회 1회로 끝). */
@@ -25,4 +27,13 @@ export async function resolveBlogPage(path:string):Promise<CapturedPageData|null
  const db=contentDatabase();
  const article=getPublishedArticle(db,route.category,route.slug);
  return article?buildArticlePage(db,article,{origin:appOrigin()}):null;
+}
+
+/** DB 정책 문서 경로를 렌더링한다. undefined: 문서 경로 아님, null: 비공개·삭제(404). */
+export async function resolveDocumentPage(path:string):Promise<CapturedPageData|null|undefined>{
+ const db=contentDatabase();
+ const state=documentRouteState(db,path);
+ if(state==='none')return undefined;
+ const doc=state==='published'?getPublishedDocument(db,path):null;
+ return doc?buildDocumentPage(doc):null;
 }
