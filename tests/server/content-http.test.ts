@@ -116,3 +116,22 @@ test('FAQ admin API: permissions, CRUD, validation and version conflict over HTT
  assert.equal((await f.send(`/api/admin/faq/${item.id}`,'DELETE',{version:2},admin)).status,200);
  assert.equal((await f.send(`/api/admin/faq/${item.id}`,'DELETE',{version:2},admin)).status,404);
 });
+
+test('updates admin API: permissions, CRUD, unsafe body and slug conflict over HTTP',async t=>{
+ const f=fixture(t);const member=await account(f,'member@example.test');const admin=await account(f,'admin@example.test',true);
+ assert.equal((await f.send('/api/admin/updates')).status,401);
+ assert.equal((await f.send('/api/admin/updates','GET',undefined,member)).status,403);
+ const list=await (await f.send('/api/admin/updates?type=feature&pageSize=100','GET',undefined,admin)).json();
+ assert.equal(list.pagination.total,14);
+ const body={slug:'2026-10-13-http',versionLabel:'v9.9.9',types:['fix'],title:'HTTP 업데이트',bodyMarkdown:'## 변경\n\n내용',publishedOn:'2026-10-13'};
+ const created=await f.send('/api/admin/updates','POST',body,admin);
+ assert.equal(created.status,201);
+ const u=(await created.json()).data;
+ assert.equal((await f.send('/api/admin/updates','POST',body,admin)).status,409);
+ const unsafe=await f.send('/api/admin/updates','POST',{...body,slug:'unsafe',bodyMarkdown:'<iframe src=x>'},admin);
+ assert.equal((await unsafe.json()).error.code,'CONTENT_INVALID');
+ assert.equal((await (await f.send(`/api/admin/updates/${u.id}`,'PATCH',{status:'published',version:1},admin)).json()).data.version,2);
+ assert.equal((await f.send(`/api/admin/updates/${u.id}`,'PATCH',{title:'x',version:1},admin)).status,409);
+ assert.equal((await f.send(`/api/admin/updates/${u.id}`,'DELETE',{version:2},admin)).status,200);
+ assert.equal((await f.send(`/api/admin/updates/${u.id}`,'GET',undefined,admin)).status,404);
+});

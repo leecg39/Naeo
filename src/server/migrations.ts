@@ -248,4 +248,27 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX faq_items_public ON faq_items(status,position);
   `,
+}, {
+  version: 7,
+  name: 'site_updates',
+  sql: `
+    CREATE TABLE site_updates (
+      id TEXT PRIMARY KEY NOT NULL,
+      slug TEXT NOT NULL UNIQUE CHECK(length(slug) BETWEEN 1 AND 80 AND slug NOT GLOB '*[^a-z0-9-]*'),
+      version_label TEXT NOT NULL DEFAULT '' CHECK(length(version_label)<=20),
+      types_json TEXT NOT NULL CHECK(json_valid(types_json) AND json_type(types_json)='array' AND json_array_length(types_json) BETWEEN 1 AND 4),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 200),
+      summary TEXT NOT NULL DEFAULT '' CHECK(length(summary)<=500),
+      body_markdown TEXT NOT NULL DEFAULT '' CHECK(length(body_markdown)<=200000),
+      published_on TEXT NOT NULL CHECK(published_on GLOB '[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]'),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published')),
+      position INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX site_updates_public ON site_updates(status,published_on DESC,position);
+  `,
 }];

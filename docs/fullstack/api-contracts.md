@@ -110,3 +110,13 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/faq/:id` | DELETE | 관리자 | `{version}` | 404, 409 |
 
 공개 `/faq`는 공개 항목을 분류별(분류의 가장 앞 항목 순서) 접이식 목록으로 `/faq` 캡처 틀에 다시 그린다. 질문·답변은 텍스트 노드로만 넣는다. 시드 `faq-v1` 1회.
+
+## P2.5 업데이트 소식 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/updates` | GET | 관리자 | `q`(제목·주소·버전·요약), `type`(feature/improvement/fix/design), `status`, `page`, `pageSize≤100`. 날짜 최신순·순서 | 401·403 |
+| `/api/admin/updates` | POST | 관리자 | `slug`(영문 소문자·숫자·-), `versionLabel≤20`, `types`(1~4개, 중복 불가), `title≤200`, `summary≤500`, `bodyMarkdown`(매거진과 같은 안전 마크다운), `publishedOn`(YYYY-MM-DD), `status`, `position`. 1MB까지 | 400 검증·`CONTENT_INVALID`, 409 `SLUG_EXISTS` |
+| `/api/admin/updates/:id` | GET·PATCH·DELETE | 관리자 | PATCH는 바뀐 필드 + `version`, DELETE는 `{version}` | 404, 409 |
+
+공개 `/updates`는 공개 항목을 날짜 최신순·월별 묶음으로 캡처 틀에 다시 그리고, 필터 개수(새 기능·개선·버그 수정)를 DB에서 계산한다. `/updates/:slug`는 `/updates?focus=:slug`로 308, focus 항목은 펼쳐서 스크롤한다. '버그 수정' 칩은 캡처 예가 없어 '개선' 칩 모양을 쓴다(새 규칙). 시드 `updates-v1` 1회.

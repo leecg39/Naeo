@@ -8,6 +8,8 @@ import {documentRouteState,getPublishedDocument} from './documents';
 import {buildDocumentPage} from './document-pages';
 import {listPublishedFaq} from './faq';
 import {buildFaqPage} from './faq-pages';
+import {listPublishedUpdates} from './updates';
+import {buildUpdatesPage} from './updates-pages';
 
 let seeded=false;
 /** 콘텐츠 화면은 첫 접근 때 캡처 기사 시드를 한 번 적용한 DB를 쓴다(이미 적용됐으면 조회 1회로 끝). */
@@ -40,10 +42,11 @@ export async function resolveDocumentPage(path:string):Promise<CapturedPageData|
  return doc?buildDocumentPage(doc):null;
 }
 
-/** DB가 맡는 화면을 순서대로 찾는다(블로그 → 정책 문서 → FAQ). undefined면 캡처 화면으로 넘긴다. */
+/** DB가 맡는 화면을 순서대로 찾는다(블로그 → FAQ → 업데이트 → 정책 문서). undefined면 캡처 화면으로 넘긴다. */
 export async function resolveDatabasePage(path:string):Promise<CapturedPageData|null|undefined>{
  const blog=await resolveBlogPage(path);
  if(blog!==undefined)return blog;
  if(path==='/faq')return buildFaqPage(listPublishedFaq(contentDatabase()));
+ if(path==='/updates')return buildUpdatesPage(listPublishedUpdates(contentDatabase()));
  return resolveDocumentPage(path);
 }

@@ -3,10 +3,12 @@ import {transaction,type Database} from '../database';
 import seed from '../../data/content/articles.seed.json';
 import documentSeed from '../../data/content/documents.seed.json';
 import faqSeed from '../../data/content/faq.seed.json';
+import updatesSeed from '../../data/content/updates.seed.json';
 
 const ARTICLES_SEED='articles-v1';
 const DOCUMENTS_SEED='documents-v1';
 const FAQ_SEED='faq-v1';
+const UPDATES_SEED='updates-v1';
 
 /**
  * 캡처한 기사 20개를 한 번만 넣는다. 실행 기록을 seed_runs에 남겨
@@ -16,6 +18,7 @@ export function applySeeds(db:Database,now=Date.now()):void{
  seedArticles(db,now);
  seedDocuments(db,now);
  seedFaq(db,now);
+ seedUpdates(db,now);
 }
 
 function seedArticles(db:Database,now:number):void{
@@ -56,5 +59,16 @@ function seedFaq(db:Database,now:number):void{
   const insert=db.prepare("INSERT INTO faq_items(id,category,question,answer,status,position,created_at,updated_at) VALUES(?,?,?,?,'published',?,?,?)");
   for(const f of faqSeed.items)insert.run(randomUUID(),f.category,f.question,f.answer,f.position,now,now);
   db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(FAQ_SEED,now);
+ });
+}
+
+/** 캡처한 업데이트 23건을 한 번만 넣는다. 같은 날짜 항목은 캡처 순서(position)를 유지한다. */
+function seedUpdates(db:Database,now:number):void{
+ transaction(db,()=>{
+  if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(UPDATES_SEED))return;
+  const insert=db.prepare(`INSERT INTO site_updates(id,slug,version_label,types_json,title,summary,body_markdown,published_on,status,position,created_at,updated_at)
+   VALUES(?,?,?,?,?,?,?,?,'published',?,?,?) ON CONFLICT(slug) DO NOTHING`);
+  updatesSeed.updates.forEach((u,i)=>insert.run(randomUUID(),u.slug,u.versionLabel,JSON.stringify(u.types),u.title,u.summary,u.bodyMarkdown,u.publishedOn,i,now,now));
+  db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(UPDATES_SEED,now);
  });
 }
