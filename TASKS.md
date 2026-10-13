@@ -36,9 +36,9 @@
 
 ### P3 — 수집·분석·추천·경쟁 블로그 (P1/P2 의존)
 
-- [ ] P3.1 SSRF 제한 RSS 수집기·posts upsert·출처/수집일·실패 저장·네이버 실제 응답 검증.
-- [ ] P3.2 지속 작업 큐·worker·lease·취소·재시도·중복 실행 방지·재시작 복구, /admin/scan-health UI.
-- [ ] P3.3 분석 공급자·점수 근거·AI 인용 근거·보고서/히스토리 모델·API. REA 미확인 가중치는 새 규칙 명시.
+- [x] P3.1 SSRF 제한 RSS 수집기·posts upsert·출처/수집일·실패 저장·네이버 실제 응답 검증. (고정 호스트·리디렉션 거부·2MB·10초, 실제 RSS 50건, 오류 분류·작업에 실패 기록)
+- [x] P3.2 지속 작업 큐·worker·lease·취소·재시도·중복 실행 방지·재시작 복구, /admin/scan-health UI. (`npm run worker`, 임대 60초·지수 대기·최대 3회, 파일 DB 재시작 복구 테스트, worker 중지 감지 브라우저 검증)
+- [ ] P3.3 분석 공급자·점수 근거·AI 인용 근거·보고서/히스토리 모델·API. REA 미확인 가중치는 새 규칙 명시. (규칙 rules-v1 5기준·근거·할 일·이력 API 완료 / AI 브리핑 인용 근거는 공급자 미설정으로 not_configured 표시)
 - [ ] P3.4 /dashboard /dashboard/mate /dashboard/ai-picks /mate /mate/s에 실제 작업·결과·상태·빈값·재진단 정책 연결.
 - [ ] P3.5 키워드/측정 지표/추천/즐겨찾기 CRUD, /admin/keywords 및 /dashboard/recommendations 필터·검색·페이지 이동·완료/해제.
 - [ ] P3.6 /dashboard/competitors CRUD·메모·비교·한도·수집 갱신·계정 격리. 오늘 할 일 저장/해제.

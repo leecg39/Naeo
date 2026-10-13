@@ -331,4 +331,74 @@ export const migrations = [{
       updated_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 10,
+  name: 'scan_jobs',
+  sql: `
+    CREATE TABLE blog_posts (
+      id TEXT PRIMARY KEY NOT NULL,
+      blog_id TEXT NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+      external_id TEXT NOT NULL CHECK(length(external_id) BETWEEN 1 AND 100),
+      url TEXT NOT NULL CHECK(length(url) BETWEEN 1 AND 500),
+      title TEXT NOT NULL CHECK(length(title)<=300),
+      excerpt TEXT NOT NULL DEFAULT '' CHECK(length(excerpt)<=2000),
+      category TEXT NOT NULL DEFAULT '' CHECK(length(category)<=100),
+      tags_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(tags_json) AND json_type(tags_json)='array'),
+      published_at INTEGER,
+      collected_at INTEGER NOT NULL,
+      UNIQUE(blog_id,external_id)
+    ) STRICT;
+    CREATE INDEX blog_posts_recent ON blog_posts(blog_id,published_at DESC);
+    CREATE TABLE scan_jobs (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      blog_id TEXT NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+      state TEXT NOT NULL DEFAULT 'queued' CHECK(state IN ('queued','running','succeeded','failed','canceled')),
+      attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),
+      max_attempts INTEGER NOT NULL DEFAULT 3 CHECK(max_attempts BETWEEN 1 AND 10),
+      progress INTEGER NOT NULL DEFAULT 0 CHECK(progress BETWEEN 0 AND 100),
+      lease_owner TEXT CHECK(lease_owner IS NULL OR length(lease_owner)<=100),
+      lease_until INTEGER,
+      run_after INTEGER NOT NULL,
+      cancel_requested INTEGER NOT NULL DEFAULT 0 CHECK(cancel_requested IN (0,1)),
+      idempotency_key TEXT CHECK(idempotency_key IS NULL OR length(idempotency_key) BETWEEN 1 AND 100),
+      retry_of TEXT REFERENCES scan_jobs(id) ON DELETE SET NULL,
+      error_code TEXT CHECK(error_code IS NULL OR length(error_code)<=60),
+      error_message TEXT CHECK(error_message IS NULL OR length(error_message)<=500),
+      result_json TEXT CHECK(result_json IS NULL OR json_valid(result_json)),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      started_at INTEGER,
+      completed_at INTEGER,
+      UNIQUE(owner_id,idempotency_key),
+      CHECK(state<>'running' OR (lease_owner IS NOT NULL AND lease_until IS NOT NULL))
+    ) STRICT;
+    CREATE UNIQUE INDEX scan_jobs_one_active ON scan_jobs(blog_id) WHERE state IN ('queued','running');
+    CREATE INDEX scan_jobs_claim ON scan_jobs(state,run_after);
+    CREATE INDEX scan_jobs_owner ON scan_jobs(owner_id,created_at DESC);
+    CREATE TABLE worker_heartbeats (
+      worker_id TEXT PRIMARY KEY NOT NULL CHECK(length(worker_id) BETWEEN 1 AND 100),
+      started_at INTEGER NOT NULL,
+      last_seen_at INTEGER NOT NULL,
+      processed INTEGER NOT NULL DEFAULT 0,
+      failed INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+  `,
+}, {
+  version: 11,
+  name: 'scan_results',
+  sql: `
+    CREATE TABLE scan_results (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      blog_id TEXT NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+      job_id TEXT UNIQUE REFERENCES scan_jobs(id) ON DELETE SET NULL,
+      score INTEGER NOT NULL CHECK(score BETWEEN 0 AND 100),
+      method_version TEXT NOT NULL CHECK(length(method_version) BETWEEN 1 AND 40),
+      report_json TEXT NOT NULL CHECK(json_valid(report_json)),
+      post_count INTEGER NOT NULL CHECK(post_count>=0),
+      measured_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX scan_results_blog ON scan_results(blog_id,measured_at DESC);
+  `,
 }];

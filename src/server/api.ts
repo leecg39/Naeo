@@ -3,6 +3,7 @@ import { register, login, logout, requireUser, requireAdmin, requireTerms } from
 import {accountApi} from './account-api';
 import {contentApi} from './content/content-api';
 import {inquiryApi,publicInquiryApi} from './inquiries/inquiry-api';
+import {scanApi} from './jobs/scan-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -45,6 +46,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(contentResponse)return contentResponse;
     const inquiryResponse=await inquiryApi(db,request,user);
     if(inquiryResponse)return inquiryResponse;
+    const scanResponse=await scanApi(db,request,user);
+    if(scanResponse)return scanResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

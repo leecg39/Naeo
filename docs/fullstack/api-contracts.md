@@ -151,3 +151,22 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/llms.txt` | text/plain | 안내·공개 고정 페이지·매거진(제목·요약)·정책 문서를 절대 주소 마크다운 링크로 색인. 소개 문구는 새로 작성 |
 
 모두 요청마다 DB를 읽고(`dynamic='force-dynamic'`), RSS·llms는 `Cache-Control: no-cache`라 비공개 전환이 바로 반영된다.
+
+## P3.1–P3.3 진단 작업·수집·분석 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/scans` | POST | 회원(본인 블로그) | `{blogId,idempotencyKey?}`. 같은 키는 같은 작업 반환, 블로그당 진행 중 작업 1개(부분 unique index), 시간당 20회 | 404 `BLOG_NOT_FOUND`, 409 `SCAN_IN_PROGRESS`, 429 |
+| `/api/scans` | GET | 회원 | `blogId`, `state`, `page`, `pageSize`. 본인 작업만 | 401 |
+| `/api/scans/:id` | GET | 회원 | 상태·진행률·시도·오류·결과 요약. 작업자 id·임대 정보는 숨김 | 404 |
+| `/api/scans/:id/cancel` | POST | 회원 | 대기 → 즉시 취소, 실행 중 → 취소 요청(작업자가 다음 진행 보고 때 중단, 늦게 온 결과보다 취소 우선) | 409 `SCAN_FINISHED` |
+| `/api/scans/:id/retry` | POST | 회원 | 실패·취소 작업만 새 작업(`retryOf`)으로 | 409 `SCAN_NOT_RETRYABLE`·`SCAN_IN_PROGRESS` |
+| `/api/blogs/:id/scan-results` · `/latest` | GET | 회원(본인 블로그) | 분석 이력(최신순)·최신 보고서 | 404 |
+| `/api/admin/scan-health` | GET | 관리자 | 상태별 개수, 24시간 완료·실패, 가장 오래 기다린 작업, lease 만료 수, worker(30초 내 신호면 동작 중), 최근 실패 | 403 |
+| `/api/admin/scans` · `/:id/cancel` · `/:id/retry` | GET·POST | 관리자 | 검색(이메일·블로그 ID·오류 코드)·상태 필터, 취소·재시도(감사 로그) | 403, 409 |
+
+작업 큐: `scan_jobs`(queued→running→succeeded/failed/canceled). worker는 `npm run worker`(같은 DB, 여러 개 실행 가능). 임대 60초, 진행 보고 때 연장, 만료되면 다른 worker가 넘겨받음(시도 횟수 증가, 최대 3회 후 `LEASE_EXPIRED`). 재시도 가능한 오류는 30초·60초 지수 대기 후 재실행.
+
+수집: 요청 주소는 `https://rss.blog.naver.com/{검증된 블로그 ID}.xml`만(사용자 URL 미사용으로 SSRF 차단), 리디렉션 거부, 10초 제한, 2MB 상한. 404·빈 채널은 `BLOG_NOT_FOUND`(재시도 안 함), 연결 실패·429·5xx는 `FETCH_FAILED`(재시도). 글은 `blog.naver.com/{id}/{글번호}`인 것만 정규 주소로 저장하고, 블로그·글 번호 기준으로 넣거나 갱신한다(수집 시각 보존, RSS에서 빠진 글은 유지).
+
+분석(`rules-v1`, 새 규칙): 발행 빈도(최근 30일 12개 만점)·최근성(3일 이내 만점)·제목 구체성(15~45자 비율)·태그 활용(3개 이상 비율)·주제 일관성(최다 분류 60% 이상 만점) 각 20점. 근거 수치, 14점 미만 기준의 할 일, 새 규칙 고지를 보고서에 저장한다. AI 브리핑 인용 근거는 공식 API·공급자가 없어 `aiCitation.status='not_configured'`로 저장하고 지어내지 않는다.
