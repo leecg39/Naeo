@@ -542,4 +542,47 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX share_links_draft ON share_links(draft_id);
   `,
+}, {
+  version: 16,
+  name: 'credits_generation',
+  sql: `
+    CREATE TABLE credit_ledger (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      delta INTEGER NOT NULL CHECK(delta<>0 AND delta BETWEEN -1000000 AND 1000000),
+      reason TEXT NOT NULL CHECK(reason IN ('grant','generation','refund','adjust')),
+      ref_type TEXT NOT NULL DEFAULT '' CHECK(length(ref_type)<=30),
+      ref_id TEXT NOT NULL DEFAULT '' CHECK(length(ref_id)<=60),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=200),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE UNIQUE INDEX credit_ledger_once ON credit_ledger(ref_type,ref_id,reason) WHERE ref_id<>'';
+    CREATE INDEX credit_ledger_owner ON credit_ledger(owner_id,created_at DESC);
+    CREATE TABLE generation_jobs (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      draft_id TEXT REFERENCES drafts(id) ON DELETE SET NULL,
+      state TEXT NOT NULL DEFAULT 'queued' CHECK(state IN ('queued','running','succeeded','failed','canceled')),
+      cost INTEGER NOT NULL CHECK(cost>=0),
+      input_json TEXT NOT NULL CHECK(json_valid(input_json)),
+      provider TEXT NOT NULL CHECK(length(provider) BETWEEN 1 AND 30),
+      model TEXT NOT NULL CHECK(length(model) BETWEEN 1 AND 80),
+      idempotency_key TEXT NOT NULL CHECK(length(idempotency_key) BETWEEN 1 AND 100),
+      attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),
+      max_attempts INTEGER NOT NULL DEFAULT 2 CHECK(max_attempts BETWEEN 1 AND 5),
+      lease_owner TEXT,
+      lease_until INTEGER,
+      run_after INTEGER NOT NULL,
+      cancel_requested INTEGER NOT NULL DEFAULT 0 CHECK(cancel_requested IN (0,1)),
+      error_code TEXT CHECK(error_code IS NULL OR length(error_code)<=60),
+      error_message TEXT CHECK(error_message IS NULL OR length(error_message)<=500),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      completed_at INTEGER,
+      UNIQUE(owner_id,idempotency_key)
+    ) STRICT;
+    CREATE INDEX generation_jobs_claim ON generation_jobs(state,run_after);
+    CREATE INDEX generation_jobs_owner ON generation_jobs(owner_id,created_at DESC);
+  `,
 }];

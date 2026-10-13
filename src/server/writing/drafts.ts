@@ -26,16 +26,19 @@ function saveRevision(db:Database,d:Draft,now:number){
  db.prepare('INSERT INTO draft_revisions(id,draft_id,version,title,body,created_at) VALUES(?,?,?,?,?,?) ON CONFLICT(draft_id,version) DO NOTHING').run(randomUUID(),d.id,d.version,d.title,d.body,now);
 }
 
+/** 초안 한 건과 첫 수정 이력을 넣는다(호출한 쪽 트랜잭션 안에서 쓴다). */
+export function insertDraftRow(db:Database,ownerId:string,v:{title:string;keyword:string;category:string;body:string},now:number,action='draft.create'):Draft{
+ const id=randomUUID();
+ db.prepare('INSERT INTO drafts(id,owner_id,title,keyword,category,body,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(id,ownerId,v.title,v.keyword,v.category,v.body,now,now);
+ const d=ownedDraft(db,ownerId,id);
+ saveRevision(db,d,now);
+ audit(db,ownerId,action,'draft',id);
+ return d;
+}
+
 export function createDraft(db:Database,ownerId:string,input:unknown,now=Date.now()):Draft{
  const v=createInput.parse(input);
- const id=randomUUID();
- return transaction(db,()=>{
-  db.prepare('INSERT INTO drafts(id,owner_id,title,keyword,category,body,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(id,ownerId,v.title,v.keyword,v.category,v.body,now,now);
-  const d=ownedDraft(db,ownerId,id);
-  saveRevision(db,d,now);
-  audit(db,ownerId,'draft.create','draft',id);
-  return d;
- });
+ return transaction(db,()=>insertDraftRow(db,ownerId,v,now));
 }
 
 export function getDraft(db:Database,ownerId:string,id:string){

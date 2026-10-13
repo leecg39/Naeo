@@ -8,6 +8,7 @@ import {memberMateApi,publicMateApi} from './mate/mate-api';
 import {keywordsApi} from './keywords/keywords-api';
 import {competitorsApi} from './competitors/competitors-api';
 import {publicShareApi,writingApi} from './writing/writing-api';
+import {generationApi} from './generation/generation-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -64,6 +65,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(competitorsResponse)return competitorsResponse;
     const writingResponse=await writingApi(db,request,user);
     if(writingResponse)return writingResponse;
+    const generationResponse=await generationApi(db,request,user);
+    if(generationResponse)return generationResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});
