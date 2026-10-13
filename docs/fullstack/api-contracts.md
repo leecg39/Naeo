@@ -99,3 +99,14 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/documents/:id/restore` | POST | 관리자 | `{revision,version}`. 내용(주소·제목·시행일·본문·맺음말)만 되돌리고 공개 상태·순서는 유지 | 404 `REVISION_NOT_FOUND` |
 
 공개 화면: `/terms` `/privacy` `/privacy/extension` `/refund`와 관리자가 만든 문서 주소는 DB 공개본을 `/terms` 캡처 틀로 렌더링한다. 본문은 `## 소제목` 줄로 조항을 나누는 일반 텍스트이며 모든 글자를 텍스트 노드로만 넣는다(HTML 해석 없음). 초안·삭제된 문서는 404이고, 시드 문서 4개는 삭제 후에도 캡처 화면으로 되돌아가지 않는다. 시드는 `seed_runs('documents-v1')`로 한 번만 적용한다. 미리보기 `/admin/pages/preview/:id`는 관리자 전용.
+
+## P2.5 FAQ API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/faq` | GET | 관리자 | `q`(질문·답변·분류), `status`, `category`, `page`, `pageSize≤100`. 응답에 전체 분류 목록 `categories` | 401·403 |
+| `/api/admin/faq` | POST | 관리자 | `category≤40`, `question≤200`, `answer≤5000`(빈 값 불가), `status`(draft/published), `position` | 400 검증 |
+| `/api/admin/faq/:id` | PATCH | 관리자 | 바뀐 필드 + `version` | 404, 409 `VERSION_CONFLICT` |
+| `/api/admin/faq/:id` | DELETE | 관리자 | `{version}` | 404, 409 |
+
+공개 `/faq`는 공개 항목을 분류별(분류의 가장 앞 항목 순서) 접이식 목록으로 `/faq` 캡처 틀에 다시 그린다. 질문·답변은 텍스트 노드로만 넣는다. 시드 `faq-v1` 1회.

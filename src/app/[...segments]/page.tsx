@@ -4,14 +4,12 @@ import { getCapturedPage } from '@/lib/pages';
 import PageExperience from '@/components/PageExperience';
 import { pageUser,adminPageUser } from '@/server/current-user';
 import { cache } from 'react';
-import { resolveBlogPage,resolveDocumentPage } from '@/server/content/public-pages';
+import { resolveDatabasePage } from '@/server/content/public-pages';
 type Props={params:Promise<{segments:string[]}>};
 // 블로그 글은 DB에서 읽으므로 요청마다 렌더링한다(관리자 수정·비공개 즉시 반영).
 export const dynamic='force-dynamic';
-const blogPage=cache(resolveBlogPage);
-const documentPage=cache(resolveDocumentPage);
-/** DB가 맡는 경로(블로그·정책 문서)를 찾는다. undefined면 캡처 화면으로 넘긴다. */
-async function databasePage(path:string){const blog=await blogPage(path);return blog===undefined?documentPage(path):blog;}
+/** DB가 맡는 경로(블로그·정책 문서·FAQ 등). undefined면 캡처 화면으로 넘긴다. */
+const databasePage=cache(resolveDatabasePage);
 export async function generateMetadata({params}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');const data=(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',robots:{index:false,follow:false}}}
 export default async function Page({params}:Props){
  const path='/'+(await params).segments.join('/');

@@ -31,7 +31,7 @@
 - [ ] P2.2 기사/카테고리/공지/FAQ/약관 등 생성·조회·수정·발행·비공개·삭제 API, slug 충돌·수정 버전·권한. (기사·카테고리 API 완료: 관리자 권한·version 409·slug 409·사용 중 분류 409·본문 검증·수정 이력/복구·예약 발행·1MB 본문 / 공지·FAQ·약관 남음)
 - [x] P2.3 /admin 및 /admin/blog 편집/목록/검색/상세/미리보기 UI, 공개 페이지 DB 연결. 새 기사 경로와 삭제/비공개 404. (/admin/blog 글·분류 관리, 초안/예약 미리보기, 수정 이력 복구, 공개 즉시 반영, 비공개·삭제 404 브라우저 검증)
 - [x] P2.4 /contact 문의 생성, 회원 본인 문의 RUD, 관리자 상태·답변 CRUD, /admin/inquiries/templates CRUD. 실제 발송은 메일 공급자와 분리 표시. (비회원·회원 접수, 내 문의 내역 조회/수정/삭제·답변 후 잠금, 관리자 검색·상태·답변 CRUD·템플릿 적용, 템플릿 CRUD 브라우저 검증. 메일은 미발송으로 표시)
-- [ ] P2.5 /updates 원문·legacy308·초점, /features /faq /guide/* /terms /privacy* /refund 및 랜딩 공지 연결. (정책 문서 /terms /privacy /privacy/extension /refund 완료: DB 시드·원본 일치 4/4·/admin/pages CRUD·이력 복구·초안/삭제 404 / FAQ·업데이트·공지·features·guide 남음)
+- [ ] P2.5 /updates 원문·legacy308·초점, /features /faq /guide/* /terms /privacy* /refund 및 랜딩 공지 연결. (정책 문서 /terms /privacy /privacy/extension /refund 완료: DB 시드·원본 일치 4/4·/admin/pages CRUD·이력 복구·초안/삭제 404 · FAQ 완료: 시드 21·원본 일치·/admin/faq CRUD / 업데이트·공지·features·guide 남음)
 - [ ] P2.6 robots/sitemap/RSS/llms 콘텐츠 경로 반영, 초안 미노출, CMS E2E·권한·XSS·페이지 전체 렌더 검증.
 
 ### P3 — 수집·분석·추천·경쟁 블로그 (P1/P2 의존)

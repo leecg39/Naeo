@@ -2,9 +2,11 @@ import {randomUUID} from 'node:crypto';
 import {transaction,type Database} from '../database';
 import seed from '../../data/content/articles.seed.json';
 import documentSeed from '../../data/content/documents.seed.json';
+import faqSeed from '../../data/content/faq.seed.json';
 
 const ARTICLES_SEED='articles-v1';
 const DOCUMENTS_SEED='documents-v1';
+const FAQ_SEED='faq-v1';
 
 /**
  * 캡처한 기사 20개를 한 번만 넣는다. 실행 기록을 seed_runs에 남겨
@@ -13,6 +15,7 @@ const DOCUMENTS_SEED='documents-v1';
 export function applySeeds(db:Database,now=Date.now()):void{
  seedArticles(db,now);
  seedDocuments(db,now);
+ seedFaq(db,now);
 }
 
 function seedArticles(db:Database,now:number):void{
@@ -43,5 +46,15 @@ function seedDocuments(db:Database,now:number):void{
    VALUES(?,?,?,?,?,?,'published',?,?,?) ON CONFLICT(path) DO NOTHING`);
   for(const d of documentSeed.documents)insert.run(randomUUID(),d.path,d.title,d.effectiveLabel,d.body,d.closingNote,d.position,now,now);
   db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(DOCUMENTS_SEED,now);
+ });
+}
+
+/** 캡처한 FAQ 21개를 한 번만 넣는다. */
+function seedFaq(db:Database,now:number):void{
+ transaction(db,()=>{
+  if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(FAQ_SEED))return;
+  const insert=db.prepare("INSERT INTO faq_items(id,category,question,answer,status,position,created_at,updated_at) VALUES(?,?,?,?,'published',?,?,?)");
+  for(const f of faqSeed.items)insert.run(randomUUID(),f.category,f.question,f.answer,f.position,now,now);
+  db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(FAQ_SEED,now);
  });
 }

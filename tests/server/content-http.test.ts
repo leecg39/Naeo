@@ -98,3 +98,21 @@ test('document admin API: permissions, CRUD, path conflicts and restore over HTT
  assert.equal((await f.send(`/api/admin/documents/${d.id}`,'DELETE',{version:3},admin)).status,200);
  assert.equal((await f.send(`/api/admin/documents/${d.id}`,'GET',undefined,admin)).status,404);
 });
+
+test('FAQ admin API: permissions, CRUD, validation and version conflict over HTTP',async t=>{
+ const f=fixture(t);const member=await account(f,'member@example.test');const admin=await account(f,'admin@example.test',true);
+ assert.equal((await f.send('/api/admin/faq')).status,401);
+ assert.equal((await f.send('/api/admin/faq','GET',undefined,member)).status,403);
+ const list=await (await f.send('/api/admin/faq?pageSize=100','GET',undefined,admin)).json();
+ assert.equal(list.pagination.total,21);assert.equal(list.categories.length,2);
+ const created=await f.send('/api/admin/faq','POST',{category:'결제',question:'HTTP 질문',answer:'HTTP 답변'},admin);
+ assert.equal(created.status,201);
+ const item=(await created.json()).data;
+ assert.equal((await f.send('/api/admin/faq','POST',{category:'결제',question:'',answer:'x'},admin)).status,400);
+ const edited=await f.send(`/api/admin/faq/${item.id}`,'PATCH',{status:'published',version:1},admin);
+ assert.equal((await edited.json()).data.version,2);
+ const stale=await f.send(`/api/admin/faq/${item.id}`,'PATCH',{answer:'x',version:1},admin);
+ assert.equal(stale.status,409);
+ assert.equal((await f.send(`/api/admin/faq/${item.id}`,'DELETE',{version:2},admin)).status,200);
+ assert.equal((await f.send(`/api/admin/faq/${item.id}`,'DELETE',{version:2},admin)).status,404);
+});

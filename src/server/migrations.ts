@@ -229,4 +229,23 @@ export const migrations = [{
       DELETE FROM content_revisions WHERE resource_type='document' AND resource_id=old.id;
     END;
   `,
+}, {
+  version: 6,
+  name: 'faq_items',
+  sql: `
+    CREATE TABLE faq_items (
+      id TEXT PRIMARY KEY NOT NULL,
+      category TEXT NOT NULL CHECK(length(category) BETWEEN 1 AND 40),
+      question TEXT NOT NULL CHECK(length(question) BETWEEN 1 AND 200),
+      answer TEXT NOT NULL CHECK(length(answer) BETWEEN 1 AND 5000),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published')),
+      position INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX faq_items_public ON faq_items(status,position);
+  `,
 }];
