@@ -151,10 +151,43 @@ export const installLanding: InstallBehavior = (root, tools) => {
     later(() => setCriterion(0),reduced?0:2900);
   });
 
-  // These are the source's useFadeUpV2 entry states, driven by viewport entry.
-  root.querySelectorAll<HTMLElement>('[style*="opacity"][style*="transform"]').forEach(el => {
-    if (criteriaGroup?.contains(el) || el.closest('[aria-roledescription="carousel"]') || !/^0(?:\.0+)?$/.test(el.style.opacity)) return;
-    observe(el, () => animate(el,[{opacity:0,transform:el.style.transform},{opacity:1,transform:"none"}],{duration:400,easing:"cubic-bezier(.22,1,.36,1)"}));
+  // Hero text is captured before its source typewriter has populated the visible span.
+  // Keep the separate screen-reader text and reproduce the observed 20ms character cadence.
+  const heroHeading = root.querySelector<HTMLElement>("#landing-v2-main > section:first-child h1");
+  const typewriter = heroHeading?.firstElementChild;
+  const accessibleText = typewriter?.querySelector<HTMLElement>('span[style*="position"]');
+  const visibleText = typewriter?.querySelector<HTMLElement>('span[aria-hidden="true"]');
+  if (visibleText && accessibleText) {
+    const previous=visibleText.textContent;
+    const headingText=accessibleText.textContent||"내 블로그 포스팅";
+    cleanups.push(()=>{visibleText.textContent=previous;});
+    if(reduced)visibleText.textContent=headingText;
+    else {
+      visibleText.textContent="";
+      for(let index=1;index<=headingText.length;index++)later(()=>{visibleText.textContent=headingText.slice(0,index);},20*index);
+    }
+    const cursor=visibleText.nextElementSibling as HTMLElement|null;
+    if(cursor){
+      saveStyle(cursor);
+      if(reduced)cursor.style.display="none";
+      else animate(cursor,[{opacity:0},{opacity:1},{opacity:0}],{duration:800,iterations:Infinity,easing:"linear"});
+    }
+  }
+  heroHeading?.querySelectorAll<HTMLElement>('[style*="blur"]').forEach(el=>{
+    animate(el,[{opacity:0,filter:"blur(10px)",transform:"scale(.95)"},{opacity:1,filter:"blur(0px)",transform:"scale(1)"}],{duration:500,delay:reduced?0:300,easing:"cubic-bezier(.22,1,.36,1)"});
+  });
+
+  // The source also has opacity-only entry states, not just translated elements.
+  // Exclude state panels and the separately animated hero/criteria/carousel content.
+  root.querySelectorAll<HTMLElement>('[style*="opacity"],[style*="filter"]').forEach(el => {
+    if (criteriaGroup?.contains(el) || mobileDescriptions?.contains(el) || heroHeading?.contains(el) || el.closest('[aria-roledescription="carousel"],[hidden],template')) return;
+    const hiddenOpacity=/^0(?:\.0+)?$/.test(el.style.opacity);
+    const blurred=/blur\((?!0(?:px)?\))/.test(el.style.filter);
+    if(!hiddenOpacity&&!blurred)return;
+    observe(el, () => animate(el,
+      [{opacity:hiddenOpacity?0:1,transform:el.style.transform||"none",filter:el.style.filter||"none"},
+       {opacity:1,transform:"none",filter:blurred?el.style.filter.replace(/blur\([^)]*\)/g,"blur(0px)"):(el.style.filter||"none")}],
+      {duration:400,easing:"cubic-bezier(.22,1,.36,1)"}));
   });
   root.querySelectorAll<HTMLElement>('[style*="translateY(110%)"]').forEach((el,index) => {
     observe(el, () => {
