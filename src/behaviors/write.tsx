@@ -5,9 +5,9 @@ import { text, type BehaviorTools, type InstallBehavior } from '@/lib/behavior';
 import { saveDraft } from '@/lib/demo-store';
 import type { Draft } from '@/types/site';
 
-// Public NAVER_TOPICS labels from the captured 1v-9ct5h5ezgw.js bundle.
-// This local topic picker supplies the demo form; generation never calls the source API.
-const TOPICS = ['문학·책','영화','미술·디자인','공연·전시','음악','드라마','스타·연예인','만화·애니','방송','일상·생각','육아·결혼','반려동물','좋은글·이미지','패션·미용','인테리어·DIY','요리·레시피','상품리뷰','원예·재배','게임','스포츠','사진','자동차','취미','국내여행','세계여행','맛집','IT·컴퓨터','사회·정치','건강·의학','비즈니스·경제','어학·외국어','교육·학문'];
+// Exact writing subcategories and order observed in the source dropdown.
+// Generation is local and never calls the source API.
+const TOPICS = ['영화','방송','스타·연예인','애니메이션','IT·테크','상품리뷰','자동차','교육','어학·외국어','경제','사회','일상·생각','(미분류)','리빙','원예·재배','반려동물','건강','육아','레시피','스포츠','게임','취미','사진','좋은글·이미지','공연·전시','음악','책','예술','패션','뷰티','국내여행','해외여행','푸드'];
 
 function DraftPreview({ draft, tools }: { draft: Draft; tools: BehaviorTools }) {
   const [title, setTitle] = useState(draft.title);
