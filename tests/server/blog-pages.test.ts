@@ -79,3 +79,16 @@ test('share links use the configured origin and encode the title',async t=>{
  const x=find(page.body,n=>n.attrs['aria-label']==='X에 공유')!;
  assert.equal(x.attrs.href,`https://twitter.com/intent/tweet?text=${encodeURIComponent(a.title)}&url=${encodeURIComponent('http://127.0.0.1:3000/blog/marketing/golden-keywords')}`);
 });
+
+test('draft previews render without previous/next links to other articles',async t=>{
+ const db=fixture(t);
+ db.prepare("UPDATE articles SET status='draft' WHERE slug='golden-keywords'").run();
+ const id=(db.prepare("SELECT id FROM articles WHERE slug='golden-keywords'").get() as {id:string}).id;
+ const {getAdminArticle}=await import('../../src/server/content/admin-articles');
+ const admin=(await import('../../src/server/auth')).register;
+ const u=(await admin(db,{email:'p@example.test',password:'preview-long-password',nickname:'p',termsAccepted:true})).user;
+ db.prepare("UPDATE users SET role='admin' WHERE id=?").run(u.id);
+ const page=await buildArticlePage(db,getAdminArticle(db,u.id,id),{origin:ORIGIN});
+ const box=find(page.body,n=>(n.attrs.class??'').includes('mui-1o2n272'))!;
+ assert.deepEqual(box.children.map(c=>typeof c==='string'?c:c.tag),['div','div']);
+});

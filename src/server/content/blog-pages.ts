@@ -115,7 +115,8 @@ export async function buildArticlePage(db:Database,a:Article,{origin}:Options):P
   if(hasClass('mui-1yjvs5a')(n))return[articleHeader(n,a,origin)];
   if(hasClass('mui-49c794')(n))return[withChildren(n,nodes)];
   if(n===tags)return[withChildren(n,a.tags.map(t=>mapTree([tagTpl],x=>hasClass('mui-oruufx')(x)?[replaceText(x,t)]:undefined)[0]))];
-  if(hasClass('mui-1o2n272')(n))return[prevNext(n,all[i+1],i>0?all[i-1]:undefined)];
+  // 초안·예약 글 미리보기(목록에 없음)는 이전/다음 글을 비워 둔다.
+  if(hasClass('mui-1o2n272')(n))return[prevNext(n,i>=0?all[i+1]:undefined,i>0?all[i-1]:undefined)];
   if(n.tag==='nav'&&n.attrs['aria-label']==='목차')return[toc(n,headings)];
   return undefined;
  });
