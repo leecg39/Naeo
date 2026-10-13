@@ -60,8 +60,9 @@ export function rateLimit(db:Database,key:string,limit:number,windowMs:number,no
     ON CONFLICT(key) DO UPDATE SET count=count+1 RETURNING count`).get(tokenHash(key),now+windowMs) as {count:number};
   if(row.count>limit) throw new AppError(429,'RATE_LIMITED','요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
 }
+export const clientPeer=(request:Request)=>process.env.NAEO_TRUST_PROXY==='1'?(request.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim():'direct';
 export function authRateLimit(db:Database,request:Request,email:string) {
-  const peer=process.env.NAEO_TRUST_PROXY==='1'?(request.headers.get('x-forwarded-for')||'unknown').split(',')[0].trim():'direct';
+  const peer=clientPeer(request);
   rateLimit(db,`auth:peer:${peer}`,100,15*60*1000);
   rateLimit(db,`auth:email:${email}`,10,15*60*1000);
 }

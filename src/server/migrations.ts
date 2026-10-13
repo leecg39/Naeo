@@ -150,4 +150,43 @@ export const migrations = [{
       applied_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 4,
+  name: 'inquiries',
+  sql: `
+    CREATE TABLE inquiries (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+      email TEXT NOT NULL CHECK(length(email) BETWEEN 3 AND 254),
+      type TEXT NOT NULL CHECK(type IN ('service','technical','business','partnership','etc')),
+      subject TEXT NOT NULL DEFAULT '' CHECK(length(subject)<=200),
+      message TEXT NOT NULL CHECK(length(message) BETWEEN 1 AND 5000),
+      status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','answered','closed')),
+      answered_at INTEGER,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX inquiries_owner ON inquiries(owner_id,created_at);
+    CREATE INDEX inquiries_status ON inquiries(status,created_at);
+    CREATE TABLE inquiry_messages (
+      id TEXT PRIMARY KEY NOT NULL,
+      inquiry_id TEXT NOT NULL REFERENCES inquiries(id) ON DELETE CASCADE,
+      author_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      body TEXT NOT NULL CHECK(length(body) BETWEEN 1 AND 10000),
+      delivery TEXT NOT NULL DEFAULT 'not_configured' CHECK(delivery IN ('not_configured','sent','failed')),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX inquiry_messages_inquiry ON inquiry_messages(inquiry_id,created_at);
+    CREATE TABLE inquiry_templates (
+      id TEXT PRIMARY KEY NOT NULL,
+      name TEXT NOT NULL UNIQUE CHECK(length(name) BETWEEN 1 AND 60),
+      subject TEXT NOT NULL DEFAULT '' CHECK(length(subject)<=200),
+      body TEXT NOT NULL CHECK(length(body) BETWEEN 1 AND 10000),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+  `,
 }];

@@ -70,3 +70,19 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/article-categories/:id` | PATCH `slug,name,sortOrder`+`version`. DELETE `version`. 글이 있으면 409 `CATEGORY_IN_USE` |
 
 규칙: 같은 분류 안의 주소 중복은 409 `SLUG_EXISTS`, 오래된 version으로 수정하면 409 `VERSION_CONFLICT`. 본문에 차단된 주소·지원하지 않는 구성 요소·HTML이 있으면 400 `CONTENT_INVALID`이며 `details`에 경고 목록을 담는다. `published`로 바꿀 때 게시일이 없으면 현재 시각을 넣는다. 미래 게시일은 예약 공개로 그 시각 전에는 404다. 본문이 바뀌면 읽는 시간을 다시 계산한다(새 규칙: 공백 제외 약 180자 = 1분, 원본 공식 미확인, 직접 입력 가능). 저장할 때마다 이전·새 버전 스냅샷을 `content_revisions`에 남기고, 감사 로그에 `content.article.*`·`content.category.*`를 기록한다. 분류를 바꾸면 공개 주소가 `/blog/새분류/주소`로 바뀐다.
+
+## P2.4 문의·답변 템플릿 API (2026-10-13)
+
+`POST /api/inquiries`만 로그인 없이 쓸 수 있다(Origin 검사는 그대로). 접속 주소별 15분 30회, 회신 이메일별 1시간 5회로 제한한다. 비회원에게는 저장 내용 대신 `{received:true}`만 돌려준다. 약관에 동의한 회원이면 본인 문의로 묶고 문의 전체를 돌려준다. 회원이 탈퇴하면 그 회원의 문의와 답변도 함께 삭제된다.
+
+| 경로 | 계약 |
+|---|---|
+| `/api/inquiries` | POST `type(service·technical·business·partnership·etc, 기본 etc),email,subject(≤200),message(1–5000)`. GET(회원) 본인 문의 `page,pageSize` |
+| `/api/inquiries/:id` | 회원 본인만(남의 문의는 404). GET 문의 + `replies[]`(답한 관리자는 노출 안 함). PATCH `type,subject,message` + `version`: 상태가 `open`이고 답변이 없을 때만 가능, 아니면 409 `INQUIRY_LOCKED`. DELETE `version`(답변 여부와 관계없이 삭제, 답변도 함께 삭제). 쓰기는 회원별 15분 60회 |
+| `/api/admin/inquiries` | 관리자. GET `q`(이메일·제목·내용, 와일드카드 이스케이프)`,status,type,page,pageSize`, 응답에 `ownerEmail` 포함 |
+| `/api/admin/inquiries/:id` | GET 상세 + `replies[]`(`authorId,authorName,delivery`). PATCH `status(open·answered·closed),version`. DELETE `version` |
+| `/api/admin/inquiries/:id/replies` | POST `body(1–10000),version`: 답변을 저장하고 `answered`·`answeredAt`으로 바꾼다. 메일 공급자가 없으므로 `delivery='not_configured'`로 기록하고 발송하지 않는다 |
+| `/api/admin/inquiries/:id/replies/:replyId` | PATCH `body,version`, DELETE `version`. 답변을 바꿀 때도 문의 `version`을 올려 동시 수정을 409로 막는다 |
+| `/api/admin/inquiry-templates` (`/:id`) | GET 목록(이름순), POST `name(1–60, 중복 409 TEMPLATE_EXISTS),subject,body`, PATCH 바뀐 필드 + `version`, DELETE `version` |
+
+관리자 쓰기는 사용자별 15분 300회. 감사 로그(`inquiry.create/update/delete`, `admin.inquiry.status`, `admin.inquiry.reply.create/update/delete`, `admin.inquiry.delete`, `admin.inquiry_template.*`)에는 이메일·본문을 남기지 않는다.

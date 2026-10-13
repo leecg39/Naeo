@@ -1,5 +1,7 @@
 import type { InstallBehavior } from '@/lib/behavior';
 import { text } from '@/lib/behavior';
+import { api, ApiError } from '@/lib/api-client';
+import MyInquiries from '@/components/contact/MyInquiries';
 
 /** Interactions for the captured magazine, changelog and contact form. */
 export const installContent: InstallBehavior = (root, tools) => {
@@ -288,6 +290,18 @@ export const installContent: InstallBehavior = (root, tools) => {
         floatLabel(document.activeElement === field);
       });
     });
+    // 캡처 당시 이메일 칸에 placeholder 값(demo@example.com)이 들어 있었다. 실제 문의가 엉뚱한 주소로 가지 않도록 비우고,
+    // 로그인한 회원이면 계정 이메일을 기본값으로 넣는다.
+    const setEmail = (value: string) => {
+      if (!email) return;
+      email.value = value;
+      email.dispatchEvent(new Event('input', { bubbles: true }));
+      email.dispatchEvent(new Event('blur'));
+    };
+    if (email && email.value === email.placeholder) setEmail('');
+    let alive = true;
+    dispose.push(() => { alive = false; });
+    void api<{ user: { email: string } }>('/api/auth/me').then(me => { if (alive && email && !email.value) setEmail(me.user.email); }).catch(() => undefined);
     const invalid = (field: HTMLInputElement | HTMLTextAreaElement, message: string) => {
       field.setCustomValidity(message);
       attr(field, 'aria-invalid', 'true');
@@ -358,9 +372,24 @@ export const installContent: InstallBehavior = (root, tools) => {
       });
       on(document, 'pointerdown', event => { if (menu && !combo.parentElement?.contains(event.target as Node)) closeMenu(); });
     }
-    if (submit) on(submit, 'click', event => {
+    const typeValue = () => ['service', 'technical', 'business', 'partnership', 'etc'][Math.max(0, types.indexOf(selectedType))];
+    const showServerErrors = (error: ApiError) => {
+      const details = Array.isArray(error.details) ? error.details as { path?: string; message?: string }[] : [];
+      const target = (path: string) => path === 'email' ? email : path === 'message' ? message : path === 'subject' ? subject : undefined;
+      const marked = details.map(d => { const field = target(d.path || ''); if (field) invalid(field, d.path === 'email' ? '회신받을 이메일 주소를 올바르게 입력해주세요.' : d.message || '입력 내용을 확인해주세요.'); return field; }).filter(Boolean);
+      if (marked.length) marked[0]!.focus(); else tools.toast(error.message);
+    };
+    const clearForm = () => [subject, message].forEach(field => {
+      if (!field) return;
+      field.value = '';
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+      field.dispatchEvent(new Event('blur'));
+    });
+    const openHistory = () => tools.openDialog('내 문의 내역', <MyInquiries onLogin={() => { tools.closeDialog(); tools.navigate('/login?next=/contact'); }} />);
+    let sending = false;
+    if (submit) on(submit, 'click', async event => {
       event.preventDefault();
-      if (!email || !message) return;
+      if (!email || !message || sending) return;
       fields.forEach(field => field.setCustomValidity(''));
       let failed = false;
       if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
@@ -369,15 +398,36 @@ export const installContent: InstallBehavior = (root, tools) => {
       }
       if (!message.value.trim()) { invalid(message, '문의 내용을 입력해주세요.'); failed = true; }
       if (failed) { (email.getAttribute('aria-invalid') === 'true' ? email : message).focus(); return; }
+      sending = true;
+      attr(submit, 'aria-busy', 'true');
+      submit.disabled = true;
       try {
-        const key = 'naeo-clone:contact-outbox';
-        let outbox: unknown[] = [];
-        try { const previous: unknown = JSON.parse(localStorage.getItem(key) || '[]'); if (Array.isArray(previous)) outbox = previous; } catch { /* Start a fresh local outbox if invalid. */ }
-        outbox.push({ id: crypto.randomUUID(), type: selectedType, email: email.value.trim(), subject: subject?.value.trim() || '', message: message.value.trim(), createdAt: new Date().toISOString() });
-        localStorage.setItem(key, JSON.stringify(outbox));
-        tools.openDialog('문의 저장 완료', <div style={{ display: 'grid', gap: 16 }}><p>문의 내용을 로컬 데모에 저장했습니다. 실제 이메일은 전송되지 않았습니다.</p><p style={{ color: '#a3a3a3', fontSize: 14 }}>문의 유형: {selectedType}<br />회신받을 이메일: {email.value.trim()}</p><button className="naeo-button" onClick={tools.closeDialog}>확인</button></div>);
-      } catch { tools.toast('브라우저 저장 공간에 문의를 저장하지 못했습니다. 잠시 후 다시 시도해주세요.'); }
+        const created = await api<{ received?: true; id?: string }>('/api/inquiries', { method: 'POST', body: { type: typeValue(), email: email.value.trim(), subject: subject?.value.trim() || '', message: message.value.trim() } });
+        const member = !!created.id;
+        clearForm();
+        tools.openDialog('문의가 접수되었습니다', <div style={{ display: 'grid', gap: 16 }}>
+          <p>{member ? '답변이 등록되면 내 문의 내역에서 확인할 수 있습니다. 답변 전에는 문의를 수정·삭제할 수 있습니다.' : '남겨주신 회신 이메일로 답변을 안내드립니다.'}</p>
+          <p style={{ color: '#a3a3a3', fontSize: 14 }}>문의 유형: {selectedType}<br />회신받을 이메일: {email.value.trim()}</p>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>{member && <button className="naeo-button" onClick={openHistory}>내 문의 내역</button>}<button className="naeo-button" onClick={tools.closeDialog}>확인</button></div>
+        </div>);
+      } catch (error) {
+        if (error instanceof ApiError && error.status === 400) showServerErrors(error);
+        else tools.toast(error instanceof Error ? error.message : '문의를 보내지 못했습니다. 잠시 후 다시 시도해주세요.');
+      } finally {
+        sending = false;
+        submit.disabled = false;
+        submit.removeAttribute('aria-busy');
+      }
     });
+    if (submit?.parentElement) {
+      const history = add(document.createElement('button')) as HTMLButtonElement;
+      history.type = 'button';
+      history.textContent = '내 문의 내역';
+      history.className = submit.className.replace(/MuiButton-contained\S*/g, '').replace(/\s+/g, ' ');
+      history.style.cssText = 'margin-top:12px;width:100%;min-height:44px;background:transparent;border:1px solid #ffffff30;border-radius:8px;color:inherit;font:inherit;font-size:15px;cursor:pointer;';
+      history.addEventListener('click', openHistory);
+      submit.insertAdjacentElement('afterend', history);
+    }
     dispose.push(closeMenu, () => fields.forEach(field => field.setCustomValidity('')));
   }
 

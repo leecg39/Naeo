@@ -2,6 +2,7 @@ import { database, type Database } from './database';
 import { register, login, logout, requireUser, requireAdmin, requireTerms } from './auth';
 import {accountApi} from './account-api';
 import {contentApi} from './content/content-api';
+import {inquiryApi,publicInquiryApi} from './inquiries/inquiry-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -31,6 +32,8 @@ export function createApi(getDatabase:()=>Database=database) {
       logout(db,cookieToken(request));
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
+    const publicInquiry=await publicInquiryApi(db,request);
+    if(publicInquiry)return publicInquiry;
     const user=requireUser(db,cookieToken(request));
     if(path==='/api/auth/me'&&method==='GET') return json({data:{user,profile:getProfile(db,user.id)}});
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
@@ -40,6 +43,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(accountResponse)return accountResponse;
     const contentResponse=await contentApi(db,request,user);
     if(contentResponse)return contentResponse;
+    const inquiryResponse=await inquiryApi(db,request,user);
+    if(inquiryResponse)return inquiryResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});
