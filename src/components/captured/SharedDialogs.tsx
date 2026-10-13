@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { DEFAULT_PROFILE, writeStore } from '@/lib/demo-store';
+import AuthForm from '@/components/account/AuthForm';
 
 export type SharedDialog = { kind: 'auth' } | { kind: 'content'; title: string; content: ReactNode } | null;
 export interface SharedDialogsProps {
@@ -63,13 +63,7 @@ export default function SharedDialogs({ dialog, menuOpen, toast, onClose, onNavi
           <button type="button" className="naeo-overlay-primary" onClick={onAuth}>시작하기</button>
         </> : dialog?.kind === 'auth' ? <div className="naeo-auth-content">
           <p>네이버 블로그를 더 쉽게, NAEO와 함께</p>
-          <button type="button" className="naeo-overlay-primary" onClick={() => {
-            writeStore('profile', DEFAULT_PROFILE);
-            writeStore('session', { demo: true, signedInAt: new Date().toISOString() });
-            onClose();
-            onNavigate('/dashboard');
-          }}>데모로 시작하기</button>
-          <p className="naeo-demo-note">로컬 데모에서 기능을 체험할 수 있습니다.<br />실제 네이버 계정에 연결되지 않습니다.</p>
+          <AuthForm onSuccess={onClose}/>
         </div> : <div className="naeo-dialog-content">{dialog?.content}</div>}
       </div>
     </div>}

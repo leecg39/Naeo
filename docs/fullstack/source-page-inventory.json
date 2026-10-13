@@ -1,0 +1,120 @@
+{
+  "origin": "https://www.naeo.kr",
+  "captured_at": "2026-10-13T02:49:08.713166+00:00",
+  "paths": [
+    "/",
+    "/admin",
+    "/admin/blog",
+    "/admin/event",
+    "/admin/events",
+    "/admin/inquiries",
+    "/admin/inquiries/templates",
+    "/admin/keywords",
+    "/admin/rewards",
+    "/admin/scan-health",
+    "/admin/users",
+    "/admin/writing",
+    "/auth/extension",
+    "/auth/google",
+    "/blog",
+    "/blog/event/naeo-review-event",
+    "/blog/guide/ai-picks-guide",
+    "/blog/guide/channel-analysis-guide",
+    "/blog/guide/competitor-analysis-guide",
+    "/blog/guide/dashboard-guide",
+    "/blog/guide/golden-keywords-guide",
+    "/blog/guide/keyword-recommendation-guide",
+    "/blog/guide/today-action-guide",
+    "/blog/marketing/ai-briefing-cited-posts",
+    "/blog/marketing/ai-briefing-food-playbook",
+    "/blog/marketing/ai-briefing-image-citation",
+    "/blog/marketing/ai-briefing-tips-1-travel-life",
+    "/blog/marketing/ai-briefing-tips-2-life-culture",
+    "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
+    "/blog/marketing/golden-keywords",
+    "/blog/marketing/mate-free-diagnosis",
+    "/blog/marketing/what-is-ai-briefing",
+    "/blog/news/across-modu-startup-ditoday",
+    "/blog/news/across-modu-startup-mt",
+    "/blog/news/naver-mate-naeo-byline",
+    "/contact",
+    "/dashboard",
+    "/dashboard/ai-picks",
+    "/dashboard/competitors",
+    "/dashboard/events",
+    "/dashboard/mate",
+    "/dashboard/recommendations",
+    "/dashboard/settings",
+    "/dashboard/write",
+    "/dev/event-preview",
+    "/dev/nav-preview",
+    "/event",
+    "/event/naeo-review",
+    "/event/ranking-reward",
+    "/faq",
+    "/features",
+    "/guide/extension-publish",
+    "/guide/writing",
+    "/images",
+    "/login",
+    "/mate",
+    "/mate/s",
+    "/mcp",
+    "/oauth/consent",
+    "/payment/complete",
+    "/preview",
+    "/pricing",
+    "/privacy",
+    "/privacy/extension",
+    "/ranking",
+    "/refund",
+    "/social/aeo-carousel",
+    "/social/aeo-carousel/export",
+    "/social/banner-preview",
+    "/social/banner-preview/frame",
+    "/social/mate-ad",
+    "/social/mate-ad/export",
+    "/terms",
+    "/updates",
+    "/updates/2026-06-10-ranking-archive-hall-of-fame",
+    "/updates/2026-06-11-mate-free-diagnosis",
+    "/updates/2026-06-24-golden-keywords",
+    "/updates/2026-09-16-post-level-exposure",
+    "/youtube/aeo-intro"
+  ],
+  "dynamic": [
+    {
+      "path": "/blog/:category/:slug",
+      "regex": "^/blog/([^/]+)/([^/]+)$",
+      "paramNames": [
+        "category",
+        "slug"
+      ],
+      "hasOptionalPrefix": false
+    },
+    {
+      "path": "/dashboard/events/:slug",
+      "regex": "^/dashboard/events/([^/]+)$",
+      "paramNames": [
+        "slug"
+      ],
+      "hasOptionalPrefix": false
+    },
+    {
+      "path": "/event/:slug",
+      "regex": "^/event/([^/]+)$",
+      "paramNames": [
+        "slug"
+      ],
+      "hasOptionalPrefix": false
+    },
+    {
+      "path": "/p/:id/images",
+      "regex": "^/p/([^/]+)/images$",
+      "paramNames": [
+        "id"
+      ],
+      "hasOptionalPrefix": false
+    }
+  ]
+}

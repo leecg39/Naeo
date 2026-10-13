@@ -1,0 +1,43 @@
+{
+  "testedAt": "2026-10-13T06:07:01.360Z",
+  "origin": "http://127.0.0.1:3100",
+  "steps": [
+    "protected route redirects",
+    "UI registration",
+    "profile update",
+    "blog create",
+    "reload persistence",
+    "blog update",
+    "logout",
+    "login persistence",
+    "server restart persistence",
+    "blog delete confirmation",
+    "deletion persists after reload"
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "scrollWidth": 1425,
+      "profile": "DB 저장 검증",
+      "emptyBlogs": true,
+      "screenshotError": "CDP request timed out: Page.captureScreenshot"
+    },
+    {
+      "width": 768,
+      "height": 1000,
+      "scrollWidth": 753,
+      "profile": "DB 저장 검증",
+      "emptyBlogs": true,
+      "screenshotError": "CDP request timed out: Page.captureScreenshot"
+    },
+    {
+      "width": 390,
+      "height": 1000,
+      "scrollWidth": 390,
+      "profile": "DB 저장 검증",
+      "emptyBlogs": true,
+      "screenshotError": "CDP request timed out: Page.captureScreenshot"
+    }
+  ]
+}

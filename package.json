@@ -2,7 +2,38 @@
   "name": "naeo-local-clone",
   "version": "1.0.0",
   "private": true,
-  "scripts": {"dev": "next dev --hostname 127.0.0.1 --port 3000", "build": "next build", "start": "next start --hostname 127.0.0.1 --port 3000", "typecheck": "tsc --noEmit", "test": "node --test tests/*.test.mjs"},
-  "dependencies": {"next": "16.4.0", "react": "19.3.0", "react-dom": "19.3.0", "clsx": "^2.1.1", "tailwind-merge": "^3.3.1", "lucide-react": "^0.577.0"},
-  "devDependencies": {"typescript": "^5.9.3", "@types/node": "^22.0.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "tailwindcss": "4.3.3", "@tailwindcss/postcss": "4.3.3", "cheerio": "^1.2.0"}
+  "engines": { "node": "^22.16.0 || >=24.0.0" },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3000",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs && node --import tsx --test tests/server/*.test.ts",
+    "test:server": "node --import tsx --test tests/server/*.test.ts",
+    "admin": "node --import tsx scripts/admin.ts",
+    "lint": "eslint src/server src/components/account src/lib/api-client.ts src/app/api src/app/login src/app/dashboard/settings tests/server scripts/admin.ts"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "cheerio": "^1.2.0",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "tailwindcss": "4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.2"
+  }
 }

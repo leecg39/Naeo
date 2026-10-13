@@ -1,0 +1,758 @@
+{
+  "scope": {
+    "origin": "https://www.naeo.kr",
+    "captured_manifest": "evidence/public-manifest.json",
+    "analysis": "public delivered HTML/JS/CSS static only",
+    "api_requests_performed": false,
+    "evidence_ids": "STATIC-* are local references, not REA engine-issued IDs",
+    "byte_offsets": "0-based UTF-8 byte offset into retained original JS",
+    "supplementary_browser_observation": "evidence/mcp-alternate-state.json: /api/mcp URL and OAuth UI observed by main investigator"
+  },
+  "sources_scanned": 69,
+  "endpoints": [
+    {
+      "method": "GET",
+      "endpoint": "/api/auth/naver/login",
+      "request_fields": [
+        "next?",
+        "reprompt?=1"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/3mddtkjn2amut.js",
+      "byte_offset": 27837,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "navigation URL; redirect target server implementation unknown"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/auth/logout",
+      "request_fields": [],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/2dlrhsdlhy7es.js",
+      "byte_offset": 11102,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "On failure fallback Supabase auth.signOut"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/blog/feedback",
+      "request_fields": [
+        "blogId",
+        "dev?=1",
+        "refresh?=1"
+      ],
+      "response_fields_consumed": [
+        "status",
+        "rediagnoseDenied",
+        "message?",
+        "error?",
+        "newPostCount",
+        "rediagnoseRemaining",
+        "nextRediagnoseAt"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/3tsgb305l64yk.js",
+      "byte_offset": 37967,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "refresh flag triggers rediagnosis path; no live call performed"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/blog/rss-posts",
+      "request_fields": [
+        "query.dev?=1",
+        "JSON.blogId"
+      ],
+      "response_fields_consumed": [
+        "posts[].title",
+        "totalRss"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/18-yqxc3foraf.js",
+      "byte_offset": 18054,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": ""
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/blog/save-url",
+      "request_fields": [
+        "JSON.newUrl"
+      ],
+      "response_fields_consumed": [
+        "message?"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/18-yqxc3foraf.js",
+      "byte_offset": 26283,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Success triggers Next router.refresh"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/archive-periods",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "periods"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/1v-9ct5h5ezgw.js",
+      "byte_offset": 37078,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "cache:no-store"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking",
+      "request_fields": [
+        "period=weekly default",
+        "key?",
+        "category?",
+        "mate?=1",
+        "sort?",
+        "full?=1",
+        "limit?"
+      ],
+      "response_fields_consumed": [
+        "rankings",
+        "totalCount",
+        "globalTotalCount",
+        "pageSize",
+        "lastRefreshedAt",
+        "archive",
+        "thresholds"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/1v-9ct5h5ezgw.js",
+      "byte_offset": 37499,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "cache:no-store; full takes precedence over limit"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/my",
+      "request_fields": [
+        "blogId",
+        "period=weekly default",
+        "total?"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/1v-9ct5h5ezgw.js",
+      "byte_offset": 40300,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Returns parsed JSON without full schema in helper; null on failure"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/new-entries",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "count",
+        "total"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/15lngt390ckhv.js",
+      "byte_offset": 659,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": ""
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/champions",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "champions[].yearMonth",
+        "champions[].category",
+        "champions[].compositeScore"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/15lngt390ckhv.js",
+      "byte_offset": 33323,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": ""
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/history",
+      "request_fields": [
+        "blog_id",
+        "period",
+        "days=30",
+        "category"
+      ],
+      "response_fields_consumed": [
+        "history[].recorded_at",
+        "history[].rank"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/15lngt390ckhv.js",
+      "byte_offset": 40500,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": ""
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/my-rank-context",
+      "request_fields": [
+        "blog_id",
+        "period_type"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/15lngt390ckhv.js",
+      "byte_offset": 40866,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "weekly->week, monthly->month, all->null client mapping"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/ranking/topic-counts",
+      "request_fields": [
+        "period"
+      ],
+      "response_fields_consumed": [
+        "counts",
+        "averages"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/15lngt390ckhv.js",
+      "byte_offset": 46896,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": ""
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/payment/start-trial",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "success",
+        "message",
+        "trialEnd"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "byte_offset": 16696,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "403/409 ineligible path; 7-day client constant"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/payment/subscribe",
+      "request_fields": [
+        "PCD_PAY_RST",
+        "PCD_PAY_OID",
+        "PCD_PAY_TOTAL",
+        "PCD_PAYER_ID",
+        "PCD_PAY_CARDNAME",
+        "PCD_PAY_CARDNUM",
+        "PCD_PAY_CARDTRADENUM",
+        "PCD_PAY_TIME",
+        "PCD_PAY_MSG",
+        "plan",
+        "attribution"
+      ],
+      "response_fields_consumed": [
+        "success",
+        "message",
+        "subscriptionId"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "byte_offset": 15802,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Client callback only; server verification unknown; paid UI blocked by NEW_SALES_PAUSED"
+    },
+    {
+      "method": "PROVIDER_RETURN_METHOD_UNKNOWN",
+      "endpoint": "/api/payment/payple-return",
+      "request_fields": [],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "byte_offset": 24752,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Payple PCD_RST_URL configured for iOS branch; HTTP method not visible"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/inquiry",
+      "request_fields": [
+        "type",
+        "email",
+        "subject?",
+        "message"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/3oi_x0w84bo6b.js",
+      "byte_offset": 14590,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "email non-empty and message>=5 chars client check; HTTP429 UI handled"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/track",
+      "request_fields": [
+        "visitor_id",
+        "path",
+        "referrer?",
+        "utm_source?",
+        "utm_medium?",
+        "utm_campaign?",
+        "utm_content?",
+        "utm_term?",
+        "gclid?",
+        "fbclid?",
+        "first_touch?"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "byte_offset": 54254,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "fetch keepalive; UUID persisted in localStorage"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/api/track/dwell",
+      "request_fields": [
+        "view_id",
+        "visitor_id",
+        "path",
+        "dwell_ms"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "byte_offset": 54893,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "navigator.sendBeacon on visibilitychange/pagehide"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/announcements",
+      "request_fields": [
+        "target=dashboard|landing"
+      ],
+      "response_fields_consumed": [
+        "announcements"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "byte_offset": 69224,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "dismissed IDs kept per day in localStorage"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/updates/content/{slug}",
+      "request_fields": [
+        "path.encodeURIComponent(slug)"
+      ],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/2ztmp2vsd6hu1.js",
+      "byte_offset": 27763,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Route seen; deeper response schema not established"
+    },
+    {
+      "method": "GET",
+      "endpoint": "/api/write/tokens",
+      "request_fields": [],
+      "response_fields_consumed": [
+        "enabled",
+        "available"
+      ],
+      "file": "sources/assets/_next/static/immutable/chunks/37-wi3ifroeel.js",
+      "byte_offset": 37307,
+      "evidence_type": "static-callsite",
+      "runtime_verified": false,
+      "notes": "Query key write-token-status; staleTime60000; refetchOnWindowFocus false"
+    },
+    {
+      "method": "MCP_TRANSPORT_METHODS_UNKNOWN",
+      "endpoint": "https://www.naeo.kr/api/mcp",
+      "request_fields": [],
+      "response_fields_consumed": [],
+      "file": "sources/assets/_next/static/immutable/chunks/1p3me3ez20ug8.js",
+      "byte_offset": 16194,
+      "evidence_type": "configuration-and-browser-ui",
+      "runtime_verified": false,
+      "notes": "OAuth user guidance and connection URL observed. No MCP request/tools schema examined."
+    }
+  ],
+  "models": {
+    "profile_selected_columns": [
+      "nickname",
+      "avatar_url",
+      "main_blog_url",
+      "blog_title",
+      "blog_nickname",
+      "blog_categories",
+      "ranking_category",
+      "blog_crawled_at",
+      "plan",
+      "plan_source",
+      "plan_expires_at",
+      "credits",
+      "credits_cap",
+      "credits_monthly",
+      "credits_reset_at",
+      "plan_started_at",
+      "ranking_public"
+    ],
+    "ranking_item_fields": [
+      "rankings",
+      "blog_id",
+      "blog_nickname",
+      "avatar_url",
+      "citation_count",
+      "text_citation_count",
+      "image_citation_count",
+      "image_citation_score",
+      "avg_rank_position",
+      "rank",
+      "rank_change",
+      "blog_categories",
+      "search_exposed_count",
+      "total_analyzed_count",
+      "ranking_public",
+      "main_blog_url",
+      "composite_score",
+      "composite_rank",
+      "composite_rank_change",
+      "ai_citation_score",
+      "search_exposure_score",
+      "keyword_strategy_score",
+      "activity_score",
+      "is_naver_mate",
+      "naver_mate_topic",
+      "naver_mate_cited",
+      "naver_mate_month",
+      "weekly_win_count",
+      "last_month_rank",
+      "last_month_key",
+      "ach_weeks_count",
+      "ach_best_prev_rank",
+      "ach_latest_rank",
+      "ach_latest_change",
+      "ach_prev_change",
+      "_change",
+      "ach_latest_citations",
+      "ach_prev_citations",
+      "ach_first_week_start"
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "STATIC-001",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1uu3s0o-rf7xa.js",
+      "sha256": "54ebe479ebf72e2d8f2aecd67f4ffb7355a857fbf800a093ea98798fc91d2b28",
+      "byte_offset": 1806,
+      "anchor": "window.next={",
+      "excerpt": "Child(i)})),Promise.resolve()).catch(e=>{console.error(e)}).then(()=>{n()}):n()}window.next={version:\"16.3.4\",appDir:!0},(\"function\"==typeof n.default||\"object\"==typeof n.default&&null!==n.default)&&void 0===n.default.__esModule&&(Object.defineProperty(n.default,\"__esModule\",{value:!0}),Object.assign(n.default,n),t.exports=n.default)},198569,(e,t,n)=>{\"use strict\";let r,a,i,o;Object.defineProperty",
+      "observation": "Next 16.3.4 App Router"
+    },
+    {
+      "evidence_id": "STATIC-002",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3gfy5frm74y0q.js",
+      "sha256": "3ea739346ed11c0198de5212c1e07e1e8ad4563aaf6cd59409a43da3f8c473ca",
+      "byte_offset": 20230,
+      "anchor": "r.version=\"19.3.0",
+      "excerpt": "mState(e,t,r)},r.useFormStatus=function(){return s.H.useHostTransitionStatus()},r.version=\"19.3.0-canary-cbb046ab-20260731\"},174080,(e,t,r)=>{\"use strict\";!function e(){if(\"u\">typeof __REACT_DEVTOOLS_GLOBAL_HOOK__&&\"function\"==typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE)try{__REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(e)}catch(e){console.error(e)}}(),t.exports=e.r(818800)},745689,(e,t,r)=>{\"use stri",
+      "observation": "React canary version"
+    },
+    {
+      "evidence_id": "STATIC-003",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0miej230mkkvi.js",
+      "sha256": "9961f9ca44e6c1dbe0ad97a7314fcc39bf136fe98a8bdfd086f96aca113ce170",
+      "byte_offset": 181659,
+      "anchor": "supabase-ssr/0.8.0 createBrowserClient",
+      "excerpt": "),n=new rb(e,t,{...void 0,global:{...void 0,headers:{...void 0,\"X-Client-Info\":\"supabase-ssr/0.8.0 createBrowserClient\"}},auth:{...void 0,...null,flowType:\"pkce\",autoRefreshToken:rO(),detectSessionInUrl:rO(),persistSession:!0,storage:i,...null}});return s&&(r=",
+      "observation": "Supabase SSR 0.8.0 PKCE"
+    },
+    {
+      "evidence_id": "STATIC-004",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/2dlrhsdlhy7es.js",
+      "sha256": "a650363f8b87df52b9b1c0299665fdb3900a4fdf2c97652327962ea14330cfa9",
+      "byte_offset": 8434,
+      "anchor": "let i={session:null",
+      "excerpt": "71,e=>{\"use strict\";var t=e.i(843476),o=e.i(271645),a=e.i(511795),r=e.i(768834);let i={session:null,user:null,profile:null,isLoading:!0,isLoggedIn:!1,userEmail:null},n=(0,r.create)(e=>({...i,setSession:t=>e({session:t}),setUser:t=>e({user:t,isLoggedIn:!!t,userEmail:t?.email??null}),setProfile:t=>e({profile:t}),setIsLoading:t=>e({isLoading:t}),reset:()=>e(i)}));var s=e.i(220911),l=e.i(609978);let c=(0,o.createContext)(void 0),u={session:null,user:{id:l.DEMO_USER_ID,email:l.DEMO_EMAIL,app_metadata:{},user_metadata:{},aud:\"authenticated\",created_at:new Date(Date.now()-2592e6).toISOString()},userEmail:l.DEMO_EMAIL,profile:l.DEMO_PROFILE,isLoggedIn:!0,isLoading:!1,handleLogout",
+      "observation": "Auth store context and state"
+    },
+    {
+      "evidence_id": "STATIC-005",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/2dlrhsdlhy7es.js",
+      "sha256": "a650363f8b87df52b9b1c0299665fdb3900a4fdf2c97652327962ea14330cfa9",
+      "byte_offset": 9604,
+      "anchor": ".from(\"profiles\")",
+      "excerpt": ");(0,o.useEffect)(()=>{let e=!0,t=async(o,a=0)=>{try{let{data:r,error:i}=await s.from(\"profiles\").select(\"nickname, avatar_url, main_blog_url, blog_title, blog_nickname, blog_categories, ranking_category, blog_crawled_at, plan, plan_source, plan_expires_at, credits, credits_cap, credits_monthly, credits_reset_at, plan_started_at, ranking_public\").eq(\"id\",o).maybeSingle();if(i){console.error(\"[AuthProvider] fetchProfile error:\",i.message),a<2&&e?setTimeout(()=>t(o,a+1),0===a?300:900):e&&f(!1);return}e&&(r&&k(r),D.current=!0,f(!1))}catch(r){r?.name!==\"AbortError\"&&(",
+      "observation": "Profile direct read"
+    },
+    {
+      "evidence_id": "STATIC-006",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "sha256": "deb672e37e607d2417c480f002943d152bbf78bc847dc23b0a3d69298c9a8762",
+      "byte_offset": 58729,
+      "anchor": "new r.QueryClient",
+      "excerpt": "271645);e.s([\"QueryProvider\",0,function({children:e}){let[n]=(0,i.useState)(()=>new r.QueryClient({defaultOptions:{queries:{staleTime:6e4,retry:1}}}));return(0,t.jsx)(s.QueryClientProvider,{client:n,children:e})}])},673760,e=>{\"use strict\";let t={year:\"numeric\",month:\"long\",day:\"numeric\"};e.s([\"ALL_UPDATE_TAGS\",0,[\"새 기능\",\"개선\",\"버그 수정\"],\"BRAND_COLOR\",0,\"#03C75A\",\"BRAND_COLOR_HOVER\",0,\"#029f48\",\"COPY",
+      "observation": "React Query defaults 60sec retry1"
+    },
+    {
+      "evidence_id": "STATIC-007",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "sha256": "deb672e37e607d2417c480f002943d152bbf78bc847dc23b0a3d69298c9a8762",
+      "byte_offset": 56315,
+      "anchor": "\"data-emotion\"",
+      "excerpt": "Fragment,{children:[n.map(({name:e,style:r})=>(0,t.jsx)(\"style\",{nonce:a?.nonce,\"data-emotion\":`${u.cache.key}-global ${e}`,dangerouslySetInnerHTML:{__html:r}},e)),s&&(0,t.jsx)(\"style\",{nonce:a?.nonce,\"data-emotion\":i,dangerouslySetInnerHTML:{__html:s}})]})}),(0,t.jsx)(o,{value:u.cache,children:l})}var o=e.i(157801),l=e.i(635642),u=e.i(594425);let c=\"function\"==typeof(0,l.globalCss)({}),h=(e,t=!1)",
+      "observation": "Emotion cache + MUI server styles"
+    },
+    {
+      "evidence_id": "STATIC-008",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3tsgb305l64yk.js",
+      "sha256": "7e70afd25b22abf60306f31364f861c287c122bde398cfad761918096c7a53b2",
+      "byte_offset": 37967,
+      "anchor": "/api/blog/feedback?",
+      "excerpt": "rams({blogId:e});t&&n.set(\"dev\",\"1\"),r&&n.set(\"refresh\",\"1\");try{s=await fetch(`/api/blog/feedback?${n.toString()}`)}catch{throw Error(i)}let l=await s.json().catch(()=>null);if(!s.ok)throw Error(l?.message||l?.error||i);if(!l)throw Error(i);return l}e.s([\"useBlogFeedback\",0,function(e,i){let n=i?.dev??!1,l=(0,r.useQueryClient)(),{data:o,isLoading:a,error:u,refetch:d}=(0,t.useQuery)({queryKey:[\"bl",
+      "observation": "Blog feedback query and refresh"
+    },
+    {
+      "evidence_id": "STATIC-009",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3tsgb305l64yk.js",
+      "sha256": "7e70afd25b22abf60306f31364f861c287c122bde398cfad761918096c7a53b2",
+      "byte_offset": 38274,
+      "anchor": "queryKey:[\"blog-feedback\"",
+      "excerpt": "l=(0,r.useQueryClient)(),{data:o,isLoading:a,error:u,refetch:d}=(0,t.useQuery)({queryKey:[\"blog-feedback\",e,n],queryFn:()=>s(e,n),enabled:!!e,staleTime:1/0,gcTime:18e5,retry:1}),c=async()=>{if(!e)return;let t=await s(e,n,!0);if(\"ok\"===t.status&&t.rediagnoseDenied)throw l.setQueryData([\"blog-feedback\",e,n],t),Error(\"지금은 재진단할 수 없어요. 안내된 시점에 다시 시도해 주세요.\");if(\"ok\"!==t.status)throw Error(\"분석할 수 있는 글이 부족해 기존 진단을 유지했어요.\");l.setQueryData([\"blog-feedback\",e,n],t)};return{feedback:o??null,loading:a,error:u?u.message:null,refetch:d,rediagnose:c}}])},328664,e=>{\"use strict\";e.s([\"PAID_REDIAGNOSE_MONTHLY_LIMIT\",0,4,\"REDIAGNOSE_CONFIRM_BELOW_POSTS\",0,3,\"REDIAGNOSE_RECOMMENDED_NEW_POSTS\",0,15])},433481,817389,e=>{\"use strict\";var t=e.i",
+      "observation": "Infinite staleTime, 30min gc, retry1"
+    },
+    {
+      "evidence_id": "STATIC-010",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/18-yqxc3foraf.js",
+      "sha256": "d5356331bb5da3098eec024e897a9f8089145f19c8a91a79f7a0262c44b40736",
+      "byte_offset": 18054,
+      "anchor": "/api/blog/rss-posts",
+      "excerpt": ">clearInterval(t)},[]),(0,a.useEffect)(()=>{if(!e)return;let t=!1;return fetch(`/api/blog/rss-posts${n?\"?dev=1\":\"\"}`,{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({blogId:e})}).then(e=>e.ok?e.json():null).then(e=>{!t&&e?.posts&&(u(e.posts.map(e=>e.title).slice(0,10)),p(e.totalRss??e.posts.length))}).catch(()=>{}),()=>{t=!0}},[e,n]);let f=Math.round(92*(1-Math.pow(1",
+      "observation": "RSS post title preview"
+    },
+    {
+      "evidence_id": "STATIC-011",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/18-yqxc3foraf.js",
+      "sha256": "d5356331bb5da3098eec024e897a9f8089145f19c8a91a79f7a0262c44b40736",
+      "byte_offset": 18347,
+      "anchor": "Math.round(92*",
+      "excerpt": "(0,10)),p(e.totalRss??e.posts.length))}).catch(()=>{}),()=>{t=!0}},[e,n]);let f=Math.round(92*(1-Math.pow(1-Math.min(1,c/32e3),2))),[y,H]=(0,a.useState)(null);r&&null==y&&H({at:c,from:f}),(0,a.useEffect)(()=>{if(!r||!s||!y)return;let e=setTimeout(s,y.at<2e3?0:1300);return()=>clearTimeout(e)},[r,s,y]);let A=y?Math.min(1,(c-y.at)/600):0,k=y?Math.round(y.from+(100-y.from)*A):f,v=!!r||c>=16e3,V=x.length>0&&c>=2500?Math.min(Math.floor((c-2500)/1300),x.length-1):-1,w=!v&&V>=0?x[V]:null,S=v?r?ee.length:Math.min(Math.floor((c-16e3)/1800),ee.length-1):-1,Z=w?`「${w}」 읽는 중`:\"블로그 최근 글을",
+      "observation": "Time-driven progress toward 92%"
+    },
+    {
+      "evidence_id": "STATIC-012",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3tsgb305l64yk.js",
+      "sha256": "7e70afd25b22abf60306f31364f861c287c122bde398cfad761918096c7a53b2",
+      "byte_offset": 38861,
+      "anchor": "PAID_REDIAGNOSE_MONTHLY_LIMIT",
+      "excerpt": "rror:u?u.message:null,refetch:d,rediagnose:c}}])},328664,e=>{\"use strict\";e.s([\"PAID_REDIAGNOSE_MONTHLY_LIMIT\",0,4,\"REDIAGNOSE_CONFIRM_BELOW_POSTS\",0,3,\"REDIAGNOSE_RECOMMENDED_NEW_POSTS\",0,15])},433481,817389,e=>{\"use strict\";var t=e.i(843476),r=e.i(271645),i=e.i(846932),s=e.i(88653),n=e.i(387652),l=e.i(772328),o=e.i(210557),a=e.i(819646),u=e.i(126863),d=e.i(769464);let c=new Map([[\"bold\",r.create",
+      "observation": "Rediagnosis client constants"
+    },
+    {
+      "evidence_id": "STATIC-013",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/223o177f4lxm0.js",
+      "sha256": "6606d87d146e0970dd1bd733ff2f4f1f2e0c6b091005dbaaec4a292107c415ba",
+      "byte_offset": 19285,
+      "anchor": "e=S[M.key]",
+      "excerpt": "e,{topicKey:I,topic:M}=(0,v.useTopicV2)(),P=o.useMemo(()=>{let e,t,o,n,r;return e=S[M.key],o=(t=M.diagnosis.map(e=>e.total>0?Math.round(e.matched/e.total*100):0)).indexOf(Math.max(...t)),n=t.indexOf(Math.min(...t)),(r=M.diagnosis.map((r,i)=>({label:C[i],kind:\"judged\",matched:r.matched,total:r.total,pct:t[i],evidence:\"\",...i===o?{good:e.bestGood}:{},...i===n?{lack:e.worstLack}:{}}))).sort((e,t)=>t.pct-e.pct),{status:\"ok\",topic:M.label,summary:e.summary,checklist:r,wellDone:e.wellDone,missing:e.missing,offTopicPct:null,consistencyNote:\"\",nextAction:e.nextAction,strengths:[],weaknesses:[],postFeedback:[],analyzedPosts:[],writingExamples:[],benchmark:null,topicDistribution:[],topicGroup:[],declaredTopics:[],citationFormula:\"\",playbookTopic:null,modelSentences:[],imageExamples:[],clickThrough:{verdict:\"\",hooks:[]},postCount:M.analyzedPosts}},[M]),L=o.useMemo(()=>[{key:\"summary\",label:\"한눈 진단\",node:(0,t.jsx)(b.SummarySlide,{feedback:P})},{key:\"standard\",label:\"공식 5가지 기준\",node:(0,t.jsx)(b.StandardSlide,{items:P.checklist,compact:E})},{key:\"proscons\",label:\"잘하는 것과 바꿀 것\",node:(0,t.jsx)(b.ProsConsSlide,{feedback:P,compact:E})}],[P,E]),[T,$]=o.useState(0),[z,D]=o.useState(1),[V,W]=o.useState(!1),N=o.useRef(null),O=(0,x.useInView)(N,{amount:.35}),F=(0,x.useInView)(N,{once:!0,margin:\"0px 0px 120px 0px\"}),H=o.useCallback(e=>{D(e),$(t=>(t+e+L.length)%L.length)},[L.length]);o.useEffect(()=>{$(0),D(1)},[I]);let B=(0,v.useTopicStoreV2)(e=>e.resetRotationPhase);return o.useEf",
+      "observation": "Landing diagnosis preview built from topic fixture"
+    },
+    {
+      "evidence_id": "STATIC-014",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1v-9ct5h5ezgw.js",
+      "sha256": "065dd4e8100dcf3ed4f36023050f694dbfcf5806365a8c4a186d1e93f91abec5",
+      "byte_offset": 37876,
+      "anchor": "rankings:(n??[])",
+      "excerpt": "100),lastRefreshedAt:\"string\"==typeof c?c:null,archive:d??null,thresholds:u??{},rankings:(n??[]).map(e=>({blog_id:String(e.blog_id??\"\"),blog_nickname:e.blog_nickname??null,avatar_url:e.avatar_url??null,citation_count:Number(e.citation_count??0),text_citation_count:Number(e.text_citation_count??0),image_citation_count:Number(e.image_citation_count??0),image_citation_score:Number(e.image_citation_score??0),avg_rank_position:null!=e.avg_rank_position?Number(e.avg_rank_position):null,rank:Number(e.rank??0),rank_change:Number(e.rank_change??0),blog_categories:e.blog_categories??[],search_exposed_count:Number(e.search_exposed_count??0),total_analyzed_count:Number(e.total_analyzed_count??0),ranking_public:!0===e.ranking_public,main_blog_url:e.main_blog_url??null,composite_score:null!=e.composite_score?Number(e.composite_score):void 0,composite_rank:null!=e.composite_rank?Number(e.composite_rank):void 0,composite_rank_change:null!=e.composite_rank_change?Number(e.composite_rank_change):void 0,ai_citation_score:null!=e.ai_citation_score?Number(e.ai_citation_score):void 0,search_exposure_score:null!=e.search_exposure_score?Number(e.search_exposure_score):void 0,keyword_strategy_score:null!=e.keyword_strategy_score?Number(e.keyword_strategy_score):void 0,activity_score:null!=e.activity_score?Number(e.activity_score):void 0,is_naver_mate:!0===e.is_naver_mate,naver_mate_topic:e.naver_mate_topic??null,naver_mate_cited:null!=e.naver_mate_cited?Number(e.naver_mate_cited):null,naver_mate_month:e.naver_mate_month??null,weekly_win_count:null!=e.weekly_win_count?Number(e.weekly_win_count):void 0,last_month_rank:null!=e.last_month_rank?Number(e.last_month_rank):null,last_month_key:e.last_month_key??null,ach_weeks_count:null!=e.ach_weeks_count?Number(e.ach_weeks_count):0,ach_best_prev_rank:null!=e.ach_best_prev_rank?Number(e.ach_best_prev_rank):null,ach_latest_rank:null!=e.ach_latest_rank?Number(e.ach_latest_rank):null,ach_latest_change:null!=e.ach_latest_change?Number(e.ach_latest_change):null,ach_prev_change:null!=e.ach_prev_change?Number(e.ach_prev_change):null,ach_prev2_change:null!=e.ach_prev2_change?Number(e.ach_prev2_change):null,ach_latest_citations:null!=e.ach_latest_citations?Number(e.ach_latest_citations):null,ach_prev_citations:null!=e.ach_prev_citations?Number(e.ach_prev_citations):null,ach_first_week_start:e.ach_first_week_start??null}))}},a=async(e,t=\"weekly\",r)=>{let a=new URLSearchParams({blogId:e,period:t});null!=r&&a.set(\"total\",String(r));try{let e=await fetch(`/api/ranking/my?${a.toString()}`);if(!e.ok)return null;return await e.json()}catch{return null}};e.s([\"NAVER_TOPICS\",0,[\"전체\",\"문학·책\",\"영화\",\"미술·디자인\",\"공연·전시\",\"음악\",\"드라마\",\"스타·연예인\",\"만화·애니\",\"방송\",\"일상·생각\",\"육아·결혼\",\"반려동물\",\"좋은글·이미지\",\"패션·미용",
+      "observation": "Ranking record normalization"
+    },
+    {
+      "evidence_id": "STATIC-015",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1v-9ct5h5ezgw.js",
+      "sha256": "065dd4e8100dcf3ed4f36023050f694dbfcf5806365a8c4a186d1e93f91abec5",
+      "byte_offset": 11773,
+      "anchor": "queryKey:[\"rankings\"",
+      "excerpt": "score\":e),_(200)},[]),R=(0,n.useCallback)(()=>_(e=>e+200),[]),C=(0,i.useQuery)({queryKey:[\"rankings\",h,g,y?e:null,a,v.fetchFull,v.fetchSort,F?0:x],queryFn:()=>(0,l.fetchAllRankings)(h,g,{limit:x,full:v.fetchFull,category:y?e:null,mateOnly:a,sort:v.fetchSort}),staleTime:3e5,placeholderData:e=>e,enabled:!u}),I=(0,i.useQuery)({queryKey:[\"rankings\",h,null,null,!1,!1,null,200],queryFn:()=>(0,l.fetchAllRankings)(h,null,{limit:200}),staleTime:3e5,placeholderData:e=>e,enabled:k}),D=(0,i.useQuery)({queryKey:[\"ranking-archive-periods\"],queryFn:l.fetchArchivePeriods,staleTime:18e5,enabled:!u}),j=(0,i.useQuery)({queryKey:[\"myBlogRank\",t,h],queryFn:()=>(0,l.fetchMyBlogRank)(t,h,C.data?.globalTotalCount),enabled:!!t&&C.isSuccess&&!u&&!g,staleTime:3e5}),T=u?(0,o.getDemoRankingResponse)(h):null,E=T??C.data,A=!u&&C.isLoading,Q=u?null:C.error,M=T?.lastRefreshedAt??C.data?.lastRefreshedAt??null,B=(0,n.useMemo)(()=>[...(0,l.filterRankingsByTopic)(E?.rankings??[],e)].sort((e,t)=>(e.composite_rank??e.rank)-(t.composite_rank??t.rank)),[E?.rankings,e]),O=(0,n.useMemo)(()=>k?E?.rankings??[]:\"composite_score\"===m?B:[...B].sort((e,t)=>{let r=e[m]??0;return(t[m]??0)-r}),[k,E?.rankings,B,m]),N=(0,n.useMemo)(()=>k?(I.data?.rankings??[]).slice(0,3):B.slice(0,3),[k,I.data?.rankings,B]),$=(0,n.useMemo)(()=>{let e=\"weekly\"===h?\"week\":\"monthly\"===h?\"month\":null;return e?(D.data??[]).filter(t=>t.periodType===e).sort((e,t)=>e.periodStart.localeCompare(t.periodStart)):[]},[D.data,h]),z=M?new Date(M):null,P=E?.totalCount??0,{hasMore:U,remaining:W}=function(e){if(e.loadAll)return{hasMore:!1,re",
+      "observation": "Ranking query caching and demo substitution"
+    },
+    {
+      "evidence_id": "STATIC-016",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3mddtkjn2amut.js",
+      "sha256": "d2e5531bd6046d1d31d74406eb25e07a6ee48c1b909bc2891b6dc354c4a50b28",
+      "byte_offset": 21478,
+      "anchor": "C.auth.signInWithPassword",
+      "excerpt": "!R)return void S(\"이메일과 비밀번호를 입력하세요.\");$(!0),S(\"\");try{let{data:e,error:t}=await C.auth.signInWithPassword({email:w,password:R});if(t)throw t;e.session&&((0,h.trackEmailLogin)(),x(),b?b(e.session):window.location.href=y||\"/dashboard\")}catch(e){S(e.message||\"로그인 중 오류가 발생했습니다.\")}finally{$(!1)}},D=async(e,t=!1)=>{try{let r=y?`?next=${encodeURIComponent(y)}`:\"\";if(\"naver\"===e){window.location.href=(0,m",
+      "observation": "Email login implementation"
+    },
+    {
+      "evidence_id": "STATIC-017",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/3mddtkjn2amut.js",
+      "sha256": "d2e5531bd6046d1d31d74406eb25e07a6ee48c1b909bc2891b6dc354c4a50b28",
+      "byte_offset": 22111,
+      "anchor": "C.auth.signInWithOAuth",
+      "excerpt": "(\"guide\"===o.type)return void _({appLabel:o.appLabel,url:a});let{error:l}=await C.auth.signInWithOAuth({provider:e,options:{redirectTo:`${window.location.origin}/auth/callback${r}${r?\"&\":\"?\"}p=google`}});if(l)throw l}catch(e){S(e.message||\"소셜 로그인 중 오류가 발생했습니다.\")}};return(0,t.jsx)(o.default,{open:e,onClose:x,maxWidth:\"xs\",fullWidth:!0,\"aria-labelledby\":\"login-dialog-title\",children:(0,t.jsxs)(l.def",
+      "observation": "Google Supabase OAuth callback"
+    },
+    {
+      "evidence_id": "STATIC-018",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "sha256": "547bbeb4a3e9ff671ab0c2885ce85ac31ecad07df918dbf4dbecf70bab851d3a",
+      "byte_offset": 42408,
+      "anchor": "\"NEW_SALES_PAUSED\",0,!0",
+      "excerpt": ",_&&S(!0)}}),(0,t.jsx)(m.default,{})]})}],769106)},247723,e=>{\"use strict\";e.s([\"NEW_SALES_PAUSED\",0,!0,\"NEW_SALES_PAUSED_MESSAGE\",0,\"지금은 신규 결제를 일시 중지했어요.\",\"PLAN_CONFIG\",0,{free:{name:\"무료\",price:0,initialCredits:10,monthlyCredits:5,creditsCap:10,autoScan:!1,maxBlogs:1},basic:{name:\"베이직\",price:19900,initialCredits:50,monthlyCredits:50,creditsCap:50,autoScan:!0,maxBlogs:1}}])},929573,e=>{\"use strict\";e.s([\"FOOTER_LINKS\",0,{legal:[{label:\"이용약관\",href:\"/terms\"},{label:\"개인정보처리방침\",href:\"/privacy\"},{label:\"환불규정\",href:\"/refund\"}],support:[{label:\"FAQ\",href:\"/faq\"},{label:\"문의하기\",href:\"/contact\"},{label:\"매거진\",href:\"/blog\"},{label:\"업데이트\",href:\"/updates\"}]},\"NAV_LINKS\",0,[{label:\"AI 글",
+      "observation": "New sales paused and plan settings"
+    },
+    {
+      "evidence_id": "STATIC-019",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "sha256": "547bbeb4a3e9ff671ab0c2885ce85ac31ecad07df918dbf4dbecf70bab851d3a",
+      "byte_offset": 21552,
+      "anchor": "!Z&&E.NEW_SALES_PAUSED",
+      "excerpt": "m:\"none\",color:\"text.secondary\"},children:\"체험 없이 바로 결제하기\"})]}),!J&&\"ready\"===x&&!Z&&E.NEW_SALES_PAUSED&&(0,t.jsxs)(o.default,{sx:{py:4,textAlign:\"center\"},role:\"status\",children:[(0,t.jsx)(l.default,{variant:\"body1\",fontWeight:700,sx:{mb:3},children:E.NEW_SALES_PAUSED_MESSAGE}),(0,t.jsx)(n.default,{variant:\"contained\",fullWidth:!0,size:\"large\",onClick:Q,sx:{py:1.5,fontWeight:700,borderRadius:2,bgc",
+      "observation": "UI blocking branch for new paid sales"
+    },
+    {
+      "evidence_id": "STATIC-020",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "sha256": "547bbeb4a3e9ff671ab0c2885ce85ac31ecad07df918dbf4dbecf70bab851d3a",
+      "byte_offset": 15802,
+      "anchor": "/api/payment/subscribe",
+      "excerpt": "rent&&p(\"processing\");let t=(0,R.getStoredAttribution)();try{let r=await fetch(\"/api/payment/subscribe\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({PCD_PAY_RST:e.PCD_PAY_RST,PCD_PAY_OID:e.PCD_PAY_OID,PCD_PAY_TOTAL:e.PCD_PAY_TOTAL,PCD_PAYER_ID:e.PCD_PAYER_ID,PCD_PAY_CARDNAME:e.PCD_PAY_CARDNAME,PCD_PAY_CARDNUM:e.PCD_PAY_CARDNUM,PCD_PAY_CARDTRADENUM:e.PCD_PAY_CARDTRADENUM,PCD_PAY_TIME:e.PCD_PAY_TIME,PCD_PAY_MSG:e.PCD_PAY_MSG,plan:i.id,attribution:t})}),a=await r.json();if(!r.ok||!a.success)throw Error(a.message||\"구독 처리에 실패했습니다.\");K.current&&p(\"done\"),(0,w.trackPurchase)(i.id,i.price,a.subscriptionId,t??void 0),c&&await c()}catch(e){if(K.current){let t=e instanceof Error?e.message:\"서버 오류가 발생했습니다.\";b(t),p(\"error\"),(0,w.trackPaymentError)(i.id,t)}}},q=async()=>{if(!H.current){H.current=!0,K.current&&p(\"processing\"),(0,w.trackEvent)(\"trial_start_click\",{plan:i.id});try{let e=await fetch(\"/api/payment/start-trial\",{method:\"POST\"}),t=await",
+      "observation": "Payment subscribe callback"
+    },
+    {
+      "evidence_id": "STATIC-021",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "sha256": "547bbeb4a3e9ff671ab0c2885ce85ac31ecad07df918dbf4dbecf70bab851d3a",
+      "byte_offset": 16696,
+      "anchor": "/api/payment/start-trial",
+      "excerpt": "sing\"),(0,w.trackEvent)(\"trial_start_click\",{plan:i.id});try{let e=await fetch(\"/api/payment/start-trial\",{method:\"POST\"}),t=await e.json();if(!e.ok||!t.success){if((409===e.status||403===e.status)&&K.current){k(!0),b(t.message||\"무료 체험 대상이 아니에요. 일반 결제로 시작할 수 있어요.\"),p(\"error\");return}throw Error(t.message||\"체험 시작에 실패했습니다.\")}K.current&&(M(\"trial\"),F(t.trialEnd?new Date(t.trialEnd).toLocaleDateString(\"ko-KR\",{month:\"long\",day:\"numeric\"}):\"\"),p(\"done\")),(0,w.trackTrialStarted)(i.id,i.price),c&&await c()}catch(e){if(K.current){let t=e instanceof Error?e.message:\"서버 오류가 발생했습니다.\";b(t),p(\"error\"),(0,w.trackPaymentError)(i.id,t)}}finally{H.current=!1}}},V=\"payple-open\"===x||\"processing\"===x,Q=()=>{V||a()},J=\"custom\"===i.id,Z=s&&\"",
+      "observation": "Trial start handler"
+    },
+    {
+      "evidence_id": "STATIC-022",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0wvc055s3y6w9.js",
+      "sha256": "547bbeb4a3e9ff671ab0c2885ce85ac31ecad07df918dbf4dbecf70bab851d3a",
+      "byte_offset": 20890,
+      "anchor": "* 자동 결제되지 않아요",
+      "excerpt": "ion\",sx:{display:\"block\",mb:2,color:\"text.secondary\",lineHeight:1.6},children:[\"* 자동 결제되지 않아요. 계속 쓰시려면 체험이 끝난 뒤 직접 결제하시면 됩니다.\",(0,t.jsx)(\"br\",{}),\"* 무료 체험은 계정당 1회예요.\"]}),(0,t.jsx)(n.default,{variant:\"contained\",fullWidth:!0,size:\"large\",onClick:q,sx:{py:1.5,fontWeight:700,fontSize:\"0.95rem\",borderRadius:2,bgcolor:\"#03C75A\",color:\"#fff\",\"&:hover\":{bgcolor:\"#029f48\"}},children:`${D.TRIAL_DAYS}일 무료로 ",
+      "observation": "Trial copy in payment modal"
+    },
+    {
+      "evidence_id": "STATIC-023",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1p3me3ez20ug8.js",
+      "sha256": "4d2876534b4a89b056e04f4455ac357e68514bfc2254aa522cb84a63cb543388",
+      "byte_offset": 3701,
+      "anchor": "key:\"matjib\"",
+      "excerpt": "mpt:\"이 글 NAEO에 저장해줘\",thinking:\"NAEO 발행 대기함에 저장 중\",reply:\"saved\",hold:3400}],O=[{key:\"matjib\",label:\"맛집\",img:\"/mcp/thumbs/matjib.jpg\",title:\"성수동 브런치 BEST 5, 웨이팅 없이 가는 법\",chars:\"2,140\",rows:[{kw:\"성수동 브런치\",vol:\"71,300\",docs:\"9,214\",sat:\"0.13\"},{kw:\"연남동 파스타\",vol:\"64,150\",docs:\"11,872\",sat:\"0.19\"},{kw:\"강남역 혼밥\",vol:\"58,400\",docs:\"12,530\",sat:\"0.21\"},{kw:\"을지로 와인바\",vol:\"47,900\",docs:\"10,644\",sat:\"0.22\"}]},{key:\"stock\",label:\"주식\",img:\"/mcp/thumbs/stock.jpg\",title:\"2026 배당주 TOP 5, 지금 담아야 할 이유\",chars:\"2,358\",rows:[{",
+      "observation": "MCP landing demonstrations use embedded fixtures"
+    },
+    {
+      "evidence_id": "STATIC-024",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/0jjwz5yhct58i.js",
+      "sha256": "deb672e37e607d2417c480f002943d152bbf78bc847dc23b0a3d69298c9a8762",
+      "byte_offset": 54254,
+      "anchor": "/api/track\"",
+      "excerpt": ";let i=(0,s.parseAttributionFromUrl)(),a=(0,s.getStoredAttribution)();if(fetch(\"/api/track\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({visitor_id:t,path:e,referrer:r,utm_source:i?.utm_source,utm_medium:i?.utm_medium,utm_campaign:i?.utm_campaign,utm_content:i?.utm_content,utm_term:i?.utm_term,gclid:i?.gclid,fbclid:i?.fbclid,first_touch:a??void 0}),keepalive:!0}).catch(()=>{}),\"function\"!=typeof navigator.sendBeacon)return;let o=crypto.randomUUID(),l=function(e=Date.now,t=!0){let r=t?e():null,s=0;return{hide:()=>(null!==r&&(s+=e()-r,r=null),s),show(){null===r&&(r=e())}",
+      "observation": "First-party page analytics payload"
+    },
+    {
+      "evidence_id": "STATIC-025",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/18-yqxc3foraf.js",
+      "sha256": "d5356331bb5da3098eec024e897a9f8089145f19c8a91a79f7a0262c44b40736",
+      "byte_offset": 30136,
+      "anchor": "F.rediagnoseRemaining",
+      "excerpt": "nt:\"caption\",display:\"block\",sx:{mt:.75,color:\"text.secondary\"},children:[null!=F.rediagnoseRemaining&&`이번 달 ${F.rediagnoseRemaining}회 남음 \\xb7 `,\"새 글 \",u.REDIAGNOSE_RECOMMENDED_NEW_POSTS,\"개쯤 쌓였을 때 다시 진단하는 걸 추천해요\"]})]}):F.nextRediagnoseAt?(0,t.jsxs)(l.default,{variant:\"caption\",sx:{color:\"text.secondary\"},children:[\"다음 재진단은 \",new Date(F.nextRediagnoseAt).toLocaleDateString(\"ko-KR\",{month:\"long\",day:\"numeric\",timeZone:\"Asia/Seoul\"}),\"부터 가능해요\"]}):0===F.rediagnoseRemaining?(0,t.jsxs)(l.default,{variant:\"caption\",sx:{color:\"text.secondary\"},children:[\"이번 달 재진단 \",u.PAID_REDIAGNOSE_MONTHLY_LIMIT,\"회를 모두 사용했어요 · 다음 달 1일에 초기화돼요\"]}):null}),(0,t.jsxs)(c.default,{open:$,onClose:()=>P(!1),maxWidth:\"xs\",children:[(0,t.jsxs)(h.default,{children:[(0,t.jsx)(l.default,{sx:{fontWeight:700,mb:1},children:\"지금 다시 진단할까요?\"}),(0,t.jsxs)(l.default,{variant:\"body2\",color:\"text.secondary\",children:[\"마지막 진단 이후 새 글이 \",J,\"개예요. 새 글이 적으면 결과가 지난번과 비슷할",
+      "observation": "UI reads rediagnosis eligibility response fields"
+    },
+    {
+      "evidence_id": "STATIC-026",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/14ewnkv-tihlk.js",
+      "sha256": "a3aeea855d9a535ac50135ead9346c6720de3362e969b9ae91f654f23e2176a5",
+      "byte_offset": 28687,
+      "anchor": "@mui/material/styles",
+      "excerpt": "rt { unstable_createBreakpoints as createBreakpoints, createTransitions } from '@mui/material/styles';\n\nconst theme = ${JSON.stringify(t,null,2)};\n\ntheme.breakpoints = createBreakpoints(theme.breakpoints || {});\ntheme.transitions = createTransitions(theme.transitions || {});\n\nexport default theme;`}function Z(e){return\"number\"==typeof e?`${(100*e).toFixed(0)}%`:`calc((${e}) * 100%)`}let ee=functio",
+      "observation": "MUI library signature"
+    },
+    {
+      "evidence_id": "STATIC-027",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1p3me3ez20ug8.js",
+      "sha256": "4d2876534b4a89b056e04f4455ac357e68514bfc2254aa522cb84a63cb543388",
+      "byte_offset": 16194,
+      "anchor": "https://www.naeo.kr/api/mcp",
+      "excerpt": "ion.hover\",transition:\"all 0.35s\"}},e.reply))})]})]})};var L=e.i(258958);let D=\"https://www.naeo.kr/api/mcp\",G=\"#03C75A\",$=\"#029f48\",U='\"JetBrains Mono\", monospace',q=[.22,1,.36,1],K=\"m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.72",
+      "observation": "MCP URL constant in landing code"
+    },
+    {
+      "evidence_id": "STATIC-028",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/1p3me3ez20ug8.js",
+      "sha256": "4d2876534b4a89b056e04f4455ac357e68514bfc2254aa522cb84a63cb543388",
+      "byte_offset": 26031,
+      "anchor": "children:\"OAuth\"",
+      "excerpt": ",\", 연결의 \",(0,t.jsx)(ea,{children:\"서버 URL\"}),\"에 복사한 주소를 붙여넣고 인증은 \",(0,t.jsx)(ea,{children:\"OAuth\"}),\" 그대로. \",(0,t.jsx)(ea,{children:'\"이해했으며 계속 진행하겠습니다\"'}),\"에 체크하고 \",(0,t.jsx)(ea,{children:\"만들기\"}),\".\"]})},{Icon:b,title:\"설치 → 로그인 → 허용\",body:(0,t.jsxs)(t.Fragment,{children:[\"추가한 \",(0,t.jsx)(ea,{children:\"NAEO 플러그인\"}),\"을 열어 \",(0,t.jsx)(ea,{children:\"플러그인 설치\"}),\"를 누르고, 뜨는 창에서 \",(0,t.jsx)(ea,{children:\"NAEO 로그인\"}),\"과 \",(0,t.jsx)(ea,{children:\"허용\"}),'까지 마치면 끝. \"추가\"만 하고 허용을 건너뛰면 도구가 안",
+      "observation": "OAuth selection instructions in ChatGPT setup UI"
+    },
+    {
+      "evidence_id": "STATIC-029",
+      "type": "static-delivered-javascript",
+      "file": "sources/assets/_next/static/immutable/chunks/37-wi3ifroeel.js",
+      "sha256": "3c6a52145cacde736a150bfd0e09969410f5aef254f392da0cf07935bfcb8285",
+      "byte_offset": 37307,
+      "anchor": "/api/write/tokens",
+      "excerpt": "useQuery)({queryKey:[\"write-token-status\"],queryFn:async()=>{let e=await fetch(\"/api/write/tokens\");if(!e.ok)throw Error(`tokens ${e.status}`);return e.json()},staleTime:6e4,refetchOnWindowFocus:!1,placeholderData:e=>e}),y=e=>\"/dashboard\"===e.href?\"/dashboard\"===p:p.startsWith(e.href),R=f?.blog_nickname||f?.nickname||\"사용자\",k=f?.avatar_url||void 0,L=(0,C.planLabel)(f);return(0,t.jsxs)(a.default,{component:\"nav\",sx:{width:{md:240},minWidth:{md:240},flexShrink:0,display:{xs:\"non",
+      "observation": "Writing token status query: enabled and available consumed"
+    }
+  ],
+  "excluded_sdk_candidates": [
+    {
+      "endpoint": "/api/broadcast",
+      "reason": "Supabase Realtime SDK built-in URL constructor; no application subscription caller found"
+    }
+  ],
+  "unknowns": [
+    "server route source",
+    "ranking score formula and weights",
+    "AI model/provider/prompt",
+    "crawler source and scheduler",
+    "MCP transport OAuth metadata tools schema; endpoint /api/mcp known from browser UI",
+    "database migrations indexes RLS",
+    "authenticated dashboard routes and writing service",
+    "server-side payment verification"
+  ]
+}

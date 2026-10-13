@@ -5,3 +5,7 @@ node_modules/
 *.log
 .env*
 !.env.example
+var/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
