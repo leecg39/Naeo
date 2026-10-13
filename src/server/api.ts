@@ -13,6 +13,8 @@ import {memberRankingApi,publicRankingApi} from './ranking/ranking-api';
 import {adminEventsApi,memberEventsApi,publicEventsApi} from './events/events-api';
 import {adminBillingApi,memberBillingApi,publicBillingApi,WEBHOOK_PATH} from './billing/billing-api';
 import {memberOAuthApi,publicOAuthApi} from './oauth/oauth-api';
+import {memberAuthzApi,publicAuthzApi,SERVER_TO_SERVER} from './oauth/authz-api';
+import {mcpApi} from './mcp/mcp-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -26,7 +28,7 @@ export function createApi(getDatabase:()=>Database=database) {
     const url=new URL(request.url),path=url.pathname,method=request.method;
     const db=getDatabase();
     // 결제사 웹훅은 서버 간 호출이라 Origin이 없다(본문을 믿지 않고 결제사에 다시 조회한다).
-    if(!['GET','HEAD','OPTIONS'].includes(method)&&path!==WEBHOOK_PATH) requireOrigin(request);
+    if(!['GET','HEAD','OPTIONS'].includes(method)&&path!==WEBHOOK_PATH&&!SERVER_TO_SERVER.includes(path)) requireOrigin(request);
     if(path==='/api/health'&&method==='GET') {
       const {version}=db.prepare('SELECT max(version) AS version FROM schema_migrations').get() as {version:number};
       return json({data:{status:'ok',schemaVersion:version}});
@@ -43,6 +45,10 @@ export function createApi(getDatabase:()=>Database=database) {
       logout(db,cookieToken(request));
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
+    const mcp=await mcpApi(db,request);
+    if(mcp)return mcp;
+    const publicAuthz=await publicAuthzApi(db,request);
+    if(publicAuthz)return publicAuthz;
     const publicOAuth=await publicOAuthApi(db,request);
     if(publicOAuth)return publicOAuth;
     const publicInquiry=await publicInquiryApi(db,request);
@@ -62,6 +68,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
     // Withdrawal and session management remain available even before consent.
     if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const authzResponse=await memberAuthzApi(db,request,user);
+    if(authzResponse)return authzResponse;
     const oauthResponse=await memberOAuthApi(db,request,user);
     if(oauthResponse)return oauthResponse;
     const accountResponse=await accountApi(db,request,user);

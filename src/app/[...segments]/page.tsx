@@ -26,6 +26,9 @@ import { abandonCheckout,confirmPayment,paymentForOwner,type Payment } from '@/s
 import { currentSubscription } from '@/server/billing/subscriptions';
 import { tossProvider } from '@/server/billing/provider';
 import { AppError } from '@/server/errors';
+import Link from 'next/link';
+import ConsentForm from '@/components/account/ConsentForm';
+import { ensureExtensionClient,problemRedirect,requestProblem,SCOPE_LABEL,validateAuthorizeRequest,type AuthorizeRequest } from '@/server/oauth/authz';
 import type { CapturedPageData } from '@/types/site';
 type Props={params:Promise<{segments:string[]}>;searchParams:Promise<Record<string,string|string[]|undefined>>};
 const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
@@ -48,6 +51,25 @@ async function paymentCompletePage(sp:Record<string,string|string[]|undefined>){
  else if(orderId&&first(sp.code)){abandonCheckout(db,user.id,orderId,{code:first(sp.code),message:first(sp.message)});error=(first(sp.message)??'결제가 취소되었습니다.').slice(0,300);}
  if(orderId){try{payment=paymentForOwner(db,user.id,orderId);}catch{payment=null;}}
  return buildPaymentCompletePage({payment,subscription:currentSubscription(db,user.id),error});
+}
+const flat=(sp:Record<string,string|string[]|undefined>)=>Object.fromEntries(Object.entries(sp).flatMap(([k,v])=>typeof v==='string'?[[k,v]]:[]));
+/** /oauth/consent: 앱·돌아갈 주소가 틀리면 캡처 오류 상자, 다른 요청 오류는 앱으로, 정상이면 로그인 후 동의 화면. */
+async function consentPage(sp:Record<string,string|string[]|undefined>){
+ const query=flat(sp),db=contentDatabase();
+ let req:AuthorizeRequest;
+ try{req=validateAuthorizeRequest(db,query);}catch{const captured=await getCapturedPage('/oauth/consent');return captured?<PageExperience data={captured}/>:notFound();}
+ const problem=requestProblem(req);
+ if(problem)redirect(problemRedirect(req,problem));
+ await pageUser(`/oauth/consent?${new URLSearchParams(query)}`);
+ return <main className="account-login"><Link className="account-logo" href="/">NAEO<span>●</span></Link><div className="panel account-card"><p className="eyebrow">CONNECT APP</p><h1 className="page-heading">앱 연결 요청</h1>
+  <ConsentForm params={query} appName={req.clientName} kind={req.kind} redirectHost={new URL(req.redirectUri).host||new URL(req.redirectUri).protocol} scopes={req.scopes.map(s=>({scope:s,label:SCOPE_LABEL[s]}))}/></div></main>;
+}
+/** /auth/extension: 허용된 확장 ID면 확장 클라이언트로 동의 화면에 보낸다. 아니면 캡처 오류 상자. */
+function extensionRedirect(sp:Record<string,string|string[]|undefined>):string|null{
+ const q=flat(sp),allowed=(process.env.NAEO_EXTENSION_IDS??'').split(',').map(v=>v.trim()).filter(Boolean);
+ if(!q.extension_id||!allowed.includes(q.extension_id)||!q.code_challenge)return null;
+ const client=ensureExtensionClient(contentDatabase(),q.extension_id);
+ return `/oauth/consent?${new URLSearchParams({response_type:'code',client_id:client.client_id,redirect_uri:client.redirect_uris[0],state:q.state??'',code_challenge:q.code_challenge,code_challenge_method:q.code_challenge_method??'S256',scope:q.scope??'naeo:read naeo:write'})}`;
 }
 export default async function Page({params,searchParams}:Props){
  const path='/'+(await params).segments.join('/');
@@ -73,6 +95,8 @@ export default async function Page({params,searchParams}:Props){
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
   return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
  }
+ if(path==='/oauth/consent')return consentPage(await searchParams);
+ if(path==='/auth/extension'){const to=extensionRedirect(await searchParams);if(to)redirect(to);}
  if(path==='/pricing'){const viewer=await currentUser();return withNotice(path,await buildPricingPage(contentDatabase(),viewer?.id??null,tossProvider()!==null));}
  if(path==='/payment/complete')return <PageExperience data={await paymentCompletePage(await searchParams)}/>;
  if(path==='/event')return withNotice(path,await buildEventListPage(contentDatabase()));

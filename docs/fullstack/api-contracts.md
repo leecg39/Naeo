@@ -306,3 +306,18 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/account/password/initial` | POST | 회원 | `{newPassword}` OAuth 가입 회원의 첫 비밀번호(세션 생성 10분 안) | 403 `REAUTH_REQUIRED`, 409 `PASSWORD_ALREADY_SET` |
 
 설정: `NAEO_GOOGLE_CLIENT_ID/SECRET`, `NAEO_NAVER_CLIENT_ID/SECRET`(리디렉션 URI `{NAEO_APP_URL}/api/auth/oauth/{google|naver}/callback`). `NAEO_OAUTH_ENDPOINT_BASE`는 로컬 검증 전용(localhost만). `/auth/google`·`/auth/naver`는 시작 주소로 이동.
+
+## P7.2·P7.3 OAuth 인가 서버·MCP (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/.well-known/oauth-authorization-server` | GET | 공개 | RFC 8414 메타데이터(동의·토큰·등록·철회 주소, S256, 공개 클라이언트) | — |
+| `/.well-known/oauth-protected-resource[/api/mcp]` | GET | 공개 | RFC 9728(`resource={origin}/api/mcp`, 인가 서버, 범위) | — |
+| `/api/oauth/register` | POST | 공개(서버 간) | RFC 7591 `{client_name,redirect_uris}` https·루프백 http·앱 전용 스킴만, 최대 5개 | 400 `invalid_client_metadata`·`invalid_redirect_uri` |
+| `/oauth/consent` | GET 화면 | 로그인(전체 요청을 next로 보존) | 앱·돌아갈 주소가 틀리면 캡처 오류 상자, `response_type`·PKCE·범위·`resource` 오류는 앱으로 `error=` | `invalid_request`·`invalid_scope`·`invalid_target`·`access_denied` |
+| `/api/oauth/authorize` | POST | 회원+사이트 Origin | 동의 화면의 승인/거부 → `{redirect}`(코드 5분·일회) | 403 |
+| `/api/oauth/token` | POST form | 공개(서버 간) | `authorization_code`(PKCE·redirect·resource 대조, 성공 시 코드 소비), `refresh_token`(회전, 재사용 시 계열 철회). 응답 `{access_token,token_type,expires_in:3600,refresh_token,scope}` | 400 `invalid_grant`·`invalid_target`·`unsupported_grant_type` (RFC 6749 형식) |
+| `/api/oauth/revoke` | POST form | 공개(서버 간) | RFC 7009 `token` 철회(리프레시면 계열) | 항상 200 |
+| `/api/account/apps` · `/:clientId` | GET·DELETE | 회원 | 연결된 앱(권한·연결일·마지막 사용·호출 수) / 앱의 모든 토큰 철회 | 404 |
+| `/auth/extension` | GET 화면 | 공개 | `extension_id`가 `NAEO_EXTENSION_IDS`에 있으면 확장 클라이언트(`https://{id}.chromiumapp.org/`)로 동의 화면 이동 | 캡처 오류 상자 |
+| `/api/mcp` | POST | Bearer(대상=/api/mcp) | MCP Streamable HTTP(2025-06-18·2025-03-26): `initialize`·`ping`·`tools/list`·`tools/call`, 알림 202. 도구: `naeo_blog_status`·`naeo_token_balance`·`naeo_list_drafts`·`naeo_get_draft`(read), `naeo_create_draft`(write), `naeo_request_generation`(generate, 토큰 차감·미설정이면 차감 없이 isError). 호출은 `mcp_calls` 기록, 연결별 분당 120회 | 401+`WWW-Authenticate: Bearer resource_metadata=…`, 403 다른 사이트 Origin, 405 GET, JSON-RPC -32601/-32602/-32700, 권한 부족은 isError |

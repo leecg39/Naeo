@@ -19,6 +19,8 @@ import {balance} from '@/server/credits/ledger';
 import ConnectionsSection from '@/components/account/ConnectionsSection';
 import {hasPassword,listConnections} from '@/server/oauth/oauth';
 import {oauthConfig} from '@/server/oauth/providers';
+import ConnectedApps from '@/components/account/ConnectedApps';
+import {listAuthorizedApps,mcpResource} from '@/server/oauth/authz';
 
 export const dynamic='force-dynamic';
 function billingState(db:ReturnType<typeof database>,userId:string){
@@ -29,5 +31,5 @@ export default async function SettingsPage({searchParams}:{searchParams:Promise<
   const user=await pageUser('/dashboard/settings'),db=database();
   const profile=getProfile(db,user.id),blogs=listBlogs(db,user.id,{pageSize:100}).data;
   const sessions=listSessions(db,user.id,(await cookies()).get(SESSION_COOKIE)!.value);
-  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><SecurityForm user={user} initialSessions={sessions}/></div></AccountShell>;
+  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><ConnectedApps initial={listAuthorizedApps(db,user.id)} mcpUrl={mcpResource()}/><SecurityForm user={user} initialSessions={sessions}/></div></AccountShell>;
 }

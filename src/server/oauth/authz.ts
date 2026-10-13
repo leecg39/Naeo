@@ -70,6 +70,8 @@ export function requestProblem(r:AuthorizeRequest):string|null{
  return null;
 }
 const back=(r:AuthorizeRequest,q:Record<string,string>)=>{const u=new URL(r.redirectUri);for(const [k,v] of Object.entries({...q,...(r.state?{state:r.state}:{})}))u.searchParams.set(k,v);return u.toString();};
+/** 요청 오류를 앱에 알리는 주소(동의 화면을 띄우기 전에 사용). */
+export const problemRedirect=(r:AuthorizeRequest,error:string)=>back(r,{error});
 /** 동의 결정: 승인하면 5분짜리 일회 코드(해시 저장)를 붙여 앱으로 돌려보낸다. */
 export function decideAuthorization(db:Database,userId:string,input:unknown,now=Date.now()):string{
  const r=validateAuthorizeRequest(db,input);
