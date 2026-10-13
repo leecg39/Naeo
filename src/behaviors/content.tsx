@@ -107,7 +107,7 @@ export const installContent: InstallBehavior = (root, tools) => {
     });
     tabs.forEach(tab => on(tab, 'click', event => {
       event.preventDefault();
-      category = categories[text(tab).replace(/\s*\(\d+\)$/, '')] || '';
+      category = tab.dataset.category ?? (categories[text(tab).replace(/\s*\(\d+\)$/, '')] || '');
       updateTabs(tabs, tab);
       filter();
     }));

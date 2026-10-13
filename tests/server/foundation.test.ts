@@ -8,6 +8,7 @@ import {register,login,sessionUser,logout,tokenHash,requireAdmin,SESSION_TTL} fr
 import {getProfile,updateProfile} from '../../src/server/profiles';
 import {createBlog,getBlog,listBlogs,updateBlog,deleteBlog} from '../../src/server/blogs';
 import {rateLimit} from '../../src/server/http';
+import {migrations} from '../../src/server/migrations';
 
 const input={email:'owner@example.test',password:'correct-long-password',nickname:'소유자',termsAccepted:true as const};
 function fixture(t:TestContext){const db=openDatabase(':memory:');t.after(()=>db.close());return db;}
@@ -16,7 +17,7 @@ test('migrations reapply safely, persist data on reopen and protect database per
  try{
   let db=openDatabase(file);const account=await register(db,input);const blog=createBlog(db,account.user.id,{naverId:'persist_blog',title:'저장된 블로그'});db.close();
   db=openDatabase(file);assert.equal(getBlog(db,account.user.id,blog.id).title,'저장된 블로그');assert.equal(sessionUser(db,account.session.token)?.id,account.user.id);
-  assert.equal((db.prepare('SELECT count(*) AS n FROM schema_migrations').get() as {n:number}).n,2);
+  assert.equal((db.prepare('SELECT count(*) AS n FROM schema_migrations').get() as {n:number}).n,migrations.length);
   assert.equal(statSync(file).mode&0o777,0o600);db.close();
  }finally{rmSync(dir,{recursive:true,force:true});}
 });

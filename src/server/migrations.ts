@@ -95,4 +95,59 @@ export const migrations = [{
     INSERT INTO consent_history(id,user_id,kind,accepted,created_at)
       SELECT lower(hex(randomblob(16))),id,'terms',1,terms_accepted_at FROM users WHERE terms_accepted_at>0;
   `,
+}, {
+  version: 3,
+  name: 'content_articles',
+  sql: `
+    CREATE TABLE article_categories (
+      id TEXT PRIMARY KEY NOT NULL,
+      slug TEXT NOT NULL UNIQUE CHECK(length(slug) BETWEEN 1 AND 40 AND slug NOT GLOB '*[^a-z0-9-]*'),
+      name TEXT NOT NULL CHECK(length(name) BETWEEN 1 AND 30),
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE articles (
+      id TEXT PRIMARY KEY NOT NULL,
+      category_id TEXT NOT NULL REFERENCES article_categories(id) ON DELETE RESTRICT,
+      slug TEXT NOT NULL CHECK(length(slug) BETWEEN 1 AND 80 AND slug NOT GLOB '*[^a-z0-9-]*'),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 200),
+      summary TEXT NOT NULL DEFAULT '' CHECK(length(summary)<=500),
+      show_summary INTEGER NOT NULL DEFAULT 1 CHECK(show_summary IN (0,1)),
+      body_markdown TEXT NOT NULL DEFAULT '' CHECK(length(body_markdown)<=200000),
+      tags_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(tags_json) AND json_type(tags_json)='array'),
+      cover_image TEXT NOT NULL DEFAULT '' CHECK(length(cover_image)<=300),
+      featured INTEGER NOT NULL DEFAULT 0 CHECK(featured IN (0,1)),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published','archived')),
+      published_at INTEGER,
+      read_minutes INTEGER NOT NULL DEFAULT 1 CHECK(read_minutes BETWEEN 1 AND 600),
+      position INTEGER NOT NULL DEFAULT 0,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE(category_id,slug),
+      CHECK(status<>'published' OR published_at IS NOT NULL)
+    ) STRICT;
+    CREATE INDEX articles_public ON articles(status,published_at DESC,position);
+    CREATE TABLE content_revisions (
+      id TEXT PRIMARY KEY NOT NULL,
+      resource_type TEXT NOT NULL CHECK(resource_type IN ('article','category')),
+      resource_id TEXT NOT NULL,
+      version INTEGER NOT NULL CHECK(version>0),
+      snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),
+      author_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      UNIQUE(resource_type,resource_id,version)
+    ) STRICT;
+    CREATE TRIGGER articles_delete_revisions AFTER DELETE ON articles BEGIN
+      DELETE FROM content_revisions WHERE resource_type='article' AND resource_id=old.id;
+    END;
+    CREATE TABLE seed_runs (
+      name TEXT PRIMARY KEY NOT NULL,
+      applied_at INTEGER NOT NULL
+    ) STRICT;
+  `,
 }];
