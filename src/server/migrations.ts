@@ -418,4 +418,44 @@ export const migrations = [{
     CREATE INDEX mate_reports_owner ON mate_reports(owner_id,created_at DESC);
     CREATE INDEX mate_reports_expiry ON mate_reports(expires_at);
   `,
+}, {
+  version: 13,
+  name: 'keywords',
+  sql: `
+    CREATE TABLE keywords (
+      id TEXT PRIMARY KEY NOT NULL,
+      phrase TEXT NOT NULL UNIQUE COLLATE NOCASE CHECK(length(phrase) BETWEEN 1 AND 60),
+      category TEXT NOT NULL DEFAULT '' CHECK(length(category)<=30),
+      status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','hidden')),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=200),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX keywords_active ON keywords(status,created_at DESC);
+    CREATE TABLE keyword_metrics (
+      id TEXT PRIMARY KEY NOT NULL,
+      keyword_id TEXT NOT NULL REFERENCES keywords(id) ON DELETE CASCADE,
+      pc_volume INTEGER NOT NULL CHECK(pc_volume>=0),
+      mobile_volume INTEGER NOT NULL CHECK(mobile_volume>=0),
+      document_count INTEGER NOT NULL CHECK(document_count>=0),
+      source TEXT NOT NULL DEFAULT 'manual' CHECK(source IN ('manual','naver_searchad')),
+      measured_at INTEGER NOT NULL,
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX keyword_metrics_latest ON keyword_metrics(keyword_id,measured_at DESC);
+    CREATE TABLE saved_keywords (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      keyword_id TEXT NOT NULL REFERENCES keywords(id) ON DELETE CASCADE,
+      status TEXT NOT NULL CHECK(status IN ('saved','written')),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=500),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE(owner_id,keyword_id)
+    ) STRICT;
+  `,
 }];

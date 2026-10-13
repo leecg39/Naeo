@@ -5,6 +5,7 @@ import {contentApi} from './content/content-api';
 import {inquiryApi,publicInquiryApi} from './inquiries/inquiry-api';
 import {scanApi} from './jobs/scan-api';
 import {memberMateApi,publicMateApi} from './mate/mate-api';
+import {keywordsApi} from './keywords/keywords-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -53,6 +54,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(scanResponse)return scanResponse;
     const mateResponse=memberMateApi(db,request,user);
     if(mateResponse)return mateResponse;
+    const keywordsResponse=await keywordsApi(db,request,user);
+    if(keywordsResponse)return keywordsResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

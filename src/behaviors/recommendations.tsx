@@ -1,5 +1,6 @@
 import type { InstallBehavior } from "@/lib/behavior";
 import { text } from "@/lib/behavior";
+import { api } from "@/lib/api-client";
 
 type Keyword = {
   name: string;
@@ -11,7 +12,6 @@ type Keyword = {
   golden: boolean;
   opportunity: boolean;
 };
-const COMPLETED_KEY = "naeo-clone:recommendations:completed";
 const CHECKED_PATH = "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9 14-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8z";
 const HELP: Record<string, string> = {
   전체: "PC와 모바일에서 발생한 월간 검색량의 합계입니다. 검색량이 클수록 해당 키워드에 대한 관심이 많다는 뜻이에요.",
@@ -50,7 +50,7 @@ export const installRecommendations: InstallBehavior = (root, tools) => {
     const card = cardInput?.closest<HTMLElement>('[id^="kw-card-"]') || null;
     const cells = [...row.querySelectorAll('[role="cell"]')].map(text);
     const date = cells[1]?.match(/(\d+)월\s*(\d+)일/);
-    return { name, row, card, mobileWrapper: card?.parentElement || null, cells, golden: /🏆|황금/.test(cells[2] || ''), opportunity: /선점기회/.test(cells.at(-1) || ''), day: date ? Date.UTC(2026, Number(date[1]) - 1, Number(date[2])) : 0 };
+    return { name, row, card, mobileWrapper: card?.parentElement || null, cells, golden: row.dataset.golden ? row.dataset.golden === "true" : /🏆|황금/.test(cells[2] || ''), opportunity: row.dataset.preempt ? row.dataset.preempt === "true" : /선점기회/.test(cells.at(-1) || ''), keywordId: row.dataset.keywordId || "", day: row.dataset.day ? Number(row.dataset.day) : date ? Date.UTC(2026, Number(date[1]) - 1, Number(date[2])) : 0 };
   }).filter((record) => record.name);
   if (!records.length) return;
   const rowParent = records[0].row.parentElement;
@@ -59,22 +59,22 @@ export const installRecommendations: InstallBehavior = (root, tools) => {
   const originalMobileOrder = mobileParent ? [...mobileParent.children] : [];
   const inputsOriginal = checkboxes.map((input) => ({ input, checked: input.checked }));
   const completed = new Set<string>();
-  try {
-    const saved: unknown = JSON.parse(localStorage.getItem(COMPLETED_KEY) || "[]");
-    if (Array.isArray(saved)) for (const name of saved) if (typeof name === "string") completed.add(name);
-  } catch { /* Private browsing may prevent persistence. The controls still work. */ }
+  // 작성 완료 표시는 서버가 그린 체크 상태가 기준이다(회원별 DB 저장).
+  for (const record of records) if (record.row.querySelector<HTMLInputElement>('input[type="checkbox"]')?.hasAttribute("checked")) completed.add(record.name);
   let filter: "all" | "golden" | "opportunity" = "all";
-  let period = "이번 주";
+  let period = root.querySelector<HTMLButtonElement>("button[data-active]")?.textContent?.trim() || "이번 주";
   let sortColumn = 5;
   let sortAscending = false;
-  const referenceDay = Math.max(...records.map((record) => record.day));
+  // 서버가 날짜를 넣어 준 경우 기간 필터는 오늘 기준(한국 시간 날짜)으로 계산한다.
+  const referenceDay = records.some((record) => record.row.dataset.day) ? Date.parse(new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10)) : Math.max(...records.map((record) => record.day));
   const date = new Date(referenceDay);
   const weekStart = referenceDay - ((date.getUTCDay() + 6) % 7) * 86400000;
   const monthStart = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1);
   const periodButtons = [...section.querySelectorAll<HTMLButtonElement>("button")].filter((button) => /^(전체기간|이번 주|이번 달)$/.test(text(button)));
   const goldenButton = [...section.querySelectorAll<HTMLButtonElement>("button")].find((button) => text(button).includes("황금 전체보기"));
-  const activeClass = periodButtons.find((button) => text(button) === "이번 주")?.className;
-  const inactiveClass = periodButtons.find((button) => text(button) === "전체기간")?.className;
+  const markedActive = periodButtons.find((button) => button.hasAttribute("data-active"));
+  const activeClass = (markedActive || periodButtons.find((button) => text(button) === "이번 주"))?.className;
+  const inactiveClass = periodButtons.find((button) => button !== (markedActive || periodButtons.find((b) => text(b) === "이번 주")))?.className;
   const goldenCard = root.querySelector<HTMLElement>('[role="button"][aria-label^="황금 키워드:"]');
   const opportunityCard = root.querySelector<HTMLElement>('[role="button"][aria-label^="선점기회:"]');
   const counter = [...section.querySelectorAll("span")].find((element) => /^\(\d+건 기준\)$/.test(text(element)));
@@ -277,9 +277,14 @@ export const installRecommendations: InstallBehavior = (root, tools) => {
     if (!(input instanceof HTMLInputElement) || !checkboxes.includes(input)) return;
     event.preventDefault();
     const name = (input.getAttribute("aria-label") || "").replace(/ 작성 완료 표시$/, "");
+    const wasChecked = completed.has(name);
     if (input.checked) completed.add(name); else completed.delete(name);
-    try { localStorage.setItem(COMPLETED_KEY, JSON.stringify([...completed])); } catch { /* Keep in-memory state. */ }
     syncCompleted();
+    const keywordId = input.dataset.keywordId;
+    if (!keywordId) return;
+    api(`/api/recommendations/${keywordId}/state`, { method: "PUT", body: { status: completed.has(name) ? "written" : null } })
+      .then(() => tools.toast(completed.has(name) ? `'${name}' 작성 완료로 표시했습니다.` : `'${name}' 작성 완료 표시를 해제했습니다.`))
+      .catch((error) => { if (wasChecked) completed.add(name); else completed.delete(name); syncCompleted(); tools.toast(error instanceof Error ? error.message : "저장하지 못했습니다."); });
   };
   const handleKey = (event: KeyboardEvent) => {
     if (event.key !== "Enter" && event.key !== " ") return;

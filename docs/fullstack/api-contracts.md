@@ -181,3 +181,15 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/mate/reports/:token` | DELETE | 회원(작성자) | 삭제 후 공유 링크도 404 | 404 |
 
 화면: `/mate`·`/mate/s` 입력은 실제 진단(예시 리포트·localStorage 제거), `/mate/s?r=토큰`은 공유 리포트 열기, `/dashboard/mate`는 내 기록 목록·삭제(없으면 빈 상태), `/dashboard/ai-picks`는 원본 계정 인용 목록·지표를 지우고 미설정 상태. 하루 진단 한도(회원 20회/KST)는 `/api/scans`에 적용.
+
+## P3.5 키워드·지표·추천 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/keywords` | GET·POST | 관리자 | 검색(키워드·분류, LIKE 이스케이프)·상태·분류 필터·페이지. 생성 `phrase≤60`(대소문자 무시 unique), `category≤30`, `note≤200`, `status`(active/hidden) | 403, 409 `KEYWORD_EXISTS` |
+| `/api/admin/keywords/:id` | GET·PATCH·DELETE | 관리자 | 상세는 지표 이력(최신순)·최신 지표. PATCH·DELETE는 `version` | 404, 409 |
+| `/api/admin/keywords/:id/metrics` · `/:metricId` | POST·DELETE | 관리자 | PC·모바일 검색량·문서수(0 이상 정수), 측정 시각. 출처 `manual`(검색광고 API 미설정) | 400, 404 |
+| `/api/recommendations` | GET | 회원 | 노출 키워드 + 최신 지표 + 내 상태. `filter`(all/golden/preempt/written), `period`(all/week/month), `q`, 페이지, 요약(전체·황금·선점·작성) | 401, 400 |
+| `/api/recommendations/:keywordId/state` | PUT | 회원 | `{status:'written'|'saved'|null}` 작성 완료 표시·해제(회원별) | 404(숨김·없음) |
+
+분류(새 규칙): 포화도 = 문서수 ÷ (PC+모바일 월 검색량). 황금 = 포화도 1 미만·검색량 1,000 이상, 선점기회 = 황금 아님·포화도 3 미만·검색량 300 이상. 지표가 없거나 검색량 0이면 분류하지 않는다. 화면 `/dashboard/recommendations`는 서버가 행·모바일 카드·요약을 DB로 그리고(캡처 계정 키워드 제거), 검색(`?q=`)·페이지(50개)는 서버, 황금·선점·기간 필터와 정렬은 화면에서 처리한다.
