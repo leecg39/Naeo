@@ -1,6 +1,7 @@
 import { database, type Database } from './database';
 import { register, login, logout, requireUser, requireAdmin, requireTerms } from './auth';
 import {accountApi} from './account-api';
+import {contentApi} from './content/content-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -37,6 +38,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(!path.startsWith('/api/auth/'))requireTerms(user);
     const accountResponse=await accountApi(db,request,user);
     if(accountResponse)return accountResponse;
+    const contentResponse=await contentApi(db,request,user);
+    if(contentResponse)return contentResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

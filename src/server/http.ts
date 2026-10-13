@@ -15,9 +15,8 @@ export function cookieToken(request:Request):string|undefined {
 export function sessionCookie(token:string,maxAge=SESSION_TTL/1000) {
   return `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${appOrigin().startsWith('https:')?'; Secure':''}`;
 }
-export async function body<T>(request:Request,schema:ZodType<T>):Promise<T> {
+export async function body<T>(request:Request,schema:ZodType<T>,max=32*1024):Promise<T> {
   if(!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type')||'')) throw new AppError(415,'JSON_REQUIRED','JSON 형식으로 요청해주세요.');
-  const max=32*1024;
   if(Number(request.headers.get('content-length')||0)>max) throw new AppError(413,'BODY_TOO_LARGE','요청 내용이 너무 큽니다.');
   if(!request.body) throw new AppError(400,'INVALID_JSON','요청 내용을 확인해주세요.');
   const reader=request.body.getReader(),chunks:Uint8Array[]=[];

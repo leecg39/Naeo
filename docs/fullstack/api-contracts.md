@@ -55,3 +55,18 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 약관 미동의 계정은 동의·탈퇴·비밀번호·세션 관리만 가능하다. 관리자 권한/계정 정지를 바꾸면 대상 계정 세션을 모두 철회한다. 마지막 관리자 수에는 활성 상태이며 약관 동의를 마친 관리자만 포함한다. 관리자 쓰기·비밀번호 변경·탈퇴는 사용자별 15분 20회 제한이다. 프로필 닉네임 변경도 사용자 버전을 갱신해 관리자 편집과의 충돌을 감지한다.
 
 연락처의 `phoneVerifiedAt`은 클라이언트에서 설정할 수 없으며 번호가 바뀌면 null로 초기화한다. SMS 공급자·이메일 발송·비밀번호 재설정·이메일 검증은 아직 구현하지 않았다. 동의/알림 설정 저장이 외부 발송 성공을 의미하지 않는다.
+
+## P2.2 매거진 관리 API (2026-10-13)
+
+모든 경로는 관리자 + 약관 동의 계정만 사용할 수 있다(일반 회원 403, 미인증 401). 쓰기 요청은 Origin 검사와 사용자별 15분 300회 제한을 적용한다. 기사 저장(`POST/PATCH /api/admin/articles…`, preview)만 요청 본문 1MB까지 받고, 나머지는 32KB 그대로다.
+
+| 경로 | 메서드·필드 |
+|---|---|
+| `/api/admin/articles` | GET `q,status,category,page,pageSize`(모든 상태, 수정일 내림차순, LIKE 와일드카드 이스케이프). POST `categoryId,slug,title` 필수, `summary,showSummary,bodyMarkdown,tags[],coverImage,featured,status,publishedAt(ISO),readMinutes,position` 선택 |
+| `/api/admin/articles/:id` | GET 상세 + `revisions[]`. PATCH 바뀐 필드만 + `version`. DELETE `version` |
+| `/api/admin/articles/:id/restore` | POST `revision,version`: 지난 버전의 내용(분류·주소·제목·요약·본문·태그·표지·읽는 시간)을 새 버전으로 되돌린다. 공개 상태·게시일·추천·순서는 유지 |
+| `/api/admin/articles/preview` | POST `bodyMarkdown` → `headings,warnings,readMinutes`(저장 안 함) |
+| `/api/admin/article-categories` | GET 목록(공개·전체 글 수). POST `slug,name,sortOrder` |
+| `/api/admin/article-categories/:id` | PATCH `slug,name,sortOrder`+`version`. DELETE `version`. 글이 있으면 409 `CATEGORY_IN_USE` |
+
+규칙: 같은 분류 안의 주소 중복은 409 `SLUG_EXISTS`, 오래된 version으로 수정하면 409 `VERSION_CONFLICT`. 본문에 차단된 주소·지원하지 않는 구성 요소·HTML이 있으면 400 `CONTENT_INVALID`이며 `details`에 경고 목록을 담는다. `published`로 바꿀 때 게시일이 없으면 현재 시각을 넣는다. 미래 게시일은 예약 공개로 그 시각 전에는 404다. 본문이 바뀌면 읽는 시간을 다시 계산한다(새 규칙: 공백 제외 약 180자 = 1분, 원본 공식 미확인, 직접 입력 가능). 저장할 때마다 이전·새 버전 스냅샷을 `content_revisions`에 남기고, 감사 로그에 `content.article.*`·`content.category.*`를 기록한다. 분류를 바꾸면 공개 주소가 `/blog/새분류/주소`로 바뀐다.
