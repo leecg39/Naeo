@@ -13,7 +13,7 @@ clone-website로 만든 naeo.kr 복제본에 REA 역공학 분석대로 **전 �
 - 증거 기반 완료: `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`를 실제로 돌리고 결과를 기록.
 - 외부 연동 키가 없으면 '미설정'으로 표시하고 결과를 꾸며내지 않는다(결제·OAuth·AI·메일·SMS).
 - naeo.kr 원문을 응답에 옮기지 않는다. 시드의 원문(정책 문서·FAQ·기사)은 실제 운영 전에 교체해야 한다.
-- 커밋 전 스테이징 diff에서 비밀값 검사(`git diff --cached | grep -E "Naeo-qa-only|sk-ant-|sk-proj-"`). QA 비밀번호는 절대 커밋하지 않는다.
+- 커밋 전 스테이징 diff에서 비밀값 검사(`git diff --cached`에서 API 키 형식 `sk-ant-`·`sk-proj-`와, 사용자에게 받은 QA 비밀번호 문자열을 검색). QA 계정 정보는 어떤 파일에도 적지 않는다.
 - 커밋 메시지: conventional commits, 끝에 `Co-Authored-By` 줄. 커밋 후 `git push origin main`.
 - Next.js 16.4는 학습 데이터와 다르다. 코드 작성 전 `node_modules/next/dist/docs`를 확인.
 - `npm run lint`는 디렉터리를 명시한다. 새 디렉터리를 만들면 `package.json`의 lint와 `eslint.config.mjs`의 files에 추가.
