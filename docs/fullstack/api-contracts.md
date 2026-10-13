@@ -294,3 +294,15 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/admin/refunds` · `/:id/decide` | GET·POST | 관리자 | `{decision,note,version}` 승인 시 `Idempotency-Key: refund-{id}`로 결제사 취소, 실패는 failed(같은 키로 재승인) | 502 `REFUND_FAILED`, 503 미설정, 409 |
 
 결제사: 토스페이먼츠 코어 API(`NAEO_TOSS_CLIENT_KEY`, `NAEO_TOSS_SECRET_KEY`, 선택 `NAEO_TOSS_API_BASE`). 키가 없으면 결제 버튼은 '결제 미설정'. 화면: /pricing(DB 요금제·상태별 버튼·체험/쿠폰/결제창 v2 SDK), /payment/complete(성공 시 서버 승인, 실패 복귀 시 주문 실패 처리, 저장된 상태로 표시), 설정 '구독·결제', /admin/billing, /admin/payments. 작업자가 1분마다 기간 종료 처리(미사용 기간 토큰 소멸·예약 갱신·종료)와 버려진 주문 만료.
+
+## P7.1 구글·네이버 로그인 API (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류(이동) |
+|---|---|---|---|---|
+| `/api/auth/oauth/:provider/start` | GET | 공개(`intent=link`는 회원) | `next`(safeNext 제한), state·PKCE(S256, 구글)·nonce 생성, `naeo_oauth` HttpOnly 쿠키(경로 /api/auth/oauth, 10분)로 브라우저에 묶고 공급자 인가 주소로 302 | 키 없음 → `/login?oauthError=OAUTH_NOT_CONFIGURED` |
+| `/api/auth/oauth/:provider/callback` | GET | 공급자 이동 | state 일회 소비·쿠키 대조 → 코드 교환(구글 토큰+ID 토큰 iss·aud·exp·nonce, 네이버 토큰+`/v1/nid/me`) → 로그인/가입(새 회원은 `/auth/terms?next=`)·연결(`/dashboard/settings?oauthLinked=` ) | `/login?oauthError=` 또는 로그인 중이면 설정으로: `OAUTH_STATE_INVALID`·`OAUTH_DENIED`·`OAUTH_EMAIL_EXISTS`·`OAUTH_EMAIL_REQUIRED`·`OAUTH_ALREADY_LINKED`·`OAUTH_PROVIDER_LINKED`·`ACCOUNT_SUSPENDED`·`OAUTH_EXCHANGE_FAILED` |
+| `/api/account/oauth` | GET | 회원 | 연결 목록·비밀번호 보유·서비스별 설정 여부 | 401 |
+| `/api/account/oauth/:provider` | DELETE | 회원 | 연결 해제 | 404, 409 `LAST_LOGIN_METHOD` |
+| `/api/account/password/initial` | POST | 회원 | `{newPassword}` OAuth 가입 회원의 첫 비밀번호(세션 생성 10분 안) | 403 `REAUTH_REQUIRED`, 409 `PASSWORD_ALREADY_SET` |
+
+설정: `NAEO_GOOGLE_CLIENT_ID/SECRET`, `NAEO_NAVER_CLIENT_ID/SECRET`(리디렉션 URI `{NAEO_APP_URL}/api/auth/oauth/{google|naver}/callback`). `NAEO_OAUTH_ENDPOINT_BASE`는 로컬 검증 전용(localhost만). `/auth/google`·`/auth/naver`는 시작 주소로 이동.

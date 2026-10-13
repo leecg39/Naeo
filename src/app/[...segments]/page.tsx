@@ -67,7 +67,7 @@ export default async function Page({params,searchParams}:Props){
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
  if(path==='/admin'||path.startsWith('/admin/')){await adminPageUser(path);notFound();}
  if(path.startsWith('/social/banner-preview'))redirect('/');
- if(path==='/auth/google')redirect('/login?provider=google&demo=1');
+ if(path==='/auth/google'||path==='/auth/naver'){const sp=await searchParams,next=first(sp.next);redirect(`/api/auth/oauth/${path.slice(6)}/start${next?`?next=${encodeURIComponent(next)}`:''}`);}
  if(path==='/ranking'){
   const sp=await searchParams,viewer=await currentUser(),db=database();
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));

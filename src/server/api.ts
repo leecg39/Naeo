@@ -12,6 +12,7 @@ import {generationApi} from './generation/generation-api';
 import {memberRankingApi,publicRankingApi} from './ranking/ranking-api';
 import {adminEventsApi,memberEventsApi,publicEventsApi} from './events/events-api';
 import {adminBillingApi,memberBillingApi,publicBillingApi,WEBHOOK_PATH} from './billing/billing-api';
+import {memberOAuthApi,publicOAuthApi} from './oauth/oauth-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -42,6 +43,8 @@ export function createApi(getDatabase:()=>Database=database) {
       logout(db,cookieToken(request));
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
+    const publicOAuth=await publicOAuthApi(db,request);
+    if(publicOAuth)return publicOAuth;
     const publicInquiry=await publicInquiryApi(db,request);
     if(publicInquiry)return publicInquiry;
     const publicMate=await publicMateApi(db,request,sessionUser(db,cookieToken(request)));
@@ -59,6 +62,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
     // Withdrawal and session management remain available even before consent.
     if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const oauthResponse=await memberOAuthApi(db,request,user);
+    if(oauthResponse)return oauthResponse;
     const accountResponse=await accountApi(db,request,user);
     if(accountResponse)return accountResponse;
     const contentResponse=await contentApi(db,request,user);

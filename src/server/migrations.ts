@@ -835,4 +835,34 @@ export const migrations = [{
       received_at INTEGER NOT NULL
     ) STRICT;
   `,
+}, {
+  version: 21,
+  name: 'oauth_accounts',
+  sql: `
+    CREATE TABLE oauth_accounts (
+      provider TEXT NOT NULL CHECK(provider IN ('google','naver')),
+      subject TEXT NOT NULL CHECK(length(subject) BETWEEN 1 AND 200),
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      email TEXT NOT NULL DEFAULT '' CHECK(length(email)<=254),
+      created_at INTEGER NOT NULL,
+      last_login_at INTEGER,
+      PRIMARY KEY(provider,subject),
+      UNIQUE(user_id,provider)
+    ) STRICT;
+    CREATE TABLE oauth_states (
+      state_hash TEXT PRIMARY KEY NOT NULL CHECK(length(state_hash)=64),
+      provider TEXT NOT NULL CHECK(provider IN ('google','naver')),
+      intent TEXT NOT NULL CHECK(intent IN ('login','link')),
+      user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+      binding_hash TEXT NOT NULL CHECK(length(binding_hash)=64),
+      code_verifier TEXT NOT NULL CHECK(length(code_verifier) BETWEEN 43 AND 128),
+      nonce TEXT NOT NULL CHECK(length(nonce) BETWEEN 16 AND 100),
+      next TEXT NOT NULL DEFAULT '/dashboard' CHECK(length(next)<=500),
+      expires_at INTEGER NOT NULL,
+      created_at INTEGER NOT NULL,
+      CHECK(intent='login' OR user_id IS NOT NULL)
+    ) STRICT;
+    CREATE INDEX oauth_states_expiry ON oauth_states(expires_at);
+  `,
 }];
+

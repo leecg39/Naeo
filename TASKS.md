@@ -74,7 +74,7 @@
 
 ### P7 — OAuth·확장·MCP·소셜 도구 (P1/P4/P6 의존)
 
-- [ ] P7.1 Google/네이버 OAuth 로그인·콜백·계정 연결/해제, state/nonce/PKCE·next 제한·실제 앱 계정 테스트.
+- [ ] P7.1 Google/네이버 OAuth 로그인·콜백·계정 연결/해제, state/nonce/PKCE·next 제한·실제 앱 계정 테스트. (구현·로컬 IdP 스텁 검증 완료. 실제 앱 등록·계정 왕복은 키 필요)
 - [ ] P7.2 /oauth/consent /auth/extension 연결/동의/철회·일회 코드·범위 제한·확장 토큰 만료·사용 UI.
 - [ ] P7.3 /api/mcp 표준 연결/도구 목록/호출·인증·권한·크레딧, /mcp 안내 설정을 실제 로컬/배포 URL로 연결.
 - [ ] P7.4 소셜 프로젝트/슬라이드 CRUD·정렬·저장·복제, /social/* 및 /youtube/aeo-intro·배너 화면 연결.
