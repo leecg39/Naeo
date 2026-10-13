@@ -4,11 +4,14 @@ import seed from '../../data/content/articles.seed.json';
 import documentSeed from '../../data/content/documents.seed.json';
 import faqSeed from '../../data/content/faq.seed.json';
 import updatesSeed from '../../data/content/updates.seed.json';
+import {getCapturedPage} from '../../lib/pages';
+import {MANAGED_PAGES,displayTitle} from './page-settings';
 
 const ARTICLES_SEED='articles-v1';
 const DOCUMENTS_SEED='documents-v1';
 const FAQ_SEED='faq-v1';
 const UPDATES_SEED='updates-v1';
+const PAGES_SEED='page-settings-v1';
 
 /**
  * 캡처한 기사 20개를 한 번만 넣는다. 실행 기록을 seed_runs에 남겨
@@ -19,6 +22,18 @@ export function applySeeds(db:Database,now=Date.now()):void{
  seedDocuments(db,now);
  seedFaq(db,now);
  seedUpdates(db,now);
+}
+
+/** 고정 디자인 페이지 설정은 캡처 파일을 읽어야 해서 비동기로 한 번만 넣는다. */
+export async function applyPageSettingSeeds(db:Database,now=Date.now()):Promise<void>{
+ if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(PAGES_SEED))return;
+ const pages=await Promise.all(MANAGED_PAGES.map(async path=>({path,page:await getCapturedPage(path)})));
+ transaction(db,()=>{
+  if(db.prepare('SELECT 1 FROM seed_runs WHERE name=?').get(PAGES_SEED))return;
+  const insert=db.prepare("INSERT INTO page_settings(id,path,title,description,status,created_at,updated_at) VALUES(?,?,?,?,'published',?,?) ON CONFLICT(path) DO NOTHING");
+  for(const {path,page} of pages)if(page)insert.run(randomUUID(),path,displayTitle(page.title),page.description,now,now);
+  db.prepare('INSERT INTO seed_runs(name,applied_at) VALUES(?,?)').run(PAGES_SEED,now);
+ });
 }
 
 function seedArticles(db:Database,now:number):void{

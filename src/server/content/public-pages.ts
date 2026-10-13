@@ -3,7 +3,8 @@ import {database,type Database} from '../database';
 import {appOrigin} from '../http';
 import {getPublishedArticle} from './articles';
 import {blogArticleRoute,buildArticlePage,buildBlogIndexPage} from './blog-pages';
-import {applySeeds} from './seed';
+import {applyPageSettingSeeds,applySeeds} from './seed';
+import {resolveManagedPage} from './page-settings';
 import {documentRouteState,getPublishedDocument} from './documents';
 import {buildDocumentPage} from './document-pages';
 import {listPublishedFaq} from './faq';
@@ -33,6 +34,13 @@ export async function resolveBlogPage(path:string):Promise<CapturedPageData|null
  return article?buildArticlePage(db,article,{origin:appOrigin()}):null;
 }
 
+/** 고정 디자인 페이지 설정 시드(캡처 파일 읽기)까지 적용한 DB. */
+export async function pageSettingsDatabase():Promise<Database>{
+ const db=contentDatabase();
+ await applyPageSettingSeeds(db);
+ return db;
+}
+
 /** DB 정책 문서 경로를 렌더링한다. undefined: 문서 경로 아님, null: 비공개·삭제(404). */
 export async function resolveDocumentPage(path:string):Promise<CapturedPageData|null|undefined>{
  const db=contentDatabase();
@@ -42,11 +50,13 @@ export async function resolveDocumentPage(path:string):Promise<CapturedPageData|
  return doc?buildDocumentPage(doc):null;
 }
 
-/** DB가 맡는 화면을 순서대로 찾는다(블로그 → FAQ → 업데이트 → 정책 문서). undefined면 캡처 화면으로 넘긴다. */
+/** DB가 맡는 화면을 순서대로 찾는다(블로그 → FAQ → 업데이트 → 고정 디자인 페이지 → 정책 문서). undefined면 캡처 화면으로 넘긴다. */
 export async function resolveDatabasePage(path:string):Promise<CapturedPageData|null|undefined>{
  const blog=await resolveBlogPage(path);
  if(blog!==undefined)return blog;
  if(path==='/faq')return buildFaqPage(listPublishedFaq(contentDatabase()));
  if(path==='/updates')return buildUpdatesPage(listPublishedUpdates(contentDatabase()));
+ const managed=await resolveManagedPage(await pageSettingsDatabase(),path);
+ if(managed!==undefined)return managed;
  return resolveDocumentPage(path);
 }

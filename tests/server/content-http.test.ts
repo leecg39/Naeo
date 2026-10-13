@@ -150,3 +150,19 @@ test('announcement admin API: permissions, CRUD, unsafe links and conflicts over
  assert.equal((await (await f.send('/api/admin/announcements?q=바뀐','GET',undefined,admin)).json()).pagination.total,1);
  assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'DELETE',{version:2},admin)).status,200);
 });
+
+test('page settings API: list, edit, hide, restore, permissions over HTTP',async t=>{
+ const f=fixture(t);const member=await account(f,'member@example.test');const admin=await account(f,'admin@example.test',true);
+ const {applyPageSettingSeeds}=await import('../../src/server/content/seed');
+ await applyPageSettingSeeds(f.db);
+ assert.equal((await f.send('/api/admin/page-settings')).status,401);
+ assert.equal((await f.send('/api/admin/page-settings','GET',undefined,member)).status,403);
+ const list=(await (await f.send('/api/admin/page-settings','GET',undefined,admin)).json()).data;
+ assert.deepEqual(list.map((p:{path:string})=>p.path),['/features','/guide/extension-publish','/guide/writing']);
+ const id=list[0].id;
+ assert.equal((await (await f.send(`/api/admin/page-settings/${id}`,'PATCH',{status:'hidden',version:1},admin)).json()).data.status,'hidden');
+ assert.equal((await f.send(`/api/admin/page-settings/${id}`,'PATCH',{title:'x',version:1},admin)).status,409);
+ assert.equal((await f.send(`/api/admin/page-settings/${id}`,'PATCH',{path:'/x',version:2},admin)).status,400);
+ const restored=await f.send(`/api/admin/page-settings/${id}/restore`,'POST',{revision:1,version:2},admin);
+ assert.equal((await restored.json()).data.version,3);
+});

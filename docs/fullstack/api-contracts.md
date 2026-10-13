@@ -130,3 +130,13 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/announcements/:id` | PATCH·DELETE | 관리자 | 바뀐 필드 + `version`. 수정 후 전체 값으로 링크 문구·기간 규칙 재검사 | 400, 404, 409 |
 
 공개: 공개 상태·기간·대상이 맞는 공지 중 가장 최근 수정된 1건을 화면 하단 고정 바로 표시한다(`/`는 landing·all, 다른 공개 화면은 all, 대시보드·관리자·로그인·결제·OAuth 경로는 표시 안 함). 방문자에게는 id·제목·내용·링크·version만 보낸다. 닫기는 방문자 브라우저에 `id:version`으로 기억하며 공지를 수정하면 다시 보인다. 원본 사이트에는 공지 영역이 없어 공지가 없으면 화면이 캡처와 같다(시드 없음).
+
+## P2.5 고정 디자인 페이지 설정 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/admin/page-settings` | GET | 관리자 | `/features` `/guide/writing` `/guide/extension-publish` 설정 목록 | 401·403 |
+| `/api/admin/page-settings/:id` | GET·PATCH | 관리자 | PATCH `title≤120`, `description≤300`, `status`(published/hidden) + `version`. 주소 변경 불가 | 400, 404, 409 |
+| `/api/admin/page-settings/:id/restore` | POST | 관리자 | `{revision,version}`. 제목·설명만 되돌리고 공개 여부 유지 | 404 |
+
+이 세 페이지는 레이아웃이 디자인 자체라 본문은 캡처 그대로 두고, 생성·삭제 대신 숨김(404)을 쓴다. 제목은 `제목 | NAEO`로, 설명은 meta description으로 나간다(모든 DB 화면이 description을 내보내도록 메타데이터도 확장). 시드 `page-settings-v1`은 캡처 제목을 읽어 1회 적용.

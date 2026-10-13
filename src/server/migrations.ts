@@ -294,4 +294,41 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX announcements_active ON announcements(status,updated_at DESC);
   `,
+}, {
+  version: 9,
+  name: 'page_settings',
+  sql: `
+    DROP TRIGGER articles_delete_revisions;
+    DROP TRIGGER site_documents_delete_revisions;
+    CREATE TABLE content_revisions_v9 (
+      id TEXT PRIMARY KEY NOT NULL,
+      resource_type TEXT NOT NULL CHECK(resource_type IN ('article','category','document','faq','update','announcement','page')),
+      resource_id TEXT NOT NULL,
+      version INTEGER NOT NULL CHECK(version>0),
+      snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),
+      author_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      UNIQUE(resource_type,resource_id,version)
+    ) STRICT;
+    INSERT INTO content_revisions_v9 SELECT id,resource_type,resource_id,version,snapshot_json,author_id,created_at FROM content_revisions;
+    DROP TABLE content_revisions;
+    ALTER TABLE content_revisions_v9 RENAME TO content_revisions;
+    CREATE TRIGGER articles_delete_revisions AFTER DELETE ON articles BEGIN
+      DELETE FROM content_revisions WHERE resource_type='article' AND resource_id=old.id;
+    END;
+    CREATE TRIGGER site_documents_delete_revisions AFTER DELETE ON site_documents BEGIN
+      DELETE FROM content_revisions WHERE resource_type='document' AND resource_id=old.id;
+    END;
+    CREATE TABLE page_settings (
+      id TEXT PRIMARY KEY NOT NULL,
+      path TEXT NOT NULL UNIQUE CHECK(path IN ('/features','/guide/writing','/guide/extension-publish')),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 120),
+      description TEXT NOT NULL DEFAULT '' CHECK(length(description)<=300),
+      status TEXT NOT NULL DEFAULT 'published' CHECK(status IN ('published','hidden')),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+  `,
 }];
