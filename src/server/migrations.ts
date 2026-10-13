@@ -458,4 +458,36 @@ export const migrations = [{
       UNIQUE(owner_id,keyword_id)
     ) STRICT;
   `,
+}, {
+  version: 14,
+  name: 'competitors_actions',
+  sql: `
+    CREATE TABLE competitor_blogs (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      naver_id TEXT NOT NULL CHECK(length(naver_id) BETWEEN 2 AND 50),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=500),
+      snapshot_json TEXT CHECK(snapshot_json IS NULL OR json_valid(snapshot_json)),
+      last_collected_at INTEGER,
+      last_attempt_at INTEGER,
+      last_error TEXT CHECK(last_error IS NULL OR length(last_error)<=60),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE(owner_id,naver_id)
+    ) STRICT;
+    CREATE TABLE action_items (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      result_id TEXT NOT NULL REFERENCES scan_results(id) ON DELETE CASCADE,
+      criterion TEXT NOT NULL CHECK(criterion IN ('cadence','recency','titles','tags','topic')),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 200),
+      status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','done')),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE(result_id,criterion)
+    ) STRICT;
+    CREATE INDEX action_items_owner ON action_items(owner_id,created_at DESC);
+  `,
 }];

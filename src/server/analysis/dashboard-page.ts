@@ -79,13 +79,24 @@ function todos(box:El,d:DashboardData):El{
  const list=mustFind(box.children,cls('mui-1sklw8n'),'todo list');
  const item=mustFind(list.children,cls('mui-oajxy2'),'todo item');
  const latest=d.history[0];
- const entries:[string,string][]=!latest?[[d.blog?'블로그 스캔으로 첫 진단 받기':'블로그 연결하기',d.blog?'스캔이 끝나면 점수가 낮은 기준부터 할 일을 알려드립니다.':'설정에서 네이버 블로그 ID를 등록해주세요.']]
-  :latest.actions.length?latest.actions.map(a=>[a.title,latest.criteria.find(c=>c.key===a.criterion)?.evidence??'']):[['모든 기준을 충족했습니다','지금처럼 꾸준히 발행해주세요.']];
- const build=([title,desc]:[string,string])=>mapTree([withChildren(item,item.children.filter(c=>!(isEl(c)&&cls('mui-1f0w7xa')(c))))],n=>{
+ type Entry={title:string;desc:string;action?:{id:string;status:string;version:number}};
+ const entries:Entry[]=!latest?[{title:d.blog?'블로그 스캔으로 첫 진단 받기':'블로그 연결하기',desc:d.blog?'스캔이 끝나면 점수가 낮은 기준부터 할 일을 알려드립니다.':'설정에서 네이버 블로그 ID를 등록해주세요.'}]
+  :d.actions.length?d.actions.map(a=>({title:a.title,desc:latest.criteria.find(c=>c.key===a.criterion)?.evidence??'',action:{id:a.id,status:a.status,version:a.version}})):[{title:'모든 기준을 충족했습니다',desc:'지금처럼 꾸준히 발행해주세요.'}];
+ const toggle=(a:NonNullable<Entry['action']>,title:string):El=>({tag:'button',attrs:{type:'button','data-action-id':a.id,'data-version':String(a.version),'aria-pressed':String(a.status==='done'),'aria-label':`${title} ${a.status==='done'?'완료 취소':'완료 표시'}`,
+  style:`margin-left:auto;flex:none;border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer;border:1px solid #03c75a;${a.status==='done'?'background:#03c75a;color:#fff':'background:transparent;color:#03c75a'}`},children:[a.status==='done'?'✓ 완료':'완료']});
+ const fill=(nodes:CapturedNode[],title:string,desc:string)=>mapTree(nodes,n=>{
   if(cls('mui-9m8hl0')(n))return[set(n,title)];
   if(cls('mui-fa9sfz')(n))return[set(n,desc)];
   return undefined;
- })[0];
+ });
+ // 제목·설명을 먼저 바꾼 뒤 토글 버튼을 붙인다(부모를 바꾸면 자식 변환이 건너뛰어지므로 순서가 중요하다).
+ const build=(e:Entry)=>{
+  const base=withChildren(item,item.children.filter(c=>!(isEl(c)&&cls('mui-1f0w7xa')(c))));
+  const filled=fill([base],e.action?.status==='done'?`✓ ${e.title}`:e.title,e.desc)[0] as El;
+  const action=e.action;
+  if(!action)return filled;
+  return mapTree([filled],n=>cls('mui-1fdy0y8')(n)?[withChildren(withAttrs(n,{style:'display:flex;align-items:center;gap:8px'}),[...n.children,toggle(action,e.title)])]:undefined)[0];
+ };
  return withAttrs(mapTree([box],n=>n===list?[withChildren(n,entries.map(build))]:undefined)[0] as El,{id:'today-todo'});
 }
 

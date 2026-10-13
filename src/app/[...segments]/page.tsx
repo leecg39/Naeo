@@ -10,6 +10,7 @@ import { buildDashboardPage } from '@/server/analysis/dashboard-page';
 import { buildMateDashboardPage } from '@/server/mate/mate-dashboard';
 import { buildAiPicksPage } from '@/server/analysis/ai-picks-page';
 import { buildRecommendationsPage } from '@/server/keywords/recommendations-page';
+import { buildCompetitorsPage } from '@/server/competitors/competitors-page';
 import { database } from '@/server/database';
 import AnnouncementBar from '@/components/content/AnnouncementBar';
 import type { CapturedPageData } from '@/types/site';
@@ -30,6 +31,7 @@ export default async function Page({params,searchParams}:Props){
   if(path==='/dashboard')return <PageExperience data={await buildDashboardPage(database(),user.id)}/>;
   if(path==='/dashboard/mate')return <PageExperience data={await buildMateDashboardPage(database(),user.id)}/>;
   if(path==='/dashboard/ai-picks')return <PageExperience data={await buildAiPicksPage()}/>;
+  if(path==='/dashboard/competitors')return <PageExperience data={await buildCompetitorsPage(database(),user.id)}/>;
   if(path==='/dashboard/recommendations'){const sp=await searchParams;return <PageExperience data={await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)})}/>;}
  }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));

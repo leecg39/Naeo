@@ -193,3 +193,15 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/recommendations/:keywordId/state` | PUT | 회원 | `{status:'written'|'saved'|null}` 작성 완료 표시·해제(회원별) | 404(숨김·없음) |
 
 분류(새 규칙): 포화도 = 문서수 ÷ (PC+모바일 월 검색량). 황금 = 포화도 1 미만·검색량 1,000 이상, 선점기회 = 황금 아님·포화도 3 미만·검색량 300 이상. 지표가 없거나 검색량 0이면 분류하지 않는다. 화면 `/dashboard/recommendations`는 서버가 행·모바일 카드·요약을 DB로 그리고(캡처 계정 키워드 제거), 검색(`?q=`)·페이지(50개)는 서버, 황금·선점·기간 필터와 정렬은 화면에서 처리한다.
+
+## P3.6 경쟁 블로그·오늘 할 일 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
+|---|---|---|---|---|
+| `/api/competitors` | GET·POST | 회원 | 목록은 내 경쟁 블로그 + 비교 기준(내 대표 블로그 최신 진단). 추가 `{blog,note≤500}`: 블로그 ID·네이버 블로그 주소만, 회원당 10개(새 규칙), 회원별 unique | 400 `INVALID_BLOG`, 409 `COMPETITOR_EXISTS`·`COMPETITOR_LIMIT` |
+| `/api/competitors/:id` | PATCH·DELETE | 회원(본인) | 메모 수정 `{note,version}`, 삭제 `{version}` | 404, 409 |
+| `/api/competitors/:id/refresh` | POST | 회원(본인) | 공개 RSS 수집 → 5가지 기준 스냅숏(점수·글 수·최근 글). 같은 블로그 10분 간격, 회원 시간당 30회. 실패 코드는 화면에 기록 | 404 `BLOG_NOT_FOUND`, 429 `REFRESH_TOO_SOON`, 502 |
+| `/api/actions` | GET | 회원 | 최신 진단 결과의 할 일(진단 저장 때 결과·기준당 1개 생성) | 401 |
+| `/api/actions/:id` | PATCH | 회원(본인) | `{status:'open'|'done',version}` 완료·해제 | 404, 409 |
+
+`/dashboard/competitors`는 원본 계정의 키워드별 상위 노출 표(다른 블로그 글 제목)를 지우고 내 경쟁 블로그 표·추가 폼·내 점수 대비 차이를 보여준다. 키워드별 상위 노출 비교는 네이버 검색 API 미설정으로 표시. 운영 주의: worker는 코드 배포 뒤 다시 시작해야 새 로직(예: 할 일 생성)이 적용된다.

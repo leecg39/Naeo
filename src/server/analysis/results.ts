@@ -3,6 +3,7 @@ import type {Database} from '../database';
 import {AppError} from '../errors';
 import {paginationInput} from '../validation';
 import type {AnalysisReport} from './rules';
+import {createActionItems} from './action-items';
 
 export type ScanResult=AnalysisReport&{id:string;blogId:string;jobId:string|null;postCount:number;measuredAt:number};
 type Row={id:string;blog_id:string;job_id:string|null;score:number;method_version:string;report_json:string;post_count:number;measured_at:number};
@@ -17,6 +18,7 @@ export function saveScanResult(db:Database,{ownerId,blogId,jobId,report,postCoun
  const id=randomUUID();
  db.prepare('INSERT INTO scan_results(id,owner_id,blog_id,job_id,score,method_version,report_json,post_count,measured_at) VALUES(?,?,?,?,?,?,?,?,?)')
   .run(id,ownerId,blogId,jobId,report.score,report.methodVersion,JSON.stringify(report),postCount,measuredAt);
+ createActionItems(db,ownerId,id,report,measuredAt);
  return id;
 }
 

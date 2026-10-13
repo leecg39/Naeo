@@ -208,54 +208,6 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
   };
 }
 
-function installCompetitors(root: HTMLElement, mutate: ReturnType<typeof mutations>, cleanup: Cleanup[]) {
-  const table = root.querySelector<HTMLTableElement>("table");
-  const body = table?.tBodies[0];
-  if (!table || !body) return () => false;
-  const rows = Array.from(body.querySelectorAll<HTMLTableRowElement>(":scope > tr"));
-  cleanup.push(() => rows.forEach(row => body.append(row)));
-  const filters = elements(root, ".mui-186wd1t button");
-  const active = filters[0]?.className; const inactive = filters[1]?.className;
-  const headers = Array.from(table.querySelectorAll<HTMLElement>("th"));
-  const headerName = (header: Element) => text(header).replace(/[▲▼]/g, "");
-  const dateColumn = headers.findIndex(header => headerName(header) === "분석일");
-  let sortColumn = headers.findIndex(header => headerName(header) === "검색량");
-  let descending = true;
-  const sortable = headers.filter(header => /분석일|검색량|포화도|내 순위|AI 추천/.test(text(header)));
-  sortable.forEach(header => { mutate.attr(header, "tabindex", "0"); mutate.attr(header, "role", "button"); mutate.attr(header, "aria-label", `${text(header).replace(/[▲▼]/g, "")} 정렬`); });
-  const report = statusElement(table.parentElement, cleanup);
-  const parseDate = (row: HTMLTableRowElement) => {
-    const [month, day] = text(row.cells[dateColumn]).split("/").map(Number);
-    return new Date(2026, month - 1, day).getTime();
-  };
-  // The snapshot is dated 2026-10-13; its period filters use that same baseline.
-  const baseline = new Date(2026, 9, 13);
-  return (target: HTMLElement) => {
-    const button = target.closest<HTMLElement>(".mui-186wd1t button");
-    if (button && filters.includes(button)) {
-      selectGroup(filters, button, mutate, active, inactive);
-      const index = filters.indexOf(button);
-      const start = new Date(baseline);
-      if (index === 1) start.setDate(start.getDate() - (start.getDay() + 6) % 7);
-      if (index === 2) start.setDate(1);
-      if (index === 3) start.setMonth(start.getMonth() - 3);
-      let count = 0;
-      rows.forEach(row => { const visible = index === 0 || parseDate(row) >= start.getTime(); mutate.attr(row, "style", visible ? null : "display:none"); if (visible) count++; });
-      report(`${text(button)} · ${count}개 키워드 · 분석 기준 2026.10.13`); return true;
-    }
-    const header = target.closest<HTMLElement>("th");
-    if (header && sortable.includes(header)) {
-      const column = headers.indexOf(header); const label = headerName(header);
-      descending = column === sortColumn ? !descending : label !== "포화도" && label !== "내 순위"; sortColumn = column;
-      headers.forEach(el => mutate.attr(el, "aria-sort", el === header ? descending ? "descending" : "ascending" : "none"));
-      const value = (row: HTMLTableRowElement) => label === "분석일" ? parseDate(row) : label === "AI 추천" ? /내 본문|내 이미지/.test(text(row.cells[column])) ? 1 : 0 : label === "내 순위" && text(row.cells[column]) === "-" ? Infinity : number(text(row.cells[column]));
-      [...rows].sort((a, b) => (value(a) - value(b)) * (descending ? -1 : 1)).forEach(row => body.append(row));
-      report(`${text(header).replace(/[▲▼]/g, "")} ${descending ? "내림차순" : "오름차순"} 정렬`); return true;
-    }
-    return false;
-  };
-}
-
 function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<typeof mutations>, cleanup: Cleanup[]) {
   // Recharts snapshots retain their measured desktop width. Preserve the SVG
   // viewBox while letting its real chart DOM fit narrower layouts.
@@ -367,6 +319,15 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
       return true;
     }
     if (button === scanButton) { void scan(); return true; }
+    const actionToggle = target.closest<HTMLButtonElement>("button[data-action-id]");
+    if (actionToggle) {
+      const done = actionToggle.getAttribute("aria-pressed") === "true";
+      actionToggle.disabled = true;
+      api(`/api/actions/${actionToggle.dataset.actionId}`, { method: "PATCH", body: { status: done ? "open" : "done", version: Number(actionToggle.dataset.version) } })
+        .then(() => { tools.toast(done ? "할 일 완료를 취소했습니다." : "할 일을 완료로 표시했습니다."); window.location.reload(); })
+        .catch(error => { actionToggle.disabled = false; tools.toast(error instanceof Error ? error.message : "저장하지 못했습니다."); });
+      return true;
+    }
     if (button && text(button) === "변경") { tools.navigate("/dashboard/settings"); return true; }
     const card = target.closest<HTMLElement>("[role='button'][aria-label$='AI 브리핑 캡처 상세보기']");
     if (card) {
@@ -381,7 +342,7 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
 export const installAnalysis: InstallBehavior = (root, tools) => {
   const cleanup: Cleanup[] = [];
   const mutate = mutations();
-  const handle = tools.pathname === "/dashboard/ai-picks" ? installAi(root, tools, mutate, cleanup) : tools.pathname === "/dashboard/competitors" ? installCompetitors(root, mutate, cleanup) : tools.pathname === "/dashboard" ? installDashboard(root, tools, mutate, cleanup) : () => false;
+  const handle = tools.pathname === "/dashboard/ai-picks" ? installAi(root, tools, mutate, cleanup) : tools.pathname === "/dashboard" ? installDashboard(root, tools, mutate, cleanup) : () => false;
   const click = (event: MouseEvent) => {
     const target = event.target instanceof Element ? event.target.closest<HTMLElement>("*") : null;
     if (!target || event.defaultPrevented) return;
