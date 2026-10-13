@@ -251,3 +251,24 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/admin/rankings/confirm` | POST | 관리자 | `{period:'week'|'month',offset:-1~-52}` 기간 확정(감사) | 403, 409 `PERIOD_NOT_FINISHED` |
 
 규칙(새 규칙): 랭킹 공개(`profiles.ranking_public`, 기본 비공개)·활성 회원의 대표 블로그를 기간 안에서 가장 최근에 진단한 점수로 순위. 동점이면 먼저 기록한 회원, 그다음 닉네임 순. 주간은 KST 월요일 0시~, 월간은 1일 0시~. 확정 스냅숏(기준별 점수 포함)은 이후 결과로 바뀌지 않는다. 칭호: 확정 주간 1위 횟수, 확정 월간 1위. 공개 응답에 회원 id·이메일 없음. AI 인용·검색 노출 지표는 공급자 미설정으로 쓰지 않는다.
+
+## P5.3–P5.5 이벤트·참여·리워드 API (2026-10-13)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/api/events` | GET | 공개 | 게시·마감 이벤트(초안 제외), 진행 중 → 예정 → 종료 순, `phase` 포함 | — |
+| `/api/events/:slug` | GET | 공개 | 상세 + 참여 수(철회 제외) | 404 |
+| `/api/events/:slug/entry` | GET | 회원 | 이 이벤트의 내 참여(철회 제외) 또는 null | 401 |
+| `/api/events/:slug/entries` | POST | 회원 | `{proofUrl?,note?}` 참여. 인증 글은 blog.naver.com·m.blog.naver.com·PostView 주소를 정규화하고 내 등록 블로그만 허용 | 400 `PROOF_NOT_OWN_BLOG`·`PROOF_REQUIRED`, 409 `ALREADY_ENTERED`·`EVENT_NOT_OPEN`·`ENTRIES_DISABLED`, 404 |
+| `/api/event-entries/:id` | PATCH | 본인 | `{proofUrl?,note?,version}` 심사 전·기간 안에서만 | 404(남의 참여), 409 `ENTRY_REVIEWED`·`VERSION_CONFLICT`·`EVENT_NOT_OPEN` |
+| `/api/event-entries/:id/withdraw` | POST | 본인 | `{version}` 심사 전 철회(이후 다시 참여 가능) | 404, 409 |
+| `/api/me/events` | GET | 회원 | 내 참여 내역·리워드 | 401 |
+| `/api/admin/events` | GET·POST | 관리자 | 목록(`q`,`status`, 상태별 참여 수) / 생성(slug·제목·요약·마크다운 본문·상태·KST 기간·인증 필수·승인 토큰·참여 신청 여부·내부 경로 CTA) | 403, 409 `SLUG_EXISTS`, 400 |
+| `/api/admin/events/:id` | PATCH·DELETE | 관리자 | 버전 잠금 수정 / 참여 없는 이벤트만 삭제 | 409 `VERSION_CONFLICT`·`EVENT_HAS_ENTRIES`, 400 `INVALID_PERIOD` |
+| `/api/admin/event-entries?slug=` | GET | 관리자 | 참여 목록(회원 이메일·닉네임, `status`·`q`) | 403, 404 |
+| `/api/admin/event-entries/:id/review` | POST | 관리자 | `{decision:'approved'|'rejected',note?,version}`. 승인 시 이벤트 토큰 1회 지급, 승인→반려 시 회수 | 409 `VERSION_CONFLICT`·`ENTRY_WITHDRAWN`·`NEGATIVE_BALANCE` |
+| `/api/admin/rewards` | GET·POST | 관리자 | 내역(`kind`,`status`,`q`) / 지급 `{userId|email, tokens|item, description, eventSlug?}` | 404 `USER_NOT_FOUND`·`EVENT_NOT_FOUND`, 400 |
+| `/api/admin/rewards/:id/revoke` | POST | 관리자 | `{version}` 회수(토큰은 반대 분개) | 409 `REWARD_REVOKED`·`NEGATIVE_BALANCE`·`VERSION_CONFLICT` |
+| `/api/admin/rewards/ranking` | POST | 관리자 | `{period,offset:-1~-52,top,tokens,eventSlug?}` 확정 기간 상위 N명 지급(같은 기간·회원 1회) | 409 `PERIOD_NOT_CONFIRMED` |
+
+규칙: 기간은 시작 포함·종료 제외(관리자 입력은 KST). 당첨 내역(이벤트 상세)은 유효 리워드만, 닉네임은 첫 글자 외 가림. 모든 관리자 변경·참여 제출/수정/철회는 감사 기록. 쿠폰(할인)은 P6 결제 모델과 연결 예정이며 지금은 상품·쿠폰명을 기록하는 상품 리워드로 지급 내역만 관리한다(발송은 별도).

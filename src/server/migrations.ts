@@ -631,4 +631,65 @@ export const migrations = [{
     CREATE INDEX ranking_snapshots_rank ON ranking_snapshots(period_type,period_key,rank);
     CREATE INDEX ranking_snapshots_user ON ranking_snapshots(user_id);
   `,
+}, {
+  version: 19,
+  name: 'events_rewards',
+  sql: `
+    CREATE TABLE events (
+      id TEXT PRIMARY KEY NOT NULL,
+      slug TEXT NOT NULL UNIQUE CHECK(length(slug) BETWEEN 2 AND 60),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 100),
+      summary TEXT NOT NULL DEFAULT '' CHECK(length(summary)<=300),
+      body TEXT NOT NULL DEFAULT '' CHECK(length(body)<=20000),
+      status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','published','closed')),
+      starts_at INTEGER NOT NULL,
+      ends_at INTEGER NOT NULL CHECK(ends_at>starts_at),
+      requires_proof INTEGER NOT NULL DEFAULT 1 CHECK(requires_proof IN (0,1)),
+      reward_tokens INTEGER NOT NULL DEFAULT 0 CHECK(reward_tokens BETWEEN 0 AND 10000),
+      accepts_entries INTEGER NOT NULL DEFAULT 1 CHECK(accepts_entries IN (0,1)),
+      cta_label TEXT NOT NULL DEFAULT '' CHECK(length(cta_label)<=40),
+      cta_href TEXT NOT NULL DEFAULT '' CHECK(cta_href='' OR (substr(cta_href,1,1)='/' AND substr(cta_href,2,1)<>'/' AND length(cta_href)<=200)),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE event_entries (
+      id TEXT PRIMARY KEY NOT NULL,
+      event_id TEXT NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      proof_url TEXT NOT NULL DEFAULT '' CHECK(length(proof_url)<=300),
+      note TEXT NOT NULL DEFAULT '' CHECK(length(note)<=500),
+      status TEXT NOT NULL DEFAULT 'submitted' CHECK(status IN ('submitted','approved','rejected','withdrawn')),
+      review_note TEXT NOT NULL DEFAULT '' CHECK(length(review_note)<=300),
+      reviewed_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      reviewed_at INTEGER,
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE UNIQUE INDEX event_entries_one ON event_entries(event_id,user_id) WHERE status<>'withdrawn';
+    CREATE INDEX event_entries_user ON event_entries(user_id,created_at DESC);
+    CREATE TABLE rewards (
+      id TEXT PRIMARY KEY NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK(kind IN ('event','ranking','manual','gift')),
+      tokens INTEGER NOT NULL CHECK((kind='gift' AND tokens=0) OR (kind<>'gift' AND tokens BETWEEN 1 AND 100000)),
+      item TEXT NOT NULL DEFAULT '' CHECK(length(item)<=100 AND (kind<>'gift' OR length(item)>0)),
+      description TEXT NOT NULL CHECK(length(description) BETWEEN 1 AND 200),
+      event_id TEXT REFERENCES events(id) ON DELETE SET NULL,
+      source_key TEXT CHECK(source_key IS NULL OR length(source_key)<=120),
+      entry_id TEXT REFERENCES event_entries(id) ON DELETE SET NULL,
+      status TEXT NOT NULL DEFAULT 'granted' CHECK(status IN ('granted','revoked')),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      granted_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      revoked_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at INTEGER NOT NULL,
+      revoked_at INTEGER
+    ) STRICT;
+    CREATE UNIQUE INDEX rewards_once ON rewards(source_key) WHERE source_key IS NOT NULL AND status='granted';
+    CREATE INDEX rewards_user ON rewards(user_id,created_at DESC);
+    CREATE INDEX rewards_event ON rewards(event_id,created_at DESC);
+  `,
 }];

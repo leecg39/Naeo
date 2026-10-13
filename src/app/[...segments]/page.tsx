@@ -17,6 +17,9 @@ import { buildRankingPage } from '@/server/ranking/ranking-page';
 import { ensureConfirmed } from '@/server/ranking/ranking-api';
 import { database } from '@/server/database';
 import AnnouncementBar from '@/components/content/AnnouncementBar';
+import EventEntryPanel from '@/components/events/EventEntryPanel';
+import { buildDashboardEventsPage,buildEventDetailPage,buildEventListPage } from '@/server/events/event-pages';
+import { getPublicEvent } from '@/server/events/events';
 import type { CapturedPageData } from '@/types/site';
 type Props={params:Promise<{segments:string[]}>;searchParams:Promise<Record<string,string|string[]|undefined>>};
 const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
@@ -24,7 +27,9 @@ const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
 export const dynamic='force-dynamic';
 /** DB가 맡는 경로(블로그·정책 문서·FAQ 등). undefined면 캡처 화면으로 넘긴다. */
 const databasePage=cache(resolveDatabasePage);
-export async function generateMetadata({params}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');const data=(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
+/** 이벤트 상세는 DB의 이벤트 제목·요약을 메타데이터로 쓴다(원본 캡처 문구 대신). */
+function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|event)\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];const e=slug?getPublicEvent(contentDatabase(),slug):null;return e?{title:`${e.title} | NAEO`,description:e.summary}:undefined;}
+export async function generateMetadata({params}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
 /** 공개 화면에는 '전체' 대상 공지를 함께 띄운다(대시보드·관리자 등은 activeAnnouncement가 제외). */
 function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
 export default async function Page({params,searchParams}:Props){
@@ -36,6 +41,9 @@ export default async function Page({params,searchParams}:Props){
   if(path==='/dashboard/mate')return <PageExperience data={await buildMateDashboardPage(database(),user.id)}/>;
   if(path==='/dashboard/ai-picks')return <PageExperience data={await buildAiPicksPage()}/>;
   if(path==='/dashboard/competitors')return <PageExperience data={await buildCompetitorsPage(database(),user.id)}/>;
+  if(path==='/dashboard/events')return <PageExperience data={await buildDashboardEventsPage(contentDatabase(),user.id)}/>;
+  const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
+  if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <><PageExperience data={detail}/><EventEntryPanel/></>;}
   if(path==='/dashboard/write'){const captured=await getCapturedPage(path);if(captured)return <><PageExperience data={captured}/><DraftsWorkspace/></>;}
   if(path==='/dashboard/recommendations'){const sp=await searchParams;return <PageExperience data={await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)})}/>;}
  }
@@ -48,13 +56,19 @@ export default async function Page({params,searchParams}:Props){
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
   return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
  }
+ if(path==='/event')return withNotice(path,await buildEventListPage(contentDatabase()));
+ if(path.startsWith('/event/')){
+  const slug=path.match(/^\/event\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
+  const detail=slug?await buildEventDetailPage(contentDatabase(),slug,{dashboard:false}):null;
+  if(!detail)notFound();
+  return <>{withNotice(path,detail)}<EventEntryPanel/></>;
+ }
  const fromDb=await databasePage(path);
  if(fromDb===null)notFound();
  if(fromDb)return withNotice(path,fromDb);
  const data=await getCapturedPage(path);
  if(data&&path==='/images')return <>{withNotice(path,data)}<ImagesLibrary/></>;
  if(data)return withNotice(path,data);
- if(path.startsWith('/dashboard/events/')){const event=await getCapturedPage('/event/'+path.split('/').at(-1));if(event)return <PageExperience data={{...event,path}}/>;redirect('/dashboard/events')}
  const shareToken=path.match(/^\/p\/([A-Za-z0-9_-]{22})\/images$/)?.[1];
  if(shareToken){const images=await getCapturedPage('/images');if(images)return <><PageExperience data={{...images,path}}/><SharedImages token={shareToken}/></>}
  notFound();

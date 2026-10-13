@@ -10,6 +10,7 @@ import {competitorsApi} from './competitors/competitors-api';
 import {publicShareApi,writingApi} from './writing/writing-api';
 import {generationApi} from './generation/generation-api';
 import {memberRankingApi,publicRankingApi} from './ranking/ranking-api';
+import {adminEventsApi,memberEventsApi,publicEventsApi} from './events/events-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -47,6 +48,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(publicShare)return publicShare;
     const publicRanking=publicRankingApi(db,request,sessionUser(db,cookieToken(request)));
     if(publicRanking)return publicRanking;
+    const publicEvents=publicEventsApi(db,request);
+    if(publicEvents)return publicEvents;
     const user=requireUser(db,cookieToken(request));
     if(path==='/api/auth/me'&&method==='GET') return json({data:{user,profile:getProfile(db,user.id)}});
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
@@ -72,6 +75,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(generationResponse)return generationResponse;
     const rankingResponse=await memberRankingApi(db,request,user);
     if(rankingResponse)return rankingResponse;
+    const eventsResponse=await memberEventsApi(db,request,user)??await adminEventsApi(db,request,user);
+    if(eventsResponse)return eventsResponse;
     if(path==='/api/profile') {
       if(method==='GET') return json({data:getProfile(db,user.id)});
       if(method==='PATCH') return json({data:updateProfile(db,user.id,await body(request,profileInput))});

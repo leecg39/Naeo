@@ -6,6 +6,7 @@ import faqSeed from '../../data/content/faq.seed.json';
 import updatesSeed from '../../data/content/updates.seed.json';
 import {getCapturedPage} from '../../lib/pages';
 import {MANAGED_PAGES,displayTitle} from './page-settings';
+import {seedEvents} from '../events/seed';
 
 const ARTICLES_SEED='articles-v1';
 const DOCUMENTS_SEED='documents-v1';
@@ -22,6 +23,7 @@ export function applySeeds(db:Database,now=Date.now()):void{
  seedDocuments(db,now);
  seedFaq(db,now);
  seedUpdates(db,now);
+ seedEvents(db,now);
 }
 
 /** 고정 디자인 페이지 설정은 캡처 파일을 읽어야 해서 비동기로 한 번만 넣는다. */
