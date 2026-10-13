@@ -321,3 +321,17 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공�
 | `/api/account/apps` · `/:clientId` | GET·DELETE | 회원 | 연결된 앱(권한·연결일·마지막 사용·호출 수) / 앱의 모든 토큰 철회 | 404 |
 | `/auth/extension` | GET 화면 | 공개 | `extension_id`가 `NAEO_EXTENSION_IDS`에 있으면 확장 클라이언트(`https://{id}.chromiumapp.org/`)로 동의 화면 이동 | 캡처 오류 상자 |
 | `/api/mcp` | POST | Bearer(대상=/api/mcp) | MCP Streamable HTTP(2025-06-18·2025-03-26): `initialize`·`ping`·`tools/list`·`tools/call`, 알림 202. 도구: `naeo_blog_status`·`naeo_token_balance`·`naeo_list_drafts`·`naeo_get_draft`(read), `naeo_create_draft`(write), `naeo_request_generation`(generate, 토큰 차감·미설정이면 차감 없이 isError). 호출은 `mcp_calls` 기록, 연결별 분당 120회 | 401+`WWW-Authenticate: Bearer resource_metadata=…`, 403 다른 사이트 Origin, 405 GET, JSON-RPC -32601/-32602/-32700, 권한 부족은 isError |
+
+## P7.4 소셜 제작 API (2026-10-14)
+
+| 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
+|---|---|---|---|---|
+| `/api/creative/projects` | GET·POST | 회원 | 내 프로젝트 목록 / `{kind:'carousel'|'ad'|'video',title}` 종류별 크기로 만들고 표지 1장 | 409 `PROJECT_LIMIT` |
+| `/api/creative/projects/:id` | GET·PATCH·DELETE | 소유자 | 슬라이드 포함 조회 / `{title?,theme?:{background,accent,text},version}` / `{version}` | 404, 409 `VERSION_CONFLICT` |
+| `/api/creative/projects/:id/duplicate` | POST | 소유자 | 슬라이드까지 복사(독립) | 409 |
+| `/api/creative/projects/:id/slides` | POST | 소유자 | `{heading?,body?,caption?,background?,position?}` 끼워 넣기 | 409 `SLIDE_LIMIT` |
+| `/api/creative/projects/:id/slides/:sid` | PATCH·DELETE | 소유자 | 버전 잠금 수정 / 삭제 후 재번호 | 409 `LAST_SLIDE`·`VERSION_CONFLICT` |
+| `.../slides/:sid/move` · `/duplicate` | POST | 소유자 | `{position}` 이동 / 바로 뒤에 복제 | 404 |
+| `.../slides/:sid.svg` | GET | 소유자 | 서버가 그린 SVG(글자 이스케이프·줄바꿈), `CSP sandbox`·`nosniff`·`no-store` | 404 |
+
+화면: `/dashboard/social` 편집기(계정 메뉴 '소셜 제작'), `/social/aeo-carousel?project=`·`/social/mate-ad?project=`·`/youtube/aeo-intro?project=` 내 프로젝트 보기(←/→), 쿼리가 없으면 캡처 견본 유지.

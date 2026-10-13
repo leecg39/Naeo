@@ -912,5 +912,36 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX mcp_calls_user ON mcp_calls(user_id,created_at DESC);
   `,
+}, {
+  version: 23,
+  name: 'creative_projects',
+  sql: `
+    CREATE TABLE creative_projects (
+      id TEXT PRIMARY KEY NOT NULL,
+      owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      kind TEXT NOT NULL CHECK(kind IN ('carousel','ad','video')),
+      title TEXT NOT NULL CHECK(length(title) BETWEEN 1 AND 100),
+      width INTEGER NOT NULL CHECK(width BETWEEN 320 AND 3840),
+      height INTEGER NOT NULL CHECK(height BETWEEN 320 AND 3840),
+      theme_json TEXT NOT NULL CHECK(json_valid(theme_json)),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX creative_projects_owner ON creative_projects(owner_id,updated_at DESC);
+    CREATE TABLE creative_slides (
+      id TEXT PRIMARY KEY NOT NULL,
+      project_id TEXT NOT NULL REFERENCES creative_projects(id) ON DELETE CASCADE,
+      position INTEGER NOT NULL CHECK(position>=0),
+      heading TEXT NOT NULL DEFAULT '' CHECK(length(heading)<=120),
+      body TEXT NOT NULL DEFAULT '' CHECK(length(body)<=600),
+      caption TEXT NOT NULL DEFAULT '' CHECK(length(caption)<=80),
+      background TEXT NOT NULL DEFAULT '' CHECK(background='' OR background GLOB '#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]'),
+      version INTEGER NOT NULL DEFAULT 1 CHECK(version>0),
+      created_at INTEGER NOT NULL,
+      updated_at INTEGER NOT NULL,
+      UNIQUE(project_id,position)
+    ) STRICT;
+  `,
 }];
 

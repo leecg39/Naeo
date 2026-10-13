@@ -77,7 +77,7 @@
 - [ ] P7.1 Google/네이버 OAuth 로그인·콜백·계정 연결/해제, state/nonce/PKCE·next 제한·실제 앱 계정 테스트. (구현·로컬 IdP 스텁 검증 완료. 실제 앱 등록·계정 왕복은 키 필요)
 - [x] P7.2 /oauth/consent /auth/extension 연결/동의/철회·일회 코드·범위 제한·확장 토큰 만료·사용 UI. (OAuth 2.1 인가 서버·동의 화면·확장 클라이언트·연결된 앱 UI. 확장 프로그램 코드 자체는 저장소에 없음)
 - [x] P7.3 /api/mcp 표준 연결/도구 목록/호출·인증·권한·크레딧, /mcp 안내 설정을 실제 로컬/배포 URL로 연결. (Streamable HTTP·OAuth 발견·도구 6개·범위·토큰 차감, 설정에 실제 MCP 주소, 공식 Inspector로 확인)
-- [ ] P7.4 소셜 프로젝트/슬라이드 CRUD·정렬·저장·복제, /social/* 및 /youtube/aeo-intro·배너 화면 연결.
+- [x] P7.4 소셜 프로젝트/슬라이드 CRUD·정렬·저장·복제, /social/* 및 /youtube/aeo-intro·배너 화면 연결. (/dashboard/social 편집기·SVG 미리보기·?project= 보기. /social/banner-preview는 캡처가 없어 홈으로 이동 유지)
 - [ ] P7.5 실제 이미지/PDF/영상 내보내기·진행/실패·파일 검증; /preview /dev/* 권한·미리보기 동작.
 - [ ] P7.6 OAuth 실제 왕복·MCP 클라이언트·확장·내보내기·모바일·접근 제어 E2E 검증.
 

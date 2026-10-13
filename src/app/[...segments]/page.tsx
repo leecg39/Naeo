@@ -28,6 +28,8 @@ import { tossProvider } from '@/server/billing/provider';
 import { AppError } from '@/server/errors';
 import Link from 'next/link';
 import ConsentForm from '@/components/account/ConsentForm';
+import CreativeViewer from '@/components/creative/CreativeViewer';
+import { getProject } from '@/server/creative/projects';
 import { ensureExtensionClient,problemRedirect,requestProblem,SCOPE_LABEL,validateAuthorizeRequest,type AuthorizeRequest } from '@/server/oauth/authz';
 import type { CapturedPageData } from '@/types/site';
 type Props={params:Promise<{segments:string[]}>;searchParams:Promise<Record<string,string|string[]|undefined>>};
@@ -38,7 +40,7 @@ export const dynamic='force-dynamic';
 const databasePage=cache(resolveDatabasePage);
 /** 이벤트 상세는 DB의 이벤트 제목·요약을 메타데이터로 쓴다(원본 캡처 문구 대신). */
 function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|event)\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];const e=slug?getPublicEvent(contentDatabase(),slug):null;return e?{title:`${e.title} | NAEO`,description:e.summary}:undefined;}
-export async function generateMetadata({params}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
+export async function generateMetadata({params,searchParams}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');if(['/social/aeo-carousel','/social/mate-ad','/youtube/aeo-intro'].includes(path)&&first((await searchParams).project))return{title:'소셜 프로젝트 보기',robots:{index:false,follow:false}};const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
 /** 공개 화면에는 '전체' 대상 공지를 함께 띄운다(대시보드·관리자 등은 activeAnnouncement가 제외). */
 function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
 /** 결제창에서 돌아온 결과: 성공이면 서버에서 승인(멱등), 실패면 주문 실패 처리. 화면은 저장된 주문 상태로 그린다. */
@@ -95,6 +97,8 @@ export default async function Page({params,searchParams}:Props){
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
   return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
  }
+ const viewKind={'/social/aeo-carousel':'carousel','/social/mate-ad':'ad','/youtube/aeo-intro':'video'}[path];
+ if(viewKind){const sp=await searchParams,id=first(sp.project);if(id){const user=await pageUser(`${path}?project=${encodeURIComponent(id)}`);let project;try{project=getProject(database(),user.id,id);}catch{notFound();}if(project.kind!==viewKind)notFound();return <CreativeViewer project={project}/>;}}
  if(path==='/oauth/consent')return consentPage(await searchParams);
  if(path==='/auth/extension'){const to=extensionRedirect(await searchParams);if(to)redirect(to);}
  if(path==='/pricing'){const viewer=await currentUser();return withNotice(path,await buildPricingPage(contentDatabase(),viewer?.id??null,tossProvider()!==null));}

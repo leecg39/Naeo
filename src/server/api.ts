@@ -15,6 +15,7 @@ import {adminBillingApi,memberBillingApi,publicBillingApi,WEBHOOK_PATH} from './
 import {memberOAuthApi,publicOAuthApi} from './oauth/oauth-api';
 import {memberAuthzApi,publicAuthzApi,SERVER_TO_SERVER} from './oauth/authz-api';
 import {mcpApi} from './mcp/mcp-api';
+import {creativeApi} from './creative/creative-api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -94,6 +95,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(rankingResponse)return rankingResponse;
     const eventsResponse=await memberEventsApi(db,request,user)??await adminEventsApi(db,request,user);
     if(eventsResponse)return eventsResponse;
+    const creativeResponse=await creativeApi(db,request,user);
+    if(creativeResponse)return creativeResponse;
     const billingResponse=await memberBillingApi(db,request,user)??await adminBillingApi(db,request,user);
     if(billingResponse)return billingResponse;
     if(path==='/api/profile') {
