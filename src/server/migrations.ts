@@ -864,5 +864,53 @@ export const migrations = [{
     ) STRICT;
     CREATE INDEX oauth_states_expiry ON oauth_states(expires_at);
   `,
+}, {
+  version: 22,
+  name: 'oauth_server_mcp',
+  sql: `
+    CREATE TABLE oauth_clients (
+      client_id TEXT PRIMARY KEY NOT NULL CHECK(length(client_id) BETWEEN 8 AND 80),
+      name TEXT NOT NULL CHECK(length(name) BETWEEN 1 AND 80),
+      kind TEXT NOT NULL CHECK(kind IN ('mcp','extension')),
+      redirect_uris_json TEXT NOT NULL CHECK(json_valid(redirect_uris_json)),
+      created_at INTEGER NOT NULL,
+      last_used_at INTEGER
+    ) STRICT;
+    CREATE TABLE oauth_codes (
+      code_hash TEXT PRIMARY KEY NOT NULL CHECK(length(code_hash)=64),
+      client_id TEXT NOT NULL REFERENCES oauth_clients(client_id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      redirect_uri TEXT NOT NULL CHECK(length(redirect_uri)<=500),
+      code_challenge TEXT NOT NULL CHECK(length(code_challenge) BETWEEN 43 AND 128),
+      scope TEXT NOT NULL CHECK(length(scope)<=200),
+      resource TEXT NOT NULL CHECK(length(resource)<=300),
+      expires_at INTEGER NOT NULL,
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE TABLE oauth_tokens (
+      token_hash TEXT PRIMARY KEY NOT NULL CHECK(length(token_hash)=64),
+      kind TEXT NOT NULL CHECK(kind IN ('access','refresh')),
+      client_id TEXT NOT NULL REFERENCES oauth_clients(client_id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      scope TEXT NOT NULL CHECK(length(scope)<=200),
+      resource TEXT NOT NULL CHECK(length(resource)<=300),
+      family_id TEXT NOT NULL,
+      expires_at INTEGER NOT NULL,
+      revoked_at INTEGER,
+      last_used_at INTEGER,
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX oauth_tokens_user ON oauth_tokens(user_id,client_id);
+    CREATE INDEX oauth_tokens_family ON oauth_tokens(family_id);
+    CREATE TABLE mcp_calls (
+      id TEXT PRIMARY KEY NOT NULL,
+      user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      client_id TEXT NOT NULL,
+      tool TEXT NOT NULL CHECK(length(tool)<=60),
+      ok INTEGER NOT NULL CHECK(ok IN (0,1)),
+      created_at INTEGER NOT NULL
+    ) STRICT;
+    CREATE INDEX mcp_calls_user ON mcp_calls(user_id,created_at DESC);
+  `,
 }];
 
