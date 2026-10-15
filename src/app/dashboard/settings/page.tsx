@@ -18,8 +18,7 @@ import {cookies} from 'next/headers';
 import {SESSION_COOKIE} from '@/server/auth';
 import BillingSection from '@/components/account/BillingSection';
 import {currentSubscription} from '@/server/billing/subscriptions';
-import {myPayments} from '@/server/billing/payments';
-import {myRefunds} from '@/server/billing/refunds';
+import {billingHistory} from '@/server/billing/history';
 import {tossProvider} from '@/server/billing/provider';
 import {balance} from '@/server/credits/ledger';
 import ConnectionsSection from '@/components/account/ConnectionsSection';
@@ -32,7 +31,7 @@ import {points,tutorial} from '@/server/engagement/service';
 
 export const dynamic='force-dynamic';
 function billingState(db:ReturnType<typeof database>,userId:string){
-  return{subscription:currentSubscription(db,userId),payments:myPayments(db,userId),refunds:myRefunds(db,userId),paymentsConfigured:tossProvider()!==null,balance:balance(db,userId),now:Date.now()};
+  return{subscription:currentSubscription(db,userId),...billingHistory(db,userId),paymentsConfigured:tossProvider()!==null,balance:balance(db,userId),now:Date.now()};
 }
 export default async function SettingsPage({searchParams}:{searchParams:Promise<{oauthLinked?:string;oauthError?:string}>}) {
   const {oauthLinked,oauthError}=await searchParams;

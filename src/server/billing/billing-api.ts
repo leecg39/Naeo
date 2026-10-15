@@ -1,3 +1,4 @@
+import {billingHistory} from './history';
 import {z} from 'zod';
 import type {Database} from '../database';
 import {requireAdmin,type User} from '../auth';
@@ -6,8 +7,8 @@ import {body,clientPeer,json,rateLimit} from '../http';
 import {createPlan,deletePlan,listAdminPlans,listPublicPlans,updatePlan} from './plans';
 import {createCoupon,listAdminCoupons,redeemCoupon,updateCoupon} from './coupons';
 import {cancelSubscription,currentSubscription,resumeSubscription,startTrial} from './subscriptions';
-import {confirmPayment,createCheckout,handleTossWebhook,listAdminPayments,myPayments,paymentForOwner} from './payments';
-import {createAdminRefund,decideRefund,listAdminRefunds,myRefunds,requestRefund} from './refunds';
+import {confirmPayment,createCheckout,handleTossWebhook,listAdminPayments,paymentForOwner} from './payments';
+import {createAdminRefund,decideRefund,listAdminRefunds,requestRefund} from './refunds';
 import {reconcilePayment} from './payments';
 import {userById} from '../auth';
 import {tossProvider} from './provider';
@@ -35,7 +36,7 @@ export async function memberBillingApi(db:Database,request:Request,user:User):Pr
  if(!path.startsWith('/api/billing/'))return null;
  if(method!=='GET')rateLimit(db,`billing:${user.id}`,60,15*60*1000);
  const input=()=>body(request,anyJson);
- if(path==='/api/billing/me'&&method==='GET')return json({data:{subscription:currentSubscription(db,user.id),payments:myPayments(db,user.id),refunds:myRefunds(db,user.id),paymentsConfigured:tossProvider()!==null}});
+ if(path==='/api/billing/me'&&method==='GET')return json({data:{subscription:currentSubscription(db,user.id),...billingHistory(db,user.id,Object.fromEntries(new URL(request.url).searchParams)),paymentsConfigured:tossProvider()!==null}});
  if(path==='/api/billing/trial'&&method==='POST')return json({data:startTrial(db,user.id,await input())},201);
  if(path==='/api/billing/subscription/cancel'&&method==='POST')return json({data:cancelSubscription(db,user.id,await input())});
  if(path==='/api/billing/subscription/resume'&&method==='POST')return json({data:resumeSubscription(db,user.id,await input())});

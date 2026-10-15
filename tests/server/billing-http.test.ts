@@ -95,3 +95,37 @@ test('billing API end to end against a local Toss stub: trial, coupon, confirm, 
  assert.equal((await (await f.send('/api/billing/me','GET',undefined,m.cookie)).json()).data.subscription,null,'refunded period ends');
  assert.ok(stub.seen.every(s=>s.auth==='Basic '+Buffer.from(`${SECRET}:`).toString('base64')),'every call uses Basic secret-key auth');
 });
+
+test('member billing history: all pages, independent refund state, ownership and invalid pagination',async t=>{
+ const {createPlan}=await import('../../src/server/billing/plans');
+ const f=fixture(t),owner=await f.member('history@example.test'),other=await f.member('other@example.test');
+ f.db.prepare("UPDATE users SET role='admin' WHERE id=?").run(owner.id);
+ const plan=createPlan(f.db,owner.id,{code:'history',name:'History',price:9900});
+ const now=Date.now();
+ const insert=f.db.prepare("INSERT INTO payments(id,user_id,order_id,order_name,plan_id,list_amount,amount,provider,status,approved_at,expires_at,created_at,updated_at) VALUES(?,?,?,?,?,9900,9900,'toss','paid',?,?,?,?)");
+ const refund=f.db.prepare("INSERT INTO refunds(id,payment_id,user_id,amount,reason,created_at,updated_at) VALUES(?,?,?,9900,'과거 환불',?,?)");
+ for(let i=0;i<51;i++){
+  const id=`payment-${String(i).padStart(3,'0')}`;
+  insert.run(id,owner.id,`order-${String(i).padStart(3,'0')}`,'History order',plan.id,now,now+86400000,now,now);
+  // Opposite refund ordering places the last payment's refund on the first history page.
+  refund.run(`refund-${String(50-i).padStart(3,'0')}`,id,owner.id,now,now);
+ }
+ insert.run('other-payment',other.id,'other-order','Other private order',plan.id,now,now+86400000,now,now);
+ refund.run('other-refund','other-payment',other.id,now,now);
+ const get=async(query='')=>{const r=await f.send('/api/billing/me'+query,'GET',undefined,owner.cookie);assert.equal(r.status,200);return (await r.json()).data;};
+ const first=await get(),last=await get('?paymentsPage=2&refundsPage=2&userId='+other.id);
+ assert.equal(first.payments.length,50);assert.equal(last.payments.length,1);
+ assert.equal(last.paymentPagination.total,51);assert.equal(last.refundPagination.total,51);
+ assert.equal(last.payments[0].id,'payment-050');assert.equal(last.refunds[0].id,'refund-050');
+ assert.equal(last.refunds[0].orderId,'order-000');
+ assert.equal(last.paymentRefunds[0].paymentId,'payment-050');assert.equal(last.paymentRefunds[0].status,'requested');
+ assert.equal(new Set([...first.payments,...last.payments].map((p:{id:string})=>p.id)).size,51);
+ assert.equal(new Set([...first.refunds,...last.refunds].map((r:{id:string})=>r.id)).size,51);
+ assert.ok(!JSON.stringify(last).includes('other-payment'));
+ const independent=await get('?paymentsPage=2');assert.equal(independent.refundPagination.page,1);
+ const beyond=await get('?paymentsPage=999&refundsPage=999');assert.equal(beyond.paymentPagination.page,2);assert.equal(beyond.refundPagination.page,2);
+ for(const query of ['?paymentsPage=0','?refundsPage=-1','?paymentsPage=abc','?refundsPage=100001'])assert.equal((await f.send('/api/billing/me'+query,'GET',undefined,owner.cookie)).status,400);
+ const privatePage=await f.send('/api/billing/me?paymentsPage=2','GET',undefined,other.cookie);const own=(await privatePage.json()).data;
+ assert.equal(own.paymentPagination.total,1);assert.equal(own.payments[0].id,'other-payment');
+ assert.equal((await f.send('/api/billing/me?paymentsPage=2')).status,401);
+});

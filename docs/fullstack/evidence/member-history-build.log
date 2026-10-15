@@ -1,0 +1,70 @@
+
+> naeo-local-clone@1.0.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 116ms
+- Experiments (use with caution):
+  ✓ authInterrupts
+  · cpus: 2
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1648ms
+  Running TypeScript ...
+  Finished TypeScript in 2.4s ...
+  Collecting page data using 2 workers ...
+(node:5771) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5770) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  Generating static pages using 2 workers (0/4) ...
+  Generating static pages using 2 workers (1/4) 
+  Generating static pages using 2 workers (2/4) 
+  Generating static pages using 2 workers (3/4) 
+✓ Generating static pages using 2 workers (4/4) in 82ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /.well-known/oauth-authorization-server
+├ ƒ /.well-known/oauth-protected-resource
+├ ƒ /.well-known/oauth-protected-resource/api/mcp
+├ ƒ /[...segments]
+├ ƒ /admin
+├ ƒ /admin/announcements
+├ ƒ /admin/billing
+├ ƒ /admin/blog
+├ ƒ /admin/blog/preview/[id]
+├ ƒ /admin/event
+├ ƒ /admin/events
+├ ƒ /admin/faq
+├ ƒ /admin/inquiries
+├ ƒ /admin/inquiries/templates
+├ ƒ /admin/keywords
+├ ƒ /admin/pages
+├ ƒ /admin/pages/preview/[id]
+├ ƒ /admin/payments
+├ ƒ /admin/rewards
+├ ƒ /admin/scan-health
+├ ƒ /admin/updates
+├ ƒ /admin/updates/preview/[id]
+├ ƒ /admin/users
+├ ƒ /admin/writing
+├ ƒ /api/[...path]
+├ ƒ /auth/forgot-password
+├ ○ /auth/reset-password
+├ ƒ /auth/terms
+├ ○ /auth/verify-email
+├ ƒ /dashboard/settings
+├ ƒ /dashboard/social
+├ ƒ /llms.txt
+├ ƒ /login
+├ ƒ /robots.txt
+├ ƒ /rss.xml
+└ ƒ /sitemap.xml
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

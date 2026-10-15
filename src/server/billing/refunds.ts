@@ -115,7 +115,21 @@ export async function createAdminRefund(db:Database,provider:PaymentProvider|nul
  return decideRefund(db,provider,adminId,r.id,{decision:'approved',version:r.version},now);
 }
 
-export const myRefunds=(db:Database,userId:string):Refund[]=>(db.prepare(`${SELECT} WHERE user_id=? ORDER BY created_at DESC LIMIT 50`).all(userId) as Refund[]).map(r=>({...r}));
+export function listMyRefunds(db:Database,userId:string,page=1,pageSize=50){
+ const parsed=refundQueryInput.parse({page,pageSize});
+ const {total}=db.prepare('SELECT count(*) AS total FROM refunds WHERE user_id=?').get(userId) as {total:number};
+ const current=Math.min(parsed.page,Math.max(1,Math.ceil(total/parsed.pageSize)));
+ const historySelect=SELECT.replace(' FROM refunds',', (SELECT order_name FROM payments WHERE payments.id=refunds.payment_id) AS orderName, (SELECT order_id FROM payments WHERE payments.id=refunds.payment_id) AS orderId FROM refunds');
+ const data=db.prepare(`${historySelect} WHERE user_id=? ORDER BY created_at DESC,id ASC LIMIT ? OFFSET ?`).all(userId,parsed.pageSize,(current-1)*parsed.pageSize) as (Refund&{orderName:string;orderId:string})[];
+ return {data:data.map(r=>({...r})),pagination:{page:current,pageSize:parsed.pageSize,total}};
+}
+export const myRefunds=(db:Database,userId:string):Refund[]=>listMyRefunds(db,userId).data;
+/** Visible orders retain their pending/latest refund independently of the history page. */
+export function refundsForPayments(db:Database,userId:string,payments:Payment[]):Refund[]{
+ const query=db.prepare(`${SELECT} WHERE user_id=? AND payment_id=? ORDER BY CASE WHEN status IN ('requested','approved','failed') THEN 0 ELSE 1 END,created_at DESC,id ASC LIMIT 1`);
+ return payments.flatMap(p=>{const r=query.get(userId,p.id) as Refund|undefined;return r?[{...r}]:[];});
+}
+
 export function listAdminRefunds(db:Database,actorId:string,query:unknown){
  requireAdmin(userById(db,actorId));
  const {page,pageSize,status}=refundQueryInput.parse(query);

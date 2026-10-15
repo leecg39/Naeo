@@ -1,0 +1,18 @@
+{
+  "verifiedAt": "2026-10-15T09:41:17.297Z",
+  "checks": [
+    "101 coupons/payments/refunds with tied timestamps",
+    "API second pages contain distinct records",
+    "Page-two coupon update and stale version rejection",
+    "Page-two refund rejection changes filtered count without provider call",
+    "Payment search reaches record 101",
+    "SSR has three separately labeled pagination controls",
+    "Unauthenticated admin list denied",
+    "Member API page 3 reaches payment/refund record 101",
+    "Visible payment keeps its related refund independent of history page",
+    "Settings SSR includes independent member history pagers"
+  ],
+  "browserVerified": false,
+  "externalProviderCalled": false,
+  "temporaryDataRemoved": true
+}

@@ -36,7 +36,16 @@ export function paymentForOwner(db:Database,userId:string,orderId:string):Paymen
  if(!p||p.userId!==userId)throw new AppError(404,'NOT_FOUND','결제를 찾을 수 없습니다.');
  return p;
 }
-export const myPayments=(db:Database,userId:string):Payment[]=>(db.prepare(`${SELECT} WHERE user_id=? AND (status<>'ready' OR confirm_started_at IS NOT NULL) ORDER BY created_at DESC LIMIT 50`).all(userId) as Payment[]).map(p=>({...p}));
+export function listMyPayments(db:Database,userId:string,page=1,pageSize=50){
+ const parsed=paymentQueryInput.parse({page,pageSize});
+ const where="WHERE user_id=? AND (status<>'ready' OR confirm_started_at IS NOT NULL)";
+ const {total}=db.prepare(`SELECT count(*) AS total FROM payments ${where}`).get(userId) as {total:number};
+ const current=Math.min(parsed.page,Math.max(1,Math.ceil(total/parsed.pageSize)));
+ const data=db.prepare(`${SELECT} ${where} ORDER BY created_at DESC,id ASC LIMIT ? OFFSET ?`).all(userId,parsed.pageSize,(current-1)*parsed.pageSize) as Payment[];
+ return {data:data.map(p=>({...p})),pagination:{page:current,pageSize:parsed.pageSize,total}};
+}
+export const myPayments=(db:Database,userId:string):Payment[]=>listMyPayments(db,userId).data;
+
 export function listAdminPayments(db:Database,actorId:string,query:unknown){
  requireAdmin(userById(db,actorId));
  const {page,pageSize,q,status}=paymentQueryInput.parse(query);

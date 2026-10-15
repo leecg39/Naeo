@@ -52,8 +52,15 @@ async function main(){
   for(const [path,labels] of [['/admin/billing',['쿠폰 페이지']],['/admin/payments',['환불 요청 페이지','결제 내역 페이지']]] as const){
    const response=await req(path,'GET',undefined,cookie);assert.equal(response.status,200);const html=await response.text();for(const label of labels)assert.ok(html.includes(`aria-label="${label}"`));
   }
+  const memberHistory=(await get('/api/billing/me?paymentsPage=3&refundsPage=3')).data;
+  assert.equal(memberHistory.paymentPagination.total,101);assert.equal(memberHistory.payments.length,1);
+  assert.equal(memberHistory.refundPagination.total,101);assert.equal(memberHistory.refunds.length,1);
+  assert.equal(memberHistory.payments[0].id,'page-payment-100');
+  assert.equal(memberHistory.paymentRefunds[0].paymentId,'page-payment-100');
+  const settings=await req('/dashboard/settings','GET',undefined,cookie);assert.equal(settings.status,200);const settingsHtml=await settings.text();
+  for(const label of ['내 결제 페이지','내 환불 페이지'])assert.ok(settingsHtml.includes(`aria-label="${label}"`));
   const unauthorized=await req('/api/admin/payments?page=2');assert.equal(unauthorized.status,401);
-  result={verifiedAt:new Date().toISOString(),checks:['101 coupons/payments/refunds with tied timestamps','API second pages contain distinct records','Page-two coupon update and stale version rejection','Page-two refund rejection changes filtered count without provider call','Payment search reaches record 101','SSR has three separately labeled pagination controls','Unauthenticated admin list denied'],browserVerified:false,externalProviderCalled:false,temporaryDataRemoved:true};
+  result={verifiedAt:new Date().toISOString(),checks:['101 coupons/payments/refunds with tied timestamps','API second pages contain distinct records','Page-two coupon update and stale version rejection','Page-two refund rejection changes filtered count without provider call','Payment search reaches record 101','SSR has three separately labeled pagination controls','Unauthenticated admin list denied','Member API page 3 reaches payment/refund record 101','Visible payment keeps its related refund independent of history page','Settings SSR includes independent member history pagers'],browserVerified:false,externalProviderCalled:false,temporaryDataRemoved:true};
  }finally{
   if(child&&child.exitCode===null&&child.signalCode===null){const processToStop=child,exited=new Promise<void>(r=>processToStop.once('exit',()=>r()));processToStop.kill('SIGTERM');const timer=setTimeout(()=>processToStop.kill('SIGKILL'),3000);await exited;clearTimeout(timer);}
   rmSync(temp,{recursive:true,force:true});

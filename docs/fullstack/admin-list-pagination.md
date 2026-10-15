@@ -58,3 +58,13 @@ RewardsManager·EntriesReview는 아래 추가 수정으로 페이지 이동을 
 `scripts/qa/billing-pagination.ts`는 격리한 DB와 실제 production Next 서버에서 각101건의 API 페이지 조회, 쿠폰 변경/409 충돌, 환불 거절, 결제 검색, 비인증401, 세 페이지 이동 컨트롤의 SSR을 검증했다. 외부 결제사는 호출하지 않았고 서버·임시 DB를 정리했다. [HTTP/SSR 기록](evidence/billing-pagination-runtime.json), [전체 테스트](evidence/billing-pagination-tests.log), [빌드](evidence/billing-pagination-build.log).
 
 실제 브라우저 클릭·hydration·포커스·모바일 동작은 아직 확인하지 못했다(P11.3). 회원 자신의 결제·환불 조회에도 LIMIT50이 있어 별도 P11.5로 남겼다. 이 변경은 원본 Payple 결제 서버를 복원했다는 의미가 아니며 기존 로컬 결제 설계의 목록 접근 보완이다.
+
+## 회원 결제·환불 전체 이력 (2026-10-15)
+
+회원 설정과 `/api/billing/me`의 최신50건 제한을 해소했다. paymentsPage와 refundsPage를 독립 입력으로 받아 각50건, 총건수와 현재 페이지를 반환한다. 범위를 넘는 페이지는 마지막 페이지로 보정하고, 1 미만·정수 아님·100000 초과는400으로 거절한다. 기존 payments/refunds 배열은 유지하며 페이지 메타데이터를 추가했다. SSR과 API는 billingHistory 서비스를 공유한다.
+
+설정에 결제·환불 각각 이전/다음 이동을 연결했다. 환불 표에는 주문명·번호, 금액·사유·상태·결정 메모·요청일을 표시한다. 결제 행의 상태는 해당 주문의 진행 중/최근 환불을 별도로 읽으므로 다른 환불 이력 페이지를 보더라도 진행 중 상태가 사라지지 않는다. 계정 ID는 인증된 서버 인수로만 결정한다.
+
+전체415(root6+server409), lint/typecheck/build 통과. API 테스트는 반대 순서의51개 결제·환불을 만들어 중복 없는 전체 접근, 주문 연결, 페이지 독립성, 관련 환불 유지, 다른 계정 userId 매개변수 무효화, 회원 격리, 비인증401, 잘못된 입력400과 초과 페이지 보정을 확인했다.
+
+실제 production Next 서버에서는101건으로3페이지의101번째 결제·환불, 주문별 환불 상태와 설정 SSR의 두 페이지 이동 컨트롤을 확인했다. 외부 결제사를 호출하지 않았고 임시 서버·DB를 정리했다. [HTTP/SSR](evidence/member-history-runtime.json), [테스트](evidence/member-history-tests.log), [빌드](evidence/member-history-build.log). 브라우저 hydration·클릭·모바일은 미검증이며 전체 사이트 완료 판정은 아니다.
