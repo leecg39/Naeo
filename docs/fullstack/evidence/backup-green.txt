@@ -1,0 +1,27 @@
+(node:20346) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ backup: open connection without concurrent writers, uploads copy, manifest with checksums and counts (98.046375ms)
+✔ backup rejects changed, missing and extra upload files (51.226792ms)
+✔ backup rejects upload symlinks and overlapping source/destination (19.094833ms)
+✔ restore refuses uploads-only target without force (52.109625ms)
+✔ restore validates SQLite and migration checksums before moving live files (54.344959ms)
+✔ restore never overwrites a previous recovery copy or accepts overlapping targets (54.934708ms)
+✔ restore: refuses to overwrite without force, keeps the previous data, reopens and matches counts (208.984792ms)
+✔ restore rolls back both resources when installing uploads fails after DB replacement (205.932125ms)
+✔ restore crash blocks database startup and the real recovery CLI restores the original pair (671.456584ms)
+✔ a committed recovery journal keeps installed data and only removes staging state (355.272541ms)
+✔ rollback removes a partially installed new target when no previous data existed (141.299666ms)
+✔ backup verification checks foreign keys and counts even when a modified DB has a valid hash (104.777333ms)
+✔ real backup/restore CLIs require offline acknowledgement and restore a fresh destination (1113.842083ms)
+✔ staged migration failure preserves existing DB and uploads (52.062666ms)
+✔ malformed manifest, legacy checksum-only format and extra root entries fail closed (50.241667ms)
+✔ legacy backups with no uploads remain restorable without changing the source (129.746875ms)
+✔ read-only verification of a WAL-mode snapshot never creates sidecars (67.466ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3672.507542

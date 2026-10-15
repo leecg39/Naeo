@@ -1,0 +1,143 @@
+(node:93564) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ backup: consistent DB snapshot while open, uploads copy, manifest with checksum and counts (90.39875ms)
+✖ backup rejects changed, missing and extra upload files (31.1565ms)
+✖ backup rejects upload symlinks and overlapping source/destination (25.071ms)
+✖ restore refuses uploads-only target without force (32.749958ms)
+✖ restore validates SQLite and migration checksums before moving live files (37.318709ms)
+✖ restore never overwrites a previous recovery copy or accepts overlapping targets (35.454917ms)
+✔ restore: refuses to overwrite without force, keeps the previous data, reopens and matches counts (109.433334ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 2
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 669.413125
+
+✖ failing tests:
+
+test at tests/server/backup.test.ts:2:3319
+✖ backup rejects changed, missing and extra upload files (31.1565ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:37:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:777:18)
+      at Test.postRun (node:internal/test_runner/test:1224:19)
+      at Test.run (node:internal/test_runner/test:1152:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'BACKUP_CORRUPT' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/backup.test.ts:2:4260
+✖ backup rejects upload symlinks and overlapping source/destination (25.071ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    Comparison {
+  +   code: 'ERR_FS_CP_EINVAL'
+  -   code: 'UNSAFE_BACKUP_PATH'
+    }
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:46:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:777:18)
+      at Test.postRun (node:internal/test_runner/test:1224:19)
+      at Test.run (node:internal/test_runner/test:1152:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Cannot copy /var/folders/04/y54015w94szby3vf2k72l9wr0000gp/T/naeo-backup-SG5YZc/uploads/ to a subdirectory of self /var/folders/04/y54015w94szby3vf2k72l9wr0000gp/T/naeo-backup-SG5YZc/uploads/backups/naeo-2026-10-15T07-13-34Z/uploads
+        at cpSyncFn (node:internal/fs/cp/cp-sync:56:13)
+        at cpSync (node:fs:3136:3)
+        at createBackup (/Users/user01/Desktop/NAEO/naeo-clone/src/server/ops/backup.ts:29:33)
+        at import_strict.default.throws.code (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:46:20)
+        at getActual (node:assert:586:5)
+        at strict.throws (node:assert:734:24)
+        at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:46:9)
+        at Test.runInAsyncScope (node:async_hooks:213:14)
+        at Test.run (node:internal/test_runner/test:1095:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:777:18),
+    expected: { code: 'UNSAFE_BACKUP_PATH' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/backup.test.ts:2:4886
+✖ restore refuses uploads-only target without force (32.749958ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:54:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:777:18)
+      at Test.postRun (node:internal/test_runner/test:1224:19)
+      at Test.run (node:internal/test_runner/test:1152:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'TARGET_EXISTS' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/backup.test.ts:2:5485
+✖ restore validates SQLite and migration checksums before moving live files (37.318709ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + Comparison {}
+  - Comparison {
+  -   code: 'BACKUP_CORRUPT'
+  - }
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:65:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:777:18)
+      at Test.postRun (node:internal/test_runner/test:1224:19)
+      at Test.run (node:internal/test_runner/test:1152:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Migration 1 checksum mismatch
+        at <anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/src/server/database.ts:39:53)
+        at transaction (/Users/user01/Desktop/NAEO/naeo-clone/src/server/database.ts:12:20)
+        at openDatabase (/Users/user01/Desktop/NAEO/naeo-clone/src/server/database.ts:32:5)
+        at restoreBackup (/Users/user01/Desktop/NAEO/naeo-clone/src/server/ops/backup.ts:62:11)
+        at import_strict.default.throws.code (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:65:20)
+        at getActual (node:assert:586:5)
+        at strict.throws (node:assert:734:24)
+        at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:65:9)
+        at Test.runInAsyncScope (node:async_hooks:213:14)
+        at Test.run (node:internal/test_runner/test:1095:25),
+    expected: { code: 'BACKUP_CORRUPT' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/backup.test.ts:2:6823
+✖ restore never overwrites a previous recovery copy or accepts overlapping targets (35.454917ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/backup.test.ts:74:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:777:18)
+      at Test.postRun (node:internal/test_runner/test:1224:19)
+      at Test.run (node:internal/test_runner/test:1152:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'RESTORE_COLLISION' },
+    operator: 'throws',
+    diff: 'simple'
+  }

@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-15T07:35:56.713468+00:00",
+  "baseCommit": "158699adde22d5925a6bdd2efa0434c36448b641",
+  "nodeVersion": "v25.4.0",
+  "checks": [
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "tests": 339,
+      "scriptTests": 6,
+      "serverTests": 333
+    },
+    {
+      "command": "node --import tsx --test tests/server/backup.test.ts",
+      "exitCode": 0,
+      "tests": 17
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0
+    }
+  ],
+  "sourceSha256": {
+    "src/server/ops/backup.ts": "54c53f49b16c93ad5b9a37282ab96109d423165541a0ed864070a76e58f71b69",
+    "src/server/database.ts": "e849975b0c9029071e6d185e642907d975397856c1e8b5cd41789fd548d4b3c5",
+    "src/server/migrations.ts": "0174c500a4f9ae35098ab3adfedd1d930fcd3126cba971739d38d76faeae9214",
+    "scripts/backup.ts": "405955be6f0ba2e9e0e9a54600cb5a859e55f9dc77906f3ff36be34842336a42",
+    "scripts/restore.ts": "1bdaeba58c7e0d948e41ff117ab5c929764563ab938ea7c853c8a06ad6369a94",
+    "tests/server/backup.test.ts": "4cb25d3e51ef4333c886ab9bc84afd73d90bb6ba26680f53b7b46cd039aa541e"
+  },
+  "evidenceSha256": {
+    "backup-red.txt": "0f4fb13dddf79d5ebc087e127354657583c8918728d570b10306b42ece5d6e1a",
+    "backup-green.txt": "8e5e4d8fe539394fcc8e94f9f5e845ceb2c584cc79468b3540ff96932532056b",
+    "backup-full-test.txt": "e7a6d27faad0ce213daa28424c071ffcdcfb598fa0696b46200bff9d3cb101d1",
+    "backup-lint.txt": "2d7d192034325cb710763d4fe33072f210f68bd2c11a34be4bafb32031a09862",
+    "backup-typecheck.txt": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715",
+    "backup-build.txt": "da5c07abe7e8a2ab2373d01ba309460acb954136f27282507db2cce4cc710486",
+    "backup-legacy-qa-review.json": "88067fd58ebf1abba578f082fc59692c34430fa3b31dd623ca78c822e0936715"
+  },
+  "scope": "Offline backups/restores. Real isolated child SIGKILL + recovery CLI; no production data restore, host power-loss experiment, browser/hydration test, or personal-data export implementation.",
+  "capturedEvidenceSha256": {
+    "backup-red.txt": "a917ea3741443bdc444ed7ba0d071ed6d2f8b3f1c3e732b3eaba82af7687fbf7",
+    "backup-green.txt": "8e5e4d8fe539394fcc8e94f9f5e845ceb2c584cc79468b3540ff96932532056b",
+    "backup-full-test.txt": "e7a6d27faad0ce213daa28424c071ffcdcfb598fa0696b46200bff9d3cb101d1",
+    "backup-lint.txt": "1083f0232a15f1176a91df5a4c4ed2ce203ac9187fbb0d280bc5a890ba8eeb42",
+    "backup-typecheck.txt": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+    "backup-build.txt": "494fac0d07646ccc89e5bef6ff3fba8c568793ec67372598e60de33d4f131075",
+    "backup-legacy-qa-review.json": "88067fd58ebf1abba578f082fc59692c34430fa3b31dd623ca78c822e0936715"
+  },
+  "logNormalization": "Only trailing line whitespace and blank EOF lines were removed; original captured hashes are retained."
+}

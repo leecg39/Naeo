@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-15T07:33:10.067Z",
+  "source": "var/qa/backups/naeo-2026-10-13T19-57-40Z",
+  "reviewedOnTemporaryCopy": true,
+  "schemaVersion": 25,
+  "uploadFiles": 0,
+  "dbChecksumMatches": true,
+  "verificationCode": "BACKUP_CORRUPT",
+  "foreignKeyProblems": [
+    {
+      "table": "profiles",
+      "parent": "users",
+      "foreignKeyIndex": 0
+    },
+    {
+      "table": "sessions",
+      "parent": "users",
+      "foreignKeyIndex": 0
+    },
+    {
+      "table": "audit_logs",
+      "parent": "users",
+      "foreignKeyIndex": 0
+    },
+    {
+      "table": "consent_history",
+      "parent": "users",
+      "foreignKeyIndex": 0
+    },
+    {
+      "table": "notification_preferences",
+      "parent": "users",
+      "foreignKeyIndex": 0
+    }
+  ],
+  "copyDirectoryUnchanged": true,
+  "originalDatabaseUnchanged": true,
+  "originalDirectoryUnchanged": true
+}

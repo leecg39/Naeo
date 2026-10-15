@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync, chmodSync } from 'node:fs';
+import { mkdirSync, chmodSync, existsSync, realpathSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { migrations } from './migrations';
@@ -20,7 +20,8 @@ export function transaction<T>(db: Database, action: () => T): T {
 }
 
 export function openDatabase(filename: string): Database {
-  const path = filename === ':memory:' ? filename : resolve(filename);
+  const path = filename === ':memory:' ? filename : existsSync(filename)?realpathSync(filename):resolve(filename);
+  if(path!==':memory:'&&existsSync(path+'.restore-pending.json')) throw new Error('Restore recovery is required before opening this database; stop all writers and run restore --offline --recover');
   if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true, mode: 0o700 });
   const db = new DatabaseSync(path);
   try {
