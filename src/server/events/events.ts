@@ -51,13 +51,14 @@ export function getPublicEvent(db:Database,slug:string,now=Date.now()){
 
 export function listAdminEvents(db:Database,actorId:string,query:unknown,now=Date.now()){
  authorize(db,actorId);
- const {page,pageSize,q,status}=eventQueryInput.parse(query);
+ const {page,pageSize,q,status,acceptsEntries}=eventQueryInput.parse(query);
  const like=`%${q.replace(/[\\%_]/g,v=>'\\'+v)}%`;
  const where=["(title LIKE ? ESCAPE '\\' OR slug LIKE ? ESCAPE '\\')"],params:(string|number)[]=[like,like];
  if(status){where.push('status=?');params.push(status);}
+ if(acceptsEntries!==undefined){where.push('accepts_entries=?');params.push(acceptsEntries==='true'?1:0);}
  const sql=`WHERE ${where.join(' AND ')}`;
  const {total}=db.prepare(`SELECT count(*) AS total FROM events ${sql}`).get(...params) as {total:number};
- const rows=(db.prepare(`${EVENT_SELECT} ${sql} ORDER BY starts_at DESC,created_at DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Raw[]).map(plain);
+ const rows=(db.prepare(`${EVENT_SELECT} ${sql} ORDER BY starts_at DESC,created_at DESC,id LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Raw[]).map(plain);
  const counts=db.prepare("SELECT status,count(*) AS n FROM event_entries WHERE event_id=? GROUP BY status");
  const data=rows.map(e=>({...e,phase:phaseOf(e,now),entryCounts:Object.fromEntries((counts.all(e.id) as {status:string;n:number}[]).map(c=>[c.status,c.n]))}));
  return{data,pagination:{page,pageSize,total}};

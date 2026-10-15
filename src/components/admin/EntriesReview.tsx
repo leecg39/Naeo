@@ -11,8 +11,9 @@ type Row=Entry&{ownerEmail:string;ownerNickname:string};
 type Result=PageResult<Row>&{event:EventItem};
 const STATUS:Record<Entry['status'],string>={submitted:'심사 대기',approved:'승인',rejected:'반려',withdrawn:'철회'};
 
-export default function EntriesReview({events,initial}:{events:{slug:string;title:string}[];initial:Result|null}){
+export default function EntriesReview({events,initial}:{events:PageResult<{slug:string;title:string}>;initial:Result|null}){
  const router=useRouter();
+ const [options,setOptions]=useState(events),[eventQuery,setEventQuery]=useState(''),[appliedEventQuery,setAppliedEventQuery]=useState('');
  const [result,setResult]=useState(initial),[status,setStatus]=useState(''),[notes,setNotes]=useState<Record<string,string>>({});
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const slug=result?.event.slug??'';
@@ -22,6 +23,10 @@ export default function EntriesReview({events,initial}:{events:{slug:string;titl
   try{await action();}
   catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');if(e instanceof ApiError&&e.status===401){router.replace('/login?next=/admin/event');router.refresh();}}
   finally{setBusy(false);}
+ }
+ async function loadOptions(page=1,q=appliedEventQuery){
+  const next=await loadValidPage(requested=>apiResponse<PageResult<{slug:string;title:string}>>(`/api/admin/events?${new URLSearchParams({q,page:String(requested),pageSize:'20',acceptsEntries:'true'})}`),page);
+  setOptions(next);setAppliedEventQuery(q);
  }
  async function load(s=slug,st=appliedStatus,page=result?.pagination.page??1){
   if(!s)return;
@@ -35,10 +40,14 @@ export default function EntriesReview({events,initial}:{events:{slug:string;titl
  return <div className="settings-sections">
   <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(()=>load())}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
-   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(slug,status,1));}}>
-    <label>이벤트<select className="field" value={slug} onChange={e=>{const s=e.target.value;void run(async()=>{await load(s,status,1);router.replace(`/admin/event?slug=${encodeURIComponent(s)}`);});}} disabled={busy}>{!slug&&<option value="">이벤트 선택</option>}{events.map(e=><option key={e.slug} value={e.slug}>{e.title}</option>)}</select></label>
+   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>loadOptions(1,eventQuery));}}>
+    <label>이벤트 검색<input className="field" value={eventQuery} onChange={e=>setEventQuery(e.target.value)} maxLength={100} disabled={busy} placeholder="제목·주소"/></label>
+    <button type="submit" className="button secondary" disabled={busy}>이벤트 검색</button>
+    <label>이벤트<select className="field" value={slug} onChange={e=>{const s=e.target.value;void run(async()=>{await load(s,status,1);router.replace(`/admin/event?slug=${encodeURIComponent(s)}`);});}} disabled={busy}>{!slug&&<option value="">이벤트 선택</option>}{slug&&!options.data.some(e=>e.slug===slug)&&<option value={slug}>{result?.event.title} (현재 선택)</option>}{options.data.map(e=><option key={e.slug} value={e.slug}>{e.title}</option>)}</select></label>
     <label>상태<select className="field" value={status} onChange={e=>{const nextStatus=e.target.value;if(slug)void run(()=>load(slug,nextStatus,1));}} disabled={busy||!slug}><option value="">전체</option>{Object.entries(STATUS).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
    </form>
+   <p className="muted">선택 가능한 이벤트 {options.pagination.total}개</p>
+   <ListPagination label="이벤트 선택 페이지" pagination={options.pagination} busy={busy} onPage={page=>void run(()=>loadOptions(page))}/>
    {result?<>
     <p className="muted" style={{marginTop:16}}>{result.event.title} · 참여 {result.pagination.total}건 · 승인 시 {result.event.rewardTokens}토큰</p>
     <div className="responsive-table"><table className="data-table">

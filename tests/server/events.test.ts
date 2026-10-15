@@ -4,7 +4,7 @@ import {openDatabase,type Database} from '../../src/server/database';
 import {register} from '../../src/server/auth';
 import {createBlog} from '../../src/server/blogs';
 import {balance} from '../../src/server/credits/ledger';
-import {createEvent,updateEvent,deleteEvent,listPublicEvents,getPublicEvent,listAdminEvents} from '../../src/server/events/events';
+import {createEvent,updateEvent,deleteEvent,listPublicEvents,getPublicEvent,listAdminEvents,eventBySlug} from '../../src/server/events/events';
 import {submitEntry,updateMyEntry,withdrawEntry,myEntries,listEventEntries,reviewEntry} from '../../src/server/events/entries';
 import {listRewards,grantReward,revokeReward,grantRankingRewards,eventWinners} from '../../src/server/events/rewards';
 import {confirmPeriod,periodRange} from '../../src/server/ranking/ranking';
@@ -24,6 +24,23 @@ async function fixture(t:TestContext){
 }
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 const ev=(over:Record<string,unknown>={})=>({slug:'review-2026-10',title:'사용 후기 이벤트',summary:'후기를 쓰면 토큰을 드려요',status:'published',startsAt:new Date(NOW-DAY).toISOString(),endsAt:new Date(NOW+7*DAY).toISOString(),requiresProof:true,rewardTokens:15,...over});
+
+test('event selection filters before pagination and finds the 101st eligible event behind ineligible rows',async t=>{
+ const {db,admin,a}=await fixture(t);
+ for(let i=0;i<101;i++){
+  createEvent(db,admin,ev({slug:`eligible-${i}`,title:`Eligible ${i}`,startsAt:new Date(NOW-DAY-i).toISOString()}));
+  createEvent(db,admin,ev({slug:`ineligible-${i}`,acceptsEntries:false,startsAt:new Date(NOW).toISOString()}));
+ }
+ const page=listAdminEvents(db,admin,{acceptsEntries:'true',page:6,pageSize:20});assert.equal(page.pagination.total,101);assert.equal(page.data.length,1);assert.equal(page.data[0].slug,'eligible-100');
+ assert.equal(eventBySlug(db,'eligible-100')?.id,page.data[0].id);
+ assert.equal(listAdminEvents(db,admin,{acceptsEntries:'false'}).pagination.total,101);
+ assert.equal(listAdminEvents(db,admin,{acceptsEntries:'true',q:'Eligible 100'}).pagination.total,1);
+ assert.throws(()=>listAdminEvents(db,a,{acceptsEntries:'true'}),{status:403});
+ assert.throws(()=>listAdminEvents(db,admin,{acceptsEntries:'yes'}),{name:'ZodError'});
+ const last=page.data[0];updateEvent(db,admin,last.id,{version:1,title:'Updated'});deleteEvent(db,admin,last.id,{version:2});
+ const recovered=await loadValidPage(async p=>listAdminEvents(db,admin,{acceptsEntries:'true',page:p,pageSize:20}),6);
+ assert.equal(recovered.pagination.page,5);assert.equal(recovered.pagination.total,100);
+});
 
 test('reward page two remains actionable and revoked filter returns to the previous page',async t=>{
  const {db,admin,a}=await fixture(t),before=balance(db,a);

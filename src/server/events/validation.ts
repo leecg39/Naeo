@@ -21,7 +21,7 @@ export const createEventInput=z.object({...eventFields,summary:eventFields.summa
  acceptsEntries:eventFields.acceptsEntries.default(true),ctaLabel:eventFields.ctaLabel.default(''),ctaHref:eventFields.ctaHref.default('')})
  .strict().refine(v=>v.endsAt>v.startsAt,{message:'종료 시각은 시작 시각보다 늦어야 합니다.',path:['endsAt']});
 export const updateEventInput=z.object(eventFields).partial().extend({version}).strict().refine(v=>Object.keys(v).length>1,'수정할 항목이 필요합니다.');
-export const eventQueryInput=paginationInput.extend({status:z.enum(['draft','published','closed']).optional()});
+export const eventQueryInput=paginationInput.extend({acceptsEntries:z.enum(['true','false']).optional(),status:z.enum(['draft','published','closed']).optional()});
 
 /** 참여 인증 글: 네이버 블로그 글 주소(blog.naver.com/{id}/{글번호} 또는 PostView.naver?blogId=&logNo=). */
 export function parseProofUrl(raw:string):{naverId:string;logNo:string;url:string}|null{

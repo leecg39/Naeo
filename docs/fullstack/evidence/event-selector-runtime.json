@@ -1,0 +1,13 @@
+{
+  "verifiedAt": "2026-10-15T09:30:31.087Z",
+  "checks": [
+    "202 events seeded in isolated database",
+    "API filters eligible events before pagination",
+    "Page 6 returns eligible event 101",
+    "Direct review page preserves eligible-100 in SSR",
+    "Event title search reaches last event",
+    "Missing/ineligible explicit slug does not silently select a different event"
+  ],
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}
