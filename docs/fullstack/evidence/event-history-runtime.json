@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-10-15T09:47:32.172Z",
+  "checks": [
+    "101 member entries and rewards",
+    "API page two contains record 101",
+    "SSR activity section contains selected history only",
+    "SSR independent pagination links preserve other page",
+    "SSR participation title links to editable event detail",
+    "Page-two entry update and withdrawal",
+    "Anonymous request denied and invalid page rejected"
+  ],
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}

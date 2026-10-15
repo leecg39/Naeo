@@ -79,10 +79,15 @@ export function withdrawEntry(db:Database,userId:string,id:string,input:unknown,
   return entryById(db,id);
  });
 }
-export function myEntries(db:Database,userId:string){
- return (db.prepare(`SELECT x.id,x.event_id AS eventId,e.slug,e.title,x.proof_url AS proofUrl,x.note,x.status,x.review_note AS reviewNote,x.reviewed_at AS reviewedAt,x.version,x.created_at AS createdAt,x.updated_at AS updatedAt
-  FROM event_entries x JOIN events e ON e.id=x.event_id WHERE x.user_id=? ORDER BY x.created_at DESC,x.rowid DESC LIMIT 100`).all(userId) as (Entry&{slug:string;title:string})[]).map(r=>({...r}));
+export function listMyEntries(db:Database,userId:string,page=1){
+ const {page:requested}=entryQueryInput.parse({page});
+ const {total}=db.prepare('SELECT count(*) AS total FROM event_entries WHERE user_id=?').get(userId) as {total:number};
+ const current=Math.min(requested,Math.max(1,Math.ceil(total/100)));
+ const data=(db.prepare(`SELECT x.id,x.event_id AS eventId,e.slug,e.title,x.proof_url AS proofUrl,x.note,x.status,x.review_note AS reviewNote,x.reviewed_at AS reviewedAt,x.version,x.created_at AS createdAt,x.updated_at AS updatedAt
+  FROM event_entries x JOIN events e ON e.id=x.event_id WHERE x.user_id=? ORDER BY x.created_at DESC,x.rowid DESC LIMIT 100 OFFSET ?`).all(userId,(current-1)*100) as (Entry&{slug:string;title:string})[]).map(r=>({...r}));
+ return {data,pagination:{page:current,pageSize:100,total}};
 }
+export const myEntries=(db:Database,userId:string)=>listMyEntries(db,userId).data;
 
 export function listEventEntries(db:Database,actorId:string,slug:string,query:unknown){
  requireAdmin(userById(db,actorId));

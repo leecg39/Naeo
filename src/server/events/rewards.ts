@@ -67,9 +67,14 @@ export function listRewards(db:Database,actorId:string,query:unknown){
   ${from} ORDER BY r.created_at DESC,r.rowid DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as (Reward&{email:string;nickname:string})[];
  return{data:rows.map(r=>({...r})),pagination:{page,pageSize,total}};
 }
-export function myRewards(db:Database,userId:string):Reward[]{
- return (db.prepare(`${SELECT} WHERE user_id=? ORDER BY created_at DESC,rowid DESC LIMIT 100`).all(userId) as Reward[]).map(r=>({...r}));
+export function listMyRewards(db:Database,userId:string,page=1){
+ const {page:requested}=rewardQueryInput.parse({page});
+ const {total}=db.prepare('SELECT count(*) AS total FROM rewards WHERE user_id=?').get(userId) as {total:number};
+ const current=Math.min(requested,Math.max(1,Math.ceil(total/100)));
+ const data=(db.prepare(`${SELECT} WHERE user_id=? ORDER BY created_at DESC,rowid DESC LIMIT 100 OFFSET ?`).all(userId,(current-1)*100) as Reward[]).map(r=>({...r}));
+ return {data,pagination:{page:current,pageSize:100,total}};
 }
+export const myRewards=(db:Database,userId:string):Reward[]=>listMyRewards(db,userId).data;
 
 export function grantReward(db:Database,actorId:string,input:unknown,now=Date.now()):Reward{
  authorize(db,actorId);

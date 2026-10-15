@@ -5,8 +5,8 @@ import {isTrackingPixel} from '../content/blog-pages';
 import {renderMarkdown} from '../content/markdown';
 import {hasClass,isEl,mapTree,mustFind,withAttrs,withChildren,type El} from '../content/tree';
 import {getPublicEvent,listPublicEvents,type EventPhase} from './events';
-import {myEntries} from './entries';
-import {eventWinners,myRewards} from './rewards';
+import {eventHistory} from './history';
+import {eventWinners} from './rewards';
 
 const el=(tag:string,attrs:Record<string,string>,children:CapturedNode[]=[]):El=>({tag,attrs,children});
 const cls=(c:string)=>hasClass(c);
@@ -56,18 +56,29 @@ export async function buildEventListPage(db:Database,now=Date.now()){
  return withContent('/event','/event','이벤트',c=>[hero(c,'이벤트','NAEO 회원을 위한 이벤트와 리워드 소식이에요.'),...lists(c,events,'/event')]);
 }
 
-function myActivity(db:Database,userId:string):El{
- const entries=myEntries(db,userId),rewards=myRewards(db,userId);
+function myActivity(db:Database,userId:string,query:unknown):El{
+ const {entries,rewards,entryPagination,rewardPagination}=eventHistory(db,userId,query);
+ const pager=(label:string,key:'entriesPage'|'rewardsPage',pagination:typeof entryPagination)=>{
+  const pages=Math.max(1,Math.ceil(pagination.total/pagination.pageSize));
+  const link=(page:number,title:string)=>el('a',{href:`/dashboard/events?${new URLSearchParams({entriesPage:String(entryPagination.page),rewardsPage:String(rewardPagination.page),[key]:String(page)})}#my-events`,class:'button secondary'},[title]);
+  return el('nav',{'aria-label':label,style:'display:flex;gap:12px;align-items:center'},[
+   ...(pagination.page>1?[link(pagination.page-1,'이전')]:[]),
+   el('span',{},[`${pagination.page} / ${pages} · 총 ${pagination.total}건`]),
+   ...(pagination.page<pages?[link(pagination.page+1,'다음')]:[]),
+  ]);
+ };
  const row=(cells:string[])=>el('tr',{},cells.map(c=>el('td',{style:'padding:8px;border-top:1px solid #e5e5e5'},[c])));
  const table=(caption:string,head:string[],rows:El[],empty:string)=>rows.length?el('table',{style:'width:100%;border-collapse:collapse;font-size:14px'},[el('caption',{style:'text-align:left;font-weight:700;padding:8px 0'},[caption]),el('thead',{},[el('tr',{},head.map(h=>el('th',{style:'text-align:left;padding:8px;color:#737373'},[h])))]),el('tbody',{},rows)]):el('p',{style:muted},[empty]);
- return el('section',{'aria-label':'내 이벤트 활동','data-my-events':'true',style:'display:grid;gap:16px;padding:20px;border:1px solid #e5e5e5;border-radius:16px'},[
-  table('내 참여 내역',['이벤트','상태','제출일','심사 메모'],entries.map(e=>row([e.title,STATUS[e.status]??e.status,day(e.createdAt),e.reviewNote||'-'])),'아직 참여한 이벤트가 없어요.'),
+ return el('section',{'aria-label':'내 이벤트 활동','data-my-events':'true',id:'my-events',style:'display:grid;gap:16px;padding:20px;border:1px solid #e5e5e5;border-radius:16px'},[
+  table('내 참여 내역',['이벤트','상태','제출일','심사 메모'],entries.map(e=>{const r=row([e.title,STATUS[e.status]??e.status,day(e.createdAt),e.reviewNote||'-']);r.children[0]=el('td',{style:'padding:8px'},[el('a',{href:`/dashboard/events/${e.slug}`,style:'color:#03c75a'},[e.title])]);return r;}),'아직 참여한 이벤트가 없어요.'),
+  pager('내 참여 페이지','entriesPage',entryPagination),
   table('내 리워드',['내용','리워드','상태','지급일'],rewards.map(r=>row([r.description,r.kind==='gift'?r.item:`${r.tokens}토큰`,r.status==='granted'?'지급':'회수',day(r.createdAt)])),'받은 리워드가 없어요.'),
+  pager('내 리워드 페이지','rewardsPage',rewardPagination),
  ]);
 }
-export async function buildDashboardEventsPage(db:Database,userId:string,now=Date.now()){
+export async function buildDashboardEventsPage(db:Database,userId:string,now=Date.now(),query:unknown={}){
  const events=listPublicEvents(db,now);
- return withContent('/dashboard/events','/dashboard/events','이벤트',c=>[hero(c,'이벤트','참여할 수 있는 이벤트와 내 참여·리워드 내역이에요.'),myActivity(db,userId),...lists(c,events,'/dashboard/events')]);
+ return withContent('/dashboard/events','/dashboard/events','이벤트',c=>[hero(c,'이벤트','참여할 수 있는 이벤트와 내 참여·리워드 내역이에요.'),myActivity(db,userId,query),...lists(c,events,'/dashboard/events')]);
 }
 
 /** 이벤트 상세: 본문(마크다운) + 참여 영역(빈 data-event-entry 자리에 클라이언트 컴포넌트가 로딩·폼·상태를 그린다). */

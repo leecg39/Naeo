@@ -1,11 +1,12 @@
+import {eventHistory} from './history';
 import {z} from 'zod';
 import type {Database} from '../database';
 import {requireAdmin,type User} from '../auth';
 import {AppError} from '../errors';
 import {body,json,rateLimit} from '../http';
 import {createEvent,deleteEvent,getPublicEvent,listAdminEvents,listPublicEvents,updateEvent} from './events';
-import {listEventEntries,myEntries,myEventEntry,reviewEntry,submitEntry,updateMyEntry,withdrawEntry} from './entries';
-import {grantRankingRewards,grantReward,listRewards,myRewards,revokeReward} from './rewards';
+import {listEventEntries,myEventEntry,reviewEntry,submitEntry,updateMyEntry,withdrawEntry} from './entries';
+import {grantRankingRewards,grantReward,listRewards,revokeReward} from './rewards';
 
 const anyJson=z.unknown();
 const ID='([a-f0-9-]{36})',SLUG='([a-z0-9][a-z0-9-]{1,59})';
@@ -26,7 +27,7 @@ export async function memberEventsApi(db:Database,request:Request,user:User):Pro
  const {pathname:path}=new URL(request.url),method=request.method;
  const input=()=>body(request,anyJson);
  if(method!=='GET'&&(path.startsWith('/api/events/')||path.startsWith('/api/event-entries/')))rateLimit(db,`events:${user.id}`,60,15*60*1000);
- if(path==='/api/me/events'&&method==='GET')return json({data:{entries:myEntries(db,user.id),rewards:myRewards(db,user.id)}});
+ if(path==='/api/me/events'&&method==='GET')return json({data:eventHistory(db,user.id,Object.fromEntries(new URL(request.url).searchParams))});
  const mine=match(path,`/api/events/${SLUG}/entry`);
  if(mine&&method==='GET')return json({data:myEventEntry(db,user.id,mine[1])});
  const submit=match(path,`/api/events/${SLUG}/entries`);

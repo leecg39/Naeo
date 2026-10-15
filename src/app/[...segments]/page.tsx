@@ -1,3 +1,4 @@
+import {eventHistoryQuery} from '@/server/events/history';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect, redirect } from 'next/navigation';
 import { getCapturedPage } from '@/lib/pages';
@@ -101,7 +102,7 @@ export default async function Page({params,searchParams}:Props){
   if(path==='/dashboard/mate')return memberView(await buildMateDashboardPage(database(),user.id));
   if(path==='/dashboard/ai-picks')return memberView(await buildAiPicksPage());
   if(path==='/dashboard/competitors')return memberView(await buildCompetitorsPage(database(),user.id));
-  if(path==='/dashboard/events')return memberView(await buildDashboardEventsPage(contentDatabase(),user.id));
+  if(path==='/dashboard/events'){const query=eventHistoryQuery.safeParse(flat(await searchParams));if(!query.success)notFound();return memberView(await buildDashboardEventsPage(contentDatabase(),user.id,Date.now(),query.data));}
   const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
   if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <>{memberView(detail)}<EventEntryPanel/></>;}
   if(path==='/dashboard/write')return <><PageExperience data={await buildWritingPage(database(),user.id)}/><PageAnnouncements path={path}/><DraftsWorkspace/></>;

@@ -78,3 +78,13 @@ RewardsManager·EntriesReview는 아래 추가 수정으로 페이지 이동을 
 실제 production Next 서버에서도101장 목록의 두 번째 페이지, 다운로드 바이트 일치, 비인증401, 삭제 후404와 총건수100을 확인했다. 임시 DB·파일·서버를 정리했다. [HTTP 기록](evidence/image-pagination-runtime.json), [테스트](evidence/image-pagination-tests.log), [빌드](evidence/image-pagination-build.log). Portal로 붙는 실제 사진함의 클릭/hydration/모바일은 아직 검증하지 못했다. 서버 HTTP 검증을 브라우저 검증으로 대체하지 않는다.
 
 추가 점검에서 회원 이벤트 참여·리워드 내역도100건 제한이 확인됐다. P11.7로 추적한다.
+
+## 회원 이벤트 참여·리워드 전체 이력 (2026-10-15)
+
+`/api/me/events`와 `/dashboard/events`의 첫100건 제한을 해소했다. entriesPage/rewardsPage를 독립 입력으로 받아 해당 목록100건 및 각각의 총건수·현재 페이지를 반환한다. 기존 entries/rewards 배열은 보존하고 pagination 정보를 추가했다. API와 SSR은 eventHistory 서비스를 공유한다. 범위를 넘은 페이지는 마지막 페이지로 보정하며 잘못된 입력은 API400·화면404로 처리한다.
+
+SSR의 내 활동 영역에 두 페이지 이동 링크를 추가했다. 한 목록을 이동해도 다른 목록의 페이지 번호를 유지하고 #my-events 앵커로 돌아온다. 참여 제목을 해당 이벤트 상세로 연결해 기존 수정/철회 폼에 접근할 수 있다. 공개 기간·심사 상태에 따른 기존 수정 권한은 유지한다.
+
+전체417(root6+server411), lint/typecheck/build 통과. API 테스트에서101개 참여/리워드의 전체 페이지 분할·중복 없음·두 목록 독립성·다른 회원 조회/수정 차단·2페이지 참여 수정/철회·비인증401·잘못된 입력400·초과 페이지 보정과 SSR 링크를 확인했다.
+
+실제 production Next 서버도101건으로 API2페이지, SSR 내 활동 영역의 목록별 단1행, 독립 페이지 링크·상세 링크, 참여 수정·철회 및 오류 응답을 검증했다. 임시 DB/서버를 정리했다. [HTTP/SSR](evidence/event-history-runtime.json), [테스트](evidence/event-history-tests.log), [빌드](evidence/event-history-build.log). 브라우저 클릭/포커스/모바일은 P11.3에 남는다. 전체 구현 목표의 외부 연동/AI/최종 감사 완료를 뜻하지 않는다.
