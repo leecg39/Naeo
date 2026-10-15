@@ -508,3 +508,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 프로덕션 Next 서버를 실제로 강제 종료한 뒤 같은 SQLite DB로 재시작했다. 60초 보호시간 이후 동일 환불을 재개해 결제사 대역의 취소가 1회인 것을 확인했다. [HTTP 20항목](evidence/payment-recovery-http.json)과 대역 검증을 실제 토스 왕복 또는 브라우저 검증으로 세지 않는다.
 
 최종 게이트: **324/324**(스크립트 6 + 서버 318, 결제 적대적 테스트 20 포함), lint·typecheck·production build 종료 코드 0. [로그와 소스 해시](evidence/payment-checks.json)를 보존했다.
+
+## P9.2 개인정보 내보내기 — 2026-10-15
+
+개인 데이터 내보내기: 전용 18개, 전체 357개(6+351), lint/typecheck/build 통과. 실제 Next 서버와 worker로 202 요청부터 TAR 다운로드·41개 데이터셋/사진 해시 대조·타 계정 차단·로그아웃 후 재시작 삭제까지 확인했다. `scripts/qa/personal-export.ts`로 격리 재현할 수 있다. [상세 계약](personal-data-export.md), [검증 색인](evidence/personal-export-verification.json), [실제 HTTP](evidence/personal-export-runtime.json). 새 UI의 Ego 클릭/hydration은 미검증이며 전체 목표 완료를 뜻하지 않는다.

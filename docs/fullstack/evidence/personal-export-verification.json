@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-15T08:00:36.321574+00:00",
+  "baseCommit": "d13336b59a0ea2a97f0c558312cced122c239629",
+  "schemaVersion": 29,
+  "verification": {
+    "tests": {
+      "passed": 357,
+      "failed": 0,
+      "scriptTests": 6,
+      "serverTests": 351
+    },
+    "dedicated": {
+      "passed": 18,
+      "failed": 0
+    },
+    "cleanupRegressionBeforeFix": {
+      "passed": 16,
+      "failed": 2
+    },
+    "lintExit": 0,
+    "typecheckExit": 0,
+    "buildExit": 0,
+    "runtimeExit": 0
+  },
+  "sourceSha256": {
+    "eslint.config.mjs": "c6e715b217b102fa1fb2792ec1518abba470b38cf89b35f69850b08edb2b793d",
+    "package.json": "6ca5d419102916beb10c1576194a868b463d80ffbe956a5ef228bce7d4b4b9a2",
+    "scripts/qa/personal-export.ts": "017a47d3fe3c773ccb376f2edd22946cdebc62294dfa2db6064251b421bd1ec8",
+    "scripts/worker.ts": "a22d31fed0056b895db0a1e2ed63a0206d4dc5093b8192ba034032f5c46724c2",
+    "src/app/dashboard/settings/page.tsx": "fac457783280492e85c24b00223283fa5dd2153ebda7c7cff99cf1a010d17f7e",
+    "src/components/account/PersonalDataExport.tsx": "8108dee45a8f64c2ffc3caf18a42a4d456c9a937dfa627fd12f89c5fbc68d9f7",
+    "src/server/account-api.ts": "fa85a33e76804b32f62af789d70e58fae588da63d6f27499700db37363de6af4",
+    "src/server/migrations.ts": "4be1c8d7ce914752436292c1928877153d67b87dd9357536c076ef466fad2269",
+    "src/server/privacy/api.ts": "ba5f8a77203bfb811db6c615818df6450668dcfcb2c9b5356fdf0fa82c89f256",
+    "src/server/privacy/archive.ts": "8e2df3bc0c35b705b78adf558db923b4643c30e6a44531f5a5c41eb886a04500",
+    "src/server/privacy/datasets.ts": "3d43f1d9798d18497e3f7681076cd2d79ddcf8436d1f199d95a42a551d1edac2",
+    "src/server/privacy/personal-export.ts": "e49217ac35c9ca8146951f8436f033b4b16b78217f10c2d539d2d6488f9f85f0",
+    "src/server/privacy/schema.ts": "b80f8ae01c7dc0f3922a6c246db88e62288b7fba5133c0f2268734f207f339aa",
+    "src/server/privacy/tar.ts": "22bd930946631e83d5fd0d933402cc00a2e39cf1a68c3ab99e53fecc530b24a8",
+    "tests/server/personal-export.test.ts": "fef95803f812f94b8e675cabb163614077937953d6bce0f4235e6626d5b47e42"
+  },
+  "logs": {
+    "docs/fullstack/evidence/personal-export-red.log": {
+      "sha256": "a8a679866e0e030d8e509f66086053d04ad54e92b2656285307a48e98ed8c124",
+      "rawSha256": "a8a679866e0e030d8e509f66086053d04ad54e92b2656285307a48e98ed8c124",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-cleanup-red.log": {
+      "sha256": "d9e4127babb2e719a8916ad25a1831e1fa24eba0e4d6639e0e1e5d06d6941145",
+      "rawSha256": "0f18925dfbb3b7895cf501411316eb2201068745d06af39c50abf0412bd6970b",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-green.log": {
+      "sha256": "e9ffc9640323c561d41f1a58b9a7f575895c80e0677f96d746e4fea8d85bdb48",
+      "rawSha256": "e9ffc9640323c561d41f1a58b9a7f575895c80e0677f96d746e4fea8d85bdb48",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-tests.log": {
+      "sha256": "32621c7afc6a435d970f691a5fa33f6c7849ff13c51e3434446a8b6ae8a42360",
+      "rawSha256": "32621c7afc6a435d970f691a5fa33f6c7849ff13c51e3434446a8b6ae8a42360",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-lint.log": {
+      "sha256": "d5b45264edf102e0cde4b926765a79578ca76aa393828002fe1c6a298dc4ca13",
+      "rawSha256": "fffb2b1e1cea01e2891076449735319eee84d62e925bd5942ebce36fdcb8fc5d",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-typecheck.log": {
+      "sha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-build.log": {
+      "sha256": "eebf19295433251aad861c90d9371c849ecc6a6588ca80a55a2e29a0ee5e5fdd",
+      "rawSha256": "5a82aea8d3f2d76ad878b818a66c4cedf1bf5709e76521653e57617346a7c9ac",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    },
+    "docs/fullstack/evidence/personal-export-runtime.log": {
+      "sha256": "9b36364c8f11bab10ecd5903608ff4b9b07f92151b8abe96abc8e47ab9dbc6cc",
+      "rawSha256": "9b36364c8f11bab10ecd5903608ff4b9b07f92151b8abe96abc8e47ab9dbc6cc",
+      "normalization": "line-end whitespace and trailing blank lines trimmed"
+    }
+  },
+  "runtimeEvidenceSha256": "9b36364c8f11bab10ecd5903608ff4b9b07f92151b8abe96abc8e47ab9dbc6cc",
+  "limitations": [
+    "Browser interaction/hydration not verified",
+    "Full 5GB account load not tested",
+    "Live original-server personal-export behavior not established by REA"
+  ]
+}

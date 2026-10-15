@@ -1,0 +1,61 @@
+(node:47108) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ personal archive includes owned records and exact media, excludes credentials and unrelated owner (158.568791ms)
+✔ invalid password, revoked session during reauthentication, payload validation (156.558166ms)
+✔ one active export per owner, early download rejected, cancellation, session cascade and durable cleanup (196.870125ms)
+✔ expired exports cannot download and cleanup deletes files; stale running lease is recovered (122.203708ms)
+✔ missing attachment fails visibly and never delivers an incomplete archive (123.31125ms)
+✔ symlinked source and traversal storage key fail without reading outside uploads (163.176333ms)
+✔ all rows beyond UI pagination are exported, no silent result cap (139.177542ms)
+✔ crash orphan is cleaned after grace without touching fresh files or unrelated names (122.24075ms)
+✔ HTTP origin, authentication, request/list/download/delete contracts (132.329958ms)
+✔ OAuth-only accounts require recent login and local-password accounts cannot skip reauthentication (117.756959ms)
+✔ inquiry replies include all delivery states but no staff ID; guest email match and other drafts excluded (124.726792ms)
+✔ creative final files and collecting pages are included with hashes; expired artifacts are metadata only (289.444833ms)
+✔ logout committed by another connection before publish fences the archive and cleans it (127.414917ms)
+✔ a reclaimed lease cannot be overwritten by the old worker (126.02425ms)
+✔ account deletion cascades completed exports and queues physical file deletion (120.505334ms)
+✔ download detects file substitution and refuses a symlink (125.646416ms)
+✖ cleanup IO failure is reported without killing the worker and remains retryable (120.945041ms)
+✖ failed deletion tombstones do not starve later valid files (102.590875ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 16
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3100.421417
+
+✖ failing tests:
+
+test at tests/server/personal-export.test.ts:2:21411
+✖ cleanup IO failure is reported without killing the worker and remains retryable (120.945041ms)
+  Error: EACCES: permission denied, scandir '/var/folders/04/y54015w94szby3vf2k72l9wr0000gp/T/naeo-personal-export-5T8VhR/personal-exports'
+      at readdirSync (node:fs:1560:26)
+      at cleanupPersonalExports (/Users/user01/Desktop/NAEO/naeo-clone/src/server/privacy/personal-export.ts:93:17)
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/personal-export.test.ts:178:19)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    errno: -13,
+    code: 'EACCES',
+    syscall: 'scandir',
+    path: '/var/folders/04/y54015w94szby3vf2k72l9wr0000gp/T/naeo-personal-export-5T8VhR/personal-exports'
+  }
+
+test at tests/server/personal-export.test.ts:2:22074
+✖ failed deletion tombstones do not starve later valid files (102.590875ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/personal-export.test.ts:187:65)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

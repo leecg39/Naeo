@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-15T07:55:47.803Z",
+  "schemaVersion": 29,
+  "checks": [
+    "settings SSR renders the export form (not browser hydration)",
+    "reauthentication, queued state and cross-owner denial over real HTTP",
+    "real worker builds archive; system tar reads all members; SHA-256, row isolation and attachment bytes match",
+    "logout immediately denies download; restarted worker deletes persisted archive tombstone"
+  ],
+  "archiveBytes": 36864,
+  "datasets": 41,
+  "attachments": 1,
+  "archiveSha256": "eb100a90425369a2d7f06d52139cc2801cfec57c0cfc030a9278a033b95def15",
+  "browserVerified": false,
+  "productionProvidersUsed": false,
+  "temporaryDataRemoved": true
+}

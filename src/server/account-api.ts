@@ -1,3 +1,4 @@
+import {personalExportApi} from './privacy/api';
 import type {Database} from './database';
 import {requireAdmin,type User} from './auth';
 import {body,json,sessionCookie,cookieToken,rateLimit} from './http';
@@ -8,6 +9,7 @@ import {changePasswordInput,deleteAccountInput,createUserInput,updateUserInput,d
 
 export async function accountApi(db:Database,request:Request,user:User):Promise<Response|null> {
   const {pathname:path,searchParams}=new URL(request.url),method=request.method,token=cookieToken(request)!;
+  const exportResponse=await personalExportApi(db,request,user);if(exportResponse)return exportResponse;
   const securityLimit=()=>rateLimit(db,`security:${user.id}`,20,15*60*1000);
   if(path==='/api/auth/password'&&method==='PATCH') {
     securityLimit();const result=await changePassword(db,user.id,await body(request,changePasswordInput));

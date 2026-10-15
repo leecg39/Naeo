@@ -1,0 +1,39 @@
+node:internal/modules/cjs/loader:1447
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module '../../src/server/privacy/personal-export'
+Require stack:
+- /Users/user01/Desktop/NAEO/naeo-clone/tests/server/personal-export.test.ts
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1447:15)
+    at nextResolveSimple (/Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-B1c7OH6V.cjs:23:1010)
+    at /Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-B1c7OH6V.cjs:22:4512
+    at /Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-B1c7OH6V.cjs:22:2830
+    at resolveTsPaths (/Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-B1c7OH6V.cjs:23:762)
+    at /Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-B1c7OH6V.cjs:23:1203
+    at j._resolveFilename (file:///Users/user01/Desktop/NAEO/naeo-clone/node_modules/tsx/dist/register-nyXW-TH3.mjs:2:18825)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at defaultResolve (node:internal/modules/cjs/loader:1093:31)
+    at nextStep (node:internal/modules/customization_hooks:189:26) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/user01/Desktop/NAEO/naeo-clone/tests/server/personal-export.test.ts'
+  ]
+}
+
+Node.js v25.4.0
+✖ tests/server/personal-export.test.ts (607.583042ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 614.930917
+
+✖ failing tests:
+
+test at tests/server/personal-export.test.ts:1:1
+✖ tests/server/personal-export.test.ts (607.583042ms)
+  'test failed'

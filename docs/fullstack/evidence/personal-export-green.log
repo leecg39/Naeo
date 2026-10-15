@@ -1,0 +1,28 @@
+(node:47697) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ personal archive includes owned records and exact media, excludes credentials and unrelated owner (159.919958ms)
+✔ invalid password, revoked session during reauthentication, payload validation (155.835292ms)
+✔ one active export per owner, early download rejected, cancellation, session cascade and durable cleanup (209.046625ms)
+✔ expired exports cannot download and cleanup deletes files; stale running lease is recovered (123.479291ms)
+✔ missing attachment fails visibly and never delivers an incomplete archive (123.548166ms)
+✔ symlinked source and traversal storage key fail without reading outside uploads (165.005ms)
+✔ all rows beyond UI pagination are exported, no silent result cap (139.531042ms)
+✔ crash orphan is cleaned after grace without touching fresh files or unrelated names (123.7015ms)
+✔ HTTP origin, authentication, request/list/download/delete contracts (131.809584ms)
+✔ OAuth-only accounts require recent login and local-password accounts cannot skip reauthentication (123.133083ms)
+✔ inquiry replies include all delivery states but no staff ID; guest email match and other drafts excluded (122.923042ms)
+✔ creative final files and collecting pages are included with hashes; expired artifacts are metadata only (290.502042ms)
+✔ logout committed by another connection before publish fences the archive and cleans it (202.431542ms)
+✔ a reclaimed lease cannot be overwritten by the old worker (133.825708ms)
+✔ account deletion cascades completed exports and queues physical file deletion (125.854875ms)
+✔ download detects file substitution and refuses a symlink (123.626833ms)
+✔ cleanup IO failure is reported without killing the worker and remains retryable (120.127709ms)
+✔ failed deletion tombstones do not starve later valid files (103.1515ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3190.850375

@@ -1,3 +1,5 @@
+import PersonalDataExport from '@/components/account/PersonalDataExport';
+import {listPersonalExports} from '@/server/privacy/personal-export';
 import { pageUser } from '@/server/current-user';
 import { database } from '@/server/database';
 import { getProfile } from '@/server/profiles';
@@ -32,6 +34,7 @@ export default async function SettingsPage({searchParams}:{searchParams:Promise<
   const {oauthLinked,oauthError}=await searchParams;
   const user=await pageUser('/dashboard/settings'),db=database();
   const profile=getProfile(db,user.id),blogs=listBlogs(db,user.id,{pageSize:100}).data;
-  const sessions=listSessions(db,user.id,(await cookies()).get(SESSION_COOKIE)!.value);
-  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><EngagementPanel initialPoints={points(db,user.id,{pageSize:10})} initialTutorial={tutorial(db,user.id)}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><ConnectedApps key={user.version} initial={listAuthorizedApps(db,user.id)} mcpUrl={mcpResource()}/><SecurityForm user={user} initialSessions={sessions}/></div></AccountShell>;
+  const token=(await cookies()).get(SESSION_COOKIE)!.value;
+  const sessions=listSessions(db,user.id,token);
+  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><EngagementPanel initialPoints={points(db,user.id,{pageSize:10})} initialTutorial={tutorial(db,user.id)}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><ConnectedApps key={user.version} initial={listAuthorizedApps(db,user.id)} mcpUrl={mcpResource()}/><PersonalDataExport key={`export-${user.version}`} initial={listPersonalExports(db,user.id,token)} hasPassword={hasPassword(db,user.id)}/><SecurityForm user={user} initialSessions={sessions}/></div></AccountShell>;
 }
