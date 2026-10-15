@@ -37,6 +37,22 @@ REA DD-03의 배포 코드는 pathname이 /dashboard로 시작하면 dashboard, 
 - 홈·공개 페이지와 인증 후 대시보드 경로, 별도 settings/social 페이지에 공지 목록을 전달한다.
 - 목록은 기간·대상·exactPath로 걸러지고 수정 시각 내림차순과 ID로 정렬된다. 이 정렬은 원본 서버를 확인한 결과가 아니라 클론의 정책이다.
 - 공지를 닫으면 이번 화면의 숨김 Set에 추가하고 다음 공지를 보여준다. 오늘 숨김을 누르면 현재 Set을 UTC 날짜와 함께 저장한다. 이미 오늘 숨긴 공지는 처음부터 건너뛴다.
-- 서버에서 직접 목록을 전달한다. 원본 /api/announcements 조회 경로 자체는 아직 호환 구현하지 않았다.
+- 서버에서 직접 목록을 전달한다. 이후 아래 조회 API를 추가했다. 화면은 서버에서 목록을 직접 전달하는 구조를 유지한다.
 
 검증: 전체405개(root6+server399) 통과. 이후 스키마34 배너 보존 사례를 보강한 공지 테스트7개 재통과. lint 및 production build 통과. UI 순차 클릭·Escape·포커스·반응형은 실제 브라우저 미검증 상태다. 서버 테스트 통과를 이 영역의 완료 근거로 사용하지 않는다.
+
+
+## 공지 조회 API — 스키마 36
+
+`GET /api/announcements?target=landing|dashboard`를 추가했다. REA HTTP-05의 저장된 원문(`reverse-engineering/rea-deep-dive-2026-10-15/evidence/announcements-landing.body`)에서 확인한 `announcements` 배열과 `id/title/content/type/target/link_url/metadata/start_date/end_date` 필드를 반환한다. 내부 작성자·수정자·status·version은 공개 응답에서 제외한다. 관리 API는 기존 필드를 유지한다.
+
+- 스키마36에 type(coupon/feature/maintenance/event/blog)을 저장하며 관리자 생성·수정 폼에서 선택한다. 다섯 값은 REA DD-03과 같은 배포 원문의 타입별 렌더링 분기에서 확인했다. 기존 텍스트 공지의 기본 maintenance는 클론의 마이그레이션 정책이다.
+- 원본 서버에서 확인하지 못한 정책: target 생략 시 landing, 잘못된 target은400, dashboard는 로그인+약관 동의 필요, GET 외에는405, 빈 링크/기간은null, 날짜는 UTC ISO, all은 landing으로 매핑한다. 이 동작을 원본 전체 규약 복원으로 표현하지 않는다.
+- 기간·상태·대상 선별은 화면과 같은 서비스 함수를 사용한다. API는 exactPath를 제거하지 않고 metadata로 반환하고, 현재 화면은 해당 경로에 맞게 별도 선별한다.
+- 생성·수정·유형/대상 변경·삭제가 조회 API에 즉시 반영된다. no-store 응답이다.
+
+실제 실행: `node --import tsx scripts/qa/announcements.ts`가 임시 DB와 production Next 서버를 만들고 관리자 로그인, 생성, 공개 조회, 이벤트 SSR 속성 포함, 대상/유형 수정, 무인증 dashboard401·인증 조회, 삭제를 HTTP 요청으로 검증했다. 프로세스와 임시 데이터는 종료·제거됐다. evidence/announcements-runtime.json 참조. SSR에 속성이 포함된 것은 이미지 표시·클릭·focus 검증이 아니다.
+
+전체406개(root6+server400) 테스트, lint·typecheck·production build 통과. 기존 DB33/34 업그레이드 테스트도 새36까지 실행된다.
+
+새로 명시한 잔여 차이: 원본 landing 응답은 metadata.display=ticker를 사용한다. 현재 입력 스키마와 화면에는 ticker가 없다. 또한 coupon/feature/maintenance/blog의 원본 유형별 전용 화면은 아직 일반 공지 렌더러로 처리한다. 이미지 배너 외 유형별 UI와 실제 브라우저 시나리오는 계속 구현·검증해야 한다.

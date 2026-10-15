@@ -5,13 +5,13 @@ import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
 import type {Announcement} from '@/server/content/announcements';
 
-type Form={title:string;body:string;linkUrl:string;linkLabel:string;target:Announcement['target'];startsAt:string;endsAt:string;status:Announcement['status'];metadata:Announcement['metadata']};
+type Form={type:Announcement['type'];title:string;body:string;linkUrl:string;linkLabel:string;target:Announcement['target'];startsAt:string;endsAt:string;status:Announcement['status'];metadata:Announcement['metadata']};
 /** datetime-local 값은 브라우저 현지 시각이라 저장할 때 ISO(UTC)로 바꾼다. */
 const toLocal=(ms:number|null)=>ms!==null?new Date(ms-new Date(ms).getTimezoneOffset()*60000).toISOString().slice(0,16):'';
 const toIso=(v:string)=>v?new Date(v).toISOString():null;
 const fmt=(ms:number|null)=>ms!==null?kstDateTime(ms):'제한 없음';
-const formOf=(a:Announcement|null):Form=>a?{title:a.title,body:a.body,linkUrl:a.linkUrl,linkLabel:a.linkLabel,target:a.target,startsAt:toLocal(a.startsAt),endsAt:toLocal(a.endsAt),status:a.status,metadata:a.metadata}
- :{title:'',body:'',linkUrl:'',linkLabel:'',target:'landing',startsAt:'',endsAt:'',status:'draft',metadata:{}};
+const formOf=(a:Announcement|null):Form=>a?{type:a.type,title:a.title,body:a.body,linkUrl:a.linkUrl,linkLabel:a.linkLabel,target:a.target,startsAt:toLocal(a.startsAt),endsAt:toLocal(a.endsAt),status:a.status,metadata:a.metadata}
+ :{type:'maintenance',title:'',body:'',linkUrl:'',linkLabel:'',target:'landing',startsAt:'',endsAt:'',status:'draft',metadata:{}};
 const payload=(f:Form)=>({...f,startsAt:toIso(f.startsAt),endsAt:toIso(f.endsAt)});
 function stateOf(a:Announcement,now:number){
  if(a.status==='draft')return'초안';
@@ -34,6 +34,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
   <h2>{item?'공지 편집':'새 공지'}</h2>
   {item&&<p className="muted">버전 {item.version}</p>}
   <form className="account-form" onSubmit={save}>
+   <label>유형<select className="field" value={form.type} onChange={e=>set('type',e.target.value as Form['type'])} disabled={busy}><option value="maintenance">점검</option><option value="event">이벤트</option><option value="feature">기능 안내</option><option value="coupon">쿠폰</option><option value="blog">블로그</option></select></label>
    <label>제목<input className="field" value={form.title} onChange={e=>set('title',e.target.value)} required maxLength={80} disabled={busy}/></label>
    <label>내용(선택)<textarea className="field" value={form.body} onChange={e=>set('body',e.target.value)} maxLength={300} rows={3} disabled={busy}/></label>
    <label>링크(선택, /경로 또는 https 주소)<input className="field" value={form.linkUrl} onChange={e=>set('linkUrl',e.target.value)} maxLength={300} disabled={busy}/></label>

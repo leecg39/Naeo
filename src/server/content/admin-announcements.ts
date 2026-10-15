@@ -8,7 +8,7 @@ import {ANNOUNCEMENT_SELECT,plainAnnouncement,type Announcement,type Announcemen
 import {announcementConsistencyMessage,announcementConsistent,announcementQueryInput,createAnnouncementInput,updateAnnouncementInput} from './announcement-validation';
 import {z} from 'zod';
 
-const COLUMNS={metadata:'metadata',title:'title',body:'body',linkUrl:'link_url',linkLabel:'link_label',target:'target',startsAt:'starts_at',endsAt:'ends_at',status:'status'} as const;
+const COLUMNS={type:'type',metadata:'metadata',title:'title',body:'body',linkUrl:'link_url',linkLabel:'link_label',target:'target',startsAt:'starts_at',endsAt:'ends_at',status:'status'} as const;
 type Field=keyof typeof COLUMNS;
 const authorize=(db:Database,actorId:string)=>requireAdmin(userById(db,actorId));
 const toMs=(v:string|null)=>v===null?null:Date.parse(v);
@@ -36,8 +36,8 @@ export function createAnnouncement(db:Database,actorId:string,input:unknown):Ann
  const v=createAnnouncementInput.parse(input);
  const id=randomUUID(),now=Date.now();
  return transaction(db,()=>{
-  db.prepare('INSERT INTO announcements(metadata,id,title,body,link_url,link_label,target,starts_at,ends_at,status,created_by,updated_by,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
-   .run(JSON.stringify(v.metadata),id,v.title,v.body,v.linkUrl,v.linkLabel,v.target,toMs(v.startsAt),toMs(v.endsAt),v.status,actorId,actorId,now,now);
+  db.prepare('INSERT INTO announcements(type,metadata,id,title,body,link_url,link_label,target,starts_at,ends_at,status,created_by,updated_by,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+   .run(v.type,JSON.stringify(v.metadata),id,v.title,v.body,v.linkUrl,v.linkLabel,v.target,toMs(v.startsAt),toMs(v.endsAt),v.status,actorId,actorId,now,now);
   audit(db,actorId,'content.announcement.create','announcement',id,{status:v.status,target:v.target});
   return row(db,id);
  });

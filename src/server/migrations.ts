@@ -1047,5 +1047,7 @@ export const migrations = [{
  DROP TABLE announcements;
  ALTER TABLE announcements_v35 RENAME TO announcements;
  CREATE INDEX announcements_active ON announcements(status,updated_at DESC);
+ `},{version:36,name:'announcement_type',sql:`
+ ALTER TABLE announcements ADD COLUMN type TEXT NOT NULL DEFAULT 'maintenance' CHECK(type IN ('coupon','feature','maintenance','event','blog'));
  `}];
 

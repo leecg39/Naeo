@@ -1,4 +1,5 @@
 import {smsApi} from './sms/api';
+import {announcementApi} from './content/announcement-api';
 import {publicMailApi,memberMailApi} from './mail/api';
 import { database, type Database } from './database';
 import { register, login, logout, requireUser, requireAdmin, requireTerms, sessionUser } from './auth';
@@ -51,6 +52,7 @@ export function createApi(getDatabase:()=>Database=database) {
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
     const publicMail=await publicMailApi(db,request);if(publicMail)return publicMail;
+    const announcements=announcementApi(db,request);if(announcements)return announcements;
     const analytics=await publicAnalyticsApi(db,request);
     if(analytics)return analytics;
     const mcp=await mcpApi(db,request);

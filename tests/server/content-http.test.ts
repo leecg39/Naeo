@@ -8,6 +8,28 @@ const origin='http://127.0.0.1:3000';
 process.env.NAEO_APP_URL=origin;
 const password='content-http-test-password';
 
+test('REA announcement GET contract reflects CRUD, filters lifecycle and separates member audience',async t=>{
+ const f=fixture(t),admin=await account(f,'public-notice-admin@example.test',true),member=await account(f,'public-notice-member@example.test');
+ const create=async(over:Record<string,unknown>={})=>{
+  const r=await f.send('/api/admin/announcements','POST',{title:'공지',body:'본문',type:'event',status:'published',metadata:{image:'/banner.png',exactPath:'/event'},...over},admin);
+  assert.equal(r.status,201);return(await r.json()).data;
+ };
+ const a=await create({target:'all'}),dashboard=await create({target:'dashboard'});
+ await create({status:'draft'});await create({startsAt:new Date(Date.now()+86400000).toISOString()});await create({endsAt:new Date(Date.now()-86400000).toISOString()});
+ const response=await f.send('/api/announcements?target=landing');assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'no-store');
+ const result=await response.json();assert.equal(result.announcements.length,1);
+ assert.deepEqual(result.announcements[0],{id:a.id,title:'공지',content:'본문',type:'event',target:'landing',link_url:null,metadata:{image:'/banner.png',exactPath:'/event'},start_date:null,end_date:null});
+ assert.deepEqual(await(await f.send('/api/announcements')).json(),result);
+ assert.equal((await f.send('/api/announcements?target=dashboard')).status,401);
+ const members=await(await f.send('/api/announcements?target=dashboard','GET',undefined,member)).json();assert.deepEqual(members.announcements.map((x:{id:string})=>x.id),[dashboard.id]);
+ assert.equal((await f.send('/api/announcements?target=admin')).status,400);
+ const wrongMethod=await f.send('/api/announcements','POST',{},member);assert.equal(wrongMethod.status,405);assert.equal(wrongMethod.headers.get('allow'),'GET');
+ const update=await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{version:1,type:'feature',body:'수정 내용'},admin);assert.equal(update.status,200);
+ const changed=await(await f.send('/api/announcements')).json();assert.equal(changed.announcements[0].type,'feature');assert.equal(changed.announcements[0].content,'수정 내용');
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'DELETE',{version:2},admin)).status,200);
+ assert.deepEqual(await(await f.send('/api/announcements')).json(),{announcements:[]});
+});
+
 test('banner metadata API enforces role/origin, round-trips fields, clears metadata and deletes',async t=>{
  const f=fixture(t),admin=await account(f,'banner-admin@example.test',true),member=await account(f,'banner-member@example.test');
  const body={title:'배너',status:'published',target:'all',metadata:{display:'banner',image:'/banner.png',imageMobile:'/mobile.png',ratio:'16 / 9',ratioMobile:'4 / 5',exactPath:'/event',ctaLabel:'열기'}};

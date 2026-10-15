@@ -17,6 +17,7 @@ export const announcementMetadataInput=z.object({
 }).strict().refine(v=>v.display!=='banner'||!!v.image,'이미지 배너에는 기본 이미지가 필요합니다.');
 const at=z.iso.datetime({offset:true}).nullable();
 const fields={
+ type:z.enum(['coupon','feature','maintenance','event','blog']),
  metadata:announcementMetadataInput,
  title:z.string().trim().min(1).max(80),
  body:z.string().trim().max(300),
@@ -31,7 +32,7 @@ type Shape={metadata?:z.infer<typeof announcementMetadataInput>;linkUrl?:string;
 const consistent=(v:Shape)=>!(v.linkUrl&&v.linkLabel===''&&!(v.metadata?.image&&v.metadata.display!=='notice'))&&!(v.startsAt&&v.endsAt&&Date.parse(v.endsAt)<=Date.parse(v.startsAt));
 const message='링크를 넣으면 링크 문구도 필요하고, 종료 시각은 시작 시각보다 뒤여야 합니다.';
 export const createAnnouncementInput=z.object({
- ...fields,metadata:announcementMetadataInput.default({}),body:fields.body.default(''),linkUrl:linkUrl.default(''),linkLabel:fields.linkLabel.default(''),target:fields.target.default('landing'),
+ ...fields,type:fields.type.default('maintenance'),metadata:announcementMetadataInput.default({}),body:fields.body.default(''),linkUrl:linkUrl.default(''),linkLabel:fields.linkLabel.default(''),target:fields.target.default('landing'),
  startsAt:at.default(null),endsAt:at.default(null),status:fields.status.default('draft')
 }).strict().refine(consistent,message);
 export const updateAnnouncementInput=z.object(fields).partial().extend({version}).strict().refine(v=>Object.keys(v).length>1,'수정할 항목이 필요합니다.');

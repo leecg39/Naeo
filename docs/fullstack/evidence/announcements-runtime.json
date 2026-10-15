@@ -1,0 +1,14 @@
+{
+  "verifiedAt": "2026-10-15T09:12:16.418Z",
+  "checks": [
+    "Admin login and create",
+    "Public REA field mapping and no-store",
+    "Event SSR includes banner props",
+    "Update audience/type reflected immediately",
+    "Anonymous dashboard denied, authenticated dashboard allowed",
+    "Delete removes API record"
+  ],
+  "browserVerified": false,
+  "externalWrites": false,
+  "temporaryDataRemoved": true
+}
