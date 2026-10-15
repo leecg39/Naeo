@@ -12,4 +12,17 @@
 
 검증: 날짜 경계·재방문용 저장 상태·복수 ID·손상 데이터·저장 오류 테스트 2개 및 기존 공지 CRUD 테스트 3개 통과. 프로덕션 빌드 통과. 실제 브라우저 클릭·hydration 동작은 이번 검사에서 확인하지 않았다.
 
-남은 범위: 원본 이미지 배너의 metadata(image/imageMobile/ratio/ratioMobile/display/exactPath/ctaLabel)를 현재 관리자 CRUD와 DB에 연결해야 한다. 공지 대상 landing/dashboard와 복수 공지 선정도 현재 구현과 차이가 있다. 현재 공지 UI 전체의 원본 일치를 주장하지 않는다. 전체 79 URL + 4 동적 패턴 목표는 계속 진행 중이다.
+추가 구현: 아래 이미지 배너 metadata CRUD를 연결했다. 남은 범위는 공지 대상 landing/dashboard와 복수 공지 선정이며 현재 구현과 원본에 차이가 있다. 현재 공지 UI 전체의 원본 일치를 주장하지 않는다. 전체 79 URL + 4 동적 패턴 목표는 계속 진행 중이다.
+
+
+## 이미지 배너 CRUD 추가
+
+- 스키마 34: announcements.metadata JSON object. 기존 레코드는 빈 객체로 유지된다. 기존 마이그레이션 checksum은 변경하지 않았다.
+- 생성·목록·수정 API에서 이미지, 모바일 이미지, 기본·모바일 비율, display, exactPath, ctaLabel을 저장·반환한다. metadata PATCH는 객체 전체 교체이며 `{}`로 초기화한다. 기존 관리자 권한·Origin·버전 충돌·감사 로그·삭제 흐름을 사용한다.
+- 이미지 주소는 사이트 경로 또는 https만 허용한다. 비율은 양수 / 양수이며 0·CSS 표현식·무한대를 거절한다. exactPath는 쿼리와 fragment 없는 경로다. 이 입력 제약과 저장 구조는 클론의 자체 구현이다.
+- 경로에 맞는 공지를 먼저 선별한 뒤 최신 공지를 고른다. 경로가 맞지 않는 최신 배너가 이전 적격 공지를 가리지 않는다.
+- 관리자 편집기에 전체 필드를 연결했다. 이미지 배너에서 링크가 없으면 /event, CTA가 없으면 ‘이벤트 보러가기’, 기본 비율은 4 / 5다.
+- 공개 화면에서 image가 있고 display가 notice가 아니면 이미지 대화상자를 사용한다. 600px 미만에서 모바일 이미지·비율을 적용하고 없으면 기본값을 쓴다. cover·중앙 정렬·60vh 제한·닫기·일일 숨김을 연결했다.
+- 원본 MUI Dialog 대신 native dialog를 사용했다. showModal/닫기/Escape와 브라우저 기본 포커스 관리를 사용하지만 실제 브라우저 호환성·시각 일치 검증은 남았다.
+
+검증: 전체 테스트 403개(root 6 + server 397) 통과 후 마이그레이션 테스트를 추가했고, 해당 파일 6개 테스트가 통과했다(현재 총 테스트 정의 404개). lint·typecheck·production build 통과. HTTP 테스트는 createApi Request/Response 핸들러를 호출하며 실제 외부 서버·브라우저 실행을 뜻하지 않는다. 근거 로그는 evidence/announcement-banner-tests.log, announcement-banner-build.log에 있다.

@@ -1,0 +1,15 @@
+.dialog{padding:0;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#121212;color:#fff;width:444px;max-width:calc(100vw - 48px);max-height:calc(100dvh - 48px);box-shadow:0 24px 64px rgba(0,0,0,.8);margin:auto;font-family:pretendard,system-ui,sans-serif}
+.dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(3px)}
+.content{position:relative;overflow:hidden}
+.image{display:block;width:100%;aspect-ratio:var(--ratio);max-height:60vh;line-height:0;background:#0b0b0f;overflow:hidden}
+.image picture{display:block;width:100%;height:100%}
+.image img{width:100%;height:100%;object-fit:cover;object-position:center}
+.close{position:absolute;right:8px;top:8px;width:36px;height:36px;background:rgba(0,0,0,.45);color:#fff;border:0;border-radius:50%;cursor:pointer;font-size:24px}
+.close:hover{background:rgba(0,0,0,.68)}
+.actions{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.1)}
+.actions button,.actions a{padding:14px 8px;text-align:center;background:transparent;color:#aaa;border:0;font:inherit;font-size:14px;cursor:pointer;text-decoration:none}
+.actions button{border-right:1px solid rgba(255,255,255,.1)}
+.actions a{color:#03c75a;font-weight:800;font-size:15px}
+.actions button:hover{background:rgba(255,255,255,.04)}
+.actions a:hover{background:rgba(3,199,90,.1)}
+@media(max-width:599px){.image{aspect-ratio:var(--mobile-ratio)}}

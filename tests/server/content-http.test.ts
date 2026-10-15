@@ -7,6 +7,22 @@ import {applySeeds} from '../../src/server/content/seed';
 const origin='http://127.0.0.1:3000';
 process.env.NAEO_APP_URL=origin;
 const password='content-http-test-password';
+
+test('banner metadata API enforces role/origin, round-trips fields, clears metadata and deletes',async t=>{
+ const f=fixture(t),admin=await account(f,'banner-admin@example.test',true),member=await account(f,'banner-member@example.test');
+ const body={title:'배너',status:'published',target:'all',metadata:{display:'banner',image:'/banner.png',imageMobile:'/mobile.png',ratio:'16 / 9',ratioMobile:'4 / 5',exactPath:'/event',ctaLabel:'열기'}};
+ assert.equal((await f.send('/api/admin/announcements','POST',body,member)).status,403);
+ assert.equal((await f.send('/api/admin/announcements','POST',body,admin,{Origin:'https://evil.test'})).status,403);
+ const result=await f.send('/api/admin/announcements','POST',body,admin);assert.equal(result.status,201);
+ const a=(await result.json()).data;assert.deepEqual(a.metadata,body.metadata);
+ const listed=await (await f.send('/api/admin/announcements','GET',undefined,admin)).json();
+ assert.deepEqual(listed.data.find((x:{id:string})=>x.id===a.id).metadata,body.metadata);
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{version:1,metadata:{ratio:'1/0'}},admin)).status,400);
+ const cleared=await f.send(`/api/admin/announcements/${a.id}`,'PATCH',{version:1,metadata:{}},admin);
+ assert.equal(cleared.status,200);assert.deepEqual((await cleared.json()).data.metadata,{});
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'DELETE',{version:1},admin)).status,409);
+ assert.equal((await f.send(`/api/admin/announcements/${a.id}`,'DELETE',{version:2},admin)).status,200);
+});
 function fixture(t:TestContext){
  const db=openDatabase(':memory:');t.after(()=>db.close());applySeeds(db);
  const handler=createApi(()=>db);

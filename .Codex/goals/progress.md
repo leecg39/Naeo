@@ -42,3 +42,10 @@
 - 이전 턴 progress: REA 배너 청크 신규 분석 및 두 URL의 원본 홈 이동 지시 확인. 근거가 구현 방향을 수정했다.
 - 이번 턴 progress: 영구 숨김을 일반 닫기/UTC 일일 숨김으로 분리. 관련 5개 테스트 및 build 통과. 기존 SMS QA의 빈 catch lint 오류도 설명 주석으로 해결.
 - 전체 goal active. 이미지 배너 metadata DB/관리자 CRUD, landing/dashboard 대상과 복수 공지, 실제 브라우저 검증 및 기존 AI/외부 공급자·전 페이지 검증은 남았다.
+
+## 최신 — 이미지 배너 CRUD
+
+- 이전 턴 progress: e2270d9 공지 일일 숨김 구현·원격 반영.
+- 이번 턴 progress: schema34 metadata, 관리자 전체 필드 편집, 공개 이미지 배너와 exactPath 선별, 관리자 API 권한·Origin·버전·삭제 검증. 전체403 테스트와 추가 migration 테스트 통과, lint/typecheck/build 통과.
+- 원본 metadata 근거와 자체 검증 제약/저장 구현을 구분. native dialog 실제 Ego 클릭·이미지 표시·포커스/반응형 미확인. landing/dashboard 대상·복수 공지 선정은 후속 정합성 과제.
+- 기존 전체79URL+4패턴, AI/외부 공급자, 실제 브라우저 전범위 검증 목표 active 유지.

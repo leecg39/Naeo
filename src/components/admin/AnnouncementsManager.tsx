@@ -5,13 +5,13 @@ import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
 import type {Announcement} from '@/server/content/announcements';
 
-type Form={title:string;body:string;linkUrl:string;linkLabel:string;target:Announcement['target'];startsAt:string;endsAt:string;status:Announcement['status']};
+type Form={title:string;body:string;linkUrl:string;linkLabel:string;target:Announcement['target'];startsAt:string;endsAt:string;status:Announcement['status'];metadata:Announcement['metadata']};
 /** datetime-local 값은 브라우저 현지 시각이라 저장할 때 ISO(UTC)로 바꾼다. */
 const toLocal=(ms:number|null)=>ms!==null?new Date(ms-new Date(ms).getTimezoneOffset()*60000).toISOString().slice(0,16):'';
 const toIso=(v:string)=>v?new Date(v).toISOString():null;
 const fmt=(ms:number|null)=>ms!==null?kstDateTime(ms):'제한 없음';
-const formOf=(a:Announcement|null):Form=>a?{title:a.title,body:a.body,linkUrl:a.linkUrl,linkLabel:a.linkLabel,target:a.target,startsAt:toLocal(a.startsAt),endsAt:toLocal(a.endsAt),status:a.status}
- :{title:'',body:'',linkUrl:'',linkLabel:'',target:'landing',startsAt:'',endsAt:'',status:'draft'};
+const formOf=(a:Announcement|null):Form=>a?{title:a.title,body:a.body,linkUrl:a.linkUrl,linkLabel:a.linkLabel,target:a.target,startsAt:toLocal(a.startsAt),endsAt:toLocal(a.endsAt),status:a.status,metadata:a.metadata}
+ :{title:'',body:'',linkUrl:'',linkLabel:'',target:'landing',startsAt:'',endsAt:'',status:'draft',metadata:{}};
 const payload=(f:Form)=>({...f,startsAt:toIso(f.startsAt),endsAt:toIso(f.endsAt)});
 function stateOf(a:Announcement,now:number){
  if(a.status==='draft')return'초안';
@@ -23,6 +23,7 @@ function stateOf(a:Announcement,now:number){
 function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boolean;run:(a:()=>Promise<void>)=>Promise<void>;onSaved:(m:string)=>Promise<void>;onClose:()=>void}){
  const [form,setForm]=useState(formOf(item)),[confirming,setConfirming]=useState(false);
  const set=<K extends keyof Form>(k:K,v:Form[K])=>setForm(f=>({...f,[k]:v}));
+ const setMeta=(key:keyof Announcement['metadata'],value:string)=>setForm(f=>({...f,metadata:{...f.metadata,[key]:value||undefined}}));
  const save=(e:FormEvent)=>{e.preventDefault();void run(async()=>{
   if(item)await api(`/api/admin/announcements/${item.id}`,{method:'PATCH',body:{...payload(form),version:item.version}});
   else await api('/api/admin/announcements',{method:'POST',body:payload(form)});
@@ -36,12 +37,22 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
    <label>제목<input className="field" value={form.title} onChange={e=>set('title',e.target.value)} required maxLength={80} disabled={busy}/></label>
    <label>내용(선택)<textarea className="field" value={form.body} onChange={e=>set('body',e.target.value)} maxLength={300} rows={3} disabled={busy}/></label>
    <label>링크(선택, /경로 또는 https 주소)<input className="field" value={form.linkUrl} onChange={e=>set('linkUrl',e.target.value)} maxLength={300} disabled={busy}/></label>
-   <label>링크 문구<input className="field" value={form.linkLabel} onChange={e=>set('linkLabel',e.target.value)} maxLength={30} required={!!form.linkUrl} disabled={busy}/></label>
+   <label>링크 문구<input className="field" value={form.linkLabel} onChange={e=>set('linkLabel',e.target.value)} maxLength={30} required={!!form.linkUrl&&!(form.metadata.image&&form.metadata.display!=='notice')} disabled={busy}/></label>
    <label>표시 위치<select className="field" value={form.target} onChange={e=>set('target',e.target.value as Form['target'])} disabled={busy}><option value="landing">첫 화면만</option><option value="all">모든 공개 화면</option></select></label>
+   <fieldset disabled={busy}><legend>이미지 배너 설정</legend>
+    <label>표시 방식<select className="field" value={form.metadata.display||'auto'} onChange={e=>setMeta('display',e.target.value==='auto'?'':e.target.value)}><option value="auto">이미지가 있으면 배너</option><option value="notice">텍스트 공지</option><option value="banner">이미지 배너</option></select></label>
+    <label>기본 이미지 주소<input className="field" value={form.metadata.image||''} onChange={e=>setMeta('image',e.target.value)} maxLength={300} required={form.metadata.display==='banner'} placeholder="/images/banner.png 또는 https://…"/></label>
+    <label>모바일 이미지 주소(선택)<input className="field" value={form.metadata.imageMobile||''} onChange={e=>setMeta('imageMobile',e.target.value)} maxLength={300}/></label>
+    <label>기본 비율(기본 4 / 5)<input className="field" value={form.metadata.ratio||''} onChange={e=>setMeta('ratio',e.target.value)} placeholder="4 / 5" maxLength={30}/></label>
+    <label>모바일 비율(선택)<input className="field" value={form.metadata.ratioMobile||''} onChange={e=>setMeta('ratioMobile',e.target.value)} placeholder="4 / 5" maxLength={30}/></label>
+    <label>정확한 표시 경로(선택)<input className="field" value={form.metadata.exactPath||''} onChange={e=>setMeta('exactPath',e.target.value)} placeholder="/event" maxLength={300}/></label>
+    <label>배너 버튼 문구(기본 이벤트 보러가기)<input className="field" value={form.metadata.ctaLabel||''} onChange={e=>setMeta('ctaLabel',e.target.value)} maxLength={30}/></label>
+    <p className="muted">비율은 너비 / 높이입니다. 모바일 이미지·비율을 비우면 기본값을 사용합니다. 링크를 비우면 배너는 /event로 이동합니다. 표시 경로는 위 표시 위치 범위 안에서 적용됩니다.</p>
+   </fieldset>
    <label>시작(비우면 바로)<input className="field" type="datetime-local" value={form.startsAt} onChange={e=>set('startsAt',e.target.value)} disabled={busy}/></label>
    <label>종료(비우면 계속)<input className="field" type="datetime-local" value={form.endsAt} onChange={e=>set('endsAt',e.target.value)} disabled={busy}/></label>
    <label>상태<select className="field" value={form.status} onChange={e=>set('status',e.target.value as Form['status'])} disabled={busy}><option value="draft">초안(비공개)</option><option value="published">공개</option></select></label>
-   <p className="muted">공개 중인 공지가 여러 개면 가장 최근에 수정한 1개만 화면 아래에 보입니다. 방문자가 닫으면 그 브라우저에서는 공지를 고칠 때까지 다시 보이지 않습니다.</p>
+   <p className="muted">공개 중인 공지가 여러 개면 경로에 맞는 가장 최근 수정 공지 1개가 보입니다. 닫기는 현재 화면에서만, 오늘 하루 안 보기는 UTC 자정(한국 오전 9시)까지 적용됩니다.</p>
    <div className="account-actions">
     <button className="button" type="submit" disabled={busy}>{item?'저장':'공지 만들기'}</button>
     {item&&!confirming&&<button className="button secondary" type="button" disabled={busy} onClick={()=>setConfirming(true)}>삭제</button>}

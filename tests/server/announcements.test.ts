@@ -17,6 +17,54 @@ const HOUR=3600_000;
 const notice=(over:Record<string,unknown>={})=>({title:'점검 안내',body:'10월 20일 새벽 2시~4시 점검합니다.',linkUrl:'/updates',linkLabel:'자세히',target:'landing',status:'published',...over});
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 
+test('schema 33 upgrades existing announcements without losing publication data',async t=>{
+ const {DatabaseSync}=await import('node:sqlite');
+ const {mkdtempSync,rmSync}=await import('node:fs');
+ const {tmpdir}=await import('node:os');
+ const {join}=await import('node:path');
+ const {createHash}=await import('node:crypto');
+ const {migrations}=await import('../../src/server/migrations');
+ const dir=mkdtempSync(join(tmpdir(),'naeo-banner-migration-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
+ const path=join(dir,'old.sqlite'),old=new DatabaseSync(path);
+ try{
+  old.exec('PRAGMA foreign_keys=ON; CREATE TABLE schema_migrations(version INTEGER PRIMARY KEY,name TEXT NOT NULL,checksum TEXT NOT NULL,applied_at INTEGER NOT NULL) STRICT;');
+  for(const m of migrations.filter(x=>x.version<=33)){old.exec(m.sql);old.prepare('INSERT INTO schema_migrations VALUES(?,?,?,?)').run(m.version,m.name,createHash('sha256').update(m.sql).digest('hex'),Date.now());}
+  old.prepare("INSERT INTO announcements(id,title,status,created_at,updated_at) VALUES('legacy','기존 공지','published',1,1)").run();
+ }finally{old.close();}
+ const upgraded=openDatabase(path);try{
+  const notice=activeAnnouncement(upgraded,'/');assert.equal(notice?.id,'legacy');assert.deepEqual(notice?.metadata,{});
+  assert.throws(()=>upgraded.prepare("UPDATE announcements SET metadata='[]'").run());
+ }finally{upgraded.close();}
+ const reopened=openDatabase(path);reopened.close();
+});
+
+test('banner metadata persists through CRUD and exactPath filters before selecting a notice',async t=>{
+ const {db,admin}=await fixture(t);
+ const base=createAnnouncement(db,admin,notice({target:'all'}));
+ const metadata={display:'banner',image:'/banner.png',imageMobile:'https://example.test/mobile.png',ratio:'16 / 9',ratioMobile:'4 / 5',exactPath:'/event',ctaLabel:'행사 보기'};
+ const a=createAnnouncement(db,admin,notice({target:'all',metadata,linkUrl:'/event',linkLabel:''}));
+ db.prepare('UPDATE announcements SET updated_at=updated_at+1000 WHERE id=?').run(a.id);
+ assert.deepEqual(a.metadata,metadata);
+ assert.equal(activeAnnouncement(db,'/pricing')?.id,base.id,'ineligible latest notice must not mask eligible older one');
+ assert.deepEqual(activeAnnouncement(db,'/event')?.metadata,metadata);
+ assert.deepEqual(listAdminAnnouncements(db,admin,{}).data.find(x=>x.id===a.id)?.metadata,metadata);
+ assert.throws(()=>updateAnnouncement(db,admin,a.id,{metadata:{display:'notice'},version:1}),{name:'ZodError'},'switching to text requires a link label');
+ const updated=updateAnnouncement(db,admin,a.id,{metadata:{image:'/new.png'},version:1});
+ assert.deepEqual(updated.metadata,{image:'/new.png'},'metadata PATCH replaces the whole object so optional fields can be removed');
+ assert.equal(updated.version,2);
+ assert.throws(()=>updateAnnouncement(db,admin,a.id,{metadata:{},version:1}),{status:409});
+ deleteAnnouncement(db,admin,a.id,{version:2});
+ assert.equal(activeAnnouncement(db,'/event')?.id,base.id);
+});
+
+test('banner input rejects unsafe URLs, invalid aspect ratios and malformed metadata',async t=>{
+ const {db,admin}=await fixture(t);
+ for(const metadata of [{display:'banner'}, {image:'javascript:alert(1)'},{image:'//evil.test/x'}, {image:'/\\evil.test/x'}, {image:'data:image/svg+xml,x'}, {ratio:'0 / 5'}, {ratio:'4 / 0'}, {ratio:'calc(1+1)'}, {ratio:'1 / Infinity'}, {exactPath:'//evil.test'}, {exactPath:'/event?x=1'}, {unknown:1}, null]){
+  assert.throws(()=>createAnnouncement(db,admin,notice({metadata})),{name:'ZodError'},JSON.stringify(metadata));
+ }
+ assert.deepEqual(createAnnouncement(db,admin,notice()).metadata,{});
+});
+
 test('only admins manage announcements',async t=>{
  const {db,member}=await fixture(t);
  assert.throws(()=>listAdminAnnouncements(db,member,{}),{status:403});

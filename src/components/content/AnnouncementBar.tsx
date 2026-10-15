@@ -2,6 +2,7 @@
 import {useEffect,useState} from 'react';
 import type {PublicAnnouncement} from '@/server/content/announcements';
 import {dismissAnnouncementToday,isAnnouncementDismissed} from './announcement-dismissal';
+import AnnouncementBanner from './AnnouncementBanner';
 function dismissed(id:string){try{return isAnnouncementDismissed(window.localStorage,id);}catch{return false;}}
 
 const bar:React.CSSProperties={position:'fixed',left:16,right:16,bottom:16,zIndex:1300,maxWidth:720,margin:'0 auto',display:'flex',gap:12,alignItems:'center',flexWrap:'wrap',
@@ -15,6 +16,7 @@ export default function AnnouncementBar({announcement}:{announcement:PublicAnnou
  useEffect(()=>{const timer=window.setTimeout(()=>setOpen(!dismissed(announcement.id)),0);return()=>window.clearTimeout(timer);},[announcement.id]);
  if(!open)return null;
  const hideToday=()=>{try{dismissAnnouncementToday(window.localStorage,announcement.id);}catch{/* localStorage getter도 차단될 수 있다 */}setOpen(false);};
+ if(announcement.metadata.image&&announcement.metadata.display!=='notice')return <AnnouncementBanner announcement={announcement} onClose={()=>setOpen(false)} onDismissToday={hideToday}/>;
  return <aside role="region" aria-label="공지" style={bar} data-announcement={announcement.id}>
   <strong style={{whiteSpace:'nowrap'}}>{announcement.title}</strong>
   {announcement.body&&<span style={{overflowWrap:'anywhere',minWidth:0,flex:'1 1 200px'}}>{announcement.body}</span>}

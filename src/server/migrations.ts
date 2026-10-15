@@ -1029,5 +1029,9 @@ export const migrations = [{
       INSERT INTO media_deletions(storage_key) VALUES(OLD.storage_key) ON CONFLICT DO NOTHING;
     END;
   `,
-}, engagementMigration,billingRecoveryMigration,personalExportMigration,accountMailMigration,inquiryMailMigration,smsMigration,phoneRewardMigration];
+}, engagementMigration,billingRecoveryMigration,personalExportMigration,accountMailMigration,inquiryMailMigration,smsMigration,phoneRewardMigration,{
+ version:34,name:'announcement_banner_metadata',sql:`
+ ALTER TABLE announcements ADD COLUMN metadata TEXT NOT NULL DEFAULT '{}' CHECK(json_valid(metadata) AND json_type(metadata)='object');
+ `,
+}];
 
