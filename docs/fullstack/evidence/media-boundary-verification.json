@@ -1,0 +1,63 @@
+{
+  "baseCommit": "2ad29fb5b71e22fcd633f5e22616bfbc9820f6ad",
+  "schemaVersion": 33,
+  "newTests": 3,
+  "allTests": 398,
+  "serverTests": 392,
+  "rootTests": 6,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "browserVerified": false,
+  "httpVerification": "route-handler Request/Response, not separate socket server",
+  "logs": [
+    {
+      "path": "docs/fullstack/evidence/media-boundary-red.log",
+      "rawSha256": "4dc701cf0440f74fe03381781cc766fe1420d80cc523102444968d08fd932c92",
+      "savedSha256": "4dc701cf0440f74fe03381781cc766fe1420d80cc523102444968d08fd932c92"
+    },
+    {
+      "path": "docs/fullstack/evidence/media-boundary-green.log",
+      "rawSha256": "5947629ce8daed8ddd3af4bd522f7f51ac6f65487377303c11b150209eca80c8",
+      "savedSha256": "5947629ce8daed8ddd3af4bd522f7f51ac6f65487377303c11b150209eca80c8"
+    },
+    {
+      "path": "docs/fullstack/evidence/media-boundary-all.log",
+      "rawSha256": "a92d6568a370289245710869d5ff05cdb29c67c31ed1c0488aa24afae367e450",
+      "savedSha256": "a92d6568a370289245710869d5ff05cdb29c67c31ed1c0488aa24afae367e450"
+    },
+    {
+      "path": "docs/fullstack/evidence/media-boundary-lint.log",
+      "rawSha256": "20c7b346e8ec6ed423798e4cb44827a87769e992415670e556e263bd57e0228d",
+      "savedSha256": "39608e2ba7a9da9aab54242c245182d2b312469ebef2176c83aab845066f8a76"
+    },
+    {
+      "path": "docs/fullstack/evidence/media-boundary-types.log",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "savedSha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715"
+    },
+    {
+      "path": "docs/fullstack/evidence/media-boundary-build.log",
+      "rawSha256": "c5952792782eb7d24a5ecb9da4a89b27fe8b5eacfec3862b3413d0fd7273fcb6",
+      "savedSha256": "0e9ae946c2ad81c7e3ce5d5d15091ef9303c08709b10299647751a25264b33f5"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/server/writing/media.ts",
+      "sha256": "fc725c742e6b99358bd824dd525ac6c6ad8bc4b8f21108d8566d49ad981c2c9a"
+    },
+    {
+      "path": "src/server/writing/shares.ts",
+      "sha256": "679797a42fc6828038d745db333c83bf97068340bea6fb7977a1b6a36476fd1d"
+    },
+    {
+      "path": "tests/server/media.test.ts",
+      "sha256": "8f5fd0919e4016d4cd88dce5e7890d0991a7e83b7220ecd31d440950d2ba405b"
+    },
+    {
+      "path": "tests/server/writing-http.test.ts",
+      "sha256": "d74b0b6198943246ecc5af44ffcd95e0acfd490f8ed3a4a9637a040ac8b7c7af"
+    }
+  ]
+}

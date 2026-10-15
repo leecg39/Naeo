@@ -1,0 +1,46 @@
+(node:27770) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ image type is decided by file signature, not by the declared type or name (0.798708ms)
+✔ upload validates type, size and count; files are stored under random keys (96.008ms)
+✔ only the owner reads or deletes media; deleting removes the file; drafts keep photos (89.438667ms)
+✔ share links expose only that draft's images until expiry or revocation (85.765791ms)
+✖ owner and share downloads reject symlink substitution, missing files and changed metadata (86.425416ms)
+✖ stored keys cannot alias other files through traversal or hard links (85.991375ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 732.075917
+
+✖ failing tests:
+
+test at tests/server/media.test.ts:2:7176
+✖ owner and share downloads reject symlink substitution, missing files and changed metadata (86.425416ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/media.test.ts:84:9)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'MEDIA_UNAVAILABLE' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/media.test.ts:2:8749
+✖ stored keys cannot alias other files through traversal or hard links (85.991375ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/media.test.ts:89:238)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'MEDIA_UNAVAILABLE' },
+    operator: 'throws',
+    diff: 'simple'
+  }

@@ -1,5 +1,5 @@
 import {randomBytes,randomUUID} from 'node:crypto';
-import {mkdirSync,readFileSync,unlinkSync,writeFileSync} from 'node:fs';
+import {mkdirSync,openSync,closeSync,fstatSync,readSync,constants,unlinkSync,writeFileSync} from 'node:fs';
 import path from 'node:path';
 import {z} from 'zod';
 import {transaction,type Database} from '../database';
@@ -62,9 +62,24 @@ export function saveUpload(db:Database,dir:string,ownerId:string,input:{bytes:Bu
 
 export function readMedia(db:Database,dir:string,ownerId:string,publicId:string){
  const r=ownedRow(db,ownerId,publicId);
- return{...toMedia(r),bytes:readFileSync(filePath(dir,r.storage_key))};
+ return{...toMedia(r),bytes:readStoredFile(dir,r.storage_key,{mime:r.mime,size:r.size})};
 }
-export function readStoredFile(dir:string,storageKey:string){return readFileSync(filePath(dir,storageKey));}
+/** Read one bounded regular file through a no-follow descriptor; metadata must match its DB row. */
+export function readStoredFile(dir:string,storageKey:string,expected?:{mime:ImageMime;size:number}){
+ const unavailable=()=>new AppError(404,'MEDIA_UNAVAILABLE','사진 파일을 읽을 수 없습니다. 다시 업로드해주세요.');
+ if(!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\.(jpg|png|webp)$/.test(storageKey))throw unavailable();
+ let fd:number|undefined;
+ try{
+  fd=openSync(path.join(dir,storageKey),constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+  const before=fstatSync(fd);
+  if(!before.isFile()||before.nlink!==1||before.size<1||before.size>MAX_IMAGE_BYTES||(expected&&before.size!==expected.size))throw unavailable();
+  const data=Buffer.alloc(before.size+1);let length=0;
+  while(length<data.length){const n=readSync(fd,data,length,data.length-length,length);if(!n)break;length+=n;}
+  const after=fstatSync(fd),bytes=data.subarray(0,length),mime=sniffImage(bytes);
+  if(length!==before.size||after.size!==before.size||after.mtimeMs!==before.mtimeMs||after.ctimeMs!==before.ctimeMs||!mime||(expected&&mime!==expected.mime))throw unavailable();
+  return bytes;
+ }catch{throw unavailable();}finally{if(fd!==undefined)closeSync(fd);}
+}
 
 export function listMedia(db:Database,ownerId:string,query:unknown){
  const {page,pageSize,draftId}=listInput.parse(query);

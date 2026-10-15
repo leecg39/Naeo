@@ -73,3 +73,10 @@ test('export, writing templates and admin generations over HTTP',async t=>{
  assert.equal((await f.send('/api/admin/generations','GET',undefined,a)).status,403);
  assert.equal((await f.send('/api/admin/generations','GET',undefined,admin)).status,200);
 });
+
+test('owner and public share routes never return substituted private files or filesystem paths',async t=>{
+ const {readdirSync,writeFileSync,unlinkSync,symlinkSync}=await import('node:fs');const f=fixture(t),a=await account(f,'safe@example.test');const draft=(await(await f.send('/api/drafts','POST',{title:'safe',body:'safe'},a)).json()).data;const media=(await(await f.upload(a,PNG,draft.id)).json()).data;const link=(await(await f.send(`/api/drafts/${draft.id}/shares`,'POST',{days:1},a)).json()).data;
+ const dir=process.env.NAEO_UPLOAD_DIR!,key=readdirSync(dir)[0],target=path.join(dir,'private.txt');writeFileSync(target,'not-public-secret');unlinkSync(path.join(dir,key));symlinkSync(target,path.join(dir,key));
+ for(const [url,cookie] of [[`/api/media/${media.publicId}`,a],[`/api/shares/${link.token}/media/${media.publicId}`,undefined]] as const){const r=await f.raw(url,cookie);assert.equal(r.status,404);const text=await r.text();assert.ok(text.includes('MEDIA_UNAVAILABLE'));assert.ok(!text.includes('not-public-secret'));assert.ok(!text.includes(dir));}
+ assert.equal((await f.send(`/api/media/${media.publicId}`,'DELETE',undefined,a)).status,200);assert.equal((await import('node:fs')).readFileSync(target,'utf8'),'not-public-secret');
+});

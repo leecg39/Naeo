@@ -39,9 +39,9 @@ export function readShared(db:Database,token:string,now=Date.now(),publicId?:str
  if(!link||link.revoked_at!==null)throw notFound();
  if(link.expires_at<=now)throw new AppError(404,'SHARE_EXPIRED','공유 기간이 끝난 링크입니다.');
  if(publicId!==undefined){
-  const m=db.prepare('SELECT mime,storage_key FROM media_files WHERE public_id=? AND draft_id=?').get(publicId,link.draft_id) as {mime:ImageMime;storage_key:string}|undefined;
+  const m=db.prepare('SELECT mime,size,storage_key FROM media_files WHERE public_id=? AND draft_id=?').get(publicId,link.draft_id) as {mime:ImageMime;size:number;storage_key:string}|undefined;
   if(!m||!dir)throw new AppError(404,'NOT_FOUND','사진을 찾을 수 없습니다.');
-  return{mime:m.mime,bytes:readStoredFile(dir,m.storage_key)};
+  return{mime:m.mime,bytes:readStoredFile(dir,m.storage_key,{mime:m.mime,size:m.size})};
  }
  const {title}=db.prepare('SELECT title FROM drafts WHERE id=?').get(link.draft_id) as {title:string};
  const images=(db.prepare('SELECT public_id AS publicId,mime,size FROM media_files WHERE draft_id=? ORDER BY created_at,rowid').all(link.draft_id) as SharedView['images']).map(i=>({...i}));

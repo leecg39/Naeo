@@ -1,0 +1,16 @@
+(node:28272) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ image type is decided by file signature, not by the declared type or name (0.70225ms)
+✔ upload validates type, size and count; files are stored under random keys (95.58875ms)
+✔ only the owner reads or deletes media; deleting removes the file; drafts keep photos (86.881916ms)
+✔ share links expose only that draft's images until expiry or revocation (84.684875ms)
+✔ owner and share downloads reject symlink substitution, missing files and changed metadata (85.287125ms)
+✔ stored keys cannot alias other files through traversal or hard links (87.919916ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 664.98375

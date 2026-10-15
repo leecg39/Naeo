@@ -136,3 +136,7 @@ Twilio Verify 어댑터·요청/확인 API·설정 화면 구현. 원본 공급�
 ### 스키마33 번호 중복 보상 — 최신
 
 공급자 승인 proof+HMAC global registry+첫 지급 key digest binding, 120P 원자 지급. 번호 원문/사용자 연결 없는 지문은 탈퇴 뒤 보존, 탈퇴UI 안내. 별도 NAEO_PHONE_REWARD_KEY 필요, 없거나 바뀌면 fail-closed. 신규6/전체395 및 2프로세스 경쟁/롤백/실제 Next+로컬SMS 왕복. export45. 실제 단말/Ego/AI 인용 단계 미완료. 다음 독립 구현은 AI 인용·검색/이미지 공급자. 전체 goal active.
+
+### 최신 — 사진 파일 읽기 경계
+
+이미지 API 키 선택 질문은 아직 답변이 없다. 해당 API 구현을 진행하지 않고 독립적인 사진 CRUD에서 symlink 노출 결함을 재현·수정했다. 최종 파일 no-follow, 정규키, bounded read, size/MIME/stat·hardlink 검사. 신규3/전체398 및 lint/typecheck/build 통과. 전체 목표 active. media-download-boundary.md 참조.

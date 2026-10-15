@@ -30,3 +30,9 @@
 - 이전 턴 progress: SMS 구현/검증 8ac4812 원격 반영.
 - 이번 턴 progress: 스키마33 proof·HMAC 번호 중복 방지·키 binding·120P 원자지급 및 탈퇴보존 안내. 신규6/전체395개, 2프로세스 경쟁/강제실패 롤백, 실제 Next/로컬 SMS 후 지급과 중복409, export45 확인.
 - NAEO_PHONE_REWARD_KEY 없으면 보상잠금. 외부 실제SMS/단말·Ego·AI인용은 미완료, P10.4/전체goal active 유지. 다음은 AI 인용·이미지 공급자 어댑터와 남은 전체 범위 실검증.
+
+## 최신 — 독립 파일 접근 점검
+
+- 직전 키 질문 턴은 no progress(실행 중 프로세스 대기가 아님). 질문 미답 상태를 유지하며 종속 OpenAI 구현은 진행하지 않았다.
+- 이번 턴 progress: 기존 소유자/공유 사진 다운로드의 symlink 노출·잘못된 저장키 허용을 실제 파일 RED로 재현, no-follow/크기·형식/파일종류·링크수 검사로 수정. 신규3/전체398·lint/typecheck/build 통과.
+- 근거 media-download-boundary.md. 전체 goal active; 이미지 키 질문은 반복하지 않음. 독립적인 남은 CRUD/오류 경로 점검과 기존 외부 연동·Ego 검증 범위 유지.

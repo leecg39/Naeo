@@ -78,3 +78,13 @@ test('share links expose only that draft\'s images until expiry or revocation',a
  assert.throws(()=>readShared(db,link.token,NOW+DAY),{status:404});
  assert.ok(!existsSync(path.join(dir,'..','nope')));
 });
+
+test('owner and share downloads reject symlink substitution, missing files and changed metadata',async t=>{
+ const {writeFileSync,unlinkSync,symlinkSync}=await import('node:fs');const {db,dir,a}=await fixture(t);const d=createDraft(db,a,{title:'safe',body:'body'});const m=saveUpload(db,dir,a,{...file(PNG),draftId:d.id},NOW);const link=createShareLink(db,a,d.id,{days:7},NOW);const key=readdirSync(dir)[0];const p=path.join(dir,key),outside=path.join(dir,'private.txt');writeFileSync(outside,'private secret');unlinkSync(p);symlinkSync(outside,p);
+ assert.throws(()=>readMedia(db,dir,a,m.publicId),{code:'MEDIA_UNAVAILABLE'});assert.throws(()=>readShared(db,link.token,NOW,m.publicId,dir),{code:'MEDIA_UNAVAILABLE'});
+ unlinkSync(p);assert.throws(()=>readMedia(db,dir,a,m.publicId),{code:'MEDIA_UNAVAILABLE'});writeFileSync(p,Buffer.concat([PNG,Buffer.from('extra')]));assert.throws(()=>readMedia(db,dir,a,m.publicId),{code:'MEDIA_UNAVAILABLE'});writeFileSync(p,Buffer.alloc(PNG.length));assert.throws(()=>readShared(db,link.token,NOW,m.publicId,dir),{code:'MEDIA_UNAVAILABLE'});
+ writeFileSync(p,PNG);assert.deepEqual(readMedia(db,dir,a,m.publicId).bytes,PNG);
+});
+test('stored keys cannot alias other files through traversal or hard links',async t=>{
+ const {linkSync,unlinkSync}=await import('node:fs');const {readStoredFile}=await import('../../src/server/writing/media');const {db,dir,a}=await fixture(t);const m=saveUpload(db,dir,a,file(PNG),NOW);const key=readdirSync(dir)[0];assert.throws(()=>readStoredFile(dir,'../'+key),{code:'MEDIA_UNAVAILABLE'});const second=path.join(dir,'hard-link');linkSync(path.join(dir,key),second);assert.throws(()=>readMedia(db,dir,a,m.publicId),{code:'MEDIA_UNAVAILABLE'});unlinkSync(second);assert.deepEqual(readMedia(db,dir,a,m.publicId).bytes,PNG);
+});

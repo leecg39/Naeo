@@ -528,3 +528,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## 2026-10-15 — 휴대폰 보상
 
 스키마33, 신규6/전체395개·lint/typecheck/build, 독립 프로세스 2개 경쟁 지급 합계120P, 원장 강제 실패 전체 롤백, 실제 Next/로컬 SMS 인증 뒤 지급/타 계정 중복409 검증. export45개 회귀. 외부 단말/Ego/AI 인용은 미완료. phone-reward.md 참조.
+
+## 2026-10-15 — 사진 다운로드 경계
+
+신규3/전체398개(6+392), lint/typecheck/build 통과. 실제 파일 symlink/hardlink/누락/크기·서명 변경과 소유자·공유 API 처리기 거절 검사. media-download-boundary.md 및 evidence/media-boundary-* 참조. 별도 브라우저 E2E는 실행하지 않았다.
