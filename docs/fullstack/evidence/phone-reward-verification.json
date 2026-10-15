@@ -1,0 +1,98 @@
+{
+  "baseCommit": "8ac4812dd9536ad461b09f23138e83bb71f82e07",
+  "schemaVersion": 33,
+  "newTests": 6,
+  "allTests": 395,
+  "serverTests": 389,
+  "rootTests": 6,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "externalSmsSent": false,
+  "browserVerified": false,
+  "concurrentProcesses": 2,
+  "concurrentTotalAwarded": 120,
+  "logs": [
+    {
+      "path": "docs/fullstack/evidence/phone-reward-focused.log",
+      "rawSha256": "67c1dc19f673fdfd93b8755a0d13b6ceadbc9d70dcbb0397fb9602b95b296307",
+      "savedSha256": "67c1dc19f673fdfd93b8755a0d13b6ceadbc9d70dcbb0397fb9602b95b296307"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-all.log",
+      "rawSha256": "c404a1d20e9a1831d0c9567d3f738d67051744e859f7d03db0dfd4eb5d5056a1",
+      "savedSha256": "c404a1d20e9a1831d0c9567d3f738d67051744e859f7d03db0dfd4eb5d5056a1"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-lint.log",
+      "rawSha256": "20c7b346e8ec6ed423798e4cb44827a87769e992415670e556e263bd57e0228d",
+      "savedSha256": "39608e2ba7a9da9aab54242c245182d2b312469ebef2176c83aab845066f8a76"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-types.log",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "savedSha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-build.log",
+      "rawSha256": "cd1d68ae74abdc57b6a419d5c43912469753838605fd402682dbc93ef162d2cf",
+      "savedSha256": "b909d51e05bf706e57bb15da07aa322fdbcaa543011cfdd44786b01ec6c74f65"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-runtime.log",
+      "rawSha256": "5b43b00e9185878b8ffa4af4581c7ec1659254b48ed6d21c864ce6d10366d527",
+      "savedSha256": "5b43b00e9185878b8ffa4af4581c7ec1659254b48ed6d21c864ce6d10366d527"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-export.log",
+      "rawSha256": "72059d150b64c9169b5684d5cf57efc4c4afa8ba5afed46bb5a6a22a19528f4c",
+      "savedSha256": "72059d150b64c9169b5684d5cf57efc4c4afa8ba5afed46bb5a6a22a19528f4c"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/server/engagement/phone-reward.ts",
+      "sha256": "13e05c33a1f9c540cb6cb48f0432d726bc69318fd074a258078a5b0055b742c5"
+    },
+    {
+      "path": "src/server/engagement/service.ts",
+      "sha256": "7ac044202e5694bb584df35b661dcee994b21d8c3f16d2f637a0943b9e6afef0"
+    },
+    {
+      "path": "src/server/sms/service.ts",
+      "sha256": "7f9c8d815f6f41082e294915e546347f8b57ad5aeff55a52bd36d9e0738619b9"
+    },
+    {
+      "path": "src/server/migrations.ts",
+      "sha256": "4b41391dc5c78cb9af74cb5d0f5d672a7ab83f491af903c220e3868733f71c6c"
+    },
+    {
+      "path": "src/server/privacy/datasets.ts",
+      "sha256": "a40aef8cb675815e911ef9f7b59fd74c9ddf8d4d4bd53524947d5ba12ec11d55"
+    },
+    {
+      "path": "src/components/account/PhoneVerification.tsx",
+      "sha256": "b1b7eacc9db30d1e8e7293d1d7a6fb2a06df4e38d830196cefd1b40bfe7b8557"
+    },
+    {
+      "path": "src/components/account/SecurityForm.tsx",
+      "sha256": "8e4e24b84dbe9cc843cfe7f556122e0ad3701da5f23fafdff253b313731303e8"
+    },
+    {
+      "path": "scripts/qa/sms.ts",
+      "sha256": "309616bc4ca62dd0c63e91a3dbab37d2f806b12b364c2999be92d6609cb63940"
+    },
+    {
+      "path": "tests/server/phone-reward.test.ts",
+      "sha256": "f718c7d51ce9a8829f1637a46251c368aa233de684b85b7d5667de10d3d4c92f"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-runtime.json",
+      "sha256": "5b43b00e9185878b8ffa4af4581c7ec1659254b48ed6d21c864ce6d10366d527"
+    },
+    {
+      "path": "docs/fullstack/evidence/phone-reward-export-runtime.json",
+      "sha256": "72059d150b64c9169b5684d5cf57efc4c4afa8ba5afed46bb5a6a22a19528f4c"
+    }
+  ]
+}

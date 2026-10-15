@@ -1,0 +1,16 @@
+(node:19400) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only approved proof enables 120P once; raw timestamp alone is insufficient (56.413958ms)
+✔ canonical number blocks another account even after original account deletion (85.6135ms)
+✔ phone change/deletion invalidates proof; same account cannot claim a second number (49.056375ms)
+✔ ledger failure rolls back registry and key binding; retry awards exactly once (48.212167ms)
+✔ missing or changed key fails closed; restoring original key preserves duplicate guard (83.177583ms)
+✔ two independent processes racing same verified number award a total of 120P (299.426375ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 854.410084

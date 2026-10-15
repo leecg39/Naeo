@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-15T08:46:46.777Z",
+  "schemaVersion": 33,
+  "providerRequests": 5,
+  "checks": [
+    "Production Next registration and contact storage",
+    "Explicit SMS request normalizes Korean mobile; cooldown enforced",
+    "Wrong code remains unverified; provider-approved code marks current contact",
+    "Settings SSR shows phone verification UI without secrets",
+    "Replay and changed phone invalidation; logout denies requests",
+    "Verified phone claims 120P once; another verified account with canonical equivalent number is denied"
+  ],
+  "externalSmsSent": false,
+  "realHandsetVerified": false,
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}

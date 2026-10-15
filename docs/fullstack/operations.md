@@ -82,3 +82,7 @@ npm run restore -- --offline --recover
 ## SMS 인증
 
 Twilio Verify 계정·service·API key·secret을 .env.example에 따라 설정한다. OTP 자체는 공급자가 생성/검사하며 앱은 보관하지 않는다. 자동 SMS 재전송은 하지 않는다. 만료 요청은 worker retention에서 삭제한다. 실제 단말 수신·지역 설정 검증이 필요하며 설정만으로 검증 완료로 간주하지 않는다. phone-verification.md 참조.
+
+## 휴대폰 보상 키
+
+별도 NAEO_PHONE_REWARD_KEY(64자리 hex)를 웹 서버에 설정한다. 최초 지급 후 DB의 digest와 다른 키면 지급을 거절한다. DB와 별도로 안전하게 백업하고 키 분실 시 신규 키로 초기화하지 않는다. 계정 삭제 후에도 계정 연결 없는 번호 HMAC/지급 시각은 중복 수령 방지를 위해 보존된다. phone-reward.md 참조.

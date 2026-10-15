@@ -4,6 +4,7 @@ export const datasets=[
  owned('account_mail','account_mail','purpose,state,attempt,error_code,accepted_at,created_at,updated_at,expires_at','user_id'),
  owned('account','users','id,email,role,status,terms_accepted_at,email_verified_at,created_at,updated_at,version','id'),
  owned('profile','profiles','nickname,avatar_url,ranking_public,version,updated_at','user_id'),
+ owned('verified_phone','verified_phones','phone,verified_at','user_id'),
  owned('sms_challenges','sms_challenges','state,attempts,created_at,expires_at','user_id'),
  owned('contact','contact_details','name,email,phone,phone_verified_at,version,updated_at','user_id'),
  owned('preferences','notification_preferences','marketing_email,scan_email,autoscan,version,updated_at','user_id'),

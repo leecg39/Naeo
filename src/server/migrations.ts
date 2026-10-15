@@ -1,3 +1,4 @@
+import {phoneRewardMigration} from './engagement/phone-reward';
 import {smsMigration} from './sms/schema';
 import {inquiryMailMigration} from './inquiries/mail-schema';
 import {accountMailMigration} from './mail/schema';
@@ -1028,5 +1029,5 @@ export const migrations = [{
       INSERT INTO media_deletions(storage_key) VALUES(OLD.storage_key) ON CONFLICT DO NOTHING;
     END;
   `,
-}, engagementMigration,billingRecoveryMigration,personalExportMigration,accountMailMigration,inquiryMailMigration,smsMigration];
+}, engagementMigration,billingRecoveryMigration,personalExportMigration,accountMailMigration,inquiryMailMigration,smsMigration,phoneRewardMigration];
 

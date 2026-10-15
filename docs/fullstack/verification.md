@@ -524,3 +524,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## 2026-10-15 — SMS 인증 (스키마 32)
 
 신규 8개/전체 389개, lint/typecheck/build, 실제 Next/로컬 공급자 HTTP 요청 3회 및 개인정보 TAR 44개 회귀 검증. 외부 SMS 미전송·Ego 미검증, 120P 중복 번호 보상은 미구현 유지. 근거 phone-verification.md 및 evidence/sms-*.
+
+## 2026-10-15 — 휴대폰 보상
+
+스키마33, 신규6/전체395개·lint/typecheck/build, 독립 프로세스 2개 경쟁 지급 합계120P, 원장 강제 실패 전체 롤백, 실제 Next/로컬 SMS 인증 뒤 지급/타 계정 중복409 검증. export45개 회귀. 외부 단말/Ego/AI 인용은 미완료. phone-reward.md 참조.

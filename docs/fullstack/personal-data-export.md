@@ -74,3 +74,7 @@ node --import tsx scripts/qa/personal-export.ts
 ## 스키마 32
 
 SMS 요청의 안전한 상태 metadata를 포함해 44개 데이터셋. 코드·공급자 ID·세션 해시는 제외한다. sms-export-runtime.json에 실제 TAR 회귀 검증을 보존했다.
+
+## 스키마33
+
+본인 verified_phone 승인 근거를 추가해 45개 데이터셋이다. 공통 번호 HMAC registry 및 키 digest는 제외한다. phone-reward-export-runtime.json으로 실제 TAR 회귀 확인.

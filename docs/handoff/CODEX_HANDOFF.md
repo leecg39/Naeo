@@ -132,3 +132,7 @@ Ego 작업 공간 **15 / p1**은 일시 중지 시점에 열린 상태로 보존
 ### 스키마 32 SMS — 최신
 
 Twilio Verify 어댑터·요청/확인 API·설정 화면 구현. 원본 공급자를 복원한 것이 아닌 별도 설계. 신규8/전체389·실제 Next/로컬 HTTP 승인 통과, export44. 외부 단말·Ego·120P 번호 중복 지급 방지는 미완료. 다음 독립 과제는 번호 중복 보상 연결과 AI 인용/이미지. 목표 active 유지. 근거 phone-verification.md.
+
+### 스키마33 번호 중복 보상 — 최신
+
+공급자 승인 proof+HMAC global registry+첫 지급 key digest binding, 120P 원자 지급. 번호 원문/사용자 연결 없는 지문은 탈퇴 뒤 보존, 탈퇴UI 안내. 별도 NAEO_PHONE_REWARD_KEY 필요, 없거나 바뀌면 fail-closed. 신규6/전체395 및 2프로세스 경쟁/롤백/실제 Next+로컬SMS 왕복. export45. 실제 단말/Ego/AI 인용 단계 미완료. 다음 독립 구현은 AI 인용·검색/이미지 공급자. 전체 goal active.
