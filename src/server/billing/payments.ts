@@ -44,7 +44,7 @@ export function listAdminPayments(db:Database,actorId:string,query:unknown){
  if(status){where.push('p.status=?');params.push(status);}
  const from=`FROM payments p LEFT JOIN users u ON u.id=p.user_id WHERE ${where.join(' AND ')}`;
  const {total}=db.prepare(`SELECT count(*) AS total ${from}`).get(...params) as {total:number};
- const ids=db.prepare(`SELECT p.id,coalesce(u.email,'(탈퇴 회원)') AS email ${from} ORDER BY p.created_at DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as {id:string;email:string}[];
+ const ids=db.prepare(`SELECT p.id,coalesce(u.email,'(탈퇴 회원)') AS email ${from} ORDER BY p.created_at DESC, p.id ASC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as {id:string;email:string}[];
  return{data:ids.map(r=>({...paymentById(db,r.id),email:r.email})),pagination:{page,pageSize,total}};
 }
 

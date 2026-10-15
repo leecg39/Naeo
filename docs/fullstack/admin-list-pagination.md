@@ -47,3 +47,14 @@ RewardsManager·EntriesReview는 아래 추가 수정으로 페이지 이동을 
 `node --import tsx scripts/qa/event-selector.ts`는 격리 production Next 서버에서 실제 HTTP로 필터/API 페이지6, 명시한101번째 이벤트의 심사 SSR, 없는/참여불가 slug가 다른 이벤트로 대체되지 않는 것을 확인했다. 임시 DB·프로세스 정리. evidence/event-selector-runtime.json 참조. 실제 브라우저 검색·select·페이지 버튼 클릭은 미검증이다.
 
 남은 P11.4 범위는 쿠폰·결제·환불 목록이다. 앞선 발견 기록의 이벤트 목록/선택기 제한은 이번 수정으로 해소했지만 전체 사이트 완료를 뜻하지 않는다.
+
+
+## 쿠폰·결제·환불 관리자 목록 (2026-10-15)
+
+첫100건만 보이던 세 목록에 각각 페이지 이동을 연결했다. 쿠폰 생성 후 첫 페이지, 상태 변경 후 현재 페이지를 조회한다. 결제 검색은 입력 중인 값과 적용한 값을 분리하고 검색 시 결제 목록만 첫 페이지로 이동한다. 환불 목록 페이지는 독립적으로 유지한다. 환불 결정·결제사 조회 이후 두 목록을 각자의 현재 페이지에서 새로 읽으며, 마지막 페이지가 없어지면 유효한 마지막 페이지로 복귀한다. 같은 created_at 값에서 페이지가 흔들리지 않도록 ID 정렬 기준도 추가했다.
+
+검증: 전체414개(root6+server408), lint/typecheck/build 통과. 도메인 테스트에서 같은 시각101개 쿠폰과101개 결제·환불의 중복 없는 페이지 분할, 두 번째 페이지 수정·거절, 상태 필터 복귀, 검색·권한·버전 충돌을 확인했다. 최초 테스트는 준비용 주문 삭제가 회계 기록 삭제 금지에 걸려 실패했다. 제품 제약은 유지하고 fixture에서 요금제를 직접 참조하도록 고쳤다.
+
+`scripts/qa/billing-pagination.ts`는 격리한 DB와 실제 production Next 서버에서 각101건의 API 페이지 조회, 쿠폰 변경/409 충돌, 환불 거절, 결제 검색, 비인증401, 세 페이지 이동 컨트롤의 SSR을 검증했다. 외부 결제사는 호출하지 않았고 서버·임시 DB를 정리했다. [HTTP/SSR 기록](evidence/billing-pagination-runtime.json), [전체 테스트](evidence/billing-pagination-tests.log), [빌드](evidence/billing-pagination-build.log).
+
+실제 브라우저 클릭·hydration·포커스·모바일 동작은 아직 확인하지 못했다(P11.3). 회원 자신의 결제·환불 조회에도 LIMIT50이 있어 별도 P11.5로 남겼다. 이 변경은 원본 Payple 결제 서버를 복원했다는 의미가 아니며 기존 로컬 결제 설계의 목록 접근 보완이다.

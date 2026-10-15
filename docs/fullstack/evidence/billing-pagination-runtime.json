@@ -1,0 +1,15 @@
+{
+  "verifiedAt": "2026-10-15T09:37:43.874Z",
+  "checks": [
+    "101 coupons/payments/refunds with tied timestamps",
+    "API second pages contain distinct records",
+    "Page-two coupon update and stale version rejection",
+    "Page-two refund rejection changes filtered count without provider call",
+    "Payment search reaches record 101",
+    "SSR has three separately labeled pagination controls",
+    "Unauthenticated admin list denied"
+  ],
+  "browserVerified": false,
+  "externalProviderCalled": false,
+  "temporaryDataRemoved": true
+}

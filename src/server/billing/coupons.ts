@@ -34,7 +34,7 @@ export function listAdminCoupons(db:Database,actorId:string,query:unknown){
  if(status){where.push('c.status=?');params.push(status);}
  const sql=`WHERE ${where.join(' AND ')}`;
  const {total}=db.prepare(`SELECT count(*) AS total FROM coupons c ${sql}`).get(...params) as {total:number};
- const rows=db.prepare(`${SELECT} ${sql} ORDER BY c.created_at DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Coupon[];
+ const rows=db.prepare(`${SELECT} ${sql} ORDER BY c.created_at DESC, c.id ASC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Coupon[];
  return{data:rows.map(r=>({...r})),pagination:{page,pageSize,total}};
 }
 export function createCoupon(db:Database,actorId:string,input:unknown):Coupon{

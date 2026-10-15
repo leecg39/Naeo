@@ -1,4 +1,6 @@
 'use client';
+import ListPagination from './ListPagination';
+import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,apiResponse,type PageResult} from '@/lib/api-client';
@@ -20,7 +22,7 @@ export default function PlansCoupons({initialPlans,initialCoupons,now}:{initialP
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  async function run(action:()=>Promise<string>){setBusy(true);setError('');setNotice('');try{setNotice(await action());}catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');}finally{setBusy(false);}}
  const loadPlans=async()=>setPlans(await api<Plan[]>('/api/admin/plans'));
- const loadCoupons=async()=>setCoupons(await apiResponse<PageResult<Coupon>>('/api/admin/coupons?pageSize=100'));
+ const loadCoupons=async(page=coupons.pagination.page)=>setCoupons(await loadValidPage(p=>apiResponse<PageResult<Coupon>>(`/api/admin/coupons?${new URLSearchParams({page:String(p),pageSize:String(coupons.pagination.pageSize)})}`),page));
  const set=<K extends keyof PlanForm>(k:K,v:PlanForm[K])=>setForm(f=>({...f,[k]:v}));
  const open=(p:Plan|'new')=>{setEditing(p);setForm(planForm(p==='new'?undefined:p));};
  const savePlan=(e:FormEvent)=>{e.preventDefault();void run(async()=>{
@@ -31,7 +33,7 @@ export default function PlansCoupons({initialPlans,initialCoupons,now}:{initialP
  const removePlan=(p:Plan)=>void run(async()=>{await api(`/api/admin/plans/${p.id}`,{method:'DELETE',body:{version:p.version}});setEditing(null);await loadPlans();return '요금제를 삭제했습니다.';});
  const createCoupon=(e:FormEvent)=>{e.preventDefault();void run(async()=>{
   await api('/api/admin/coupons',{method:'POST',body:{code:coupon.code,kind:coupon.kind,value:Number(coupon.value),planCode:coupon.planCode||null,maxRedemptions:coupon.maxRedemptions?Number(coupon.maxRedemptions):null,startsAt:iso(coupon.startsAt),endsAt:iso(coupon.endsAt),note:coupon.note}});
-  setCoupon(c=>({...c,code:'',note:''}));await loadCoupons();return '쿠폰을 만들었습니다.';
+  setCoupon(c=>({...c,code:'',note:''}));await loadCoupons(1);return '쿠폰을 만들었습니다.';
  });};
  const toggleCoupon=(c:Coupon)=>void run(async()=>{await api(`/api/admin/coupons/${c.id}`,{method:'PATCH',body:{status:c.status==='active'?'disabled':'active',version:c.version}});await loadCoupons();return c.status==='active'?'쿠폰을 중지했습니다.':'쿠폰을 다시 켰습니다.';});
  return <div className="settings-sections">
@@ -74,6 +76,7 @@ export default function PlansCoupons({initialPlans,initialCoupons,now}:{initialP
     <tbody>{coupons.data.map(c=><tr key={c.id}><td><strong>{c.code}</strong>{c.note&&<span className="muted"> · {c.note}</span>}</td><td>{c.value}{KIND[c.kind]==='토큰 지급'?'토큰':KIND[c.kind]}{c.planCode?` (${c.planCode})`:''}</td><td>{c.redemptions}{c.maxRedemptions?` / ${c.maxRedemptions}`:''}</td><td>{fmt(c.startsAt)} ~ {fmt(c.endsAt)}</td><td>{c.status==='active'?'사용 가능':'중지'}</td>
      <td><button className="button secondary" type="button" disabled={busy} onClick={()=>toggleCoupon(c)}>{c.status==='active'?'중지':'다시 켜기'}<span className="sr-only"> {c.code}</span></button></td></tr>)}</tbody></table>
     {!coupons.data.length&&<p className="empty-state">쿠폰이 없습니다.</p>}</div>
+   <ListPagination label="쿠폰 페이지" pagination={coupons.pagination} busy={busy} onPage={page=>void run(async()=>{await loadCoupons(page);return '쿠폰 목록을 불러왔습니다.';})}/>
   </section>
  </div>;
 }

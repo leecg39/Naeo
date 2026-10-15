@@ -1,4 +1,6 @@
 'use client';
+import ListPagination from './ListPagination';
+import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {api,apiResponse,type PageResult} from '@/lib/api-client';
@@ -15,11 +17,14 @@ export default function PaymentsRefunds({initialPayments,initialRefunds,configur
  const [payments,setPayments]=useState(initialPayments),[refunds,setRefunds]=useState(initialRefunds),[status,setStatus]=useState(''),[q,setQ]=useState('');
  const [notes,setNotes]=useState<Record<string,string>>({}),[amounts,setAmounts]=useState<Record<string,string>>({});
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
- const load=async()=>{
-  setPayments(await apiResponse<PageResult<PayRow>>(`/api/admin/payments?${new URLSearchParams({pageSize:'100',q,...(status?{status}:{})})}`));
-  setRefunds(await apiResponse<PageResult<RefundRow>>('/api/admin/refunds?pageSize=100'));
+ const [applied,setApplied]=useState({q:'',status:''});
+ const loadPayments=async(page=payments.pagination.page,filters=applied)=>{
+  const next=await loadValidPage(p=>apiResponse<PageResult<PayRow>>(`/api/admin/payments?${new URLSearchParams({page:String(p),pageSize:String(payments.pagination.pageSize),q:filters.q,...(filters.status?{status:filters.status}:{})})}`),page);
+  setPayments(next);setApplied(filters);
  };
- async function run(action:()=>Promise<string>){setBusy(true);setError('');setNotice('');try{const m=await action();await load();setNotice(m);}catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');await load().catch(()=>undefined);}finally{setBusy(false);}}
+ const loadRefunds=async(page=refunds.pagination.page)=>setRefunds(await loadValidPage(p=>apiResponse<PageResult<RefundRow>>(`/api/admin/refunds?${new URLSearchParams({page:String(p),pageSize:String(refunds.pagination.pageSize)})}`),page));
+ const load=async()=>{await Promise.all([loadPayments(),loadRefunds()]);};
+ async function run(action:()=>Promise<string>,refresh=true){setBusy(true);setError('');setNotice('');try{const m=await action();if(refresh)await load();setNotice(m);}catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');if(refresh)await load().catch(()=>undefined);}finally{setBusy(false);}}
  const decide=(r:RefundRow,decision:'approved'|'rejected')=>void run(async()=>{await api(`/api/admin/refunds/${r.id}/decide`,{method:'POST',body:{decision,note:notes[r.id]??'',version:r.version}});return decision==='approved'?`${r.email} 환불을 완료했습니다.`:'환불 요청을 거절했습니다.';});
  const refund=(p:PayRow)=>void run(async()=>{const amount=amounts[p.id]?Number(amounts[p.id]):undefined;await api(`/api/admin/payments/${p.id}/refund`,{method:'POST',body:{reason:notes[p.id]||'운영자 환불',...(amount?{amount}:{})}});return `${p.orderName} 환불을 완료했습니다.`;});
  return <div className="settings-sections">
@@ -33,10 +38,11 @@ export default function PaymentsRefunds({initialPayments,initialRefunds,configur
      <td>{['requested','failed','approved'].includes(r.status)?<div style={{display:'grid',gap:6}}><input className="field" aria-label={`${r.email} 결정 메모`} value={notes[r.id]??''} onChange={e=>setNotes(n=>({...n,[r.id]:e.target.value}))} maxLength={300} placeholder="메모"/>
       <div style={{display:'flex',gap:6}}><button className="button" type="button" disabled={busy||!configured} onClick={()=>decide(r,'approved')}>{r.status==='requested'?'승인(결제 취소)':'같은 환불 다시 확인'}<span className="sr-only"> {r.email}</span></button>{r.status==='requested'&&<button className="button secondary" type="button" disabled={busy} onClick={()=>decide(r,'rejected')}>거절<span className="sr-only"> {r.email}</span></button>}</div></div>:r.decisionNote||'-'}</td></tr>)}</tbody></table>
     {!refunds.data.length&&<p className="empty-state">환불 요청이 없습니다.</p>}</div>
+   <ListPagination label="환불 요청 페이지" pagination={refunds.pagination} busy={busy} onPage={page=>void run(async()=>{await loadRefunds(page);return '환불 목록을 불러왔습니다.';},false)}/>
   </section>
   <section className="panel account-card" aria-label="결제 내역">
    <h2>결제 내역</h2>
-   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(async()=>'목록을 불러왔습니다.');}}>
+   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(async()=>{await loadPayments(1,{q,status});return '목록을 불러왔습니다.';},false);}}>
     <label>검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="주문 번호·이메일" disabled={busy}/></label>
     <label>상태<select className="field" value={status} onChange={e=>setStatus(e.target.value)} disabled={busy}><option value="">전체</option>{Object.entries(PAY).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
     <button className="button" type="submit" disabled={busy}>검색</button>
@@ -47,6 +53,7 @@ export default function PaymentsRefunds({initialPayments,initialRefunds,configur
      <td>{p.status==='ready'&&p.confirmStartedAt!==null?'결제 확인 중':PAY[p.status]}{p.failureCode&&<span className="muted"> · {p.failureCode}</span>}{p.status==='ready'&&p.paymentKey&&<button className="button secondary" disabled={busy||!configured} onClick={()=>void run(async()=>{await api(`/api/admin/payments/${p.id}/reconcile`,{method:'POST'});return '결제사 상태를 다시 조회했습니다.';})}>결제사 상태 조회</button>}</td><td>{fmt(p.approvedAt??p.createdAt)}</td>
      <td>{['paid','partial_canceled'].includes(p.status)&&p.amount>p.canceledAmount?<div style={{display:'grid',gap:6}}><input className="field" type="number" min={1} max={p.amount-p.canceledAmount} aria-label={`${p.orderId} 환불 금액`} value={amounts[p.id]??''} onChange={e=>setAmounts(a=>({...a,[p.id]:e.target.value}))} placeholder={`전액 ${p.amount-p.canceledAmount}`}/><input className="field" aria-label={`${p.orderId} 환불 사유`} value={notes[p.id]??''} onChange={e=>setNotes(n=>({...n,[p.id]:e.target.value}))} maxLength={200} placeholder="사유"/><button className="button secondary" type="button" disabled={busy} onClick={()=>refund(p)}>환불<span className="sr-only"> {p.orderId}</span></button></div>:'-'}</td></tr>)}</tbody></table>
     {!payments.data.length&&<p className="empty-state">결제가 없습니다.</p>}</div>
+   <ListPagination label="결제 내역 페이지" pagination={payments.pagination} busy={busy} onPage={page=>void run(async()=>{await loadPayments(page);return '결제 목록을 불러왔습니다.';},false)}/>
    <p className="muted">결제·환불 기록은 회계 기록이라 삭제되지 않고, 금액은 바꿀 수 없습니다.</p>
   </section>
  </div>;

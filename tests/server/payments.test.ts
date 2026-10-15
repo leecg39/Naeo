@@ -164,3 +164,34 @@ test('accounting records are protected',async t=>{
  db.prepare('DELETE FROM users WHERE id=?').run(b);
  assert.equal((db.prepare('SELECT count(*) AS n FROM payments WHERE user_id IS NULL').get() as {n:number}).n,1,'payments outlive the account');
 });
+
+test('admin billing pagination: 101 tied payments/refunds, page two decision and filtered recovery',async t=>{
+ const {listAdminPayments}=await import('../../src/server/billing/payments');
+ const {listAdminRefunds}=await import('../../src/server/billing/refunds');
+ const {loadValidPage}=await import('../../src/components/admin/pagination');
+ const {db,admin,a,b}=await fixture(t);
+ const plan=db.prepare("SELECT id FROM plans WHERE code='basic'").get() as {id:string};
+ // Historical paid orders, all with the same timestamp, isolate pagination from provider setup.
+ const insert=db.prepare("INSERT INTO payments(id,user_id,order_id,order_name,plan_id,list_amount,amount,provider,status,approved_at,expires_at,created_at,updated_at) VALUES(?,?,?,?,?,9900,9900,'toss','paid',?,?,?,?)");
+ for(let i=0;i<101;i++){
+  const id=`page-payment-${String(i).padStart(3,'0')}`;
+  insert.run(id,a,`page-order-${String(i).padStart(3,'0')}`,'페이지 검증',plan.id,NOW,NOW+DAY,NOW,NOW);
+  requestRefund(db,a,id,{reason:'페이지 검증 환불'},NOW);
+ }
+ const payments=listAdminPayments(db,admin,{page:1,pageSize:100,status:'paid'});
+ const last=listAdminPayments(db,admin,{page:2,pageSize:100,status:'paid'});
+ assert.equal(last.data[0].id,'page-payment-100');
+ assert.equal(new Set([...payments.data,...last.data].map(p=>p.id)).size,101);
+ assert.equal(listAdminPayments(db,admin,{q:last.data[0].orderId}).pagination.total,1);
+ const firstRefunds=listAdminRefunds(db,admin,{page:1,pageSize:100,status:'requested'});
+ const lastRefunds=listAdminRefunds(db,admin,{page:2,pageSize:100,status:'requested'});
+ assert.equal(new Set([...firstRefunds.data,...lastRefunds.data].map(r=>r.id)).size,101);
+ const r=lastRefunds.data[0];
+ await decideRefund(db,null,admin,r.id,{decision:'rejected',note:'심사 완료',version:r.version},NOW+1);
+ const recovered=await loadValidPage(async page=>listAdminRefunds(db,admin,{page,pageSize:100,status:'requested'}),2);
+ assert.equal(recovered.pagination.page,1);assert.equal(recovered.pagination.total,100);
+ assert.equal(listAdminRefunds(db,admin,{status:'rejected'}).data[0].decisionNote,'심사 완료');
+ assert.equal(listAdminPayments(db,admin,{status:'paid'}).pagination.total,101,'rejection does not change accounting');
+ assert.throws(()=>listAdminPayments(db,b,{page:2}),{status:403});
+ assert.throws(()=>listAdminRefunds(db,b,{page:2}),{status:403});
+});

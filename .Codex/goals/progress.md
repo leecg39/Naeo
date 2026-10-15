@@ -98,3 +98,11 @@
 - 이번 턴 progress: EventsManager 페이지 이동, 이벤트 선택기 검색/20개 페이지, DB acceptsEntries 선필터, 명시한 slug 직접 조회/잘못된 slug404. 가능101+불가101 검증 및 production HTTP/SSR101번째 이벤트 확인.
 - 전체412·lint/typecheck/build 통과. 임시 서버·DB 정리. P11.4 쿠폰/결제/환불 목록, P11.3 실제 브라우저 남김.
 - 전 페이지/AI/외부 연동 원래 목표 active 유지.
+
+
+## 최신 — 관리자 결제·환불·쿠폰 페이지 이동
+
+- 이전 턴 progress: REA 통합 문서와10개 원본/Evidence 해시 대조 기록 생성. 이는 기능 구현 완료 판정이 아님.
+- 이번 턴 progress: 세 관리자 목록의 첫100건 제한 해소, 결제 검색 적용 상태 분리, 개별 페이지 유지/마지막 페이지 복귀, 동률 정렬 안정화.
+- 전체414·lint/typecheck/build, 실제 production HTTP/SSR 각101건 검증 통과. 테스트 준비 코드의 회계 삭제 위반을 수정했고 제품 제약 유지.
+- P11.4 구현/HTTP 검증 완료. P11.3 브라우저 검증, 새로 확인한 P11.5 회원 내역50건 제한 및 기존 AI/외부 공급자/전체 목표는 미완료, active 유지.

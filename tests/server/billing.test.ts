@@ -95,3 +95,20 @@ test('cancel/resume and period rollover expire only the unused period tokens, on
  assert.equal(currentSubscription(db,a,NOW+8*DAY),null);
  assert.equal((db.prepare('SELECT status FROM subscriptions WHERE id=?').get(sub.id) as {status:string}).status,'canceled');
 });
+
+test('admin coupons: 101 tied records are reachable, mutable on page two, and recover after filtering',async t=>{
+ const {loadValidPage}=await import('../../src/components/admin/pagination');
+ const {db,admin,a}=await fixture(t);
+ for(let i=0;i<101;i++)createCoupon(db,admin,coupon({code:`PAGE${String(i).padStart(3,'0')}`}));
+ db.prepare('UPDATE coupons SET created_at=?').run(NOW);
+ const query={pageSize:100,status:'active'};
+ const first=listAdminCoupons(db,admin,{...query,page:1}),last=listAdminCoupons(db,admin,{...query,page:2});
+ assert.equal(first.pagination.total,101);assert.equal(last.data.length,1);
+ assert.equal(new Set([...first.data,...last.data].map(c=>c.id)).size,101);
+ const c=last.data[0];updateCoupon(db,admin,c.id,{status:'disabled',version:c.version});
+ const recovered=await loadValidPage(async page=>listAdminCoupons(db,admin,{...query,page}),2);
+ assert.equal(recovered.pagination.page,1);assert.equal(recovered.pagination.total,100);
+ assert.equal(listAdminCoupons(db,admin,{q:c.code,status:'disabled'}).data[0].id,c.id);
+ assert.throws(()=>updateCoupon(db,admin,c.id,{status:'active',version:c.version}),{status:409});
+ assert.throws(()=>listAdminCoupons(db,a,{page:2}),{status:403});
+});

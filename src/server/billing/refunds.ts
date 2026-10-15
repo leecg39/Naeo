@@ -121,7 +121,7 @@ export function listAdminRefunds(db:Database,actorId:string,query:unknown){
  const {page,pageSize,status}=refundQueryInput.parse(query);
  const where=status?'WHERE r.status=?':'',params=status?[status]:[];
  const {total}=db.prepare(`SELECT count(*) AS total FROM refunds r ${where}`).get(...params) as {total:number};
- const rows=db.prepare(`SELECT r.id,coalesce(u.email,'(탈퇴 회원)') AS email,p.order_id AS orderId,p.order_name AS orderName FROM refunds r JOIN payments p ON p.id=r.payment_id LEFT JOIN users u ON u.id=r.user_id ${where} ORDER BY r.created_at DESC LIMIT ? OFFSET ?`)
+ const rows=db.prepare(`SELECT r.id,coalesce(u.email,'(탈퇴 회원)') AS email,p.order_id AS orderId,p.order_name AS orderName FROM refunds r JOIN payments p ON p.id=r.payment_id LEFT JOIN users u ON u.id=r.user_id ${where} ORDER BY r.created_at DESC, r.id ASC LIMIT ? OFFSET ?`)
   .all(...params,pageSize,(page-1)*pageSize) as {id:string;email:string;orderId:string;orderName:string}[];
  return{data:rows.map(x=>({...refundById(db,x.id),email:x.email,orderId:x.orderId,orderName:x.orderName})),pagination:{page,pageSize,total}};
 }
