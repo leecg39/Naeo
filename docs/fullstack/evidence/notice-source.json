@@ -1,0 +1,32 @@
+{
+  "source_url": "https://www.naeo.kr/_next/static/immutable/chunks/2ihf3durgz1ow.js",
+  "sha256": "91b8cb04e0ce7f7c945f81a0cfbb803649305c3280393407ea74f923fa1a1f6a",
+  "rea_evidence_id": "ev_a3e1798d07d5c429ee125f2d7541166da2803a056b7085875e164a441887726c",
+  "evidence_type": "analyst source reading of REA-analyzed artifact",
+  "ranges": [
+    {
+      "type": "coupon",
+      "start": 6240,
+      "end_exclusive": 8056,
+      "excerpt": "function h({announcement:e,onClose:r,onDismissToday:p}){let[m,x]=(0,n.useState)(!1),g=e.metadata?.couponCode||\"\",y=async()=>{if(g)try{await navigator.clipboard.writeText(g),x(!0),setTimeout(()=>x(!1),2e3)}catch{}};return(0,t.jsx)(s.default,{open:!0,onClose:r,maxWidth:\"xs\",fullWidth:!0,children:(0,t.jsxs)(l.default,{sx:{p:0,bgcolor:\"background.paper\"},children:[(0,t.jsxs)(i.default,{sx:{p:3,borderBottom:e=>\"dark\"===e.palette.mode?\"1px solid rgba(255,255,255,0.06)\":\"1px solid rgba(0,0,0,0.06)\",display:\"flex\",justifyContent:\"space-between\",alignItems:\"center\"},children:[(0,t.jsx)(o.default,{variant:\"h6\",fontWeight:800,children:e.title}),(0,t.jsx)(u.default,{onClick:r,\"aria-label\":\"닫기\",sx:{color:\"text.secondary\"},children:(0,t.jsx)(c.default,{})})]}),(0,t.jsxs)(i.default,{sx:{p:3},children:[e.content&&(0,t.jsx)(o.default,{variant:\"body2\",sx:{color:\"text.secondary\",mb:2.5},children:e.content}),g&&(0,t.jsxs)(i.default,{sx:{display:\"flex\",alignItems:\"center\",gap:1,p:2,borderRadius:2,bgcolor:e=>\"dark\"===e.palette.mode?\"rgba(3,199,90,0.08)\":\"rgba(3,199,90,0.06)\",border:\"1px dashed #03C75A\",mb:2.5},children:[(0,t.jsx)(o.default,{variant:\"h5\",fontWeight:800,sx:{color:\"#03C75A\",flex:1,letterSpacing:2},children:g}),(0,t.jsx)(u.default,{onClick:y,size:\"small\",\"aria-label\":\"쿠폰 코드 복사\",sx:{color:m?\"#03C75A\":\"text.secondary\"},children:m?(0,t.jsx)(f.default,{}):(0,t.jsx)(d.default,{})})]}),e.link_url&&(0,t.jsx)(a.default,{href:e.link_url,fullWidth:!0,variant:\"contained\",sx:{bgcolor:\"#03C75A\",fontWeight:700,textTransform:\"none\",borderRadius:2,py:1.2,\"&:hover\":{bgcolor:\"#029f48\"}},children:\"쿠폰 사용하기\"}),(0,t.jsx)(a.default,{fullWidth:!0,onClick:p,sx:{mt:1,color:\"text.secondary\",textTransform:\"none\",fontSize:\"0.8rem\"},children:\"오늘 하루 안 보기\"})]})]})})}var p=e.i(459546);"
+    },
+    {
+      "type": "feature",
+      "start": 8056,
+      "end_exclusive": 9359,
+      "excerpt": "function m({announcement:e,onClose:n,onDismissToday:r}){return(0,t.jsx)(s.default,{open:!0,onClose:n,maxWidth:\"xs\",fullWidth:!0,children:(0,t.jsxs)(l.default,{sx:{p:0,bgcolor:\"background.paper\"},children:[(0,t.jsxs)(i.default,{sx:{p:3,borderBottom:e=>\"dark\"===e.palette.mode?\"1px solid rgba(255,255,255,0.06)\":\"1px solid rgba(0,0,0,0.06)\",display:\"flex\",justifyContent:\"space-between\",alignItems:\"center\"},children:[(0,t.jsxs)(i.default,{sx:{display:\"flex\",alignItems:\"center\",gap:1},children:[(0,t.jsx)(p.default,{sx:{color:\"#03C75A\",fontSize:22}}),(0,t.jsx)(o.default,{variant:\"h6\",fontWeight:800,children:e.title})]}),(0,t.jsx)(u.default,{onClick:n,\"aria-label\":\"닫기\",sx:{color:\"text.secondary\"},children:(0,t.jsx)(c.default,{})})]}),(0,t.jsxs)(i.default,{sx:{p:3},children:[e.content&&(0,t.jsx)(o.default,{variant:\"body2\",sx:{color:\"text.secondary\",mb:2.5,lineHeight:1.7},children:e.content}),e.link_url&&(0,t.jsx)(a.default,{href:e.link_url,fullWidth:!0,variant:\"contained\",sx:{bgcolor:\"#03C75A\",fontWeight:700,textTransform:\"none\",borderRadius:2,py:1.2,\"&:hover\":{bgcolor:\"#029f48\"}},children:\"자세히 보기\"}),(0,t.jsx)(a.default,{fullWidth:!0,onClick:r,sx:{mt:1,color:\"text.secondary\",textTransform:\"none\",fontSize:\"0.8rem\"},children:\"오늘 하루 안 보기\"})]})]})})}var x=e.i(757328);"
+    },
+    {
+      "type": "maintenance",
+      "start": 9359,
+      "end_exclusive": 10131,
+      "excerpt": "function g({announcement:e,onClose:n}){return(0,t.jsxs)(i.default,{role:\"alert\",\"aria-live\":\"polite\",sx:{position:\"fixed\",top:72,left:0,right:0,zIndex:99,bgcolor:\"#F59E0B\",color:\"#1F2937\",py:1,px:2,display:\"flex\",alignItems:\"center\",justifyContent:\"center\",gap:1},children:[(0,t.jsx)(x.default,{sx:{fontSize:18}}),(0,t.jsxs)(o.default,{variant:\"body2\",fontWeight:600,sx:{flex:1,textAlign:\"center\"},children:[e.title,e.content&&` \\xb7 ${e.content}`]}),(0,t.jsx)(u.default,{onClick:n,size:\"small\",\"aria-label\":\"닫기\",sx:{color:\"#1F2937\"},children:(0,t.jsx)(c.default,{fontSize:\"small\"})})]})}let y=(0,e.i(755742).default)((0,t.jsx)(\"path\",{d:\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-5 14H7v-2h7zm3-4H7v-2h10zm0-4H7V7h10z\"}),\"Article\");"
+    },
+    {
+      "type": "blog",
+      "start": 10131,
+      "end_exclusive": 11798,
+      "excerpt": "function b({announcement:e,onClose:n,onDismissToday:r}){return(0,t.jsx)(s.default,{open:!0,onClose:n,maxWidth:\"xs\",fullWidth:!0,children:(0,t.jsxs)(l.default,{sx:{p:0,bgcolor:\"background.paper\"},children:[(0,t.jsxs)(i.default,{sx:{p:3,borderBottom:e=>\"dark\"===e.palette.mode?\"1px solid rgba(255,255,255,0.06)\":\"1px solid rgba(0,0,0,0.06)\",display:\"flex\",justifyContent:\"space-between\",alignItems:\"center\"},children:[(0,t.jsxs)(i.default,{sx:{display:\"flex\",alignItems:\"center\",gap:1},children:[(0,t.jsx)(y,{sx:{color:\"#03C75A\",fontSize:22}}),(0,t.jsx)(o.default,{variant:\"subtitle1\",fontWeight:700,children:\"새 글이 올라왔어요\"})]}),(0,t.jsx)(u.default,{onClick:n,\"aria-label\":\"닫기\",sx:{color:\"text.secondary\"},children:(0,t.jsx)(c.default,{})})]}),(0,t.jsxs)(i.default,{sx:{p:3},children:[(0,t.jsx)(o.default,{variant:\"h6\",fontWeight:700,sx:{mb:1},children:e.title}),e.content&&(0,t.jsx)(o.default,{variant:\"body2\",sx:{color:\"text.secondary\",mb:2.5,lineHeight:1.7},children:e.content}),e.link_url&&(0,t.jsx)(a.default,{href:e.link_url,fullWidth:!0,variant:\"contained\",sx:{bgcolor:\"#03C75A\",fontWeight:700,textTransform:\"none\",borderRadius:2,py:1.2,\"&:hover\":{bgcolor:\"#029f48\"}},children:\"읽으러 가기\"}),(0,t.jsx)(a.default,{fullWidth:!0,onClick:r,sx:{mt:1,color:\"text.secondary\",textTransform:\"none\",fontSize:\"0.8rem\"},children:\"오늘 하루 안 보기\"})]})]})})}var S=e.i(190425);let v=\"#03C75A\",T={coffee:{src:\"/event/review-2026-09/icon-coffee.webp\",alt:\"스타벅스 아메리카노\"},airpods:{src:\"/event/review-2026-09/icon-earbuds.webp\",alt:\"에어팟 프로\"},ipad:{src:\"/event/review-2026-09/icon-tablet.webp\",alt:\"아이패드 에어\"}};"
+    }
+  ]
+}

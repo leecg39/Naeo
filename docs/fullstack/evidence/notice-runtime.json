@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-10-15T09:19:18.143Z",
+  "checks": [
+    "Admin login and create",
+    "Public REA field mapping and no-store",
+    "Event SSR includes banner props",
+    "Update audience/type/ticker metadata reflected immediately",
+    "All three ticker WebP assets served with valid signatures",
+    "Anonymous dashboard denied, authenticated dashboard allowed",
+    "Delete removes API record",
+    "Coupon code create/read/update/delete without legacy link label"
+  ],
+  "browserVerified": false,
+  "externalWrites": false,
+  "temporaryDataRemoved": true
+}

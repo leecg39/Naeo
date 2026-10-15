@@ -73,4 +73,20 @@ REA에 입력한 동일 배포 청크의 `j` 함수에서 조건·스타일·아
 
 검증: 전체407개(root6+server401), lint/typecheck/build 통과. production Next HTTP QA에서 ticker metadata 수정·조회와 WebP3개 HTTP200 및 파일 시그니처를 검사했다(evidence/ticker-runtime.json). 임시 서버·DB는 정리했다.
 
-브라우저 상태 재확인: Ego에는 사용자 소유 IRON RIFT 공간10만 있고 기존 NAEO 공간은 없다. ego-browser 스킬의 새 복구 TaskSpace 금지 규칙에 따라 새 공간을 만들지 않았다. 실제 위치·애니메이션·hover/focus 정지·모바일·모션 감소·닫기 클릭은 미검증이다. coupon/feature/maintenance/blog 전용 UI도 여전히 남았다. 전체 목표는 미완료다.
+브라우저 상태 재확인: Ego에는 사용자 소유 IRON RIFT 공간10만 있고 기존 NAEO 공간은 없다. ego-browser 스킬의 새 복구 TaskSpace 금지 규칙에 따라 새 공간을 만들지 않았다. 실제 위치·애니메이션·hover/focus 정지·모바일·모션 감소·닫기 클릭은 미검증이다. 이후 아래 유형별 전용 UI를 구현했으며 실제 브라우저 검증은 남았다. 전체 목표는 미완료다.
+
+
+## 쿠폰·기능·점검·블로그 유형
+
+REA와 해시가 같은 배포 원문 h/m/g/b 함수를 읽어 유형별 동작을 분리했다. evidence/notice-source.json에 함수별 UTF-8 byte 범위·원문·SHA-256·REA ID를 보존했다.
+
+- coupon: 제목·내용·metadata.couponCode, 복사 버튼, 링크가 있을 때 ‘쿠폰 사용하기’, 오늘 숨김. Clipboard API 성공 후 2초 동안 완료 표시한다. 복사 실패 안내는 원본의 조용한 실패에 추가한 클론 UX다.
+- feature: 제목·내용·‘자세히 보기’ 링크·오늘 숨김.
+- blog: ‘새 글이 올라왔어요’ 머리말, 글 제목·내용·‘읽으러 가기’ 링크·오늘 숨김.
+- maintenance: top72px의 노란 알림 띠, 제목과 내용, 일반 닫기. 원본과 같이 일일 숨김/링크 버튼이 없다.
+- ticker가 모든 유형보다 우선한다. event만 이미지 배너를 선택하며 이미지가 없거나 display=notice이면 표시하지 않는다. 이미지가 있다고 다른 유형을 이벤트 배너로 바꾸던 이전 동작을 정정했다.
+- 쿠폰 코드는 기존 metadata에 저장한다. 관리자 폼/API에서 생성·수정·제거하며 trim 후 1~120자 제약은 클론의 저장 정책이다. coupon/feature/blog의 고정 링크 문구 때문에 legacy linkLabel을 요구하지 않는다.
+
+대화상자는 native dialog와 Lucide 아이콘을 사용한다. 원본 MUI 및 아이콘 픽셀을 그대로 복원했다고 주장하지 않는다. 클립보드 복사는 텍스트 복사만 수행하며 쿠폰 생성·발급·잔액·할인 사용 처리가 아니다. 원본에 그런 실행 근거가 없다.
+
+검증: 전체408개(root6+server402), lint·typecheck·production build 통과. production HTTP로 쿠폰 코드 생성→조회→변경→조회→삭제를 실행했고 나머지 공지/아이콘 검증도 통과했다(evidence/notice-runtime.json). 실제 복사·키보드 포커스·닫기·반응형 렌더링은 브라우저 미검증으로 남는다. 다음은 전체 페이지 계획과 실제 남은 차이를 다시 대조해야 한다.

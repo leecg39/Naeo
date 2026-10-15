@@ -49,7 +49,7 @@ export function updateAnnouncement(db:Database,actorId:string,id:string,input:un
  return transaction(db,()=>{
   const current=row(db,id);
   if(current.version!==version)throw new AppError(409,'VERSION_CONFLICT','다른 곳에서 먼저 수정했습니다. 최신 내용을 불러와주세요.');
-  const merged={metadata:current.metadata,linkUrl:current.linkUrl,linkLabel:current.linkLabel,startsAt:iso(current.startsAt),endsAt:iso(current.endsAt),...changes};
+  const merged={type:current.type,metadata:current.metadata,linkUrl:current.linkUrl,linkLabel:current.linkLabel,startsAt:iso(current.startsAt),endsAt:iso(current.endsAt),...changes};
   // 수정 후 전체 값이 규칙(링크 문구, 시작<종료)을 지키는지 검사한다.
   if(!announcementConsistent(merged))throw new z.ZodError([{code:'custom',path:[],message:announcementConsistencyMessage,input:merged}]);
   const keys=Object.keys(changes) as Field[];

@@ -31,7 +31,13 @@ async function main(){
   const memberNotice=(await(await req('/api/announcements?target=dashboard','GET',undefined,cookie)).json()).announcements[0];assert.equal(memberNotice.type,'feature');assert.equal(memberNotice.metadata.display,'ticker');assert.equal(memberNotice.content,'보상 [coffee]');
   assert.equal((await req(`/api/admin/announcements/${a.id}`,'DELETE',{version:2},cookie)).status,200);
   assert.deepEqual(await(await req('/api/announcements?target=dashboard','GET',undefined,cookie)).json(),{announcements:[]});
-  result={verifiedAt:new Date().toISOString(),checks:['Admin login and create','Public REA field mapping and no-store','Event SSR includes banner props','Update audience/type/ticker metadata reflected immediately','All three ticker WebP assets served with valid signatures','Anonymous dashboard denied, authenticated dashboard allowed','Delete removes API record'],browserVerified:false,externalWrites:false,temporaryDataRemoved:true};
+  const couponResponse=await req('/api/admin/announcements','POST',{title:'Coupon test',type:'coupon',status:'published',linkUrl:'/pricing',metadata:{couponCode:'TEST-CODE'}},cookie);assert.equal(couponResponse.status,201);const coupon=(await couponResponse.json()).data;
+  assert.equal((await(await req('/api/announcements')).json()).announcements[0].metadata.couponCode,'TEST-CODE');
+  const couponUpdate=await req(`/api/admin/announcements/${coupon.id}`,'PATCH',{version:1,metadata:{couponCode:'CHANGED'}},cookie);assert.equal(couponUpdate.status,200);
+  assert.equal((await(await req('/api/announcements')).json()).announcements[0].metadata.couponCode,'CHANGED');
+  assert.equal((await req(`/api/admin/announcements/${coupon.id}`,'DELETE',{version:2},cookie)).status,200);
+  assert.deepEqual(await(await req('/api/announcements')).json(),{announcements:[]});
+  result={verifiedAt:new Date().toISOString(),checks:['Admin login and create','Public REA field mapping and no-store','Event SSR includes banner props','Update audience/type/ticker metadata reflected immediately','All three ticker WebP assets served with valid signatures','Anonymous dashboard denied, authenticated dashboard allowed','Delete removes API record','Coupon code create/read/update/delete without legacy link label'],browserVerified:false,externalWrites:false,temporaryDataRemoved:true};
  }finally{
   if(child&&child.exitCode===null&&child.signalCode===null){const processToStop=child,exited=new Promise<void>(r=>processToStop.once('exit',()=>r()));processToStop.kill('SIGTERM');const timer=setTimeout(()=>processToStop.kill('SIGKILL'),3000);await exited;clearTimeout(timer);}
   rmSync(temp,{recursive:true,force:true});

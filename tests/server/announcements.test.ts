@@ -17,6 +17,19 @@ const HOUR=3600_000;
 const notice=(over:Record<string,unknown>={})=>({title:'점검 안내',body:'10월 20일 새벽 2시~4시 점검합니다.',linkUrl:'/updates',linkLabel:'자세히',target:'landing',status:'published',...over});
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 
+test('coupon codes round-trip through CRUD and type-specific links do not require legacy labels',async t=>{
+ const {db,admin}=await fixture(t);
+ const a=createAnnouncement(db,admin,notice({type:'coupon',linkLabel:'',metadata:{couponCode:' AUTUMN-2026 '}}));
+ assert.equal(a.metadata.couponCode,'AUTUMN-2026');
+ assert.equal(activeAnnouncement(db,'/')?.metadata.couponCode,'AUTUMN-2026');
+ const changed=updateAnnouncement(db,admin,a.id,{version:1,metadata:{couponCode:'NEW-CODE'}});assert.equal(changed.metadata.couponCode,'NEW-CODE');
+ const cleared=updateAnnouncement(db,admin,a.id,{version:2,metadata:{}});assert.deepEqual(cleared.metadata,{});
+ for(const type of ['feature','blog'])assert.equal(createAnnouncement(db,admin,notice({type,linkLabel:''})).type,type);
+ for(const couponCode of ['', ' '.repeat(10),'a'.repeat(121)])assert.throws(()=>createAnnouncement(db,admin,notice({type:'coupon',metadata:{couponCode}})),{name:'ZodError'});
+ deleteAnnouncement(db,admin,a.id,{version:3});
+ assert.ok(!listAdminAnnouncements(db,admin,{}).data.some(x=>x.id===a.id));
+});
+
 test('ticker display stores without an image, keeps tokens and supports target/path updates',async t=>{
  const {db,admin}=await fixture(t);
  const a=createAnnouncement(db,admin,notice({type:'event',body:'매주 [coffee] 선물 [airpods] [ipad]',linkLabel:'',metadata:{display:'ticker',exactPath:'/'}}));
