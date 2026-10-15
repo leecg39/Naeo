@@ -22,7 +22,7 @@ const fields={
  body:z.string().trim().max(300),
  linkUrl,
  linkLabel:z.string().trim().max(30),
- target:z.enum(['landing','all']),
+ target:z.enum(['landing','all','dashboard']),
  startsAt:at,
  endsAt:at,
  status:z.enum(['draft','published']),

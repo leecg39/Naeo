@@ -38,7 +38,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
    <label>내용(선택)<textarea className="field" value={form.body} onChange={e=>set('body',e.target.value)} maxLength={300} rows={3} disabled={busy}/></label>
    <label>링크(선택, /경로 또는 https 주소)<input className="field" value={form.linkUrl} onChange={e=>set('linkUrl',e.target.value)} maxLength={300} disabled={busy}/></label>
    <label>링크 문구<input className="field" value={form.linkLabel} onChange={e=>set('linkLabel',e.target.value)} maxLength={30} required={!!form.linkUrl&&!(form.metadata.image&&form.metadata.display!=='notice')} disabled={busy}/></label>
-   <label>표시 위치<select className="field" value={form.target} onChange={e=>set('target',e.target.value as Form['target'])} disabled={busy}><option value="landing">첫 화면만</option><option value="all">모든 공개 화면</option></select></label>
+   <label>표시 위치<select className="field" value={form.target} onChange={e=>set('target',e.target.value as Form['target'])} disabled={busy}><option value="landing">공개 사이트</option><option value="dashboard">회원 대시보드</option><option value="all">모든 공개 화면</option></select></label>
    <fieldset disabled={busy}><legend>이미지 배너 설정</legend>
     <label>표시 방식<select className="field" value={form.metadata.display||'auto'} onChange={e=>setMeta('display',e.target.value==='auto'?'':e.target.value)}><option value="auto">이미지가 있으면 배너</option><option value="notice">텍스트 공지</option><option value="banner">이미지 배너</option></select></label>
     <label>기본 이미지 주소<input className="field" value={form.metadata.image||''} onChange={e=>setMeta('image',e.target.value)} maxLength={300} required={form.metadata.display==='banner'} placeholder="/images/banner.png 또는 https://…"/></label>
@@ -52,7 +52,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
    <label>시작(비우면 바로)<input className="field" type="datetime-local" value={form.startsAt} onChange={e=>set('startsAt',e.target.value)} disabled={busy}/></label>
    <label>종료(비우면 계속)<input className="field" type="datetime-local" value={form.endsAt} onChange={e=>set('endsAt',e.target.value)} disabled={busy}/></label>
    <label>상태<select className="field" value={form.status} onChange={e=>set('status',e.target.value as Form['status'])} disabled={busy}><option value="draft">초안(비공개)</option><option value="published">공개</option></select></label>
-   <p className="muted">공개 중인 공지가 여러 개면 경로에 맞는 가장 최근 수정 공지 1개가 보입니다. 닫기는 현재 화면에서만, 오늘 하루 안 보기는 UTC 자정(한국 오전 9시)까지 적용됩니다.</p>
+   <p className="muted">공개 중인 공지는 경로에 맞는 수정 순서로 표시하며 닫으면 다음 공지가 보입니다. 닫기는 현재 화면에서만, 오늘 하루 안 보기는 UTC 자정(한국 오전 9시)까지 적용됩니다.</p>
    <div className="account-actions">
     <button className="button" type="submit" disabled={busy}>{item?'저장':'공지 만들기'}</button>
     {item&&!confirming&&<button className="button secondary" type="button" disabled={busy} onClick={()=>setConfirming(true)}>삭제</button>}
@@ -90,7 +90,7 @@ export default function AnnouncementsManager({initial,now:serverNow}:{initial:Pa
     <caption className="sr-only">공지 목록</caption>
     <thead><tr><th>제목</th><th>위치</th><th>상태</th><th>기간</th><th>관리</th></tr></thead>
     <tbody>{result.data.map(a=><tr key={a.id}>
-     <td><strong>{a.title}</strong></td><td>{a.target==='all'?'모든 공개 화면':'첫 화면'}</td><td>{stateOf(a,now)}</td><td>{fmt(a.startsAt)} ~ {fmt(a.endsAt)}</td>
+     <td><strong>{a.title}</strong></td><td>{a.target==='dashboard'?'회원 대시보드':a.target==='all'?'모든 공개 화면':'공개 사이트'}</td><td>{stateOf(a,now)}</td><td>{fmt(a.startsAt)} ~ {fmt(a.endsAt)}</td>
      <td><button className="button secondary" type="button" disabled={busy} onClick={()=>{setCreating(false);setSelected(a);}}>편집<span className="sr-only"> {a.title}</span></button></td>
     </tr>)}</tbody>
    </table>{!result.data.length&&<p className="empty-state">공지가 없습니다. 공지가 없으면 첫 화면은 원래 디자인 그대로 보입니다.</p>}</div>

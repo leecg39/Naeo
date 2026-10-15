@@ -2,7 +2,7 @@ import {test,type TestContext} from 'node:test';
 import assert from 'node:assert/strict';
 import {openDatabase,type Database} from '../../src/server/database';
 import {register} from '../../src/server/auth';
-import {activeAnnouncement} from '../../src/server/content/announcements';
+import {activeAnnouncement,activeAnnouncements} from '../../src/server/content/announcements';
 import {listAdminAnnouncements,createAnnouncement,updateAnnouncement,deleteAnnouncement} from '../../src/server/content/admin-announcements';
 
 async function fixture(t:TestContext){
@@ -17,7 +17,23 @@ const HOUR=3600_000;
 const notice=(over:Record<string,unknown>={})=>({title:'점검 안내',body:'10월 20일 새벽 2시~4시 점검합니다.',linkUrl:'/updates',linkLabel:'자세히',target:'landing',status:'published',...over});
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 
-test('schema 33 upgrades existing announcements without losing publication data',async t=>{
+test('landing and dashboard queues isolate audiences and retain all eligible notices in deterministic order',async t=>{
+ const {db,admin}=await fixture(t),now=Date.now();
+ const landing=createAnnouncement(db,admin,notice());
+ const dashboard=createAnnouncement(db,admin,notice({title:'회원 공지',target:'dashboard'}));
+ const second=createAnnouncement(db,admin,notice({title:'회원 배너',target:'dashboard',metadata:{image:'/banner.png',exactPath:'/dashboard/write'}}));
+ db.prepare('UPDATE announcements SET updated_at=? WHERE id=?').run(now+1000,second.id);
+ assert.deepEqual(activeAnnouncements(db,'/pricing').map(x=>x.id),[landing.id]);
+ assert.deepEqual(activeAnnouncements(db,'/dashboard').map(x=>x.id),[dashboard.id]);
+ assert.deepEqual(activeAnnouncements(db,'/dashboard/write').map(x=>x.id),[second.id,dashboard.id]);
+ assert.deepEqual(activeAnnouncements(db,'/dashboard/settings').map(x=>x.id),[dashboard.id]);
+ for(const path of ['/admin','/login','/auth/terms','/payment/complete','/api/test'])assert.deepEqual(activeAnnouncements(db,path),[]);
+ const updated=updateAnnouncement(db,admin,dashboard.id,{target:'landing',version:1});
+ assert.equal(updated.target,'landing');assert.deepEqual(activeAnnouncements(db,'/dashboard'),[]);
+ assert.equal(activeAnnouncements(db,'/pricing').length,2);
+});
+
+test('schema 33 and 34 upgrades preserve existing announcements and banner metadata',async t=>{
  const {DatabaseSync}=await import('node:sqlite');
  const {mkdtempSync,rmSync}=await import('node:fs');
  const {tmpdir}=await import('node:os');
@@ -25,17 +41,20 @@ test('schema 33 upgrades existing announcements without losing publication data'
  const {createHash}=await import('node:crypto');
  const {migrations}=await import('../../src/server/migrations');
  const dir=mkdtempSync(join(tmpdir(),'naeo-banner-migration-'));t.after(()=>rmSync(dir,{recursive:true,force:true}));
- const path=join(dir,'old.sqlite'),old=new DatabaseSync(path);
+ for(const version of [33,34]){
+ const path=join(dir,`old-${version}.sqlite`),old=new DatabaseSync(path);
  try{
   old.exec('PRAGMA foreign_keys=ON; CREATE TABLE schema_migrations(version INTEGER PRIMARY KEY,name TEXT NOT NULL,checksum TEXT NOT NULL,applied_at INTEGER NOT NULL) STRICT;');
-  for(const m of migrations.filter(x=>x.version<=33)){old.exec(m.sql);old.prepare('INSERT INTO schema_migrations VALUES(?,?,?,?)').run(m.version,m.name,createHash('sha256').update(m.sql).digest('hex'),Date.now());}
+  for(const m of migrations.filter(x=>x.version<=version)){old.exec(m.sql);old.prepare('INSERT INTO schema_migrations VALUES(?,?,?,?)').run(m.version,m.name,createHash('sha256').update(m.sql).digest('hex'),Date.now());}
   old.prepare("INSERT INTO announcements(id,title,status,created_at,updated_at) VALUES('legacy','기존 공지','published',1,1)").run();
+  if(version===34)old.prepare("UPDATE announcements SET metadata=?,version=7").run(JSON.stringify({image:'/legacy.png'}));
  }finally{old.close();}
  const upgraded=openDatabase(path);try{
-  const notice=activeAnnouncement(upgraded,'/');assert.equal(notice?.id,'legacy');assert.deepEqual(notice?.metadata,{});
+  const notice=activeAnnouncement(upgraded,'/');assert.equal(notice?.id,'legacy');assert.deepEqual(notice?.metadata,version===34?{image:'/legacy.png'}:{});if(version===34)assert.equal(notice?.version,7);
   assert.throws(()=>upgraded.prepare("UPDATE announcements SET metadata='[]'").run());
  }finally{upgraded.close();}
  const reopened=openDatabase(path);reopened.close();
+ }
 });
 
 test('banner metadata persists through CRUD and exactPath filters before selecting a notice',async t=>{
@@ -82,7 +101,7 @@ test('active announcement respects status, period and target',async t=>{
  assert.equal(activeAnnouncement(db,'/',now+2*HOUR)?.id,draft.id,'shown after start');
  const ended=createAnnouncement(db,admin,notice({title:'끝난 공지',endsAt:iso(now-HOUR)}));
  assert.notEqual(activeAnnouncement(db,'/',now+2*HOUR)?.id,ended.id,'ended hidden');
- assert.equal(activeAnnouncement(db,'/pricing',now+2*HOUR),null,'landing-only target');
+ assert.equal(activeAnnouncement(db,'/pricing',now+2*HOUR)?.id,draft.id,'landing target includes public pages');
  const all=createAnnouncement(db,admin,notice({title:'전체 공지',target:'all'}));
  assert.equal(activeAnnouncement(db,'/pricing',now)?.id,all.id);
  assert.equal(activeAnnouncement(db,'/dashboard',now),null,'never on dashboard');

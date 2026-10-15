@@ -49,3 +49,10 @@
 - 이번 턴 progress: schema34 metadata, 관리자 전체 필드 편집, 공개 이미지 배너와 exactPath 선별, 관리자 API 권한·Origin·버전·삭제 검증. 전체403 테스트와 추가 migration 테스트 통과, lint/typecheck/build 통과.
 - 원본 metadata 근거와 자체 검증 제약/저장 구현을 구분. native dialog 실제 Ego 클릭·이미지 표시·포커스/반응형 미확인. landing/dashboard 대상·복수 공지 선정은 후속 정합성 과제.
 - 기존 전체79URL+4패턴, AI/외부 공급자, 실제 브라우저 전범위 검증 목표 active 유지.
+
+## 최신 — 공지 대상·순차 표시
+
+- 이전 턴 progress: dc89f45 배너 metadata DB/관리자/UI 구현·원격 반영.
+- 이번 턴 progress: schema35 dashboard 대상, landing 공개사이트 조회, 복수 공지/숨김 Set 기반 다음 항목 표시, settings/social 포함 인증 후 대시보드 배치. 전체405 테스트 및 schema33/34 업그레이드 보존 검증, lint/build 통과.
+- 정렬과 관리자/인증 화면 제외 정책은 원본 서버 확인이 아닌 클론 설계. /api/announcements 호환 조회 및 실제 브라우저 순차 닫기·포커스/반응형 확인 남음.
+- 전체79 URL+4패턴/AI·외부 공급자/실브라우저 목표 active 유지.

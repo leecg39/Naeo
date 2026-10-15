@@ -5,7 +5,6 @@ import PageExperience from '@/components/PageExperience';
 import { pageUser,adminPageUser,currentUser } from '@/server/current-user';
 import { cache } from 'react';
 import { contentDatabase,resolveDatabasePage } from '@/server/content/public-pages';
-import { activeAnnouncement } from '@/server/content/announcements';
 import { buildDashboardPage } from '@/server/analysis/dashboard-page';
 import { buildMateDashboardPage } from '@/server/mate/mate-dashboard';
 import { buildAiPicksPage } from '@/server/analysis/ai-picks-page';
@@ -18,7 +17,7 @@ import { ImagesLibrary,SharedImages } from '@/components/writing/ImagePages';
 import { buildRankingPage } from '@/server/ranking/ranking-page';
 import { ensureConfirmed } from '@/server/ranking/ranking-api';
 import { database } from '@/server/database';
-import AnnouncementBar from '@/components/content/AnnouncementBar';
+import PageAnnouncements from '@/components/content/PageAnnouncements';
 import EventEntryPanel from '@/components/events/EventEntryPanel';
 import { buildDashboardEventsPage,buildEventDetailPage,buildEventListPage } from '@/server/events/event-pages';
 import { getPublicEvent } from '@/server/events/events';
@@ -49,8 +48,8 @@ const databasePage=cache(resolveDatabasePage);
 /** 이벤트 상세는 DB의 이벤트 제목·요약을 메타데이터로 쓴다(원본 캡처 문구 대신). */
 function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|event)\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];const e=slug?getPublicEvent(contentDatabase(),slug):null;return e?{title:`${e.title} | NAEO`,description:e.summary}:undefined;}
 export async function generateMetadata({params,searchParams}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');if(['/social/aeo-carousel','/social/mate-ad','/youtube/aeo-intro'].includes(path.replace(/\/export$/,''))&&first((await searchParams).project))return{title:path.endsWith('/export')?'소셜 프로젝트 내보내기':'소셜 프로젝트 보기',robots:{index:false,follow:false}};const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
-/** 공개 화면에는 '전체' 대상 공지를 함께 띄운다(대시보드·관리자 등은 activeAnnouncement가 제외). */
-function withNotice(path:string,data:CapturedPageData){const notice=activeAnnouncement(contentDatabase(),path);return <><PageExperience data={data}/>{notice&&<AnnouncementBar announcement={notice}/>}</>;}
+/** 경로별 대상과 기간을 만족하는 공지를 순서대로 표시한다. */
+function withNotice(path:string,data:CapturedPageData){return <><PageExperience data={data}/><PageAnnouncements path={path}/></>;}
 /** 결제창에서 돌아온 결과: 성공이면 서버에서 승인(멱등), 실패면 주문 실패 처리. 화면은 저장된 주문 상태로 그린다. */
 async function paymentCompletePage(sp:Record<string,string|string[]|undefined>){
  const query=new URLSearchParams(Object.entries(sp).flatMap(([k,v])=>typeof v==='string'?[[k,v]]:[]));
@@ -96,7 +95,7 @@ export default async function Page({params,searchParams}:Props){
  const path='/'+(await params).segments.join('/');
  if(path==='/dashboard'||path.startsWith('/dashboard/')){
   const user=await pageUser(path);
-  const memberView=(data:CapturedPageData)=><PageExperience data={memberChrome(database(),user.id,data)}/>;
+  const memberView=(data:CapturedPageData)=><><PageExperience data={memberChrome(database(),user.id,data)}/><PageAnnouncements path={path}/></>;
   // 대시보드는 로그인 회원 본인의 블로그·진단 결과로 채운다(원본 계정 데이터 미노출).
   if(path==='/dashboard')return <>{memberView(await buildDashboardPage(database(),user.id))}<EngagementPanel initialPoints={points(database(),user.id,{pageSize:10})} initialTutorial={tutorial(database(),user.id)} floating/></>;
   if(path==='/dashboard/mate')return memberView(await buildMateDashboardPage(database(),user.id));
@@ -105,7 +104,7 @@ export default async function Page({params,searchParams}:Props){
   if(path==='/dashboard/events')return memberView(await buildDashboardEventsPage(contentDatabase(),user.id));
   const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
   if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <>{memberView(detail)}<EventEntryPanel/></>;}
-  if(path==='/dashboard/write')return <><PageExperience data={await buildWritingPage(database(),user.id)}/><DraftsWorkspace/></>;
+  if(path==='/dashboard/write')return <><PageExperience data={await buildWritingPage(database(),user.id)}/><PageAnnouncements path={path}/><DraftsWorkspace/></>;
   if(path==='/dashboard/recommendations'){const sp=await searchParams;return memberView(await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)}));}
  }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
