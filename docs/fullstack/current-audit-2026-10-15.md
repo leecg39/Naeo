@@ -27,7 +27,7 @@
 
 설정 확인은 현재 프로세스와 Next production env 파일의 필수 항목 존재 여부만 검사했다. 외부 계정이 존재하지 않는다는 주장은 아니며 자격 증명 값은 출력·기록하지 않았다. [설정 존재 여부](evidence/provider-readiness-current.json).
 
-Ego 스킬의 “Never use a new TaskSpace to recover … stop and ask the user.”에 따라 다른 프로젝트 공간을 사용하거나 대체 공간을 만들지 않았다. OpenAI 키 선택 질문은 OAuth 선택으로 답변됐다. [OAuth 적용 범위와 실행 항목](openai-oauth.md)에 공식 지원 조건을 기록했다. 로컬 개인 사용과 회원별 배포 서비스의 인증 경로가 달라 사용 형태 확인이 필요하다. 위 외부 연결·화면 검증 없이는 원래 목표를 달성했다고 표시하지 않는다.
+Ego 스킬의 “Never use a new TaskSpace to recover … stop and ask the user.”에 따라 다른 프로젝트 공간을 사용하거나 대체 공간을 만들지 않았다. OpenAI 키 선택 질문은 OAuth 선택으로 답변됐다. [OAuth 적용 범위와 실행 항목](openai-oauth.md)에 공식 지원 조건을 기록했다. 회원별 배포 서비스로 확정됐으며, 해당 용도의 클라이언트 승인·사용량 위임 권한·HTTPS 콜백 조건이 필요하다. 위 외부 연결·화면 검증 없이는 원래 목표를 달성했다고 표시하지 않는다.
 
 ## 감사 기록 보존 수정
 
