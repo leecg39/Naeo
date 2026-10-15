@@ -1,3 +1,4 @@
+import {publicMailApi,memberMailApi} from './mail/api';
 import { database, type Database } from './database';
 import { register, login, logout, requireUser, requireAdmin, requireTerms, sessionUser } from './auth';
 import {accountApi} from './account-api';
@@ -48,6 +49,7 @@ export function createApi(getDatabase:()=>Database=database) {
       logout(db,cookieToken(request));
       return json({data:{signedOut:true}},200,{'Set-Cookie':sessionCookie('',0)});
     }
+    const publicMail=await publicMailApi(db,request);if(publicMail)return publicMail;
     const analytics=await publicAnalyticsApi(db,request);
     if(analytics)return analytics;
     const mcp=await mcpApi(db,request);
@@ -73,6 +75,7 @@ export function createApi(getDatabase:()=>Database=database) {
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
     // Withdrawal and session management remain available even before consent.
     if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const memberMail=await memberMailApi(db,request,user);if(memberMail)return memberMail;
     const engagementResponse=await engagementApi(db,request,user);
     if(engagementResponse)return engagementResponse;
     const authzResponse=await memberAuthzApi(db,request,user);

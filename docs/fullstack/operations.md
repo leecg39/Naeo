@@ -68,3 +68,9 @@ npm run restore -- --offline --recover
 ## 개인 데이터 내보내기
 
 [계약·검증](personal-data-export.md). 스키마 29, `npm run worker` 필요. `personal_exports`가 준비 상태를, `personal_export_deletions`가 삭제 재시도를 보존한다. worker 로그의 `personal export cleanup`에서 `failed/scanError`가 있으면 업로드 폴더 권한·디스크 상태를 확인한다. 쿠키·비밀번호·아카이브 내용을 로그에 남기지 않는다. 요청 1시간 만료, 10분 lease, 최대 3회 중단 복구이며 브라우저는 TAR를 스트리밍 다운로드한다. 이 파일을 공용 정적 경로에 노출하지 않는다.
+
+## 계정 메일 (스키마 30)
+
+`.env.example`의 Resend 공급자·API key·발신 이메일·32바이트 암호화 키 및 NAEO_APP_URL을 설정한다. 웹과 worker에 같은 암호화 키를 제공하고 키는 DB 백업과 별도 비밀 저장소에서 보존한다. 키를 잃으면 기존 대기 본문은 복호화할 수 없으며 PAYLOAD_UNREADABLE로 종료된다. 키·서비스 origin·발신자 교체 전 대기 항목 상태를 확인하고 필요하면 사용자에게 새 링크 요청을 안내한다. 토큰 TTL은 최대 60분이다.
+
+기존 `npm run worker`가 계정 메일을 처리한다. 운영 현황에는 pending/failed 수와 설정 여부만 노출한다. 공급자 accepted는 실제 수신 도착이 아니다. 계정 메일 외 문의 답변/스캔 알림/마케팅은 아직 연결하지 않았다. 실제 공급자 key나 수신자 정보를 검증 로그에 남기지 않는다. 자세한 API/재시도/로컬 QA는 `account-mail.md` 참조.

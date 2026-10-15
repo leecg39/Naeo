@@ -1,0 +1,40 @@
+✖ account forms containing password controls never fall back to credentials in a GET query (39.162792ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 496.73825
+
+✖ failing tests:
+
+test at tests/server/password-form-method.test.ts:2:1097
+✖ account forms containing password controls never fall back to credentials in a GET query (39.162792ms)
+  AssertionError [ERR_ASSERTION]: native password forms must use POST even before hydration
+  + actual - expected
+  
+  + [
+  +   'AccountMailForms.tsx:21',
+  +   'AuthForm.tsx:28',
+  +   'ConnectionsSection.tsx:29',
+  +   'PersonalDataExport.tsx:25',
+  +   'SecurityForm.tsx:15',
+  +   'SecurityForm.tsx:24',
+  +   'TermsForm.tsx:10'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/password-form-method.test.ts:21:9)
+      at Test.runInAsyncScope (node:async_hooks:213:14)
+      at Test.run (node:internal/test_runner/test:1095:25)
+      at Test.start (node:internal/test_runner/test:992:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: [ 'AccountMailForms.tsx:21', 'AuthForm.tsx:28', 'ConnectionsSection.tsx:29', 'PersonalDataExport.tsx:25', 'SecurityForm.tsx:15', 'SecurityForm.tsx:24', 'TermsForm.tsx:10' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

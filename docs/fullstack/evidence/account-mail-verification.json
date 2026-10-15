@@ -1,0 +1,145 @@
+{
+  "baseCommit": "e03134b34f3fadd73b74b292141cbe609b073850",
+  "schemaVersion": 30,
+  "dedicatedTests": 18,
+  "allTests": 375,
+  "serverTests": 369,
+  "rootTests": 6,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "externalInboxVerified": false,
+  "browserVerified": false,
+  "logs": [
+    {
+      "path": "docs/fullstack/evidence/account-mail-red.log",
+      "rawSha256": "2aa9ce4a3ae4e0e10578bfca33b7edf07db2a8e8b43cd3fdea4e7c77ec1d25d6",
+      "savedSha256": "2aa9ce4a3ae4e0e10578bfca33b7edf07db2a8e8b43cd3fdea4e7c77ec1d25d6"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-form-red.log",
+      "rawSha256": "9401ddc9191aa90b58c09cc63dec04df2cd28ffd0dedf3a1db7f3440c020221d",
+      "savedSha256": "9401ddc9191aa90b58c09cc63dec04df2cd28ffd0dedf3a1db7f3440c020221d"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-config-red.log",
+      "rawSha256": "eed04a4334b5c7aaeb3c3137c8e6c969c6b989d97740b4cf7a122003ddcbc44c",
+      "savedSha256": "eed04a4334b5c7aaeb3c3137c8e6c969c6b989d97740b4cf7a122003ddcbc44c"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-green.log",
+      "rawSha256": "a0c02e73877d76303d172509ca4c4d1aba7c801feb5fd968dab0220235f9f229",
+      "savedSha256": "a0c02e73877d76303d172509ca4c4d1aba7c801feb5fd968dab0220235f9f229"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-tests.log",
+      "rawSha256": "fad5de39a8d457e34a0809e0cef391f7d0c047368af7e67994e551a902a09844",
+      "savedSha256": "fad5de39a8d457e34a0809e0cef391f7d0c047368af7e67994e551a902a09844"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-lint.log",
+      "rawSha256": "fffb2b1e1cea01e2891076449735319eee84d62e925bd5942ebce36fdcb8fc5d",
+      "savedSha256": "d5b45264edf102e0cde4b926765a79578ca76aa393828002fe1c6a298dc4ca13"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-types.log",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "savedSha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-build.log",
+      "rawSha256": "527fb46470864abfc6039cc3bf8d54aee30627965109fd15b83434fa93a48ee0",
+      "savedSha256": "6263661153d715ab9be6b65adcc334b3d5021e51d14d33b126886f4cc4fc6404"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/fullstack/evidence/account-mail-export-runtime.json",
+      "sha256": "4dbf1daadfd6cffe4289a244fdee765b3c5a0984383ab281209f725960200d22"
+    },
+    {
+      "path": "docs/fullstack/evidence/account-mail-runtime.json",
+      "sha256": "a3a00620985393c260cbb4a45af055d86dfa926b437d429dce93246fbe453796"
+    },
+    {
+      "path": "scripts/qa/account-mail.ts",
+      "sha256": "2ba1b3c89e343b64ec9390636f557b424878d8d60dac068225cfb3fcc16c236a"
+    },
+    {
+      "path": "scripts/worker.ts",
+      "sha256": "17103d226e04677853fb42a38d407af21e43080fdf367a792c357225fc959aed"
+    },
+    {
+      "path": "src/app/auth/forgot-password/page.tsx",
+      "sha256": "20bb95b980cf4fe2e9064892747d46f89cbb96495053a0a48925a19b7b227bc7"
+    },
+    {
+      "path": "src/app/auth/reset-password/page.tsx",
+      "sha256": "69e71777438e3b7cdfedeae4510cf0af2b5862783ff3bbfb42e60825d99fa77e"
+    },
+    {
+      "path": "src/app/auth/terms/page.tsx",
+      "sha256": "55970c2b98b93c0ce61db3c7f54e8facd4f85d79a2c1ca3562495c4570a0f89c"
+    },
+    {
+      "path": "src/app/auth/verify-email/page.tsx",
+      "sha256": "63d7ec53d167102797609a0695c550f94a284cbbfd075f8a68c1e3fc5261e1c6"
+    },
+    {
+      "path": "src/components/account/AccountMailForms.tsx",
+      "sha256": "50ec79beed340f0f62ce47d40a99e5659214a61a30e30954991d7556f6be122d"
+    },
+    {
+      "path": "src/server/api.ts",
+      "sha256": "ab82245dbcb5683ca8f0a4d11ca3419667a3c92bf2a6abdd4c884d57a4319846"
+    },
+    {
+      "path": "src/server/mail/account-mail.ts",
+      "sha256": "279c0e60c38e45e8c5ff5a73156fd1fa20a59cd6e49a20cca601b4821995933b"
+    },
+    {
+      "path": "src/server/mail/api.ts",
+      "sha256": "44138d826e6f0a5abaac507ddab899b961bc4ea1156e7a3e4e8d802262227cce"
+    },
+    {
+      "path": "src/server/mail/provider.ts",
+      "sha256": "8187f0573580bef54b3f0756c72d65f1fcef4621a69a3dd52ef7863b96124c8f"
+    },
+    {
+      "path": "src/server/mail/schema.ts",
+      "sha256": "9a4a635ddc86ed1f9c49d827d16da37c190e8db427d87b71acf1e35e705ffe90"
+    },
+    {
+      "path": "src/server/mail/worker.ts",
+      "sha256": "6486ff8897e449353db2e63f2e0eb4f8657eb7708806977c72bac959a3b382c8"
+    },
+    {
+      "path": "src/server/migrations.ts",
+      "sha256": "8fc5744ce1ffba56bc02b0d41a3aaab5431c5fc23c3dd3229f5ac2c20219c6c3"
+    },
+    {
+      "path": "src/server/ops/health.ts",
+      "sha256": "2d8f5c904b7938ed5876bd220aa7fb2dd47497bc78adc2f7b1560a3068ad2c42"
+    },
+    {
+      "path": "src/server/ops/retention.ts",
+      "sha256": "c3f09b4b42571220e601a6fbaa12e446c67418623108270b54a8412f6b856b3c"
+    },
+    {
+      "path": "src/server/privacy/datasets.ts",
+      "sha256": "0d4b369510fdf71095adfb61a3d327d4e878f2007f0e8855856b5684532cdbdc"
+    },
+    {
+      "path": "tests/server/account-mail.test.ts",
+      "sha256": "45a2cadee595fdea5241cbd031333bfe9b72a4a05b37058211df2a8ee7c471ce"
+    },
+    {
+      "path": "tests/server/mail-provider.test.ts",
+      "sha256": "37f8b416129a021e1d9ef26364cb408d7d66bcc78dff9c3a3e1bb660df76b6d3"
+    },
+    {
+      "path": "tests/server/password-form-method.test.ts",
+      "sha256": "160a29e5e4b7fea3588030ea229ed5d5c2facb0d5e6c64b6890623c13b6cdda9"
+    }
+  ]
+}

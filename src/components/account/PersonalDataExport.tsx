@@ -22,7 +22,7 @@ export default function PersonalDataExport({initial,hasPassword}:{initial:Person
  return <section className="panel account-card"><h2>내 데이터 내려받기</h2>
   <p className="muted">계정 정보, 글과 수정 이력, 블로그 진단, 활동·결제·문의 기록과 보관 중인 사진·제작 파일을 TAR 파일로 내려받습니다. 압축을 풀면 항목별 JSON Lines와 첨부 파일을 볼 수 있습니다.</p>
   <p className="muted">요청 후 최대 1시간 동안 이 로그인에서만 받을 수 있습니다. 로그아웃·비밀번호 변경·탈퇴 시 요청도 삭제됩니다. 파일에는 개인정보가 포함되므로 안전한 곳에 보관해주세요.</p>
-  <form className="account-form" onSubmit={request}>
+  <form method="post" className="account-form" onSubmit={request}>
    {hasPassword?<label>본인 확인 비밀번호<input type="password" name="currentPassword" className="field" autoComplete="current-password" maxLength={128} required disabled={busy||active}/></label>:<p>소셜 계정으로 로그인한 뒤 10분 안에 요청해주세요. 시간이 지났다면 다시 로그인해야 합니다.</p>}
    <button className="button" type="submit" disabled={busy||active}>{active?'자료 준비 중':'내 데이터 내보내기 요청'}</button>
   </form>

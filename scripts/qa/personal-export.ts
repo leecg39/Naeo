@@ -1,4 +1,5 @@
 /** Isolated production HTTP + worker acceptance run. Uses generated credentials only in memory. */
+import {migrations} from '../../src/server/migrations';
 import assert from 'node:assert/strict';
 import {spawn,execFileSync,type ChildProcess} from 'node:child_process';
 import {createHash,randomBytes} from 'node:crypto';
@@ -22,7 +23,7 @@ let result:Record<string,unknown>|undefined;
 try{
  const web=launch(['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port',String(port)]);
  await until(async()=>{try{return(await fetch(origin+'/api/health')).ok;}catch{return false;}});
- const health=await(await request('/api/health')).json();assert.equal(health.data.schemaVersion,29);
+ const health=await(await request('/api/health')).json();assert.equal(health.data.schemaVersion,migrations.at(-1)!.version);
  const a=await account('personal-export-a@example.test'),b=await account('personal-export-b@example.test');
  for(const u of [a,b]){const r=await request('/api/drafts','POST',u.cookie,{title:u===a?'내 기록':'비공개 다른 기록',body:'개인정보 내보내기 실제 HTTP 검증'});assert.equal(r.status,201);}
  const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64');
@@ -45,7 +46,7 @@ try{
  await stop(worker);assert.equal((await request('/api/auth/logout','POST',a.cookie)).status,200);assert.equal((await request(`/api/auth/data-exports/${job.id}/download`,'GET',a.cookie)).status,401);
  const restarted=launch(['--import','tsx','scripts/worker.ts']);await until(async()=>readdirSync(join(uploads,'personal-exports')).length===0);await stop(restarted);checks.push('logout immediately denies download; restarted worker deletes persisted archive tombstone');
  await stop(web);
- result={verifiedAt:new Date().toISOString(),schemaVersion:29,checks,archiveBytes:bytes.length,datasets:manifest.datasets.length,attachments:manifest.attachments.length,archiveSha256:createHash('sha256').update(bytes).digest('hex'),browserVerified:false,productionProvidersUsed:false,temporaryDataRemoved:true};
+ result={verifiedAt:new Date().toISOString(),schemaVersion:migrations.at(-1)!.version,checks,archiveBytes:bytes.length,datasets:manifest.datasets.length,attachments:manifest.attachments.length,archiveSha256:createHash('sha256').update(bytes).digest('hex'),browserVerified:false,productionProvidersUsed:false,temporaryDataRemoved:true};
 
 }finally{for(const p of children)await stop(p);rmSync(temp,{recursive:true,force:true});}
  const out=resolve(process.argv[2]||'docs/fullstack/evidence/personal-export-runtime.json');writeFileSync(out,JSON.stringify(result,null,2)+'\n');process.stdout.write(readFileSync(out));

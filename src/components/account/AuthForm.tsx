@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, safeNext } from '@/lib/api-client';
@@ -24,7 +25,7 @@ export default function AuthForm({next,onSuccess}:{next?:string;onSuccess?:()=>v
       <button type="button" role="tab" aria-selected={mode==='login'} disabled={busy} onClick={()=>{setMode('login');setError('');}}>로그인</button>
       <button type="button" role="tab" aria-selected={mode==='register'} disabled={busy} onClick={()=>{setMode('register');setError('');}}>회원가입</button>
     </div>
-    <form onSubmit={submit}>
+    <form method="post" onSubmit={submit}>
       {mode==='register'&&<label>닉네임<input className="field" name="nickname" autoComplete="nickname" minLength={1} maxLength={30} required disabled={busy}/></label>}
       <label>이메일<input className="field" name="email" type="email" autoComplete="username" maxLength={254} required disabled={busy}/></label>
       <label>비밀번호<input className="field" name="password" type="password" autoComplete={mode==='login'?'current-password':'new-password'} minLength={mode==='register'?10:1} maxLength={128} required disabled={busy}/></label>
@@ -32,5 +33,6 @@ export default function AuthForm({next,onSuccess}:{next?:string;onSuccess?:()=>v
       {error&&<p role="alert" className="account-error">{error}</p>}
       <button className="button" type="submit" disabled={busy}>{busy?'처리 중…':mode==='login'?'로그인':'계정 만들기'}</button>
     </form>
+    <Link href="/auth/forgot-password">비밀번호를 잊으셨나요?</Link>
   </div>;
 }

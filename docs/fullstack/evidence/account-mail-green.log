@@ -1,0 +1,28 @@
+(node:81958) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ reset request is generic; worker sends opaque fragment token and DB stores no raw token/payload (160.331042ms)
+✔ verification is bound to the account and purpose; GET does not consume; reset token cannot verify (72.732542ms)
+✔ expired links fail, successful reset invalidates all links and concurrent use has one winner (86.27325ms)
+✔ password change/email change/suspension/deletion invalidate outstanding mail and pending delivery (116.92075ms)
+✔ transient send failure retries identical payload and idempotency key; permanent failure is visible to owner (52.70575ms)
+✔ missing configuration never reports sent, wrong encryption key fails without outbound request (47.451209ms)
+✔ recovered lease uses the same delivery; late prior worker cannot overwrite cancellation (48.816083ms)
+✔ reset revokes all sessions and personal export requests (81.102542ms)
+✔ HTTP origin and generic recovery responses; verification status never exposes token or ciphertext (54.663791ms)
+✔ resends retain earlier link until success and successful reset revokes refresh/access tokens (83.553ms)
+✔ expired/retry-exhausted mail never sends, repeated request within a minute uses one outbox item (47.552208ms)
+✔ queued links are not sent to an obsolete application origin after configuration changes (46.80625ms)
+✔ personal archive includes safe delivery metadata but never authentication token or encrypted message (88.112042ms)
+✔ Resend adapter sends exact immutable payload and stable idempotency key over actual HTTP (52.291ms)
+✔ rate limit/concurrent conflict retry, permanent mismatch fails, redirect never forwards credentials (9.772792ms)
+✔ malformed and oversized provider success cannot be reported as acceptance (4.697125ms)
+✔ configuration rejects missing encryption, non-loopback overrides and insecure external app URL (1.7645ms)
+✔ account forms containing password controls never fall back to credentials in a GET query (35.171583ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1538.7065

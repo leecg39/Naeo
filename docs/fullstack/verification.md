@@ -512,3 +512,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## P9.2 개인정보 내보내기 — 2026-10-15
 
 개인 데이터 내보내기: 전용 18개, 전체 357개(6+351), lint/typecheck/build 통과. 실제 Next 서버와 worker로 202 요청부터 TAR 다운로드·41개 데이터셋/사진 해시 대조·타 계정 차단·로그아웃 후 재시작 삭제까지 확인했다. `scripts/qa/personal-export.ts`로 격리 재현할 수 있다. [상세 계약](personal-data-export.md), [검증 색인](evidence/personal-export-verification.json), [실제 HTTP](evidence/personal-export-runtime.json). 새 UI의 Ego 클릭/hydration은 미검증이며 전체 목표 완료를 뜻하지 않는다.
+
+## 2026-10-15 — 계정 메일 (스키마 30)
+
+전용 18개, 전체 375개(6+369), lint/typecheck/build 통과. 실제 프로덕션 Next/worker/loopback HTTP 수신기로 인증·재설정·동일 요청 재시도·세션 철회를 검증했다. 비밀번호 폼 GET fallback 및 origin 변경 후 잘못된 링크 전송을 재현 후 수정했다. 내보내기 42개 데이터셋과 첨부의 실제 TAR 회귀도 통과했다. 원본 메일 공급자를 복원한 것은 아니며 외부 실제 수신·Ego 화면 검증은 미완료다. 계약·로그·해시는 `account-mail.md`, `evidence/account-mail-verification.json` 참조.

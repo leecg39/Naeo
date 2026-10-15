@@ -1,0 +1,112 @@
+{
+  "target": "https://www.naeo.kr/",
+  "source_url": "https://www.naeo.kr/_next/static/immutable/chunks/43rxbavuhyztr.js",
+  "sha256": "97558b333c51595257ee79ff833832c721286b939bb394aa80da11815a5609db",
+  "bytes": 19668,
+  "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+  "bundle_sha256": "b1f207d03fada871e3a06490834230ea136f90adb7f04150f383f04df8ede13e",
+  "statistics": {
+    "findings": 2,
+    "invalid_utf8_files": 0,
+    "modules": 0,
+    "nested_asar_containers": 0,
+    "parse_failures": 0,
+    "parsed_javascript_files": 1,
+    "relevant_files": 1,
+    "text_bytes_read": 19668,
+    "truncated_scopes": 0,
+    "visited_ast_nodes": 5169
+  },
+  "graph_coverage": {
+    "limits": [],
+    "omitted_count": 0,
+    "status": "complete",
+    "truncated": false
+  },
+  "semantic_status": "unknown",
+  "semantic_unknowns": 421,
+  "limitations": [
+    "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+    "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+    "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+    "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+    "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+  ],
+  "findings": [
+    {
+      "id": "AUTH-01",
+      "claim": "이메일/비밀번호로 SDK 로그인, 세션이 있으면 콜백 또는 next/dashboard로 이동",
+      "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+      "evidence_type": "static-source-interpretation",
+      "source": "input/43rxbavuhyztr.js",
+      "start_byte": 11712,
+      "end_byte": 12416,
+      "excerpt": "e]),r.useEffect(()=>{y?$(!0):\"pg-test\"===new URLSearchParams(window.location.search).get(\"mode\")&&$(!0)},[y]);let W=async()=>{if(!k||!R)return void w(\"이메일과 비밀번호를 입력하세요.\");T(!0),w(\"\");try{let{data:e,error:t}=await A.auth.signInWithPassword({email:k,password:R});if(t)throw t;e.session&&((0,h.trackEmailLogin)(),x(),m?m(e.session):window.location.href=v||\"/dashboard\")}catch(e){w(e.message||\"로그인 중 오류가 발생했습니다.\")}finally{T(!1)}},D=async(e,t=!1)=>{try{let r=v?`?next=${encodeURIComponent(v)}`:\"\";if(\"naver\"===e){window.location.href=(0,b.naverLoginHref)(v,t||!!j);return}let o=`${window.location.origin}/auth/google${r}`,l=(0,g.resolveGoogleLoginAction)("
+    },
+    {
+      "id": "AUTH-02",
+      "claim": "네이버 로그인 URL에 next와 선택적 reprompt=1 구성",
+      "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+      "evidence_type": "static-source-interpretation",
+      "source": "input/43rxbavuhyztr.js",
+      "start_byte": 18111,
+      "end_byte": 18367,
+      "excerpt": "\"naverLoginHref\",0,function(e,t){let r=new URLSearchParams;e&&r.set(\"next\",e),t&&r.set(\"reprompt\",\"1\");let o=r.toString();return`/api/auth/naver/login${o?`?${o}`:\"\"}`}])},118917,e=>{\"use strict\";let t=[{id:\"threads\",label:\"스레드\",test:/Threads|Barcelon"
+    },
+    {
+      "id": "AUTH-03",
+      "claim": "Google OAuth callback에 next 및 p=google 전달",
+      "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+      "evidence_type": "static-source-interpretation",
+      "source": "input/43rxbavuhyztr.js",
+      "start_byte": 12553,
+      "end_byte": 12873,
+      "excerpt": "Label,url:o});let{error:a}=await A.auth.signInWithOAuth({provider:e,options:{redirectTo:`${window.location.origin}/auth/callback${r}${r?\"&\":\"?\"}p=google`}});if(a)throw a}catch(e){w(e.message||\"소셜 로그인 중 오류가 발생했습니다.\")}};return(0,t.jsx)(l.default,{open:e,onClose:x,maxWidth:\"xs\",fullWidth:!0,\""
+    },
+    {
+      "id": "AUTH-04",
+      "claim": "Android 인앱은 Chrome intent, iOS Instagram은 proceed, 다른 탐지 앱은 안내",
+      "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+      "evidence_type": "static-source-interpretation",
+      "source": "input/43rxbavuhyztr.js",
+      "start_byte": 18758,
+      "end_byte": 19668,
+      "excerpt": "r(e){if(!e)return null;for(let r of t)if(r.test.test(e))return{id:r.id,label:r.label};return null}function o(e){return e?/Android/i.test(e)?\"android\":/iPhone|iPad|iPod/i.test(e)?\"ios\":\"other\":\"other\"}let l=[\"instagram\"];function a(e,t,l){let a=r(e);if(!a)return{type:\"proceed\"};let n=o(e);if(\"android\"===n){let r=function(e,t){if(\"android\"!==o(e))return null;let r=t.replace(/^https?:\\/\\//i,\"\"),l=encodeURIComponent(t);return`intent://${r}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${l};end`}(e,t);return r?{type:\"redirect-chrome\",url:r}:{type:\"proceed\"}}return\"ios\"===n?l.includes(a.id)?{type:\"proceed\"}:{type:\"guide\",appLabel:a.label}:{type:\"proceed\"}}e.s([\"detectInAppBrowser\",0,r,\"detectMobileOS\",0,o,\"resolveGoogleLoginAction\",0,function(e,t){return a(e,t,l)},\"resolveInAppPaymentAction\",0,function(e,t){return a(e,t,[])}])}]);\n\n//# debugId=ab05cdaa-aae1-4dc2-0baf-0bf7696448ab"
+    },
+    {
+      "id": "AUTH-05",
+      "claim": "mode=pg-test 또는 입력 prop에 따라 이메일 로그인 상태 활성화; 서버 인증 우회 근거 아님",
+      "evidence_id": "ev_f568454195d04e9137de94b3091bfac1f56ddc57a7b59319039e6ed951a47975",
+      "evidence_type": "static-source-interpretation",
+      "source": "input/43rxbavuhyztr.js",
+      "start_byte": 11691,
+      "end_byte": 11949,
+      "excerpt": "\"\"),O(null),F(!1))},[e]),r.useEffect(()=>{y?$(!0):\"pg-test\"===new URLSearchParams(window.location.search).get(\"mode\")&&$(!0)},[y]);let W=async()=>{if(!k||!R)return void w(\"이메일과 비밀번호를 입력하세요.\");T(!0),w(\"\");try{let{data:e,error:t}=aw"
+    }
+  ],
+  "bounded_search": {
+    "resetPasswordForEmail": {
+      "matched_files": [
+        {
+          "file": "0miej230mkkvi.js",
+          "sha256": "9961f9ca44e6c1dbe0ad97a7314fcc39bf136fe98a8bdfd086f96aca113ce170"
+        }
+      ],
+      "searched_files": 69,
+      "scope": "/Users/user01/Desktop/NAEO/reverse-engineering/rea-2026-10-15/sources/assets/_next/static/immutable/chunks",
+      "conclusion": "SDK 정의의 존재만 확인. 앱 측 호출 또는 실행을 증명하지 않음."
+    },
+    "verifyOtp": {
+      "matched_files": [
+        {
+          "file": "0miej230mkkvi.js",
+          "sha256": "9961f9ca44e6c1dbe0ad97a7314fcc39bf136fe98a8bdfd086f96aca113ce170"
+        }
+      ],
+      "searched_files": 69,
+      "scope": "/Users/user01/Desktop/NAEO/reverse-engineering/rea-2026-10-15/sources/assets/_next/static/immutable/chunks",
+      "conclusion": "SDK 정의의 존재만 확인. 앱 측 호출 또는 실행을 증명하지 않음."
+    }
+  },
+  "verified": true
+}

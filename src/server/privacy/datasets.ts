@@ -1,6 +1,7 @@
 /** Explicit export contract. Never SELECT *: new private columns do not silently enter archives. */
 const owned=(name:string,table:string,columns:string,owner='owner_id')=>({name,sql:`SELECT ${columns} FROM ${table} WHERE ${owner}=? ORDER BY rowid`});
 export const datasets=[
+ owned('account_mail','account_mail','purpose,state,attempt,error_code,accepted_at,created_at,updated_at,expires_at','user_id'),
  owned('account','users','id,email,role,status,terms_accepted_at,email_verified_at,created_at,updated_at,version','id'),
  owned('profile','profiles','nickname,avatar_url,ranking_public,version,updated_at','user_id'),
  owned('contact','contact_details','name,email,phone,phone_verified_at,version,updated_at','user_id'),

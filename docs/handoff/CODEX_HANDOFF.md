@@ -116,3 +116,11 @@ Ego 작업 공간 **15 / p1**은 일시 중지 시점에 열린 상태로 보존
 - 폴더 EACCES가 전체 worker를 죽이던 문제와 앞 100개 삭제 실패가 뒤의 정상 행을 굶기던 문제는 각각 RED 후 수정했다. 자세한 계약/근거: `docs/fullstack/personal-data-export.md`.
 - 격리 QA 서버/worker/임시 데이터는 정리했다. 사용자 DB나 기존 서버를 수정하지 않았다.
 - goal은 active. P9.2는 새 UI의 Ego 클릭/hydration 검증 때문에 미완료 유지. 기존 공간 부재와 새 공간 질문 답변 대기는 그대로다. 독립 구현 가능한 다음 과제: 이메일 재설정/이메일 확인 공급자 어댑터와 상태·화면·실제 로컬 왕복 검증. SMS/AI 인용·이미지 등 나머지 외부 기능과 전체 원본 시각 비교 범위를 축소하지 않는다.
+
+### P1.6 계정 메일 이후 — 최신
+
+- 스키마 30, Resend 어댑터·암호화 outbox·일회용 토큰·인증 및 재설정 화면 구현. 원본 메일 공급자/복구 정책은 REA로 확인되지 않은 자체 설계다.
+- 전용 18개/전체 375개, lint/typecheck/build 및 프로덕션 Next/worker/로컬 HTTP 왕복 통과. 개인정보 내보내기 42개 데이터셋·비밀 필드 제외 회귀 확인. 로그/해시: account-mail-verification.json.
+- 외부 수신함 및 Ego 클릭/hydration 미검증으로 P1.6 체크는 보류. 문의 답변·스캔 알림에는 아직 메일 어댑터가 연결되지 않았다.
+- REA 인증 추가 근거: docs/fullstack/rea-authentication.md와 evidence/rea-authentication-2026-10-15.json. 전체 원본 Evidence는 workspace reverse-engineering/rea-auth-2026-10-15에 보존.
+- 다음 독립 구현은 문의 답변의 명시적 메일 발송/상태·재시도 또는 SMS/AI 인용·이미지 공급자. 전체 79 URL+4패턴·실제 외부 연동·시각 비교 범위와 active 목표를 유지한다.

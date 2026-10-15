@@ -26,7 +26,7 @@ export default function ConnectionsSection({initial,linked,error:initialError}:{
     :state.configured[p]?<a className="button secondary" href={`/api/auth/oauth/${p}/start?intent=link&next=%2Fdashboard%2Fsettings`}>연결하기<span className="sr-only"> {NAME[p]}</span></a>
     :<button className="button secondary" type="button" disabled>미설정</button>}
   </div>;})}
-  {!state.hasPassword&&<form className="account-form" onSubmit={setInitial} aria-label="비밀번호 설정">
+  {!state.hasPassword&&<form method="post" className="account-form" onSubmit={setInitial} aria-label="비밀번호 설정">
    <p className="muted">간편 로그인으로 가입해 비밀번호가 없어요. 연결 해제·탈퇴에는 비밀번호가 필요해요. 보안을 위해 로그인한 지 10분 안에만 설정할 수 있어요.</p>
    <label>새 비밀번호(10자 이상)<input className="field" type="password" autoComplete="new-password" minLength={10} maxLength={128} value={password} onChange={e=>setPassword(e.target.value)} required disabled={busy}/></label>
    <div className="account-actions"><button className="button" type="submit" disabled={busy}>비밀번호 설정</button></div>

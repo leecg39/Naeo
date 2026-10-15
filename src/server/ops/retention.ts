@@ -1,3 +1,4 @@
+import {cleanupMail} from '../mail/worker';
 import type {Database} from '../database';
 import {kstDay,RAW_RETENTION_DAYS,rollupAnalytics} from './analytics';
 
@@ -12,6 +13,7 @@ export function runRetention(db:Database,now=Date.now()){
  rollupAnalytics(db,now);
  const del=(sql:string,...p:(string|number)[])=>Number(db.prepare(sql).run(...p).changes);
  return{
+  accountMail:cleanupMail(db,now),
   pageViews:del('DELETE FROM page_views WHERE created_at<?',now-RAW_RETENTION_DAYS*DAY),
   salts:del('DELETE FROM analytics_salts WHERE day<?',kstDay(now-DAY)),
   auditLogs:del('DELETE FROM audit_logs WHERE created_at<?',now-365*DAY),
