@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-15T06:57:20.501988+00:00",
+  "baseCommit": "b171f2527def3effd3f0f51970d53927d45edce5",
+  "schema": 28,
+  "tests": 324,
+  "adversarialTests": 20,
+  "httpChecks": 20,
+  "logs": {
+    "adversarial-red": {
+      "path": "payment-adversarial-red.txt",
+      "sha256": "d6e21e2c95e172a964b4b377e567fd220143f39c66a2cb3815d573c73d128f1e",
+      "exitCode": 1
+    },
+    "adversarial-green": {
+      "path": "payment-adversarial-green.txt",
+      "sha256": "fbe16b24b340d909b7a0b60579947925a1c3ca57293093b4c732d6a57da1d9d2",
+      "exitCode": 0
+    },
+    "tests": {
+      "path": "payment-tests.txt",
+      "sha256": "3c30d9aa236805b2927bb158b978c43c999ede7a4137a905a0665108d3089624",
+      "exitCode": 0
+    },
+    "typecheck": {
+      "path": "payment-typecheck.txt",
+      "sha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "exitCode": 0
+    },
+    "lint": {
+      "path": "payment-lint.txt",
+      "sha256": "1083f0232a15f1176a91df5a4c4ed2ce203ac9187fbb0d280bc5a890ba8eeb42",
+      "exitCode": 0
+    },
+    "build": {
+      "path": "payment-build.txt",
+      "sha256": "aa6e8df7e0ae967f48563d5c2f1d563f2fd91c60fe0c28dbececd62ea9b744bd",
+      "exitCode": 0
+    },
+    "recovery-http": {
+      "path": "payment-recovery-http.txt",
+      "sha256": "7167108fa7156004f171b9c7f88ac72e62e6be9c2d77c6d2766f73a3f56eaa7d",
+      "exitCode": 0
+    }
+  },
+  "sourceSha256": {
+    "src/components/account/BillingSection.tsx": "15415cae9ab44d932bd8c4c0950cacd5f1a12e87f78db1a57e72cd2e0bc55748",
+    "src/components/admin/PaymentsRefunds.tsx": "7756e6abb6907ce89ac2bdb007d7b3645ca0d654093c7714d5d105f68b1c54f0",
+    "src/server/billing/billing-api.ts": "4755362326a55f2865584964dd9af7ac47a4e39844118ad4e6eae604fc245a0a",
+    "src/server/billing/payment-complete-page.ts": "3e7232616f1a4e345e4e705e593733c781c68ee28a0c6ed6467ec41bcc6eb76b",
+    "src/server/billing/payments.ts": "354f22374203a788d1e3a17ae10d4e9fa7b64dfeb87595cb5e9d8d12ffcef9a3",
+    "src/server/billing/provider.ts": "f4410c837e94ebfd98285a2fdb9825e5460b5ad0fe35f88e4f178b5fcd8b52f8",
+    "src/server/billing/refunds.ts": "38f8805d05cff5e4bf98cdb6b290af33f3c1a8499b53dacaa7c9a9c6ddb371e9",
+    "src/server/billing/validation.ts": "44da8892db7268312ad1f22f3054f1c70a5bc699b86701c2941554d43508a0d5",
+    "src/server/migrations.ts": "0174c500a4f9ae35098ab3adfedd1d930fcd3126cba971739d38d76faeae9214",
+    "tests/server/engagement.test.ts": "f3d2106b35c42361055d4239120a2df488129047231704560aa17a5999e5a73e",
+    "scripts/verify-payment-recovery.mjs": "80d19922ea9aa493ff0b1506ae47635dc1528790c68ba4dfa09280aef7f02e9d",
+    "src/server/billing/payment-contract.ts": "4e5b9f34c3f3b27e333c12309d4f43796ff746c96d590dbfea6651c978564229",
+    "src/server/billing/recovery-schema.ts": "730f31fcf270396f38bf0625c6a8469d22b8f9e65b265a6c5f1dfe88a9657eb9",
+    "tests/server/adversarial-payments.test.ts": "56973e7028eb268737aa8e393b2abe9c6c6a6557cddb83701ef743cfcedf2e97"
+  },
+  "limits": [
+    "Loopback Toss-shaped provider only; real sandbox not verified.",
+    "HTTP and SSR tested; browser hydration and visual review pending.",
+    "Full goal remains incomplete; see TASKS.md."
+  ]
+}

@@ -1,0 +1,30 @@
+(node:61199) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ confirmation rejects a different payment key and preserves the mismatch for reconciliation (93.406833ms)
+✔ an in-flight confirmation cannot be replaced, abandoned or locally expired (84.500791ms)
+✔ account deletion during confirmation preserves the financial result without recreating user data (84.751459ms)
+✔ webhooks cannot apply a snapshot belonging to a different payment key (83.989ms)
+✔ refund rejects identity provider response without changing accounting (84.698292ms)
+✔ refund rejects insufficient provider response without changing accounting (83.962209ms)
+✔ refund rejects negative provider response without changing accounting (86.073334ms)
+✔ an unexpected refund transport error is retryable with the original idempotency key (85.119333ms)
+✔ a crashed refund can resume after its processing grace without opening a new refund (84.972709ms)
+✔ an unconfigured admin refund does not leave an open request behind (87.2185ms)
+✔ an uncertain provider confirmation can be retried after the local order timeout (86.802084ms)
+✔ uncertain confirmations are visible, reject another key and reconcile without a second charge (86.664625ms)
+✔ a cancellation webhook wins over an older confirmation response and does not leave tokens (86.402834ms)
+✔ uncertain confirmations older than 15 days only query, never send another confirmation (84.487917ms)
+✔ refund recovery keeps the baseline after a webhook and never re-cancels after 15 days (85.784209ms)
+✔ late failed refund response cannot overwrite a newer recovery that has completed (86.016958ms)
+✔ failed refunds cannot be rejected to bypass the same-operation retry rule (86.769416ms)
+✔ refund completion remains recorded if the deciding administrator is deleted while awaiting the provider (86.560583ms)
+✔ refund retries beyond 15 days cannot cancel again when a lookup has not confirmed the refund (86.096458ms)
+✔ schema 27 upgrade preserves legacy financial rows and does not invent a missing refund baseline (115.333083ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2028.050708

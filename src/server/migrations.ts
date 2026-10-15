@@ -1,4 +1,5 @@
 import {engagementMigration} from './engagement/schema';
+import {billingRecoveryMigration} from './billing/recovery-schema';
 export const migrations = [{
   version: 1,
   name: 'accounts_profiles_blogs',
@@ -1023,5 +1024,5 @@ export const migrations = [{
       INSERT INTO media_deletions(storage_key) VALUES(OLD.storage_key) ON CONFLICT DO NOTHING;
     END;
   `,
-}, engagementMigration];
+}, engagementMigration,billingRecoveryMigration];
 

@@ -13,7 +13,7 @@ export interface PaymentProvider{
  cancel(paymentKey:string,input:{reason:string;amount:number},idempotencyKey:string):Promise<ProviderPayment>;
 }
 
-const paymentShape=z.object({paymentKey:z.string(),orderId:z.string(),status:z.string(),totalAmount:z.number(),balanceAmount:z.number(),method:z.string().nullable().optional(),approvedAt:z.string().nullable().optional()}).passthrough();
+const paymentShape=z.object({paymentKey:z.string().min(1).max(200),orderId:z.string().min(6).max(64),status:z.string().min(1).max(40),totalAmount:z.number().int().nonnegative().safe(),balanceAmount:z.number().int().nonnegative().safe(),method:z.string().nullable().optional(),approvedAt:z.string().nullable().optional()}).passthrough().refine(p=>p.balanceAmount<=p.totalAmount);
 const errorShape=z.object({code:z.string().optional(),message:z.string().optional()}).passthrough();
 const TIMEOUT=15_000;
 

@@ -1,7 +1,7 @@
 import {createHash,randomBytes,randomUUID} from 'node:crypto';
 import {z} from 'zod';
 import {transaction,type Database} from '../database';
-import {requireAdmin,userById} from '../auth';
+import {requireAdmin,requireTerms,userById} from '../auth';
 import {audit} from '../audit';
 import {AppError} from '../errors';
 import {activePlan,planById} from './plans';
@@ -9,15 +9,17 @@ import {reserveDiscount,settleRedemption} from './coupons';
 import {activatePaidPeriod,currentSubscription,DAY,endPaidPeriod} from './subscriptions';
 import {ProviderError,type PaymentProvider,type ProviderPayment} from './provider';
 import {checkoutInput,confirmInput,paymentQueryInput} from './validation';
+import {IDEMPOTENCY_WINDOW,samePayment,canceledSnapshot,validAmounts} from './payment-contract';
 
 export type PaymentStatus='ready'|'paid'|'failed'|'expired'|'canceled'|'partial_canceled';
 export type Payment={id:string;userId:string|null;orderId:string;orderName:string;planId:string;listAmount:number;amount:number;couponRedemptionId:string|null;provider:'toss'|'none';status:PaymentStatus;
- paymentKey:string|null;method:string;canceledAmount:number;failureCode:string;failureMessage:string;subscriptionId:string|null;approvedAt:number|null;expiresAt:number;version:number;createdAt:number};
-const SELECT=`SELECT id,user_id AS userId,order_id AS orderId,order_name AS orderName,plan_id AS planId,list_amount AS listAmount,amount,coupon_redemption_id AS couponRedemptionId,provider,status,payment_key AS paymentKey,method,
+ paymentKey:string|null;confirmStartedAt:number|null;method:string;canceledAmount:number;failureCode:string;failureMessage:string;subscriptionId:string|null;approvedAt:number|null;expiresAt:number;version:number;createdAt:number};
+const SELECT=`SELECT id,user_id AS userId,order_id AS orderId,order_name AS orderName,plan_id AS planId,list_amount AS listAmount,amount,coupon_redemption_id AS couponRedemptionId,provider,status,payment_key AS paymentKey,confirm_started_at AS confirmStartedAt,method,
  canceled_amount AS canceledAmount,failure_code AS failureCode,failure_message AS failureMessage,subscription_id AS subscriptionId,approved_at AS approvedAt,expires_at AS expiresAt,version,created_at AS createdAt FROM payments`;
 export const ORDER_TTL=30*60_000;
 export const RENEW_WINDOW=3*DAY;
 const orderIdOf=()=>randomBytes(24).toString('base64url');
+function activeMember(db:Database,id:string){const user=userById(db,id);requireTerms(user);if(user.status!=='active')throw new AppError(401,'UNAUTHENTICATED','다시 로그인해주세요.');}
 
 export function paymentByOrder(db:Database,orderId:string):Payment|null{
  const p=db.prepare(`${SELECT} WHERE order_id=?`).get(orderId) as Payment|undefined;
@@ -34,7 +36,7 @@ export function paymentForOwner(db:Database,userId:string,orderId:string):Paymen
  if(!p||p.userId!==userId)throw new AppError(404,'NOT_FOUND','결제를 찾을 수 없습니다.');
  return p;
 }
-export const myPayments=(db:Database,userId:string):Payment[]=>(db.prepare(`${SELECT} WHERE user_id=? AND status<>'ready' ORDER BY created_at DESC LIMIT 50`).all(userId) as Payment[]).map(p=>({...p}));
+export const myPayments=(db:Database,userId:string):Payment[]=>(db.prepare(`${SELECT} WHERE user_id=? AND (status<>'ready' OR confirm_started_at IS NOT NULL) ORDER BY created_at DESC LIMIT 50`).all(userId) as Payment[]).map(p=>({...p}));
 export function listAdminPayments(db:Database,actorId:string,query:unknown){
  requireAdmin(userById(db,actorId));
  const {page,pageSize,q,status}=paymentQueryInput.parse(query);
@@ -46,17 +48,20 @@ export function listAdminPayments(db:Database,actorId:string,query:unknown){
  return{data:ids.map(r=>({...paymentById(db,r.id),email:r.email})),pagination:{page,pageSize,total}};
 }
 
-function markFailed(db:Database,p:Payment,status:'failed'|'expired',code:string,message:string,now:number){
+function markFailed(db:Database,p:Payment,status:'failed'|'expired',code:string,message:string,now:number,providerRejected=false){
+ if(p.confirmStartedAt!==null&&!providerRejected)return;
  const r=db.prepare("UPDATE payments SET status=?,failure_code=?,failure_message=?,version=version+1,updated_at=? WHERE id=? AND status='ready'").run(status,code.slice(0,60),message.slice(0,300),now,p.id);
  if(r.changes)settleRedemption(db,p.couponRedemptionId,'released',p.id,now);
 }
 /** 승인 확정(트랜잭션 안): ready → paid 한 번만, 쿠폰 사용 처리, 구독 기간 시작·갱신. */
 function finalizePaid(db:Database,p:Payment,result:Pick<ProviderPayment,'paymentKey'|'method'>|null,now:number):boolean{
- const r=db.prepare("UPDATE payments SET status='paid',payment_key=?,method=?,approved_at=?,version=version+1,updated_at=? WHERE id=? AND status='ready'").run(result?.paymentKey??null,result?.method??'',now,now,p.id);
+ const r=db.prepare("UPDATE payments SET status='paid',payment_key=?,method=?,approved_at=?,failure_code='',failure_message='',version=version+1,updated_at=? WHERE id=? AND status='ready'").run(result?.paymentKey??null,result?.method??'',now,now,p.id);
  if(!r.changes)return false;
  settleRedemption(db,p.couponRedemptionId,'used',p.id,now);
- const sub=activatePaidPeriod(db,p.userId!,planById(db,p.planId),p.id,now);
- db.prepare('UPDATE payments SET subscription_id=? WHERE id=?').run(sub.id,p.id);
+ if(p.userId){
+  const sub=activatePaidPeriod(db,p.userId,planById(db,p.planId),p.id,now);
+  db.prepare('UPDATE payments SET subscription_id=? WHERE id=?').run(sub.id,p.id);
+ }
  audit(db,p.userId,'billing.payment.paid','payment',p.id,{amount:p.amount,provider:p.provider});
  return true;
 }
@@ -77,6 +82,8 @@ function assertEligible(db:Database,userId:string,planId:string,now:number){
 export function createCheckout(db:Database,provider:PaymentProvider|null,userId:string,input:unknown,now=Date.now()){
  const v=checkoutInput.parse(input);
  return transaction(db,()=>{
+  activeMember(db,userId);
+  if(db.prepare("SELECT 1 FROM payments WHERE user_id=? AND status='ready' AND confirm_started_at IS NOT NULL").get(userId))throw new AppError(409,'PAYMENT_PROCESSING','확인 중인 결제가 있습니다. 결제 내역에서 먼저 확인해주세요.');
   const plan=activePlan(db,v.planCode);
   if(plan.price<=0)throw new AppError(400,'FREE_PLAN','무료 요금제는 결제가 필요 없습니다.');
   assertEligible(db,userId,plan.id,now);
@@ -94,43 +101,73 @@ export function createCheckout(db:Database,provider:PaymentProvider|null,userId:
  });
 }
 
-/** 결제창 성공 뒤 승인: 주인·상태·금액(서버 기록)을 확인하고 멱등 키로 공급자 승인. 같은 주문의 중복 승인은 같은 결과. */
+/** Persist the identity before awaiting the provider. Uncertain results stay ready for reconciliation. */
 export async function confirmPayment(db:Database,provider:PaymentProvider|null,userId:string,input:unknown,now=Date.now()):Promise<Payment>{
  const v=confirmInput.parse(input);
  type Check={done:Payment}|{error:AppError}|{pending:Payment};
  const check=transaction(db,():Check=>{
-  const p=paymentByOrder(db,v.orderId);
-  if(!p||p.userId!==userId)throw new AppError(404,'NOT_FOUND','결제를 찾을 수 없습니다.');
+  const p=paymentForOwner(db,userId,v.orderId);
+  activeMember(db,userId);
   if(p.status==='paid'){if(p.paymentKey===v.paymentKey)return{done:p};throw new AppError(409,'ORDER_ALREADY_PAID','이미 결제가 끝난 주문입니다.');}
   if(p.status!=='ready')throw new AppError(409,'PAYMENT_NOT_PENDING','진행 중인 결제가 아닙니다.');
+  if(p.paymentKey&&p.paymentKey!==v.paymentKey)throw new AppError(409,'PAYMENT_KEY_CONFLICT','이미 확인 중인 거래와 다른 결제입니다.');
   if(v.amount!==p.amount){markFailed(db,p,'failed','AMOUNT_MISMATCH','결제 금액이 주문과 다릅니다.',now);return{error:new AppError(400,'AMOUNT_MISMATCH','결제 금액이 주문과 다릅니다.')};}
-  if(now>=p.expiresAt){markFailed(db,p,'expired','ORDER_EXPIRED','주문 시간이 지났습니다.',now);return{error:new AppError(409,'PAYMENT_EXPIRED','주문 시간이 지났습니다. 다시 결제해주세요.')};}
-  return{pending:p};
+  if(p.confirmStartedAt===null&&now>=p.expiresAt){markFailed(db,p,'expired','ORDER_EXPIRED','주문 시간이 지났습니다.',now);return{error:new AppError(409,'PAYMENT_EXPIRED','주문 시간이 지났습니다. 다시 결제해주세요.')};}
+  if(!provider)throw new AppError(503,'PAYMENT_PROVIDER_NOT_CONFIGURED','결제 기능이 아직 설정되지 않았습니다(미설정).');
+  if(db.prepare('SELECT 1 FROM payments WHERE payment_key=? AND id<>?').get(v.paymentKey,p.id))throw new AppError(409,'PAYMENT_KEY_CONFLICT','다른 주문에 연결된 거래입니다.');
+  db.prepare('UPDATE payments SET payment_key=?,confirm_started_at=coalesce(confirm_started_at,?),updated_at=? WHERE id=?').run(v.paymentKey,now,now,p.id);
+  return{pending:paymentById(db,p.id)};
  });
  if('done' in check)return check.done;
  if('error' in check)throw check.error;
- if(!provider)throw new AppError(503,'PAYMENT_PROVIDER_NOT_CONFIGURED','결제 기능이 아직 설정되지 않았습니다(미설정).');
  const p=check.pending;
+ if(now-p.confirmStartedAt!>=IDEMPOTENCY_WINDOW)return reconcilePayment(db,provider,p.id,now);
  let result:ProviderPayment;
- try{result=await provider.confirm({paymentKey:v.paymentKey,orderId:p.orderId,amount:p.amount},`confirm-${p.orderId}`);}
+ try{result=await provider!.confirm({paymentKey:v.paymentKey,orderId:p.orderId,amount:p.amount},`confirm-${p.orderId}`);}
  catch(e){
-  if(!(e instanceof ProviderError))throw e;
-  if(e.status>=500)throw new AppError(503,e.code,e.message);
-  transaction(db,()=>markFailed(db,p,'failed',e.code,e.message,Date.now()));
-  throw new AppError(402,'PAYMENT_FAILED',e.message);
- }
- return transaction(db,()=>{
   const current=paymentById(db,p.id);
-  if(current.status==='paid')return current;
-  if(result.orderId!==p.orderId||result.totalAmount!==p.amount||result.status!=='DONE'){markFailed(db,current,'failed','PROVIDER_MISMATCH','결제사 승인 내용이 주문과 다릅니다.',now);throw new AppError(502,'PROVIDER_MISMATCH','결제사 승인 내용이 주문과 다릅니다. 고객센터로 문의해주세요.');}
-  finalizePaid(db,current,result,now);
-  return paymentById(db,p.id);
- });
+  if(current.status!=='ready')return current;
+  // An explicit card decline is terminal; transport, malformed responses and in-progress errors are uncertain.
+  if(e instanceof ProviderError&&e.status<500&&e.code==='REJECT_CARD_COMPANY'){
+   transaction(db,()=>markFailed(db,current,'failed',e.code,e.message,now,true));
+   throw new AppError(402,'PAYMENT_FAILED',e.message);
+  }
+  paymentProblem(db,p.id,e instanceof ProviderError?e.code:'PROVIDER_UNREACHABLE','결제 결과를 확인하지 못했습니다. 같은 주문으로 다시 확인해주세요.',now);
+  throw new AppError(503,e instanceof ProviderError?e.code:'PROVIDER_UNREACHABLE','결제 결과를 확인하지 못했습니다. 결제 내역에서 다시 확인해주세요.');
+ }
+ if(!samePayment(result,{...p,paymentKey:v.paymentKey})||result.status!=='DONE'||result.balanceAmount!==p.amount){
+  paymentProblem(db,p.id,'PROVIDER_MISMATCH','결제사 승인 내용이 주문과 다릅니다. 재확인이 필요합니다.',now);
+  throw new AppError(502,'PROVIDER_MISMATCH','결제사 승인 내용이 주문과 다릅니다. 고객센터로 문의해주세요.');
+ }
+ return transaction(db,()=>{const current=paymentById(db,p.id);if(current.status==='ready')finalizePaid(db,current,result,now);return paymentById(db,p.id);});
+}
+function paymentProblem(db:Database,id:string,code:string,message:string,now:number){
+ transaction(db,()=>db.prepare("UPDATE payments SET failure_code=?,failure_message=?,updated_at=? WHERE id=? AND status='ready'").run(code.slice(0,60),message.slice(0,300),now,id));
+}
+/** Read-only provider lookup for interrupted confirmations, also available after account deletion. */
+export async function reconcilePayment(db:Database,provider:PaymentProvider|null,paymentId:string,now=Date.now()):Promise<Payment>{
+ const p=paymentById(db,paymentId);
+ if(!provider)throw new AppError(503,'PAYMENT_PROVIDER_NOT_CONFIGURED','결제 기능이 아직 설정되지 않았습니다.');
+ if(!p.paymentKey)throw new AppError(409,'PAYMENT_NOT_STARTED','확인할 결제 거래가 없습니다.');
+ let real:ProviderPayment;
+ try{real=await provider.get(p.paymentKey);}catch{throw new AppError(503,'PROVIDER_UNREACHABLE','결제사 조회에 실패했습니다. 잠시 후 다시 확인해주세요.');}
+ if(!samePayment(real,p))throw new AppError(502,'PROVIDER_MISMATCH','결제사 조회 내용이 주문과 다릅니다.');
+ return transaction(db,()=>{applySnapshot(db,paymentById(db,p.id),real,now);return paymentById(db,p.id);});
+}
+function applySnapshot(db:Database,p:Payment,real:ProviderPayment,now:number){
+ if(real.status==='DONE'&&real.balanceAmount===p.amount&&p.status==='ready')return finalizePaid(db,p,real,now)?'paid':'noop';
+ if(canceledSnapshot(real)&&['ready','paid','partial_canceled'].includes(p.status)){
+  if(p.status==='ready')finalizePaid(db,p,real,now);
+  return applyCancellation(db,paymentById(db,p.id),real.totalAmount-real.balanceAmount,now)?'canceled':'noop';
+ }
+ if(['ABORTED','EXPIRED'].includes(real.status)&&p.status==='ready'){markFailed(db,p,real.status==='EXPIRED'?'expired':'failed',real.status,'결제가 완료되지 않았습니다.',now,true);return'failed';}
+ return'noop';
 }
 
 /** 취소 반영(트랜잭션 안): 누적 취소액으로 상태를 정하고 전액이면 그 결제가 산 기간을 끝낸다. */
 export function applyCancellation(db:Database,p:Payment,totalCanceled:number,now:number){
- const canceled=Math.min(p.amount,totalCanceled);
+ if(!Number.isSafeInteger(totalCanceled)||totalCanceled<0||totalCanceled>p.amount)throw new AppError(502,'PROVIDER_MISMATCH','결제사 취소 금액이 올바르지 않습니다.');
+ const canceled=totalCanceled;
  if(canceled<=p.canceledAmount)return false;
  db.prepare('UPDATE payments SET canceled_amount=?,status=?,version=version+1,updated_at=? WHERE id=?').run(canceled,canceled>=p.amount?'canceled':'partial_canceled',now,p.id);
  if(canceled>=p.amount)endPaidPeriod(db,p.id,now);
@@ -146,18 +183,20 @@ const webhookInput=z.object({eventType:z.string().max(60),createdAt:z.string().m
 export async function handleTossWebhook(db:Database,provider:PaymentProvider|null,body:unknown,now=Date.now()){
  const e=webhookInput.parse(body);
  if(!provider)throw new AppError(503,'PAYMENT_PROVIDER_NOT_CONFIGURED','결제 기능이 설정되지 않았습니다.');
- const key=`${e.eventType}:${e.data.paymentKey}:${e.data.status??''}:${e.createdAt}`.slice(0,300);
+ const key=createHash('sha256').update(JSON.stringify([e.eventType,e.data.paymentKey,e.data.status??'',e.createdAt])).digest('hex');
  if(db.prepare('SELECT 1 FROM payment_events WHERE dedupe_key=?').get(key))return{result:'duplicate'};
  if(e.eventType!=='PAYMENT_STATUS_CHANGED')return remember(db,key,e.eventType,'','ignored',now);
  const real=await provider.get(e.data.paymentKey);
  return transaction(db,()=>{
   const p=paymentByOrder(db,real.orderId);
   if(!p)return rememberIn(db,key,e.eventType,real.orderId,'unknown_order',now);
-  if(real.totalAmount!==p.amount)return rememberIn(db,key,e.eventType,p.orderId,'amount_mismatch',now);
-  let result='noop';
-  if(real.status==='DONE'&&p.status==='ready'&&finalizePaid(db,p,real,now))result='paid';
-  else if(['CANCELED','PARTIAL_CANCELED'].includes(real.status)&&applyCancellation(db,p,real.totalAmount-real.balanceAmount,now))result='canceled';
-  else if(['ABORTED','EXPIRED'].includes(real.status)&&p.status==='ready'){markFailed(db,p,real.status==='EXPIRED'?'expired':'failed',real.status,'결제가 완료되지 않았습니다.',now);result='failed';}
+  if(real.paymentKey!==e.data.paymentKey||(p.paymentKey&&p.paymentKey!==real.paymentKey))return rememberIn(db,key,e.eventType,p.orderId,'identity_mismatch',now);
+  if(db.prepare('SELECT 1 FROM payments WHERE payment_key=? AND id<>?').get(real.paymentKey,p.id))return rememberIn(db,key,e.eventType,p.orderId,'identity_mismatch',now);
+  if(real.totalAmount!==p.amount||!validAmounts(real))return rememberIn(db,key,e.eventType,p.orderId,'amount_mismatch',now);
+  if(real.status==='DONE'&&real.balanceAmount!==real.totalAmount)return rememberIn(db,key,e.eventType,p.orderId,'amount_mismatch',now);
+  if(['CANCELED','PARTIAL_CANCELED'].includes(real.status)&&!canceledSnapshot(real))return rememberIn(db,key,e.eventType,p.orderId,'amount_mismatch',now);
+  if(!p.paymentKey)db.prepare('UPDATE payments SET payment_key=? WHERE id=?').run(real.paymentKey,p.id);
+  const result=applySnapshot(db,paymentById(db,p.id),real,now);
   return rememberIn(db,key,e.eventType,p.orderId,result,now);
  });
 }
@@ -169,7 +208,7 @@ const remember=(db:Database,key:string,type:string,orderId:string,result:string,
 
 /** 결제창을 닫고 떠난 주문 정리(작업자 주기 실행): 만료 처리와 쿠폰 예약 해제. */
 export function expireStalePayments(db:Database,now=Date.now()):number{
- const stale=db.prepare("SELECT id FROM payments WHERE status='ready' AND expires_at<=? LIMIT 500").all(now) as {id:string}[];
+ const stale=db.prepare("SELECT id FROM payments WHERE status='ready' AND confirm_started_at IS NULL AND expires_at<=? LIMIT 500").all(now) as {id:string}[];
  for(const {id} of stale)transaction(db,()=>markFailed(db,paymentById(db,id),'expired','ORDER_EXPIRED','주문 시간이 지났습니다.',now));
  return stale.length;
 }

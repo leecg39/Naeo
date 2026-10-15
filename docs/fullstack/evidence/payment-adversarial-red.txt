@@ -1,0 +1,215 @@
+(node:45043) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ confirmation rejects a different payment key and preserves the mismatch for reconciliation (92.813917ms)
+✖ an in-flight confirmation cannot be replaced, abandoned or locally expired (83.650625ms)
+✖ account deletion during confirmation preserves the financial result without recreating user data (81.797292ms)
+✖ webhooks cannot apply a snapshot belonging to a different payment key (83.471333ms)
+✖ refund rejects identity provider response without changing accounting (82.497833ms)
+✖ refund rejects insufficient provider response without changing accounting (81.5945ms)
+✖ refund rejects negative provider response without changing accounting (81.217125ms)
+✖ an unexpected refund transport error is retryable with the original idempotency key (84.602167ms)
+✖ a crashed refund can resume after its processing grace without opening a new refund (83.247125ms)
+✖ an unconfigured admin refund does not leave an open request behind (83.556834ms)
+✖ an uncertain provider confirmation can be retried after the local order timeout (81.178625ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 0
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1232.780458
+
+✖ failing tests:
+
+test at tests/server/adversarial-payments.test.ts:2:2804
+✖ confirmation rejects a different payment key and preserves the mismatch for reconciliation (92.813917ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:31:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'PROVIDER_MISMATCH' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:3404
+✖ an in-flight confirmation cannot be replaced, abandoned or locally expired (83.650625ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:43:10)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'PAYMENT_PROCESSING' },
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:4447
+✖ account deletion during confirmation preserves the financial result without recreating user data (81.797292ms)
+  Error: NOT NULL constraint failed: subscriptions.user_id
+      at activatePaidPeriod (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/subscriptions.ts:109:170)
+      at finalizePaid (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/payments.ts:58:12)
+      at <anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/payments.ts:126:3)
+      at transaction (/Users/user01/Desktop/NAEO/naeo-clone/src/server/database.ts:12:20)
+      at confirmPayment (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/payments.ts:122:9)
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:54:10)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    code: 'ERR_SQLITE_ERROR',
+    errcode: 1299,
+    errstr: 'constraint failed'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:4970
+✖ webhooks cannot apply a snapshot belonging to a different payment key (83.471333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'canceled'
+  - 'identity_mismatch'
+  
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:62:9)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'canceled',
+    expected: 'identity_mismatch',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:5631
+✖ refund rejects identity provider response without changing accounting (82.497833ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:68:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'REFUND_FAILED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:5631
+✖ refund rejects insufficient provider response without changing accounting (81.5945ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:68:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'REFUND_FAILED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:5631
+✖ refund rejects negative provider response without changing accounting (81.217125ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:68:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { code: 'REFUND_FAILED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:6542
+✖ an unexpected refund transport error is retryable with the original idempotency key (84.602167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + Comparison {}
+  - Comparison {
+  -   code: 'REFUND_FAILED'
+  - }
+  
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:75:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: socket interrupted
+        at Object.f.provider.cancel (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:74:79)
+        at decideRefund (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/refunds.ts:66:32)
+        at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:75:23)
+        at async Test.run (node:internal/test_runner/test:1102:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:777:7),
+    expected: { code: 'REFUND_FAILED' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:7626
+✖ a crashed refund can resume after its processing grace without opening a new refund (83.247125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    Comparison {
+  +   code: 'REFUND_DECIDED'
+  -   code: 'REFUND_PROCESSING'
+    }
+  
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:86:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AppError: 이미 처리된 환불 요청입니다.
+        at <anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/refunds.ts:56:55)
+        at transaction (/Users/user01/Desktop/NAEO/naeo-clone/src/server/database.ts:12:20)
+        at decideRefund (/Users/user01/Desktop/NAEO/naeo-clone/src/server/billing/refunds.ts:53:10)
+        at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:86:23)
+        at async Test.run (node:internal/test_runner/test:1102:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:777:7),
+    expected: { code: 'REFUND_PROCESSING' },
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:8309
+✖ an unconfigured admin refund does not leave an open request behind (83.556834ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:94:9)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server/adversarial-payments.test.ts:2:8705
+✖ an uncertain provider confirmation can be retried after the local order timeout (81.178625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/adversarial-payments.test.ts:101:9)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

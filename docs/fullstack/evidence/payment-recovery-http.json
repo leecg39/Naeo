@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-15T06:53:59.877Z",
+  "checks": [
+    {
+      "label": "register",
+      "result": "passed"
+    },
+    {
+      "label": "register",
+      "result": "passed"
+    },
+    {
+      "label": "register",
+      "result": "passed"
+    },
+    {
+      "label": "create plan",
+      "result": "passed"
+    },
+    {
+      "label": "lost confirmation response",
+      "result": "passed"
+    },
+    {
+      "label": "uncertain order cannot be replaced",
+      "result": "passed"
+    },
+    {
+      "label": "pending visible",
+      "result": "passed"
+    },
+    {
+      "label": "SSR pending recovery control",
+      "result": "passed"
+    },
+    {
+      "label": "owner isolation",
+      "result": "passed"
+    },
+    {
+      "label": "wrong provider identity",
+      "result": "passed"
+    },
+    {
+      "label": "reconcile approved payment",
+      "result": "passed"
+    },
+    {
+      "label": "paid after lost response",
+      "result": "passed"
+    },
+    {
+      "label": "crashed refund persisted",
+      "result": "passed"
+    },
+    {
+      "label": "grace prevents competing retry",
+      "result": "passed"
+    },
+    {
+      "label": "crashed refund recovered",
+      "result": "passed"
+    },
+    {
+      "label": "payment canceled",
+      "result": "passed"
+    },
+    {
+      "label": "subscription ended",
+      "result": "passed"
+    },
+    {
+      "label": "tokens reclaimed",
+      "result": "passed"
+    },
+    {
+      "label": "provider confirms once",
+      "result": "passed"
+    },
+    {
+      "label": "provider cancels once",
+      "result": "passed"
+    }
+  ],
+  "provider": "loopback stub",
+  "realProviderVerified": false,
+  "crashSignal": "SIGKILL",
+  "databaseReopened": true,
+  "credentialsSaved": false,
+  "limitations": [
+    "No actual Toss sandbox credentials or browser hydration were used."
+  ]
+}

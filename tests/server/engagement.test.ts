@@ -28,7 +28,7 @@ test('schema 26 upgrades to points tables without changing existing accounts, bl
  const blog=createBlog(old,user.id,{naverId:'upgrade_blog',title:'기존 블로그'});
  old.prepare("INSERT INTO credit_ledger(id,owner_id,delta,reason,created_at) VALUES(?,?,?,'grant',?)").run('old-credit',user.id,77,start);
  old.close();const upgraded=openDatabase(path);t.after(()=>upgraded.close());
- assert.equal(upgraded.prepare('SELECT max(version) n FROM schema_migrations').get()?.n,27);
+ assert.equal(upgraded.prepare('SELECT max(version) n FROM schema_migrations').get()?.n,migrations.at(-1)!.version);
  assert.equal(upgraded.prepare('SELECT title FROM blogs WHERE id=?').get(blog.id)?.title,'기존 블로그');
  assert.equal(upgraded.prepare('SELECT sum(delta) n FROM credit_ledger WHERE owner_id=?').get(user.id)?.n,77);
  assert.equal(points(upgraded,user.id).balance,0);

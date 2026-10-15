@@ -499,3 +499,12 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 - AI 인용/휴대폰 단계는 서버에서도 잠금이며 허위 완료/지급하지 않는다. 전체 사이트 목표·P9.2 결제 미완료 항목은 유지한다.
 
 - 최종 게이트: 전체 **304/304**(기존 스크립트 6 + 서버 298, 신규 보상 테스트 11 포함), lint·typecheck·production build 모두 종료 코드 0. 로그와 소스 해시는 [evidence/engagement-checks.json](evidence/engagement-checks.json)에 보존했다.
+
+
+## P9.2 — 결제·환불 복구 (2026-10-15 재개)
+
+[구현·계약·증거 상세](payment-recovery.md). 초안 11건의 RED 재확인 후 전용 20건 GREEN. 승인 identity·미확정 주문 보호·탈퇴 중 승인·환불 identity/금액·일반 통신 오류·중단 재시도·늦은 응답·15일 멱등키 경계·이전 스키마 업그레이드를 검증했다.
+
+프로덕션 Next 서버를 실제로 강제 종료한 뒤 같은 SQLite DB로 재시작했다. 60초 보호시간 이후 동일 환불을 재개해 결제사 대역의 취소가 1회인 것을 확인했다. [HTTP 20항목](evidence/payment-recovery-http.json)과 대역 검증을 실제 토스 왕복 또는 브라우저 검증으로 세지 않는다.
+
+최종 게이트: **324/324**(스크립트 6 + 서버 318, 결제 적대적 테스트 20 포함), lint·typecheck·production build 종료 코드 0. [로그와 소스 해시](evidence/payment-checks.json)를 보존했다.

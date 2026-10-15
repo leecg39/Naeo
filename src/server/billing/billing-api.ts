@@ -8,6 +8,8 @@ import {createCoupon,listAdminCoupons,redeemCoupon,updateCoupon} from './coupons
 import {cancelSubscription,currentSubscription,resumeSubscription,startTrial} from './subscriptions';
 import {confirmPayment,createCheckout,handleTossWebhook,listAdminPayments,myPayments,paymentForOwner} from './payments';
 import {createAdminRefund,decideRefund,listAdminRefunds,myRefunds,requestRefund} from './refunds';
+import {reconcilePayment} from './payments';
+import {userById} from '../auth';
 import {tossProvider} from './provider';
 import {seedPlans} from './seed';
 
@@ -42,6 +44,8 @@ export async function memberBillingApi(db:Database,request:Request,user:User):Pr
  if(path==='/api/billing/confirm'&&method==='POST')return json({data:await confirmPayment(db,tossProvider(),user.id,await input())});
  const order=match(path,'/api/billing/payments/([A-Za-z0-9_-]{6,64})');
  if(order&&method==='GET')return json({data:paymentForOwner(db,user.id,order[1])});
+ const recheck=match(path,'/api/billing/payments/([A-Za-z0-9_-]{6,64})/reconcile');
+ if(recheck&&method==='POST')return json({data:await reconcilePayment(db,tossProvider(),paymentForOwner(db,user.id,recheck[1]).id)});
  const refund=match(path,`/api/billing/payments/${ID}/refund`);
  if(refund&&method==='POST')return json({data:requestRefund(db,user.id,refund[1],await input())},201);
  return null;
@@ -68,6 +72,8 @@ export async function adminBillingApi(db:Database,request:Request,user:User):Pro
  const coupon=match(path,`/api/admin/coupons/${ID}`);
  if(coupon&&method==='PATCH')return json({data:updateCoupon(db,user.id,coupon[1],await input())});
  if(path==='/api/admin/payments'&&method==='GET')return json(listAdminPayments(db,user.id,query));
+ const recheck=match(path,`/api/admin/payments/${ID}/reconcile`);
+ if(recheck&&method==='POST'){requireAdmin(userById(db,user.id));return json({data:await reconcilePayment(db,tossProvider(),recheck[1])});}
  const pay=match(path,`/api/admin/payments/${ID}/refund`);
  if(pay&&method==='POST')return json({data:await createAdminRefund(db,tossProvider(),user.id,pay[1],await input())},201);
  if(path==='/api/admin/refunds'&&method==='GET')return json(listAdminRefunds(db,user.id,query));

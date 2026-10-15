@@ -13,6 +13,7 @@ export type CompleteView={payment:Payment|null;subscription:Subscription|null;er
 
 function content(v:CompleteView):{title:string;rows:CapturedNode[]}{
  const pay=v.payment;
+ if(pay?.status==='ready'&&pay.confirmStartedAt!==null&&pay.confirmStartedAt!==undefined)return{title:'결제를 확인하는 중이에요',rows:[p('결제 결과가 아직 확정되지 않았어요. 중복 결제를 진행하지 말고 결제 내역에서 다시 확인해주세요.'),link('/dashboard/settings#billing','결제 내역에서 확인',true)]};
  if(v.error&&(!pay||pay.status!=='paid'))return{title:'결제가 완료되지 않았어요',rows:[p(v.error),el('div',{style:'display:flex;gap:8px;flex-wrap:wrap;justify-content:center'},[link('/pricing','요금제로 돌아가기',true),link('/dashboard/settings#billing','결제 내역')])]};
  if(!pay)return{title:'결제 정보를 찾을 수 없어요',rows:[p('주문 번호를 확인할 수 없습니다.'),link('/pricing','요금제 보기',true)]};
  if(pay.status==='paid'){
