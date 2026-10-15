@@ -1,0 +1,13 @@
+{
+  "verifiedAt": "2026-10-15T09:44:07.199Z",
+  "checks": [
+    "101 real stored media fixtures",
+    "Distinct first and second page records",
+    "Second-page owned photo download matches bytes",
+    "Anonymous download rejected",
+    "Second-page deletion removes photo and updates total",
+    "Previous page contains remaining 100 photos"
+  ],
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}

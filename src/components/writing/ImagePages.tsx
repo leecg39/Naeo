@@ -1,4 +1,6 @@
 'use client';
+import ListPagination from '../admin/ListPagination';
+import {loadValidPage} from '../admin/pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
 import {createPortal} from 'react-dom';
@@ -18,10 +20,13 @@ function useMain(){
 }
 
 function Library(){
- const [items,setItems]=useState<Media[]|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[signedOut,setSignedOut]=useState(false);
- const load=useCallback(async()=>{try{setItems((await apiResponse<PageResult<Media>>('/api/media?pageSize=100')).data);}catch(e){if(e instanceof ApiError&&e.status===401)setSignedOut(true);else setMessage(e instanceof Error?e.message:'불러오지 못했습니다.');}},[]);
- useEffect(()=>{const t=window.setTimeout(()=>void load(),0);return()=>window.clearTimeout(t);},[load]);
- async function run(action:()=>Promise<string>){setBusy(true);try{setMessage(await action());await load();}catch(e){setMessage(e instanceof Error?e.message:'처리하지 못했습니다.');}finally{setBusy(false);}}
+ const [items,setItems]=useState<PageResult<Media>|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[signedOut,setSignedOut]=useState(false);
+ const load=useCallback(async(page=1)=>{
+  const next=await loadValidPage(p=>apiResponse<PageResult<Media>>(`/api/media?page=${p}&pageSize=100`),page);
+  setItems(next);setSignedOut(false);
+ },[]);
+ const run=useCallback(async(action:()=>Promise<string>,page=1)=>{setBusy(true);setMessage('');try{const result=await action();await load(page);setMessage(result);}catch(e){if(e instanceof ApiError&&e.status===401)setSignedOut(true);else setMessage(e instanceof Error?e.message:'처리하지 못했습니다.');}finally{setBusy(false);}},[load]);
+ useEffect(()=>{const t=window.setTimeout(()=>void run(async()=>''),0);return()=>window.clearTimeout(t);},[run]);
  // 캡처 화면의 원래 업로드 영역(끌어놓기 상자·숨은 파일 입력)도 실제 업로드로 연결한다.
  useEffect(()=>{
   const card=document.querySelector<HTMLElement>(CARD);
@@ -31,22 +36,22 @@ function Library(){
   const change=()=>{const files=[...input.files??[]];input.value='';if(files.length)void run(async()=>{for(const f of files)await uploadPhoto(f);return`사진 ${files.length}장을 올렸습니다.`;});};
   zone?.addEventListener('click',pick);input.addEventListener('change',change);
   return()=>{zone?.removeEventListener('click',pick);input.removeEventListener('change',change);};
- // eslint-disable-next-line react-hooks/exhaustive-deps -- 캡처 요소에 한 번만 연결한다
- },[]);
+ },[run]);
  if(signedOut)return <p>로그인하면 내 사진함을 볼 수 있습니다. <a href="/login?next=%2Fimages" style={{color:'#03c75a'}}>로그인</a></p>;
  return <div style={{display:'grid',gap:12}}>
-  <h2 style={{margin:0,fontSize:20}}>내 사진함 {items?`(${items.length})`:''}</h2>
+  <h2 style={{margin:0,fontSize:20}}>내 사진함 {items?`(${items.pagination.total})`:''}</h2>
   <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>JPG·PNG·WEBP, 10MB 이하. 사진은 본인만 볼 수 있고, 공유 링크를 만든 글의 사진만 링크로 열 수 있습니다.</p>
   <input type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="사진 올리기" disabled={busy}
    onChange={e=>{const files=[...e.target.files??[]];e.target.value='';void run(async()=>{for(const f of files)await uploadPhoto(f);return`사진 ${files.length}장을 올렸습니다.`;});}}/>
   {message&&<p role="status" style={{margin:0}}>{message}</p>}
-  <ul style={grid}>{items?.map(m=><li key={m.publicId} style={{display:'grid',gap:6}}>
+  <ul style={grid}>{items?.data.map(m=><li key={m.publicId} style={{display:'grid',gap:6}}>
    {/* 로그인한 본인만 받는 개인 사진 */}
    <img src={`/api/media/${m.publicId}`} alt={m.originalName||'내 사진'} style={img}/>
    <span style={{fontSize:12,color:'#a3a3a3'}}>{m.draftId?'초안에 연결됨':'연결 안 됨'} · {KB(m.size)}</span>
-   <button type="button" className="naeo-button" disabled={busy} onClick={()=>{if(window.confirm('사진을 삭제할까요?'))void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'DELETE'});return'사진을 삭제했습니다.';});}}>삭제<span className="sr-only"> {m.originalName}</span></button>
+   <button type="button" className="naeo-button" disabled={busy} onClick={()=>{if(window.confirm('사진을 삭제할까요?'))void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'DELETE'});return'사진을 삭제했습니다.';},items?.pagination.page);}}>삭제<span className="sr-only"> {m.originalName}</span></button>
   </li>)}</ul>
-  {items&&!items.length&&<p style={{color:'#a3a3a3'}}>아직 올린 사진이 없습니다.</p>}
+  {items&&!items.data.length&&<p style={{color:'#a3a3a3'}}>아직 올린 사진이 없습니다.</p>}
+  {items&&<ListPagination label="내 사진함 페이지" pagination={items.pagination} busy={busy} onPage={page=>void run(async()=>'',page)}/>}
  </div>;
 }
 

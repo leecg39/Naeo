@@ -68,3 +68,13 @@ RewardsManager·EntriesReview는 아래 추가 수정으로 페이지 이동을 
 전체415(root6+server409), lint/typecheck/build 통과. API 테스트는 반대 순서의51개 결제·환불을 만들어 중복 없는 전체 접근, 주문 연결, 페이지 독립성, 관련 환불 유지, 다른 계정 userId 매개변수 무효화, 회원 격리, 비인증401, 잘못된 입력400과 초과 페이지 보정을 확인했다.
 
 실제 production Next 서버에서는101건으로3페이지의101번째 결제·환불, 주문별 환불 상태와 설정 SSR의 두 페이지 이동 컨트롤을 확인했다. 외부 결제사를 호출하지 않았고 임시 서버·DB를 정리했다. [HTTP/SSR](evidence/member-history-runtime.json), [테스트](evidence/member-history-tests.log), [빌드](evidence/member-history-build.log). 브라우저 hydration·클릭·모바일은 미검증이며 전체 사이트 완료 판정은 아니다.
+
+## 사진함 전체 목록 접근 (2026-10-15)
+
+`/images`가 API pagination을 버리고 첫100장의 배열만 표시하던 결함을 수정했다. 전체 건수와 이전/다음 이동을 표시하고, 삭제 후 현재 페이지를 유지하되 마지막 페이지가 없어지면 유효한 마지막 페이지로 복귀한다. 업로드 후 첫 페이지로 이동한다. 캡처 화면의 기존 업로드 입력과 사진함의 추가 입력은 동일한 안정된 처리기를 사용한다. 로드 오류를 성공 메시지로 덮어쓰지 않으며 인증 만료는 로그인 안내로 전환한다.
+
+전체416(root6+server410), lint/typecheck/build 통과. 실제 저장 파일101장과 타 회원1장을 만든 테스트는 페이지 분할·본인 읽기·타 회원 삭제404·파일 삭제·마지막 페이지 복귀·타 회원 보존을 검증했다. 원본 이미지 바이트는 파일 입출력 검증용 짧은 시그니처 fixture로, 이미지 디코딩/시각 품질 검증 자료가 아니다.
+
+실제 production Next 서버에서도101장 목록의 두 번째 페이지, 다운로드 바이트 일치, 비인증401, 삭제 후404와 총건수100을 확인했다. 임시 DB·파일·서버를 정리했다. [HTTP 기록](evidence/image-pagination-runtime.json), [테스트](evidence/image-pagination-tests.log), [빌드](evidence/image-pagination-build.log). Portal로 붙는 실제 사진함의 클릭/hydration/모바일은 아직 검증하지 못했다. 서버 HTTP 검증을 브라우저 검증으로 대체하지 않는다.
+
+추가 점검에서 회원 이벤트 참여·리워드 내역도100건 제한이 확인됐다. P11.7로 추적한다.

@@ -88,3 +88,22 @@ test('owner and share downloads reject symlink substitution, missing files and c
 test('stored keys cannot alias other files through traversal or hard links',async t=>{
  const {linkSync,unlinkSync}=await import('node:fs');const {readStoredFile}=await import('../../src/server/writing/media');const {db,dir,a}=await fixture(t);const m=saveUpload(db,dir,a,file(PNG),NOW);const key=readdirSync(dir)[0];assert.throws(()=>readStoredFile(dir,'../'+key),{code:'MEDIA_UNAVAILABLE'});const second=path.join(dir,'hard-link');linkSync(path.join(dir,key),second);assert.throws(()=>readMedia(db,dir,a,m.publicId),{code:'MEDIA_UNAVAILABLE'});unlinkSync(second);assert.deepEqual(readMedia(db,dir,a,m.publicId).bytes,PNG);
 });
+
+test('library page two: all 101 photos remain private and deletion recovers the final page',async t=>{
+ const {loadValidPage}=await import('../../src/components/admin/pagination');
+ const {db,dir,a,b}=await fixture(t);
+ for(let i=0;i<101;i++)saveUpload(db,dir,a,file(PNG,`photo-${i}.png`),NOW);
+ saveUpload(db,dir,b,file(PNG,'other-private.png'),NOW);
+ const first=listMedia(db,a,{page:1,pageSize:100}),last=listMedia(db,a,{page:2,pageSize:100});
+ assert.equal(first.pagination.total,101);assert.equal(last.data.length,1);
+ assert.equal(new Set([...first.data,...last.data].map(m=>m.publicId)).size,101);
+ const photo=last.data[0];assert.equal(photo.originalName,'photo-0.png');
+ assert.deepEqual(readMedia(db,dir,a,photo.publicId).bytes,PNG);
+ assert.throws(()=>deleteMedia(db,dir,b,photo.publicId),{status:404});
+ deleteMedia(db,dir,a,photo.publicId);
+ const recovered=await loadValidPage(async page=>listMedia(db,a,{page,pageSize:100}),2);
+ assert.equal(recovered.pagination.page,1);assert.equal(recovered.pagination.total,100);
+ assert.throws(()=>readMedia(db,dir,a,photo.publicId),{status:404});
+ assert.equal(listMedia(db,b,{}).pagination.total,1);
+ assert.equal(readdirSync(dir).length,101,'only the selected own file is deleted');
+});
