@@ -77,3 +77,10 @@
 - 이번 턴 progress: REA h/m/g/b 함수 기반 쿠폰·기능·점검·블로그 전용 UI, couponCode 관리자 CRUD·API, event 이미지 분기 정정. 전체408·lint/typecheck/build 및 production HTTP 쿠폰 CRUD 통과.
 - clipboard·native dialog·Lucide 아이콘은 구현되었지만 실제 브라우저 복사/포커스/시각 일치는 미검증. 원본 쿠폰 사용은 링크 이동뿐이며 발급/할인 처리를 추론하지 않음.
 - 공지 외 전체79URL+4패턴 계획·잔여차이 대조, 외부 공급자/AI/실브라우저 검증 계속. goal active 유지.
+
+## 최신 — 전체 목록 CRUD 접근 점검
+
+- 이전 턴 progress: ab5aeaf 공지 유형별 화면/쿠폰 CRUD 원격 반영.
+- 이번 턴 progress: 전체 TASKS/코드 대조에서 문서·FAQ·공지 첫100개 고정 결함 발견, 페이지 이동·적용 필터 분리·삭제 후 유효 마지막 페이지 복귀 구현. 각101개 API 검증 및 전체409·lint/typecheck/build 통과.
+- 대량생성 첫검사는429, 제품 제한 유지/독립DB로 재검증. 원본 UI 추정이 아닌 클론 결함 수정.
+- P11.2 리워드/참여심사 고정조회, P11.3 실제 브라우저 검증 추가. 전체79URL+4패턴/기존외부·AI 과제 active 유지.

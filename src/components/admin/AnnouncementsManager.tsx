@@ -1,4 +1,6 @@
 'use client';
+import ListPagination from './ListPagination';
+import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
@@ -68,6 +70,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
 export default function AnnouncementsManager({initial,now:serverNow}:{initial:PageResult<Announcement>;now:number}){
  const router=useRouter();
  const [result,setResult]=useState(initial),[q,setQ]=useState(''),[status,setStatus]=useState(''),[now,setNow]=useState(serverNow);
+ const [applied,setApplied]=useState({q:'',status:''});
  const [selected,setSelected]=useState<Announcement|null>(null),[creating,setCreating]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  async function run(action:()=>Promise<void>){
@@ -76,12 +79,19 @@ export default function AnnouncementsManager({initial,now:serverNow}:{initial:Pa
   catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');if(e instanceof ApiError&&e.status===401){router.replace('/login?next=/admin/announcements');router.refresh();}}
   finally{setBusy(false);}
  }
- const load=async()=>{setResult(await apiResponse<PageResult<Announcement>>(`/api/admin/announcements?${new URLSearchParams({pageSize:'100',q,...(status?{status}:{})})}`));setNow(Date.now());};
- const saved=async(m:string)=>{setSelected(null);setCreating(false);await load();setNotice(m);};
+ async function load(page=result.pagination.page,filters=applied){
+  const next=await loadValidPage(async requested=>{
+   const query=new URLSearchParams({...filters,page:String(requested),pageSize:String(result.pagination.pageSize)});
+   for(const [key,value] of [...query])if(!value)query.delete(key);
+   return apiResponse<PageResult<Announcement>>(`/api/admin/announcements?${query}`);
+  },page);
+  setResult(next);setApplied(filters);setNow(Date.now());
+ }
+ const saved=async(m:string)=>{setSelected(null);setCreating(false);await load(creating?1:result.pagination.page);setNotice(m);};
  return <div className="settings-sections">
   <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{setSelected(null);await load();setNotice('최신 목록을 불러왔습니다. 다시 편집해주세요.');})}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
-   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(load);}}>
+   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(1,{q,status}));}}>
     <label>공지 검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="제목·내용" disabled={busy}/></label>
     <label>상태<select className="field" value={status} onChange={e=>setStatus(e.target.value)} disabled={busy}><option value="">전체 상태</option><option value="published">공개</option><option value="draft">초안</option></select></label>
     <button className="button" type="submit" disabled={busy}>검색</button>
@@ -96,6 +106,7 @@ export default function AnnouncementsManager({initial,now:serverNow}:{initial:Pa
      <td><button className="button secondary" type="button" disabled={busy} onClick={()=>{setCreating(false);setSelected(a);}}>편집<span className="sr-only"> {a.title}</span></button></td>
     </tr>)}</tbody>
    </table>{!result.data.length&&<p className="empty-state">공지가 없습니다. 공지가 없으면 첫 화면은 원래 디자인 그대로 보입니다.</p>}</div>
+   <ListPagination pagination={result.pagination} busy={busy} onPage={page=>void run(()=>load(page))}/>
   </section>
   {(creating||selected)&&<Editor key={selected?`${selected.id}:${selected.version}`:'new'} item={selected} busy={busy} run={run} onSaved={saved} onClose={()=>{setSelected(null);setCreating(false);}}/>}
  </div>;

@@ -3,10 +3,35 @@ import assert from 'node:assert/strict';
 import {openDatabase} from '../../src/server/database';
 import {createApi} from '../../src/server/api';
 import {applySeeds} from '../../src/server/content/seed';
+import {loadValidPage} from '../../src/components/admin/pagination';
 
 const origin='http://127.0.0.1:3000';
 process.env.NAEO_APP_URL=origin;
 const password='content-http-test-password';
+
+test('documents, FAQ and announcements remain editable beyond 100 records and recover after deleting last page',async t=>{
+ for(const kind of ['documents','faq','announcements']){
+  const f=fixture(t),admin=await account(f,'pagination-admin@example.test',true);
+  const base=`/api/admin/${kind}`,prefix=`paging-${kind}`;
+  for(let i=0;i<101;i++){
+   const text=`${prefix}-${String(i).padStart(3,'0')}`;
+   const payload=kind==='documents'?{path:`/${text}`,title:text,body:'본문'}:kind==='faq'?{question:text,category:'분류',answer:'답변'}:{title:text};
+   const created=await f.send(base,'POST',payload,admin);assert.equal(created.status,201,kind);
+  }
+  type Result={data:{id:string;version:number}[];pagination:{page:number;pageSize:number;total:number}};
+  const fetchPage=async(page:number):Promise<Result>=>{
+   const response=await f.send(`${base}?q=${prefix}&pageSize=100&page=${page}`,'GET',undefined,admin);assert.equal(response.status,200);return response.json();
+  };
+  const first=await fetchPage(1),second=await loadValidPage(fetchPage,2);
+  assert.equal(first.data.length,100);assert.equal(second.data.length,1);assert.equal(second.pagination.total,101);
+  const last=second.data[0];assert.ok(!first.data.some(x=>x.id===last.id));
+  assert.equal((await f.send(`${base}/${last.id}`,'PATCH',{version:last.version,...(kind==='faq'?{question:`${prefix}-changed`}:{title:`${prefix}-changed`})},admin)).status,200);
+  assert.equal((await f.send(`${base}/${last.id}`,'DELETE',{version:last.version+1},admin)).status,200);
+  const requests:number[]=[];
+  const recovered=await loadValidPage(async page=>{requests.push(page);return fetchPage(page);},2);
+  assert.deepEqual(requests,[2,1]);assert.equal(recovered.pagination.page,1);assert.equal(recovered.data.length,100);
+ }
+});
 
 test('REA announcement GET contract reflects CRUD, filters lifecycle and separates member audience',async t=>{
  const f=fixture(t),admin=await account(f,'public-notice-admin@example.test',true),member=await account(f,'public-notice-member@example.test');
