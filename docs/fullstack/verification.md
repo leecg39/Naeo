@@ -516,3 +516,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## 2026-10-15 — 계정 메일 (스키마 30)
 
 전용 18개, 전체 375개(6+369), lint/typecheck/build 통과. 실제 프로덕션 Next/worker/loopback HTTP 수신기로 인증·재설정·동일 요청 재시도·세션 철회를 검증했다. 비밀번호 폼 GET fallback 및 origin 변경 후 잘못된 링크 전송을 재현 후 수정했다. 내보내기 42개 데이터셋과 첨부의 실제 TAR 회귀도 통과했다. 원본 메일 공급자를 복원한 것은 아니며 외부 실제 수신·Ego 화면 검증은 미완료다. 계약·로그·해시는 `account-mail.md`, `evidence/account-mail-verification.json` 참조.
+
+## 2026-10-15 — 문의 답변 메일
+
+스키마 31, 신규 검증 6개·전체 381개(6+375), lint/typecheck/build 통과. 실제 Next·worker·로컬 HTTP 수신기로 비회원 문의→관리자 답변→발송 요청→접수 상태/본문 일치를 확인했다. 개인 데이터 TAR 43개 회귀도 통과. 외부 수신·Ego 검증 미완료. inquiry-mail.md와 evidence/inquiry-mail-* 참조.

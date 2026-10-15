@@ -47,10 +47,7 @@ export function updateInquiryStatus(db:Database,actorId:string,id:string,input:u
  return mutate(db,actorId,id,version,()=>db.prepare('UPDATE inquiries SET status=? WHERE id=?').run(status,id),'admin.inquiry.status',{status});
 }
 
-/**
- * 답변을 저장하고 문의를 '답변 완료'로 바꾼다. 메일 공급자가 연결되지 않았으므로
- * 답변은 발송하지 않고 delivery='not_configured'로 기록한다(회원은 /contact에서 확인).
- */
+/** Save a reply; email delivery is requested separately through the outbox. */
 export function addReply(db:Database,actorId:string,id:string,input:unknown){
  const {body,version}=replyInput.parse(input);
  return mutate(db,actorId,id,version,now=>{
@@ -66,6 +63,7 @@ export function updateReply(db:Database,actorId:string,id:string,replyId:string,
  const {body,version}=replyInput.parse(input);
  return mutate(db,actorId,id,version,now=>{
   assertReply(db,id,replyId);
+  if(db.prepare('SELECT 1 FROM inquiry_mail WHERE reply_id=?').get(replyId))throw new AppError(409,'REPLY_DISPATCHED','발송을 요청한 답변은 수정할 수 없습니다. 새 답변을 작성해주세요.');
   db.prepare('UPDATE inquiry_messages SET body=?,updated_at=? WHERE id=?').run(body,now,replyId);
  },'admin.inquiry.reply.update',{replyId});
 }

@@ -9,3 +9,10 @@
 - 근거 docs/fullstack/account-mail.md 및 evidence/account-mail-*.
 - Ego NAEO 공간 부재. 기존 질문 대기 유지, 다른 사용자 공간을 사용하지 않는다. 외부 수신·hydration·시각 검증 미완료이며 P1.6 및 전체 완료로 처리하지 않는다.
 - 다음 독립 작업: 문의 답변 메일의 실제 큐 연결/상태/재시도, SMS, AI 인용·검색·이미지 등. OAuth/Anthropic/Toss/MCP/확장 실연동과 원본 전 화면 비교까지 기존 요구 유지.
+
+## 최신 진행 — 문의 메일
+
+- 직전 턴 progress: 계정 메일 구현/검증을 7bab89c까지 원격 반영.
+- 이번 턴 progress: 스키마 31 문의 답변 발송 API·큐·관리자 UI 구현, 전용 6개/전체 381개 및 실제 production HTTP/worker 수신 확인.
+- 내보내기 43개 실제 TAR 회귀 확인. 외부 메일 전송 없음. 임시 프로세스/데이터 정리 완료.
+- 전체 goal active, 원본 전체 화면·Ego·외부 inbox·SMS·AI 인용/검색·이미지·실 OAuth/결제/MCP/확장 미검증 범위 유지. 다음 독립 구현은 SMS 또는 AI 인용/이미지 공급자.

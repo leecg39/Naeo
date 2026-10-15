@@ -124,3 +124,7 @@ Ego 작업 공간 **15 / p1**은 일시 중지 시점에 열린 상태로 보존
 - 외부 수신함 및 Ego 클릭/hydration 미검증으로 P1.6 체크는 보류. 문의 답변·스캔 알림에는 아직 메일 어댑터가 연결되지 않았다.
 - REA 인증 추가 근거: docs/fullstack/rea-authentication.md와 evidence/rea-authentication-2026-10-15.json. 전체 원본 Evidence는 workspace reverse-engineering/rea-auth-2026-10-15에 보존.
 - 다음 독립 구현은 문의 답변의 명시적 메일 발송/상태·재시도 또는 SMS/AI 인용·이미지 공급자. 전체 79 URL+4패턴·실제 외부 연동·시각 비교 범위와 active 목표를 유지한다.
+
+### 스키마 31 문의 메일 — 최신
+
+명시적 관리자 발송 API/UI, 암호화 outbox, 동일 키·본문 재시도, 답변 수정 잠금, 삭제 cascade와 늦은 결과 차단 구현. 신규 6개/전체 381개, lint/typecheck/build와 production Next/worker/로컬 HTTP 수신 통과. 개인정보 export 43개. 외부 inbox·Ego는 미완료이며 목표 active. 다음은 SMS/AI 인용·이미지 및 원본 대비 전체 화면/외부 연동 미검증 범위를 이어간다. 근거 inquiry-mail.md.

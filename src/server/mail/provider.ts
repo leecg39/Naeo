@@ -17,7 +17,7 @@ export function mailConfig():MailConfig|null{
 }
 export function encryptMail(message:MailMessage,id:string,key:Buffer){const iv=randomBytes(12),cipher=createCipheriv('aes-256-gcm',key,iv);cipher.setAAD(Buffer.from(id));const bytes=Buffer.concat([cipher.update(JSON.stringify(message),'utf8'),cipher.final()]);return Buffer.concat([iv,cipher.getAuthTag(),bytes]).toString('base64');}
 export function decryptMail(encoded:string,id:string,key:Buffer):MailMessage{
- try{const b=Buffer.from(encoded,'base64'),decipher=createDecipheriv('aes-256-gcm',key,b.subarray(0,12));decipher.setAAD(Buffer.from(id));decipher.setAuthTag(b.subarray(12,28));return z.object({from:z.email(),to:z.array(z.email()).length(1),subject:z.string().max(200),text:z.string().max(8000)}).strict().parse(JSON.parse(Buffer.concat([decipher.update(b.subarray(28)),decipher.final()]).toString()));}
+ try{const b=Buffer.from(encoded,'base64'),decipher=createDecipheriv('aes-256-gcm',key,b.subarray(0,12));decipher.setAAD(Buffer.from(id));decipher.setAuthTag(b.subarray(12,28));return z.object({from:z.email(),to:z.array(z.email()).length(1),subject:z.string().max(200),text:z.string().max(20000)}).strict().parse(JSON.parse(Buffer.concat([decipher.update(b.subarray(28)),decipher.final()]).toString()));}
  catch{throw new MailError('PAYLOAD_UNREADABLE',false);}
 }
 async function responseJson(response:Response){

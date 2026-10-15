@@ -1,0 +1,22 @@
+(node:3019) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ guests can submit without login but receive no stored content back (46.687459ms)
+✔ submission is rate limited per e-mail address (16.656333ms)
+✔ members read, edit and delete only their own inquiries over HTTP (92.189417ms)
+✔ admin inquiry and template endpoints enforce role and work end to end (93.012625ms)
+✔ admin dispatch API requires auth, origin and current version; status contains no encrypted message (87.300959ms)
+(node:3020) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ explicit admin send encrypts full reply, guest recipient, immutable and idempotent queue (59.3985ms)
+✔ transient failure retries same immutable content/key; deletion fences late completion (52.998625ms)
+✔ corrupt key fails without outbound request or plaintext exposure (50.708584ms)
+✔ expired replies never send; permanent provider failures remove ciphertext (51.045333ms)
+✔ reply queue delivers through actual HTTP adapter and disallows non-admin dispatch (93.747ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 711.08475

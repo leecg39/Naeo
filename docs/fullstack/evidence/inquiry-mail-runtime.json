@@ -1,0 +1,20 @@
+{
+  "verifiedAt": "2026-10-15T08:32:37.239Z",
+  "schemaVersion": 31,
+  "passwordFormsChecked": 4,
+  "providerRequests": 4,
+  "uniqueLocalMessages": 3,
+  "checks": [
+    "Production SSR routes and native POST password forms",
+    "Actual HTTP Resend adapter and encrypted persistent worker queue",
+    "503 after local acceptance then same-key same-payload retry without duplicate local message",
+    "GET link does not consume; explicit verification POST succeeds once",
+    "Existing and unknown account recovery responses match",
+    "Reset invalidates old session/password/link; new password login succeeds",
+    "Guest inquiry, admin reply and explicit email dispatch over production Next HTTP and actual worker"
+  ],
+  "externalInboxVerified": false,
+  "browserHydrationVerified": false,
+  "externalMailSent": false,
+  "temporaryDataRemoved": true
+}

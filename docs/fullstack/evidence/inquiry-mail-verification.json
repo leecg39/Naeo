@@ -1,0 +1,110 @@
+{
+  "baseCommit": "7bab89c17ab4a6517bee8483e5ea21c8a3d7ec9d",
+  "schemaVersion": 31,
+  "allTests": 381,
+  "newTests": 6,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "externalMailSent": false,
+  "browserVerified": false,
+  "logs": [
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-focused.log",
+      "rawSha256": "d9886e3ea163051bfafabfecd4b31c7f875bfe9f45d69fa9f2ebe8aed510be64",
+      "savedSha256": "d9886e3ea163051bfafabfecd4b31c7f875bfe9f45d69fa9f2ebe8aed510be64"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-all.log",
+      "rawSha256": "36a34b54312bf9b28f72777da945f1bafeed3606ed86f44bc356a7d66510a718",
+      "savedSha256": "36a34b54312bf9b28f72777da945f1bafeed3606ed86f44bc356a7d66510a718"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-lint.log",
+      "rawSha256": "fffb2b1e1cea01e2891076449735319eee84d62e925bd5942ebce36fdcb8fc5d",
+      "savedSha256": "d5b45264edf102e0cde4b926765a79578ca76aa393828002fe1c6a298dc4ca13"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-types.log",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "savedSha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-build.log",
+      "rawSha256": "11b0641df4b407709f951f2fb8ccff38086b11b02ccb69416f44d5f1e671dbd7",
+      "savedSha256": "34d7533230dec18af696b1dec0068e9261a9f08c8cb3e21dbba267b4a3ff0a57"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-runtime.log",
+      "rawSha256": "f5727988a300a1ae7f0e4fb886a0530ff2a67d2421c6fe095c990bbc35ca90b6",
+      "savedSha256": "f5727988a300a1ae7f0e4fb886a0530ff2a67d2421c6fe095c990bbc35ca90b6"
+    },
+    {
+      "path": "docs/fullstack/evidence/inquiry-mail-export.log",
+      "rawSha256": "6fefdd2c6a3c42906454682fbdec9e611d2ab2feae9aab380a064482ac47a5c6",
+      "savedSha256": "6fefdd2c6a3c42906454682fbdec9e611d2ab2feae9aab380a064482ac47a5c6"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/server/inquiries/validation.ts",
+      "sha256": "7b28196bb0509c5133e98497060fdedbc2613fb80f5fed33f738998ae2372ce7"
+    },
+    {
+      "path": "src/server/inquiries/admin-inquiries.ts",
+      "sha256": "29ab51ad63d8d9a16b2c9b8d29bb38fd82f3f69b6cd39f92c79b2f1dfa1ce1ea"
+    },
+    {
+      "path": "src/server/inquiries/inquiries.ts",
+      "sha256": "d76d5a660d48a6c5fbdb703bdec5ff2ce24b6658c7d8a0aaab442f79dc7544b5"
+    },
+    {
+      "path": "src/server/inquiries/templates.ts",
+      "sha256": "1694a6a9cd3f36ba1427b82e90173f36297afab3e29f7d414076ecb3c637afc2"
+    },
+    {
+      "path": "src/server/inquiries/mail-schema.ts",
+      "sha256": "38f94cf15693e8414d2fad5874d2dd2321b54d4003da92bb919ea0707b1038de"
+    },
+    {
+      "path": "src/server/inquiries/records.ts",
+      "sha256": "d64c38fa9e449eab170e7b2d4de0c90bc869db9ea0e50ecf0fe9cd8d51b47c4a"
+    },
+    {
+      "path": "src/server/inquiries/inquiry-api.ts",
+      "sha256": "99ce6ed412b7ec193097215f5c987f2eca209d08f308dd763bf79cd6638969ab"
+    },
+    {
+      "path": "src/server/inquiries/mail.ts",
+      "sha256": "37ddf85886f2d76f358b7884c7c59573c3318f3e1670849415a31ee79149955e"
+    },
+    {
+      "path": "src/server/mail/provider.ts",
+      "sha256": "b5e406253b1ecd2aa8286b3a1723225b671ccac5f3cc7e8dcf1b94ab86257755"
+    },
+    {
+      "path": "scripts/worker.ts",
+      "sha256": "b5edda5348511b2b74a8551a2a612666e43e947c842ae090053a4d2e8fcabd40"
+    },
+    {
+      "path": "scripts/qa/account-mail.ts",
+      "sha256": "246268ca28e4f0de873523ce29b7952d465405029277c9b68cc52956fd376eda"
+    },
+    {
+      "path": "src/components/admin/InquiryDetail.tsx",
+      "sha256": "38f63af22df078f4de5e911f03da25aa37aec69786c3f86b326cf9cc13c173fe"
+    },
+    {
+      "path": "src/server/privacy/datasets.ts",
+      "sha256": "e39e1efefa37ce2501cd57cd97929c44266e6163597370620782d79341cecae1"
+    },
+    {
+      "path": "tests/server/inquiry-mail.test.ts",
+      "sha256": "db9c43e8cc53e7eca8435b8ea63156e46d8a6db989baaa4beda2684403107707"
+    },
+    {
+      "path": "tests/server/inquiry-http.test.ts",
+      "sha256": "be7e0b77b7118f44165d1a2d36181463646eb2d4ef5f26a098533353485291c3"
+    }
+  ]
+}

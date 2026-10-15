@@ -79,3 +79,17 @@ test('admin inquiry and template endpoints enforce role and work end to end',asy
  assert.equal((await f.send(`/api/admin/inquiries/${mine.id}`,'DELETE',{version:5},admin)).status,200);
  assert.equal((await f.send(`/api/admin/inquiry-templates/${tpl.id}`,'DELETE',{version:2},admin)).status,200);
 });
+
+test('admin dispatch API requires auth, origin and current version; status contains no encrypted message',async t=>{
+ const f=fixture(t),admin=await account(f,'dispatch-admin@example.test',true),member=await account(f,'dispatch-member@example.test');
+ const post=await f.send('/api/inquiries','POST',form,member),id=(await post.json()).data.id;
+ const replyResponse=await f.send(`/api/admin/inquiries/${id}/replies`,'POST',{body:'email reply',version:1},admin);const detail=(await replyResponse.json()).data;const path=`/api/admin/inquiries/${id}/replies/${detail.replies[0].id}/send`;
+ const vars={NAEO_EMAIL_PROVIDER:'resend',NAEO_RESEND_API_KEY:'test-only',NAEO_MAIL_FROM:'support@example.test',NAEO_MAIL_ENCRYPTION_KEY:'07'.repeat(32)};
+ const old=Object.fromEntries(Object.keys(vars).map(k=>[k,process.env[k]]));Object.assign(process.env,vars);t.after(()=>{for(const [k,v] of Object.entries(old)){if(v===undefined)delete process.env[k];else process.env[k]=v;}});
+ assert.equal((await f.send(path,'POST',{version:detail.version})).status,401);
+ assert.equal((await f.send(path,'POST',{version:detail.version},member)).status,403);
+ assert.equal((await f.send(path,'POST',{version:detail.version},admin,{Origin:'https://evil.test'})).status,403);
+ assert.equal((await f.send(path,'POST',{version:1},admin)).status,409);
+ const r=await f.send(path,'POST',{version:detail.version},admin);assert.equal(r.status,202);const data=(await r.json()).data;assert.equal(data.replies[0].mailState,'queued');assert.equal(JSON.stringify(data).includes('payload'),false);
+ assert.equal((await f.send(`/api/admin/inquiries/${id}/replies/${data.replies[0].id}`,'PATCH',{body:'change',version:data.version},admin)).status,409);
+});

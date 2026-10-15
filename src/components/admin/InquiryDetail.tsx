@@ -16,13 +16,14 @@ function ReplyItem({inquiry,reply,busy,run,onChanged}:Omit<Props,'templates'|'on
   await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}/replies/${reply.id}`,{method:'DELETE',body:{version:inquiry.version}}),'답변을 삭제했습니다.');
  });
  return <li className="inquiry-reply">
-  <p className="muted">{reply.authorName??'탈퇴한 관리자'} · {formatKst(reply.createdAt)}{reply.updatedAt!==reply.createdAt?` (수정 ${formatKst(reply.updatedAt)})`:''} · 메일 {reply.delivery==='sent'?'발송됨':'미발송(메일 공급자 미설정)'}</p>
+  <p className="muted">{reply.authorName??'탈퇴한 관리자'} · {formatKst(reply.createdAt)}{reply.updatedAt!==reply.createdAt?` (수정 ${formatKst(reply.updatedAt)})`:''} · 메일 {reply.mailState?({queued:'발송 대기',sending:'접수 요청 중',retry:'자동 재시도 대기',accepted:'메일 서비스 접수 완료 (수신 미확인)',failed:'실패 · 재전송 전 공급자 내역 확인'}[reply.mailState]):'미발송'}</p>
   {editing?<form className="account-form" onSubmit={save}>
    <label>답변 수정<textarea className="field" value={body} onChange={e=>setBody(e.target.value)} rows={5} required maxLength={10000} disabled={busy}/></label>
    <div className="account-actions"><button className="button" type="submit" disabled={busy}>답변 저장</button><button className="button secondary" type="button" disabled={busy} onClick={()=>{setEditing(false);setBody(reply.body);}}>취소</button></div>
   </form>:<>
    <p className="inquiry-text">{reply.body}</p>
-   <div className="account-actions"><button className="button secondary" type="button" disabled={busy} onClick={()=>setEditing(true)}>답변 수정</button><button className="button secondary" type="button" disabled={busy} onClick={remove}>답변 삭제</button></div>
+   {!reply.mailState&&<button className="button" type="button" disabled={busy} onClick={()=>void run(async()=>{await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}/replies/${reply.id}/send`,{method:'POST',body:{version:inquiry.version}}),'메일 발송을 요청했습니다. 상태를 새로고침해 확인해주세요.');})}>회신 이메일로 발송 요청</button>}
+   <div className="account-actions"><button className="button secondary" type="button" disabled={busy||!!reply.mailState} onClick={()=>setEditing(true)}>답변 수정</button><button className="button secondary" type="button" disabled={busy} onClick={remove}>답변 삭제</button></div>
   </>}
  </li>;
 }
@@ -30,7 +31,7 @@ function ReplyItem({inquiry,reply,busy,run,onChanged}:Omit<Props,'templates'|'on
 export default function InquiryDetail({inquiry,templates,busy,run,onChanged,onClose}:Props){
  const [reply,setReply]=useState(''),[status,setStatus]=useState<InquiryStatus>(inquiry.status),[confirm,setConfirm]=useState('');
  const send=(e:FormEvent)=>{e.preventDefault();void run(async()=>{
-  await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}/replies`,{method:'POST',body:{body:reply,version:inquiry.version}}),'답변을 저장했습니다. 메일 공급자가 없어 메일은 보내지 않았고, 회원은 문의 내역에서 볼 수 있습니다.');
+  await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}/replies`,{method:'POST',body:{body:reply,version:inquiry.version}}),'답변을 저장했습니다. 이메일은 별도로 발송 요청해주세요.');
  });};
  const saveStatus=(e:FormEvent)=>{e.preventDefault();void run(async()=>{
   await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}`,{method:'PATCH',body:{status,version:inquiry.version}}),'상태를 바꿨습니다.');
@@ -45,11 +46,12 @@ export default function InquiryDetail({inquiry,templates,busy,run,onChanged,onCl
   <p>회신 이메일 <a href={`mailto:${inquiry.email}`}>{inquiry.email}</a>{inquiry.ownerEmail?` · 회원 ${inquiry.ownerEmail}`:' · 비회원'}</p>
   <p className="inquiry-text">{inquiry.message}</p>
   <h3>답변 {inquiry.replies.length}개</h3>
+  <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{await onChanged(await api<AdminInquiryDetail>(`/api/admin/inquiries/${inquiry.id}`),'발송 상태를 갱신했습니다.');})}>발송 상태 새로고침</button>
   {inquiry.replies.length>0&&<ul className="inquiry-replies">{inquiry.replies.map(r=><ReplyItem key={`${r.id}:${r.updatedAt}`} inquiry={inquiry} reply={r} busy={busy} run={run} onChanged={onChanged}/>)}</ul>}
   <form className="account-form" onSubmit={send}>
    {templates.length>0&&<label>템플릿 넣기<select className="field" value="" onChange={e=>{const t=templates.find(x=>x.id===e.target.value);if(t)setReply(t.body);}} disabled={busy}><option value="">템플릿 선택</option>{templates.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select></label>}
    <label>새 답변<textarea className="field" value={reply} onChange={e=>setReply(e.target.value)} rows={6} required maxLength={10000} disabled={busy}/></label>
-   <p className="muted account-hint">메일 공급자가 연결되지 않아 답변 메일은 발송되지 않습니다. 비회원 문의는 위 회신 이메일로 직접 보내주세요.</p>
+   <p className="muted account-hint">저장 후 회신 이메일로 발송을 요청할 수 있습니다. 발송 요청한 답변은 수정할 수 없습니다. 삭제해도 전송 중이거나 이미 도착한 메일은 회수되지 않습니다.</p>
    <div className="account-actions"><button className="button" type="submit" disabled={busy||!reply.trim()}>답변 저장</button></div>
   </form>
   <form className="admin-filters" style={{marginTop:24}} onSubmit={saveStatus}>

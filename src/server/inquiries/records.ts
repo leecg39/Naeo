@@ -3,7 +3,7 @@ import {AppError} from '../errors';
 import type {INQUIRY_STATUSES,INQUIRY_TYPES} from './validation';
 
 export type Inquiry={id:string;ownerId:string|null;email:string;type:typeof INQUIRY_TYPES[number];subject:string;message:string;status:typeof INQUIRY_STATUSES[number];answeredAt:number|null;version:number;createdAt:number;updatedAt:number;replyCount:number};
-export type Reply={id:string;body:string;delivery:'not_configured'|'sent'|'failed';createdAt:number;updatedAt:number};
+export type Reply={mailState:'queued'|'sending'|'retry'|'accepted'|'failed'|null;id:string;body:string;delivery:'not_configured'|'sent'|'failed';createdAt:number;updatedAt:number};
 export type AdminReply=Reply&{authorId:string|null;authorName:string|null};
 export type AdminInquiry=Inquiry&{ownerEmail:string|null};
 
@@ -24,11 +24,11 @@ export function inquiryRow(db:Database,id:string,ownerId?:string):Row{
 export const memberInquiry=(r:Row)=>toInquiry(r);
 
 export function adminReplies(db:Database,inquiryId:string):AdminReply[]{
- return (db.prepare(`SELECT m.id,m.body,m.delivery,m.created_at AS createdAt,m.updated_at AS updatedAt,m.author_id AS authorId,p.nickname AS authorName
+ return (db.prepare(`SELECT (SELECT state FROM inquiry_mail WHERE reply_id=m.id) AS mailState,m.id,m.body,m.delivery,m.created_at AS createdAt,m.updated_at AS updatedAt,m.author_id AS authorId,p.nickname AS authorName
   FROM inquiry_messages m LEFT JOIN profiles p ON p.user_id=m.author_id WHERE m.inquiry_id=? ORDER BY m.created_at,m.id`).all(inquiryId) as AdminReply[]).map(r=>({...r}));
 }
 /** 회원에게는 어느 관리자가 답했는지 보여주지 않는다. */
-export const memberReplies=(db:Database,inquiryId:string):Reply[]=>adminReplies(db,inquiryId).map(({id,body,delivery,createdAt,updatedAt})=>({id,body,delivery,createdAt,updatedAt}));
+export const memberReplies=(db:Database,inquiryId:string):Reply[]=>adminReplies(db,inquiryId).map(({id,body,delivery,mailState,createdAt,updatedAt})=>({id,body,delivery,mailState,createdAt,updatedAt}));
 
 export function assertVersion(current:number,expected:number){
  if(current!==expected)throw new AppError(409,'VERSION_CONFLICT','다른 곳에서 먼저 수정했습니다. 최신 내용을 불러와주세요.');

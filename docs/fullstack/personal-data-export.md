@@ -66,3 +66,7 @@ node --import tsx scripts/qa/personal-export.ts
 ## 스키마 30 회귀 확인
 
 계정 메일의 안전한 상태 메타데이터가 추가되어 현재 내보내기는 42개 데이터셋이다. 위 스키마 29의 41개 검증은 당시 기록으로 유지한다. 실제 메일 토큰·토큰 해시·암호화 본문·공급자 ID는 제외한다. `account-mail-export-runtime.json`에서 실제 Next/worker/TAR 왕복과 첨부 격리를 재검증했다.
+
+## 스키마 31
+
+본인 문의 메일의 안전한 상태 metadata를 포함해 43개 데이터셋. inquiry-mail-export-runtime.json에 실제 TAR 회귀를 보존했다. 이전 41/42개 검증은 각 시점의 기록이다.

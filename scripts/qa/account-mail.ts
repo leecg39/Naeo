@@ -10,6 +10,7 @@ import {join,resolve} from 'node:path';
 import {setTimeout as delay} from 'node:timers/promises';
 import {load} from 'cheerio';
 import {migrations} from '../../src/server/migrations';
+import {openDatabase} from '../../src/server/database';
 async function main(){
  const temp=mkdtempSync(join(tmpdir(),'naeo-account-mail-http-')),children:ChildProcess[]=[];
  const inbox=new Map<string,{body:string;message:{to:string[];text:string;subject:string}}>();let attempts=0,first=true;
@@ -47,7 +48,15 @@ async function main(){
   assert.equal((await req('/api/auth/password/reset','POST',{token:resetToken,newPassword:nextPassword})).status,200);
   assert.equal((await req('/api/auth/me','GET',undefined,cookie)).status,401);assert.equal((await req('/api/auth/password/reset','POST',{token:resetToken,newPassword:password})).status,400);
   assert.equal((await req('/api/auth/login','POST',{email:'account-mail-local@example.test',password})).status,401);assert.equal((await req('/api/auth/login','POST',{email:'account-mail-local@example.test',password:nextPassword})).status,200);
-  result={verifiedAt:new Date().toISOString(),schemaVersion:migrations.at(-1)!.version,passwordFormsChecked:passwordForms,providerRequests:attempts,uniqueLocalMessages:inbox.size,checks:['Production SSR routes and native POST password forms','Actual HTTP Resend adapter and encrypted persistent worker queue','503 after local acceptance then same-key same-payload retry without duplicate local message','GET link does not consume; explicit verification POST succeeds once','Existing and unknown account recovery responses match','Reset invalidates old session/password/link; new password login succeeds'],externalInboxVerified:false,browserHydrationVerified:false,externalMailSent:false,temporaryDataRemoved:true};
+  const ownedDb=openDatabase(env.NAEO_DATABASE_PATH);try{ownedDb.prepare("UPDATE users SET role='admin' WHERE email=?").run('account-mail-local@example.test');}finally{ownedDb.close();}
+  const adminLogin=await req('/api/auth/login','POST',{email:'account-mail-local@example.test',password:nextPassword});assert.equal(adminLogin.status,200);const adminCookie=adminLogin.headers.get('set-cookie')!.split(';')[0];
+  assert.equal((await req('/api/inquiries','POST',{email:'guest-inquiry@example.test',type:'etc',message:'Local acceptance inquiry'})).status,201);
+  const list=(await(await req('/api/admin/inquiries','GET',undefined,adminCookie)).json()).data;const inquiry=list.find((q:{email:string})=>q.email==='guest-inquiry@example.test');assert.ok(inquiry);
+  const answered=(await(await req(`/api/admin/inquiries/${inquiry.id}/replies`,'POST',{body:'Local acceptance reply',version:inquiry.version},adminCookie)).json()).data;
+  const reply=answered.replies[0];assert.equal((await req(`/api/admin/inquiries/${inquiry.id}/replies/${reply.id}/send`,'POST',{version:answered.version},adminCookie)).status,202);
+  await wait(async()=>{const detail=(await(await req(`/api/admin/inquiries/${inquiry.id}`,'GET',undefined,adminCookie)).json()).data;return detail.replies[0].mailState==='accepted';});
+  const delivered=[...inbox.values()].find(v=>v.message.to[0]==='guest-inquiry@example.test');assert.ok(delivered?.message.text.includes('Local acceptance reply'));
+  result={verifiedAt:new Date().toISOString(),schemaVersion:migrations.at(-1)!.version,passwordFormsChecked:passwordForms,providerRequests:attempts,uniqueLocalMessages:inbox.size,checks:['Production SSR routes and native POST password forms','Actual HTTP Resend adapter and encrypted persistent worker queue','503 after local acceptance then same-key same-payload retry without duplicate local message','GET link does not consume; explicit verification POST succeeds once','Existing and unknown account recovery responses match','Reset invalidates old session/password/link; new password login succeeds','Guest inquiry, admin reply and explicit email dispatch over production Next HTTP and actual worker'],externalInboxVerified:false,browserHydrationVerified:false,externalMailSent:false,temporaryDataRemoved:true};
  }finally{
   for(const p of children){if(p.exitCode!==null||p.signalCode!==null)continue;const exited=new Promise<void>(r=>p.once('exit',()=>r()));p.kill('SIGTERM');const timer=setTimeout(()=>p.kill('SIGKILL'),3000);await exited;clearTimeout(timer);}
   await new Promise<void>(r=>{provider.close(()=>r());provider.closeAllConnections();});rmSync(temp,{recursive:true,force:true});

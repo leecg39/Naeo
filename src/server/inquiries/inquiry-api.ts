@@ -1,3 +1,5 @@
+import {queueReplyMail} from './mail';
+import {mailConfig} from '../mail/provider';
 import {z} from 'zod';
 import type {Database} from '../database';
 import {requireAdmin,sessionUser,type User} from '../auth';
@@ -52,6 +54,8 @@ async function adminRoutes(db:Database,path:string,method:string,searchParams:UR
  }
  const replies=path.match(new RegExp(`^/api/admin/inquiries/${ID}/replies$`));
  if(replies&&method==='POST')return json({data:addReply(db,actorId,replies[1],await input())},201);
+ const send=path.match(new RegExp(`^/api/admin/inquiries/${ID}/replies/${ID}/send$`));
+ if(send&&method==='POST'){queueReplyMail(db,actorId,send[1],send[2],await input(),mailConfig());return json({data:getAdminInquiry(db,actorId,send[1])},202);}
  const reply=path.match(new RegExp(`^/api/admin/inquiries/${ID}/replies/${ID}$`));
  if(reply){
   if(method==='PATCH')return json({data:updateReply(db,actorId,reply[1],reply[2],await input())});
