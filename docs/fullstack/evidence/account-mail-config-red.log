@@ -26,9 +26,9 @@
 test at tests/server/account-mail.test.ts:2:14728
 ✖ queued links are not sent to an obsolete application origin after configuration changes (47.539542ms)
   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
-  
+
   1 !== 0
-  
+
       at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/account-mail.test.ts:114:9)
       at async Test.run (node:internal/test_runner/test:1102:7)
       at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {

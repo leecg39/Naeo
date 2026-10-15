@@ -14,7 +14,7 @@ test at tests/server/password-form-method.test.ts:2:1097
 ✖ account forms containing password controls never fall back to credentials in a GET query (39.162792ms)
   AssertionError [ERR_ASSERTION]: native password forms must use POST even before hydration
   + actual - expected
-  
+
   + [
   +   'AccountMailForms.tsx:21',
   +   'AuthForm.tsx:28',
@@ -25,7 +25,7 @@ test at tests/server/password-form-method.test.ts:2:1097
   +   'TermsForm.tsx:10'
   + ]
   - []
-  
+
       at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/password-form-method.test.ts:21:9)
       at Test.runInAsyncScope (node:async_hooks:213:14)
       at Test.run (node:internal/test_runner/test:1095:25)

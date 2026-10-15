@@ -18,9 +18,9 @@
 (node:83241) ExperimentalWarning: SQLite is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
   Generating static pages using 2 workers (0/4) ...
-  Generating static pages using 2 workers (1/4) 
-  Generating static pages using 2 workers (2/4) 
-  Generating static pages using 2 workers (3/4) 
+  Generating static pages using 2 workers (1/4)
+  Generating static pages using 2 workers (2/4)
+  Generating static pages using 2 workers (3/4)
 ✓ Generating static pages using 2 workers (4/4) in 85ms
   Finalizing page optimization ...
 
