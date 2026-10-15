@@ -520,3 +520,7 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## 2026-10-15 — 문의 답변 메일
 
 스키마 31, 신규 검증 6개·전체 381개(6+375), lint/typecheck/build 통과. 실제 Next·worker·로컬 HTTP 수신기로 비회원 문의→관리자 답변→발송 요청→접수 상태/본문 일치를 확인했다. 개인 데이터 TAR 43개 회귀도 통과. 외부 수신·Ego 검증 미완료. inquiry-mail.md와 evidence/inquiry-mail-* 참조.
+
+## 2026-10-15 — SMS 인증 (스키마 32)
+
+신규 8개/전체 389개, lint/typecheck/build, 실제 Next/로컬 공급자 HTTP 요청 3회 및 개인정보 TAR 44개 회귀 검증. 외부 SMS 미전송·Ego 미검증, 120P 중복 번호 보상은 미구현 유지. 근거 phone-verification.md 및 evidence/sms-*.

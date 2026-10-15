@@ -87,7 +87,7 @@ export function tutorial(db:Database,id:string,now=Date.now()){
  const reasons={blog:hasBlog?'':'블로그를 먼저 등록해주세요.',mate:hasMate?'':'본인 블로그의 글이 있는 진단을 완료해주세요.',
   ai_picks:'AI 인용 확인 공급자가 연결되면 수령할 수 있습니다.',
   ranking:!hasBlog?'블로그를 먼저 등록해주세요.':!visited?'랭킹을 먼저 둘러봐주세요.':!prefs.subTopic?'서브 주제를 저장해주세요.':'',
-  verify:'휴대폰 인증 공급자가 연결되면 수령할 수 있습니다.'};
+  verify:'휴대폰 인증 보상은 동일 번호 중복 수령 검증이 연결된 뒤 받을 수 있습니다.'};
  const steps=STEPS.map(step=>{const claim=claims.find(c=>c.step===step.key);return{...step,done:Boolean(claim),claimedAt:claim?.createdAt??null,eligible:!claim&&!reasons[step.key],lockedReason:claim?'':reasons[step.key]};});
  return{steps,completedAll:steps.every(s=>s.done),totalPoints:300,claimedPoints:steps.filter(s=>s.done).reduce((n,s)=>n+s.points,0),subTopic:prefs,now};
 }

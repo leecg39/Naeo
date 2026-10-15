@@ -14,6 +14,7 @@ export function runRetention(db:Database,now=Date.now()){
  const del=(sql:string,...p:(string|number)[])=>Number(db.prepare(sql).run(...p).changes);
  return{
   accountMail:cleanupMail(db,now),
+  smsChallenges:del('DELETE FROM sms_challenges WHERE expires_at<=?',now),
   pageViews:del('DELETE FROM page_views WHERE created_at<?',now-RAW_RETENTION_DAYS*DAY),
   salts:del('DELETE FROM analytics_salts WHERE day<?',kstDay(now-DAY)),
   auditLogs:del('DELETE FROM audit_logs WHERE created_at<?',now-365*DAY),

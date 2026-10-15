@@ -1,0 +1,118 @@
+{
+  "baseCommit": "a3f63f8dc75d935c961de70f337f098f1a308b75",
+  "schemaVersion": 32,
+  "newTests": 8,
+  "allTests": 389,
+  "rootTests": 6,
+  "serverTests": 383,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "realHandsetVerified": false,
+  "browserVerified": false,
+  "phoneRewardEnabled": false,
+  "externalSmsSent": false,
+  "logs": [
+    {
+      "path": "docs/fullstack/evidence/sms-focused.log",
+      "rawSha256": "3258564d6554abbacc55242680411e7d17a5779bb332677b172fd921a54e2ac6",
+      "savedSha256": "3258564d6554abbacc55242680411e7d17a5779bb332677b172fd921a54e2ac6"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-all.log",
+      "rawSha256": "651cf706141feb5b5dcc258a01f78e8db114a26b995248d0435b0c7da8784613",
+      "savedSha256": "651cf706141feb5b5dcc258a01f78e8db114a26b995248d0435b0c7da8784613"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-lint.log",
+      "rawSha256": "20c7b346e8ec6ed423798e4cb44827a87769e992415670e556e263bd57e0228d",
+      "savedSha256": "39608e2ba7a9da9aab54242c245182d2b312469ebef2176c83aab845066f8a76"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-types.log",
+      "rawSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9",
+      "savedSha256": "eab2e977b8e8c3b3cd40cb21bc2d655fd29292705b8aedd0359da52bd2eab715"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-build.log",
+      "rawSha256": "9ded0f5b5817ac07e16733820611a56d2602cbf009a44b3f6eef737f1c782679",
+      "savedSha256": "109463952679a657414ba0fefc9415d0573982831ca6f7fe22e10c48859e259e"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-runtime.log",
+      "rawSha256": "8cfd8b3b18f2605e7ba98fda413f6d9afec84fbaed85fcee4a723f54a93d9590",
+      "savedSha256": "8cfd8b3b18f2605e7ba98fda413f6d9afec84fbaed85fcee4a723f54a93d9590"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-export.log",
+      "rawSha256": "5428de2c72a09b5788d799e76cb29f1b05584475415e0eae36786b2313e885f0",
+      "savedSha256": "5428de2c72a09b5788d799e76cb29f1b05584475415e0eae36786b2313e885f0"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/server/sms/schema.ts",
+      "sha256": "aadc81da54bd295df3421aa513642bfaf0b3a6e1a17919d67a9807f958f91774"
+    },
+    {
+      "path": "src/server/sms/api.ts",
+      "sha256": "1eced82caadf9b079c672703bd1fd888b0a70d3ea36b3ce2c72b0794ac2ee585"
+    },
+    {
+      "path": "src/server/sms/provider.ts",
+      "sha256": "aeb7208f995038ca5f943d3245961622dcda7ae138aa631dbbf8550f6a1c37a9"
+    },
+    {
+      "path": "src/server/sms/service.ts",
+      "sha256": "8c42b3d66adbaa282e3d56690454eff96e21cd65be9d40d1e6425a77c5085004"
+    },
+    {
+      "path": "src/server/api.ts",
+      "sha256": "959543ff71347a6e73bdbfaf1a60e11f559187bbdf0b7a4140c92510ff4da145"
+    },
+    {
+      "path": "src/server/migrations.ts",
+      "sha256": "8b0a1ab51fecb4f206d098363f4c4b4f1e7f399352f1847f536d4fd9b29754d3"
+    },
+    {
+      "path": "src/server/ops/retention.ts",
+      "sha256": "4ba3d1ce7791d20429acb650d98b976888c1834ba04a6a7edd25c1f0cd315dfc"
+    },
+    {
+      "path": "src/server/ops/health.ts",
+      "sha256": "800d027a26615eadd0414617dce642e8e9fd36fe18a594868e6e2dd98808983e"
+    },
+    {
+      "path": "src/server/privacy/datasets.ts",
+      "sha256": "a59d7a807e564cc8fe64fb73fa1c17452cf2063261ac856da6bb263ec666a832"
+    },
+    {
+      "path": "src/server/engagement/service.ts",
+      "sha256": "464222fdd04442c4b76f8e4f71849c6c8785e364070e096a56b2d65a26ea1a03"
+    },
+    {
+      "path": "src/components/account/ContactPreferencesForm.tsx",
+      "sha256": "b84a0b15aef7407e51fff074e02c9ba855bc847c881dd73f3c8316c8c9187c37"
+    },
+    {
+      "path": "src/components/account/PhoneVerification.tsx",
+      "sha256": "52f3b523e8e8db8fd7794225d5d1d529118427dcd78c394e24b77aeefe191fcf"
+    },
+    {
+      "path": "scripts/qa/sms.ts",
+      "sha256": "bb66239a6fadb3cc4b1caa045fdcd3a686a950a7186654199c377a131e4d7b91"
+    },
+    {
+      "path": "tests/server/sms.test.ts",
+      "sha256": "65b3f6db0889d52e4614dda68ca028c8302e1481c602255adadbe2da1260474a"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-runtime.json",
+      "sha256": "8cfd8b3b18f2605e7ba98fda413f6d9afec84fbaed85fcee4a723f54a93d9590"
+    },
+    {
+      "path": "docs/fullstack/evidence/sms-export-runtime.json",
+      "sha256": "5428de2c72a09b5788d799e76cb29f1b05584475415e0eae36786b2313e885f0"
+    }
+  ]
+}

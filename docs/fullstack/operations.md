@@ -78,3 +78,7 @@ npm run restore -- --offline --recover
 ## 문의 답변 메일 (스키마 31)
 
 계정 메일과 같은 환경 설정·worker를 사용한다. 관리자가 답변 저장 후 별도 발송 요청해야 큐에 들어간다. 23시간 만료, 최대 5회 동일 키/본문 재시도. 관리자 문의 상세의 mailState가 상태 기준이다. 공급자 접수는 수신 완료가 아니며 실패 후 중복 발송을 막기 위해 새 키 자동 재발송은 하지 않는다. 자세한 운영/삭제 한계는 inquiry-mail.md 참조. 스캔 알림·마케팅 메일은 여전히 미연결이다.
+
+## SMS 인증
+
+Twilio Verify 계정·service·API key·secret을 .env.example에 따라 설정한다. OTP 자체는 공급자가 생성/검사하며 앱은 보관하지 않는다. 자동 SMS 재전송은 하지 않는다. 만료 요청은 worker retention에서 삭제한다. 실제 단말 수신·지역 설정 검증이 필요하며 설정만으로 검증 완료로 간주하지 않는다. phone-verification.md 참조.

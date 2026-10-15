@@ -70,3 +70,7 @@ node --import tsx scripts/qa/personal-export.ts
 ## 스키마 31
 
 본인 문의 메일의 안전한 상태 metadata를 포함해 43개 데이터셋. inquiry-mail-export-runtime.json에 실제 TAR 회귀를 보존했다. 이전 41/42개 검증은 각 시점의 기록이다.
+
+## 스키마 32
+
+SMS 요청의 안전한 상태 metadata를 포함해 44개 데이터셋. 코드·공급자 ID·세션 해시는 제외한다. sms-export-runtime.json에 실제 TAR 회귀 검증을 보존했다.

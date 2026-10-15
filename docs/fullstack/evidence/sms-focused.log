@@ -1,0 +1,18 @@
+(node:14149) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ SMS approval is required; number normalized, one use, no code persisted (55.6525ms)
+✔ number/contact edits and logout during provider response cannot approve stale contact (49.023667ms)
+✔ wrong session and five failed codes cannot mark verified (49.27775ms)
+✔ send response after logout is discarded; missing provider never sends (47.706084ms)
+✔ Twilio adapter actual HTTP validates service/account/number/SID and never accepts invalid status (43.707042ms)
+✔ expired challenge is rejected before provider call; concurrent check cannot race approval (49.281417ms)
+✔ HTTP endpoints require session and Origin, strict input; missing provider stays unavailable (283.127292ms)
+✔ configuration rejects remote override and incomplete secrets; response failures never approve (6.254625ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 789.741125

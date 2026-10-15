@@ -1,3 +1,4 @@
+import {smsConfig} from '../sms/provider';
 import {mailConfig} from '../mail/provider';
 import type {Database} from '../database';
 import {requireAdmin,userById} from '../auth';
@@ -18,6 +19,6 @@ export function serviceHealth(db:Database,actorId:string,now=Date.now()){
   queues:{scan:queue('scan_jobs'),generation:queue('generation_jobs'),exportsCollecting:count(db,"SELECT count(*) AS n FROM export_jobs WHERE state='collecting'")},
   mailQueue:{pending:count(db,"SELECT count(*) AS n FROM account_mail WHERE state IN ('queued','retry','sending')"),failed:count(db,"SELECT count(*) AS n FROM account_mail WHERE state='failed'")},
   mediaDeletion:{pending:count(db,'SELECT count(*) AS n FROM media_deletions'),retrying:count(db,'SELECT count(*) AS n FROM media_deletions WHERE attempts>0')},
-  integrations:{ai:!!providerConfig().apiKey,aiCitation:false,payments:tossProvider()!==null,google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null,mail:mailConfig()!==null,sms:false},
+  integrations:{ai:!!providerConfig().apiKey,aiCitation:false,payments:tossProvider()!==null,google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null,mail:mailConfig()!==null,sms:!!smsConfig()},
  };
 }

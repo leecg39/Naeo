@@ -1,3 +1,4 @@
+import {smsApi} from './sms/api';
 import {publicMailApi,memberMailApi} from './mail/api';
 import { database, type Database } from './database';
 import { register, login, logout, requireUser, requireAdmin, requireTerms, sessionUser } from './auth';
@@ -75,6 +76,7 @@ export function createApi(getDatabase:()=>Database=database) {
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
     // Withdrawal and session management remain available even before consent.
     if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const sms=await smsApi(db,request,user);if(sms)return sms;
     const memberMail=await memberMailApi(db,request,user);if(memberMail)return memberMail;
     const engagementResponse=await engagementApi(db,request,user);
     if(engagementResponse)return engagementResponse;

@@ -128,3 +128,7 @@ Ego 작업 공간 **15 / p1**은 일시 중지 시점에 열린 상태로 보존
 ### 스키마 31 문의 메일 — 최신
 
 명시적 관리자 발송 API/UI, 암호화 outbox, 동일 키·본문 재시도, 답변 수정 잠금, 삭제 cascade와 늦은 결과 차단 구현. 신규 6개/전체 381개, lint/typecheck/build와 production Next/worker/로컬 HTTP 수신 통과. 개인정보 export 43개. 외부 inbox·Ego는 미완료이며 목표 active. 다음은 SMS/AI 인용·이미지 및 원본 대비 전체 화면/외부 연동 미검증 범위를 이어간다. 근거 inquiry-mail.md.
+
+### 스키마 32 SMS — 최신
+
+Twilio Verify 어댑터·요청/확인 API·설정 화면 구현. 원본 공급자를 복원한 것이 아닌 별도 설계. 신규8/전체389·실제 Next/로컬 HTTP 승인 통과, export44. 외부 단말·Ego·120P 번호 중복 지급 방지는 미완료. 다음 독립 과제는 번호 중복 보상 연결과 AI 인용/이미지. 목표 active 유지. 근거 phone-verification.md.
