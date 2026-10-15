@@ -17,6 +17,18 @@ const HOUR=3600_000;
 const notice=(over:Record<string,unknown>={})=>({title:'점검 안내',body:'10월 20일 새벽 2시~4시 점검합니다.',linkUrl:'/updates',linkLabel:'자세히',target:'landing',status:'published',...over});
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 
+test('ticker display stores without an image, keeps tokens and supports target/path updates',async t=>{
+ const {db,admin}=await fixture(t);
+ const a=createAnnouncement(db,admin,notice({type:'event',body:'매주 [coffee] 선물 [airpods] [ipad]',linkLabel:'',metadata:{display:'ticker',exactPath:'/'}}));
+ assert.equal(a.metadata.display,'ticker');assert.equal(a.metadata.image,undefined);
+ assert.equal(activeAnnouncement(db,'/')?.body,'매주 [coffee] 선물 [airpods] [ipad]');
+ assert.equal(activeAnnouncement(db,'/pricing'),null);
+ const edited=updateAnnouncement(db,admin,a.id,{version:1,target:'dashboard',metadata:{display:'ticker',exactPath:'/dashboard'},body:'새 이벤트'});
+ assert.equal(edited.version,2);assert.equal(activeAnnouncement(db,'/'),null);
+ assert.equal(activeAnnouncement(db,'/dashboard')?.body,'새 이벤트');
+ deleteAnnouncement(db,admin,a.id,{version:2});assert.equal(activeAnnouncement(db,'/dashboard'),null);
+});
+
 test('landing and dashboard queues isolate audiences and retain all eligible notices in deterministic order',async t=>{
  const {db,admin}=await fixture(t),now=Date.now();
  const landing=createAnnouncement(db,admin,notice());

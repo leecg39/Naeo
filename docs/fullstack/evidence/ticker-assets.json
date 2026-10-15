@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-15T09:14:48.771335+00:00",
+  "assets": [
+    {
+      "url": "https://www.naeo.kr/event/review-2026-09/icon-coffee.webp",
+      "status": 200,
+      "file": "public/event/review-2026-09/icon-coffee.webp",
+      "bytes": 2334,
+      "sha256": "87e6cb0d0ece0f8ba491886d5b518b6b0e682ac5ad07795fbbebe89da1084af0"
+    },
+    {
+      "url": "https://www.naeo.kr/event/review-2026-09/icon-earbuds.webp",
+      "status": 200,
+      "file": "public/event/review-2026-09/icon-earbuds.webp",
+      "bytes": 2002,
+      "sha256": "85d9c0cf1055dce9a237b989a6a1d991f569c6d1b71d476a77cb7ed294707acc"
+    },
+    {
+      "url": "https://www.naeo.kr/event/review-2026-09/icon-tablet.webp",
+      "status": 200,
+      "file": "public/event/review-2026-09/icon-tablet.webp",
+      "bytes": 3452,
+      "sha256": "2d2fd378e719963d807c71aff28628fd51bafa6762ed9d2d57c3eb11d05256d8"
+    }
+  ]
+}

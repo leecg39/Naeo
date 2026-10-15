@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react';
 import type {PublicAnnouncement} from '@/server/content/announcements';
 import {dismissAnnouncementToday,isAnnouncementDismissed} from './announcement-dismissal';
 import AnnouncementBanner from './AnnouncementBanner';
+import AnnouncementTicker from './AnnouncementTicker';
 function dismissed(id:string){try{return isAnnouncementDismissed(window.localStorage,id);}catch{return false;}}
 
 const bar:React.CSSProperties={position:'fixed',left:16,right:16,bottom:16,zIndex:1300,maxWidth:720,margin:'0 auto',display:'flex',gap:12,alignItems:'center',flexWrap:'wrap',
@@ -17,6 +18,7 @@ export default function AnnouncementBar({announcement,onDismiss}:{announcement:P
  if(!open)return null;
  const hide=()=>{setOpen(false);onDismiss?.(false);};
  const hideToday=()=>{try{dismissAnnouncementToday(window.localStorage,announcement.id);}catch{/* localStorage getter도 차단될 수 있다 */}setOpen(false);onDismiss?.(true);};
+ if(announcement.metadata.display==='ticker')return <AnnouncementTicker announcement={announcement} onDismissToday={hideToday}/>;
  if(announcement.metadata.image&&announcement.metadata.display!=='notice')return <AnnouncementBanner announcement={announcement} onClose={hide} onDismissToday={hideToday}/>;
  return <aside role="region" aria-label="공지" style={bar} data-announcement={announcement.id}>
   <strong style={{whiteSpace:'nowrap'}}>{announcement.title}</strong>

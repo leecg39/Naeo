@@ -38,17 +38,17 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Announcement|null;busy:boo
    <label>제목<input className="field" value={form.title} onChange={e=>set('title',e.target.value)} required maxLength={80} disabled={busy}/></label>
    <label>내용(선택)<textarea className="field" value={form.body} onChange={e=>set('body',e.target.value)} maxLength={300} rows={3} disabled={busy}/></label>
    <label>링크(선택, /경로 또는 https 주소)<input className="field" value={form.linkUrl} onChange={e=>set('linkUrl',e.target.value)} maxLength={300} disabled={busy}/></label>
-   <label>링크 문구<input className="field" value={form.linkLabel} onChange={e=>set('linkLabel',e.target.value)} maxLength={30} required={!!form.linkUrl&&!(form.metadata.image&&form.metadata.display!=='notice')} disabled={busy}/></label>
+   <label>링크 문구<input className="field" value={form.linkLabel} onChange={e=>set('linkLabel',e.target.value)} maxLength={30} required={!!form.linkUrl&&!(form.metadata.display==='ticker'||(form.metadata.image&&form.metadata.display!=='notice'))} disabled={busy}/></label>
    <label>표시 위치<select className="field" value={form.target} onChange={e=>set('target',e.target.value as Form['target'])} disabled={busy}><option value="landing">공개 사이트</option><option value="dashboard">회원 대시보드</option><option value="all">모든 공개 화면</option></select></label>
    <fieldset disabled={busy}><legend>이미지 배너 설정</legend>
-    <label>표시 방식<select className="field" value={form.metadata.display||'auto'} onChange={e=>setMeta('display',e.target.value==='auto'?'':e.target.value)}><option value="auto">이미지가 있으면 배너</option><option value="notice">텍스트 공지</option><option value="banner">이미지 배너</option></select></label>
+    <label>표시 방식<select className="field" value={form.metadata.display||'auto'} onChange={e=>setMeta('display',e.target.value==='auto'?'':e.target.value)}><option value="auto">이미지가 있으면 배너</option><option value="notice">텍스트 공지</option><option value="banner">이미지 배너</option><option value="ticker">흐르는 공지 띠</option></select></label>
     <label>기본 이미지 주소<input className="field" value={form.metadata.image||''} onChange={e=>setMeta('image',e.target.value)} maxLength={300} required={form.metadata.display==='banner'} placeholder="/images/banner.png 또는 https://…"/></label>
     <label>모바일 이미지 주소(선택)<input className="field" value={form.metadata.imageMobile||''} onChange={e=>setMeta('imageMobile',e.target.value)} maxLength={300}/></label>
     <label>기본 비율(기본 4 / 5)<input className="field" value={form.metadata.ratio||''} onChange={e=>setMeta('ratio',e.target.value)} placeholder="4 / 5" maxLength={30}/></label>
     <label>모바일 비율(선택)<input className="field" value={form.metadata.ratioMobile||''} onChange={e=>setMeta('ratioMobile',e.target.value)} placeholder="4 / 5" maxLength={30}/></label>
     <label>정확한 표시 경로(선택)<input className="field" value={form.metadata.exactPath||''} onChange={e=>setMeta('exactPath',e.target.value)} placeholder="/event" maxLength={300}/></label>
     <label>배너 버튼 문구(기본 이벤트 보러가기)<input className="field" value={form.metadata.ctaLabel||''} onChange={e=>setMeta('ctaLabel',e.target.value)} maxLength={30}/></label>
-    <p className="muted">비율은 너비 / 높이입니다. 모바일 이미지·비율을 비우면 기본값을 사용합니다. 링크를 비우면 배너는 /event로 이동합니다. 표시 경로는 위 표시 위치 범위 안에서 적용됩니다.</p>
+    <p className="muted">흐르는 공지 띠는 내용을 표시하며 비어 있으면 제목을 사용합니다. [coffee], [airpods], [ipad]는 상품 아이콘으로 표시됩니다. 닫으면 오늘 숨김이 적용됩니다. 이벤트 상세에서는 표시하지 않습니다. 비율은 너비 / 높이입니다. 모바일 이미지·비율을 비우면 기본값을 사용합니다. 링크를 비우면 배너는 /event로 이동합니다. 표시 경로는 위 표시 위치 범위 안에서 적용됩니다.</p>
    </fieldset>
    <label>시작(비우면 바로)<input className="field" type="datetime-local" value={form.startsAt} onChange={e=>set('startsAt',e.target.value)} disabled={busy}/></label>
    <label>종료(비우면 계속)<input className="field" type="datetime-local" value={form.endsAt} onChange={e=>set('endsAt',e.target.value)} disabled={busy}/></label>

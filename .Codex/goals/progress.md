@@ -63,3 +63,10 @@
 - 이번 턴 progress: schema36 공지 type CRUD와 REA 외부 필드명 GET API. 기간/대상 공통 조회, dashboard 인증 경계는 자체 정책으로 문서화.
 - 전체406 테스트·lint/typecheck/build 통과. 격리 production Next 실제 HTTP 로그인/생성/조회/수정/대상격리/삭제 및 SSR 속성 확인. 프로세스·임시 DB 정리.
 - 원본 응답의 ticker와 coupon/feature/maintenance/blog 전용 UI 미구현 확인: 후속 원본 근거 기반 구현 필요. 실제 브라우저와 전체79URL+4패턴/AI·외부 공급자 목표 active 유지.
+
+## 최신 — ticker 저장·표시
+
+- 이전 턴 progress: c7466b6 조회 API/type CRUD 및 production HTTP 검증.
+- 이번 턴 progress: REA 원문 ticker 조건·속도·모션 감소·헤더 측정·상품 아이콘 재현, 관리자 metadata CRUD/API 연결. 전체407 테스트·production HTTP/실제 WebP3개 제공·lint/typecheck/build 통과.
+- Ego live 목록 재확인: 사용자 소유 다른 작업 공간10뿐, NAEO 공간 없음. 기존 복구 질문 미답/skill 금지 상태 유지하되 독립 구현 진행. 브라우저 QA 완료 아님.
+- 원본 유형별 coupon/feature/maintenance/blog UI와 전체79URL+4패턴, 외부 공급자·AI·실브라우저 과제 계속. goal active.

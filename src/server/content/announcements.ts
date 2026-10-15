@@ -1,6 +1,6 @@
 import type {Database} from '../database';
 
-export type AnnouncementMetadata={image?:string;imageMobile?:string;ratio?:string;ratioMobile?:string;display?:'notice'|'banner';exactPath?:string;ctaLabel?:string};
+export type AnnouncementMetadata={image?:string;imageMobile?:string;ratio?:string;ratioMobile?:string;display?:'notice'|'banner'|'ticker';exactPath?:string;ctaLabel?:string};
 export type AnnouncementType='coupon'|'feature'|'maintenance'|'event'|'blog';
 export type AnnouncementTarget='landing'|'all'|'dashboard';
 export type Announcement={id:string;type:AnnouncementType;metadata:AnnouncementMetadata;title:string;body:string;linkUrl:string;linkLabel:string;target:AnnouncementTarget;startsAt:number|null;endsAt:number|null;status:'draft'|'published';version:number;createdAt:number;updatedAt:number};

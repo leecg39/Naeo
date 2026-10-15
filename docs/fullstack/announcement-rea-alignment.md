@@ -55,4 +55,22 @@ REA DD-03의 배포 코드는 pathname이 /dashboard로 시작하면 dashboard, 
 
 전체406개(root6+server400) 테스트, lint·typecheck·production build 통과. 기존 DB33/34 업그레이드 테스트도 새36까지 실행된다.
 
-새로 명시한 잔여 차이: 원본 landing 응답은 metadata.display=ticker를 사용한다. 현재 입력 스키마와 화면에는 ticker가 없다. 또한 coupon/feature/maintenance/blog의 원본 유형별 전용 화면은 아직 일반 공지 렌더러로 처리한다. 이미지 배너 외 유형별 UI와 실제 브라우저 시나리오는 계속 구현·검증해야 한다.
+새로 명시한 잔여 차이: 원본 landing 응답은 metadata.display=ticker를 사용한다. 이후 아래 ticker 구현을 추가했다. 또한 coupon/feature/maintenance/blog의 원본 유형별 전용 화면은 아직 일반 공지 렌더러로 처리한다. 이미지 배너 외 유형별 UI와 실제 브라우저 시나리오는 계속 구현·검증해야 한다.
+
+
+## 흐르는 공지 띠(ticker)
+
+REA에 입력한 동일 배포 청크의 `j` 함수에서 조건·스타일·아이콘 치환을 확인했다. 정확한 원문 SHA-256과 UTF-8 byte 범위는 evidence/ticker-source.json에 보존했다. 별도의 새 REA 실행이나 브라우저 관찰을 했다는 뜻은 아니다.
+
+- 관리자 표시 방식에 ticker를 추가하고 기존 metadata JSON·버전·CRUD·조회 API에 연결했다. 이미지 없이 설정 가능하며 링크 문구를 강제하지 않는다.
+- 내용 우선, 비어 있으면 제목. [coffee]/[airpods]/[ipad]를 원본 아이콘으로 표시한다. 알려지지 않은 토큰은 텍스트로 남는다.
+- body header 높이를 측정해 그 아래 고정한다. 150/600/1500/3000ms와 resize에서 재측정하며 높이가 없으면 숨긴다. 첫 측정은 React effect 안의 requestAnimationFrame으로 수행한다.
+- exactPath 불일치·/event/ 상세 경로·빈 내용에서 숨긴다. 링크 기본값은 /event다.
+- 문장을 3회 반복하고 `max(14, round(0.28 * 문자열 길이))`초 동안 1/3만큼 이동한다. 마우스 hover·키보드 focus 동안 정지한다. prefers-reduced-motion은 애니메이션과 중복 문장을 숨긴다.
+- 데스크톱52px/모바일48px, 원본 초록색과 그라데이션·아이콘 크기를 반영했다. 닫기는 일일 숨김 콜백에 연결한다.
+- 원본의 anchor 내부 button 대신 region 내부에 링크와 닫기 버튼을 형제로 두어 중첩 인터랙티브 요소를 피했다. 이것은 클론의 마크업 선택이다.
+- 원본 WebP3개를 다운로드해 public/event/review-2026-09에 보존했다. URL·크기·해시는 evidence/ticker-assets.json에 있다.
+
+검증: 전체407개(root6+server401), lint/typecheck/build 통과. production Next HTTP QA에서 ticker metadata 수정·조회와 WebP3개 HTTP200 및 파일 시그니처를 검사했다(evidence/ticker-runtime.json). 임시 서버·DB는 정리했다.
+
+브라우저 상태 재확인: Ego에는 사용자 소유 IRON RIFT 공간10만 있고 기존 NAEO 공간은 없다. ego-browser 스킬의 새 복구 TaskSpace 금지 규칙에 따라 새 공간을 만들지 않았다. 실제 위치·애니메이션·hover/focus 정지·모바일·모션 감소·닫기 클릭은 미검증이다. coupon/feature/maintenance/blog 전용 UI도 여전히 남았다. 전체 목표는 미완료다.
