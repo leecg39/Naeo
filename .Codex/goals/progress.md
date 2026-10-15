@@ -36,3 +36,9 @@
 - 직전 키 질문 턴은 no progress(실행 중 프로세스 대기가 아님). 질문 미답 상태를 유지하며 종속 OpenAI 구현은 진행하지 않았다.
 - 이번 턴 progress: 기존 소유자/공유 사진 다운로드의 symlink 노출·잘못된 저장키 허용을 실제 파일 RED로 재현, no-follow/크기·형식/파일종류·링크수 검사로 수정. 신규3/전체398·lint/typecheck/build 통과.
 - 근거 media-download-boundary.md. 전체 goal active; 이미지 키 질문은 반복하지 않음. 독립적인 남은 CRUD/오류 경로 점검과 기존 외부 연동·Ego 검증 범위 유지.
+
+## 최신 — REA 공지 숨김 정합성
+
+- 이전 턴 progress: REA 배너 청크 신규 분석 및 두 URL의 원본 홈 이동 지시 확인. 근거가 구현 방향을 수정했다.
+- 이번 턴 progress: 영구 숨김을 일반 닫기/UTC 일일 숨김으로 분리. 관련 5개 테스트 및 build 통과. 기존 SMS QA의 빈 catch lint 오류도 설명 주석으로 해결.
+- 전체 goal active. 이미지 배너 metadata DB/관리자 CRUD, landing/dashboard 대상과 복수 공지, 실제 브라우저 검증 및 기존 AI/외부 공급자·전 페이지 검증은 남았다.
