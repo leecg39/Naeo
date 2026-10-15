@@ -1,4 +1,6 @@
 'use client';
+import ListPagination from './ListPagination';
+import {loadValidPage} from './pagination';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -14,13 +16,18 @@ export default function EntriesReview({events,initial}:{events:{slug:string;titl
  const [result,setResult]=useState(initial),[status,setStatus]=useState(''),[notes,setNotes]=useState<Record<string,string>>({});
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const slug=result?.event.slug??'';
+ const [appliedStatus,setAppliedStatus]=useState('');
  async function run(action:()=>Promise<void>){
   setBusy(true);setError('');setNotice('');
   try{await action();}
   catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');if(e instanceof ApiError&&e.status===401){router.replace('/login?next=/admin/event');router.refresh();}}
   finally{setBusy(false);}
  }
- const load=async(s=slug,st=status)=>setResult(await apiResponse<Result>(`/api/admin/event-entries?${new URLSearchParams({slug:s,pageSize:'100',...(st?{status:st}:{})})}`));
+ async function load(s=slug,st=appliedStatus,page=result?.pagination.page??1){
+  if(!s)return;
+  const next=await loadValidPage(requested=>apiResponse<Result>(`/api/admin/event-entries?${new URLSearchParams({slug:s,page:String(requested),pageSize:String(result?.pagination.pageSize??100),...(st?{status:st}:{})})}`),page);
+  setResult(next);setAppliedStatus(st);setStatus(st);
+ }
  const review=(e:Row,decision:'approved'|'rejected')=>void run(async()=>{
   await api(`/api/admin/event-entries/${e.id}/review`,{method:'POST',body:{decision,note:notes[e.id]??e.reviewNote,version:e.version}});
   await load();setNotice(decision==='approved'?`${e.ownerNickname||e.ownerEmail} 참여를 승인했습니다.`:`${e.ownerNickname||e.ownerEmail} 참여를 반려했습니다.`);
@@ -28,9 +35,9 @@ export default function EntriesReview({events,initial}:{events:{slug:string;titl
  return <div className="settings-sections">
   <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(()=>load())}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
-   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load());}}>
-    <label>이벤트<select className="field" value={slug} onChange={e=>{const s=e.target.value;router.replace(`/admin/event?slug=${s}`);void run(()=>load(s));}} disabled={busy}>{!slug&&<option value="">이벤트 선택</option>}{events.map(e=><option key={e.slug} value={e.slug}>{e.title}</option>)}</select></label>
-    <label>상태<select className="field" value={status} onChange={e=>{setStatus(e.target.value);if(slug)void run(()=>load(slug,e.target.value));}} disabled={busy||!slug}><option value="">전체</option>{Object.entries(STATUS).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
+   <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(slug,status,1));}}>
+    <label>이벤트<select className="field" value={slug} onChange={e=>{const s=e.target.value;void run(async()=>{await load(s,status,1);router.replace(`/admin/event?slug=${encodeURIComponent(s)}`);});}} disabled={busy}>{!slug&&<option value="">이벤트 선택</option>}{events.map(e=><option key={e.slug} value={e.slug}>{e.title}</option>)}</select></label>
+    <label>상태<select className="field" value={status} onChange={e=>{const nextStatus=e.target.value;if(slug)void run(()=>load(slug,nextStatus,1));}} disabled={busy||!slug}><option value="">전체</option>{Object.entries(STATUS).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
    </form>
    {result?<>
     <p className="muted" style={{marginTop:16}}>{result.event.title} · 참여 {result.pagination.total}건 · 승인 시 {result.event.rewardTokens}토큰</p>
@@ -49,6 +56,7 @@ export default function EntriesReview({events,initial}:{events:{slug:string;titl
        </div></div>}</td>
      </tr>)}</tbody>
     </table>{!result.data.length&&<p className="empty-state">참여가 없습니다.</p>}</div>
+    <ListPagination pagination={result.pagination} busy={busy} onPage={page=>void run(()=>load(slug,appliedStatus,page))}/>
     <p className="muted">승인하면 이벤트 토큰이 한 번 지급되고, 승인을 반려로 바꾸면 지급한 토큰을 회수합니다(회원이 이미 써서 잔액이 부족하면 거절).</p>
    </>:<p className="empty-state">심사할 이벤트를 고르세요.</p>}
   </section>

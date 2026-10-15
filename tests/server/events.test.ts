@@ -10,6 +10,7 @@ import {listRewards,grantReward,revokeReward,grantRankingRewards,eventWinners} f
 import {confirmPeriod,periodRange} from '../../src/server/ranking/ranking';
 import {saveScanResult} from '../../src/server/analysis/results';
 import {analyzePosts} from '../../src/server/analysis/rules';
+import {loadValidPage} from '../../src/components/admin/pagination';
 
 const NOW=Date.parse('2026-10-14T03:00:00Z');
 const DAY=86_400_000;
@@ -23,6 +24,33 @@ async function fixture(t:TestContext){
 }
 const audits=(db:Database,action:string)=>(db.prepare('SELECT count(*) AS n FROM audit_logs WHERE action=?').get(action) as {n:number}).n;
 const ev=(over:Record<string,unknown>={})=>({slug:'review-2026-10',title:'사용 후기 이벤트',summary:'후기를 쓰면 토큰을 드려요',status:'published',startsAt:new Date(NOW-DAY).toISOString(),endsAt:new Date(NOW+7*DAY).toISOString(),requiresProof:true,rewardTokens:15,...over});
+
+test('reward page two remains actionable and revoked filter returns to the previous page',async t=>{
+ const {db,admin,a}=await fixture(t),before=balance(db,a);
+ for(let i=0;i<101;i++)grantReward(db,admin,{email:'a@example.test',tokens:1,description:`pagination-${i}`});
+ const fetchPage=async(page:number)=>listRewards(db,admin,{page,pageSize:100,status:'granted',kind:'manual'});
+ const first=await fetchPage(1),second=await loadValidPage(fetchPage,2);assert.equal(first.data.length,100);assert.equal(second.data.length,1);
+ assert.ok(!first.data.some(r=>r.id===second.data[0].id));
+ revokeReward(db,admin,second.data[0].id,{version:second.data[0].version});
+ const back=await loadValidPage(fetchPage,2);assert.equal(back.pagination.page,1);assert.equal(back.pagination.total,100);assert.equal(balance(db,a),before+100);
+});
+
+test('entry page two can be reviewed and submitted filter recovers without changing another event',async t=>{
+ const {db,admin}=await fixture(t);
+ createEvent(db,admin,ev({requiresProof:false}));
+ createEvent(db,admin,ev({slug:'other-event',requiresProof:false}));
+ for(let i=0;i<101;i++){
+  const {user}=await register(db,{email:`paging-${i}@example.test`,password:'pagination-password-long',nickname:`회원${i}`,termsAccepted:true});
+  submitEntry(db,user.id,'review-2026-10',{note:`참여${i}`},NOW);
+ }
+ const fetchPage=async(page:number)=>listEventEntries(db,admin,'review-2026-10',{status:'submitted',page,pageSize:100});
+ const first=await fetchPage(1),second=await loadValidPage(fetchPage,2);assert.equal(first.data.length,100);assert.equal(second.data.length,1);
+ const entry=second.data[0],before=balance(db,entry.userId);
+ reviewEntry(db,admin,entry.id,{decision:'approved',note:'확인',version:entry.version});
+ const back=await loadValidPage(fetchPage,2);assert.equal(back.pagination.page,1);assert.equal(back.pagination.total,100);assert.equal(balance(db,entry.userId),before+15);
+ assert.equal(listEventEntries(db,admin,'other-event',{}).pagination.total,0);
+ assert.equal(listEventEntries(db,admin,'review-2026-10',{status:'approved'}).pagination.total,1);
+});
 
 test('admin event CRUD with slug uniqueness, versions and public visibility',async t=>{
  const {db,admin,a}=await fixture(t);
