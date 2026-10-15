@@ -1,0 +1,46 @@
+{
+  "verifiedAt": "2026-10-15T09:53:16.518Z",
+  "results": [
+    {
+      "kind": "document",
+      "create": true,
+      "previewDraft": true,
+      "editReflected": true,
+      "staleVersionRejected": true,
+      "publishReflected": true,
+      "deleteReflected": true,
+      "anonymousRedirect": true,
+      "memberDenied": true,
+      "invalidIdsNotFound": true,
+      "noindex": true
+    },
+    {
+      "kind": "article",
+      "create": true,
+      "previewDraft": true,
+      "editReflected": true,
+      "staleVersionRejected": true,
+      "publishReflected": true,
+      "deleteReflected": true,
+      "anonymousRedirect": true,
+      "memberDenied": true,
+      "invalidIdsNotFound": true,
+      "noindex": true
+    },
+    {
+      "kind": "update",
+      "create": true,
+      "previewDraft": true,
+      "editReflected": true,
+      "staleVersionRejected": true,
+      "publishReflected": true,
+      "deleteReflected": true,
+      "anonymousRedirect": true,
+      "memberDenied": true,
+      "invalidIdsNotFound": true,
+      "noindex": true
+    }
+  ],
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}

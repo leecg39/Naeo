@@ -32,3 +32,11 @@ Ego 스킬의 “Never use a new TaskSpace to recover … stop and ask the user.
 ## 감사 기록 보존 수정
 
 재실행 과정에서 route-audit가 evidence 배열을 통째로 바꿔 기존 browser-render83건을 제거하는 문제가 확인됐다. HTTP/tests/verification/external_pending만 새 결과로 교체하고, 그 외 근거는 보존하도록 수정했다. 이전 브라우저 기록의 시각과 내용은 유지했으며 이번 브라우저 검증으로 표현하지 않는다. 재실행 뒤 원본83건과 내용 일치를 검사했다.
+
+## 관리자 미리보기3종 추가 검증
+
+앞의17개 고정 메뉴에서 제외했던 `/admin/pages/preview/[id]`, `/admin/blog/preview/[id]`, `/admin/updates/preview/[id]`를 별도 production HTTP 시나리오로 검증했다. 임시 DB에 관리자·일반 회원 계정을 만들고 API로 초안을 생성했다.
+
+각 종류에서 초안 미리보기200·실제 본문, 비로그인307·회원403, noindex 메타, 공개 페이지의 초안 비노출을 확인했다. 이어서 본문 수정→미리보기 반영, 이전 버전 수정409, 발행→공개 화면 반영, 삭제→공개 화면 제거를 확인했다. 삭제된 ID·없는 UUID·잘못된 ID는 모두404였다. HTML 검사는 script/style을 제거한 실제 마크업 텍스트를 사용해 RSC 직렬화 문자열만으로 본문 반영을 판단하지 않았다.
+
+[실행 결과](evidence/preview-crud-runtime.json), 재실행 스크립트 `scripts/qa/preview-crud.ts`. 스크립트 eslint·typecheck 통과. 기존 앱 코드는 수정할 필요가 없었고 임시 서버·DB를 정리했다. 브라우저 화면·클릭·모바일 증거는 아니다. 기존 전체417개 테스트 결과는 이전 실행 시점의 근거이며, 이번에 전체 테스트를 다시 실행했다고 표현하지 않는다.
