@@ -77,7 +77,7 @@ async function main(){
  if(!login.ok)throw new Error(`login failed: ${login.status}`);
  const cookie=login.headers.get('set-cookie')!.split(';')[0];
  const file='docs/fullstack/page-coverage.json';
- const routes=JSON.parse(readFileSync(file,'utf8')) as {path:string;status:string;evidence:unknown[]}[];
+ const routes=JSON.parse(readFileSync(file,'utf8')) as {path:string;status:string;evidence:{type:string;[key:string]:unknown}[]}[];
  const at=new Date().toISOString();
  let failed=0,pendingExternal=0;
  const next=[];
@@ -91,7 +91,7 @@ async function main(){
   if(missing.length)throw new Error(`missing test files for ${r.path}: ${missing.join(', ')}`);
   const status=!ok?'failed':rule.external?'external_pending':'verified';
   if(!ok)failed++;if(status==='external_pending')pendingExternal++;
-  next.push({...r,status,evidence:[{type:'http',at,url,access:rule.access,anonymous:anon,admin,ok},{type:'tests',files:rule.tests},{type:'verification',sections:rule.sections},...(rule.external?[{type:'external_pending',reason:rule.external}]:[])]});
+  next.push({...r,status,evidence:[{type:'http',at,url,access:rule.access,anonymous:anon,admin,ok},{type:'tests',files:rule.tests},{type:'verification',sections:rule.sections},...(rule.external?[{type:'external_pending',reason:rule.external}]:[]),...r.evidence.filter(e=>!['http','tests','verification','external_pending'].includes(e.type))]});
  }
  const me=await fetch(`${base}/api/auth/me`,{headers:{Cookie:cookie}});
  writeFileSync(file,JSON.stringify(next,null,1)+'\n');

@@ -1,0 +1,128 @@
+{
+  "verifiedAt": "2026-10-15T09:51:37.827Z",
+  "exitCode": 0,
+  "output": "routes=83 verified=76 external_pending=7 failed=0 session_kept=true",
+  "adminAccess": [
+    {
+      "path": "/admin",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/writing",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/billing",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/event",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/pages",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/keywords",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/events",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/users",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/blog",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/updates",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/announcements",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/rewards",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/faq",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/inquiries",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/inquiries/templates",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/payments",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    },
+    {
+      "path": "/admin/scan-health",
+      "anonymous": 307,
+      "member": 403,
+      "memberForbidden": true,
+      "admin": 200
+    }
+  ],
+  "browserVerified": false,
+  "temporaryDataRemoved": true
+}
