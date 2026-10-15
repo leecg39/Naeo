@@ -485,3 +485,17 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 | 관리자 UI | 390px 삭제 재시도 경고·복구 후 해제, 가로 넘침/JS 예외 0 | `docs/audit/media-deletion-ui.json`, 전후 PNG |
 
 전체 완료는 보류한다. 결제·환불 경합, 백업/복원·이동성, 원래 외부 연동·시각 비교 요구사항은 P9.2/P9.3과 `final-audit.md`에 남긴다. 상세 감사는 `docs/audit/audit-report-2026-10-14.md`를 따른다.
+
+
+## P10 — REA 추가 API 반영 (2026-10-15)
+
+- 계획: [engagement-plan.md](engagement-plan.md), 원문 근거: [rea-engagement-evidence.json](rea-engagement-evidence.json). 원본 서버 규칙은 미확인이다. 이 구현의 출석은 고정 5P + 7일 연속 15P, 서브 주제 대기 7일이며 정책을 화면/API/문서에 명시했다.
+- 스키마 27: 포인트 원장·출석·튜토리얼 수령·서브 주제·방문. 기존 토큰 원장과 분리. DB 트랜잭션/UNIQUE로 중복 지급을 막고 지급 원장은 수정/삭제 불가(계정 탈퇴 cascade 제외).
+- 단위/핸들러 검증: KST 경계·연속 출석 단절·필수 조건·다른 사람/만료 메이트 보고서·공급자 미설정·서브 주제 버전/대기·원장 실패 롤백·재접속·회원 격리·정지/미동의·Origin·금액 위조·동시 재요청·탈퇴. 26→27 업그레이드가 기존 회원·블로그·77토큰을 보존함을 별도 검증.
+- 실제 Next.js 3110 HTTP: [evidence/engagement-http.json](evidence/engagement-http.json), 25항목 통과. 8개 동시 출석 요청에서 5P 한 번, 블로그 30P·랭킹 90P, 내역 3건/125P, 로그아웃→재로그인 보존, 계정 삭제→401. `/dashboard`, `/dashboard/settings`의 서버 렌더에 포인트 패널 표시. 테스트 계정 삭제 완료. `node scripts/verify-engagement-http.mjs`로 재현.
+- 실제 HTTP에서 빈 POST 스트림이 JSON 오류가 되는 문제를 발견. 테스트에서 400/200 불일치를 먼저 확인한 뒤, 빈 스트림 허용·1KB 제한·비어 있지 않은 JSON 엄격 검증으로 수정했다.
+- 전체 테스트 첫 실행의 실패 4건은 스키마 26 상수 기대값 때문이었다. 최신 버전 확인으로 바꾸고 미디어 복구 테스트는 해당 migration 26 설치를 직접 확인하도록 수정했다.
+- 브라우저 한계: 이전 NAEO Ego 공간 15가 현재 존재하지 않는다. 목록에는 다른 사용자 작업만 있다. 새 공간 생성 확인을 요청했고, 현재 HTTP/SSR 검증을 브라우저 hydration·시각·모바일 검증으로 확대 해석하지 않는다.
+- AI 인용/휴대폰 단계는 서버에서도 잠금이며 허위 완료/지급하지 않는다. 전체 사이트 목표·P9.2 결제 미완료 항목은 유지한다.
+
+- 최종 게이트: 전체 **304/304**(기존 스크립트 6 + 서버 298, 신규 보상 테스트 11 포함), lint·typecheck·production build 모두 종료 코드 0. 로그와 소스 해시는 [evidence/engagement-checks.json](evidence/engagement-checks.json)에 보존했다.

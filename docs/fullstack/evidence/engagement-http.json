@@ -1,0 +1,110 @@
+{
+  "at": "2026-10-15T06:38:13.834Z",
+  "origin": "http://127.0.0.1:3110",
+  "checks": [
+    {
+      "label": "register",
+      "result": "passed"
+    },
+    {
+      "label": "initial balance",
+      "result": "passed"
+    },
+    {
+      "label": "missing blog locks reward",
+      "result": "passed"
+    },
+    {
+      "label": "8 concurrent check-ins grant once",
+      "result": "passed"
+    },
+    {
+      "label": "blog registered",
+      "result": "passed"
+    },
+    {
+      "label": "blog reward",
+      "result": "passed"
+    },
+    {
+      "label": "duplicate reward",
+      "result": "passed"
+    },
+    {
+      "label": "sub-topic saved",
+      "result": "passed"
+    },
+    {
+      "label": "ranking not visited",
+      "result": "passed"
+    },
+    {
+      "label": "ranking visit",
+      "result": "passed"
+    },
+    {
+      "label": "ranking reward",
+      "result": "passed"
+    },
+    {
+      "label": "unavailable verification remains locked",
+      "result": "passed"
+    },
+    {
+      "label": "sub-topic cooldown",
+      "result": "passed"
+    },
+    {
+      "label": "ledger balance",
+      "result": "passed"
+    },
+    {
+      "label": "three ledger entries",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard HTTP",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard reward UI rendered",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard no RSC serialization error",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard/settings HTTP",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard/settings reward UI rendered",
+      "result": "passed"
+    },
+    {
+      "label": "/dashboard/settings no RSC serialization error",
+      "result": "passed"
+    },
+    {
+      "label": "login again",
+      "result": "passed"
+    },
+    {
+      "label": "balance persists across new session",
+      "result": "passed"
+    },
+    {
+      "label": "withdrawal",
+      "result": "passed"
+    },
+    {
+      "label": "deleted session denied",
+      "result": "passed"
+    }
+  ],
+  "limitations": [
+    "HTTP and server-rendered HTML only; this does not prove browser hydration or visual fidelity."
+  ],
+  "testAccountDeleted": true
+}

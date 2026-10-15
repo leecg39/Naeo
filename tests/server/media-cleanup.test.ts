@@ -58,11 +58,11 @@ test('failed physical deletion remains retryable after restart and never deletes
  assert.equal(existsSync(join(f.uploads,key)),true,'a referenced file is never removed');
 });
 
-test('upgrading schema 25 preserves existing photos and installs cascading deletion recovery',async t=>{
+test('restoring the missing media cleanup migration preserves photos and cascading deletion recovery',async t=>{
  const f=await fixture(t);
  f.db.exec('DROP TRIGGER media_delete_file; DROP TABLE media_deletions; DELETE FROM schema_migrations WHERE version=26;');
  const db=f.reopen();
- assert.equal(db.prepare('SELECT max(version) AS v FROM schema_migrations').get()?.v,26);
+ assert.equal(db.prepare('SELECT version AS v FROM schema_migrations WHERE version=26').get()?.v,26);
  assert.equal(db.prepare('SELECT count(*) AS n FROM media_files').get()?.n,1);
  assert.deepEqual(readFileSync(f.path),PNG);
  transaction(db,()=>eraseAccount(db,f.user.id,f.user.id));

@@ -1,0 +1,48 @@
+{
+  "verifiedAt": "2026-10-15T06:41:22.147058+00:00",
+  "tests": 304,
+  "newEngagementTests": 11,
+  "httpChecks": 25,
+  "commands": {
+    "npm test": {
+      "exitCode": 0,
+      "log": "engagement-tests.txt",
+      "logSha256": "07015e62c314823303ecdd95f1c156cad713c17afd3cdbb4af290b030d55bcc1"
+    },
+    "npm run lint": {
+      "exitCode": 0,
+      "log": "engagement-lint.txt",
+      "logSha256": "1083f0232a15f1176a91df5a4c4ed2ce203ac9187fbb0d280bc5a890ba8eeb42"
+    },
+    "npm run typecheck": {
+      "exitCode": 0,
+      "log": "engagement-typecheck.txt",
+      "logSha256": "c65ec92611818c1dfafab89c38c9b0eb88be1888caa8ce3d66880a12d02e55e9"
+    },
+    "npm run build": {
+      "exitCode": 0,
+      "log": "engagement-build.txt",
+      "logSha256": "ced43a1b21d61923521aa6299db31d1c10362223e694098f7bb3b0cbb83510ea"
+    }
+  },
+  "sourceSha256": {
+    "src/server/engagement/schema.ts": "baef0e5d9a6e87367b34bf8d106cb098418c2301499471a8e1d4fb472c5e6ff4",
+    "src/server/engagement/api.ts": "1b7a73bdca431c3416483747c7ca74ccd41f569f88b7e4fc90e9e4dc35a8a506",
+    "src/server/engagement/service.ts": "11aca077cfc26e092e096e2c1f4a64fe0d3d538418c52d30fe921f64428f73d1",
+    "tests/server/engagement.test.ts": "5be916d4343d49af6b58c4d834a2cf1c0ca62803fe62def3d75f5e4f02724ba2",
+    "tests/server/engagement-http.test.ts": "d44d5df282b9c44137fa5fcd1aa1271fa50f9b3edfda6568b0c742a08d6b4ab8",
+    "src/components/account/EngagementPanel.tsx": "0a6d2871ff525ac258a53905c27ef222e2be6c061b6ec3bdb767dcb6aeecee70",
+    "src/components/account/RankingVisit.tsx": "98f5d41c0ba1d22ea9e870bea8c13836bc09c58d17d0802e2caba5d18fcde56b",
+    "src/app/[...segments]/page.tsx": "f610f3038eceaaa2bd7d454bacc7168ff3f21fca0d525b67fbe351283c61be42",
+    "src/app/dashboard/settings/page.tsx": "f857cb2ceb42c4bfe06f53f49d657779f5e8b70d3dcfb52bb30db35af39e77e6",
+    "src/app/account.css": "b5ddf29541e4150d1e50dc1aa72934322da350bbcd23bea54254aa221d26c356",
+    "src/server/api.ts": "3777ab101c799eb1454b7412e6b2702e825903b19d7fdbfe574f275a72fbd1c8",
+    "src/server/migrations.ts": "d6a28fac1f084f201ea0de2c8e1e92c9e2a00853732ace157ae9bdd5e864d57a"
+  },
+  "browserVerified": false,
+  "remaining": [
+    "Ego task space creation confirmation",
+    "AI citation provider and phone verification provider",
+    "Earlier P0–P9 incomplete requirements"
+  ]
+}

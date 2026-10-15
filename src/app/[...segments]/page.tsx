@@ -37,6 +37,9 @@ import { getDraft } from '@/server/writing/drafts';
 import { getProject } from '@/server/creative/projects';
 import { ensureExtensionClient,problemRedirect,requestProblem,SCOPE_LABEL,validateAuthorizeRequest,type AuthorizeRequest } from '@/server/oauth/authz';
 import type { CapturedPageData } from '@/types/site';
+import EngagementPanel from '@/components/account/EngagementPanel';
+import RankingVisit from '@/components/account/RankingVisit';
+import {points,tutorial} from '@/server/engagement/service';
 type Props={params:Promise<{segments:string[]}>;searchParams:Promise<Record<string,string|string[]|undefined>>};
 const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
 // 블로그 글은 DB에서 읽으므로 요청마다 렌더링한다(관리자 수정·비공개 즉시 반영).
@@ -95,7 +98,7 @@ export default async function Page({params,searchParams}:Props){
   const user=await pageUser(path);
   const memberView=(data:CapturedPageData)=><PageExperience data={memberChrome(database(),user.id,data)}/>;
   // 대시보드는 로그인 회원 본인의 블로그·진단 결과로 채운다(원본 계정 데이터 미노출).
-  if(path==='/dashboard')return memberView(await buildDashboardPage(database(),user.id));
+  if(path==='/dashboard')return <>{memberView(await buildDashboardPage(database(),user.id))}<EngagementPanel initialPoints={points(database(),user.id,{pageSize:10})} initialTutorial={tutorial(database(),user.id)} floating/></>;
   if(path==='/dashboard/mate')return memberView(await buildMateDashboardPage(database(),user.id));
   if(path==='/dashboard/ai-picks')return memberView(await buildAiPicksPage());
   if(path==='/dashboard/competitors')return memberView(await buildCompetitorsPage(database(),user.id));
@@ -112,7 +115,7 @@ export default async function Page({params,searchParams}:Props){
  if(path==='/ranking'){
   const sp=await searchParams,viewer=await currentUser(),db=database();
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
-  return withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null));
+  return <>{withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null))}{viewer?.termsAcceptedAt?<RankingVisit/>:null}</>;
  }
  const exporting=path.endsWith('/export'),viewKind={'/social/aeo-carousel':'carousel','/social/mate-ad':'ad','/youtube/aeo-intro':'video'}[exporting?path.slice(0,-7):path];
  if(viewKind){const sp=await searchParams,id=first(sp.project);if(id){const user=await pageUser(`${path}?project=${encodeURIComponent(id)}`);let project;try{project=getProject(database(),user.id,id);}catch{notFound();}if(project.kind!==viewKind)notFound();return exporting?<ExportPanel project={project} initial={listExports(database(),user.id,project.id)}/>:<CreativeViewer project={project}/>;}}

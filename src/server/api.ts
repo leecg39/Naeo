@@ -17,6 +17,7 @@ import {memberAuthzApi,publicAuthzApi,SERVER_TO_SERVER} from './oauth/authz-api'
 import {mcpApi} from './mcp/mcp-api';
 import {creativeApi} from './creative/creative-api';
 import {adminOpsApi,publicAnalyticsApi} from './ops/analytics-api';
+import {engagementApi} from './engagement/api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -72,6 +73,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(path==='/api/auth/terms'&&method==='POST')return json({data:acceptTerms(db,user.id,await body(request,acceptTermsInput))});
     // Withdrawal and session management remain available even before consent.
     if(!path.startsWith('/api/auth/'))requireTerms(user);
+    const engagementResponse=await engagementApi(db,request,user);
+    if(engagementResponse)return engagementResponse;
     const authzResponse=await memberAuthzApi(db,request,user);
     if(authzResponse)return authzResponse;
     const oauthResponse=await memberOAuthApi(db,request,user);

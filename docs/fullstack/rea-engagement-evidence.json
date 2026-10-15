@@ -1,0 +1,218 @@
+{
+  "analysisDate": "2026-10-15",
+  "sourceReport": "../reverse-engineering/rea-2026-10-15/README.md",
+  "scope": "Shipped client analysis only; server rewards and policies remain unknown.",
+  "findings": [
+    {
+      "id": "R15-01",
+      "title": "포인트 조회",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "method": "GET",
+        "input": [],
+        "response": "성공 JSON 전체 반환; 필수 필드는 이 helper에서 확인 불가"
+      },
+      "source": {
+        "path": "scopes/engagement/3aivxm2c_cv0b.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/3aivxm2c_cv0b.js",
+        "sha256": "5c321b3071ab7faf44058ddfb64d56c11b60dcc4eb5255c27005fb7797cc5d36",
+        "utf8_byte_offset": 48812,
+        "needle": "/api/points",
+        "excerpt": "nc function n(){if((0,t.isPointsDemo)())return(0,t.demoPoints)((0,t.loadDemo)());let e=await fetch(\"/api/points\");if(!e.ok)throw Error(\"points\");return e.json()}async function o(){if((0,t.isPointsDemo)()){let{state:e,result:r}=(0,t.demoCheckIn)((0,t.loadDemo)(),Math.random());return(0,t.saveDemo)(e),r}let e=await fetch(\"/api/attendance\",{method:\"POST\"}),r=await e.json().catch(()=>null);if(!e.ok)throw Error(r?.message??\"출석을 저장하지 못했어요. 잠시 후 다시 눌러 주세요.\");return r}async function i(){if((0,t.isPointsDemo)()){let{state:e,response:r}=(0,t.demoTutorial)((0,t.loadDemo)());return(0,t.saveDemo)(e),r}let e=await fetch(\"/api/tutorial\");if(!e.ok)throw Error(\"tutorial\");return e.json()}async function a(e){if((0,t.isPointsDemo)())return!0;try{return(await fetch(\"/api/tutorial/finish\",{method:\"POST\",header"
+      },
+      "rea_evidence_id": "ev_a663ec6bd84732119262cfb97ae661158a627acf410c2f0758b637aa8a53432b",
+      "rea_evidence_file": "evidence/rea-engagement.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-02",
+      "title": "출석 저장",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "method": "POST",
+        "input": [],
+        "response": "JSON 전체 반환, 실패 시 message 또는 기본 오류; 지급·중복 방지는 미확인"
+      },
+      "source": {
+        "path": "scopes/engagement/3aivxm2c_cv0b.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/3aivxm2c_cv0b.js",
+        "sha256": "5c321b3071ab7faf44058ddfb64d56c11b60dcc4eb5255c27005fb7797cc5d36",
+        "utf8_byte_offset": 49034,
+        "needle": "/api/attendance",
+        "excerpt": "t:r}=(0,t.demoCheckIn)((0,t.loadDemo)(),Math.random());return(0,t.saveDemo)(e),r}let e=await fetch(\"/api/attendance\",{method:\"POST\"}),r=await e.json().catch(()=>null);if(!e.ok)throw Error(r?.message??\"출석을 저장하지 못했어요. 잠시 후 다시 눌러 주세요.\");return r}async function i(){if((0,t.isPointsDemo)()){let{state:e,response:r}=(0,t.demoTutorial)((0,t.loadDemo)());return(0,t.saveDemo)(e),r}let e=await fetch(\"/api/tutorial\");if(!e.ok)throw Error(\"tutorial\");return e.json()}async function a(e){if((0,t.isPointsDemo)())return!0;try{return(await fetch(\"/api/tutorial/finish\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({step:e})})).ok}catch{return!1}}e.s([\"POINTS_QUERY_KEY\",0,[\"points\"],\"TUTORIAL_QUERY_KEY\",0,r],461613),e.s([\"fetchPoints\",0,n,\"finishTour\",0,a,\"postCheckIn\",0,o,\"tu"
+      },
+      "rea_evidence_id": "ev_a663ec6bd84732119262cfb97ae661158a627acf410c2f0758b637aa8a53432b",
+      "rea_evidence_file": "evidence/rea-engagement.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-03",
+      "title": "튜토리얼 조회",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "method": "GET",
+        "input": [],
+        "response": "JSON 전체 반환, completedAll을 mount 재조회 조건으로 소비"
+      },
+      "source": {
+        "path": "scopes/engagement/3aivxm2c_cv0b.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/3aivxm2c_cv0b.js",
+        "sha256": "5c321b3071ab7faf44058ddfb64d56c11b60dcc4eb5255c27005fb7797cc5d36",
+        "utf8_byte_offset": 49369,
+        "needle": "/api/tutorial",
+        "excerpt": "ate:e,response:r}=(0,t.demoTutorial)((0,t.loadDemo)());return(0,t.saveDemo)(e),r}let e=await fetch(\"/api/tutorial\");if(!e.ok)throw Error(\"tutorial\");return e.json()}async function a(e){if((0,t.isPointsDemo)())return!0;try{return(await fetch(\"/api/tutorial/finish\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({step:e})})).ok}catch{return!1}}e.s([\"POINTS_QUERY_KEY\",0,[\"points\"],\"TUTORIAL_QUERY_KEY\",0,r],461613),e.s([\"fetchPoints\",0,n,\"finishTour\",0,a,\"postCheckIn\",0,o,\"tutorialQuery\",0,{queryKey:r,queryFn:i,refetchOnMount:e=>!e.state.data?.completedAll&&\"always\"}],482663)},913502,e=>{\"use strict\";var t=e.i(247167);e.s([\"isPointsEnabled\",0,()=>\"true\"===t.default.env.NEXT_PUBLIC_POINTS_ENABLED])},801567,e=>{\"use strict\";var t=e.i(271645);let r=\"naeo.tutorial.se"
+      },
+      "rea_evidence_id": "ev_a663ec6bd84732119262cfb97ae661158a627acf410c2f0758b637aa8a53432b",
+      "rea_evidence_file": "evidence/rea-engagement.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-04",
+      "title": "튜토리얼 종료",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "method": "POST",
+        "input": [
+          "step"
+        ],
+        "response": "response.ok만 반환. 응답 본문 소비 없음; 예외 시 false"
+      },
+      "source": {
+        "path": "scopes/engagement/3aivxm2c_cv0b.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/3aivxm2c_cv0b.js",
+        "sha256": "5c321b3071ab7faf44058ddfb64d56c11b60dcc4eb5255c27005fb7797cc5d36",
+        "utf8_byte_offset": 49511,
+        "needle": "/api/tutorial/finish",
+        "excerpt": "rial\");return e.json()}async function a(e){if((0,t.isPointsDemo)())return!0;try{return(await fetch(\"/api/tutorial/finish\",{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({step:e})})).ok}catch{return!1}}e.s([\"POINTS_QUERY_KEY\",0,[\"points\"],\"TUTORIAL_QUERY_KEY\",0,r],461613),e.s([\"fetchPoints\",0,n,\"finishTour\",0,a,\"postCheckIn\",0,o,\"tutorialQuery\",0,{queryKey:r,queryFn:i,refetchOnMount:e=>!e.state.data?.completedAll&&\"always\"}],482663)},913502,e=>{\"use strict\";var t=e.i(247167);e.s([\"isPointsEnabled\",0,()=>\"true\"===t.default.env.NEXT_PUBLIC_POINTS_ENABLED])},801567,e=>{\"use strict\";var t=e.i(271645);let r=\"naeo.tutorial.session\",n=null,o=!1,i=new Set;function a(){if(!o){o=!0;try{let e=sessionStorage.getItem(r);n=e?JSON.parse(e):null}catch{n=null}}}function s(){r"
+      },
+      "rea_evidence_id": "ev_a663ec6bd84732119262cfb97ae661158a627acf410c2f0758b637aa8a53432b",
+      "rea_evidence_file": "evidence/rea-engagement.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-05",
+      "title": "튜토리얼 단계·보상",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "steps": [
+          {
+            "key": "blog",
+            "points": 30
+          },
+          {
+            "key": "mate",
+            "points": 30
+          },
+          {
+            "key": "ai_picks",
+            "points": 30
+          },
+          {
+            "key": "ranking",
+            "points": 90
+          },
+          {
+            "key": "verify",
+            "points": 120
+          }
+        ],
+        "total": 300,
+        "status": "공개 클라이언트 상수. 실제 원장 지급은 미검증"
+      },
+      "source": {
+        "path": "scopes/reward-rules/0ejb4lzgw5ydu.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/0ejb4lzgw5ydu.js",
+        "sha256": "e0bf72bd66e051757a76d5927a05abed7f60df362e0373f53b8ec031394e0a50",
+        "utf8_byte_offset": 27741,
+        "needle": "let t=[{key:\"blog\",title:\"블로그 등록\"",
+        "excerpt": "ngify(e))}catch{}queueMicrotask(()=>window.dispatchEvent(new Event(u)))}])},425328,e=>{\"use strict\";let t=[{key:\"blog\",title:\"블로그 등록\",points:30,href:\"/dashboard\"},{key:\"mate\",title:\"메이트 진단\",points:30,href:\"/dashboard/mate\"},{key:\"ai_picks\",title:\"AI 인용 현황\",points:30,href:\"/dashboard/ai-picks\"},{key:\"ranking\",title:\"랭킹 둘러보기 + 서브 주제\",points:90,href:\"/ranking\"},{key:\"verify\",title:\"휴대폰 인증\",points:120,href:\"/dashboard/settings\"}],r=t.reduce((e,t)=>e+t.points,0);e.s([\"TUTORIAL_STEPS\",0,t,\"TUTORIAL_TOTAL\",0,r,\"evaluateSteps\",0,function(e,r,s=new Date){let i={blog:e.hasBlog,mate:e.hasMate,ai_picks:e.viewedAiPicksDetail,ranking:e.viewedRanking&&e.hasSubTopic,verify:e.phoneVerified};return t.map(t=>{var n,a,o;let u=r.has(t.key),c=(n=t.key,a=e,o=s,\"blog\"===n||a.hasBlog?\"ai_picks\"!==n||a.hasAnalyzedP"
+      },
+      "rea_evidence_id": "ev_bcded2e092fde874cd876b03b0164f6968cf2fc348a0e1221da9584518e12014",
+      "rea_evidence_file": "evidence/rea-reward-rules.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-06",
+      "title": "데모 선택 조건",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "result": "수집된 이 모듈의 isPointsDemo()는 false 반환",
+        "limitation": "다른 배포·모듈 교체·소비자 실행 상태까지 보장하지 않음"
+      },
+      "source": {
+        "path": "scopes/reward-rules/0ejb4lzgw5ydu.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/0ejb4lzgw5ydu.js",
+        "sha256": "e0bf72bd66e051757a76d5927a05abed7f60df362e0373f53b8ec031394e0a50",
+        "utf8_byte_offset": 27434,
+        "needle": "\"isPointsDemo\",0,function(){return!1}",
+        "excerpt": ",newlyCompleted:n,newlyPoints:o,verifyTodo:(0,t.verifyTodo)(s)}}},\"installDemoFetch\",0,function(){},\"isPointsDemo\",0,function(){return!1},\"loadDemo\",0,function(){try{let e=sessionStorage.getItem(o);return e?JSON.parse(e):s()}catch{return s()}},\"saveDemo\",0,function(e){try{sessionStorage.setItem(o,JSON.stringify(e))}catch{}queueMicrotask(()=>window.dispatchEvent(new Event(u)))}])},425328,e=>{\"use strict\";let t=[{key:\"blog\",title:\"블로그 등록\",points:30,href:\"/dashboard\"},{key:\"mate\",title:\"메이트 진단\",points:30,href:\"/dashboard/mate\"},{key:\"ai_picks\",title:\"AI 인용 현황\",points:30,href:\"/dashboard/ai-picks\"},{key:\"ranking\",title:\"랭킹 둘러보기 + 서브 주제\",points:90,href:\"/ranking\"},{key:\"verify\",title:\"휴대폰 인증\",points:120,href:\"/dashboard/settings\"}],r=t.reduce((e,t)=>e+t.points,0);e.s([\"TUTORIAL_STEPS\",0,t,\"TUTO"
+      },
+      "rea_evidence_id": "ev_bcded2e092fde874cd876b03b0164f6968cf2fc348a0e1221da9584518e12014",
+      "rea_evidence_file": "evidence/rea-reward-rules.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-07",
+      "title": "출석 계산 함수",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "streakEvery": 7,
+        "streakBonus": 15,
+        "rollThresholds": [
+          {
+            "lessThan": 0.5,
+            "points": 5
+          },
+          {
+            "lessThan": 0.9,
+            "points": 10
+          },
+          {
+            "otherwise": true,
+            "points": 15
+          }
+        ],
+        "status": "demoCheckIn이 이 함수를 사용. 실제 서버 난수·보상 규칙의 근거 아님"
+      },
+      "source": {
+        "path": "scopes/reward-rules/0ejb4lzgw5ydu.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/0ejb4lzgw5ydu.js",
+        "sha256": "e0bf72bd66e051757a76d5927a05abed7f60df362e0373f53b8ec031394e0a50",
+        "utf8_byte_offset": 25103,
+        "needle": "\"STREAK_BONUS\",0,15",
+        "excerpt": "t=new Date(`${e}T00:00:00Z`);return t.setUTCDate(t.getUTCDate()-1),t.toISOString().slice(0,10)}e.s([\"STREAK_BONUS\",0,15,\"STREAK_EVERY\",0,7,\"currentStreak\",0,function(e,r){let s=new Set(e),i=s.has(r)?r:t(r),n=0;for(;s.has(i);)n+=1,i=t(i);return n},\"daysToNextBonus\",0,function(e){return 7-e%7},\"rollAttendancePoints\",0,function(e){return e<.5?5:e<.9?10:15}])},693218,e=>{\"use strict\";var t=e.i(425328),r=e.i(876322);function s(){return{day:0,balance:0,checkIns:[],done:[],pending:[]}}let i=e=>new Date(Date.UTC(2026,0,1+e)).toISOString().slice(0,10);function n(e){let t=e.checkIns.map(e=>i(e.day)),s=i(e.day);return{balance:e.balance,todayChecked:t.includes(s),streak:(0,r.currentStreak)(t,s),recent:[]}}let a=(e,t)=>e.done.includes(t)||e.pending.includes(t),o=\"naeo.points.demo\",u=\"naeo:points-demo-s"
+      },
+      "rea_evidence_id": "ev_bcded2e092fde874cd876b03b0164f6968cf2fc348a0e1221da9584518e12014",
+      "rea_evidence_file": "evidence/rea-reward-rules.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    },
+    {
+      "id": "R15-15",
+      "title": "포인트 기능 플래그",
+      "type": "shipped-client-static-analysis",
+      "runtime_executed": false,
+      "contract": {
+        "comparison": "환경값이 문자열 true인지 검사",
+        "unknown": "배포 환경의 실제 값·모든 요청을 차단하는지 여부"
+      },
+      "source": {
+        "path": "scopes/engagement/3aivxm2c_cv0b.js",
+        "url": "https://www.naeo.kr/_next/static/immutable/chunks/3aivxm2c_cv0b.js",
+        "sha256": "5c321b3071ab7faf44058ddfb64d56c11b60dcc4eb5255c27005fb7797cc5d36",
+        "utf8_byte_offset": 49974,
+        "needle": "NEXT_PUBLIC_POINTS_ENABLED",
+        "excerpt": "663)},913502,e=>{\"use strict\";var t=e.i(247167);e.s([\"isPointsEnabled\",0,()=>\"true\"===t.default.env.NEXT_PUBLIC_POINTS_ENABLED])},801567,e=>{\"use strict\";var t=e.i(271645);let r=\"naeo.tutorial.session\",n=null,o=!1,i=new Set;function a(){if(!o){o=!0;try{let e=sessionStorage.getItem(r);n=e?JSON.parse(e):null}catch{n=null}}}function s(){return a(),n}function l(e){return i.add(e),()=>{i.delete(e)}}e.s([\"getTutorialSession\",0,s,\"setTutorialSession\",0,function(e){a(),n=e?{...e,since:Date.now()}:null;try{n?sessionStorage.setItem(r,JSON.stringify(n)):sessionStorage.removeItem(r)}catch{}i.forEach(e=>e())},\"useTutorialSession\",0,function(){return(0,t.useSyncExternalStore)(l,s,()=>null)}])},774151,e=>{\"use strict\";var t=e.i(425328);let r=(e={})=>({kind:\"info\",...e}),n=e=>({kind:\"action\",endOn:e}),o={"
+      },
+      "rea_evidence_id": "ev_a663ec6bd84732119262cfb97ae661158a627acf410c2f0758b637aa8a53432b",
+      "rea_evidence_file": "evidence/rea-engagement.json",
+      "methodology": "REA AST/semantic Evidence plus analyst reading of the exact source. HTTP method and business interpretation are not inferred solely from an endpoint name."
+    }
+  ]
+}
