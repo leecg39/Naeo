@@ -18,7 +18,7 @@ export function publicRankingApi(db:Database,request:Request,viewer:User|null):R
  const {pathname:path,searchParams}=new URL(request.url);
  if(request.method!=='GET')return null;
  if(path==='/api/rankings'){ensureConfirmed(db,searchParams);return json(liveRanking(db,Object.fromEntries(searchParams),viewer?.id??null));}
- if(path==='/api/rankings/champions')return json({data:champions(db)});
+ if(path==='/api/rankings/champions')return json({data:champions(db).map(r=>({periodType:r.periodType,periodKey:r.periodKey,nickname:r.nickname,naverId:r.naverId,score:r.score}))});
  return null;
 }
 

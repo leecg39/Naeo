@@ -5,7 +5,7 @@ import {register} from '../../src/server/auth';
 import {createBlog} from '../../src/server/blogs';
 import {saveScanResult} from '../../src/server/analysis/results';
 import {analyzePosts,type AnalysisReport} from '../../src/server/analysis/rules';
-import {periodRange,liveRanking,confirmPeriod,champions,memberHistory,titlesOf} from '../../src/server/ranking/ranking';
+import {periodRange,liveRanking,confirmPeriod,champions,memberHistory,titlesOf,categoryChampions} from '../../src/server/ranking/ranking';
 
 const DAY=86_400_000;
 const NOW=Date.parse('2026-10-14T03:00:00Z'); // 수요일 12:00 KST (이번 주 월요일 = NOW-2일)
@@ -55,6 +55,63 @@ test('live ranking: public members only, latest score in period, deterministic t
  assert.ok(!('email' in r.data[0]),'no private fields');
  assert.equal(r.categories.find(x=>x.name==='여행')?.count,2);
  assert.equal(liveRanking(db,{period:'week',offset:-1},null,NOW).total,0,'nothing measured last week');
+});
+
+function cited(db:Database,m:{id:string;blog:string},at:number,{briefing=0,exposed=0,imageRank=null}:{briefing?:number;exposed?:number;imageRank?:number|null}={}){
+ db.prepare("INSERT INTO blog_posts(id,blog_id,external_id,url,title,collected_at) VALUES(?,?,?,?,?,?)").run(`post-${m.id}-${at}`,m.blog,`p${at}`,`https://blog.naver.com/x/${at}`,'글',at);
+ db.prepare("INSERT INTO citation_runs(id,owner_id,blog_id,state,source,provider,post_limit,run_after,created_at,updated_at) VALUES(?,?,?,'succeeded','scan','test',1,?,?,?)").run(`run-${m.id}-${at}`,m.id,m.blog,at,at,at);
+ db.prepare("INSERT INTO citation_results(id,run_id,owner_id,blog_id,post_id,keyword,keyword_source,status,briefing,exposed,image_rank,evidence_json,checked_at) VALUES(?,?,?,?,?,?,'title','checked',?,?,?,'{}',?)")
+  .run(`res-${m.id}-${at}`,`run-${m.id}-${at}`,m.id,m.blog,`post-${m.id}-${at}`,'키워드',briefing,exposed,imageRank,at);
+}
+function exposed(db:Database,m:{id:string;blog:string},mine:number,at:number){
+ const hits=Array.from({length:mine},(_,i)=>({rank:i+1,naverId:'me',title:'t',link:'l',postDate:'',kind:'mine'}));
+ db.prepare("INSERT INTO keyword_exposures(id,owner_id,keyword,total,results_json,checked_at,created_at) VALUES(?,?,?,?,?,?,?)").run(`ke-${m.id}-${at}`,m.id,'제주 맛집',10,JSON.stringify(hits),at,at);
+}
+function mate(db:Database,m:{id:string},expires:number){
+ db.prepare("INSERT INTO mate_reports(token,owner_id,naver_id,score,report_json,post_count,created_at,expires_at) VALUES(?,?,?,50,'{}',1,?,?)").run(`mt-${m.id.slice(0,19)}`,m.id,'me',expires-DAY,expires);
+}
+
+test('period metrics: AI citations, search exposure and keyword hits are counted per member',async t=>{
+ const {db,a,b}=await fixture(t);
+ scored(db,a,70,NOW-DAY);scored(db,b,80,NOW-DAY);
+ cited(db,a,NOW-DAY,{briefing:1,exposed:1,imageRank:3});
+ cited(db,a,NOW-DAY+1000,{briefing:1,exposed:0});
+ exposed(db,a,2,NOW-DAY);
+ const r=liveRanking(db,{period:'week'},null,NOW);
+ const row=r.data.find(x=>x.nickname==='알파')!;
+ assert.deepEqual(row.metrics,[2,1,1,2],'ai_body, ai_image, exposed, keyword_hits');
+ assert.deepEqual(r.data.find(x=>x.nickname==='브라보')!.metrics,[0,0,0,0]);
+ assert.equal(liveRanking(db,{period:'week',offset:-1},null,NOW).data.length,0,'metrics do not leak across periods');
+});
+
+test('mate filter keeps only members with a live mate report, and entrants count recent first scans',async t=>{
+ const {db,a,b}=await fixture(t);
+ scored(db,a,80,NOW-DAY);scored(db,b,70,NOW-DAY);
+ mate(db,a,NOW+DAY);mate(db,b,NOW-DAY); // 브라보의 리포트는 이미 만료
+ const all=liveRanking(db,{period:'week'},null,NOW);
+ assert.equal(all.participants,2);assert.equal(all.entrants,2,'both first scanned within 7 days');
+ const mates=liveRanking(db,{period:'week',mate:'1'},null,NOW);
+ assert.deepEqual(mates.data.map(x=>x.nickname),['알파']);assert.equal(mates.mateOnly,true);
+ assert.deepEqual(liveRanking(db,{period:'week',mate:'true'},null,NOW).data.map(x=>x.nickname),['알파']);
+ assert.equal(liveRanking(db,{period:'week',mate:'0'},null,NOW).total,2,'invalid mate value does not filter');
+});
+
+test('confirmed snapshots freeze metrics and mate status; month champions feed the hall of fame',async t=>{
+ const {db,a,b,c}=await fixture(t);
+ const lastWeek=periodRange('week',-1,NOW);
+ scored(db,a,80,lastWeek.start+DAY);mate(db,a,NOW+10*DAY);
+ cited(db,a,lastWeek.start+DAY,{briefing:1,exposed:1,imageRank:2});
+ confirmPeriod(db,'week',-1,NOW);
+ const snap=liveRanking(db,{period:'week',offset:-1},null,NOW);
+ assert.deepEqual(snap.data[0].metrics,[1,1,1,0],'metrics frozen into the snapshot');
+ const mates=liveRanking(db,{period:'week',offset:-1,mate:'1'},null,NOW);
+ assert.deepEqual(mates.data.map(x=>x.nickname),['알파'],'mate flag survives in the snapshot');
+ const month=periodRange('month',-1,NOW);
+ scored(db,b,90,month.start+DAY);scored(db,c,85,month.start+DAY);
+ confirmPeriod(db,'month',-1,NOW);
+ const cats=categoryChampions(db);
+ assert.deepEqual(cats.map(x=>[x.category,x.nickname]).sort(),[['맛집','브라보'],['여행','찰리']]);
+ assert.ok(champions(db).some(x=>x.userId===b.id&&x.periodType==='month'));
 });
 
 test('confirming a finished period snapshots ranks once; champions, titles and history follow',async t=>{

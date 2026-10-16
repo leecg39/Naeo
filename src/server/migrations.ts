@@ -1126,5 +1126,8 @@ export const migrations = [{
  ) STRICT;
  INSERT INTO export_pages SELECT * FROM saved_export_pages;
  DROP TABLE saved_export_pages;
+ `},{version:46,name:'ranking_snapshot_metrics',sql:`
+ ALTER TABLE ranking_snapshots ADD COLUMN metrics_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(metrics_json) AND json_type(metrics_json)='array');
+ ALTER TABLE ranking_snapshots ADD COLUMN mate INTEGER NOT NULL DEFAULT 0 CHECK(mate IN(0,1));
  `}];
 

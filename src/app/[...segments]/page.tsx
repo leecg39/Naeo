@@ -117,7 +117,7 @@ export default async function Page({params,searchParams}:Props){
  if(path==='/ranking'){
   const sp=await searchParams,viewer=await currentUser(),db=database();
   ensureConfirmed(db,new URLSearchParams({period:first(sp.period)??'',offset:first(sp.offset)??'0'}));
-  return <>{withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page)},viewer?.id??null))}{viewer?.termsAcceptedAt?<RankingVisit/>:null}</>;
+  return <>{withNotice(path,await buildRankingPage(db,{period:first(sp.period),page:first(sp.page),mate:first(sp.mate)},viewer?.id??null))}{viewer?.termsAcceptedAt?<RankingVisit/>:null}</>;
  }
  const exporting=path.endsWith('/export'),viewKind={'/social/aeo-carousel':'carousel','/social/mate-ad':'ad','/youtube/aeo-intro':'video'}[exporting?path.slice(0,-7):path];
  if(viewKind){const sp=await searchParams,id=first(sp.project);if(id){const user=await pageUser(`${path}?project=${encodeURIComponent(id)}`);let project;try{project=getProject(database(),user.id,id);}catch{notFound();}if(project.kind!==viewKind)notFound();return exporting?<ExportPanel project={project} initial={listExports(database(),user.id,project.id)}/>:<CreativeViewer project={project}/>;}}

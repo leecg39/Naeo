@@ -34,7 +34,7 @@ test('captured third-party ranking data is removed; empty ranking explains how t
  const page=await buildRankingPage(db,{},null,NOW);
  assert.equal(all(page.body,n=>/blog\.naver\.com/.test(n.attrs.href??'')).length,0,'no captured blog links');
  assert.equal(all(page.body,n=>n.attrs['data-rank']!==undefined).length,0);
- assert.ok(!/AI 본문|AI 이미지/.test(JSON.stringify(page.body)),'unmeasured AI citation columns removed');
+ assert.match(JSON.stringify(page.body),/AI 본문/,'AI citation metric columns render');
  assert.match(JSON.stringify(page.body),/랭킹 공개/);
  assert.match(JSON.stringify(page.body),/새 규칙/);
 });
@@ -59,6 +59,32 @@ test('rows, tabs, my rank, categories and hall of fame come from the database',a
  assert.match(JSON.stringify(page.body),/명예의 전당/);
  const privatePage=await buildRankingPage(db,{period:'week'},hidden.id,NOW);
  assert.match(text(all(privatePage.body,n=>(n.attrs.class??'').includes('mui-gtw5ek'))[0]),/랭킹 비공개/);
+});
+
+test('mate toggle, metric cells and hall-of-fame cards render real data',async t=>{
+ const db=await fixture(t);
+ const a=await member(db,'alpha@example.test','알파');const b=await member(db,'bravo@example.test','브라보');
+ scored(db,a,NOW-DAY);scored(db,b,NOW-DAY+1000);
+ db.prepare("INSERT INTO mate_reports(token,owner_id,naver_id,score,report_json,post_count,created_at,expires_at) VALUES('mate-token-alpha-00000',?, 'alpha',50,'{}',1,?,?)").run(a.id,NOW-DAY,NOW+10*DAY);
+ db.prepare("INSERT INTO keyword_exposures(id,owner_id,keyword,total,results_json,checked_at,created_at) VALUES('ke-alpha',?,?,?, ?,?,?)")
+  .run(a.id,'제주 맛집',10,JSON.stringify([{rank:1,naverId:'alpha',title:'t',link:'l',postDate:'',kind:'mine'}]),NOW-DAY,NOW-DAY);
+ const page=await buildRankingPage(db,{period:'week'},null,NOW);
+ const toggle=all(page.body,n=>n.tag==='button'&&text(n)==='네이버 메이트만')[0];
+ assert.ok(toggle,'mate toggle rendered');assert.equal(toggle.attrs['aria-pressed'],'false');
+ const mateRow=all(page.body,n=>n.attrs['data-rank']==='1')[0];
+ assert.equal(all([mateRow],n=>(n.attrs['aria-label']??'').startsWith('네이버 공식 메이트')).length,1,'mate badge marker on mate row');
+ const plain=all(page.body,n=>n.attrs['data-rank']==='2')[0];
+ assert.equal(all([plain],n=>(n.attrs['aria-label']??'').startsWith('네이버 공식 메이트')).length,0);
+ assert.match(text(mateRow),/1/,'keyword hits metric cell');
+ const filtered=await buildRankingPage(db,{period:'week',mate:'1'},null,NOW);
+ assert.equal(all(filtered.body,n=>n.attrs['data-rank']!==undefined).length,1,'mate=1 keeps only mates');
+ assert.equal(all(filtered.body,n=>n.tag==='button'&&text(n)==='네이버 메이트만')[0].attrs['aria-pressed'],'true');
+ const prevMonth=periodRange('month',-1,NOW);
+ scored(db,a,prevMonth.start+DAY);scored(db,b,prevMonth.start+2*DAY);confirmPeriod(db,'month',-1,NOW);
+ const withHall=await buildRankingPage(db,{},null,NOW);
+ const allText=withHall.body.map(text).join('');
+ assert.match(allText,/년 \d+월 왕/,'monthly champion card');
+ assert.match(allText,/주제별 왕/);assert.match(allText,/여행 왕/,'category champion card');
 });
 
 test('podium shows the top 3 with scores and titles; riser needs previous-week data',async t=>{

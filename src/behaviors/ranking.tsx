@@ -47,7 +47,8 @@ export const installRanking: InstallBehavior = (root, tools) => {
   const topicDialogText = topicDialogButton ? [...topicDialogButton.childNodes].find(node => node.nodeType === Node.TEXT_NODE) : null;
   const originalTopicText = topicDialogText?.textContent ?? null;
   let selectedTopic = "전체";
-  let mateOnly = false;
+  // 서버가 mate=1로 그린 화면이면 버튼의 aria-pressed가 이미 true다.
+  let mateOnly = mateButton?.getAttribute("aria-pressed") === "true";
   let sortIndex = 0;
   let descending = true;
   // 서버가 그린 화면이면 선택된 탭이 현재 기간이다.
@@ -147,11 +148,17 @@ export const installRanking: InstallBehavior = (root, tools) => {
       event.preventDefault(); openTopics(); return;
     }
     if (button === mateButton) {
-      event.preventDefault(); mateOnly = !mateOnly; update(); return;
+      event.preventDefault();
+      if (serverRendered) {
+        const url = new URL(window.location.href);
+        if (mateOnly) url.searchParams.delete("mate"); else url.searchParams.set("mate", "1");
+        tools.navigate(url.pathname + url.search); return;
+      }
+      mateOnly = !mateOnly; update(); return;
     }
     if (button && periodTabs.includes(button)) {
       event.preventDefault();
-      if (button.dataset.period) { tools.navigate(`/ranking?period=${button.dataset.period}`); return; }
+      if (button.dataset.period) { tools.navigate(`/ranking?period=${button.dataset.period}${mateOnly ? "&mate=1" : ""}`); return; }
       period = text(button); update(); return;
     }
     if (button === moreButton) {

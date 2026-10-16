@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-16T16:56:06.744Z",
+ "generatedAt": "2026-10-16T19:28:15.104Z",
  "orig": "https://www.naeo.kr",
  "clone": "http://127.0.0.1:3200",
  "rows": [
@@ -12,8 +12,8 @@
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 295771,
-   "diffRatio": 0.0159,
+   "diffPixels": 265825,
+   "diffRatio": 0.0143,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -29,7 +29,7 @@
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 173859,
+   "diffPixels": 173776,
    "diffRatio": 0.0308,
    "scrollW": {
     "orig": 390,
@@ -131,8 +131,8 @@
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 45603,
-   "diffRatio": 0.0592,
+   "diffPixels": 44889,
+   "diffRatio": 0.0583,
    "scrollW": {
     "orig": 390,
     "clone": 390
@@ -148,8 +148,8 @@
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 125761,
-   "diffRatio": 0.021,
+   "diffPixels": 125204,
+   "diffRatio": 0.0209,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -211,13 +211,13 @@
    "route": "/ranking",
    "viewport": "desktop",
    "origDocH": 17856,
-   "cloneDocH": 2232,
-   "comparedH": 2232,
+   "cloneDocH": 2763,
+   "comparedH": 2763,
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 104931,
-   "diffRatio": 0.033,
+   "diffPixels": 120532,
+   "diffRatio": 0.0306,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -228,13 +228,13 @@
    "route": "/ranking",
    "viewport": "mobile",
    "origDocH": 20728,
-   "cloneDocH": 2435,
-   "comparedH": 2435,
+   "cloneDocH": 2954,
+   "comparedH": 2954,
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 76476,
-   "diffRatio": 0.0805,
+   "diffPixels": 86582,
+   "diffRatio": 0.0752,
    "scrollW": {
     "orig": 390,
     "clone": 390
