@@ -22,6 +22,7 @@ import {creativeApi} from './creative/creative-api';
 import {adminOpsApi,publicAnalyticsApi} from './ops/analytics-api';
 import {engagementApi} from './engagement/api';
 import {memberOpenAIApi,publicOpenAIApi} from './openai/api';
+import {citationApi} from './citations/api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -99,6 +100,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(inquiryResponse)return inquiryResponse;
     const scanResponse=await scanApi(db,request,user);
     if(scanResponse)return scanResponse;
+    const citationResponse=await citationApi(db,request,user);
+    if(citationResponse)return citationResponse;
     const mateResponse=memberMateApi(db,request,user);
     if(mateResponse)return mateResponse;
     const keywordsResponse=await keywordsApi(db,request,user);

@@ -1,5 +1,6 @@
 import {phoneRewardMigration} from './engagement/phone-reward';
 import {openAIConnectionMigration,openAIGenerationMigration} from './openai/schema';
+import {citationMigration} from './citations/schema';
 import {smsMigration} from './sms/schema';
 import {inquiryMailMigration} from './inquiries/mail-schema';
 import {accountMailMigration} from './mail/schema';
@@ -1058,5 +1059,5 @@ export const migrations = [{
   created_at INTEGER NOT NULL
  ) STRICT;
  CREATE INDEX media_markdown_owner ON media_markdown_links(owner_id,created_at DESC);
- `},openAIConnectionMigration,openAIGenerationMigration];
+ `},openAIConnectionMigration,openAIGenerationMigration,citationMigration];
 

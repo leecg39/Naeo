@@ -22,7 +22,7 @@ const RULES:Rule[]=[
  {match:/^\/auth\/google$/,tests:t('oauth'),sections:['P7.1'],access:'redirect',to:'/api/auth/oauth/google/start',external:'Google·네이버 앱 키(NAEO_GOOGLE_*/NAEO_NAVER_*)'},
  {match:/^\/blog/,tests:t('articles','blog-pages','article-seed','admin-articles'),sections:['P2.1','P2.2·P2.3'],access:'public'},
  {match:/^\/contact$/,tests:t('inquiries','inquiry-http'),sections:['P2.4'],access:'public'},
- {match:/^\/dashboard\/ai-picks$/,tests:t('ai-picks-page','analysis'),sections:['P3.4 무료 진단'],access:'member',external:'AI 인용 확인 공급자'},
+ {match:/^\/dashboard\/ai-picks$/,tests:t('ai-picks-page','analysis','citations','citations-http'),sections:['P3.3 AI 인용 확인','P3.4 무료 진단'],access:'member',external:'AI 인용 확인 SerpApi 키(NAEO_CITATION_PROVIDER·NAEO_SERPAPI_KEY) 실제 왕복'},
  {match:/^\/dashboard\/competitors$/,tests:t('competitors','competitors-http','competitors-page','action-items'),sections:['P3.6'],access:'member'},
  {match:/^\/dashboard\/events/,tests:t('event-pages','events','events-http'),sections:['P5.3–P5.6'],access:'member'},
  {match:/^\/dashboard\/mate$/,tests:t('mate','mate-dashboard'),sections:['P3.4 무료 진단'],access:'member'},

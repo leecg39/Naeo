@@ -5,6 +5,8 @@ import {isTrackingPixel} from '../content/blog-pages';
 import {hasClass,isEl,mapTree,mustFind,textOf,withAttrs,withChildren,type El} from '../content/tree';
 import {ago,dashboardData,stamp,type DashboardData,type DashboardResult} from './dashboard-data';
 import {scoreChart} from './score-chart';
+import {citationConfig} from '../citations/provider';
+import {citationOverview,type CitationOverview} from '../citations/runs';
 
 const set=(n:El,text:string)=>withChildren(n,[text]);
 const cls=(c:string)=>hasClass(c);
@@ -133,7 +135,14 @@ function feed(box:El,d:DashboardData):El{
  })[0] as El;
 }
 
-function transform(nodes:CapturedNode[],d:DashboardData):CapturedNode[]{
+/** 대시보드의 AI 인용 한 줄: 최근 성공한 확인 결과 요약, 없으면 예약·미설정 상태. */
+function citationLine(c:CitationOverview):string{
+ const r=c.report;
+ if(r)return`AI 추천 ${r.cited}/${r.checked} · 통합검색 노출 ${r.exposed}/${r.checked} · AI 브리핑 ${r.briefing}개 키워드 · ${stamp(r.checkedAt)} 확인`;
+ if(!c.configured)return'AI 브리핑 인용 확인은 공급자 설정 전이라 아직 제공하지 않습니다 (미설정)';
+ return c.activeRun?'AI 인용을 확인하고 있습니다 · 끝나면 AI 인용 현황에 표시됩니다':'AI 인용 확인 전 · 블로그 스캔 뒤 자동으로 확인합니다';
+}
+function transform(nodes:CapturedNode[],d:DashboardData,c:CitationOverview):CapturedNode[]{
  return mapTree(nodes,n=>{
   if(cls('mui-3lb3hl')(n))return[planRow(n,d)];
   if(cls('mui-4b4sse')(n))return[set(n,d.blog?.title??'연결된 블로그 없음')];
@@ -142,7 +151,7 @@ function transform(nodes:CapturedNode[],d:DashboardData):CapturedNode[]{
   if(cls('mui-zhxvjz')(n))return[set(n,lastScan(d))];
   if(n.tag==='button'&&cls('mui-rpip74')(n))return[scanButton(n,d)];
   if(cls('mui-4ynyf6')(n))return[set(n,headline(d))];
-  if(cls('mui-1qjnrdp')(n))return[set(n,'AI 브리핑 인용 확인은 공급자 설정 전이라 아직 제공하지 않습니다 (미설정)')];
+  if(cls('mui-1qjnrdp')(n))return[set(n,citationLine(c))];
   if(cls('mui-jojpj5')(n))return[withChildren(n,[])];
   if(n.attrs['aria-label']==='핵심 지표')return[metrics(n,d)];
   if(cls('mui-xb6up5')(n))return[growth(n,d)];
@@ -159,5 +168,5 @@ export async function buildDashboardPage(db:Database,userId:string,now=Date.now(
  const tpl=await getCapturedPage('/dashboard');
  if(!tpl)throw new Error('dashboard template missing');
  const d=dashboardData(db,userId,now);
- return{...tpl,body:transform(tpl.body.filter(n=>!isTrackingPixel(n)),d),source:'database'};
+ return{...tpl,body:transform(tpl.body.filter(n=>!isTrackingPixel(n)),d,citationOverview(db,userId,{blogId:d.blog?.id,config:citationConfig(),now})),source:'database'};
 }

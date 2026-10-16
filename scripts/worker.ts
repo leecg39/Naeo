@@ -1,6 +1,6 @@
 import {runInquiryMailOnce} from '../src/server/inquiries/mail';
 /**
- * 진단·AI 글 생성 작업 worker. 웹 서버와 같은 DB(NAEO_DATABASE_PATH)를 보고 대기 작업을 하나씩 처리한다.
+ * 진단·AI 인용 확인·AI 글 생성 작업 worker. 웹 서버와 같은 DB(NAEO_DATABASE_PATH)를 보고 대기 작업을 하나씩 처리한다.
  * 실행: npm run worker   (여러 개를 띄워도 lease로 같은 작업을 두 번 실행하지 않는다)
  */
 import {mailConfig} from '../src/server/mail/provider';
@@ -17,6 +17,8 @@ import {cleanupExports} from '../src/server/creative/exports';
 import {runRetention} from '../src/server/ops/retention';
 import {uploadDir} from '../src/server/writing/writing-api';
 import {cleanupMedia} from '../src/server/writing/media-cleanup';
+import {citationConfig,serpApiProvider} from '../src/server/citations/provider';
+import {runCitationOnce} from '../src/server/citations/worker';
 
 async function main(){
  const workerId=`${hostname()}-${process.pid}`;
@@ -33,7 +35,8 @@ async function main(){
   if(billing&&billing.at-retained>=3600_000){retained=billing.at;const r=runRetention(db,billing.at);process.stdout.write(`[worker] retention ${JSON.stringify(r)}\n`);}
   if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const replied=await runInquiryMailOnce(db,mailConfig()),mailed=await runMailOnce(db,mailConfig()),exported=runPersonalExportOnce(db,uploadDir());
-  const ran=(await runWorkerOnce(db,workerId,scans))??(await runGenerationOnce(db,workerId,provider))??(replied||mailed||exported);
+  const citation=citationConfig();
+  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider))??(replied||mailed||exported);
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
  }
  process.stdout.write(`[worker] ${workerId} stopped\n`);

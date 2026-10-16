@@ -540,3 +540,15 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 전용 8개, 관련 묶음 15개, 전체 427개 테스트가 통과했다. lint·typecheck·production build·`git diff --check`도 exit 0이다. Ego TaskSpace 0에서 재시작 전 장기 실행 서버의 스키마 37 때문에 `openai_connections` 부재 500을 발견했고, 웹 재시작 뒤 `/api/health` 스키마 39와 설정·글쓰기 정상 렌더를 확인했다. 승인 클라이언트 미설정 버튼은 disabled이며 390px 가로 넘침은 0이다. 임시 QA 회원은 삭제했다. [상세 계약](openai-oauth.md), [검증 로그](evidence/openai-oauth-2026-10-16/verification.txt), [모바일 화면](evidence/openai-oauth-2026-10-16/openai-settings-mobile.png).
 
 실제 OpenAI 검증은 배포 서비스용 승인 client ID와 HTTPS 콜백 등록 후 남는다. 로컬 대역 검증을 실제 공급자 성공으로 세지 않으며 AI 이미지·네이버 인용 수집도 별도 미완료다.
+
+## 2026-10-16 — 네이버 AI 브리핑 인용 확인 (P3.3·P3.7·P10.4 구현분)
+
+| 검증 | 결과 | 내용 |
+|---|---|---|
+| `npm test` | 455/455 통과(12+443) | 인용 단위 14(설정 게이트·주소 매칭·키워드 규칙·어댑터 필드 한도/광고 제외·오류 분류·키 미노출·실행 주기·재시도/이어하기·취소·임대 경쟁·쿼터·근거 축소·보존/보내기·스캔 연동), HTTP 1(인증·Origin·strict 입력·멱등·격리·409/429/405·키워드 버전), 화면 2(미설정 정직 표시·캡처 계정 데이터 부재, 실제 결과 렌더) |
+| lint/typecheck/build | 통과 | eslint·tsc·next build exit 0 |
+| 로컬 왕복 E2E | 통과 | `scripts/qa/citations.ts`: 프로덕션 Next+worker+loopback SerpApi double. 최신순·중복 키워드 1회·page_token 후속·본문/이미지 순위·SSR 지표·상세 404 격리·열람 기록·키워드 재정의→다음 실행 반영·하루 2회 429. 키는 화면에 미노출. `evidence/citations-runtime.json` |
+| 브라우저 | 통과 | 실제 Chrome: 로그인→「인용 확인 시작」→대기/취소 버튼→워커 완료 후 지표·필터·행 렌더→상세 대화상자(브리핑 본문·출처 '이 글' 배지·관련 질문 링크)→대표 키워드 저장→열람 기록으로 튜토리얼 30P 지급→'AI 추천됨 4' 필터 |
+| 결정 | — | 공급자는 SerpApi `naver`(통합검색·`ai_briefing`)+`naver_ai_overview`(page_token 후속). 단순 검색 순위를 인용으로 세지 않고 `ai_briefing` 존재 시에만 인용으로 기록. 미설정이면 화면·API·스캔 보고서에 '미설정' 표시. 확인 규칙(최근 10개·하루 2회)은 원본 미확인 새 규칙으로 표기 |
+
+남은 범위: 실제 SerpApi 키 왕복(응답 스키마 계약 확인 포함)과 운영 한도 조정은 외부 준비물 확보 후다. 스캔 뒤 자동 확인은 공급자 미설정 시 `not_configured`로 남긴다.

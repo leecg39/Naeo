@@ -7,7 +7,9 @@ export type PostSample={title:string;category:string;tags:string[];publishedAt:n
 export type CriterionKey='cadence'|'recency'|'titles'|'tags'|'topic';
 export type Criterion={key:CriterionKey;label:string;score:number;max:20;evidence:string};
 export type ActionItem={criterion:CriterionKey;title:string};
-export type AnalysisReport={methodVersion:string;score:number;criteria:Criterion[];actions:ActionItem[];disclosure:string;aiCitation:{status:'not_configured'}};
+/** AI 인용은 진단 점수와 별개로 확인한다. 진단 직후 확인 작업을 예약했는지, 못 했다면 그 이유만 남긴다. */
+export type AiCitationStatus={status:'not_configured'}|{status:'scheduled';runId:string}|{status:'skipped';reason:string};
+export type AnalysisReport={methodVersion:string;score:number;criteria:Criterion[];actions:ActionItem[];disclosure:string;aiCitation:AiCitationStatus};
 
 const DAY=86_400_000;
 const clamp=(n:number)=>Math.max(0,Math.min(20,Math.round(n)));
@@ -57,6 +59,6 @@ export function analyzePosts(posts:PostSample[],now=Date.now()):AnalysisReport{
   methodVersion:METHOD_VERSION,score:criteria.reduce((s,c)=>s+c.score,0),criteria,
   actions:criteria.filter(c=>c.score<14).sort((a,b)=>a.score-b.score).map(c=>({criterion:c.key,title:ACTIONS[c.key]})),
   disclosure:'원본 서비스의 점수 가중치는 공개되지 않아 이 복제본의 새 규칙(rules-v1)으로 계산했습니다. 네이버 RSS에 공개된 최근 글만 사용합니다.',
-  aiCitation:{status:'not_configured'}
+  aiCitation:{status:'not_configured'} as AiCitationStatus
  };
 }

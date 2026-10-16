@@ -1,0 +1,14 @@
+{
+ "verifiedAt": "2026-10-16T08:00:00.000Z",
+ "environment": "production next start :3100 + worker + loopback SerpApi stub :3101, real Chrome via devtools",
+ "checks": [
+  "로그인 후 /dashboard/ai-picks: 미확인 상태 지표 '-'·남은 2/2회 표시",
+  "「인용 확인 시작」 클릭 → 대기 중/취소 버튼 → 워커 실행 완료 → 지표 5글·AI 추천 4/5·80%·카테고리 분포·행 렌더링",
+  "상세 대화상자: 브리핑 본문·본문 출처 '이 글' 배지·이미지 출처 '내 블로그' 배지·관련 질문 글쓰기 링크·원문/복사",
+  "대표 키워드 수정 저장 → post_keywords member 재정의(version 1) 영속",
+  "상세 열람 기록 → tutorial ai_picks 단계 30P 지급",
+  "필터 탭 'AI 추천됨 4' → 4행만 표시"
+ ],
+ "externalSearchPerformed": false,
+ "realProviderVerified": false
+}

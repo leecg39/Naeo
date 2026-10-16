@@ -4,41 +4,19 @@ import { type BehaviorTools, type InstallBehavior, text } from "@/lib/behavior";
 
 type Cleanup = () => void;
 type AiRow = {
-  element: HTMLElement; index: number; title: string; keyword: string; link: string;
-  dates: string; volume: number; saturation: number; exposed: boolean;
-  briefing: boolean; recommended: boolean; performance: string;
+  element: HTMLElement; index: number; resultId: string; title: string; keyword: string; link: string; category: string;
+  publishedAt: number; volume: number; saturation: number; exposed: boolean; briefing: boolean; recommended: boolean;
 };
-
-const captureImages: Record<string, string> = {
-  "병역특례업체 합격": "/assets/e7260a4d8541f73c.webp",
-  "군포시 우수기업": "/assets/5762762b6b97d1f0.webp",
-  "SMATEC 공장자동화": "/assets/4e6985d9336eebb5.webp",
-  "블록체인 보안 고도화": "/assets/a959e4bb2d8663c0.webp",
-  "병역특례업체 신청": "/assets/3d8083cbfe3e1d91.webp",
-  "다자녀가구 통행료 할인": "/assets/77edcdfbd38275ae.webp",
-  "성과공유기업 인증": "/assets/4a797c419c129796.webp",
-  "우수기업연구소 지정": "/assets/600aa33b5a49cfd5.webp",
-  "병역특례업체 자격": "/assets/bea73e58dbe51acd.webp",
-  "산업기능요원 선정 결과": "/assets/6b654a3facdcba22.webp",
-  "제조혁신바우처": "/assets/3994df4f5d079b44.webp",
-  "병역특례업체 요건": "/assets/be1c4436fd56a31f.webp",
-  "전문연구요원 병역특례업체": "/assets/8a6f9d52a62748d0.webp",
-  "전문연구요원 병역지정업체": "/assets/8a6f9d52a62748d0.webp",
-  "병역특례기간": "/assets/423e0a681bdfa537.webp",
-  "병역특례업체 자격요건": "/assets/be1c4436fd56a31f.webp",
-  "전동지게차 지원사업": "/assets/7a211af9061de2de.webp",
-  "Windows11 창 최소화": "/assets/4331813a6170e65c.webp",
-  "중소기업 혁신바우처": "/assets/d44064f9f0217ac9.webp",
-  "산업기능요원 신청 자격": "/assets/103e975a5ebe479c.webp",
-  "전문연구요원 신청": "/assets/3351209189aac8c8.webp",
-  "병역지정업체 신청": "/assets/757371520d94fc75.webp",
-  "병원 사내근로복지기금": "/assets/0cc81e0ce3aecbf1.webp",
-  "벤처기업인증 신청": "/assets/c4e2578647a4e39a.webp",
-  "용인시 중소기업 전시회": "/assets/c0f12c9e13398306.webp",
-  "전문연구요원 병역특례업체 신청": "/assets/a9663d587165fd91.webp",
-  "전문연구요원 병역지정업체 신청": "/assets/51f9d4f2406421cd.webp",
-  "인재육성형 중소기업 지정": "/assets/ca02b3ab9cf717df.webp"
+type Source = { title: string; link: string; source?: string; platform?: string; mine: boolean; samePost: boolean };
+type CitationDetailData = {
+  id: string; postId: string; title: string; url: string; category: string; publishedAt: number | null; checkedAt: number;
+  keyword: string; keywordSource: "member" | "tag" | "title"; keywordVersion: number; status: "checked" | "error";
+  briefing: boolean; exposed: boolean; textRank: number | null; imageRank: number | null; volume: number | null; saturation: number | null;
+  briefingDetail: { markdown: string; questions: string[]; references: (Source & { index: number; snippet: string })[]; media: (Source & { position: number })[] } | null;
+  exposure: { section: string; position: number } | null; error: { code: string; message: string } | null;
 };
+type CitationRunStatus = { id: string; state: "queued" | "running" | "succeeded" | "failed" | "canceled"; progress: number; checked: number; errorMessage: string | null };
+const KEYWORD_SOURCE = { member: "직접 지정", tag: "첫 태그", title: "제목" } as const;
 const number = (value: string) => Number(value.replace(/[^\d.-]/g, "")) || 0;
 const elements = (root: ParentNode, selector: string) => Array.from(root.querySelectorAll<HTMLElement>(selector));
 
@@ -95,35 +73,88 @@ function copyLink(link: string, tools: BehaviorTools) {
   navigator.clipboard?.writeText(link).then(() => tools.toast("링크를 복사했습니다.")).catch(() => tools.toast("브라우저에서 링크를 직접 복사해 주세요."));
 }
 
-function showDetail(row: AiRow, tools: BehaviorTools) {
-  const image = captureImages[row.keyword];
-  tools.openDialog("AI 인용 상세", <div style={{ display: "grid", gap: 18 }}>
-    <div><p style={{ color: "#03c75a", fontSize: 13, marginBottom: 8 }}>{row.keyword}</p><h3 style={{ fontSize: 19, lineHeight: 1.5 }}>{row.title}</h3></div>
+const kstDay = (ms: number) => { const d = new Date(ms + 9 * 3600_000); return `${d.getUTCFullYear()}. ${d.getUTCMonth() + 1}. ${d.getUTCDate()}.`; };
+const performanceText = (d: Pick<CitationDetailData, "status" | "briefing" | "textRank" | "imageRank">) => {
+  if (d.status === "error") return "확인 실패";
+  const parts = [d.textRank !== null ? `본문 ${d.textRank}위` : "", d.imageRank !== null ? `이미지 ${d.imageRank}위` : ""].filter(Boolean);
+  return parts.length ? `AI 추천 · ${parts.join(" · ")}` : d.briefing ? "AI 브리핑은 있지만 내 블로그는 미추천" : "AI 브리핑 없음";
+};
+const badge = (s: Source) => s.samePost ? <span style={{ marginLeft: 6, color: "#03c75a", fontWeight: 700 }}>이 글</span> : s.mine ? <span style={{ marginLeft: 6, color: "#03c75a", fontWeight: 700 }}>내 블로그</span> : null;
+const listStyle: React.CSSProperties = { display: "grid", gap: 8, margin: 0, padding: 0, listStyle: "none", fontSize: 14 };
+// 서버가 http(s)만 저장하지만 화면에서도 한 번 더 확인한다.
+const safeHref = (link: string) => /^https?:\/\//i.test(link) ? link : undefined;
+const sourceLink = (s: Source) => <a href={safeHref(s.link)} target="_blank" rel="noopener noreferrer nofollow" style={{ color: "inherit", overflowWrap: "anywhere" }}>{s.title || s.link}</a>;
+
+/** 저장한 AI 브리핑 근거를 보여주고, 열람 기록(튜토리얼 조건)을 남긴다. 대표 키워드를 고치면 다음 확인부터 쓴다. */
+function CitationDetail({ id, tools }: { id: string; tools: BehaviorTools }) {
+  const [detail, setDetail] = React.useState<CitationDetailData | null>(null);
+  const [error, setError] = React.useState("");
+  const [keyword, setKeyword] = React.useState("");
+  const [saving, setSaving] = React.useState(false);
+  const [notice, setNotice] = React.useState("");
+  React.useEffect(() => {
+    let live = true;
+    api<CitationDetailData>(`/api/citations/results/${id}`).then(data => {
+      if (!live) return;
+      setDetail(data); setKeyword(data.keyword);
+      void api(`/api/citations/results/${id}/viewed`, { method: "POST" }).catch(() => undefined);
+    }).catch(e => { if (live) setError(e instanceof Error ? e.message : "상세를 불러오지 못했습니다."); });
+    return () => { live = false; };
+  }, [id]);
+  if (error) return <p role="alert">{error}</p>;
+  if (!detail) return <p role="status">AI 인용 근거를 불러오는 중…</p>;
+  const save = async (remove: boolean) => {
+    setSaving(true); setNotice("");
+    try {
+      const next = await api<{ keyword: string; source: CitationDetailData["keywordSource"]; version: number } | null>(`/api/citations/keywords/${detail.postId}`, remove ? { method: "DELETE", body: { version: detail.keywordVersion } } : { method: "PUT", body: { keyword, version: detail.keywordVersion } });
+      setDetail({ ...detail, keywordSource: next?.source ?? detail.keywordSource, keywordVersion: next?.version ?? 0 });
+      if (next) setKeyword(next.keyword);
+      setNotice(remove ? "자동 대표 키워드로 되돌렸습니다. 다음 확인부터 적용됩니다." : "대표 키워드를 저장했습니다. 다음 확인부터 이 키워드로 확인합니다.");
+    } catch (e) { setNotice(e instanceof Error ? e.message : "저장하지 못했습니다."); }
+    finally { setSaving(false); }
+  };
+  const b = detail.briefingDetail;
+  return <div style={{ display: "grid", gap: 18 }}>
+    <div><p style={{ color: "#03c75a", fontSize: 13, marginBottom: 8 }}>{detail.keyword}</p><h3 style={{ fontSize: 19, lineHeight: 1.5, overflowWrap: "anywhere" }}>{detail.title || "(제목 없음)"}</h3></div>
     <dl style={{ display: "grid", gridTemplateColumns: "minmax(100px, 1fr) 2fr", gap: "12px 20px", fontSize: 14 }}>
-      <dt>분석일 / 발행일</dt><dd>{row.dates}</dd>
-      <dt>검색량</dt><dd>{row.volume.toLocaleString("ko-KR")}</dd>
-      <dt>포화도</dt><dd>{row.saturation.toLocaleString("ko-KR")}%</dd>
-      <dt>통합검색 노출</dt><dd>{row.exposed ? "노출됨" : "미노출"}</dd>
-      <dt>AI 브리핑</dt><dd>{row.briefing ? "브리핑 확인됨" : "브리핑 없음"}</dd>
-      <dt>AI 인용</dt><dd>{row.recommended ? `${row.performance}${row.keyword === "병역특례업체 합격" ? " · 본문 5위" : ""}` : row.briefing ? "내 글 미추천" : "-"}</dd>
+      <dt>확인일 / 발행일</dt><dd>{kstDay(detail.checkedAt)} / {detail.publishedAt ? kstDay(detail.publishedAt) : "-"}</dd>
+      <dt>대표 키워드</dt><dd>{detail.keyword} ({KEYWORD_SOURCE[detail.keywordSource]})</dd>
+      <dt>검색량 / 포화도</dt><dd>{detail.volume === null ? "지표 없음" : detail.volume.toLocaleString("ko-KR")} / {detail.saturation === null ? "-" : `${(detail.saturation * 100).toFixed(1)}%`}</dd>
+      <dt>통합검색 노출</dt><dd>{detail.status === "error" ? "-" : detail.exposure ? `노출됨 · ${detail.exposure.section} ${detail.exposure.position}번째 결과` : "미노출"}</dd>
+      <dt>AI 인용</dt><dd>{performanceText(detail)}</dd>
     </dl>
-    {image && <img src={image} alt={`${row.keyword} AI 브리핑 캡처`} style={{ width: "100%", maxHeight: "55vh", objectFit: "contain", borderRadius: 10, background: "#fff" }} />}
+    {detail.error && <p role="alert" style={{ color: "#e05a52" }}>{detail.error.message}</p>}
+    <form onSubmit={event => { event.preventDefault(); void save(false); }} style={{ display: "grid", gap: 8 }}>
+      <label htmlFor={`citation-keyword-${detail.id}`} style={{ fontWeight: 700 }}>대표 키워드 수정</label>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <input id={`citation-keyword-${detail.id}`} className="naeo-field" style={{ flex: "1 1 200px", width: "auto" }} value={keyword} maxLength={60} onChange={event => setKeyword(event.target.value)} disabled={saving} />
+        <button type="submit" className="naeo-button" disabled={saving || keyword.trim().length < 2}>저장</button>
+        {detail.keywordSource === "member" && <button type="button" className="naeo-button secondary" disabled={saving} onClick={() => void save(true)}>자동으로 되돌리기</button>}
+      </div>
+      {notice && <p role="status" style={{ fontSize: 13, color: "#a3a3a3" }}>{notice}</p>}
+    </form>
+    {b ? <>
+      <section><h4 style={{ marginBottom: 8 }}>AI 브리핑 본문</h4><p style={{ whiteSpace: "pre-wrap", fontSize: 14, lineHeight: 1.7, maxHeight: 260, overflow: "auto", padding: 12, borderRadius: 8, background: "rgba(255,255,255,.04)", overflowWrap: "anywhere" }}>{b.markdown || "(본문 없음)"}</p></section>
+      <section><h4 style={{ marginBottom: 8 }}>본문 출처 ({b.references.length})</h4>{b.references.length ? <ol style={listStyle}>{b.references.map(r => <li key={`${r.index}-${r.link}`}><span style={{ color: "#a3a3a3" }}>[{r.index}] </span>{sourceLink(r)}{r.source ? <span style={{ color: "#a3a3a3" }}> · {r.source}</span> : null}{badge(r)}</li>)}</ol> : <p style={{ color: "#a3a3a3" }}>출처 없음</p>}</section>
+      <section><h4 style={{ marginBottom: 8 }}>이미지 출처 ({b.media.length})</h4>{b.media.length ? <ol style={listStyle}>{b.media.map(m => <li key={`${m.position}-${m.link}`}><span style={{ color: "#a3a3a3" }}>{m.position}. </span>{sourceLink(m)}{m.platform ? <span style={{ color: "#a3a3a3" }}> · {m.platform}</span> : null}{badge(m)}</li>)}</ol> : <p style={{ color: "#a3a3a3" }}>이미지 출처 없음</p>}</section>
+      <section><h4 style={{ marginBottom: 8 }}>관련 질문</h4>{b.questions.length ? <ul style={listStyle}>{b.questions.map(q => <li key={q}><a href={`/dashboard/write?keyword=${encodeURIComponent(q.slice(0, 60))}`} style={{ color: "#03c75a" }}>{q}</a></li>)}</ul> : <p style={{ color: "#a3a3a3" }}>관련 질문 없음</p>}</section>
+    </> : <p style={{ color: "#a3a3a3" }}>{detail.status === "error" ? "이 키워드는 확인하지 못했습니다. 다음 확인에서 다시 시도합니다." : "확인 시점에 이 키워드의 AI 브리핑이 없었습니다."}</p>}
     <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-      {row.link && <a className="naeo-button" href={row.link} target="_blank" rel="noopener noreferrer">원문 보기</a>}
-      {row.link && <button className="naeo-button secondary" onClick={() => copyLink(row.link, tools)}>링크 복사</button>}
+      <a className="naeo-button" href={safeHref(detail.url)} target="_blank" rel="noopener noreferrer">원문 보기</a>
+      <button type="button" className="naeo-button secondary" onClick={() => copyLink(detail.url, tools)}>링크 복사</button>
     </div>
-  </div>);
+  </div>;
 }
 
 function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<typeof mutations>, cleanup: Cleanup[]) {
   const container = root.querySelector<HTMLElement>(".mui-uien4a");
   if (!container) return () => false;
-  const rows: AiRow[] = Array.from(container.children).filter((el): el is HTMLElement => el instanceof HTMLElement).map((element, index) => {
-    const cells = Array.from(element.children);
-    const performance = text(cells[5]);
-    const metric = text(cells[3]).split("/");
-    return { element, index, title: text(cells[1]), keyword: text(cells[2]), link: cells[1]?.querySelector<HTMLAnchorElement>("a")?.href || "", dates: text(cells[0]), volume: number(metric[0]), saturation: number(metric[1] || ""), exposed: text(cells[4]) === "O", briefing: performance !== "-", recommended: performance !== "-" && performance !== "미추천", performance };
-  });
+  const rows: AiRow[] = Array.from(container.children).filter((el): el is HTMLElement => el instanceof HTMLElement && !!el.dataset.resultId).map((element, index) => ({
+    element, index, resultId: element.dataset.resultId || "", title: text(element.querySelector("a")), keyword: element.dataset.keyword || "",
+    link: element.querySelector<HTMLAnchorElement>("a")?.href || "", category: element.dataset.category || "미분류", publishedAt: Number(element.dataset.publishedAt) || 0,
+    volume: Number(element.dataset.volume ?? -1), saturation: Number(element.dataset.saturation ?? -1),
+    exposed: element.dataset.exposed === "true", briefing: element.dataset.briefing === "true", recommended: element.dataset.cited === "true",
+  }));
   cleanup.push(() => rows.forEach(row => container.append(row.element)));
   const filters = elements(root, ".mui-5vm3uw > button");
   const active = filters[0]?.className;
@@ -141,14 +172,19 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
   empty.style.cssText = "display:none;padding:48px 20px;text-align:center;color:#A3A3A3";
   container.append(empty);
   cleanup.push(() => empty.remove());
+  // 지표가 없는 글(-1)은 정렬 방향과 관계없이 뒤에 둔다.
+  const measured = (value: number, other: number) => value < 0 ? (other < 0 ? 0 : 1) : other < 0 ? -1 : null;
   const apply = () => {
-    const visible = rows.filter(row => filter === 0 || filter === 1 && row.exposed || filter === 2 && row.briefing || filter === 3 && row.recommended);
+    if (!rows.length) return;
+    const visible = rows.filter(row => (category === "전체" || row.category === category) && (filter === 0 || filter === 1 && row.exposed || filter === 2 && row.briefing || filter === 3 && row.recommended));
     const accepted = new Set(visible);
     rows.forEach(row => mutate.attr(row.element, "style", accepted.has(row) ? null : "display:none"));
     visible.sort((a, b) => {
-      const difference = sort === 1 ? a.volume - b.volume : sort === 2 ? a.saturation - b.saturation : b.index - a.index;
-      return (descending ? -1 : 1) * difference || a.index - b.index;
-    }).forEach(row => container.append(row.element));
+      const key = sort === 1 ? [a.volume, b.volume] : sort === 2 ? [a.saturation, b.saturation] : [a.publishedAt, b.publishedAt];
+      const unknown = sort ? measured(key[0], key[1]) : null;
+      if (unknown !== null) return unknown || a.index - b.index;
+      return (descending ? -1 : 1) * (key[0] - key[1]) || a.index - b.index;
+    }).forEach(row => container.insertBefore(row.element, empty));
     empty.style.display = visible.length ? "none" : "block";
     report(`${category} · ${visible.length}개 글 · ${["최신순", "검색량순", "포화도순"][sort]} ${descending ? "내림차순" : "오름차순"}`);
     mutate.attr(container, "aria-label", `${category} ${visible.length}개 글`);
@@ -162,12 +198,12 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
     menu.setAttribute("role", "listbox");
     menu.setAttribute("aria-label", "글 카테고리");
     const rect = combo.getBoundingClientRect();
-    menu.style.cssText = `position:fixed;z-index:1500;left:${rect.left}px;top:${rect.bottom + 5}px;min-width:${Math.max(rect.width, 120)}px;padding:6px;background:#222;border-radius:10px;box-shadow:0 8px 30px #0008`;
+    menu.style.cssText = `position:fixed;z-index:1500;left:${rect.left}px;top:${rect.bottom + 5}px;min-width:${Math.max(rect.width, 120)}px;max-height:320px;overflow:auto;padding:6px;background:#222;border-radius:10px;box-shadow:0 8px 30px #0008`;
     mutate.attr(combo, "aria-expanded", "true");
     const close = () => { menu.remove(); document.removeEventListener("pointerdown", outside); document.removeEventListener("keydown", key); mutate.attr(combo, "aria-expanded", "false"); closeMenu = undefined; };
     const outside = (event: PointerEvent) => { if (!menu.contains(event.target as Node) && !combo.contains(event.target as Node)) close(); };
     const key = (event: KeyboardEvent) => { if (event.key === "Escape") { close(); combo.focus(); } };
-    ["전체", "미분류"].forEach(label => {
+    ["전체", ...new Set(rows.map(row => row.category))].forEach(label => {
       const option = document.createElement("button");
       option.type = "button"; option.setAttribute("role", "option"); option.setAttribute("aria-selected", String(category === label)); option.textContent = label;
       option.style.cssText = `display:block;width:100%;border:0;padding:10px 16px;text-align:left;border-radius:6px;cursor:pointer;color:inherit;background:${category === label ? "#03c75a26" : "transparent"}`;
@@ -177,7 +213,57 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
     document.body.append(menu); document.addEventListener("pointerdown", outside); document.addEventListener("keydown", key);
     closeMenu = close; menu.querySelector<HTMLButtonElement>("button[aria-selected='true']")?.focus();
   };
+  // 인용 확인 실행: 서버가 넣어 준 data-citation-blog/run으로 작업을 만들고 상태를 폴링한다.
+  const runButton = root.querySelector<HTMLButtonElement>("button[data-citation-blog]");
+  const note = root.querySelector<HTMLElement>("[data-citation-note]");
+  const timers: ReturnType<typeof setTimeout>[] = [];
+  cleanup.push(() => timers.forEach(clearTimeout));
+  let cancelButton: HTMLButtonElement | null = null;
+  cleanup.push(() => cancelButton?.remove());
+  const label = (value: string) => mutate.content(runButton, value);
+  const busy = (on: boolean, runId?: string) => {
+    mutate.attr(runButton, "aria-busy", on ? "true" : "false"); mutate.attr(runButton, "disabled", on ? "" : null);
+    if (on && runId && !cancelButton && runButton) {
+      cancelButton = document.createElement("button");
+      cancelButton.type = "button"; cancelButton.className = "naeo-button secondary"; cancelButton.textContent = "확인 취소";
+      cancelButton.addEventListener("click", () => {
+        if (!cancelButton) return;
+        cancelButton.disabled = true;
+        api<CitationRunStatus>(`/api/citations/runs/${runId}/cancel`, { method: "POST" }).then(() => tools.toast("취소를 요청했습니다. 확인 중인 글까지만 처리합니다.")).catch(e => { if (cancelButton) cancelButton.disabled = false; tools.toast(e instanceof Error ? e.message : "취소하지 못했습니다."); });
+      });
+      runButton.insertAdjacentElement("afterend", cancelButton);
+    }
+    if (!on) { cancelButton?.remove(); cancelButton = null; }
+  };
+  const poll = (runId: string, round = 0) => {
+    busy(true, runId);
+    if (round >= 300) { busy(false); label("인용 다시 확인"); tools.toast("확인이 오래 걸리고 있습니다. 잠시 후 새로고침해주세요."); return; }
+    timers.push(setTimeout(async () => {
+      try {
+        const run = await api<CitationRunStatus>(`/api/citations/runs/${runId}`);
+        if (run.state === "queued" || run.state === "running") { label(run.state === "queued" ? "확인 대기 중…" : `인용 확인 중… ${run.progress}%`); poll(runId, round + 1); return; }
+        busy(false); label("인용 다시 확인");
+        if (run.state === "succeeded") { tools.toast(`AI 인용 확인 완료 · 글 ${run.checked}개를 확인했습니다.`); timers.push(setTimeout(() => window.location.reload(), 800)); }
+        else tools.toast(run.state === "canceled" ? "AI 인용 확인을 취소했습니다." : run.errorMessage || "AI 인용 확인에 실패했습니다.");
+      } catch (e) { busy(false); label("인용 다시 확인"); tools.toast(e instanceof Error ? e.message : "확인 상태를 불러오지 못했습니다."); }
+    }, round === 0 ? 400 : 2000));
+  };
+  const start = async () => {
+    const blogId = runButton?.dataset.citationBlog;
+    if (!runButton || !blogId || runButton.getAttribute("aria-busy") === "true") return;
+    busy(true); label("확인 대기 중…");
+    try {
+      const run = await api<CitationRunStatus>("/api/citations/runs", { method: "POST", body: { blogId, idempotencyKey: crypto.randomUUID() } });
+      poll(run.id);
+    } catch (e) {
+      busy(false); label(rows.length ? "인용 다시 확인" : "인용 확인 시작");
+      const message = e instanceof ApiError || e instanceof Error ? e.message : "AI 인용 확인을 시작하지 못했습니다.";
+      tools.toast(message); mutate.content(note, message);
+    }
+  };
+  if (runButton?.dataset.citationRun) poll(runButton.dataset.citationRun);
   return (target: HTMLElement) => {
+    if (runButton && target.closest("button") === runButton) { void start(); return true; }
     const filterButton = target.closest<HTMLElement>(".mui-5vm3uw > button");
     if (filterButton && filters.includes(filterButton)) { filter = filters.indexOf(filterButton); selectGroup(filters, filterButton, mutate, active, inactive); apply(); return true; }
     const sortButton = target.closest<HTMLElement>(".mui-10egq61 [role='button']");
@@ -189,20 +275,18 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
     }
     const combo = target.closest<HTMLElement>("[role='combobox']");
     if (combo) { openCategory(combo); return true; }
-    const detail = target.closest("button");
-    if (detail && text(detail) === "상세 보기") {
-      const row = rows.find(row => row.element.contains(detail)); if (row) showDetail(row, tools); return true;
-    }
+    const detail = target.closest<HTMLButtonElement>("button[data-result-id]");
+    if (detail?.dataset.resultId) { tools.openDialog("AI 인용 상세", <CitationDetail id={detail.dataset.resultId} tools={tools} />); return true; }
     const help = target.closest("button[aria-label$='설명'], .mui-1v5qcm9 button");
     if (help) {
-      const label = help.getAttribute("aria-label") || "AI 성과 설명";
+      const helpLabel = help.getAttribute("aria-label") || "AI 성과 설명";
       const descriptions: Record<string, string> = {
-        "대표 키워드 설명": "포스트의 주제를 대표하는 검색어입니다. 이 키워드로 통합검색 노출과 AI 브리핑 인용 여부를 확인합니다.",
-        "검색량 및 포화도 설명": "검색량은 키워드의 월간 검색 횟수입니다. 포화도는 검색량에 비해 등록된 문서가 얼마나 많은지 보여주는 비율입니다.",
-        "통합검색 노출 설명": "O는 해당 키워드의 네이버 통합검색 결과에 글이 노출되었음을, X는 확인 시점에 노출되지 않았음을 뜻합니다.",
-        "AI 성과 설명": "AI 브리핑에 내 글의 본문이나 이미지가 출처로 인용되면 인용 유형과 순위를 표시합니다. 미추천은 브리핑이 있지만 내 글은 인용되지 않은 상태입니다.",
+        "대표 키워드 설명": "글마다 확인에 쓰는 검색어입니다. 직접 지정한 키워드가 있으면 그것을, 없으면 첫 태그, 태그가 없으면 제목의 첫 구절을 씁니다. 상세 보기에서 고칠 수 있습니다.",
+        "검색량 및 포화도 설명": "검색량은 관리자가 등록한 키워드 지표의 월간 검색 횟수(PC+모바일)입니다. 포화도는 문서 수를 검색량으로 나눈 비율이며, 지표가 없으면 -로 표시합니다.",
+        "통합검색 노출 설명": "O는 확인 시점에 대표 키워드의 네이버 통합검색 일반 결과에 이 글이 있었음을, X는 없었음을 뜻합니다.",
+        "AI 성과 설명": "AI 브리핑의 본문 출처나 이미지 출처에 내 블로그 글이 있으면 출처 순서를 표시합니다. 미추천은 브리핑이 있지만 내 블로그가 출처에 없는 상태, -는 브리핑이 없는 상태입니다.",
       };
-      tools.openDialog(label, <p style={{ lineHeight: 1.8 }}>{descriptions[label] || descriptions["AI 성과 설명"]}</p>); return true;
+      tools.openDialog(helpLabel, <p style={{ lineHeight: 1.8 }}>{descriptions[helpLabel] || descriptions["AI 성과 설명"]}</p>); return true;
     }
     return false;
   };

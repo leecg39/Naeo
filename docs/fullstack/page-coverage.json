@@ -2272,7 +2272,9 @@
     "type": "tests",
     "files": [
      "tests/server/ai-picks-page.test.ts",
-     "tests/server/analysis.test.ts"
+     "tests/server/analysis.test.ts",
+     "tests/server/citations.test.ts",
+     "tests/server/citations-http.test.ts"
     ]
    },
    {
@@ -2283,7 +2285,7 @@
    },
    {
     "type": "external_pending",
-    "reason": "AI 인용 확인 공급자"
+    "reason": "실제 SerpApi 키(NAEO_CITATION_PROVIDER·NAEO_SERPAPI_KEY) 왕복 — 로컬 double·프로덕션 HTTP/워커·브라우저 검증은 완료"
    },
    {
     "type": "browser-render",

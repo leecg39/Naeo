@@ -2,10 +2,21 @@ import type {Database} from '../database';
 import {collectBlog,type FetchLike} from '../collect/rss';
 import type {ScanHandler} from '../jobs/worker';
 import {JobCanceled} from '../jobs/worker';
-import {analyzePosts,type PostSample} from './rules';
+import {analyzePosts,type AiCitationStatus,type PostSample} from './rules';
 import {saveScanResult} from './results';
+import {AppError} from '../errors';
+import {citationConfig} from '../citations/provider';
+import {enqueueCitation} from '../citations/runs';
 
-/** 진단 작업: RSS 수집 → 최근 글 분석 → 결과·이력 저장. */
+/** 진단이 끝나면 AI 인용 확인을 자동 예약한다(같은 진단 작업은 한 번만). 한도·진행 중이면 이유만 남긴다. */
+function scheduleCitation(db:Database,ownerId:string,blogId:string,jobId:string,now:number):AiCitationStatus{
+ const config=citationConfig();
+ if(!config)return{status:'not_configured'};
+ try{return{status:'scheduled',runId:enqueueCitation(db,ownerId,{blogId,idempotencyKey:`scan:${jobId}`},{source:'scan',config},now).id};}
+ catch(e){if(e instanceof AppError)return{status:'skipped',reason:e.code};throw e;}
+}
+
+/** 진단 작업: RSS 수집 → 최근 글 분석 → (공급자가 있으면) AI 인용 확인 예약 → 결과·이력 저장. */
 export function scanHandler(db:Database,fetchImpl:FetchLike=fetch,now:()=>number=Date.now):ScanHandler{
  return async(job,ctx)=>{
   await ctx.progress(10);
@@ -16,6 +27,7 @@ export function scanHandler(db:Database,fetchImpl:FetchLike=fetch,now:()=>number
   const report=analyzePosts(posts,now());
   if(ctx.canceled())throw new JobCanceled();
   const {owner_id:ownerId}=db.prepare('SELECT owner_id FROM scan_jobs WHERE id=?').get(job.id) as {owner_id:string};
+  report.aiCitation=scheduleCitation(db,ownerId,job.blogId,job.id,now());
   const resultId=saveScanResult(db,{ownerId,blogId:job.blogId,jobId:job.id,report,postCount:posts.length,measuredAt:now()});
   return{resultId,score:report.score,postCount:posts.length,collected};
  };

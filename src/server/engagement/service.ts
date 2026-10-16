@@ -5,6 +5,8 @@ import {transaction,type Database} from '../database';
 import {requireTerms,userById} from '../auth';
 import {AppError} from '../errors';
 import {paginationInput} from '../validation';
+import {citationConfig} from '../citations/provider';
+import {hasCitationResult,hasViewedCitation} from '../citations/runs';
 
 const DAY=86_400_000,COOLDOWN=7*DAY;
 export const POINT_POLICY={version:'local-fixed-v1',timezone:'Asia/Seoul',daily:5,streakEvery:7,streakBonus:15,subTopicCooldownDays:7} as const;
@@ -86,7 +88,7 @@ export function tutorial(db:Database,id:string,now=Date.now()){
  const hasMate=Boolean(db.prepare('SELECT 1 FROM mate_reports s JOIN blogs b ON b.naver_id=s.naver_id WHERE s.owner_id=? AND b.owner_id=? AND s.post_count>0 AND s.expires_at>?').get(id,id,now));
  const prefs=subTopic(db,id),visited=Boolean(db.prepare('SELECT 1 FROM engagement_visits WHERE owner_id=?').get(id));
  const reasons={blog:hasBlog?'':'블로그를 먼저 등록해주세요.',mate:hasMate?'':'본인 블로그의 글이 있는 진단을 완료해주세요.',
-  ai_picks:'AI 인용 확인 공급자가 연결되면 수령할 수 있습니다.',
+  ai_picks:hasViewedCitation(db,id)?'':hasCitationResult(db,id)?'AI 인용 현황에서 글 하나의 상세를 열어 확인해주세요.':citationConfig()?'AI 인용 현황에서 인용 확인을 먼저 실행해주세요.':'AI 인용 확인 공급자가 연결되면 수령할 수 있습니다.',
   ranking:!hasBlog?'블로그를 먼저 등록해주세요.':!visited?'랭킹을 먼저 둘러봐주세요.':!prefs.subTopic?'서브 주제를 저장해주세요.':'',
   verify:phoneRewardEligibility(db,id).reason};
  const steps=STEPS.map(step=>{const claim=claims.find(c=>c.step===step.key);return{...step,done:Boolean(claim),claimedAt:claim?.createdAt??null,eligible:!claim&&!reasons[step.key],lockedReason:claim?'':reasons[step.key]};});

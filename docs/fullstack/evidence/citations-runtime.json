@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-10-16T07:55:25.391Z",
+  "schemaVersion": 40,
+  "providerRequests": 8,
+  "checks": [
+    "Production Next + worker with loopback SerpApi double; key never rendered",
+    "Newest posts first, duplicate keywords searched once, page_token follow-up for AI briefing",
+    "Text/image citation ranks and same-post integrated search exposure stored and summarized",
+    "AI picks and dashboard SSR show the member results; captured account rows absent",
+    "Detail isolation; viewing records the tutorial condition; 30P claimed once",
+    "Member keyword override used on the next run; daily limit 2 returns 429"
+  ],
+  "externalSearchPerformed": false,
+  "realProviderVerified": false,
+  "temporaryDataRemoved": true
+}
