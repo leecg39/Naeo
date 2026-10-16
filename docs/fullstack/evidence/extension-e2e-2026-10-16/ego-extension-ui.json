@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-16T15:00:00+09:00",
+  "taskSpaceId": 0,
+  "extension": {
+    "name": "NAEO 네이버 블로그 발행 도우미",
+    "version": "1.0.0",
+    "id": "lacdnccodopejadkbeannbcmbljiodik",
+    "loadedUnpacked": true,
+    "enabled": true
+  },
+  "serviceBase": "http://localhost:62568",
+  "oauthConnected": true,
+  "draft": {
+    "title": "Ego 확장 발행 검증",
+    "listed": true,
+    "opened": true,
+    "transferRows": ["title", "body", "heading", "image"]
+  },
+  "naverWriter": {
+    "opened": true,
+    "authenticated": false,
+    "remaining": "사용자가 네이버 로그인 후 편집기 위치 선택·클립보드 붙여넣기를 검증"
+  },
+  "secretsRecorded": false
+}
