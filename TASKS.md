@@ -80,7 +80,7 @@
 - [x] P7.3 /api/mcp 표준 연결/도구 목록/호출·인증·권한·크레딧, /mcp 안내 설정을 실제 로컬/배포 URL로 연결. (Streamable HTTP·OAuth 발견·도구 6개·범위·토큰 차감, 설정에 실제 MCP 주소, 공식 Inspector로 확인)
 - [x] P7.4 소셜 프로젝트/슬라이드 CRUD·정렬·저장·복제, /social/* 및 /youtube/aeo-intro·배너 화면 연결. (/dashboard/social 편집기·SVG 미리보기·?project= 보기. /social/banner-preview는 캡처가 없어 홈으로 이동 유지)
 - [x] P7.5 실제 이미지/PDF/영상 내보내기·진행/실패·파일 검증; /preview /dev/* 권한·미리보기 동작. (PNG·PDF·ZIP 내보내기와 진행/실패·파일 검증, /preview 내 초안, /dev 관리자 전용. 영상 인코딩은 지원 안 함)
-- [ ] P7.6 OAuth 실제 왕복·MCP 클라이언트·확장·내보내기·모바일·접근 제어 E2E 검증. (MCP 공식 클라이언트·내보내기·모바일·접근 제어는 검증 완료. 실제 OAuth 앱 왕복과 실제 확장 프로그램은 키·확장 코드 필요)
+- [ ] P7.6 OAuth 실제 왕복·MCP 클라이언트·확장·내보내기·모바일·접근 제어 E2E 검증. (MCP 공식 클라이언트·내보내기·모바일·접근 제어는 검증 완료. 실제 OAuth 앱 왕복과 실제 확장 프로그램은 키·확장 코드 필요. 2026-10-16 확장 Origin을 MCP가 거부하던 결함 수정·전용 API/DB 테스트 포함 전체420 통과, `docs/fullstack/extension-origin.md`)
 
 ### P8 — 운영·완료 감사 (P0–P7 의존)
 

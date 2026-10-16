@@ -17,15 +17,19 @@ function unauthorized(e:AppError):Response{
 
 /**
  * MCP Streamable HTTP(명세 2025-06-18): POST 한 건의 JSON-RPC 메시지를 받아 JSON으로 응답한다(서버 시작 스트림 없음 → GET 405).
- * 다른 사이트 Origin은 거절(DNS 리바인딩 방지), 접근 토큰은 /api/mcp 대상이어야 한다.
+ * 다른 사이트 Origin은 거절(DNS 리바인딩 방지). 허용 확장 Origin은 해당 확장 토큰만 사용한다.
+ * 접근 토큰은 /api/mcp 대상이어야 한다.
  */
 export async function mcpApi(db:Database,request:Request,now=Date.now()):Promise<Response|null>{
  if(new URL(request.url).pathname!=='/api/mcp')return null;
  const origin=request.headers.get('origin');
- if(origin&&origin!==appOrigin())return json({error:'forbidden_origin'},403);
+ const extensionId=origin?.match(/^chrome-extension:\/\/([a-p]{32})$/)?.[1];
+ const allowedExtension=extensionId&&(process.env.NAEO_EXTENSION_IDS??'').split(',').map(id=>id.trim()).includes(extensionId);
+ if(origin&&origin!==appOrigin()&&!allowedExtension)return json({error:'forbidden_origin'},403);
  if(request.method!=='POST')return new Response(null,{status:405,headers:{Allow:'POST'}});
  let who;
  try{who=authenticateBearer(db,request.headers.get('authorization'),mcpResource(),now);}catch(e){if(e instanceof AppError)return unauthorized(e);throw e;}
+ if(extensionId&&who.clientId!==`naeo-extension-${extensionId}`)return json({error:'forbidden_origin'},403);
  rateLimit(db,`mcp:${who.userId}:${who.clientId}`,120,60_000,now);
  const bytes=await readRequestBytes(request,512*1024);
  let message:z.infer<typeof rpc>;

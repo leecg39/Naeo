@@ -5,6 +5,7 @@ import {openDatabase} from '../../src/server/database';
 import {createApi} from '../../src/server/api';
 import {createBlog} from '../../src/server/blogs';
 import {authorizationServerMetadata,protectedResourceMetadata} from '../../src/server/oauth/metadata';
+import {ensureExtensionClient} from '../../src/server/oauth/authz';
 
 const origin='http://127.0.0.1:3000';
 process.env.NAEO_APP_URL=origin;
@@ -28,6 +29,36 @@ async function connect(f:ReturnType<typeof fixture>,cookie:string,scope:string){
  return{client:reg.client_id as string,token:await tok.json() as {access_token:string;refresh_token:string},status:tok.status};
 }
 const mcp=(f:ReturnType<typeof fixture>,token:string,body:unknown,extra:Record<string,string>={})=>f.call('/api/mcp',{method:'POST',body:JSON.stringify(body),headers:{'Content-Type':'application/json',Accept:'application/json, text/event-stream',Authorization:`Bearer ${token}`,...extra}});
+
+test('extension MCP requests require an allowed origin and a token for that exact extension',async t=>{
+ const f=fixture(t),id='a'.repeat(32),other='b'.repeat(32);
+ const previous=process.env.NAEO_EXTENSION_IDS;
+ process.env.NAEO_EXTENSION_IDS=` ${id},${other} `;
+ t.after(()=>{if(previous===undefined)delete process.env.NAEO_EXTENSION_IDS;else process.env.NAEO_EXTENSION_IDS=previous;});
+ const registration=await f.site('/api/auth/register','POST',{email:'extension@example.test',password:'extension-long-password',nickname:'확장 회원',termsAccepted:true},'');
+ assert.equal(registration.status,201);
+ const cookie=registration.headers.get('set-cookie')!.split(';')[0];
+ const client=ensureExtensionClient(f.db,id),redirect=client.redirect_uris[0];
+ const authorization=await f.site('/api/oauth/authorize','POST',{response_type:'code',client_id:client.client_id,redirect_uri:redirect,state:'extension-state',code_challenge:challenge,code_challenge_method:'S256',scope:'naeo:read',decision:'approve'},cookie);
+ assert.equal(authorization.status,200);
+ const callback=new URL((await authorization.json()).data.redirect);
+ assert.equal(callback.searchParams.get('state'),'extension-state');
+ const exchange=await f.call('/api/oauth/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded',Origin:`chrome-extension://${id}`},body:new URLSearchParams({grant_type:'authorization_code',client_id:client.client_id,redirect_uri:redirect,code:callback.searchParams.get('code')!,code_verifier:verifier}).toString()});
+ assert.equal(exchange.status,200);const token=(await exchange.json()).access_token;
+ const ping={jsonrpc:'2.0',id:1,method:'ping'};
+ const accepted=await mcp(f,token,ping,{Origin:`chrome-extension://${id}`});
+ assert.equal(accepted.status,200);assert.deepEqual((await accepted.json()).result,{});
+ assert.equal((await mcp(f,token,ping,{Origin:`chrome-extension://${other}`})).status,403);
+ for(const invalid of [`chrome-extension://${'c'.repeat(32)}`,`chrome-extension://${id}.evil.test`,`chrome-extension://${id}/path`,'null','https://evil.example'])
+  assert.equal((await mcp(f,token,ping,{Origin:invalid})).status,403,invalid);
+ const regular=await connect(f,cookie,'naeo:read');
+ assert.equal((await mcp(f,regular.token.access_token,ping,{Origin:`chrome-extension://${id}`})).status,403);
+ assert.equal((await mcp(f,'invalid',ping,{Origin:`chrome-extension://${id}`})).status,401);
+ const denied=await mcp(f,token,{jsonrpc:'2.0',id:2,method:'tools/call',params:{name:'naeo_create_draft',arguments:{title:'권한 없음'}}},{Origin:`chrome-extension://${id}`});
+ assert.equal((await denied.json()).result.isError,true);
+ process.env.NAEO_EXTENSION_IDS=other;
+ assert.equal((await mcp(f,token,ping,{Origin:`chrome-extension://${id}`})).status,403);
+});
 
 test('metadata documents advertise the endpoints MCP clients discover',()=>{
  const as=authorizationServerMetadata(),pr=protectedResourceMetadata();
