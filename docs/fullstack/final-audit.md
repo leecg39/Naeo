@@ -1,6 +1,6 @@
 # 최신 상태
 
-2026-10-16 현재 전체 478개 테스트(루트 12 + 서버 466), lint, typecheck, 최신 소스의 production build가 통과했다. 83개 경로와 17개 관리자 고정 메뉴 권한, 실제 메뉴·주요 CRUD, 사진함 마크다운 복사·링크 철회·1600px 최적화, 확장 OAuth→MCP→철회 HTTP 왕복과 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달을 검증했다. 회원별 OpenAI OAuth 연결·암호화 저장·회전 갱신·Responses 생성은 로컬 공급자 대역으로 검증했고 Ego 설정 화면도 확인했다. [현재 구현·검증 상태](current-audit-2026-10-16.md), [OpenAI 연결 계약](openai-oauth.md), [실제 Ego 검증](ego-crud-2026-10-16.md), [확장 발행 계약](extension-publish-extension.md)을 참조한다. 전체 목표는 승인된 OpenAI 클라이언트와 나머지 실제 외부 공급자 왕복이 남아 계속 진행 상태다. 아래는 이전 시점의 기록이다.
+2026-10-16 현재 전체 479개 테스트(루트 12 + 서버 467), lint, typecheck, 최신 소스의 production build가 통과했다. 83개 경로와 17개 관리자 고정 메뉴 권한, 실제 메뉴·주요 CRUD, 사진함 마크다운 복사·링크 철회·1600px 최적화, 확장 OAuth→MCP→철회 HTTP 왕복과 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달을 검증했다. 회원별 OpenAI OAuth 연결·암호화 저장·회전 갱신·Responses 생성은 로컬 공급자 대역으로 검증했고 Ego 설정 화면도 확인했다. [현재 구현·검증 상태](current-audit-2026-10-16.md), [OpenAI 연결 계약](openai-oauth.md), [실제 Ego 검증](ego-crud-2026-10-16.md), [확장 발행 계약](extension-publish-extension.md)을 참조한다. 전체 목표는 승인된 OpenAI 클라이언트와 나머지 실제 외부 공급자 왕복이 남아 계속 진행 상태다. 아래는 이전 시점의 기록이다.
 
 # NAEO 풀스택 최종 감사 — 2026-10-14
 

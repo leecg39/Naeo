@@ -15,7 +15,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/",
     "access": "public",
     "anonymous": {
@@ -76,7 +76,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin",
     "access": "admin",
     "anonymous": {
@@ -134,7 +134,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/blog",
     "access": "admin",
     "anonymous": {
@@ -193,7 +193,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/event",
     "access": "admin",
     "anonymous": {
@@ -252,7 +252,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/events",
     "access": "admin",
     "anonymous": {
@@ -310,7 +310,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/inquiries",
     "access": "admin",
     "anonymous": {
@@ -366,7 +366,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/inquiries/templates",
     "access": "admin",
     "anonymous": {
@@ -420,11 +420,11 @@
   ],
   "operations": "키워드·주제·검색 지표 CRUD, 출처·측정일 표시",
   "acceptance": "일반 계정 403, 모든 관리 경로 직접 접근, 수정 공개 반영",
-  "status": "verified",
+  "status": "external_pending",
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/keywords",
     "access": "admin",
     "anonymous": {
@@ -450,6 +450,10 @@
     "sections": [
      "P3.5"
     ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "검색광고 API 자격 증명(NAEO_SEARCHAD_*)·네이버 검색 API(NAEO_NAVER_*) 실제 왕복"
    },
    {
     "type": "browser-render",
@@ -484,7 +488,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/rewards",
     "access": "admin",
     "anonymous": {
@@ -542,7 +546,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/scan-health",
     "access": "admin",
     "anonymous": {
@@ -601,7 +605,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/users",
     "access": "admin",
     "anonymous": {
@@ -660,7 +664,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/admin/writing",
     "access": "admin",
     "anonymous": {
@@ -720,7 +724,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/auth/extension",
     "access": "public",
     "anonymous": {
@@ -790,7 +794,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/auth/google",
     "access": "redirect",
     "anonymous": {
@@ -851,7 +855,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog",
     "access": "public",
     "anonymous": {
@@ -912,7 +916,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/event/naeo-review-event",
     "access": "public",
     "anonymous": {
@@ -973,7 +977,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/ai-picks-guide",
     "access": "public",
     "anonymous": {
@@ -1034,7 +1038,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/channel-analysis-guide",
     "access": "public",
     "anonymous": {
@@ -1095,7 +1099,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/competitor-analysis-guide",
     "access": "public",
     "anonymous": {
@@ -1156,7 +1160,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/dashboard-guide",
     "access": "public",
     "anonymous": {
@@ -1217,7 +1221,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/golden-keywords-guide",
     "access": "public",
     "anonymous": {
@@ -1278,7 +1282,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/keyword-recommendation-guide",
     "access": "public",
     "anonymous": {
@@ -1339,7 +1343,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/today-action-guide",
     "access": "public",
     "anonymous": {
@@ -1400,7 +1404,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-cited-posts",
     "access": "public",
     "anonymous": {
@@ -1461,7 +1465,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-food-playbook",
     "access": "public",
     "anonymous": {
@@ -1522,7 +1526,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-image-citation",
     "access": "public",
     "anonymous": {
@@ -1583,7 +1587,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-tips-1-travel-life",
     "access": "public",
     "anonymous": {
@@ -1644,7 +1648,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-tips-2-life-culture",
     "access": "public",
     "anonymous": {
@@ -1705,7 +1709,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
     "access": "public",
     "anonymous": {
@@ -1766,7 +1770,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/golden-keywords",
     "access": "public",
     "anonymous": {
@@ -1827,7 +1831,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/mate-free-diagnosis",
     "access": "public",
     "anonymous": {
@@ -1888,7 +1892,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/marketing/what-is-ai-briefing",
     "access": "public",
     "anonymous": {
@@ -1949,7 +1953,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/news/across-modu-startup-ditoday",
     "access": "public",
     "anonymous": {
@@ -2010,7 +2014,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/news/across-modu-startup-mt",
     "access": "public",
     "anonymous": {
@@ -2071,7 +2075,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/news/naver-mate-naeo-byline",
     "access": "public",
     "anonymous": {
@@ -2132,7 +2136,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/contact",
     "access": "public",
     "anonymous": {
@@ -2193,7 +2197,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard",
     "access": "member",
     "anonymous": {
@@ -2256,7 +2260,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/ai-picks",
     "access": "member",
     "anonymous": {
@@ -2281,12 +2285,13 @@
    {
     "type": "verification",
     "sections": [
+     "P3.3 AI 인용 확인",
      "P3.4 무료 진단"
     ]
    },
    {
     "type": "external_pending",
-    "reason": "실제 SerpApi 키(NAEO_CITATION_PROVIDER·NAEO_SERPAPI_KEY) 왕복 — 로컬 double·프로덕션 HTTP/워커·브라우저 검증은 완료"
+    "reason": "AI 인용 확인 SerpApi 키(NAEO_CITATION_PROVIDER·NAEO_SERPAPI_KEY) 실제 왕복"
    },
    {
     "type": "browser-render",
@@ -2316,11 +2321,11 @@
   ],
   "operations": "추가·목록·메모 수정·삭제·비교",
   "acceptance": "중복 주소·한도·두 계정 격리·실제 결과 비교",
-  "status": "verified",
+  "status": "external_pending",
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/competitors",
     "access": "member",
     "anonymous": {
@@ -2348,6 +2353,10 @@
     "sections": [
      "P3.6"
     ]
+   },
+   {
+    "type": "external_pending",
+    "reason": "네이버 검색 API(NAEO_NAVER_*) 실제 왕복"
    },
    {
     "type": "browser-render",
@@ -2381,7 +2390,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/events",
     "access": "member",
     "anonymous": {
@@ -2443,7 +2452,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/mate",
     "access": "member",
     "anonymous": {
@@ -2502,7 +2511,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/recommendations",
     "access": "member",
     "anonymous": {
@@ -2563,7 +2572,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/settings",
     "access": "member",
     "anonymous": {
@@ -2597,13 +2606,13 @@
     ]
    },
    {
+    "type": "external_pending",
+    "reason": "메일·SMS 인증(P1.6·P1.7) 실제 수신"
+   },
+   {
     "type": "runtime",
     "file": "docs/fullstack/evidence/notify-mail-runtime.json",
     "note": "알림 메일 아웃박스·자동 스캔 예약의 로컬 프로덕션 왕복(루프백 Resend/RSS double)"
-   },
-   {
-    "type": "external_pending",
-    "reason": "메일·SMS 인증(P1.6·P1.7)"
    },
    {
     "type": "browser-render",
@@ -2639,7 +2648,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/write",
     "access": "member",
     "anonymous": {
@@ -2671,7 +2680,7 @@
    },
    {
     "type": "external_pending",
-    "reason": "AI 글: 승인된 OpenAI client(NAEO_OPENAI_*) 또는 ANTHROPIC_API_KEY 실제 왕복 · AI 이미지: NAEO_IMAGE_API_KEY 실제 왕복(로컬 double 검증 완료, docs/fullstack/evidence/image-generation-runtime.json)"
+    "reason": "AI 글: 승인된 OpenAI client(NAEO_OPENAI_*) 또는 ANTHROPIC_API_KEY 실제 왕복 · AI 이미지 NAEO_IMAGE_* 실제 키 왕복"
    },
    {
     "type": "browser-render",
@@ -2704,7 +2713,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dev/event-preview",
     "access": "dev",
     "anonymous": {
@@ -2758,7 +2767,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dev/nav-preview",
     "access": "dev",
     "anonymous": {
@@ -2813,7 +2822,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/event",
     "access": "public",
     "anonymous": {
@@ -2872,7 +2881,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/event/naeo-review",
     "access": "public",
     "anonymous": {
@@ -2931,7 +2940,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/event/ranking-reward",
     "access": "public",
     "anonymous": {
@@ -2990,7 +2999,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/faq",
     "access": "public",
     "anonymous": {
@@ -3047,7 +3056,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/features",
     "access": "public",
     "anonymous": {
@@ -3105,7 +3114,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/guide/extension-publish",
     "access": "public",
     "anonymous": {
@@ -3163,7 +3172,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/guide/writing",
     "access": "public",
     "anonymous": {
@@ -3223,7 +3232,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/images",
     "access": "public",
     "anonymous": {
@@ -3283,7 +3292,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/login",
     "access": "guest",
     "anonymous": {
@@ -3346,7 +3355,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/mate",
     "access": "public",
     "anonymous": {
@@ -3406,7 +3415,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/mate/s",
     "access": "public",
     "anonymous": {
@@ -3464,7 +3473,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/mcp",
     "access": "public",
     "anonymous": {
@@ -3524,7 +3533,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/oauth/consent",
     "access": "public",
     "anonymous": {
@@ -3585,7 +3594,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/payment/complete",
     "access": "member",
     "anonymous": {
@@ -3647,7 +3656,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/preview",
     "access": "redirect",
     "anonymous": {
@@ -3708,7 +3717,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/pricing",
     "access": "public",
     "anonymous": {
@@ -3772,7 +3781,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/privacy",
     "access": "public",
     "anonymous": {
@@ -3829,7 +3838,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/privacy/extension",
     "access": "public",
     "anonymous": {
@@ -3886,7 +3895,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/ranking",
     "access": "public",
     "anonymous": {
@@ -3945,7 +3954,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/refund",
     "access": "public",
     "anonymous": {
@@ -4002,7 +4011,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/aeo-carousel",
     "access": "public",
     "anonymous": {
@@ -4063,7 +4072,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/aeo-carousel/export",
     "access": "public",
     "anonymous": {
@@ -4124,7 +4133,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/banner-preview",
     "access": "redirect",
     "anonymous": {
@@ -4179,7 +4188,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/banner-preview/frame",
     "access": "redirect",
     "anonymous": {
@@ -4234,7 +4243,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/mate-ad",
     "access": "public",
     "anonymous": {
@@ -4295,7 +4304,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/social/mate-ad/export",
     "access": "public",
     "anonymous": {
@@ -4356,7 +4365,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/terms",
     "access": "public",
     "anonymous": {
@@ -4413,7 +4422,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/updates",
     "access": "public",
     "anonymous": {
@@ -4470,7 +4479,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/updates/2026-06-10-ranking-archive-hall-of-fame",
     "access": "redirect",
     "anonymous": {
@@ -4527,7 +4536,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/updates/2026-06-11-mate-free-diagnosis",
     "access": "redirect",
     "anonymous": {
@@ -4584,7 +4593,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/updates/2026-06-24-golden-keywords",
     "access": "redirect",
     "anonymous": {
@@ -4641,7 +4650,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/updates/2026-09-16-post-level-exposure",
     "access": "redirect",
     "anonymous": {
@@ -4698,7 +4707,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/youtube/aeo-intro",
     "access": "public",
     "anonymous": {
@@ -4759,7 +4768,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/blog/guide/dashboard-guide",
     "access": "public",
     "anonymous": {
@@ -4820,7 +4829,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/dashboard/events/naeo-review",
     "access": "member",
     "anonymous": {
@@ -4879,7 +4888,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/event/naeo-review",
     "access": "public",
     "anonymous": {
@@ -4940,7 +4949,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-16T00:07:05.759Z",
+    "at": "2026-10-16T10:00:58.802Z",
     "url": "/p/AAAAAAAAAAAAAAAAAAAAAA/images",
     "access": "public",
     "anonymous": {

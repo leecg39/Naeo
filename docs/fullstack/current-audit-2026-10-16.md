@@ -5,7 +5,8 @@
 ## 최신 검증
 
 - eced38a까지 포함한 최신 소스를 별도 디렉터리에서 production build해 컴파일·TypeScript·정적 페이지 생성을 확인했다. 실행 중인 Ego 임시 서버의 `.next`는 바꾸지 않았다.
-- 전체 478개 테스트(루트 12 + 서버 466), lint, typecheck, production build, `git diff --check`가 통과했다. 이전 기록의 "427개"는 서버 묶음만 센 값이며, 이후 인용 확인·AI 이미지·검색 어댑터·알림 메일 구현으로 466개가 됐다.
+- 전체 479개 테스트(루트 12 + 서버 467), lint, typecheck, production build, `git diff --check`가 통과했다. 이전 기록의 "427개"는 서버 묶음만 센 값이며, 이후 인용 확인·AI 이미지·검색 어댑터·알림 메일·이벤트 대표 이미지 구현으로 467개가 됐다.
+- 원본 naeo.kr과 공개 16경로를 Chrome DevTools로 SSR 구조·1440/390px 실측 비교했다. `/event` 대표 이미지·`/login` 제목 결함을 수정했고 잔여 차이는 캡처 이후 원본 변동으로 분류했다. [비교 기록](visual-parity-2026-10-16.md), [배포·외부 준비물](deployment-prerequisites.md).
 - 공용 페이지 이동의 포커스 처리, 목록 복귀 도중 동시 삭제 처리, 확장 Origin·토큰 clientId 대조, 사진함 마크다운 링크·폐기·재발행, 30일 초안 자동 삭제가 구현됐다.
 - 고정 개발 ID를 가진 Manifest V3 확장 본체를 추가했다. 실제 Next HTTP에서 PKCE 동의→토큰→MCP 초안 조회→철회 후 401을 확인했다. [확장 발행 기록](extension-publish-extension.md).
 - 실제 Ego Lite와 로그인된 네이버 SmartEditor ONE에서 제목·구조화 본문·소제목·PNG 사진의 4단계 전달, 진행 상태, 연결 해제, 테스트 글 정리를 확인했다. 공개 발행은 누르지 않았다.
@@ -17,7 +18,9 @@
 |---|---|---|
 | 회원별 OpenAI OAuth AI 글 | 스키마 38·39, 연결 UI/API, PKCE·nonce·ID token 검증, 암호화 저장, 회전 갱신·lease, 회원별 작업 revision, 모델 조회·Responses 완료 이벤트, 실패 환급을 로컬 대역과 전용 8개로 확인. Ego 미설정 화면 390px 확인 | 배포용 승인 client ID·HTTPS 콜백 등록 후 실제 회원 두 명의 동의·생성·갱신·해제·사용량 오류 왕복 |
 | AI 이미지 | OpenAI Images 어댑터·장당 1토큰·부분 환급·초안 첨부 구현, 로컬 double로 프로덕션 왕복 검증 | `NAEO_IMAGE_*` 실제 키 왕복 미완료 |
-| AI 브리핑 인용 | analysis/rules.ts에서 not_configured 고정 | 실제 인용 근거 수집 경로 조사·확정·구현·대조. 키만 입력하면 되는 기존 어댑터가 아님 |
+| AI 브리핑 인용 | SerpApi Naver·AI Overview 어댑터(스키마 40), 최근 글 10개·하루 2회·스캔 후 자동 확인, 상세·열람·키워드 재정의·취소/재시도/임대·격리를 로컬 double·프로덕션·브라우저로 검증 | 실제 SerpApi 키 왕복 |
+| 알림 메일·자동 스캔 | `notify_mail` 아웃박스(스키마 43): scan_email/marketing_email 동의 연동·회수·임대·재시도, autoscan 하루 1회. 로컬 double·프로덕션 왕복 검증 | 실제 Resend 수신·단말 확인 |
+| 키워드 지표·상위 노출 | 검색광고 HMAC·네이버 검색 어댑터(스키마 42), 관리자 수집 버튼·회원 노출 확인·하루 한도를 로컬 double로 검증 | 실제 네이버 키 왕복 |
 | 결제 | 구현·모의 검증, 로컬 Toss 인증정보 없음 | 테스트 자격 증명으로 결제/실패/환불 왕복 |
 | Google·네이버 로그인 | 구현·모의 검증, 로컬 앱 인증정보 없음 | 앱/콜백 등록 후 실제 로그인·연결/해제 |
 | 이메일·SMS | 구현·로컬 검증, 로컬 공급자 인증정보 없음 | 발신 설정·실제 수신·인증 및 실패 처리 |
