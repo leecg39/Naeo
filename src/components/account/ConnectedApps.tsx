@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {api,ApiError} from '@/lib/api-client';
@@ -12,7 +13,7 @@ export default function ConnectedApps({initial,mcpUrl}:{initial:AuthorizedApp[];
  return <section className="panel account-card" id="apps" aria-label="연결된 앱">
   <h2>연결된 앱</h2>
   <p className="muted">ChatGPT·Claude 같은 AI 앱에 MCP 서버 주소 <code>{mcpUrl}</code>를 추가하면 NAEO 로그인 후 연결할 수 있어요.</p>
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   {apps.length?<div className="responsive-table"><table className="data-table"><caption className="sr-only">연결된 앱 목록</caption>
    <thead><tr><th>앱</th><th>권한</th><th>연결</th><th>마지막 사용</th><th>호출</th><th>관리</th></tr></thead>
    <tbody>{apps.map(a=><tr key={a.clientId}><td><strong>{a.name}</strong>{a.kind==='extension'&&<span className="muted"> · 확장 프로그램</span>}</td><td>{a.scopes.join(', ')}</td><td>{day(a.connectedAt)}</td><td>{a.lastUsedAt?day(a.lastUsedAt):'-'}</td><td>{a.calls}</td>

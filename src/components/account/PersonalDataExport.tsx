@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import {useEffect,useState,type FormEvent} from 'react';
 import {kstDateTime} from '@/lib/kst-time';
 import {api,ApiError} from '@/lib/api-client';
@@ -26,7 +27,7 @@ export default function PersonalDataExport({initial,hasPassword}:{initial:Person
    {hasPassword?<label>본인 확인 비밀번호<input type="password" name="currentPassword" className="field" autoComplete="current-password" maxLength={128} required disabled={busy||active}/></label>:<p>소셜 계정으로 로그인한 뒤 10분 안에 요청해주세요. 시간이 지났다면 다시 로그인해야 합니다.</p>}
    <button className="button" type="submit" disabled={busy||active}>{active?'자료 준비 중':'내 데이터 내보내기 요청'}</button>
   </form>
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <ul className="account-blog-list">{jobs.map(j=><li key={j.id}><div><strong>{labels[j.state]}</strong><small>요청: {kstDateTime(j.createdAt)} KST</small><small>받을 수 있는 시간: {kstDateTime(j.expiresAt)} KST</small>{j.error&&<p role="alert">{j.error}</p>}{j.state==='queued'&&<p className="muted">대기가 계속되면 잠시 후 새로고침하거나 고객 지원에 문의해주세요.</p>}{j.fileSize!==null&&<small>{(j.fileSize/1024/1024).toFixed(1)} MB</small>}</div><div className="account-actions">{j.state==='succeeded'&&<a className="button" href={`/api/auth/data-exports/${j.id}/download`} download>파일 내려받기</a>}<button type="button" className="button secondary" disabled={busy} onClick={()=>void remove(j.id)}>{j.state==='queued'||j.state==='running'?'요청 취소':'요청 삭제'}</button></div></li>)}</ul>
   <button type="button" className="button secondary" disabled={busy} onClick={async()=>{setBusy(true);try{setJobs(await api<PersonalExport[]>('/api/auth/data-exports'));setError('');}catch(e){setError(e instanceof Error?e.message:'상태를 불러오지 못했습니다.');}finally{setBusy(false);}}}>내보내기 상태 새로고침</button>
  </section>;

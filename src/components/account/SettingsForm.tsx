@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Profile } from '@/server/profiles';
@@ -34,7 +35,7 @@ export default function SettingsForm({initialProfile,initialBlogs,email}:{initia
     });
   }
   return <div className="settings-sections">
-    <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button type="button" disabled={busy} className="button secondary" onClick={()=>void run(async()=>{setProfile(await api<Profile>('/api/profile'));await refreshBlogs();setEditing(null);setFormKey(k=>k+1);setNotice('최신 정보를 불러왔습니다.');})}>최신 정보 불러오기</button></div>}</div>
+    <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} <button type="button" disabled={busy} className="button secondary" onClick={()=>void run(async()=>{setProfile(await api<Profile>('/api/profile'));await refreshBlogs();setEditing(null);setFormKey(k=>k+1);setNotice('최신 정보를 불러왔습니다.');})}>최신 정보 불러오기</button></div>}</div>
     <section className="panel account-card"><h2>내 프로필</h2><p className="muted">로그인 계정: {email}</p>
       <form onSubmit={saveProfile} key={profile.version} className="account-form">
         <label>닉네임<input name="nickname" className="field" defaultValue={profile.nickname} required maxLength={30} disabled={busy}/></label>

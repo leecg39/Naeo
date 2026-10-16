@@ -1,4 +1,5 @@
 import {useCallback,useEffect,useState} from 'react';
+import OperationNotice from '../admin/OperationNotice';
 import {preparePhoto} from './prepare-photo';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
 import type {Media} from '@/server/writing/media';
@@ -22,7 +23,7 @@ export default function DraftMedia({draftId}:{draftId:string}){
   <strong>사진 {items.length}/20</strong>
   <input type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="초안에 사진 올리기" disabled={busy||items.length>=20}
    onChange={e=>{const files=[...e.target.files??[]];e.target.value='';void run(async()=>{for(const f of files)await uploadPhoto(f,draftId);return`사진 ${files.length}장을 올렸습니다.`;});}}/>
-  {message&&<p role="status" style={{margin:0,fontSize:13}}>{message}</p>}
+  <OperationNotice message={message} className="" style={{margin:0,fontSize:13}}/>
   <ul style={{listStyle:'none',padding:0,margin:0,display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(110px,1fr))',gap:10}}>
    {items.map(m=><li key={m.publicId} style={{display:'grid',gap:4}}>
     {/* 인증이 필요한 개인 사진이라 최적화 서버를 거치지 않는다. */}

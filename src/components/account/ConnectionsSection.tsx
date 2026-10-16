@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api,ApiError} from '@/lib/api-client';
@@ -19,7 +20,7 @@ export default function ConnectionsSection({initial,linked,error:initialError}:{
  const setInitial=(e:FormEvent)=>{e.preventDefault();void run(async()=>{await api('/api/account/password/initial',{method:'POST',body:{newPassword:password}});setPassword('');return '비밀번호를 설정했어요. 이제 이메일로도 로그인할 수 있어요.';});};
  return <section className="panel account-card" id="connections" aria-label="로그인 연결">
   <h2>로그인 연결</h2>
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   {(Object.keys(NAME) as OAuthProviderName[]).map(p=>{const c=state.connections.find(x=>x.provider===p);return <div key={p} className="account-actions" data-connection={p} style={{justifyContent:'space-between'}}>
    <span><strong>{NAME[p]}</strong> {c?<span className="muted">· {c.email||'이메일 없음'} · {day(c.createdAt)} 연결</span>:<span className="muted">· 연결 안 됨</span>}</span>
    {c?<button className="button secondary" type="button" disabled={busy} onClick={()=>unlink(p)}>연결 해제<span className="sr-only"> {NAME[p]}</span></button>

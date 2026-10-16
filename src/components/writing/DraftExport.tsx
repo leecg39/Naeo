@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import OperationNotice from '../admin/OperationNotice';
 
 /** 내보내기: 서버가 만든 안전한 HTML을 샌드박스 iframe으로 미리보고, 서식째 복사하거나 파일로 받는다. */
 export default function DraftExport({draftId,dirty}:{draftId:string;dirty:boolean}){
@@ -22,7 +23,7 @@ export default function DraftExport({draftId,dirty}:{draftId:string;dirty:boolea
    <button type="button" className="naeo-button" onClick={copy}>서식째 복사</button>
    {(['html','markdown','text'] as const).map(f=><a key={f} className="naeo-button" href={`/api/drafts/${draftId}/export?format=${f}&download=1`}>{f==='html'?'HTML':f==='markdown'?'마크다운':'텍스트'} 받기</a>)}
   </div>
-  {message&&<p role="status" style={{margin:0,fontSize:13}}>{message}</p>}
+  <OperationNotice message={message} className="" style={{margin:0,fontSize:13}}/>
   {preview&&<iframe title="내보내기 미리보기" sandbox="" srcDoc={`<!doctype html><meta charset="utf-8"><style>body{font-family:sans-serif;line-height:1.7;padding:16px;color:#111;background:#fff}img{max-width:100%}</style>${preview}`} style={{width:'100%',height:360,border:'1px solid rgba(255,255,255,.2)',borderRadius:8,background:'#fff'}}/>}
  </div>;
 }

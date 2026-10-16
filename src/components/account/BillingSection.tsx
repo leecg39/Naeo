@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from '../admin/ListPagination';
+import OperationNotice from '../admin/OperationNotice';
 import type {billingHistory} from '@/server/billing/history';
 import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
@@ -36,7 +37,7 @@ export default function BillingSection({initial}:{initial:BillingState}){
  const openRefund=(p:Payment)=>state.paymentRefunds.find(r=>r.paymentId===p.id&&['requested','approved','failed'].includes(r.status));
  return <section className="panel account-card" id="billing" aria-label="구독·결제">
   <h2>구독·결제</h2>
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <p>보유 토큰 <strong>{state.balance.toLocaleString('ko-KR')}</strong></p>
   {sub?<div className="account-form">
    <p><strong>{sub.planName}</strong> · {sub.trial?'무료 체험 중':'이용 중'} · {day(sub.currentPeriodEnd)}까지{sub.cancelAtPeriodEnd?' (기간 종료 후 해지)':''}</p>

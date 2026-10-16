@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState,type FormEvent} from 'react';
 import {createPortal} from 'react-dom';
@@ -44,7 +45,7 @@ function Workspace(){
   </div>
   {templates.length>0&&<label style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap',fontSize:14}}>AI 글 생성 템플릿
    <select id="writing-template" style={field} defaultValue=""><option value="">템플릿 없이</option>{templates.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select></label>}
-  <div aria-live="polite">{notice&&<p role="status" style={{margin:0,color:'#03c75a'}}>{notice}</p>}{error&&<p role="alert" style={{margin:0,color:'#f87171'}}>{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice} className="" style={{margin:0,color:'#03c75a'}}/>{error&&<p role="alert" style={{margin:0,color:'#f87171'}}>{error}</p>}</div>
   {jobs.length>0&&<div className="naeo-panel" style={{padding:12,fontSize:13,display:'grid',gap:4}}><strong>최근 AI 생성</strong>{jobs.map(j=><div key={j.id} style={{display:'flex',gap:8,flexWrap:'wrap'}}>
    <span>{fmt(j.createdAt)} · {JOB[j.state]}{j.errorMessage&&j.state==='failed'?` · ${j.errorMessage}`:''}</span>
    {j.draftId&&<button type="button" className="naeo-button" style={{fontSize:12,padding:'2px 8px'}} onClick={()=>void open(j.draftId!)}>초안 열기</button>}

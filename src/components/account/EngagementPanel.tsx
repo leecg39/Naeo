@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from '../admin/OperationNotice';
 import {useState,type FormEvent} from 'react';
 import {api} from '@/lib/api-client';
 import {kstDateTime} from '@/lib/kst-time';
@@ -30,7 +31,7 @@ export default function EngagementPanel({initialPoints,initialTutorial,floating=
   <p className="muted">매일 5P · 연속 7일마다 15P 추가 · 한국 시간 자정 기준</p>
   <p>{wallet.attendance.today} · 연속 {wallet.attendance.streak}일</p>
   <button className="button" disabled={busy||wallet.attendance.checkedIn} onClick={()=>void claim('/api/attendance')}>{wallet.attendance.checkedIn?'오늘 출석 완료':'오늘 출석하고 5P 받기'}</button>
-  {notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}
+  <OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}
   <h3>시작 가이드 · {guide.claimedPoints} / {guide.totalPoints}P</h3>
   <ol className="engagement-steps">{guide.steps.map(s=><li key={s.key}><div><a href={s.href}>{s.title}</a><strong>{s.points}P</strong></div>{s.lockedReason&&<p className="muted">{s.lockedReason}</p>}<button className="button secondary" disabled={busy||s.done||!s.eligible} onClick={()=>void claim('/api/tutorial/finish',{step:s.key})}>{s.done?'수령 완료':`${s.points}P 받기`}</button></li>)}</ol>
   <form className="account-form" key={guide.subTopic.version} onSubmit={saveTopic}>
