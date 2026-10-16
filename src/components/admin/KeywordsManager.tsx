@@ -9,6 +9,7 @@ import {classify} from '@/server/keywords/records';
 
 type Row=Keyword&{latest:Metric|null};
 type Detail=Keyword&{metrics:Metric[];latest:Metric|null};
+type ListResult=PageResult<Row>&{searchAds?:boolean};
 const fmt=(ms:number)=>kstDate(ms);
 const num=(n:number|null|undefined)=>n==null?'—':n.toLocaleString('ko-KR');
 
@@ -21,7 +22,7 @@ function MetricForm({keyword,busy,run,onSaved}:{keyword:Detail;busy:boolean;run:
  const remove=(m:Metric)=>void run(async()=>{await api(`/api/admin/keywords/${keyword.id}/metrics/${m.id}`,{method:'DELETE'});await onSaved('지표를 삭제했습니다.');});
  return <div style={{marginTop:20}}>
   <h3>지표 이력</h3>
-  <p className="muted">네이버 검색광고 API가 설정되지 않아 관리자가 확인한 월간 검색량·문서수를 직접 기록합니다(출처: 관리자 입력).</p>
+  <p className="muted">관리자가 확인한 월간 검색량·문서수를 직접 기록합니다(출처: 관리자 입력). 검색광고 API가 설정돼 있으면 목록 위 '지표 API 수집'으로 자동 수집할 수 있습니다.</p>
   <form className="admin-filters" onSubmit={submit}>
    <label>PC 검색량<input className="field" type="number" min={0} required value={pc} onChange={e=>setPc(e.target.value)} disabled={busy}/></label>
    <label>모바일 검색량<input className="field" type="number" min={0} required value={mobile} onChange={e=>setMobile(e.target.value)} disabled={busy}/></label>
@@ -63,9 +64,9 @@ function Editor({item,busy,run,onSaved,onClose}:{item:Detail|null;busy:boolean;r
  </section>;
 }
 
-export default function KeywordsManager({initial}:{initial:PageResult<Row>}){
+export default function KeywordsManager({initial}:{initial:ListResult}){
  const router=useRouter();
- const [result,setResult]=useState(initial),[q,setQ]=useState(''),[status,setStatus]=useState('');
+ const [result,setResult]=useState<ListResult>(initial),[q,setQ]=useState(''),[status,setStatus]=useState('');
  const [selected,setSelected]=useState<Detail|null>(null),[creating,setCreating]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
  const totalPages=Math.max(1,Math.ceil(result.pagination.total/result.pagination.pageSize));
@@ -75,8 +76,12 @@ export default function KeywordsManager({initial}:{initial:PageResult<Row>}){
   catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');if(e instanceof ApiError&&e.status===401){router.replace('/login?next=/admin/keywords');router.refresh();}}
   finally{setBusy(false);}
  }
- const load=async(page=result.pagination.page)=>setResult(await apiResponse<PageResult<Row>>(`/api/admin/keywords?${new URLSearchParams({page:String(page),pageSize:'20',q,...(status?{status}:{})})}`));
+ const load=async(page=result.pagination.page)=>setResult(await apiResponse<ListResult>(`/api/admin/keywords?${new URLSearchParams({page:String(page),pageSize:'20',q,...(status?{status}:{})})}`));
  const open=(id:string)=>run(async()=>{setCreating(false);setSelected(await api<Detail>(`/api/admin/keywords/${id}`));});
+ const collect=()=>run(async()=>{
+  const r=await api<{measured:{phrase:string}[];missing:string[];failed:{phrase:string;code:string}[]}>('/api/admin/keywords/metrics-collect',{method:'POST',body:{}});
+  await load();setNotice(`지표 수집: ${r.measured.length}개 기록${r.missing.length?` · 결과 없음 ${r.missing.length}개`:''}${r.failed.length?` · 실패 ${r.failed.length}개(${r.failed[0].code})`:''}`);
+ });
  const saved=async(id:string|null,m:string)=>{setCreating(false);setSelected(id?await api<Detail>(`/api/admin/keywords/${id}`):null);await load();setNotice(m);};
  return <div className="settings-sections">
   <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={()=>void open(selected.id)}>최신 정보 불러오기</button>}</div>}</div>
@@ -86,6 +91,7 @@ export default function KeywordsManager({initial}:{initial:PageResult<Row>}){
     <label>상태<select className="field" value={status} onChange={e=>setStatus(e.target.value)} disabled={busy}><option value="">전체</option><option value="active">노출</option><option value="hidden">숨김</option></select></label>
     <button className="button" type="submit" disabled={busy}>검색</button>
     <button className="button secondary" type="button" disabled={busy} onClick={()=>{setSelected(null);setCreating(true);}}>새 키워드</button>
+    <button className="button secondary" type="button" disabled={busy||!result.searchAds} onClick={collect} title={result.searchAds?'노출 중인 키워드(최대 50개)의 월간 검색량·문서수를 수집합니다.':'네이버 검색광고 API 미설정'}>지표 API 수집{result.searchAds?'':' (미설정)'}</button>
    </form>
    <p className="muted" style={{marginTop:16}}>총 {result.pagination.total}개 · 황금 키워드(포화도 1 미만·검색량 1,000 이상)와 선점기회(포화도 3 미만·검색량 300 이상)는 이 복제본의 새 규칙입니다.</p>
    <div className="responsive-table"><table className="data-table"><caption className="sr-only">키워드 목록</caption>

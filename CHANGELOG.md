@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-16 — 네이버 검색광고 지표·키워드 상위 노출
+
+- 검색광고 어댑터(NAEO_SEARCHAD_*): keywordstool HMAC-SHA256 서명(헤더 전용), 키워드 5개 묶음 조회, 입력과 정확히 같은 키워드만 반영(공백·대소문자 무시), "< 10"는 상한 미만 최대 정수로 환산. /admin/keywords '지표 API 수집' 버튼으로 최대 50개를 한 번에 수집, 출처는 `naver_searchad`로 기록.
+- 네이버 검색 어댑터(NAEO_NAVER_CLIENT_*): blog.json 상위 20개(정확도순)·총 문서 수. 제목 태그·엔티티 정리, 결과 링크는 blog.naver.com만 인식.
+- 스키마 42 `keyword_exposures`: 회원이 키워드를 입력하면 상위 20개에서 내 블로그·등록 경쟁 블로그를 표시해 /dashboard/competitors에 저장·표시. 회원당 KST 하루 10회, 실패 호출은 한도 미소비·미기록, 회원 격리 404, 보존 최근 50회·개인정보 보내기 데이터셋 포함.
+- 지표 수집의 문서수는 네이버 검색 총건수를 쓰고 미설정이면 직전 값을 유지. 두 연동 모두 미설정이면 화면·API에 '미설정'을 표시하고 수집·확인은 503.
+- 신규 6개 테스트 포함 전체 470개(루트 12+서버 458), lint·typecheck·production build 통과. 로컬 double로 프로덕션 Next 왕복(`scripts/qa/search-adapters.ts`, `docs/fullstack/evidence/search-adapters-runtime.json`): 스텁이 HMAC 서명을 검증하고 회원 추천 화면 반영·마킹·한도·키 미노출을 확인. 실제 네이버 키 왕복은 미완료.
+
 ## 2026-10-16 — AI 이미지 생성
 
 - 스키마 41: 생성 작업에 `images_made`·입력 `aiImages`. OpenAI Images 어댑터(NAEO_IMAGE_PROVIDER/API_KEY/API_BASE/MODEL/SIZE), 인라인 b64만 수신·PNG/JPEG/WEBP 서명 검증·32MB 상한·키는 Authorization 헤더에만.

@@ -15,12 +15,18 @@ export const installCompetitorsPage: InstallBehavior = (root, tools) => {
   };
   const submit = (event: Event) => {
     const form = event.target;
-    if (!(form instanceof HTMLFormElement) || !form.hasAttribute("data-competitor-add")) return;
+    if (!(form instanceof HTMLFormElement) || (!form.hasAttribute("data-competitor-add") && !form.hasAttribute("data-exposure-form"))) return;
     event.preventDefault();
     const data = new FormData(form);
-    void run(async () => {
+    if (form.hasAttribute("data-competitor-add")) void run(async () => {
       await api("/api/competitors", { method: "POST", body: { blog: String(data.get("blog") || ""), note: String(data.get("note") || "") } });
       return "경쟁 블로그를 추가했습니다. '갱신'을 눌러 공개 글을 수집하세요.";
+    });
+    if (form.hasAttribute("data-exposure-form")) void run(async () => {
+      const keyword = String(data.get("keyword") || "").trim();
+      const result = await api<{ hits: { kind: string }[] }>("/api/exposures", { method: "POST", body: { keyword } });
+      const mine = result.hits.filter(h => h.kind === "mine").length, comp = result.hits.filter(h => h.kind === "competitor").length;
+      return `"${keyword}" 상위 노출: 내 블로그 ${mine}개 · 경쟁 ${comp}개`;
     });
   };
   const click = (event: MouseEvent) => {

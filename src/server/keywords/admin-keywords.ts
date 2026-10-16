@@ -6,6 +6,7 @@ import {audit} from '../audit';
 import {AppError} from '../errors';
 import {deleteInput,paginationInput,version} from '../validation';
 import {KEYWORD_SELECT,METRIC_SELECT,likeOf,plain,type Keyword,type Metric} from './records';
+import {searchAdConfig} from './searchad';
 
 const phrase=z.string().trim().min(1).max(60);
 const category=z.string().trim().max(30);
@@ -36,7 +37,7 @@ export function listAdminKeywords(db:Database,actorId:string,query:unknown){
  const sql=`WHERE ${where.join(' AND ')}`;
  const {total}=db.prepare(`SELECT count(*) AS total FROM keywords ${sql}`).get(...params) as {total:number};
  const rows=(db.prepare(`${KEYWORD_SELECT} ${sql} ORDER BY created_at DESC,id LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Keyword[]).map(plain);
- return{data:rows.map(k=>({...k,latest:metricsOf(db,k.id)[0]??null})),pagination:{page,pageSize,total}};
+ return{data:rows.map(k=>({...k,latest:metricsOf(db,k.id)[0]??null})),pagination:{page,pageSize,total},searchAds:searchAdConfig()!==null};
 }
 export function getAdminKeyword(db:Database,actorId:string,id:string){
  authorize(db,actorId);
@@ -76,7 +77,7 @@ export function deleteKeyword(db:Database,actorId:string,id:string,input:unknown
   return{deleted:true};
  });
 }
-/** 관리자가 직접 확인한 지표를 기록한다(출처 'manual'). 검색광고 API 연동은 미설정. */
+/** 관리자가 직접 확인한 지표를 기록한다(출처 'manual'). API 수집은 metrics-collect 경로. */
 export function addKeywordMetric(db:Database,actorId:string,keywordId:string,input:unknown,now=Date.now()):Metric{
  authorize(db,actorId);
  const v=metricInput.parse(input);

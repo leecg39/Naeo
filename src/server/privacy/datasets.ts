@@ -21,6 +21,7 @@ export const datasets=[
  owned('mate_reports','mate_reports','naver_id,score,report_json,post_count,created_at,expires_at'),
  {name:'saved_keywords',sql:'SELECT s.id,s.keyword_id,k.phrase,k.category,s.status,s.note,s.version,s.created_at,s.updated_at FROM saved_keywords s JOIN keywords k ON k.id=s.keyword_id WHERE s.owner_id=? ORDER BY s.rowid'},
  owned('competitors','competitor_blogs','id,naver_id,note,snapshot_json,last_collected_at,last_attempt_at,last_error,version,created_at,updated_at'),
+ owned('keyword_exposures','keyword_exposures','id,keyword,total,results_json,checked_at,created_at'),
  owned('actions','action_items','id,result_id,criterion,title,status,version,created_at,updated_at'),
  owned('drafts','drafts','id,title,keyword,category,body,status,published_at,version,created_at,updated_at'),
  {name:'draft_revisions',sql:'SELECT r.id,r.draft_id,r.version,r.title,r.body,r.created_at FROM draft_revisions r JOIN drafts d ON d.id=r.draft_id WHERE d.owner_id=? ORDER BY r.rowid'},

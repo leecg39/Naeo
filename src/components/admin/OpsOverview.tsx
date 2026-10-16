@@ -3,7 +3,7 @@ import type {analyticsSummary} from '@/server/ops/analytics';
 import type {serviceHealth} from '@/server/ops/health';
 
 type Summary=ReturnType<typeof analyticsSummary>;type Health=ReturnType<typeof serviceHealth>;
-const LABEL:Record<keyof Health['integrations'],string>={ai:'AI 글 생성',aiCitation:'AI 인용 확인',aiImage:'AI 이미지 생성',payments:'결제(토스)',google:'Google 로그인',naver:'네이버 로그인',mail:'계정 안내 메일',sms:'문자 인증'};
+const LABEL:Record<keyof Health['integrations'],string>={ai:'AI 글 생성',aiCitation:'AI 인용 확인',aiImage:'AI 이미지 생성',searchAds:'검색광고 지표',naverSearch:'네이버 검색',payments:'결제(토스)',google:'Google 로그인',naver:'네이버 로그인',mail:'계정 안내 메일',sms:'문자 인증'};
 const time=(ms:number)=>kstDateTime(ms,{seconds:true});
 /** 운영 현황: 방문 통계(개인정보 최소화 집계)와 서비스 상태. 서버에서 그린다. */
 export default function OpsOverview({summary,health}:{summary:Summary;health:Health}){

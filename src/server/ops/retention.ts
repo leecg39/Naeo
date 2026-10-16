@@ -10,7 +10,7 @@ const DAY=86_400_000;
  * - 저장 후 30일 지난 초안, 하루 넘게 신호 없는 작업자 기록, 감사 로그 1년을 삭제한다.
  * - 만료된 세션·인가 코드·OAuth state는 즉시, 만료 30일 지난 OAuth 토큰은 삭제한다.
  * - 결제·환불 기록은 회계 기록이라 지우지 않는다(트리거로 보호).
- * - AI 인용 확인은 블로그마다 끝난 작업 최근 5회와 그 결과만 남긴다.
+ * - AI 인용 확인은 블로그마다 끝난 작업 최근 5회와 그 결과만, 키워드 상위 노출 확인은 회원마다 최근 50회만 남긴다.
  */
 export function runRetention(db:Database,now=Date.now()){
  rollupAnalytics(db,now);
@@ -23,6 +23,7 @@ export function runRetention(db:Database,now=Date.now()){
   auditLogs:del('DELETE FROM audit_logs WHERE created_at<?',now-365*DAY),
   drafts:cleanupExpiredDrafts(db,now),
   citations:del("DELETE FROM citation_runs WHERE id IN (SELECT id FROM (SELECT id,row_number() OVER (PARTITION BY blog_id ORDER BY completed_at DESC,created_at DESC,rowid DESC) AS n FROM citation_runs WHERE state IN ('succeeded','failed','canceled')) WHERE n>5)"),
+  exposures:del("DELETE FROM keyword_exposures WHERE id IN (SELECT id FROM (SELECT id,row_number() OVER (PARTITION BY owner_id ORDER BY checked_at DESC,rowid DESC) AS n FROM keyword_exposures) WHERE n>50)"),
   sessions:del('DELETE FROM sessions WHERE expires_at<=?',now),
   workers:del('DELETE FROM worker_heartbeats WHERE last_seen_at<?',now-DAY),
   oauth:del('DELETE FROM oauth_codes WHERE expires_at<=?',now)+del('DELETE FROM oauth_states WHERE expires_at<=?',now)+del('DELETE FROM openai_connection_states WHERE expires_at<=?',now)+del('DELETE FROM oauth_tokens WHERE expires_at<?',now-30*DAY),

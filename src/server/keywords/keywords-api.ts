@@ -3,6 +3,7 @@ import type {Database} from '../database';
 import {requireAdmin,type User} from '../auth';
 import {body,json,rateLimit} from '../http';
 import {addKeywordMetric,createKeyword,deleteKeyword,deleteKeywordMetric,getAdminKeyword,listAdminKeywords,updateKeyword} from './admin-keywords';
+import {collectKeywordMetrics} from './collect';
 import {listRecommendations,setKeywordState} from './recommendations';
 
 const ID='([a-f0-9-]{36})';
@@ -17,6 +18,7 @@ export async function keywordsApi(db:Database,request:Request,user:User):Promise
  if(state&&method==='PUT'){rateLimit(db,`keyword-state:${user.id}`,300,15*60_000);return json({data:setKeywordState(db,user.id,state[1],await input())});}
  if(!path.startsWith('/api/admin/keywords'))return null;
  requireAdmin(user);
+ if(path==='/api/admin/keywords/metrics-collect'&&method==='POST')return json({data:await collectKeywordMetrics(db,user.id,await input())});
  if(path==='/api/admin/keywords'){
   if(method==='GET')return json(listAdminKeywords(db,user.id,Object.fromEntries(searchParams)));
   if(method==='POST')return json({data:createKeyword(db,user.id,await input())},201);

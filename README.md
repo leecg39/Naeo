@@ -51,7 +51,7 @@ HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO
 
 ## 남은 구현·검증
 
-네이버 검색광고 지표·상위 노출 수집 공급자는 추가 연동 구현이 필요합니다. AI 이미지 생성은 OpenAI Images 어댑터·장당 1토큰 원장·부분 환급·초안 첨부·화면 연결까지 구현했으며 `NAEO_IMAGE_PROVIDER=openai`·`NAEO_IMAGE_API_KEY` 설정과 실제 왕복 검증이 남았습니다. AI 브리핑 인용 확인은 SerpApi 어댑터·확인 작업·결과 화면까지 구현했으며 `NAEO_CITATION_PROVIDER=serpapi`·`NAEO_SERPAPI_KEY` 설정과 실제 왕복 검증이 남았습니다. 메일 기반 비밀번호 재설정·이메일 인증(Resend), SMS 인증(Twilio Verify), 회원별 ChatGPT(OpenAI OAuth)·Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 어댑터와 로컬 대역 검증까지 구현했으며 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 확장 프로그램은 로컬 설치용 코드, 실제 서버 OAuth/MCP 검증, 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달 검증까지 갖췄으며 Chrome Web Store 등록과 배포 환경 검증이 남았습니다(공개 발행은 회원이 직접 누르는 동작). 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
+네이버 검색광고 지표 수집(`NAEO_SEARCHAD_*`)과 키워드 상위 노출 비교(`NAEO_NAVER_CLIENT_*`)는 어댑터·화면·로컬 double 검증까지 구현했으며 실제 키 왕복이 남았습니다. AI 이미지 생성은 OpenAI Images 어댑터·장당 1토큰 원장·부분 환급·초안 첨부·화면 연결까지 구현했으며 `NAEO_IMAGE_PROVIDER=openai`·`NAEO_IMAGE_API_KEY` 설정과 실제 왕복 검증이 남았습니다. AI 브리핑 인용 확인은 SerpApi 어댑터·확인 작업·결과 화면까지 구현했으며 `NAEO_CITATION_PROVIDER=serpapi`·`NAEO_SERPAPI_KEY` 설정과 실제 왕복 검증이 남았습니다. 메일 기반 비밀번호 재설정·이메일 인증(Resend), SMS 인증(Twilio Verify), 회원별 ChatGPT(OpenAI OAuth)·Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 어댑터와 로컬 대역 검증까지 구현했으며 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 확장 프로그램은 로컬 설치용 코드, 실제 서버 OAuth/MCP 검증, 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달 검증까지 갖췄으며 Chrome Web Store 등록과 배포 환경 검증이 남았습니다(공개 발행은 회원이 직접 누르는 동작). 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
 
 소셜 견본과 소개 영상의 캡처 콘텐츠는 유지하며, `/social/banner-preview`는 캡처 부재로 홈으로 이동합니다. 원본에서도 없었던 대시보드 가이드 이미지 5개는 현재도 404로 표시됩니다. 원본 대비 전 화면 시각적 일치 검증은 완료하지 않았습니다.
 

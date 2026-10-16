@@ -1062,5 +1062,17 @@ export const migrations = [{
  `},openAIConnectionMigration,openAIGenerationMigration,citationMigration,{
  version:41,name:'generation_images_made',sql:`
  ALTER TABLE generation_jobs ADD COLUMN images_made INTEGER NOT NULL DEFAULT 0 CHECK(images_made>=0);
+ `},{
+ version:42,name:'keyword_exposures',sql:`
+ CREATE TABLE keyword_exposures (
+  id TEXT PRIMARY KEY NOT NULL,
+  owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  keyword TEXT NOT NULL CHECK(length(keyword) BETWEEN 1 AND 60),
+  total INTEGER NOT NULL DEFAULT 0 CHECK(total>=0),
+  results_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(results_json) AND json_type(results_json)='array' AND length(results_json)<=200000),
+  checked_at INTEGER NOT NULL,
+  created_at INTEGER NOT NULL
+ ) STRICT;
+ CREATE INDEX keyword_exposures_owner ON keyword_exposures(owner_id,checked_at DESC,id DESC);
  `}];
 

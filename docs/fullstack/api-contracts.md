@@ -188,7 +188,10 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 |---|---|---|---|---|
 | `/api/admin/keywords` | GET·POST | 관리자 | 검색(키워드·분류, LIKE 이스케이프)·상태·분류 필터·페이지. 생성 `phrase≤60`(대소문자 무시 unique), `category≤30`, `note≤200`, `status`(active/hidden) | 403, 409 `KEYWORD_EXISTS` |
 | `/api/admin/keywords/:id` | GET·PATCH·DELETE | 관리자 | 상세는 지표 이력(최신순)·최신 지표. PATCH·DELETE는 `version` | 404, 409 |
-| `/api/admin/keywords/:id/metrics` · `/:metricId` | POST·DELETE | 관리자 | PC·모바일 검색량·문서수(0 이상 정수), 측정 시각. 출처 `manual`(검색광고 API 미설정) | 400, 404 |
+| `/api/admin/keywords/:id/metrics` · `/:metricId` | POST·DELETE | 관리자 | PC·모바일 검색량·문서수(0 이상 정수), 측정 시각. 출처 `manual` | 400, 404 |
+| `/api/admin/keywords/metrics-collect` | POST | 관리자 | `{keywordIds?}` 없으면 노출 중 최대 50개를 5개씩 묶어 검색광고 keywordstool로 수집, 문서수는 네이버 검색 총건수(미설정 시 직전 값 유지), 출처 `naver_searchad`. 반환 `{measured,missing,failed,documents}` | 403, 404 `KEYWORD_NOT_FOUND`, 503 `SEARCHAD_NOT_CONFIGURED` |
+| `/api/exposures` | GET·POST | 회원 | 키워드 상위 노출: 네이버 블로그 검색 상위 20개에 내 블로그·등록 경쟁 표시. POST `{keyword≤60}`, 회원당 KST 하루 10회, 실패 호출은 한도 미소비·미기록 | 400, 404, 429 `EXPOSURE_QUOTA_EXCEEDED`, 503 `SEARCH_NOT_CONFIGURED` |
+| `/api/exposures/:id` | GET | 회원 | 본인 확인 결과만 | 404 |
 | `/api/recommendations` | GET | 회원 | 노출 키워드 + 최신 지표 + 내 상태. `filter`(all/golden/preempt/written), `period`(all/week/month), `q`, 페이지, 요약(전체·황금·선점·작성) | 401, 400 |
 | `/api/recommendations/:keywordId/state` | PUT | 회원 | `{status:'written'|'saved'|null}` 작성 완료 표시·해제(회원별) | 404(숨김·없음) |
 
@@ -204,7 +207,7 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/actions` | GET | 회원 | 최신 진단 결과의 할 일(진단 저장 때 결과·기준당 1개 생성) | 401 |
 | `/api/actions/:id` | PATCH | 회원(본인) | `{status:'open'|'done',version}` 완료·해제 | 404, 409 |
 
-`/dashboard/competitors`는 원본 계정의 키워드별 상위 노출 표(다른 블로그 글 제목)를 지우고 내 경쟁 블로그 표·추가 폼·내 점수 대비 차이를 보여준다. 키워드별 상위 노출 비교는 네이버 검색 API 미설정으로 표시. 운영 주의: worker는 코드 배포 뒤 다시 시작해야 새 로직(예: 할 일 생성)이 적용된다.
+`/dashboard/competitors`는 원본 계정의 키워드별 상위 노출 표(다른 블로그 글 제목)를 지우고 내 경쟁 블로그 표·추가 폼·내 점수 대비 차이를 보여준다. 키워드별 상위 노출 확인은 네이버 검색 API 설정 시 `/api/exposures`로 실행하고 같은 페이지에 결과를 그린다(미설정 시 '미설정' 안내). 운영 주의: worker는 코드 배포 뒤 다시 시작해야 새 로직(예: 할 일 생성)이 적용된다.
 
 ## P4.1·P4.3 초안·사진·공유 링크 API (2026-10-13)
 

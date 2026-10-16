@@ -441,7 +441,8 @@
     "type": "tests",
     "files": [
      "tests/server/keywords.test.ts",
-     "tests/server/keywords-http.test.ts"
+     "tests/server/keywords-http.test.ts",
+     "tests/server/search-providers.test.ts"
     ]
    },
    {
@@ -2338,7 +2339,8 @@
      "tests/server/competitors.test.ts",
      "tests/server/competitors-http.test.ts",
      "tests/server/competitors-page.test.ts",
-     "tests/server/action-items.test.ts"
+     "tests/server/action-items.test.ts",
+     "tests/server/search-providers.test.ts"
     ]
    },
    {

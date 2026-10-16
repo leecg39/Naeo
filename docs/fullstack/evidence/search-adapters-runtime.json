@@ -1,0 +1,18 @@
+{
+  "verifiedAt": "2026-10-16T09:00:59.553Z",
+  "providerCalls": {
+    "keywordstool": 1,
+    "keywordstoolBadSig": 0,
+    "blog": 3,
+    "blogBadAuth": 0
+  },
+  "checks": [
+    "Production Next + loopback SearchAd/Naver Search doubles",
+    "HMAC-SHA256 서명·고객 ID·API 키는 헤더 전용(스텁이 서명 검증, badSig 0건)",
+    "keywordstool 5개 묶음·\"< 10\" 환산·정확 일치 매칭·문서수는 네이버 검색 총건수",
+    "지표는 naver_searchad 출처로 기록되고 회원 추천 화면에 반영",
+    "상위 노출: 내 블로그/경쟁 표시, 타 회원 404, KST 하루 한도 표시, 비밀키 미노출"
+  ],
+  "externalProviderUsed": false,
+  "temporaryDataRemoved": true
+}
