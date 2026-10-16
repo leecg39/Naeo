@@ -23,3 +23,13 @@ Ego Lite 0.5.1.13 업데이트 알림을 받았다. 스킬의 알림 처리 지�
 fixture ID101건을 삭제 서비스로 정리했고 남은 건수0을 확인했다. 기존 이벤트는 건드리지 않았다. [정리 기록](evidence/ego-event-pagination-2026-10-16/cleanup.json). p1은 정리 후 이벤트 관리 화면이며 다른 사용자 탭은 유지했다.
 
 이번 차례는 브라우저 검증이며 제품 코드 변경이나 자동 테스트 재실행은 없었다. P11.3과 전체 목표는 미완료다.
+
+## 사용자 승인 후 Ego 업데이트와 후속 검증
+
+사용자가 “업데이트 후 검증 계속”을 선택했다. `ego-browser upgrade`가 설치 완료·재시작을 보고했고 새 SKILL.md와 `ego-browser skill` v2.1.0 전체를 다시 읽었다. 설치된 앱의 정확한 버전 번호는 별도 확인하지 않았으므로 가이드 버전을 앱 버전으로 표기하지 않는다. 재시작 후 기존 이름·탭을 유지한 공간의 ID가15에서0으로 바뀌어 목록에서 확인한0을 사용했다. 새 공간은 생성하지 않았다.
+
+업데이트 직전 키보드 조작으로101번째 이벤트 제목 수정·저장, 재편집·삭제 확인,100건·1/1 복귀를 확인했다. 삭제 후 포커스는 BODY였으므로 EventsManager도 공통 OperationNotice를 사용하도록 수정했다.
+
+업데이트 후 일반 click으로 데스크톱1440px에서 검색·다음·편집·삭제·복귀와 성공 안내 포커스를 확인했다. 이후 한 실행 안에서390px를 설정하고 같은 흐름을 반복해 끝까지390px/scrollWidth390,100건·1/1,포커스 “이벤트를 삭제했습니다.”를 확인했다. 실행을 나눴던 앞선 시도는 끝에서1440px여서 모바일 증거로 사용하지 않았다. [데스크톱](evidence/ego-event-pagination-2026-10-16/deletion-after-update.json), [모바일](evidence/ego-event-pagination-2026-10-16/deletion-mobile-after-update.json).
+
+타입 검사·린트 통과. 테스트 fixture는 삭제 서비스로 정리해 남은0건을 확인했다([정리](evidence/ego-event-pagination-2026-10-16/cleanup-after-update.json)). 참여101건 승인/반려·다른 목록의 대량 검증은 여전히 남는다.
