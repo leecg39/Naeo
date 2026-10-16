@@ -8,11 +8,11 @@ import {createEventInput,eventQueryInput,updateEventInput} from './validation';
 
 export type EventStatus='draft'|'published'|'closed';
 export type EventPhase='upcoming'|'open'|'ended';
-export type EventItem={id:string;slug:string;title:string;summary:string;body:string;status:EventStatus;startsAt:number;endsAt:number;requiresProof:boolean;rewardTokens:number;acceptsEntries:boolean;ctaLabel:string;ctaHref:string;version:number;createdAt:number;updatedAt:number};
+export type EventItem={id:string;slug:string;title:string;summary:string;body:string;status:EventStatus;startsAt:number;endsAt:number;requiresProof:boolean;rewardTokens:number;acceptsEntries:boolean;ctaLabel:string;ctaHref:string;coverImage:string;version:number;createdAt:number;updatedAt:number};
 type Raw=Omit<EventItem,'requiresProof'|'acceptsEntries'>&{requiresProof:number;acceptsEntries:number};
-export const EVENT_SELECT='SELECT id,slug,title,summary,body,status,starts_at AS startsAt,ends_at AS endsAt,requires_proof AS requiresProof,reward_tokens AS rewardTokens,accepts_entries AS acceptsEntries,cta_label AS ctaLabel,cta_href AS ctaHref,version,created_at AS createdAt,updated_at AS updatedAt FROM events';
+export const EVENT_SELECT='SELECT id,slug,title,summary,body,status,starts_at AS startsAt,ends_at AS endsAt,requires_proof AS requiresProof,reward_tokens AS rewardTokens,accepts_entries AS acceptsEntries,cta_label AS ctaLabel,cta_href AS ctaHref,cover_image AS coverImage,version,created_at AS createdAt,updated_at AS updatedAt FROM events';
 const plain=(r:Raw):EventItem=>({...r,requiresProof:r.requiresProof===1,acceptsEntries:r.acceptsEntries===1});
-const COLUMNS={slug:'slug',title:'title',summary:'summary',body:'body',status:'status',startsAt:'starts_at',endsAt:'ends_at',requiresProof:'requires_proof',rewardTokens:'reward_tokens',acceptsEntries:'accepts_entries',ctaLabel:'cta_label',ctaHref:'cta_href'} as const;
+const COLUMNS={slug:'slug',title:'title',summary:'summary',body:'body',status:'status',startsAt:'starts_at',endsAt:'ends_at',requiresProof:'requires_proof',rewardTokens:'reward_tokens',acceptsEntries:'accepts_entries',ctaLabel:'cta_label',ctaHref:'cta_href',coverImage:'cover_image'} as const;
 type Field=keyof typeof COLUMNS;
 const authorize=(db:Database,actorId:string)=>requireAdmin(userById(db,actorId));
 
@@ -70,8 +70,8 @@ export function createEvent(db:Database,actorId:string,input:unknown):EventItem{
  const id=randomUUID(),now=Date.now();
  return transaction(db,()=>{
   assertSlugFree(db,v.slug,id);
-  db.prepare('INSERT INTO events(id,slug,title,summary,body,status,starts_at,ends_at,requires_proof,reward_tokens,accepts_entries,cta_label,cta_href,created_by,updated_by,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
-   .run(id,v.slug,v.title,v.summary,v.body,v.status,v.startsAt,v.endsAt,v.requiresProof?1:0,v.rewardTokens,v.acceptsEntries?1:0,v.ctaLabel,v.ctaHref,actorId,actorId,now,now);
+  db.prepare('INSERT INTO events(id,slug,title,summary,body,status,starts_at,ends_at,requires_proof,reward_tokens,accepts_entries,cta_label,cta_href,cover_image,created_by,updated_by,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)')
+   .run(id,v.slug,v.title,v.summary,v.body,v.status,v.startsAt,v.endsAt,v.requiresProof?1:0,v.rewardTokens,v.acceptsEntries?1:0,v.ctaLabel,v.ctaHref,v.coverImage,actorId,actorId,now,now);
   audit(db,actorId,'admin.event.create','event',id,{slug:v.slug,status:v.status});
   return eventById(db,id);
  });

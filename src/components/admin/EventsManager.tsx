@@ -9,14 +9,14 @@ import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
 import type {EventItem,EventPhase} from '@/server/events/events';
 
 type Row=EventItem&{phase:EventPhase;entryCounts:Record<string,number>};
-type Form={slug:string;title:string;summary:string;body:string;status:EventItem['status'];startsAt:string;endsAt:string;requiresProof:boolean;rewardTokens:string;acceptsEntries:boolean;ctaLabel:string;ctaHref:string};
+type Form={slug:string;title:string;summary:string;body:string;status:EventItem['status'];startsAt:string;endsAt:string;requiresProof:boolean;rewardTokens:string;acceptsEntries:boolean;ctaLabel:string;ctaHref:string;coverImage:string};
 const PHASE:Record<EventPhase,string>={open:'진행 중',upcoming:'예정',ended:'종료'};
 const STATUS:Record<EventItem['status'],string>={draft:'초안',published:'게시',closed:'마감'};
 /** datetime-local 값은 한국 시간으로 해석한다(+09:00). */
 const toLocal=(ms:number)=>new Date(ms+9*3600_000).toISOString().slice(0,16);
 const toIso=(local:string)=>`${local}:00+09:00`;
-const empty=():Form=>({slug:'',title:'',summary:'',body:'',status:'draft',startsAt:toLocal(Date.now()),endsAt:toLocal(Date.now()+7*86_400_000),requiresProof:true,rewardTokens:'0',acceptsEntries:true,ctaLabel:'',ctaHref:''});
-const formOf=(e:EventItem):Form=>({slug:e.slug,title:e.title,summary:e.summary,body:e.body,status:e.status,startsAt:toLocal(e.startsAt),endsAt:toLocal(e.endsAt),requiresProof:e.requiresProof,rewardTokens:String(e.rewardTokens),acceptsEntries:e.acceptsEntries,ctaLabel:e.ctaLabel,ctaHref:e.ctaHref});
+const empty=():Form=>({slug:'',title:'',summary:'',body:'',status:'draft',startsAt:toLocal(Date.now()),endsAt:toLocal(Date.now()+7*86_400_000),requiresProof:true,rewardTokens:'0',acceptsEntries:true,ctaLabel:'',ctaHref:'',coverImage:''});
+const formOf=(e:EventItem):Form=>({slug:e.slug,title:e.title,summary:e.summary,body:e.body,status:e.status,startsAt:toLocal(e.startsAt),endsAt:toLocal(e.endsAt),requiresProof:e.requiresProof,rewardTokens:String(e.rewardTokens),acceptsEntries:e.acceptsEntries,ctaLabel:e.ctaLabel,ctaHref:e.ctaHref,coverImage:e.coverImage});
 
 function Editor({item,busy,run,onSaved,onClose}:{item:EventItem|null;busy:boolean;run:(a:()=>Promise<void>)=>Promise<void>;onSaved:(m:string)=>Promise<void>;onClose:()=>void}){
  const [form,setForm]=useState<Form>(item?formOf(item):empty()),[confirming,setConfirming]=useState(false);
@@ -28,7 +28,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:EventItem|null;busy:boolea
   await onSaved(item?'저장했습니다. 공개 화면에 바로 반영됩니다.':'이벤트를 만들었습니다.');
  });};
  const remove=()=>void run(async()=>{if(!item)return;await api(`/api/admin/events/${item.id}`,{method:'DELETE',body:{version:item.version}});await onSaved('이벤트를 삭제했습니다.');});
- const field=(label:string,k:'slug'|'title'|'summary'|'ctaLabel'|'ctaHref',max:number,required=false)=><label>{label}<input className="field" value={form[k]} onChange={e=>set(k,e.target.value)} maxLength={max} required={required} disabled={busy}/></label>;
+ const field=(label:string,k:'slug'|'title'|'summary'|'ctaLabel'|'ctaHref'|'coverImage',max:number,required=false)=><label>{label}<input className="field" value={form[k]} onChange={e=>set(k,e.target.value)} maxLength={max} required={required} disabled={busy}/></label>;
  return <section className="panel account-card" aria-label={item?'이벤트 편집':'새 이벤트'}>
   <h2>{item?'이벤트 편집':'새 이벤트'}</h2>{item&&<p className="muted">버전 {item.version}</p>}
   <form className="account-form" onSubmit={save}>
@@ -44,6 +44,7 @@ function Editor({item,busy,run,onSaved,onClose}:{item:EventItem|null;busy:boolea
    <label>승인 시 지급 토큰<input className="field" type="number" min={0} max={10000} value={form.rewardTokens} onChange={e=>set('rewardTokens',e.target.value)} disabled={busy}/></label>
    {field('안내 버튼 문구(참여 신청을 받지 않을 때)','ctaLabel',40)}
    {field('안내 버튼 링크(/로 시작하는 사이트 내부 경로)','ctaHref',200)}
+   {field('대표 이미지(/로 시작하는 사이트 내부 경로, 비우면 이미지 없이 표시)','coverImage',300)}
    <div className="account-actions">
     <button className="button" type="submit" disabled={busy}>{item?'저장':'이벤트 만들기'}</button>
     {item&&!confirming&&<button className="button secondary" type="button" disabled={busy} onClick={()=>setConfirming(true)}>삭제</button>}

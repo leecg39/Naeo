@@ -15,10 +15,11 @@ export const eventFields={
  acceptsEntries:z.boolean(),
  ctaLabel:z.string().trim().max(40),
  ctaHref:z.union([z.literal(''),z.string().trim().max(200).regex(/^\/(?!\/)[^\s\\]*$/,'버튼 링크는 이 사이트 안의 경로(/로 시작)만 쓸 수 있습니다.')]),
+ coverImage:z.union([z.literal(''),z.string().trim().max(300).regex(/^\/(?!\/)[^\s\\]*$/,'대표 이미지는 이 사이트 안의 경로(/로 시작)만 쓸 수 있습니다.')]),
 };
 export const createEventInput=z.object({...eventFields,summary:eventFields.summary.default(''),body:eventFields.body.default(''),
  status:eventFields.status.default('draft'),requiresProof:eventFields.requiresProof.default(true),rewardTokens:eventFields.rewardTokens.default(0),
- acceptsEntries:eventFields.acceptsEntries.default(true),ctaLabel:eventFields.ctaLabel.default(''),ctaHref:eventFields.ctaHref.default('')})
+ acceptsEntries:eventFields.acceptsEntries.default(true),ctaLabel:eventFields.ctaLabel.default(''),ctaHref:eventFields.ctaHref.default(''),coverImage:eventFields.coverImage.default('')})
  .strict().refine(v=>v.endsAt>v.startsAt,{message:'종료 시각은 시작 시각보다 늦어야 합니다.',path:['endsAt']});
 export const updateEventInput=z.object(eventFields).partial().extend({version}).strict().refine(v=>Object.keys(v).length>1,'수정할 항목이 필요합니다.');
 export const eventQueryInput=paginationInput.extend({acceptsEntries:z.enum(['true','false']).optional(),status:z.enum(['draft','published','closed']).optional()});

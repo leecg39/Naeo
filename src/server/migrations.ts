@@ -1091,5 +1091,8 @@ export const migrations = [{
   UNIQUE(kind,ref_id)
  ) STRICT;
  CREATE INDEX notify_mail_queue ON notify_mail(state,run_after);
+ `},{
+ version:44,name:'events_cover_image',sql:`
+ ALTER TABLE events ADD COLUMN cover_image TEXT NOT NULL DEFAULT '' CHECK(cover_image='' OR (substr(cover_image,1,1)='/' AND substr(cover_image,2,1)<>'/' AND length(cover_image)<=300));
  `}];
 

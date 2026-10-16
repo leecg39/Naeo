@@ -21,7 +21,10 @@ type Listed=ReturnType<typeof listPublicEvents>[number];
 function card(tpl:El,e:Listed,href:string):El{
  const a=withAttrs(tpl,{href,'aria-label':`${e.title} (${PHASE[e.phase]})`});
  return mapTree([a],n=>{
-  if(cls('mui-1li648i')(n)||cls('mui-841cpt')(n))return[];
+  if(cls('mui-1li648i')(n)||cls('mui-841cpt')(n)){
+   if(!e.coverImage)return[];
+   return[mapTree([n],m=>m.tag==='img'?[withAttrs(m,{src:e.coverImage,alt:e.title})]:undefined)[0] as El];
+  }
   if(n.tag==='span'&&cls('MuiChip-label')(n))return[withChildren(n,[PHASE[e.phase]])];
   if(n.tag==='h2')return[withChildren(n,[e.title])];
   if(cls('mui-qymsdf')(n))return[withChildren(n,[periodText(e)])];
@@ -93,6 +96,7 @@ export async function buildEventDetailPage(db:Database,slug:string,opts:{dashboa
  return withContent('/event',`${base}/${e.slug}`,e.title,c=>[
   el('a',{href:base,style:'color:#03c75a;font-weight:700;text-decoration:none'},['← 이벤트 목록']),
   hero(c,e.title,e.summary),
+  ...(e.coverImage?[el('img',{src:e.coverImage,alt:e.title,style:'display:block;width:100%;max-width:640px;border-radius:16px;margin:0 0 16px'})]:[]),
   el('p',{style:muted,'aria-label':'이벤트 정보'},[facts.join(' · ')]),
   el('article',{class:'event-body',style:'line-height:1.7'},renderMarkdown(e.body).nodes),
   action,

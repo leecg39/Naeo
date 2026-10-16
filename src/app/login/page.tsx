@@ -7,6 +7,7 @@ import SocialLogin from '@/components/account/SocialLogin';
 import {oauthConfig} from '@/server/oauth/providers';
 
 export const dynamic='force-dynamic';
+export const metadata={title:{absolute:'NAEO: 네이버 AI 검색(AEO) 최적화 진단'}};
 export default async function LoginPage({searchParams}:{searchParams:Promise<{next?:string;oauthError?:string}>}) {
   const {next,oauthError}=await searchParams;
   const user=await currentUser();

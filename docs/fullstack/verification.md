@@ -19,7 +19,7 @@
 | 실제 Ego UI | 통과 | 미인증 리다이렉트 → 회원가입 → 프로필 변경 → 블로그 생성/조회/수정 → 로그아웃/재로그인 → 서버 재시작 보존 → 삭제 확인 → 재조회 빈 목록 |
 | 관리자 초기 지정 CLI | 통과 | 별도 QA DB의 기존 계정에 `npm run admin -- promote` 실행 후 `/api/auth/me`의 role=admin 확인. 관리자 CRUD UI는 미구현 |
 | 반응형 DOM | 통과 | 1440px: scrollWidth 1425, 768px: 753, 390px: 390. 프로필·폼·빈 목록 존재 |
-| 스크린샷 시각 비교 | 미완료 | Ego `Page.captureScreenshot` 시간 초과. screenshot wrapper와 직접 CDP 모두 실패. 이미지 결과물을 생성했다고 주장하지 않음 |
+| 스크린샷 시각 비교 | 부분 완료 | 당시 Ego `Page.captureScreenshot` 시간 초과로 미완료였으나, 10-16에 Chrome DevTools 브라우저로 원본 naeo.kr과 공개 16경로를 SSR 구조·1440/390px 실측 비교해 `visual-parity-2026-10-16.md`에 기록. 픽셀 단위 diff는 미수행 |
 
 서버 테스트: `tests/server/foundation.test.ts`, `tests/server/http.test.ts`. 브라우저 실측: `evidence/foundation-browser.json`, `evidence/settings-after-crud.txt`. 스크린샷 시도 중 발생한 emulation 좌표 문제는 1440px override를 다시 설정해 회복했고, 이후 키보드와 포인터로 삭제 확인 흐름을 마쳤다. 최종 브라우저 공간은 7, 페이지 p1이며 전체 목표의 후속 검증에 재사용한다.
 
@@ -47,7 +47,7 @@ AI/OAuth/결제/SMS/메일 개발 설정은 미확인이다. 원본 로그인 �
 | 관리자 CRUD | 통과 | 사용자 생성·닉네임 수정·정지/복구·검색, 삭제 시 이메일 불일치 거절, 정상 삭제 후 새로고침 목록에서 제거(총 1명) |
 | 마지막 관리자 보호 | 통과 | 약관 미동의 관리자는 집계 제외. 유일한 동의 관리자 본인 강등 시 409 LAST_ADMIN, DB role 유지 |
 | 반응형 | 수정 후 통과 | 수정 전 `/admin/users` 390px 레이아웃 폭 681(→622), 768px scrollWidth 961; `/admin` 922/1202. 원인: `.settings-sections` grid 열이 nowrap 표 폭으로 확장, 행 버튼의 `sr-only`(absolute)가 스크롤 컨테이너 밖으로 탈출. `admin.css`에 `grid-template-columns:minmax(0,1fr)`와 `.responsive-table{position:relative}` 추가. 수정 후 390/768/1440px 세 화면 모두 scrollWidth ≤ innerWidth, 표만 가로 스크롤 |
-| 스크린샷 시각 비교 | 미완료 | Ego `Page.captureScreenshot` 시간 초과 지속 |
+| 스크린샷 시각 비교 | 부분 완료 | 당시 Ego 캡처 시간 초과. 10-16 Chrome DevTools 비교로 대체 — `visual-parity-2026-10-16.md` |
 
 브라우저 기록: `evidence/account-security-browser.txt`, `evidence/admin-users-created-updated.txt`, `evidence/admin-audit-deletions.txt`, `evidence/account-responsive.json`, `evidence/admin-responsive.json`(반응형 수정 전 측정, 경로 미기재 — 위 표의 수정 후 수치가 최신).
 
@@ -574,3 +574,25 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 | 결정 | — | 지표는 관리자 버튼으로 수집(회원 자동 수집은 한도·비용 관리상 미적용). 문서수는 네이버 검색 총건수, 검색 미설정 시 직전 값 유지. 상위 노출은 동기 호출로 단순화(실패 미기록) |
 
 남은 범위: 실제 검색광고·네이버 검색 키 왕복(키 발급·IP 제한 정책 확인 포함)은 준비물 확보 후다. 로컬 double 검증을 실제 공급자 성공으로 세지 않는다.
+
+## 2026-10-16 — 알림 설정 실제 적용 (P1.7 구현분, 스키마 43)
+
+| 검증 | 결과 | 내용 |
+|---|---|---|
+| `npm test` | 478/478 통과(12+466) | 알림 8: 동의/설정 게이트·스캔 완료 큐잉과 본문(점수·수집 수·대시보드 링크)·중복 차단·발송·일시/영구 실패·만료·동의 철회 시 삭제·리워드 회수 연동·정지 회원·워커 임대 회수·autoscan 하루 1회·실제 워커 경로 |
+| lint/typecheck/build | 통과 | eslint·tsc·next build exit 0, `git diff --check` 통과 |
+| 로컬 왕복 E2E | 통과 | `scripts/qa/notify-mail.ts`: 프로덕션 Next+worker+loopback Resend·RSS double. 동의→스캔→메일 발송·복호화 본문·철회 시 미발송·autoscan 예약. `evidence/notify-mail-runtime.json` |
+| 결정 | — | `notify_mail` 아웃박스는 AES-256-GCM 암호화·(kind,ref_id) 멱등·5회 재시도·60초 임대·24h 만료. 발송 직전 트랜잭션에서 동의 재확인. `scan_done`→scan_email, `benefit`→marketing_email, autoscan은 예약 동의. `notify-mail/` 멱등 네임스페이스 분리. `NAEO_RSS_BASE`는 루프백 전용 테스트 오버라이드 |
+
+남은 범위: 실제 Resend 수신함 도착·단말 확인은 외부 검증 대기. 로컬 double을 실제 공급자 성공으로 세지 않는다.
+
+## 2026-10-16 — 공개 화면 시각 비교 (P1.8 구현분)
+
+| 검증 | 결과 | 내용 |
+|---|---|---|
+| SSR 구조 비교 | 통과 | 공개 16경로를 원본 naeo.kr과 DOMParser 지표(h1·img·section·header/footer)로 비교 — `/` 14/14 이미지·12/12 섹션 등 대부분 일치 |
+| 런타임 실측 | 통과 | 1440·390px에서 header 79px·h1 60px·배경/글자색 일치, 390px 가로 넘침 0 |
+| 수정 결함 | 수정 후 통과 | `/event` 카드 포스터 부재 → `events.cover_image`(스키마 44, 로컬 경로만)·시드·목록/상세 렌더·관리자 필드로 구현(390px docH 1082/1082 일치). `/login` 제목을 원본과 동일하게 교정 |
+| 원본 변동 | 기록 | 홈 신규 섹션·이미지(+34), `/blog` 신규 글, 홈 제목 접두어 제거 — 10-13 캡처 이후 원본 변경분. 공지 티커는 자체 공지 시스템으로 의도적 대체 |
+
+전체 기록·한계(픽셀 diff 미수행, 로그인 후 화면 범위 밖): `docs/fullstack/visual-parity-2026-10-16.md`. `npm test` 479(12+467), lint·typecheck·build·`git diff --check` 통과.
