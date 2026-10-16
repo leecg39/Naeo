@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-16T00:47:59.754Z",
+  "scope": "local development environment presence only; values never included",
+  "providers": {
+    "anthropic": {
+      "configured": false,
+      "missing": [
+        "ANTHROPIC_API_KEY"
+      ]
+    },
+    "toss": {
+      "configured": false,
+      "missing": [
+        "NAEO_TOSS_CLIENT_KEY",
+        "NAEO_TOSS_SECRET_KEY"
+      ]
+    },
+    "google": {
+      "configured": false,
+      "missing": [
+        "NAEO_GOOGLE_CLIENT_ID",
+        "NAEO_GOOGLE_CLIENT_SECRET"
+      ]
+    },
+    "naver": {
+      "configured": false,
+      "missing": [
+        "NAEO_NAVER_CLIENT_ID",
+        "NAEO_NAVER_CLIENT_SECRET"
+      ]
+    },
+    "email": {
+      "configured": false,
+      "missing": [
+        "NAEO_RESEND_API_KEY"
+      ]
+    },
+    "sms": {
+      "configured": false,
+      "missing": [
+        "NAEO_TWILIO_ACCOUNT_SID",
+        "NAEO_TWILIO_VERIFY_SERVICE_SID",
+        "NAEO_TWILIO_API_KEY",
+        "NAEO_TWILIO_API_SECRET"
+      ]
+    },
+    "extension": {
+      "configured": false,
+      "missing": [
+        "NAEO_EXTENSION_IDS"
+      ]
+    }
+  }
+}
