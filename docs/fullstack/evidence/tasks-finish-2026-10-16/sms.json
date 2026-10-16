@@ -1,0 +1,10 @@
+{
+  "wrong": "코드가 일치하지 않습니다. 다시 입력해주세요.",
+  "after": {
+    "verified": true,
+    "notice": "휴대폰 번호를 확인했습니다.",
+    "activeRole": "status",
+    "width": 390,
+    "scrollWidth": 390
+  }
+}

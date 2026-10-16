@@ -346,12 +346,16 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. Open
 
 | 경로 | 메서드 | 권한 | 입력·동작 | 오류 |
 |---|---|---|---|---|
-| `/api/creative/projects/:id/exports` | GET·POST | 소유자 | 최근 10개 / `{format:'pdf'|'zip'}` 시작(시간당 20회) | 404, 429 |
+| `/api/creative/export-capabilities` | GET | 회원 | `{formats,mp4:{available,message}}`; MP4 인코더 사용 가능 여부. PNG는 ZIP 수록 이미지 형식 | 401 |
+| `/api/creative/projects/:id/exports` | GET·POST | 소유자 | 최근 10개 / `{format:'pdf'|'zip'|'mp4',secondsPerSlide?}` 시작(시간당 20회). MP4 시간은 정수 1~30초, 기본 3초 | 404, 429 `EXPORT_BUSY`, 503 `EXPORT_ENCODER_UNAVAILABLE` |
 | `/api/creative/exports/:job/pages/:n` | PUT `image/png` | 소유자 | 브라우저가 그린 PNG(최대 12MB): 서명·청크 CRC·8비트 RGB/RGBA·비인터레이스·프로젝트 크기 확인, 같은 자리는 교체 | 415, 413, 400 `INVALID_PNG`·`UNSUPPORTED_PNG`·`SIZE_MISMATCH`·`BAD_POSITION`(작업 실패로 기록), 409 `EXPORT_EXPIRED`·`EXPORT_CLOSED` |
-| `/api/creative/exports/:job/complete` | POST | 소유자 | PDF 1.4(장마다 한 페이지, 픽셀×0.75pt, RGB Flate) 또는 ZIP(slide-01.png…, 무압축 저장) 생성, 7일 보관 | 409 `PAGES_MISSING` |
-| `/api/creative/exports/:job/file` | GET | 소유자 | `attachment; filename*=UTF-8''제목.pdf` | 404, 410 `EXPORT_EXPIRED` |
+| `/api/creative/exports/:job/complete` | POST | 소유자 | PDF 1.4 또는 ZIP 즉시 생성(200). MP4는 202와 `queued` 반환 후 worker가 비동기 인코딩. 완성 후 7일 보관 | 409 `PAGES_MISSING`·`EXPORT_EXPIRED`·`EXPORT_CLOSED`, 503 인코더 사용 불가 |
+| `/api/creative/exports/:job` | GET·DELETE | 소유자 | 작업 조회 / 수집·대기·인코딩 취소(lease 철회, 입력 PNG 삭제). 취소 재요청은 멱등 | 404, 409 `EXPORT_CLOSED` |
+| `/api/creative/exports/:job/file` | GET | 소유자 | `attachment; filename*=UTF-8''제목.pdf` 또는 `.zip`·`.mp4`; MP4는 `video/mp4`, private/no-store | 404, 410 `EXPORT_EXPIRED` |
 
-화면: `/social/aeo-carousel/export?project=`·`/social/mate-ad/export?project=`·`/youtube/aeo-intro/export?project=`(진행 n/전체, 실패 이유, 내려받기). 영상 파일 인코딩은 지원하지 않음(인코더 필요). `/preview?id=`는 내 초안을 샌드박스 iframe(허용 목록 HTML)으로 미리보기, id 없으면 `/dashboard/write`. `/dev/*`는 관리자만(그 외 404). localStorage 미리보기 데모(DemoPreview) 제거.
+화면: `/social/aeo-carousel/export?project=`·`/social/mate-ad/export?project=`·`/youtube/aeo-intro/export?project=`(장면 전송·MP4 대기/진행률·실패·취소·내려받기). MP4는 장당 시간 선택, 무음 정지 장면의 순서 재생, 30fps H.264/yuv420p이며 원본 애니메이션 녹화가 아니다. 재생 시간은 최대 600초이고 출력 256MB·인코딩 5분 제한이다. 웹과 worker에 FFmpeg(libx264)가 필요하다. `/preview?id=`는 내 초안을 샌드박스 iframe(허용 목록 HTML)으로 미리보기, id 없으면 `/dashboard/write`. `/dev/*`는 관리자만(그 외 404). localStorage 미리보기 데모(DemoPreview) 제거.
+
+2026-10-16 후속 구현으로 MP4 `unsupported`는 위 계약으로 대체했다. 기존 [REA 조사](rea-mp4-drift-2026-10-16.md)는 구현 전 기록이다. 작업 응답은 `state: collecting|queued|encoding|succeeded|failed|canceled`, `secondsPerSlide`, `progress:0..100`을 포함한다. DB당 한 개의 인코더, 회원별 활성 2개·전체 32개로 제한한다. 서버 정상 종료는 queued로 복귀, lease 만료는 최대 3회 복구하며 소유권·취소·삭제를 재확인한 작업만 결과를 공개한다. 상세 운영은 [운영 문서](operations.md)의 MP4 절을 따른다.
 
 ## P8.1 방문·체류 집계와 운영 상태 (2026-10-14)
 

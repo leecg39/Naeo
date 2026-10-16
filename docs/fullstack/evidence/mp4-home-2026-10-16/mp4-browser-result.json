@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-16T13:14:28.074Z",
+  "queuedReloadPreserved": true,
+  "downloaded": true,
+  "url": "http://mp4-qa.localhost:3266/youtube/aeo-intro/export?project=d5e3d4f8-2f39-4b7b-9a30-ddb6d36210c9",
+  "jobs": [
+    {
+      "id": "881b2ce9-d70c-4ee2-90ec-4e42ac477c0c",
+      "projectId": "d5e3d4f8-2f39-4b7b-9a30-ddb6d36210c9",
+      "format": "mp4",
+      "state": "succeeded",
+      "secondsPerSlide": 1,
+      "progress": 100,
+      "slideCount": 2,
+      "received": 0,
+      "error": "",
+      "fileSize": 43138,
+      "expiresAt": 1792761260655,
+      "createdAt": 1792156458174
+    }
+  ],
+  "viewport": {
+    "width": 1908,
+    "scrollWidth": 1908
+  }
+}

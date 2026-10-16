@@ -4,7 +4,8 @@ import type {User} from '../auth';
 import {body,json,rateLimit,readRequestBytes} from '../http';
 import {addSlide,createProject,deleteProject,deleteSlide,duplicateProject,duplicateSlide,getProject,listProjects,moveSlide,updateProject,updateSlide} from './projects';
 import {slideSvg} from './svg';
-import {addPage,completeExport,listExports,MAX_PAGE_BYTES,readExportFile,startExport} from './exports';
+import {addPage,cancelExport,completeExport,getExport,listExports,MAX_PAGE_BYTES,readExportFile,startExport} from './exports';
+import {mp4Capability,requireMp4Encoder} from './mp4';
 import {AppError} from '../errors';
 import {uploadDir} from '../writing/writing-api';
 
@@ -25,6 +26,7 @@ export async function creativeApi(db:Database,request:Request,user:User):Promise
  if(!path.startsWith('/api/creative/'))return null;
  if(method!=='GET')rateLimit(db,`creative:${user.id}`,300,15*60*1000);
  const input=()=>body(request,z.unknown());
+ if(path==='/api/creative/export-capabilities'&&method==='GET'){const mp4=await mp4Capability();return json({data:{formats:mp4.available?['png','pdf','zip','mp4']:['png','pdf','zip'],mp4}});}
  if(path==='/api/creative/projects'){
   if(method==='GET')return json({data:listProjects(db,user.id)});
   if(method==='POST')return json({data:createProject(db,user.id,await input())},201);
@@ -37,12 +39,15 @@ export async function creativeApi(db:Database,request:Request,user:User):Promise
  }
  if((r=m(path,`/${ID}/exports`))){
   if(method==='GET')return json({data:listExports(db,user.id,r[1])});
-  if(method==='POST'){rateLimit(db,`export:${user.id}`,20,60*60*1000);return json({data:startExport(db,user.id,r[1],await input())},201);}
+  if(method==='POST'){rateLimit(db,`export:${user.id}`,20,60*60*1000);const payload=await input();getProject(db,user.id,r[1]);if(payload&&typeof payload==='object'&&'format' in payload&&payload.format==='mp4')await requireMp4Encoder();return json({data:startExport(db,user.id,r[1],payload)},201);}
  }
  const page=path.match(new RegExp(`^/api/creative/exports/${ID}/pages/(\\d{1,2})$`));
  if(page&&method==='PUT')return json({data:addPage(db,uploadDir(),user.id,page[1],Number(page[2]),await pngBody(request))});
  const done=path.match(new RegExp(`^/api/creative/exports/${ID}/complete$`));
- if(done&&method==='POST')return json({data:completeExport(db,uploadDir(),user.id,done[1])});
+ if(done&&method==='POST'){if(getExport(db,user.id,done[1]).format==='mp4')await requireMp4Encoder();const data=completeExport(db,uploadDir(),user.id,done[1]);return json({data},data.state==='queued'?202:200);}
+ const job=path.match(new RegExp(`^/api/creative/exports/${ID}$`));
+ if(job&&method==='GET')return json({data:getExport(db,user.id,job[1])});
+ if(job&&method==='DELETE')return json({data:cancelExport(db,uploadDir(),user.id,job[1])});
  const file=path.match(new RegExp(`^/api/creative/exports/${ID}/file$`));
  if(file&&method==='GET')return download(readExportFile(db,uploadDir(),user.id,file[1]));
  if((r=m(path,`/${ID}/duplicate`))&&method==='POST')return json({data:duplicateProject(db,user.id,r[1])},201);

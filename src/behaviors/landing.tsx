@@ -1,5 +1,6 @@
 "use client";
 
+import { installHomeDemo } from "@/components/home/home-demo";
 import type { InstallBehavior } from "@/lib/behavior";
 import { text } from "@/lib/behavior";
 import { api } from "@/lib/api-client";
@@ -40,6 +41,7 @@ export function parseBlogId(value: string): string | null {
 
 export const installLanding: InstallBehavior = (root, tools) => {
   const cleanups: (() => void)[] = [];
+  if(tools.pathname === "/"){const cleanup=installHomeDemo(root,tools);if(cleanup)cleanups.push(cleanup);}
   const attributeSnapshots = [...root.querySelectorAll("button,input")].map(el => ({el, attributes:["aria-pressed","aria-expanded","aria-current","aria-invalid","class"].map(name => [name,el.getAttribute(name)] as const)}));
   cleanups.push(() => attributeSnapshots.forEach(({el,attributes}) => attributes.forEach(([name,value]) => value===null?el.removeAttribute(name):el.setAttribute(name,value))));
   const timers = new Set<ReturnType<typeof setTimeout>>();
@@ -186,6 +188,7 @@ export const installLanding: InstallBehavior = (root, tools) => {
   // The source also has opacity-only entry states, not just translated elements.
   // Exclude state panels and the separately animated hero/criteria/carousel content.
   root.querySelectorAll<HTMLElement>('[style*="opacity"],[style*="filter"]').forEach(el => {
+    if (el.closest("[data-naeo-home-demo]") || (el.closest("[data-naeo-home-mcp]") && !el.hasAttribute("data-naeo-home-mcp"))) return;
     if (criteriaGroup?.contains(el) || mobileDescriptions?.contains(el) || heroHeading?.contains(el) || el.closest('[aria-roledescription="carousel"],[hidden],template')) return;
     const hiddenOpacity=/^0(?:\.0+)?$/.test(el.style.opacity);
     const blurred=/blur\((?!0(?:px)?\))/.test(el.style.filter);
@@ -341,6 +344,7 @@ export const installLanding: InstallBehavior = (root, tools) => {
   if(firstKeyword&&keywordSection&&window.matchMedia("(min-width:900px)").matches) observe(keywordSection,()=>{later(()=>{if(!detailNodes.size)toggleKeyword(firstKeyword);},reduced?0:450);},.25,"0px");
 
   on(root,"click",event=>{
+    if(event.defaultPrevented)return;
     const target=event.target instanceof Element?event.target.closest<HTMLButtonElement>("button"):null;
     if(!target||!root.contains(target))return;
     const label=target.getAttribute("aria-label")||"";

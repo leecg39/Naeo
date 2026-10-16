@@ -7,7 +7,7 @@ export const ARCHIVE_KEY=/^[a-f0-9]{64}\.tar$/;
 export function checkedDirectory(dir:string){const s=lstatSync(dir);if(s.isSymbolicLink()||!s.isDirectory())throw new Error('UNSAFE_DIRECTORY');return dir;}
 export function archiveDirectory(dir:string){checkedDirectory(dir);return checkedDirectory(join(dir,'personal-exports'));}
 const imageKey=/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}\.(jpg|png|webp)$/;
-const renderKey=/^[a-f0-9]{32}\.(png|pdf|zip)$/;
+const renderKey=/^[a-f0-9]{32}\.(png|pdf|zip|mp4)$/;
 type Attachment={id:string;key:string;size:number;originalName?:string};
 function attachments(db:Database,dir:string,owner:string,writer:TarWriter,now:number){
  const items=[];
@@ -18,7 +18,7 @@ function attachments(db:Database,dir:string,owner:string,writer:TarWriter,now:nu
  }
  const query=`SELECT id,file_key AS key,file_size AS size FROM export_jobs WHERE owner_id=? AND state='succeeded' AND file_key IS NOT NULL AND expires_at>?`;
  for(const r of db.prepare(query).iterate(owner,now) as Iterable<Attachment>){items.push(renderFile(dir,writer,r,'creative'));}
- const pages=`SELECT j.id||'-'||p.position AS id,p.storage_key AS key,p.size FROM export_pages p JOIN export_jobs j ON j.id=p.job_id WHERE j.owner_id=? AND j.state='collecting' AND j.expires_at>? ORDER BY j.id,p.position`;
+ const pages=`SELECT j.id||'-'||p.position AS id,p.storage_key AS key,p.size FROM export_pages p JOIN export_jobs j ON j.id=p.job_id WHERE j.owner_id=? AND j.state IN ('collecting','queued','encoding') AND j.expires_at>? ORDER BY j.id,p.position`;
  for(const r of db.prepare(pages).iterate(owner,now) as Iterable<Attachment>){items.push(renderFile(dir,writer,r,'creative_page'));}
  return items;
 }

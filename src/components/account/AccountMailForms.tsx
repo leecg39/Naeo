@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import Link from 'next/link';
+import OperationNotice from '../admin/OperationNotice';
 import {api} from '@/lib/api-client';
 import type {mailStatus} from '@/server/mail/account-mail';
 type Status=ReturnType<typeof mailStatus>;
@@ -17,7 +18,7 @@ export function EmailLinkForm({purpose}:{purpose:'reset'|'verify'}){
   const fields=new FormData(e.currentTarget);if(purpose==='reset'&&fields.get('newPassword')!==fields.get('confirmPassword')){setError('새 비밀번호가 일치하지 않습니다.');return;}
   setBusy(true);try{await api(purpose==='reset'?'/api/auth/password/reset':'/api/auth/email/verify',{method:'POST',body:{token:token.current,...(purpose==='reset'?{newPassword:fields.get('newPassword')}:{})}});token.current='';setDone(true);}catch(e){setError(e instanceof Error?e.message:'링크를 확인하지 못했습니다.');}finally{setBusy(false);}
  }
- if(done)return <div className="account-form"><p role="status" className="account-success">{purpose==='reset'?'비밀번호를 변경하고 모든 로그인과 외부 앱 연결을 종료했습니다. 새 비밀번호로 로그인해주세요.':'이메일 주소를 확인했습니다. 로그인한 뒤 계정 설정에서 확인할 수 있습니다.'}</p><Link className="button" href="/login">로그인으로 이동</Link></div>;
+ if(done)return <div className="account-form"><OperationNotice message={purpose==='reset'?'비밀번호를 변경하고 모든 로그인과 외부 앱 연결을 종료했습니다. 새 비밀번호로 로그인해주세요.':'이메일 주소를 확인했습니다. 로그인한 뒤 계정 설정에서 확인할 수 있습니다.'}/><Link className="button" href="/login">로그인으로 이동</Link></div>;
  return <form method="post" className="account-form" onSubmit={submit}><p>{purpose==='reset'?'새 비밀번호를 입력한 뒤 변경을 눌러주세요.':'이메일 주소를 확인하려면 아래 버튼을 눌러주세요.'}</p>{purpose==='reset'&&<><label>새 비밀번호<input className="field" type="password" name="newPassword" autoComplete="new-password" minLength={10} maxLength={128} required disabled={busy}/></label><label>새 비밀번호 확인<input className="field" type="password" name="confirmPassword" autoComplete="new-password" minLength={10} maxLength={128} required disabled={busy}/></label></>}<button className="button" disabled={busy}>{busy?'처리 중…':purpose==='reset'?'비밀번호 변경':'이메일 주소 확인'}</button>{error&&<p role="alert" className="account-error">{error}</p>}<Link href={purpose==='reset'?'/auth/forgot-password':'/dashboard/settings'}>안내 메일 다시 요청하기</Link></form>;
 }
 const STATE:Record<string,string>={queued:'안내 메일 준비 중',sending:'메일 서비스에 요청 중',retry:'잠시 후 자동으로 다시 시도합니다',accepted:'메일 서비스가 접수했습니다. 받은편지함과 스팸함을 확인해주세요.',failed:'안내 메일을 보내지 못했습니다. 잠시 후 다시 요청해주세요.'};

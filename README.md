@@ -6,14 +6,14 @@ NAEO의 79개 구체 URL과 4개 동적 경로를 바탕으로 만든 로컬 재
 
 ## 구현된 기능
 
-- 계정: [이메일 인증·비밀번호 복구](docs/fullstack/account-mail.md) API·작업자·화면(외부 수신 검증 대기), 이메일 가입·로그인·세션·약관 동의, 프로필·블로그·연락처·알림 설정(스캔 완료·혜택 메일과 자동 진단 동의는 `notify_mail` 아웃박스로 실제 발송·예약), 비밀번호 변경·세션 철회·탈퇴, 관리자 사용자 관리·감사 로그. [개인 데이터 내보내기](docs/fullstack/personal-data-export.md)는 45개 데이터셋·소유 첨부를 재인증 후 TAR로 제공합니다.
+- 계정: [이메일 인증·비밀번호 복구](docs/fullstack/account-mail.md) API·작업자·화면(외부 수신 검증 대기), 이메일 가입·로그인·세션·약관 동의, 프로필·블로그·연락처·알림 설정(스캔 완료·혜택 메일과 자동 진단 동의는 `notify_mail` 아웃박스로 실제 발송·예약), 비밀번호 변경·세션 철회·탈퇴, 관리자 사용자 관리·감사 로그. [개인 데이터 내보내기](docs/fullstack/personal-data-export.md)는 항목별 데이터셋·소유 첨부를 재인증 후 TAR로 제공합니다.
 - 콘텐츠: 매거진·카테고리·정책·FAQ·업데이트·공지·고정 페이지 CMS, 버전 충돌 검사·이력 복구·발행/비공개, 문의·답변·답변 템플릿.
 - 분석: 네이버 RSS 수집, 지속 작업 큐와 재시도, `rules-v1` 진단·근거·할 일·리포트·공유, 키워드·추천·경쟁 블로그. 키워드 상위 노출도 지원하며, AI 인용 확인은 SerpApi 어댑터로 구현됐고 키가 없으면 '미설정'으로 표시합니다.
 - 작성: 초안 CRUD·버전 복구·템플릿, 개인 사진 업로드·다운로드·공유 철회, 안전한 HTML/Markdown/텍스트 내보내기. AI 글 생성(회원별 OpenAI OAuth 또는 Anthropic)·AI 이미지 생성(OpenAI Images)·작업 큐·멱등 차감·실패 환급은 구현되었고 실제 공급자 호출은 키가 필요합니다.
 - 랭킹·이벤트: 기간별 스냅숏·동점 규칙·공개 설정, 이벤트·참여·심사·보상·회수·쿠폰·원장.
 - 포인트·시작 가이드: 별도 원장·KST 출석·단계별 수령·서브 주제 CRUD. 휴대폰 단계는 승인 근거·동일 번호 중복 방지 후 120P를 지급하며 별도 키 설정이 필요합니다. AI 인용 단계는 공급자 연결 전까지 잠금입니다. [REA 반영 계획](docs/fullstack/engagement-plan.md).
 - 요금제·결제: 체험·쿠폰·기간 지급/소멸·해지/재개, 토스 주문·승인·웹훅 재조회·환불·회계 기록 보호. 미확정 승인 조회·중단 환불 복구를 포함합니다. [서버 강제 종료/복구 검증](docs/fullstack/payment-recovery.md)과 실제 샌드박스 검증을 구분합니다.
-- 연동·제작: Google/네이버 OAuth 어댑터, OAuth 동의·연결·철회, MCP 도구 6개, [Manifest V3 네이버 발행 확장](extension/README.md), 30일 초안 자동 삭제, 소셜 프로젝트·슬라이드 CRUD, PNG/PDF/ZIP 내보내기, 소유자 미리보기·관리자 개발 화면.
+- 연동·제작: Google/네이버 OAuth 어댑터, OAuth 동의·연결·철회, MCP 도구 6개, [Manifest V3 네이버 발행 확장](extension/README.md), 30일 초안 자동 삭제, 소셜 프로젝트·슬라이드 CRUD, PNG/PDF/ZIP/MP4 내보내기, 소유자 미리보기·관리자 개발 화면.
 - 운영: 개인정보를 최소화한 방문 집계, 서비스/작업자 상태, 보관 정책, 일관된 DB 백업·업로드 복사·검증 후 복원.
 
 ## 실행
@@ -34,6 +34,8 @@ npm start
 
 ## 검증
 
+최신 결과: **490개 테스트**, lint·typecheck·프로덕션 빌드 통과. 이메일 인증·비밀번호 복구·휴대폰 인증·설정·세션 철회·탈퇴를 실제 Ego에서 검증하고 성공 안내/포커스 결함을 수정했습니다. [TASKS 후속 결과와 외부 완료 조건](docs/fullstack/tasks-finish-2026-10-16.md).
+
 ```bash
 npm test
 npm run lint
@@ -51,7 +53,7 @@ HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO
 
 ## 남은 구현·검증
 
-네이버 검색광고 지표 수집(`NAEO_SEARCHAD_*`)과 키워드 상위 노출 비교(`NAEO_NAVER_CLIENT_*`)는 어댑터·화면·로컬 double 검증까지 구현했으며 실제 키 왕복이 남았습니다. AI 이미지 생성은 OpenAI Images 어댑터·장당 1토큰 원장·부분 환급·초안 첨부·화면 연결까지 구현했으며 `NAEO_IMAGE_PROVIDER=openai`·`NAEO_IMAGE_API_KEY` 설정과 실제 왕복 검증이 남았습니다. AI 브리핑 인용 확인은 SerpApi 어댑터·확인 작업·결과 화면까지 구현했으며 `NAEO_CITATION_PROVIDER=serpapi`·`NAEO_SERPAPI_KEY` 설정과 실제 왕복 검증이 남았습니다. 메일 기반 비밀번호 재설정·이메일 인증(Resend), SMS 인증(Twilio Verify), 회원별 ChatGPT(OpenAI OAuth)·Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 어댑터와 로컬 대역 검증까지 구현했으며 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 확장 프로그램은 로컬 설치용 코드, 실제 서버 OAuth/MCP 검증, 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달 검증까지 갖췄으며 Chrome Web Store 등록과 배포 환경 검증이 남았습니다(공개 발행은 회원이 직접 누르는 동작). 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
+네이버 검색광고 지표 수집(`NAEO_SEARCHAD_*`)과 키워드 상위 노출 비교(`NAEO_NAVER_CLIENT_*`)는 어댑터·화면·로컬 double 검증까지 구현했으며 실제 키 왕복이 남았습니다. AI 이미지 생성은 OpenAI Images 어댑터·장당 1토큰 원장·부분 환급·초안 첨부·화면 연결까지 구현했으며 `NAEO_IMAGE_PROVIDER=openai`·`NAEO_IMAGE_API_KEY` 설정과 실제 왕복 검증이 남았습니다. AI 브리핑 인용 확인은 SerpApi 어댑터·확인 작업·결과 화면까지 구현했으며 `NAEO_CITATION_PROVIDER=serpapi`·`NAEO_SERPAPI_KEY` 설정과 실제 왕복 검증이 남았습니다. 메일 기반 비밀번호 재설정·이메일 인증(Resend), SMS 인증(Twilio Verify), 회원별 ChatGPT(OpenAI OAuth)·Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 어댑터와 로컬 대역 검증까지 구현했으며 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 확장 프로그램은 로컬 설치용 코드, 실제 서버 OAuth/MCP 검증, 로그인된 네이버 편집기의 제목·본문·소제목·사진 전달 검증까지 갖췄으며 Chrome Web Store 등록과 배포 환경 검증이 남았습니다(공개 발행은 회원이 직접 누르는 동작). 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4는 FFmpeg/libx264 기반 무음 슬라이드 영상으로 지원하며 웹과 같은 DB·업로드 폴더를 사용하는 worker가 필요합니다. [MP4·홈 복원](docs/fullstack/mp4-home-implementation-2026-10-16.md)을 참조하세요. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
 
 소셜 견본과 소개 영상의 캡처 콘텐츠는 유지하며, `/social/banner-preview`는 캡처 부재로 홈으로 이동합니다. 원본에서도 없었던 대시보드 가이드 이미지 5개는 현재도 404로 표시됩니다. 원본 대비 전 화면 시각적 일치 검증은 완료하지 않았습니다.
 

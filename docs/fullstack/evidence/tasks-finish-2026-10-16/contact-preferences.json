@@ -1,0 +1,56 @@
+{
+  "reward": {
+    "points": {
+      "balance": 120,
+      "entries": [
+        {
+          "id": "852e23bf-c03d-4e9c-8e58-fb5565afbf4f",
+          "delta": 120,
+          "reason": "tutorial",
+          "reference": "verify",
+          "createdAt": 1792161560799
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "pageSize": 20,
+        "total": 1
+      },
+      "policy": {
+        "version": "local-fixed-v1",
+        "timezone": "Asia/Seoul",
+        "daily": 5,
+        "streakEvery": 7,
+        "streakBonus": 15,
+        "subTopicCooldownDays": 7
+      },
+      "attendance": {
+        "today": "2026-10-16",
+        "checkedIn": false,
+        "streak": 0,
+        "last": null
+      }
+    },
+    "notice": "120P를 받았습니다."
+  },
+  "persisted": {
+    "marketingEmail": true,
+    "scanEmail": true,
+    "autoscan": true
+  },
+  "invalidated": {
+    "contact": {
+      "name": "인증 확인",
+      "email": "account-browser@example.test",
+      "phone": "01099998888",
+      "phoneVerifiedAt": null,
+      "version": 3,
+      "updatedAt": 1792161568686
+    },
+    "verifiedText": false
+  },
+  "deleted": {
+    "contact": null,
+    "focusedNotice": true
+  }
+}

@@ -14,6 +14,7 @@ import {runtimeGenerationProvider} from '../src/server/generation/runtime-provid
 import {scanHandler} from '../src/server/analysis/scan-handler';
 import {billingMaintenance} from '../src/server/billing/maintenance';
 import {cleanupExports} from '../src/server/creative/exports';
+import {runCreativeExportOnce} from '../src/server/creative/worker';
 import {runRetention} from '../src/server/ops/retention';
 import {uploadDir} from '../src/server/writing/writing-api';
 import {cleanupMedia} from '../src/server/writing/media-cleanup';
@@ -40,7 +41,8 @@ async function main(){
   if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;const autoscan=enqueueAutoscans(db,billing.at);if(autoscan)process.stdout.write(`[worker] autoscan queued=${autoscan}\n`);if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const replied=await runInquiryMailOnce(db,mailConfig()),mailed=await runMailOnce(db,mailConfig()),notified=await runNotifyMailOnce(db,mailConfig()),exported=runPersonalExportOnce(db,uploadDir());
   const citation=citationConfig();
-  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider,imageOptions()))??(replied||mailed||notified||exported);
+  const creative=await runCreativeExportOnce(db,uploadDir(),workerId,{signal:controller.signal});
+  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider,imageOptions()))??(replied||mailed||notified||exported||creative);
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
  }
  process.stdout.write(`[worker] ${workerId} stopped\n`);

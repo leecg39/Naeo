@@ -31,7 +31,7 @@ export const datasets=[
  owned('generation','generation_jobs','id,draft_id,state,cost,input_json,provider,model,attempt,max_attempts,run_after,cancel_requested,error_code,error_message,created_at,updated_at,completed_at'),
  owned('projects','creative_projects','id,kind,title,width,height,theme_json,version,created_at,updated_at'),
  {name:'slides',sql:'SELECT s.id,s.project_id,s.position,s.heading,s.body,s.caption,s.background,s.version,s.created_at,s.updated_at FROM creative_slides s JOIN creative_projects p ON p.id=s.project_id WHERE p.owner_id=? ORDER BY s.project_id,s.position'},
- owned('creative_exports','export_jobs','id,project_id,format,state,slide_count,width,height,error,file_size,expires_at,created_at,updated_at'),
+ owned('creative_exports','export_jobs','id,project_id,format,state,slide_count,width,height,seconds_per_slide,progress,error,file_size,expires_at,created_at,updated_at'),
  owned('rankings','ranking_snapshots','period_type,period_key,nickname,naver_id,category,rank,score,total,measured_at,criteria_json','user_id'),
  {name:'event_entries',sql:'SELECT e.id,e.event_id,v.title,e.proof_url,e.note,e.status,e.review_note,e.reviewed_at,e.version,e.created_at,e.updated_at FROM event_entries e JOIN events v ON v.id=e.event_id WHERE e.user_id=? ORDER BY e.rowid'},
  owned('rewards','rewards','id,kind,tokens,item,description,event_id,entry_id,status,version,created_at,revoked_at','user_id'),

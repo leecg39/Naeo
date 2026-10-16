@@ -1,0 +1,10 @@
+{
+  "changed": {
+    "currentStatus": 200,
+    "activeRole": "status",
+    "notice": "비밀번호를 변경하고 다른 기기와 외부 앱의 연결을 종료했습니다. 외부 앱은 다시 연결해주세요."
+  },
+  "wrong": "현재 비밀번호가 일치하지 않습니다.",
+  "deletedStatus": 401,
+  "redirectedToLogin": true
+}

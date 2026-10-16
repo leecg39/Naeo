@@ -15,7 +15,7 @@
     "backup": "node --import tsx scripts/backup.ts",
     "restore": "node --import tsx scripts/restore.ts",
     "audit:routes": "node --import tsx scripts/route-audit.ts",
-    "lint": "eslint src/server src/components/account src/components/admin src/components/contact src/components/content src/components/events src/components/writing src/components/creative src/components/ops src/lib/api-client.ts src/lib/kst-time.ts src/lib/inquiry-labels.ts src/lib/safe-next.ts src/app/api src/app/robots.ts src/app/sitemap.ts src/app/rss.xml src/app/llms.txt src/app/login src/app/auth src/app/admin src/app/dashboard/settings src/app/dashboard/social extension tests/*.test.mjs tests/server scripts/admin.ts scripts/worker.ts scripts/route-audit.ts scripts/backup.ts scripts/restore.ts scripts/content scripts/qa",
+    "lint": "eslint src/server src/components/account src/components/admin src/components/contact src/components/content src/components/events src/components/writing src/components/creative src/components/home src/components/ops src/lib/api-client.ts src/lib/kst-time.ts src/lib/inquiry-labels.ts src/lib/safe-next.ts src/app/api src/app/robots.ts src/app/sitemap.ts src/app/rss.xml src/app/llms.txt src/app/login src/app/auth src/app/admin src/app/dashboard/settings src/app/dashboard/social extension tests/*.test.mjs tests/server scripts/admin.ts scripts/worker.ts scripts/route-audit.ts scripts/backup.ts scripts/restore.ts scripts/content scripts/qa",
     "content:extract": "node --import tsx scripts/content/extract-articles.ts"
   },
   "dependencies": {

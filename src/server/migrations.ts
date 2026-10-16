@@ -1094,5 +1094,37 @@ export const migrations = [{
  `},{
  version:44,name:'events_cover_image',sql:`
  ALTER TABLE events ADD COLUMN cover_image TEXT NOT NULL DEFAULT '' CHECK(cover_image='' OR (substr(cover_image,1,1)='/' AND substr(cover_image,2,1)<>'/' AND length(cover_image)<=300));
+ `},{version:45,name:'creative_mp4_exports',sql:`
+ CREATE TABLE export_jobs_v45 (
+  id TEXT PRIMARY KEY NOT NULL,
+  project_id TEXT NOT NULL REFERENCES creative_projects(id) ON DELETE CASCADE,
+  owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  format TEXT NOT NULL CHECK(format IN ('pdf','zip','mp4')),
+  state TEXT NOT NULL DEFAULT 'collecting' CHECK(state IN ('collecting','queued','encoding','succeeded','failed','canceled')),
+  slide_count INTEGER NOT NULL CHECK(slide_count BETWEEN 1 AND 20),
+  width INTEGER NOT NULL,height INTEGER NOT NULL,
+  error TEXT NOT NULL DEFAULT '' CHECK(length(error)<=300),
+  file_key TEXT CHECK(file_key IS NULL OR length(file_key)<=60),file_size INTEGER,
+  expires_at INTEGER NOT NULL,created_at INTEGER NOT NULL,updated_at INTEGER NOT NULL,
+  seconds_per_slide INTEGER NOT NULL DEFAULT 3 CHECK(seconds_per_slide BETWEEN 1 AND 30),
+  progress INTEGER NOT NULL DEFAULT 0 CHECK(progress BETWEEN 0 AND 100),
+  lease_token TEXT,lease_until INTEGER,attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0)
+ ) STRICT;
+ INSERT INTO export_jobs_v45(id,project_id,owner_id,format,state,slide_count,width,height,error,file_key,file_size,expires_at,created_at,updated_at,progress)
+ SELECT id,project_id,owner_id,format,state,slide_count,width,height,error,file_key,file_size,expires_at,created_at,updated_at,CASE WHEN state='succeeded' THEN 100 ELSE 0 END FROM export_jobs;
+ CREATE TEMP TABLE saved_export_pages AS SELECT * FROM export_pages;
+ DROP TABLE export_pages;
+ DROP TABLE export_jobs;
+ ALTER TABLE export_jobs_v45 RENAME TO export_jobs;
+ CREATE INDEX export_jobs_project ON export_jobs(project_id,created_at DESC);
+ CREATE INDEX export_jobs_expiry ON export_jobs(expires_at);
+ CREATE INDEX export_jobs_queue ON export_jobs(state,created_at);
+ CREATE TABLE export_pages (
+  job_id TEXT NOT NULL REFERENCES export_jobs(id) ON DELETE CASCADE,
+  position INTEGER NOT NULL CHECK(position BETWEEN 0 AND 19),
+  storage_key TEXT NOT NULL CHECK(length(storage_key)<=60),size INTEGER NOT NULL,PRIMARY KEY(job_id,position)
+ ) STRICT;
+ INSERT INTO export_pages SELECT * FROM saved_export_pages;
+ DROP TABLE saved_export_pages;
  `}];
 

@@ -9,6 +9,7 @@
 | 서버 | Node `^22.16 \|\| >=24`, 지속 볼륨이 있는 단일 호스트 | SQLite 파일과 업로드 폴더를 쓰므로 serverless/stateless 불가 |
 | 프로세스 | `npm start`(웹) + `npm run worker`(작업자) 2개, 같은 `NAEO_DATABASE_PATH`·`NAEO_UPLOAD_DIR` | 큐·정기 작업은 worker에서만 처리(알림 메일·자동 스캔·보내기·보관 정책 포함) |
 | 도메인 | 공개 HTTPS origin → `NAEO_APP_URL` | OAuth 콜백·결제 웹훅·MCP 주소·Secure 쿠키가 실제 origin에 묶임 |
+| MP4 | FFmpeg/libx264 + 웹과 같은 환경의 worker | 무음 H.264 슬라이드 영상 인코딩 |
 | 기타 | `NAEO_TRUST_PROXY=1`(프록시 뒤일 때), `NAEO_ALLOW_INDEXING=1`(검색 노출 허용 시) | — |
 
 ## 2. 외부 연동 준비물(기능별)

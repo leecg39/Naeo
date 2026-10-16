@@ -118,7 +118,8 @@ test('checkExposure: config gate, marking, persistence, quota, isolation',async 
 test('collectKeywordMetrics: admin gate, batches of 5, document count, missing/failed reporting',async t=>{
  const {db,admin,a}=await fixture(t);
  const words=await Promise.all(['제주 여행','서울 맛집','부산 카페','강릉 바다','대전 빵','전주 한옥'].map(p=>createKeyword(db,admin,{phrase:p},NOW)));
- addKeywordMetric(db,admin,words[0].id,{pcVolume:1,mobileVolume:1,documentCount:500});
+ // The retained manual value must precede the collection's fixed clock, independent of the wall clock.
+ addKeywordMetric(db,admin,words[0].id,{pcVolume:1,mobileVolume:1,documentCount:500},NOW-1);
  await assert.rejects(collectKeywordMetrics(db,a,{}, {searchAd:ads(),fetchImpl:async()=>statsList([])},NOW),{status:403});
  await assert.rejects(collectKeywordMetrics(db,admin,{},{searchAd:null},NOW),{status:503,code:'SEARCHAD_NOT_CONFIGURED'});
  const calls:string[]=[];

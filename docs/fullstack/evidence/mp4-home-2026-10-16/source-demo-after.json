@@ -1,0 +1,2196 @@
+[
+  {
+    "step": "8",
+    "stages": [
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-hksp08",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 209.5,
+          "y": 393.5625,
+          "width": 8,
+          "height": 8
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1lf6m2g",
+        "style": "opacity: 1;",
+        "hidden": null,
+        "text": "내 최근 글발행하면 AI 인용 여부를 자동으로 추적해요주택청약 1순위 조건, 무주택 기간 계산에서 틀린 것들✓ AI 인용됨5.11실손보험 청구 앱으로 5분에 끝낸 후기발행됨5.07키워드연말정산 미리보기소분류경제⌄이미지 사진 0/20내가 찍은 사진을 올리면 글에 우선 배치돼요AI 이미지1장3장5장→ 총 3장 예상 = AI ",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18zcow1",
+        "style": "opacity: 1;",
+        "hidden": "false",
+        "text": "내 최근 글발행하면 AI 인용 여부를 자동으로 추적해요주택청약 1순위 조건, 무주택 기간 계산에서 틀린 것들✓ AI 인용됨5.11실손보험 청구 앱으로 5분에 끝낸 후기발행됨5.07키워드연말정산 미리보기소분류경제⌄이미지 사진 0/20내가 찍은 사진을 올리면 글에 우선 배치돼요AI 이미지1장3장5장→ 총 3장 예상 = AI ",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-n7f9ql",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 614.5,
+          "y": 520.046875,
+          "width": 2,
+          "height": 18
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1du3dco",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 847.5625,
+          "y": 602.703125,
+          "width": 6.9375,
+          "height": 11.515625
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 572.21875,
+          "y": 679.890625,
+          "width": 18,
+          "height": 18
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1du3dco",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 847.5625,
+          "y": 929.734375,
+          "width": 6.9375,
+          "height": 11.515625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-ebhwsg",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "1지시서 준비2본문 작성3이미지4저장글을 만들고 있어요 · 연말정산 미리보기",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "1",
+        "rect": {
+          "x": 460.5,
+          "y": 684.046875,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "2",
+        "rect": {
+          "x": 620.5,
+          "y": 684.046875,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "3",
+        "rect": {
+          "x": 780.5,
+          "y": 684.046875,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "4",
+        "rect": {
+          "x": 940.5,
+          "y": 684.046875,
+          "width": 24,
+          "height": 24
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s5ei7",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "글이 완성됐어요내용을 확인하고 발행 대기함에 저장하세요연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서올해 달라진 연말정산연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서연말정산 미리보기, 다들 한 번은 돌려보셨을 거예요. 저도 작년까지는 한 번 돌려보고 \"올해는 이 정도 나오는구나\" 하고 닫았습니다. 그런",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1flf6kr",
+        "style": "opacity: 0; transform: translateY(8px);",
+        "hidden": null,
+        "text": "글이 완성됐어요내용을 확인하고 발행 대기함에 저장하세요",
+        "rect": {
+          "x": 392.5,
+          "y": 451.0625,
+          "width": 640,
+          "height": 91.953125
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 693.5,
+          "y": 451.0625,
+          "width": 38,
+          "height": 38
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-6qw6p8",
+        "style": "opacity: 0; transform: translateY(8px);",
+        "hidden": null,
+        "text": "연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서올해 달라진 연말정산연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서연말정산 미리보기, 다들 한 번은 돌려보셨을 거예요. 저도 작년까지는 한 번 돌려보고 \"올해는 이 정도 나오는구나\" 하고 닫았습니다. 그런데 올해는 카드 사용처를 바꿔가며 세 번을 돌려봤고, ",
+        "rect": {
+          "x": 392.5,
+          "y": 567.015625,
+          "width": 640,
+          "height": 1941.140625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-nj515e",
+        "style": "opacity: 0; transform: scale(0.94);",
+        "hidden": null,
+        "text": "올해 달라진 연말정산",
+        "rect": {
+          "x": 429.55999755859375,
+          "y": 647.1961059570312,
+          "width": 565.8800048828125,
+          "height": 375.7796630859375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-0",
+        "style": "opacity: 0; transform: translateY(8px);",
+        "hidden": null,
+        "text": "연말정산 미리보기, 다들 한 번은 돌려보셨을 거예요. 저도 작년까지는 한 번 돌려보고 \"올해는 이 정도 나오는구나\" 하고 닫았습니다. 그런데 올해는 카드 사용처를 바꿔가며 세 번을 돌려봤고, 예상 환급금이 41만 원 늘었어요. 그 과정을 순서대로 정리합니다.1차 조회, 지금 상태 그대로 확인하기먼저 홈택스에서 올해 1~9",
+        "rect": {
+          "x": 411.5,
+          "y": 1079.359375,
+          "width": 602,
+          "height": 1417.796875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-d2l9n6",
+        "style": null,
+        "hidden": "true",
+        "text": "올해 카드 내역부터 펼쳐놓고 시작했습니다",
+        "rect": {
+          "x": 411.5,
+          "y": 1244.28125,
+          "width": 602,
+          "height": 436.15625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-b8kzem",
+        "style": null,
+        "hidden": "true",
+        "text": "조회바꾼 것예상 환급금1차현재 상태 그대로23만 원2차체크카드 비중 확대37만 원3차전통시장·대중교통 집중64만 원",
+        "rect": {
+          "x": 411.5,
+          "y": 1719.234375,
+          "width": 602,
+          "height": 130.6875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-d2l9n6",
+        "style": null,
+        "hidden": "true",
+        "text": "남은 석 달 사용액을 영수증째 정리했어요",
+        "rect": {
+          "x": 411.5,
+          "y": 1907.171875,
+          "width": 602,
+          "height": 436.15625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-k5eaet",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 411.5,
+          "y": 2442.984375,
+          "width": 3,
+          "height": 21.75
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18oosqi",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "NAEO‹분석내 글‹연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서⧉제목⧉본문소제목 · 이미지🖼사진1T소제목1🖼사진2T소제목2🖼사진3NAEO‹분석내 글‹연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서발행⧉제목⧉본문소제목 · 이미지🖼경제 대표 사진사진 복사 + 위치T1차 조회, 지금 상태 그대로 확",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1bg3c60",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-ooegfy",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-wuv6r1",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1gqkcgi",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1gqkcgi",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13s3sxg",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13s3sxg",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13s3sxg",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13s3sxg",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13s3sxg",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1f35t6v",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 402.671875,
+          "y": 428.421875,
+          "width": 4.828125,
+          "height": 12.484375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-uf5o3j",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 200.5,
+          "y": 490.4375,
+          "width": 4.734375,
+          "height": 16.578125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1ccdc02",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 379.453125,
+          "y": 491.859375,
+          "width": 12,
+          "height": 12
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1surlz0",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 235.046875,
+          "y": 521.515625,
+          "width": 8.921875,
+          "height": 17.921875
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1surlz0",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 342.546875,
+          "y": 521.515625,
+          "width": 8.921875,
+          "height": 17.921875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 208.5,
+          "y": 582.234375,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 208.5,
+          "y": 617,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 208.5,
+          "y": 651.765625,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 208.5,
+          "y": 686.53125,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "🖼",
+        "rect": {
+          "x": 208.5,
+          "y": 721.296875,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1woqot1",
+        "style": null,
+        "hidden": "true",
+        "text": "N",
+        "rect": {
+          "x": 431.5,
+          "y": 430.40625,
+          "width": 18,
+          "height": 18
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 432.890625,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 465.40625,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 500.8125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 532.34375,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 560.40625,
+          "y": 470.359375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 571.59375,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-u0r5f7",
+        "style": null,
+        "hidden": "true",
+        "text": "▾",
+        "rect": {
+          "x": 588.1875,
+          "y": 472.40625,
+          "width": 4.296875,
+          "height": 6.71875
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 603.265625,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-u0r5f7",
+        "style": null,
+        "hidden": "true",
+        "text": "▾",
+        "rect": {
+          "x": 619.859375,
+          "y": 472.40625,
+          "width": 4.296875,
+          "height": 6.71875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 634.34375,
+          "y": 470.359375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 645.53125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 671.3125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 697.09375,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 729.203125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 761.3125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 787.09375,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 812.28125,
+          "y": 470.359375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 823.46875,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 855.578125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18a0lx0",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 869.578125,
+          "y": 466.765625,
+          "width": 4,
+          "height": 4
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 887.6875,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18a0lx0",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 901.6875,
+          "y": 466.765625,
+          "width": 4,
+          "height": 4
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1120.390625,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1159.78125,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1198.234375,
+          "y": 468.265625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1pgbpsr",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 451.84375,
+          "y": 509.796875,
+          "width": 4.828125,
+          "height": 12.796875
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-145d92g",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 501.265625,
+          "y": 511.265625,
+          "width": 4.828125,
+          "height": 10
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-145d92g",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 529.390625,
+          "y": 511.265625,
+          "width": 4.828125,
+          "height": 10
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 547.015625,
+          "y": 510.203125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 560.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 581.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 602.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 623.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 644.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-k17vfw",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 665.8125,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 691.609375,
+          "y": 510.203125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 705.40625,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 726.40625,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 747.40625,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 773.203125,
+          "y": 510.203125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 840.875,
+          "y": 510.203125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 854.671875,
+          "y": 509.703125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-a5isk7",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "‹월급쟁이 재테크 노트⌂⋮경제연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서월월급쟁이 재테크 노트· 방금 전올해 달라진 연말정산연말정산 미리보기, 다들 한 번은 돌려보셨을 거예요. 저도 작년까지는 한 번 돌려보고 \"올해는 이 정도 나오는구나\" 하고 닫았습니다. 그런데 올해는 카드 사용처를 바꿔가며 세 번을 돌려봤",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-wcms2q",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "‹월급쟁이 재테크 노트⌂⋮경제연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서월월급쟁이 재테크 노트· 방금 전올해 달라진 연말정산연말정산 미리보기, 다들 한 번은 돌려보셨을 거예요. 저도 작년까지는 한 번 돌려보고 \"올해는 이 정도 나오는구나\" 하고 닫았습니다. 그런데 올해는 카드 사용처를 바꿔가며 세 번을 돌려봤",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-85qp8t",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 481.6474914550781,
+          "width": 5.243408203125,
+          "height": 13.541900634765625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-bn6nz9",
+        "style": null,
+        "hidden": "true",
+        "text": "⌂",
+        "rect": {
+          "x": 820.6587524414062,
+          "y": 482.4112548828125,
+          "width": 7.3878173828125,
+          "height": 12.029052734375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-bn6nz9",
+        "style": null,
+        "hidden": "true",
+        "text": "⋮",
+        "rect": {
+          "x": 835.5665283203125,
+          "y": 482.4112548828125,
+          "width": 10.4134521484375,
+          "height": 12.029052734375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-37hglr",
+        "style": null,
+        "hidden": "true",
+        "text": "월",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 578.5409545898438,
+          "width": 16.91998291015625,
+          "height": 16.91998291015625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-r3jq6z",
+        "style": null,
+        "hidden": "true",
+        "text": "올해 달라진 연말정산",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 615.200927734375,
+          "width": 266.9599609375,
+          "height": 177.27813720703125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1y0ugv4",
+        "style": null,
+        "hidden": "true",
+        "text": "올해 카드 내역부터 펼쳐놓고 시작했습니다",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 1065.66650390625,
+          "width": 266.9599609375,
+          "height": 209.6053466796875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-b8kzem",
+        "style": null,
+        "hidden": "true",
+        "text": "조회바꾼 것예상 환급금1차현재 상태 그대로23만 원2차체크카드 비중 확대37만 원3차전통시장·대중교통 집중64만 원",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 1313.1656494140625,
+          "width": 266.9599609375,
+          "height": 122.84619140625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1y0ugv4",
+        "style": null,
+        "hidden": "true",
+        "text": "남은 석 달 사용액을 영수증째 정리했어요",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 1532.0093994140625,
+          "width": 266.9599609375,
+          "height": 209.605224609375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1pb4vic",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 579.02001953125,
+          "y": 1875.1827392578125,
+          "width": 2.8199462890625,
+          "height": 61.3350830078125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-i2xngx",
+        "style": null,
+        "hidden": "true",
+        "text": "♡ 공감 0💬 댓글 0⤴",
+        "rect": {
+          "x": 567.739990234375,
+          "y": 1016.8453369140625,
+          "width": 289.52001953125,
+          "height": 31.857177734375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1i1dwk8",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "내 최근 글발행하면 AI 인용 여부를 자동으로 추적해요연말정산 미리보기 3번 돌려 환급금 41만 원 올린 순서발행됨방금 전주택청약 1순위 조건, 무주택 기간 계산에서 틀린 것들✓ AI 인용됨5.11실손보험 청구 앱으로 5분에 끝낸 후기발행됨5.07",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1hjanqi",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "N네이버 블로그 글쓰기로 이동",
+        "rect": {
+          "x": 193.5,
+          "y": 419.0625,
+          "width": 1038,
+          "height": 656
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-5em6p8",
+        "style": null,
+        "hidden": "true",
+        "text": "N",
+        "rect": {
+          "x": 688.5,
+          "y": 702.625,
+          "width": 48,
+          "height": 48
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-13z18dz",
+        "style": "opacity: 1; transform: translateX(409.548px) translateY(486.993px);",
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 603.0482177734375,
+          "y": 864.0554809570312,
+          "width": 0,
+          "height": 0
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 598.4700927734375,
+          "y": 861.5554809570312,
+          "width": 20,
+          "height": 20
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1k0wb2a",
+        "style": "opacity: 0; transform: scale(2.6);",
+        "hidden": null,
+        "text": "",
+        "rect": {
+          "x": 579.648193359375,
+          "y": 840.655517578125,
+          "width": 46.79998779296875,
+          "height": 46.7999267578125
+        }
+      }
+    ]
+  },
+  {
+    "step": "0",
+    "stages": [
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-8rxg5f",
+        "style": "width: 224px; opacity: 1;",
+        "hidden": null,
+        "text": "NAEO‹분석내 글‹노션 AI 사용법, 회의록 자동 정리까지 3단계발행⧉제목⧉본문소제목T1단계, 회의록 템플릿부터 고정하세요소제목으로 변환T12번 돌려본 결과, 프롬프트 비교소제목으로 변환클로드는 사진을 직접 넣어야 합니다에디터 위 [사진] 버튼으로 추가",
+        "rect": {
+          "x": 193.5,
+          "y": 1509.8125,
+          "width": 224,
+          "height": 698
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1f35t6v",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 402.671875,
+          "y": 1519.171875,
+          "width": 4.828125,
+          "height": 12.484375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-uf5o3j",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 200.5,
+          "y": 1581.1875,
+          "width": 4.734375,
+          "height": 16.578125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1ccdc02",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 379.453125,
+          "y": 1582.609375,
+          "width": 12,
+          "height": 12
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1surlz0",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 235.046875,
+          "y": 1612.265625,
+          "width": 8.921875,
+          "height": 17.921875
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1surlz0",
+        "style": null,
+        "hidden": "true",
+        "text": "⧉",
+        "rect": {
+          "x": 342.546875,
+          "y": 1612.265625,
+          "width": 8.921875,
+          "height": 17.921875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 208.5,
+          "y": 1672.984375,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-s8ks7t",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 208.5,
+          "y": 1707.75,
+          "width": 15,
+          "height": 15.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1dxjkrq",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 210.5,
+          "y": 1750.578125,
+          "width": 13.59375,
+          "height": 13.59375
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 210.5,
+          "y": 1750.578125,
+          "width": 13.59375,
+          "height": 13.59375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-ok8zxw",
+        "style": "height: auto; opacity: 1;",
+        "hidden": null,
+        "text": "Nblog저장 1발행",
+        "rect": {
+          "x": 417.5,
+          "y": 1509.8125,
+          "width": 814,
+          "height": 41.703125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1woqot1",
+        "style": null,
+        "hidden": "true",
+        "text": "N",
+        "rect": {
+          "x": 431.5,
+          "y": 1521.15625,
+          "width": 18,
+          "height": 18
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-ok8zxw",
+        "style": "height: auto; opacity: 1;",
+        "hidden": null,
+        "text": "사진MYBOX동영상스티커▾인용구▾구분선링크파일일정소스코드표수식장소내돈내산글감내 클립라이브러리템플릿본문⌄나눔고딕 ⌄16 ⌄TT1T1※번역Aa 맞춤법",
+        "rect": {
+          "x": 417.5,
+          "y": 1551.515625,
+          "width": 814,
+          "height": 69.703125
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 432.890625,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 465.40625,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 500.8125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 532.34375,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 560.40625,
+          "y": 1561.109375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 571.59375,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-u0r5f7",
+        "style": null,
+        "hidden": "true",
+        "text": "▾",
+        "rect": {
+          "x": 588.1875,
+          "y": 1563.15625,
+          "width": 4.296875,
+          "height": 6.71875
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 603.265625,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-u0r5f7",
+        "style": null,
+        "hidden": "true",
+        "text": "▾",
+        "rect": {
+          "x": 619.859375,
+          "y": 1563.15625,
+          "width": 4.296875,
+          "height": 6.71875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 634.34375,
+          "y": 1561.109375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 645.53125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 671.3125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 697.09375,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 729.203125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 761.3125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 787.09375,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-3c3h1g",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 812.28125,
+          "y": 1561.109375,
+          "width": 1,
+          "height": 22
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 823.46875,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 855.578125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18a0lx0",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 869.578125,
+          "y": 1557.515625,
+          "width": 4,
+          "height": 4
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 887.6875,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-18a0lx0",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 901.6875,
+          "y": 1557.515625,
+          "width": 4,
+          "height": 4
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1120.390625,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1159.78125,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 1198.234375,
+          "y": 1559.015625,
+          "width": 15,
+          "height": 15
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-1pgbpsr",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 451.84375,
+          "y": 1600.546875,
+          "width": 4.828125,
+          "height": 12.796875
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-145d92g",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 501.265625,
+          "y": 1602.015625,
+          "width": 4.828125,
+          "height": 10
+        }
+      },
+      {
+        "tag": "SPAN",
+        "class": "MuiBox-root mui-145d92g",
+        "style": null,
+        "hidden": "true",
+        "text": "⌄",
+        "rect": {
+          "x": 529.390625,
+          "y": 1602.015625,
+          "width": 4.828125,
+          "height": 10
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 547.015625,
+          "y": 1600.953125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 560.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 581.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 602.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 623.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 644.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-k17vfw",
+        "style": null,
+        "hidden": "true",
+        "text": "T",
+        "rect": {
+          "x": 665.8125,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 691.609375,
+          "y": 1600.953125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 705.40625,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 726.40625,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 747.40625,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 773.203125,
+          "y": 1600.953125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1tgk2ox",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 840.875,
+          "y": 1600.953125,
+          "width": 1,
+          "height": 12
+        }
+      },
+      {
+        "tag": "svg",
+        "class": {},
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 854.671875,
+          "y": 1600.453125,
+          "width": 13,
+          "height": 13
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-rmsv5t",
+        "style": "opacity: 1;",
+        "hidden": "false",
+        "text": "제목나를 돌아보는 회고, 뜻밖의 발견을 기다립니다. #모두의회고",
+        "rect": {
+          "x": 417.5,
+          "y": 1621.21875,
+          "width": 814,
+          "height": 586.59375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-wcms2q",
+        "style": "opacity: 0;",
+        "hidden": "true",
+        "text": "‹퇴근 후 개발일지⌂⋮IT·테크노션 AI 사용법, 회의록 자동 정리까지 3단계퇴퇴근 후 개발일지· 방금 전요약 버튼만 누르면 되는 줄 알았는데, 회의록은 입력 구조부터 잡아야 했습니다. 3주 동안 12번을 돌려보며 프롬프트를 고쳤고, 지금은 회의 끝나고 5분이면 정리가 끝나요. 실패한 방식까지 그대로 남깁니다.1단계, 회",
+        "rect": {
+          "x": 417.5,
+          "y": 1621.21875,
+          "width": 814,
+          "height": 586.59375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-85qp8t",
+        "style": null,
+        "hidden": "true",
+        "text": "‹",
+        "rect": {
+          "x": 691.02001953125,
+          "y": 1681.7215576171875,
+          "width": 5.243408203125,
+          "height": 13.5418701171875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-bn6nz9",
+        "style": null,
+        "hidden": "true",
+        "text": "⌂",
+        "rect": {
+          "x": 932.6587524414062,
+          "y": 1682.4853515625,
+          "width": 7.3878173828125,
+          "height": 12.029052734375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-bn6nz9",
+        "style": null,
+        "hidden": "true",
+        "text": "⋮",
+        "rect": {
+          "x": 947.5665283203125,
+          "y": 1682.4853515625,
+          "width": 10.4134521484375,
+          "height": 12.029052734375
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-37hglr",
+        "style": null,
+        "hidden": "true",
+        "text": "퇴",
+        "rect": {
+          "x": 691.02001953125,
+          "y": 1759.330322265625,
+          "width": 16.91998291015625,
+          "height": 16.919921875
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-b8kzem",
+        "style": null,
+        "hidden": "true",
+        "text": "방식프롬프트결과실패\"회의록 요약해줘\"잡담까지 섞여 나옴개선\"결정사항만 불릿으로\"실행 항목 누락최종\"결정·담당·기한 표로\"5분 만에 완성",
+        "rect": {
+          "x": 691.02001953125,
+          "y": 2045.2666015625,
+          "width": 266.9599609375,
+          "height": 122.84619140625
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-1pb4vic",
+        "style": null,
+        "hidden": "true",
+        "text": "",
+        "rect": {
+          "x": 691.02001953125,
+          "y": 2376.029052734375,
+          "width": 2.8199462890625,
+          "height": 40.889892578125
+        }
+      },
+      {
+        "tag": "DIV",
+        "class": "MuiBox-root mui-i2xngx",
+        "style": null,
+        "hidden": "true",
+        "text": "♡ 공감 0💬 댓글 0⤴",
+        "rect": {
+          "x": 679.739990234375,
+          "y": 2151.677490234375,
+          "width": 289.52001953125,
+          "height": 31.857177734375
+        }
+      }
+    ]
+  }
+]

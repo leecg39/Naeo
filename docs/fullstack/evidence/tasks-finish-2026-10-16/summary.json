@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-16",
+  "tests": {
+    "root": 12,
+    "server": 478,
+    "total": 490,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "diffCheck": "passed"
+  },
+  "browser": {
+    "name": "Ego Lite",
+    "taskSpace": 7,
+    "finished": true,
+    "mode": "production with loopback provider doubles",
+    "screenshotsReviewed": [
+      "email-mobile.png",
+      "reset-mobile.png",
+      "sms-mobile.png"
+    ]
+  },
+  "externalMailSent": false,
+  "externalSmsSent": false,
+  "realProviderVerification": false,
+  "configuration": {
+    "repositoryEnvFiles": [
+      ".env.example"
+    ],
+    "relevantProcessVariablesConfigured": []
+  },
+  "remainingTasks": [
+    "P1.6",
+    "P1.7",
+    "P1.8",
+    "P3.3",
+    "P3.7",
+    "P4.2",
+    "P4.2a",
+    "P6.3",
+    "P6.5",
+    "P7.1",
+    "P7.6",
+    "P8.6",
+    "P9.3",
+    "P10.4"
+  ],
+  "temporaryAccountDeleted": true,
+  "qaServerAndWorkerStopped": true
+}

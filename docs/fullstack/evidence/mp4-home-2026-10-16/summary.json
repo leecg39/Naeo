@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "tests": {
+    "root": 12,
+    "server": 478,
+    "total": 490,
+    "failed": 0,
+    "skipped": 0
+  },
+  "checks": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "diffCheck": "passed"
+  },
+  "browser": "Ego Lite",
+  "taskSpace": 6,
+  "taskSpaceFinished": true,
+  "sample": {
+    "file": "naeo-mp4-sample.mp4",
+    "bytes": 43138,
+    "sha256": "41f8aedf81747e1bcc51934f028d18aad7f280b14d4d1f022bd38edbcfa52466"
+  },
+  "screenshotsReviewed": [
+    "mp4-queued.png",
+    "mp4-mobile.png",
+    "mp4-frame.png",
+    "home-demo-desktop.png",
+    "home-demo-mobile.png",
+    "source-demo-settled.png"
+  ],
+  "scope": "무음 슬라이드 MP4 및 기존 홈 런타임 복원. 배포하지 않음.",
+  "qaCleanup": {
+    "serverStopped": true,
+    "workerStopped": true,
+    "temporaryRuntimeRemoved": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "jobs": [
+    {
+      "id": "2dddc2c5-130e-4ea9-8271-6f1e3fc7f67d",
+      "projectId": "d5e3d4f8-2f39-4b7b-9a30-ddb6d36210c9",
+      "format": "mp4",
+      "state": "canceled",
+      "secondsPerSlide": 3,
+      "progress": 0,
+      "slideCount": 2,
+      "received": 0,
+      "error": "사용자가 내보내기를 취소했습니다.",
+      "fileSize": null,
+      "expiresAt": 1792242902214,
+      "createdAt": 1792156501954
+    },
+    {
+      "id": "881b2ce9-d70c-4ee2-90ec-4e42ac477c0c",
+      "projectId": "d5e3d4f8-2f39-4b7b-9a30-ddb6d36210c9",
+      "format": "mp4",
+      "state": "succeeded",
+      "secondsPerSlide": 1,
+      "progress": 100,
+      "slideCount": 2,
+      "received": 0,
+      "error": "",
+      "fileSize": 43138,
+      "expiresAt": 1792761260655,
+      "createdAt": 1792156458174
+    }
+  ],
+  "viewport": {
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "mp4Enabled": true
+}

@@ -1,0 +1,14 @@
+{
+  "before": {
+    "verified": false,
+    "fragmentCleared": true
+  },
+  "after": {
+    "notice": "이메일 주소를 확인했습니다. 로그인한 뒤 계정 설정에서 확인할 수 있습니다.",
+    "activeTag": "P",
+    "activeRole": "status",
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "replay": "유효하지 않거나 만료된 링크입니다. 안내 메일을 다시 요청해주세요."
+}

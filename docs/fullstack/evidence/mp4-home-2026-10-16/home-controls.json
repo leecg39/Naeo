@@ -1,0 +1,59 @@
+{
+  "claude": {
+    "buttons": [
+      {
+        "text": "ChatGPT",
+        "pressed": "false"
+      },
+      {
+        "text": "Claude",
+        "pressed": "true"
+      }
+    ],
+    "visibleHeadingBrands": [
+      "Claude가"
+    ],
+    "imageTools": [
+      {
+        "hidden": true,
+        "display": "none"
+      },
+      {
+        "hidden": true,
+        "display": "none"
+      }
+    ]
+  },
+  "chatgpt": {
+    "visibleHeadingBrands": [
+      "ChatGPT가"
+    ],
+    "imageTools": [
+      {
+        "hidden": false,
+        "display": "flex"
+      },
+      {
+        "hidden": false,
+        "display": "flex"
+      }
+    ]
+  },
+  "reduced": {
+    "matches": true,
+    "playText": "예시 재생",
+    "stage": "3"
+  },
+  "reducedInitial": {
+    "matches": true,
+    "stage": "4",
+    "playText": "예시 재생"
+  },
+  "autoplay": {
+    "stage": "1",
+    "playText": "일시정지",
+    "visiblePanels": [
+      "1"
+    ]
+  }
+}
