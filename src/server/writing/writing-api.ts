@@ -35,7 +35,7 @@ export function publicShareApi(db:Database,request:Request):Response|null{
  const {pathname:path}=new URL(request.url);
  if(request.method!=='GET')return null;
  const image=path.match(new RegExp(`^/api/images/${TOKEN}$`));
- if(image){const f=readPublishedMedia(db,uploadDir(),image[1]);return imageResponse(f.bytes,f.mime,'public, max-age=31536000, immutable');}
+ if(image){const f=readPublishedMedia(db,uploadDir(),image[1]);return imageResponse(f.bytes,f.mime,'no-store');}
  const view=path.match(new RegExp(`^/api/shares/${TOKEN}$`));
  if(view)return json({data:readShared(db,view[1],Date.now())});
  const file=path.match(new RegExp(`^/api/shares/${TOKEN}/media/${TOKEN}$`));

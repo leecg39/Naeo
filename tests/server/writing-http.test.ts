@@ -64,6 +64,7 @@ test('markdown image upload returns a copyable public URL that deletion revokes'
  assert.equal(image.media.mime,'image/jpeg');assert.equal(image.media.originalName,'photo.jpg');
  const publicRead=await f.raw(new URL(image.url).pathname);
  assert.equal(publicRead.status,200);assert.equal(publicRead.headers.get('content-type'),'image/jpeg');
+ assert.equal(publicRead.headers.get('cache-control'),'no-store','revoked links must not remain usable from a long-lived browser cache');
  assert.equal((await f.raw(`/api/images/${image.media.publicId}`)).status,404,'private id cannot replace the share token');
  const listed=(await (await f.send('/api/media','GET',undefined,a)).json()).data;
  assert.equal(listed[0].shareToken,image.media.shareToken);
