@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-15T09:51:37.827Z",
+  "verifiedAt": "2026-10-16T00:07:10.105Z",
   "exitCode": 0,
   "output": "routes=83 verified=76 external_pending=7 failed=0 session_kept=true",
   "adminAccess": [
@@ -121,6 +121,106 @@
       "member": 403,
       "memberForbidden": true,
       "admin": 200
+    }
+  ],
+  "publicNavigation": [
+    {
+      "path": "/",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/mcp",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/mcp",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/contact",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/contact",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/pricing",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/pricing",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/event",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/event",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/blog",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/blog",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
+    },
+    {
+      "path": "/ranking",
+      "viewer": "anonymous",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": false
+    },
+    {
+      "path": "/ranking",
+      "viewer": "member",
+      "status": 200,
+      "capturedIdentity": false,
+      "dashboardLink": true
     }
   ],
   "browserVerified": false,

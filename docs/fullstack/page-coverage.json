@@ -15,7 +15,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/",
     "access": "public",
     "anonymous": {
@@ -76,7 +76,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin",
     "access": "admin",
     "anonymous": {
@@ -134,7 +134,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/blog",
     "access": "admin",
     "anonymous": {
@@ -193,7 +193,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/event",
     "access": "admin",
     "anonymous": {
@@ -252,7 +252,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/events",
     "access": "admin",
     "anonymous": {
@@ -310,7 +310,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/inquiries",
     "access": "admin",
     "anonymous": {
@@ -366,7 +366,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/inquiries/templates",
     "access": "admin",
     "anonymous": {
@@ -424,7 +424,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/keywords",
     "access": "admin",
     "anonymous": {
@@ -483,7 +483,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/rewards",
     "access": "admin",
     "anonymous": {
@@ -541,7 +541,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/scan-health",
     "access": "admin",
     "anonymous": {
@@ -600,7 +600,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/users",
     "access": "admin",
     "anonymous": {
@@ -659,7 +659,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/admin/writing",
     "access": "admin",
     "anonymous": {
@@ -719,7 +719,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/auth/extension",
     "access": "public",
     "anonymous": {
@@ -783,7 +783,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/auth/google",
     "access": "redirect",
     "anonymous": {
@@ -844,7 +844,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog",
     "access": "public",
     "anonymous": {
@@ -905,7 +905,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/event/naeo-review-event",
     "access": "public",
     "anonymous": {
@@ -966,7 +966,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/ai-picks-guide",
     "access": "public",
     "anonymous": {
@@ -1027,7 +1027,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/channel-analysis-guide",
     "access": "public",
     "anonymous": {
@@ -1088,7 +1088,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/competitor-analysis-guide",
     "access": "public",
     "anonymous": {
@@ -1149,7 +1149,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/dashboard-guide",
     "access": "public",
     "anonymous": {
@@ -1210,7 +1210,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/golden-keywords-guide",
     "access": "public",
     "anonymous": {
@@ -1271,7 +1271,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/keyword-recommendation-guide",
     "access": "public",
     "anonymous": {
@@ -1332,7 +1332,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/today-action-guide",
     "access": "public",
     "anonymous": {
@@ -1393,7 +1393,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-cited-posts",
     "access": "public",
     "anonymous": {
@@ -1454,7 +1454,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-food-playbook",
     "access": "public",
     "anonymous": {
@@ -1515,7 +1515,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-image-citation",
     "access": "public",
     "anonymous": {
@@ -1576,7 +1576,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-tips-1-travel-life",
     "access": "public",
     "anonymous": {
@@ -1637,7 +1637,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-tips-2-life-culture",
     "access": "public",
     "anonymous": {
@@ -1698,7 +1698,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/ai-briefing-tips-3-knowledge-hobby",
     "access": "public",
     "anonymous": {
@@ -1759,7 +1759,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/golden-keywords",
     "access": "public",
     "anonymous": {
@@ -1820,7 +1820,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/mate-free-diagnosis",
     "access": "public",
     "anonymous": {
@@ -1881,7 +1881,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/marketing/what-is-ai-briefing",
     "access": "public",
     "anonymous": {
@@ -1942,7 +1942,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/news/across-modu-startup-ditoday",
     "access": "public",
     "anonymous": {
@@ -2003,7 +2003,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/news/across-modu-startup-mt",
     "access": "public",
     "anonymous": {
@@ -2064,7 +2064,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/news/naver-mate-naeo-byline",
     "access": "public",
     "anonymous": {
@@ -2125,7 +2125,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/contact",
     "access": "public",
     "anonymous": {
@@ -2186,7 +2186,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard",
     "access": "member",
     "anonymous": {
@@ -2249,7 +2249,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/ai-picks",
     "access": "member",
     "anonymous": {
@@ -2311,7 +2311,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/competitors",
     "access": "member",
     "anonymous": {
@@ -2371,7 +2371,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/events",
     "access": "member",
     "anonymous": {
@@ -2433,7 +2433,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/mate",
     "access": "member",
     "anonymous": {
@@ -2492,7 +2492,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/recommendations",
     "access": "member",
     "anonymous": {
@@ -2553,7 +2553,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/settings",
     "access": "member",
     "anonymous": {
@@ -2623,7 +2623,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/write",
     "access": "member",
     "anonymous": {
@@ -2688,7 +2688,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dev/event-preview",
     "access": "dev",
     "anonymous": {
@@ -2742,7 +2742,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dev/nav-preview",
     "access": "dev",
     "anonymous": {
@@ -2797,7 +2797,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/event",
     "access": "public",
     "anonymous": {
@@ -2856,7 +2856,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/event/naeo-review",
     "access": "public",
     "anonymous": {
@@ -2915,7 +2915,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/event/ranking-reward",
     "access": "public",
     "anonymous": {
@@ -2974,7 +2974,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/faq",
     "access": "public",
     "anonymous": {
@@ -3031,7 +3031,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/features",
     "access": "public",
     "anonymous": {
@@ -3089,7 +3089,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/guide/extension-publish",
     "access": "public",
     "anonymous": {
@@ -3147,7 +3147,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/guide/writing",
     "access": "public",
     "anonymous": {
@@ -3207,7 +3207,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/images",
     "access": "public",
     "anonymous": {
@@ -3267,7 +3267,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/login",
     "access": "guest",
     "anonymous": {
@@ -3330,7 +3330,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/mate",
     "access": "public",
     "anonymous": {
@@ -3390,7 +3390,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/mate/s",
     "access": "public",
     "anonymous": {
@@ -3448,7 +3448,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/mcp",
     "access": "public",
     "anonymous": {
@@ -3508,7 +3508,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/oauth/consent",
     "access": "public",
     "anonymous": {
@@ -3569,7 +3569,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/payment/complete",
     "access": "member",
     "anonymous": {
@@ -3631,7 +3631,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/preview",
     "access": "redirect",
     "anonymous": {
@@ -3692,7 +3692,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/pricing",
     "access": "public",
     "anonymous": {
@@ -3756,7 +3756,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/privacy",
     "access": "public",
     "anonymous": {
@@ -3813,7 +3813,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/privacy/extension",
     "access": "public",
     "anonymous": {
@@ -3870,7 +3870,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/ranking",
     "access": "public",
     "anonymous": {
@@ -3929,7 +3929,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/refund",
     "access": "public",
     "anonymous": {
@@ -3986,7 +3986,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/aeo-carousel",
     "access": "public",
     "anonymous": {
@@ -4047,7 +4047,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/aeo-carousel/export",
     "access": "public",
     "anonymous": {
@@ -4108,7 +4108,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/banner-preview",
     "access": "redirect",
     "anonymous": {
@@ -4163,7 +4163,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/banner-preview/frame",
     "access": "redirect",
     "anonymous": {
@@ -4218,7 +4218,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/mate-ad",
     "access": "public",
     "anonymous": {
@@ -4279,7 +4279,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/social/mate-ad/export",
     "access": "public",
     "anonymous": {
@@ -4340,7 +4340,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/terms",
     "access": "public",
     "anonymous": {
@@ -4397,7 +4397,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/updates",
     "access": "public",
     "anonymous": {
@@ -4454,7 +4454,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/updates/2026-06-10-ranking-archive-hall-of-fame",
     "access": "redirect",
     "anonymous": {
@@ -4511,7 +4511,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/updates/2026-06-11-mate-free-diagnosis",
     "access": "redirect",
     "anonymous": {
@@ -4568,7 +4568,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/updates/2026-06-24-golden-keywords",
     "access": "redirect",
     "anonymous": {
@@ -4625,7 +4625,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/updates/2026-09-16-post-level-exposure",
     "access": "redirect",
     "anonymous": {
@@ -4682,7 +4682,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/youtube/aeo-intro",
     "access": "public",
     "anonymous": {
@@ -4743,7 +4743,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/blog/guide/dashboard-guide",
     "access": "public",
     "anonymous": {
@@ -4804,7 +4804,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/dashboard/events/naeo-review",
     "access": "member",
     "anonymous": {
@@ -4863,7 +4863,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/event/naeo-review",
     "access": "public",
     "anonymous": {
@@ -4924,7 +4924,7 @@
   "evidence": [
    {
     "type": "http",
-    "at": "2026-10-15T09:51:34.694Z",
+    "at": "2026-10-16T00:07:05.759Z",
     "url": "/p/AAAAAAAAAAAAAAAAAAAAAA/images",
     "access": "public",
     "anonymous": {

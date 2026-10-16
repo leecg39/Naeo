@@ -95,7 +95,7 @@
 ### P9 — 적대적 QA와 반복 개선 (사용자 추가 요청)
 
 - [x] P9.1 보안·개인정보·의존성 감사, 재현 결함 수정 및 기능 보강. (요청 스트림 제한·사진 삭제 복구·외부 앱 철회 수정, 293/293·lint·typecheck·build 통과, 실제 HTTP 탈퇴·파일 삭제 실패/작업자 복구·모바일 경고 검증. `docs/audit/audit-report-2026-10-14.md`)
-- [ ] P9.2 결제·환불 응답/경합, 백업·복원·개인정보 이동성의 추가 검토와 개선. (결제/환불 전용 20개·실제 HTTP 중단 복구 완료. 백업 결함 5개 재현·수정 및 전용 17개 검증. 개인정보 이동성은 스키마 29·41개 데이터셋/첨부 TAR·재인증/세션 경합·정리 재시도, 전용 18개·실제 Next/worker/다운로드 검증 완료. 새 계정 화면의 Ego 클릭·hydration 검증은 남음. `docs/fullstack/payment-recovery.md`, `docs/fullstack/backup-recovery.md`, `docs/fullstack/personal-data-export.md`)
+- [x] P9.2 결제·환불 응답/경합, 백업·복원·개인정보 이동성의 추가 검토와 개선. (결제/환불 전용 20개·실제 HTTP 중단 복구 완료. 백업 결함 5개 재현·수정 및 전용 17개 검증. 개인정보 이동성은 스키마 29·41개 데이터셋/첨부 TAR·재인증/세션 경합·정리 재시도, 전용 18개·실제 Next/worker/다운로드 검증 완료. 2026-10-16 Ego에서 재인증 요청→worker 완료→TAR 다운로드→요청 삭제 및 390px 설정 화면 검증 완료. `docs/fullstack/ego-crud-2026-10-16.md`와 다운로드 SHA-256 근거 참조. `docs/fullstack/payment-recovery.md`, `docs/fullstack/backup-recovery.md`, `docs/fullstack/personal-data-export.md`)
 - [ ] P9.3 원래 P0–P8 미완료 요구사항을 포함한 완료 감사. 외부 자료·실연동 증거 없이 완료로 바꾸지 않는다.
 
 ### P10 — 2026-10-15 REA 추가 범위 (포인트·출석·튜토리얼)
@@ -124,4 +124,4 @@
 
 - [x] 공개·회원·관리자 메뉴 직접 클릭 및 주요 CRUD 재검증. [실제 결과와 한계](docs/fullstack/ego-crud-2026-10-16.md).
 - [x] 실제 포털 다운로드 간섭, 빈 이미지 src, 블로그 가이드/이벤트 인원 갱신, 공개 계정 표시 수정.
-- [ ] P11.3 대량 목록의 모든 페이지·포커스·모바일 조합 검증은 별도 잔여 작업.
+- P11.3 대량 목록의 모든 페이지·포커스·모바일 조합 검증은 위 미완료 항목에서 계속 추적한다.

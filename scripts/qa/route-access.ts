@@ -10,6 +10,7 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {openDatabase} from '../../src/server/database';
 import {register} from '../../src/server/auth';
 import {applySeeds,applyPageSettingSeeds} from '../../src/server/content/seed';
+import {load} from 'cheerio';
 
 async function main(){
  const temp=mkdtempSync(join(tmpdir(),'naeo-route-audit-')),dbPath=join(temp,'db.sqlite');let child:ChildProcess|undefined;
@@ -30,6 +31,18 @@ async function main(){
   const exitCode=await new Promise<number|null>((resolve,reject)=>{audit.once('error',reject);audit.once('exit',resolve);});
   const signIn=async(email:string)=>{const r=await req('/api/auth/login','POST',{email,password});assert.equal(r.status,200);return r.headers.get('set-cookie')!.split(';')[0];};
   const adminCookie=await signIn('admin@example.test'),memberCookie=await signIn('member@example.test');
+  const publicNavigation=[];
+  for(const path of ['/','/mcp','/contact','/pricing','/event','/blog','/ranking']){
+   for(const [viewer,cookie] of [['anonymous',undefined],['member',memberCookie]] as const){
+    const response=await req(path,'GET',undefined,cookie);assert.equal(response.status,200);
+    const $=load(await response.text());$('script,style').remove();const nav=$('nav');
+    assert.ok(nav.length>0,`${path}: rendered navigation`);
+    assert.ok(!nav.text().includes('NAEO 블로거'),`${path}: no captured identity`);
+    const dashboard=nav.find('a[href="/dashboard"]').length;
+    assert.equal(dashboard>0,viewer==='member',`${path}: ${viewer} navigation`);
+    publicNavigation.push({path,viewer,status:response.status,capturedIdentity:false,dashboardLink:dashboard>0});
+   }
+  }
   const adminPaths=['/admin','/admin/writing','/admin/billing','/admin/event','/admin/pages','/admin/keywords','/admin/events','/admin/users','/admin/blog','/admin/updates','/admin/announcements','/admin/rewards','/admin/faq','/admin/inquiries','/admin/inquiries/templates','/admin/payments','/admin/scan-health'];
   const adminAccess=[];
   for(const path of adminPaths){
@@ -38,7 +51,7 @@ async function main(){
    const admin=await req(path,'GET',undefined,adminCookie);assert.equal(admin.status,200);assert.ok(!(await admin.text()).includes('Internal Server Error'));
    adminAccess.push({path,anonymous:anon.status,member:member.status,memberForbidden:true,admin:admin.status});
   }
-  result={verifiedAt:new Date().toISOString(),exitCode,output:output.trim(),adminAccess,browserVerified:false,temporaryDataRemoved:true};
+  result={verifiedAt:new Date().toISOString(),exitCode,output:output.trim(),adminAccess,publicNavigation,browserVerified:false,temporaryDataRemoved:true};
   if(exitCode!==0)process.exitCode=1;
 
  }finally{
