@@ -4,7 +4,7 @@ import type {User} from '../auth';
 import {AppError} from '../errors';
 import {body,json,rateLimit,readRequestBytes} from '../http';
 import {createDraft,deleteDraft,getDraft,listDrafts,restoreDraftRevision,updateDraft} from './drafts';
-import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,imageMarkdown,listMedia,publishMedia,readMedia,readPublishedMedia,saveUpload} from './media';
+import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,imageMarkdown,listMedia,publishMedia,readMedia,readPublishedMedia,revokePublishedMedia,saveUpload} from './media';
 import {createShareLink,listShareLinks,readShared,revokeShareLink} from './shares';
 import {exportDraft} from './export';
 
@@ -101,5 +101,6 @@ export async function writingApi(db:Database,request:Request,user:User):Promise<
   const url=`${new URL(request.url).origin}/api/images/${token}`;
   return json({data:{token,url,markdown:imageMarkdown(owned.originalName,url)}});
  }
+ if(publish&&method==='DELETE')return json({data:revokePublishedMedia(db,user.id,publish[1])});
  return null;
 }

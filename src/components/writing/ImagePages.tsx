@@ -58,6 +58,7 @@ function Library(){
    <img src={`/api/media/${m.publicId}`} alt={m.originalName||'내 사진'} style={img}/>
    <span style={{fontSize:12,color:'#a3a3a3'}}>{m.draftId?'초안에 연결됨':'연결 안 됨'} · {KB(m.size)}</span>
    <button type="button" className="naeo-button" disabled={busy} onClick={()=>copyMarkdown(m)}>{copied===m.publicId?'✓ 복사됨':'마크다운 복사'}<span className="sr-only"> {m.originalName}</span></button>
+   {m.shareToken&&<button type="button" className="naeo-button" disabled={busy} onClick={()=>void run(async()=>{await api(`/api/media/${m.publicId}/publish`,{method:'DELETE'});setCopied('');return'마크다운 링크를 껐습니다. 기존 주소에서는 더 이상 사진이 열리지 않습니다.';},items?.pagination.page)}>공개 링크 끄기<span className="sr-only"> {m.originalName}</span></button>}
    <button type="button" className="naeo-button" disabled={busy} onClick={()=>{if(window.confirm('사진을 삭제할까요?'))void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'DELETE'});return'사진을 삭제했습니다.';},items?.pagination.page);}}>삭제<span className="sr-only"> {m.originalName}</span></button>
   </li>)}</ul>
   {items&&!items.data.length&&<p style={{color:'#a3a3a3'}}>아직 올린 사진이 없습니다.</p>}

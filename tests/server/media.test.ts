@@ -6,7 +6,7 @@ import path from 'node:path';
 import {openDatabase} from '../../src/server/database';
 import {register} from '../../src/server/auth';
 import {createDraft,deleteDraft} from '../../src/server/writing/drafts';
-import {saveUpload,readMedia,listMedia,deleteMedia,attachMedia,publishMedia,readPublishedMedia,imageMarkdown,sniffImage,MAX_IMAGE_BYTES,MAX_PER_DRAFT} from '../../src/server/writing/media';
+import {saveUpload,readMedia,listMedia,deleteMedia,attachMedia,publishMedia,readPublishedMedia,revokePublishedMedia,imageMarkdown,sniffImage,MAX_IMAGE_BYTES,MAX_PER_DRAFT} from '../../src/server/writing/media';
 import {createShareLink,revokeShareLink,readShared} from '../../src/server/writing/shares';
 
 const PNG=Buffer.from('89504e470d0a1a0a0000000d49484452','hex');
@@ -94,8 +94,14 @@ test('markdown image tokens expose exactly one photo and disappear with deletion
  assert.throws(()=>readPublishedMedia(db,dir,photo.publicId),{status:404},'private publicId is not a public token');
  assert.throws(()=>readPublishedMedia(db,dir,hidden.publicId),{status:404});
  assert.equal(listMedia(db,a,{}).data.find(m=>m.publicId===photo.publicId)?.shareToken,token);
+ assert.throws(()=>revokePublishedMedia(db,b,photo.publicId),{status:404});
+ assert.deepEqual(revokePublishedMedia(db,a,photo.publicId),{revoked:true});
+ assert.throws(()=>readPublishedMedia(db,dir,token),{status:404});
+ assert.throws(()=>revokePublishedMedia(db,a,photo.publicId),{status:404},'revocation is explicit about an absent link');
+ const replacement=publishMedia(db,a,photo.publicId,NOW+2);assert.notEqual(replacement,token);
+ assert.deepEqual(readPublishedMedia(db,dir,replacement).bytes,JPG);
  deleteMedia(db,dir,a,photo.publicId);
- assert.throws(()=>readPublishedMedia(db,dir,token),{status:404},'deletion cascades to the public token');
+ assert.throws(()=>readPublishedMedia(db,dir,replacement),{status:404},'deletion cascades to the public token');
 });
 
 test('owner and share downloads reject symlink substitution, missing files and changed metadata',async t=>{

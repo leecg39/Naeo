@@ -74,6 +74,12 @@ export function publishMedia(db:Database,ownerId:string,publicId:string,now=Date
  db.prepare('INSERT INTO media_markdown_links(token,public_id,owner_id,created_at) VALUES(?,?,?,?)').run(token,publicId,ownerId,now);
  return token;
 }
+export function revokePublishedMedia(db:Database,ownerId:string,publicId:string){
+ ownedRow(db,ownerId,publicId);
+ const removed=db.prepare('DELETE FROM media_markdown_links WHERE public_id=? AND owner_id=?').run(publicId,ownerId);
+ if(!removed.changes)throw new AppError(404,'NOT_FOUND','공개 링크를 찾을 수 없습니다.');
+ return{revoked:true};
+}
 /** 무작위 공개 토큰을 가진 사진만 읽는다. 원본 개인 publicId로는 접근할 수 없다. */
 export function readPublishedMedia(db:Database,dir:string,token:string){
  const r=/^[A-Za-z0-9_-]{22}$/.test(token)?db.prepare(`SELECT m.public_id,m.draft_id,m.mime,m.size,m.original_name,m.source,m.created_at,m.storage_key FROM media_files m JOIN media_markdown_links l ON l.public_id=m.public_id WHERE l.token=?`).get(token) as Row|undefined:undefined;

@@ -67,8 +67,12 @@ test('markdown image upload returns a copyable public URL that deletion revokes'
  assert.equal((await f.raw(`/api/images/${image.media.publicId}`)).status,404,'private id cannot replace the share token');
  const listed=(await (await f.send('/api/media','GET',undefined,a)).json()).data;
  assert.equal(listed[0].shareToken,image.media.shareToken);
+ assert.equal((await f.send(`/api/media/${image.media.publicId}/publish`,'DELETE',undefined,a)).status,200);
+ assert.equal((await f.raw(new URL(image.url).pathname)).status,404,'explicit revocation closes the copied URL');
+ const replacement=(await (await f.send(`/api/media/${image.media.publicId}/publish`,'POST',undefined,a)).json()).data;
+ assert.notEqual(replacement.token,image.media.shareToken);assert.equal((await f.raw(new URL(replacement.url).pathname)).status,200);
  assert.equal((await f.send(`/api/media/${image.media.publicId}`,'DELETE',undefined,a)).status,200);
- assert.equal((await f.raw(new URL(image.url).pathname)).status,404,'deletion revokes the copied URL');
+ assert.equal((await f.raw(new URL(replacement.url).pathname)).status,404,'deletion revokes the replacement URL');
 });
 
 test('export, writing templates and admin generations over HTTP',async t=>{
