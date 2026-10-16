@@ -12,6 +12,7 @@ import {uploadPhoto} from './DraftMedia';
 const grid={listStyle:'none',padding:0,margin:0,display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))',gap:12} as const;
 const img={width:'100%',aspectRatio:'1',objectFit:'cover',borderRadius:10,display:'block'} as const;
 const KB=(n:number)=>`${Math.max(1,Math.round(n/1024))}KB`;
+const markdown=(name:string,url:string)=>`![${(name||'사진').replaceAll('\\','\\\\').replaceAll('[','\\[').replaceAll(']','\\]').replace(/[\r\n]+/g,' ')}](${url})`;
 /** 캡처한 /images 화면의 업로드 카드. 이 화면에는 main이 없어 카드 안에 붙인다. */
 const CARD='.mui-y1kssf';
 function useMain(){
@@ -22,6 +23,7 @@ function useMain(){
 
 function Library(){
  const [items,setItems]=useState<PageResult<Media>|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[signedOut,setSignedOut]=useState(false);
+ const [copied,setCopied]=useState('');
  const load=useCallback(async(page=1)=>{
   const next=await loadValidPage(p=>apiResponse<PageResult<Media>>(`/api/media?page=${p}&pageSize=100`),page);
   setItems(next);setSignedOut(false);
@@ -38,17 +40,24 @@ function Library(){
   zone?.addEventListener('click',pick);input.addEventListener('change',change);
   return()=>{zone?.removeEventListener('click',pick);input.removeEventListener('change',change);};
  },[run]);
+ const markdownFor=async(m:Media)=>m.shareToken?markdown(m.originalName,`${location.origin}/api/images/${m.shareToken}`):(await api<{markdown:string}>(`/api/media/${m.publicId}/publish`,{method:'POST'})).markdown;
+ const copyMarkdown=(m:Media)=>void run(async()=>{
+  const markdown=await markdownFor(m);
+  await navigator.clipboard.writeText(markdown);setCopied(m.publicId);return'마크다운을 복사했습니다. AI 채팅에 붙여넣으세요.';
+ },items?.pagination.page??1);
  if(signedOut)return <p>로그인하면 내 사진함을 볼 수 있습니다. <a href="/login?next=%2Fimages" style={{color:'#03c75a'}}>로그인</a></p>;
  return <div style={{display:'grid',gap:12}}>
   <h2 style={{margin:0,fontSize:20}}>내 사진함 {items?`(${items.pagination.total})`:''}</h2>
-  <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>JPG·PNG·WEBP, 10MB 이하. 사진은 본인만 볼 수 있고, 공유 링크를 만든 글의 사진만 링크로 열 수 있습니다.</p>
+  <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>JPG·PNG·WEBP, 10MB 이하. 개인 사진 주소는 본인만 볼 수 있고, 복사한 마크다운의 무작위 링크로 해당 사진만 공유됩니다.</p>
   <input type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="사진 올리기" disabled={busy}
    onChange={e=>{const files=[...e.target.files??[]];e.target.value='';void run(async()=>{for(const f of files)await uploadPhoto(f);return`사진 ${files.length}장을 올렸습니다.`;});}}/>
+  {items&&items.data.length>1&&<button type="button" className="naeo-button" disabled={busy} onClick={()=>void run(async()=>{const markdown=(await Promise.all(items.data.map(markdownFor))).join('\n');await navigator.clipboard.writeText(markdown);setCopied('__all__');return`현재 페이지 ${items.data.length}장 마크다운을 복사했습니다.`;},items.pagination.page)}>{copied==='__all__'?'✓ 전체 복사됨':`현재 페이지 ${items.data.length}장 마크다운 복사`}</button>}
   <OperationNotice message={message} className="" style={{margin:0}}/>
   <ul style={grid}>{items?.data.map(m=><li key={m.publicId} style={{display:'grid',gap:6}}>
    {/* 로그인한 본인만 받는 개인 사진 */}
    <img src={`/api/media/${m.publicId}`} alt={m.originalName||'내 사진'} style={img}/>
    <span style={{fontSize:12,color:'#a3a3a3'}}>{m.draftId?'초안에 연결됨':'연결 안 됨'} · {KB(m.size)}</span>
+   <button type="button" className="naeo-button" disabled={busy} onClick={()=>copyMarkdown(m)}>{copied===m.publicId?'✓ 복사됨':'마크다운 복사'}<span className="sr-only"> {m.originalName}</span></button>
    <button type="button" className="naeo-button" disabled={busy} onClick={()=>{if(window.confirm('사진을 삭제할까요?'))void run(async()=>{await api(`/api/media/${m.publicId}`,{method:'DELETE'});return'사진을 삭제했습니다.';},items?.pagination.page);}}>삭제<span className="sr-only"> {m.originalName}</span></button>
   </li>)}</ul>
   {items&&!items.data.length&&<p style={{color:'#a3a3a3'}}>아직 올린 사진이 없습니다.</p>}

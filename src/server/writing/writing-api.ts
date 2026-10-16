@@ -4,7 +4,7 @@ import type {User} from '../auth';
 import {AppError} from '../errors';
 import {body,json,rateLimit,readRequestBytes} from '../http';
 import {createDraft,deleteDraft,getDraft,listDrafts,restoreDraftRevision,updateDraft} from './drafts';
-import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,listMedia,readMedia,saveUpload} from './media';
+import {MAX_IMAGE_BYTES,attachMedia,deleteMedia,imageMarkdown,listMedia,publishMedia,readMedia,readPublishedMedia,saveUpload} from './media';
 import {createShareLink,listShareLinks,readShared,revokeShareLink} from './shares';
 import {exportDraft} from './export';
 
@@ -34,6 +34,8 @@ async function uploadForm(request:Request){
 export function publicShareApi(db:Database,request:Request):Response|null{
  const {pathname:path}=new URL(request.url);
  if(request.method!=='GET')return null;
+ const image=path.match(new RegExp(`^/api/images/${TOKEN}$`));
+ if(image){const f=readPublishedMedia(db,uploadDir(),image[1]);return imageResponse(f.bytes,f.mime,'public, max-age=31536000, immutable');}
  const view=path.match(new RegExp(`^/api/shares/${TOKEN}$`));
  if(view)return json({data:readShared(db,view[1],Date.now())});
  const file=path.match(new RegExp(`^/api/shares/${TOKEN}/media/${TOKEN}$`));
@@ -75,6 +77,13 @@ export async function writingApi(db:Database,request:Request,user:User):Promise<
  const {pathname:path,searchParams}=new URL(request.url),method=request.method;
  const drafts=await draftRoutes(db,request,user,path,method,searchParams);
  if(drafts)return drafts;
+ if(path==='/api/images'&&method==='POST'){
+  rateLimit(db,`upload:${user.id}`,120,60*60_000);
+  const media=saveUpload(db,uploadDir(),user.id,await uploadForm(request));
+  const token=publishMedia(db,user.id,media.publicId);
+  const url=`${new URL(request.url).origin}/api/images/${token}`;
+  return json({url,markdown:imageMarkdown(media.originalName,url),media:{...media,shareToken:token}},201);
+ }
  if(path==='/api/media'){
   if(method==='GET')return json(listMedia(db,user.id,Object.fromEntries(searchParams)));
   if(method==='POST'){rateLimit(db,`upload:${user.id}`,120,60*60_000);return json({data:saveUpload(db,uploadDir(),user.id,await uploadForm(request))},201);}
@@ -84,6 +93,13 @@ export async function writingApi(db:Database,request:Request,user:User):Promise<
   if(method==='GET'){const m=readMedia(db,uploadDir(),user.id,media[1]);return imageResponse(m.bytes,m.mime,'private, no-store');}
   if(method==='PATCH')return json({data:attachMedia(db,user.id,media[1],await body(request,anyJson))});
   if(method==='DELETE')return json({data:deleteMedia(db,uploadDir(),user.id,media[1])});
+ }
+ const publish=path.match(new RegExp(`^/api/media/${TOKEN}/publish$`));
+ if(publish&&method==='POST'){
+  const owned=readMedia(db,uploadDir(),user.id,publish[1]);
+  const token=publishMedia(db,user.id,publish[1]);
+  const url=`${new URL(request.url).origin}/api/images/${token}`;
+  return json({data:{token,url,markdown:imageMarkdown(owned.originalName,url)}});
  }
  return null;
 }

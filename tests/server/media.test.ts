@@ -6,7 +6,7 @@ import path from 'node:path';
 import {openDatabase} from '../../src/server/database';
 import {register} from '../../src/server/auth';
 import {createDraft,deleteDraft} from '../../src/server/writing/drafts';
-import {saveUpload,readMedia,listMedia,deleteMedia,attachMedia,sniffImage,MAX_IMAGE_BYTES,MAX_PER_DRAFT} from '../../src/server/writing/media';
+import {saveUpload,readMedia,listMedia,deleteMedia,attachMedia,publishMedia,readPublishedMedia,imageMarkdown,sniffImage,MAX_IMAGE_BYTES,MAX_PER_DRAFT} from '../../src/server/writing/media';
 import {createShareLink,revokeShareLink,readShared} from '../../src/server/writing/shares';
 
 const PNG=Buffer.from('89504e470d0a1a0a0000000d49484452','hex');
@@ -28,6 +28,9 @@ test('image type is decided by file signature, not by the declared type or name'
  assert.equal(sniffImage(PNG),'image/png');assert.equal(sniffImage(JPG),'image/jpeg');assert.equal(sniffImage(WEBP),'image/webp');
  assert.equal(sniffImage(Buffer.from('<svg onload=alert(1)>')),null);
  assert.equal(sniffImage(Buffer.from('GIF89a')),null);
+});
+test('image markdown escapes filename syntax and removes line breaks',()=>{
+ assert.equal(imageMarkdown('a[b]\\c\nnext.jpg','https://example.test/x'),'![a\\[b\\]\\\\c next.jpg](https://example.test/x)');
 });
 
 test('upload validates type, size and count; files are stored under random keys',async t=>{
@@ -77,6 +80,22 @@ test('share links expose only that draft\'s images until expiry or revocation',a
  revokeShareLink(db,a,link.token,NOW+DAY);
  assert.throws(()=>readShared(db,link.token,NOW+DAY),{status:404});
  assert.ok(!existsSync(path.join(dir,'..','nope')));
+});
+
+test('markdown image tokens expose exactly one photo and disappear with deletion',async t=>{
+ const {db,dir,a,b}=await fixture(t);
+ const photo=saveUpload(db,dir,a,file(JPG,'published.jpg','image/jpeg'),NOW);
+ const hidden=saveUpload(db,dir,a,file(PNG,'hidden.png'),NOW);
+ const token=publishMedia(db,a,photo.publicId,NOW);
+ assert.match(token,/^[A-Za-z0-9_-]{22}$/);
+ assert.equal(publishMedia(db,a,photo.publicId,NOW+1),token,'publishing is idempotent');
+ assert.throws(()=>publishMedia(db,b,photo.publicId,NOW),{status:404});
+ assert.deepEqual(readPublishedMedia(db,dir,token).bytes,JPG);
+ assert.throws(()=>readPublishedMedia(db,dir,photo.publicId),{status:404},'private publicId is not a public token');
+ assert.throws(()=>readPublishedMedia(db,dir,hidden.publicId),{status:404});
+ assert.equal(listMedia(db,a,{}).data.find(m=>m.publicId===photo.publicId)?.shareToken,token);
+ deleteMedia(db,dir,a,photo.publicId);
+ assert.throws(()=>readPublishedMedia(db,dir,token),{status:404},'deletion cascades to the public token');
 });
 
 test('owner and share downloads reject symlink substitution, missing files and changed metadata',async t=>{

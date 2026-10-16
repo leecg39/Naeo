@@ -6,10 +6,10 @@ import type {Media} from '@/server/writing/media';
 /** 사진 업로드(multipart). 서버가 형식·크기·수량을 다시 검사한다. */
 export async function uploadPhoto(file:File,draftId?:string):Promise<Media>{
  const form=new FormData();form.set('file',await preparePhoto(file));if(draftId)form.set('draftId',draftId);
- const res=await fetch('/api/media',{method:'POST',body:form,credentials:'same-origin'});
+ const res=await fetch(draftId?'/api/media':'/api/images',{method:'POST',body:form,credentials:'same-origin'});
  const json=await res.json();
  if(!res.ok)throw new ApiError(json.error?.message||'사진을 올리지 못했습니다.',json.error?.code||'UNKNOWN',res.status);
- return json.data as Media;
+ return (draftId?json.data:json.media) as Media;
 }
 
 /** 이 초안에 연결된 사진: 올리기·연결 해제·삭제. */

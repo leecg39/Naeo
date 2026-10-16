@@ -131,3 +131,4 @@
 - P11.8 진행: 공통 사진 업로드에 긴 변1600px 최적화 구현. 실제 Ego 업로드 및 저장 파일로 PNG/JPEG 축소·PNG 투명도·작은WEBP 원본 유지·손상 이미지 거절 확인. 마크다운 복사/확장 규약은 미완료. `docs/fullstack/image-optimization-2026-10-16.md`.
 
 - P11.8 정정: 원본 최신 번들에서 JPEG0.85·긴 변1600px 변환과 서버 응답 markdown 복사를 확인했다. 기존 형식 보존을 JPEG 변환으로 수정·실제 저장 검증. 독립 이미지 공유/마크다운 서버 계약 및 UI는 남아 있다. `docs/fullstack/images-rea-contract-2026-10-16.md`.
+- P11.8 진행: 독립 `media_markdown_links` 모델, `/api/images` 업로드·공개 조회, 기존 사진 링크 발행, 사진별/현재 페이지 전체 마크다운 복사 UI, 삭제 시 링크 폐기를 구현했다. HTTP·저장 파일·루트6+서버417개 테스트 검증 완료. Ego 클립보드 읽기는 사용자 제어권 전환으로 중단됐고 확장 프로그램→네이버 발행 종단 검증이 남아 있다. `docs/fullstack/image-markdown-links-2026-10-16.md`.

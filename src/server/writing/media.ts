@@ -12,13 +12,14 @@ export const MAX_IMAGE_BYTES=10*1024*1024;
 export const MAX_PER_DRAFT=20;
 export const MAX_PER_OWNER=500;
 export type ImageMime='image/jpeg'|'image/png'|'image/webp';
-export type Media={publicId:string;draftId:string|null;mime:ImageMime;size:number;originalName:string;source:'upload'|'ai';createdAt:number};
+export type Media={publicId:string;draftId:string|null;mime:ImageMime;size:number;originalName:string;source:'upload'|'ai';createdAt:number;shareToken?:string};
 type Row={public_id:string;draft_id:string|null;mime:ImageMime;size:number;original_name:string;source:'upload'|'ai';created_at:number;storage_key:string};
 const SELECT='SELECT public_id,draft_id,mime,size,original_name,source,created_at,storage_key FROM media_files';
 const toMedia=(r:Row):Media=>({publicId:r.public_id,draftId:r.draft_id,mime:r.mime,size:r.size,originalName:r.original_name,source:r.source,createdAt:r.created_at});
 const EXT:Record<ImageMime,string>={'image/jpeg':'.jpg','image/png':'.png','image/webp':'.webp'};
 const listInput=paginationInput.extend({draftId:z.uuid().optional()});
 const attachInput=z.object({draftId:z.uuid().nullable()}).strict();
+export const imageMarkdown=(name:string,url:string)=>`![${(name||'사진').replaceAll('\\','\\\\').replaceAll('[','\\[').replaceAll(']','\\]').replace(/[\r\n]+/g,' ')}](${url})`;
 
 /** 파일 앞부분 서명으로만 형식을 정한다(선언된 MIME·파일명은 믿지 않는다). */
 export function sniffImage(bytes:Buffer):ImageMime|null{
@@ -64,6 +65,21 @@ export function readMedia(db:Database,dir:string,ownerId:string,publicId:string)
  const r=ownedRow(db,ownerId,publicId);
  return{...toMedia(r),bytes:readStoredFile(dir,r.storage_key,{mime:r.mime,size:r.size})};
 }
+/** 사진함 마크다운에 쓰는 공개 토큰. 원본 publicId와 분리해 개인 API 주소를 노출하지 않는다. */
+export function publishMedia(db:Database,ownerId:string,publicId:string,now=Date.now()):string{
+ ownedRow(db,ownerId,publicId);
+ const current=db.prepare('SELECT token FROM media_markdown_links WHERE public_id=? AND owner_id=?').get(publicId,ownerId) as {token:string}|undefined;
+ if(current)return current.token;
+ const token=randomBytes(16).toString('base64url');
+ db.prepare('INSERT INTO media_markdown_links(token,public_id,owner_id,created_at) VALUES(?,?,?,?)').run(token,publicId,ownerId,now);
+ return token;
+}
+/** 무작위 공개 토큰을 가진 사진만 읽는다. 원본 개인 publicId로는 접근할 수 없다. */
+export function readPublishedMedia(db:Database,dir:string,token:string){
+ const r=/^[A-Za-z0-9_-]{22}$/.test(token)?db.prepare(`SELECT m.public_id,m.draft_id,m.mime,m.size,m.original_name,m.source,m.created_at,m.storage_key FROM media_files m JOIN media_markdown_links l ON l.public_id=m.public_id WHERE l.token=?`).get(token) as Row|undefined:undefined;
+ if(!r)throw new AppError(404,'NOT_FOUND','사진을 찾을 수 없습니다.');
+ return{...toMedia(r),bytes:readStoredFile(dir,r.storage_key,{mime:r.mime,size:r.size})};
+}
 /** Read one bounded regular file through a no-follow descriptor; metadata must match its DB row. */
 export function readStoredFile(dir:string,storageKey:string,expected?:{mime:ImageMime;size:number}){
  const unavailable=()=>new AppError(404,'MEDIA_UNAVAILABLE','사진 파일을 읽을 수 없습니다. 다시 업로드해주세요.');
@@ -85,8 +101,8 @@ export function listMedia(db:Database,ownerId:string,query:unknown){
  const {page,pageSize,draftId}=listInput.parse(query);
  const where=draftId?'owner_id=? AND draft_id=?':'owner_id=?',params=draftId?[ownerId,draftId]:[ownerId];
  const {total}=db.prepare(`SELECT count(*) AS total FROM media_files WHERE ${where}`).get(...params) as {total:number};
- const rows=db.prepare(`${SELECT} WHERE ${where} ORDER BY created_at DESC,rowid DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as Row[];
- return{data:rows.map(toMedia),pagination:{page,pageSize,total}};
+ const rows=db.prepare(`SELECT public_id,draft_id,mime,size,original_name,source,created_at,storage_key,(SELECT token FROM media_markdown_links l WHERE l.public_id=media_files.public_id) AS share_token FROM media_files WHERE ${where} ORDER BY created_at DESC,rowid DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as (Row&{share_token:string|null})[];
+ return{data:rows.map(r=>({...toMedia(r),...(r.share_token?{shareToken:r.share_token}:{})})),pagination:{page,pageSize,total}};
 }
 
 /** 사진을 다른 글에 연결하거나(draftId) 연결을 푼다(null). */

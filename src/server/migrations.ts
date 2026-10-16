@@ -1049,5 +1049,13 @@ export const migrations = [{
  CREATE INDEX announcements_active ON announcements(status,updated_at DESC);
  `},{version:36,name:'announcement_type',sql:`
  ALTER TABLE announcements ADD COLUMN type TEXT NOT NULL DEFAULT 'maintenance' CHECK(type IN ('coupon','feature','maintenance','event','blog'));
+ `},{version:37,name:'media_markdown_links',sql:`
+ CREATE TABLE media_markdown_links (
+  token TEXT PRIMARY KEY NOT NULL CHECK(length(token)=22),
+  public_id TEXT NOT NULL UNIQUE REFERENCES media_files(public_id) ON DELETE CASCADE,
+  owner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at INTEGER NOT NULL
+ ) STRICT;
+ CREATE INDEX media_markdown_owner ON media_markdown_links(owner_id,created_at DESC);
  `}];
 

@@ -16,8 +16,9 @@ function fixture(t:TestContext){
  const handler=createApi(()=>db);
  const send=(p:string,method='GET',body?:unknown,cookie?:string)=>handler(new Request(origin+p,{method,headers:{Origin:origin,'Content-Type':'application/json',...(cookie?{Cookie:cookie}:{})},...(body!==undefined?{body:JSON.stringify(body)}:{})}));
  const upload=(cookie:string,bytes:Buffer,draftId?:string)=>{const form=new FormData();form.set('file',new File([new Uint8Array(bytes)],'photo.png',{type:'image/png'}));if(draftId)form.set('draftId',draftId);return handler(new Request(origin+'/api/media',{method:'POST',headers:{Origin:origin,Cookie:cookie},body:form}));};
+ const uploadMarkdown=(cookie:string,bytes:Buffer)=>{const form=new FormData();form.set('file',new File([new Uint8Array(bytes)],'photo.jpg',{type:'image/jpeg'}));return handler(new Request(origin+'/api/images',{method:'POST',headers:{Origin:origin,Cookie:cookie},body:form}));};
  const raw=(p:string,cookie?:string)=>handler(new Request(origin+p,{headers:cookie?{Cookie:cookie}:{}}));
- return{db,send,upload,raw};
+ return{db,send,upload,uploadMarkdown,raw};
 }
 async function account(f:ReturnType<typeof fixture>,email:string){
  const r=await f.send('/api/auth/register','POST',{email,password:'writing-http-pass',nickname:'W',termsAccepted:true});
@@ -50,6 +51,24 @@ test('drafts, media upload/download and share links over HTTP',async t=>{
  assert.equal((await f.raw(`/api/shares/${link.token}`)).status,404);
  assert.equal((await f.send(`/api/media/${m.publicId}`,'DELETE',undefined,a)).status,200);
  assert.equal((await f.send(`/api/drafts/${d.id}`,'DELETE',{version:2},a)).status,200);
+});
+
+test('markdown image upload returns a copyable public URL that deletion revokes',async t=>{
+ const f=fixture(t),a=await account(f,'markdown@example.test');
+ assert.equal((await f.uploadMarkdown('',PNG)).status,401);
+ const response=await f.uploadMarkdown(a,Buffer.from('ffd8ffe000104a464946','hex'));
+ assert.equal(response.status,201);
+ const image=await response.json() as {url:string;markdown:string;media:{publicId:string;shareToken:string;mime:string;originalName:string}};
+ assert.match(image.url,/^http:\/\/127\.0\.0\.1:3000\/api\/images\/[A-Za-z0-9_-]{22}$/);
+ assert.equal(image.markdown,`![photo.jpg](${image.url})`);
+ assert.equal(image.media.mime,'image/jpeg');assert.equal(image.media.originalName,'photo.jpg');
+ const publicRead=await f.raw(new URL(image.url).pathname);
+ assert.equal(publicRead.status,200);assert.equal(publicRead.headers.get('content-type'),'image/jpeg');
+ assert.equal((await f.raw(`/api/images/${image.media.publicId}`)).status,404,'private id cannot replace the share token');
+ const listed=(await (await f.send('/api/media','GET',undefined,a)).json()).data;
+ assert.equal(listed[0].shareToken,image.media.shareToken);
+ assert.equal((await f.send(`/api/media/${image.media.publicId}`,'DELETE',undefined,a)).status,200);
+ assert.equal((await f.raw(new URL(image.url).pathname)).status,404,'deletion revokes the copied URL');
 });
 
 test('export, writing templates and admin generations over HTTP',async t=>{

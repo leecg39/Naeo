@@ -1,0 +1,9 @@
+{
+  "uploadStatus": 201,
+  "urlShape": "/api/images/<22-char-token>",
+  "markdown": "![wide.png](http://localhost:62568/api/images/<22-char-token>)",
+  "anonymousPublicRead": 200,
+  "privateReadWithoutCookie": 401,
+  "ownerDelete": 200,
+  "publicReadAfterDelete": 404
+}
