@@ -5,7 +5,7 @@
 ## 최신 검증
 
 - eced38a까지 포함한 최신 소스를 별도 디렉터리에서 production build해 컴파일·TypeScript·정적 페이지 생성을 확인했다. 실행 중인 Ego 임시 서버의 `.next`는 바꾸지 않았다.
-- 전체 439개 테스트(루트 12 + 서버 427), lint, typecheck, production build, `git diff --check`가 통과했다. 이전 기록의 "427개"는 서버 묶음만 센 값이다.
+- 전체 464개 테스트(루트 12 + 서버 452), lint, typecheck, production build, `git diff --check`가 통과했다. 이전 기록의 "427개"는 서버 묶음만 센 값이며, 이후 인용 확인·AI 이미지 구현으로 452개가 됐다.
 - 공용 페이지 이동의 포커스 처리, 목록 복귀 도중 동시 삭제 처리, 확장 Origin·토큰 clientId 대조, 사진함 마크다운 링크·폐기·재발행, 30일 초안 자동 삭제가 구현됐다.
 - 고정 개발 ID를 가진 Manifest V3 확장 본체를 추가했다. 실제 Next HTTP에서 PKCE 동의→토큰→MCP 초안 조회→철회 후 401을 확인했다. [확장 발행 기록](extension-publish-extension.md).
 - 실제 Ego Lite와 로그인된 네이버 SmartEditor ONE에서 제목·구조화 본문·소제목·PNG 사진의 4단계 전달, 진행 상태, 연결 해제, 테스트 글 정리를 확인했다. 공개 발행은 누르지 않았다.
@@ -16,7 +16,7 @@
 | 요구사항 | 현재 코드·근거 | 다음 필수 작업 |
 |---|---|---|
 | 회원별 OpenAI OAuth AI 글 | 스키마 38·39, 연결 UI/API, PKCE·nonce·ID token 검증, 암호화 저장, 회전 갱신·lease, 회원별 작업 revision, 모델 조회·Responses 완료 이벤트, 실패 환급을 로컬 대역과 전용 8개로 확인. Ego 미설정 화면 390px 확인 | 배포용 승인 client ID·HTTPS 콜백 등록 후 실제 회원 두 명의 동의·생성·갱신·해제·사용량 오류 왕복 |
-| AI 이미지 | aiImages > 0 요청을 503으로 거절. 어댑터 없음 | 사용자 OAuth 요구와 별도로 이미지 공급 방식 결정·구현·실검증 |
+| AI 이미지 | OpenAI Images 어댑터·장당 1토큰·부분 환급·초안 첨부 구현, 로컬 double로 프로덕션 왕복 검증 | `NAEO_IMAGE_*` 실제 키 왕복 미완료 |
 | AI 브리핑 인용 | analysis/rules.ts에서 not_configured 고정 | 실제 인용 근거 수집 경로 조사·확정·구현·대조. 키만 입력하면 되는 기존 어댑터가 아님 |
 | 결제 | 구현·모의 검증, 로컬 Toss 인증정보 없음 | 테스트 자격 증명으로 결제/실패/환불 왕복 |
 | Google·네이버 로그인 | 구현·모의 검증, 로컬 앱 인증정보 없음 | 앱/콜백 등록 후 실제 로그인·연결/해제 |

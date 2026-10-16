@@ -18,6 +18,7 @@ import {runRetention} from '../src/server/ops/retention';
 import {uploadDir} from '../src/server/writing/writing-api';
 import {cleanupMedia} from '../src/server/writing/media-cleanup';
 import {citationConfig,serpApiProvider} from '../src/server/citations/provider';
+import {imageConfig,openAIImageProvider} from '../src/server/generation/image-provider';
 import {runCitationOnce} from '../src/server/citations/worker';
 
 async function main(){
@@ -27,6 +28,7 @@ async function main(){
  const db=database();
  process.stdout.write(`[worker] ${workerId} started\n`);
  const provider=runtimeGenerationProvider(db);
+ const imageOptions=()=>{const c=imageConfig();return{imageProvider:c?openAIImageProvider(c):null,uploadDir:uploadDir()};};
  const scans=scanHandler(db),idleMs=Number(process.env.NAEO_WORKER_IDLE_MS)||2000;
  let maintained=0,retained=0;
  while(!controller.signal.aborted){
@@ -36,7 +38,7 @@ async function main(){
   if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
   const replied=await runInquiryMailOnce(db,mailConfig()),mailed=await runMailOnce(db,mailConfig()),exported=runPersonalExportOnce(db,uploadDir());
   const citation=citationConfig();
-  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider))??(replied||mailed||exported);
+  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider,imageOptions()))??(replied||mailed||exported);
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
  }
  process.stdout.write(`[worker] ${workerId} stopped\n`);

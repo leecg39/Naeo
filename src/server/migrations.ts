@@ -1059,5 +1059,8 @@ export const migrations = [{
   created_at INTEGER NOT NULL
  ) STRICT;
  CREATE INDEX media_markdown_owner ON media_markdown_links(owner_id,created_at DESC);
- `},openAIConnectionMigration,openAIGenerationMigration,citationMigration];
+ `},openAIConnectionMigration,openAIGenerationMigration,citationMigration,{
+ version:41,name:'generation_images_made',sql:`
+ ALTER TABLE generation_jobs ADD COLUMN images_made INTEGER NOT NULL DEFAULT 0 CHECK(images_made>=0);
+ `}];
 

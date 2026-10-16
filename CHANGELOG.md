@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-16 — AI 이미지 생성
+
+- 스키마 41: 생성 작업에 `images_made`·입력 `aiImages`. OpenAI Images 어댑터(NAEO_IMAGE_PROVIDER/API_KEY/API_BASE/MODEL/SIZE), 인라인 b64만 수신·PNG/JPEG/WEBP 서명 검증·32MB 상한·키는 Authorization 헤더에만.
+- 이미지 장당 1토큰을 글 생성 비용에 합산해 원자 차감. 이미지는 한 장씩 생성·장 사이에 취소 확인. 일부 장 실패는 `IMAGE_PARTIAL`로 기록하고 미생성 장만큼 환급, 전체 실패·취소·공급자 미설정도 해당 토큰 환급.
+- 성공 이미지는 서명 검증 뒤 `source='ai'` 미디어로 초안에 첨부. /dashboard/write에 장당 비용 표시, 관리자 운영·글쓰기 화면에 이미지 공급자 설정 상태 표시.
+- 신규 9개 테스트 포함 전체 452개, lint·typecheck·production build 통과. 로컬 OpenAI Images double로 프로덕션 Next+worker 왕복(`scripts/qa/image-generation.ts`, `docs/fullstack/evidence/image-generation-runtime.json`): 13토큰 차감→2장 첨부·1장 환급·비밀키 미노출·타 회원 404. 실제 OpenAI Images 키 왕복은 미완료.
+
 ## 2026-10-16 — 네이버 AI 브리핑 인용 확인
 
 - 스키마 40: 인용 확인 작업·글별 결과·열람 기록·대표 키워드 재정의 테이블. SerpApi Naver 통합검색 + `ai_briefing.page_token` 후속 AI Overview 어댑터.

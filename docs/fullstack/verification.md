@@ -552,3 +552,14 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 | 결정 | — | 공급자는 SerpApi `naver`(통합검색·`ai_briefing`)+`naver_ai_overview`(page_token 후속). 단순 검색 순위를 인용으로 세지 않고 `ai_briefing` 존재 시에만 인용으로 기록. 미설정이면 화면·API·스캔 보고서에 '미설정' 표시. 확인 규칙(최근 10개·하루 2회)은 원본 미확인 새 규칙으로 표기 |
 
 남은 범위: 실제 SerpApi 키 왕복(응답 스키마 계약 확인 포함)과 운영 한도 조정은 외부 준비물 확보 후다. 스캔 뒤 자동 확인은 공급자 미설정 시 `not_configured`로 남긴다.
+
+## 2026-10-16 — AI 이미지 생성 (P4.2 구현분)
+
+| 검증 | 결과 | 내용 |
+|---|---|---|
+| `npm test` | 464/464 통과(12+452) | 이미지 단위 9(설정 게이트·어댑터 b64/한도/오류 분류/키 헤더 전용·프롬프트 경계·요청 검증·비용/멱등·부분 실패 환급·취소 환급·공급자 제거 환급·미디어 첨부·소유권), 기존 생성 묶음 회귀 |
+| lint/typecheck/build | 통과 | eslint·tsc·next build exit 0, `git diff --check` 통과 |
+| 로컬 왕복 E2E | 통과 | `scripts/qa/image-generation.ts`: 프로덕션 Next+worker+loopback Anthropic·OpenAI Images double. 10+3=13토큰 차감→3회 이미지 호출 중 2장 성공 첨부·1장 환급(잔액 88)·`IMAGE_PARTIAL`·PNG 서명 바이트 일치·타 회원 404·페이지에 키 미노출·`data-image-cost` 표시. `evidence/image-generation-runtime.json` |
+| 결정 | — | 공급자는 OpenAI Images(`/v1/images/generations`), 인라인 b64만 수신해 외부 URL fetch 경로를 만들지 않는다. 이미지 실패는 글 생성 성공을 깨지 않고 장 단위 부분 실패+환급으로 처리. 미설정 시 `aiImages>0` 요청은 503, 차감 없음 |
+
+남은 범위: 실제 OpenAI Images 키 왕복(콘텐츠 정책 거절·실제 모델명·요금 확인 포함)은 `NAEO_IMAGE_*` 준비물 확보 후다. 로컬 double 검증을 실제 공급자 성공으로 세지 않는다.

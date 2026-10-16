@@ -2663,7 +2663,7 @@
    },
    {
     "type": "external_pending",
-    "reason": "AI 글: 승인된 OpenAI client(NAEO_OPENAI_*) 또는 ANTHROPIC_API_KEY 실제 왕복 · AI 이미지 공급자 미구현"
+    "reason": "AI 글: 승인된 OpenAI client(NAEO_OPENAI_*) 또는 ANTHROPIC_API_KEY 실제 왕복 · AI 이미지: NAEO_IMAGE_API_KEY 실제 왕복(로컬 double 검증 완료, docs/fullstack/evidence/image-generation-runtime.json)"
    },
    {
     "type": "browser-render",

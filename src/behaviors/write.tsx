@@ -70,8 +70,9 @@ export const installWrite: InstallBehavior = (root, tools) => {
     if (legend) legend.style.maxWidth = filled || focused ? '100%' : '';
   };
   const aiImages = () => Math.max(0, imageCount - photos.length);
-  // AI 이미지 공급자가 미설정이라 글 생성 비용(10토큰)만 받는다. AI 이미지가 필요한 선택은 생성 전에 막는다.
-  const tokens = () => 10;
+  // AI 이미지 공급자가 설정됐을 때만 장당 비용을 더한다(서버가 미설정이면 data-image-cost=0).
+  const imageCost = Number(generate.dataset.imageCost || 0);
+  const tokens = () => 10 + imageCost * aiImages();
   const sync = () => {
     const valid = keyword.value.trim().length > 0 && category.length > 0;
     generate.disabled = !valid || generating;
@@ -83,9 +84,11 @@ export const installWrite: InstallBehavior = (root, tools) => {
       button.setAttribute('aria-pressed', String(selected));
       button.classList.toggle('Mui-selected', selected);
     }
-    if (imageSummary) imageSummary.textContent = photos.length
-      ? `→ 내 사진 ${photos.length}장이 들어가요${aiImages() ? ` · AI 이미지 ${aiImages()}장은 미설정이라 만들지 않아요` : ''}`
-      : `→ AI 이미지 ${imageCount}장은 미설정이라 만들지 않아요. 글만 만들어지고, 내 사진을 올리면 함께 들어가요.`;
+    if (imageSummary) imageSummary.textContent = imageCost
+      ? `→ 내 사진 ${photos.length}장 + AI 이미지 ${aiImages()}장이 들어가요`
+      : photos.length
+        ? `→ 내 사진 ${photos.length}장이 들어가요${aiImages() ? ` · AI 이미지 ${aiImages()}장은 미설정이라 만들지 않아요` : ''}`
+        : `→ AI 이미지 ${imageCount}장은 미설정이라 만들지 않아요. 글만 만들어지고, 내 사진을 올리면 함께 들어가요.`;
     if (photoCounter) photoCounter.textContent = `사진 ${photos.length}/20`;
   };
   const renderPhotos = () => {
@@ -205,8 +208,7 @@ export const installWrite: InstallBehavior = (root, tools) => {
   };
   const generateDraft = () => {
     if (generating || !keyword.value.trim() || !category) return;
-    const skippedAiImages = aiImages();
-    if (skippedAiImages > 0) tools.toast(`AI 이미지 ${skippedAiImages}장은 미설정이라 빼고, 글${photos.length ? `과 내 사진 ${photos.length}장` : ''}만 만들어요.`);
+    if (!imageCost && aiImages() > 0) tools.toast(`AI 이미지 ${aiImages()}장은 미설정이라 빼고, 글${photos.length ? `과 내 사진 ${photos.length}장` : ''}만 만들어요.`);
     generating = true;
     sync();
     progress.style.display = 'block';
@@ -216,8 +218,8 @@ export const installWrite: InstallBehavior = (root, tools) => {
     const request = {
       keyword: keyword.value.trim(), category, title: titleInput?.value.trim() || '',
       experience: experience?.value.trim() || '', instructions: instructions?.value.trim() || '',
-      // AI 이미지 공급자가 미설정이라 AI 이미지는 요청하지 않는다(서버도 0보다 크면 503으로 거절).
-      aiImages: 0, idempotencyKey: crypto.randomUUID(),
+      // AI 이미지 공급자가 설정됐을 때만 실제 장수를 요청한다(미설정이면 서버도 503).
+      aiImages: imageCost ? aiImages() : 0, idempotencyKey: crypto.randomUUID(),
       ...(() => { const id = document.querySelector<HTMLSelectElement>('#writing-template')?.value; return id ? { templateId: id } : {}; })(),
     };
     void (async () => {

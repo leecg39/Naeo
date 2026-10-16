@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-10-16T08:41:36.850Z",
+  "providerCalls": {
+    "anthropic": 1,
+    "images": 3,
+    "imageAuthFail": 0
+  },
+  "checks": [
+    "Production Next+worker with loopback Anthropic+OpenAI Images doubles",
+    "Cost = 10토큰 + 이미지 장당 1토큰, 원장 차감·부분 환급 일치",
+    "AI 이미지는 서명 검증 후 draft에 ai로 첨부, 비밀키 미노출, 타 회원 404",
+    "깨진 이미지 응답은 해당 장만 실패 처리하고 환급"
+  ],
+  "externalProviderUsed": false,
+  "temporaryDataRemoved": true
+}

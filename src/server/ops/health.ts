@@ -7,6 +7,7 @@ import {tossProvider} from '../billing/provider';
 import {oauthConfig} from '../oauth/providers';
 import {openAIConnectionConfig} from '../openai/config';
 import {citationConfig} from '../citations/provider';
+import {imageConfig} from '../generation/image-provider';
 
 export const WORKER_STALE=2*60_000;
 const count=(db:Database,sql:string,...p:(string|number)[])=>(db.prepare(sql).get(...p) as {n:number}).n;
@@ -21,6 +22,6 @@ export function serviceHealth(db:Database,actorId:string,now=Date.now()){
   queues:{scan:queue('scan_jobs'),citation:queue('citation_runs'),generation:queue('generation_jobs'),exportsCollecting:count(db,"SELECT count(*) AS n FROM export_jobs WHERE state='collecting'")},
   mailQueue:{pending:count(db,"SELECT count(*) AS n FROM account_mail WHERE state IN ('queued','retry','sending')"),failed:count(db,"SELECT count(*) AS n FROM account_mail WHERE state='failed'")},
   mediaDeletion:{pending:count(db,'SELECT count(*) AS n FROM media_deletions'),retrying:count(db,'SELECT count(*) AS n FROM media_deletions WHERE attempts>0')},
-  integrations:{ai:!!providerConfig().apiKey||openAIConnectionConfig()!==null,aiCitation:citationConfig()!==null,payments:tossProvider()!==null,google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null,mail:mailConfig()!==null,sms:!!smsConfig()},
+  integrations:{ai:!!providerConfig().apiKey||openAIConnectionConfig()!==null,aiCitation:citationConfig()!==null,aiImage:imageConfig()!==null,payments:tossProvider()!==null,google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null,mail:mailConfig()!==null,sms:!!smsConfig()},
  };
 }

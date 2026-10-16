@@ -43,22 +43,33 @@ function assertRoom(db:Database,ownerId:string,draftId:string|null){
 const filePath=(dir:string,key:string)=>path.join(dir,path.basename(key));
 
 export function saveUpload(db:Database,dir:string,ownerId:string,input:{bytes:Buffer;name:string;type:string;draftId?:string|null;source?:'upload'|'ai'},now=Date.now()):Media{
- if(input.bytes.length>MAX_IMAGE_BYTES)throw new AppError(413,'IMAGE_TOO_LARGE','사진은 10MB 이하만 올릴 수 있습니다.');
- const mime=sniffImage(input.bytes);
+ const mime=validateImage(input.bytes);
+ if(input.draftId)ownedDraft(db,ownerId,input.draftId);
+ return transaction(db,()=>storeMedia(db,dir,ownerId,{...input,mime},now));
+}
+function validateImage(bytes:Buffer):ImageMime{
+ if(bytes.length>MAX_IMAGE_BYTES)throw new AppError(413,'IMAGE_TOO_LARGE','사진은 10MB 이하만 올릴 수 있습니다.');
+ const mime=sniffImage(bytes);
  if(!mime)throw new AppError(415,'UNSUPPORTED_IMAGE','JPG, PNG, WEBP 사진만 올릴 수 있습니다.');
+ return mime;
+}
+/** 이미 열린 트랜잭션 안에서 사진 파일과 행을 함께 넣는다(생성 작업 완료처럼 더 큰 원자 단위에서 재사용). */
+export function storeMedia(db:Database,dir:string,ownerId:string,input:{bytes:Buffer;name:string;mime:ImageMime;draftId?:string|null;source?:'upload'|'ai'},now:number):Media{
  const draftId=input.draftId??null;
- if(draftId)ownedDraft(db,ownerId,draftId);
- const publicId=randomBytes(16).toString('base64url'),key=`${randomUUID()}${EXT[mime]}`;
+ const publicId=randomBytes(16).toString('base64url'),key=`${randomUUID()}${EXT[input.mime]}`;
  mkdirSync(dir,{recursive:true,mode:0o700});
- return transaction(db,()=>{
-  assertRoom(db,ownerId,draftId);
-  writeFileSync(filePath(dir,key),input.bytes,{flag:'wx',mode:0o600});
-  try{
-   db.prepare('INSERT INTO media_files(id,public_id,owner_id,draft_id,mime,size,storage_key,original_name,source,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
-    .run(randomUUID(),publicId,ownerId,draftId,mime,input.bytes.length,key,input.name.slice(0,120),input.source??'upload',now);
-  }catch(e){unlinkSync(filePath(dir,key));throw e;}
-  return toMedia(ownedRow(db,ownerId,publicId));
- });
+ assertRoom(db,ownerId,draftId);
+ writeFileSync(filePath(dir,key),input.bytes,{flag:'wx',mode:0o600});
+ try{
+  db.prepare('INSERT INTO media_files(id,public_id,owner_id,draft_id,mime,size,storage_key,original_name,source,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
+   .run(randomUUID(),publicId,ownerId,draftId,input.mime,input.bytes.length,key,input.name.slice(0,120),input.source??'upload',now);
+ }catch(e){unlinkSync(filePath(dir,key));throw e;}
+ return toMedia(ownedRow(db,ownerId,publicId));
+}
+/** AI가 만든 바이트를 한 장 저장한다. 형식·크기 검증은 saveUpload와 같다. */
+export function saveGeneratedImage(db:Database,dir:string,ownerId:string,input:{bytes:Buffer;name:string;draftId?:string|null},now=Date.now()):Media{
+ const mime=validateImage(input.bytes);
+ return storeMedia(db,dir,ownerId,{bytes:input.bytes,name:input.name,mime,draftId:input.draftId,source:'ai'},now);
 }
 
 export function readMedia(db:Database,dir:string,ownerId:string,publicId:string){

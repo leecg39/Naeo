@@ -38,6 +38,6 @@
 
 NAEO 배포 서비스용 OpenAI client ID 승인, 실제 HTTPS 서비스 도메인과 콜백 등록, 허용된 ChatGPT plan usage 범위가 필요하다. 승인 후 실제 회원 두 명으로 동의→모델 조회→글 생성→초안 저장, 만료 갱신, 연결 해제, 사용량 초과, 중단·중복 요청을 검증한다. 현재 로컬 모의 공급자 결과를 실제 OpenAI 성공으로 확대하지 않는다.
 
-OpenAI의 이 OAuth 경로는 AI 이미지 생성을 제공하지 않는다. 이미지 생성, 네이버 AI 브리핑 인용 근거 수집, 실제 외부 공급자 왕복은 별도 미완료 항목이다.
+OpenAI의 이 OAuth 경로는 AI 이미지 생성을 제공하지 않는다. 이미지는 별도 `NAEO_IMAGE_*` OpenAI Images 어댑터로 구현했고 실제 키 왕복이 남았으며, 네이버 AI 브리핑 인용도 실제 SerpApi 키 왕복이 남은 별도 항목이다.
 
 공식 계약 확인: [토큰 수명주기](https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions), [모델과 추론](https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference), [토큰 참조](https://developers.openai.com/siwc/token-sharing-open-source/token-reference), [오류와 복구](https://developers.openai.com/siwc/token-sharing-open-source/errors-and-recovery), [배포 서비스 로그인](https://developers.openai.com/siwc/website), [클라이언트 신청](https://developers.openai.com/siwc/request-client-id).
