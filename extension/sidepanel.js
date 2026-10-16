@@ -159,7 +159,10 @@ async function writeClipboard(row) {
 
 async function applyRow(row) {
   await writeClipboard(row);
-  const focus = await chrome.runtime.sendMessage({ type: 'focusEditor', target: { kind: row.kind, text: row.target || '' } });
+  const focus = await chrome.runtime.sendMessage({
+    type: 'focusEditor',
+    target: { kind: row.kind, text: row.target || '', imageAnchorIndex: row.imageAnchorIndex || 0 },
+  });
   if (!focus?.ok) {
     const copied = row.kind === 'heading' ? '' : '클립보드 복사는 완료했습니다. ';
     throw new Error(`${copied}네이버 블로그 글쓰기 탭을 활성화한 뒤 다시 눌러주세요.`);

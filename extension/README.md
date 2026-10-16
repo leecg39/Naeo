@@ -17,7 +17,7 @@ Manifest의 공개키가 개발용 ID를 고정하므로 같은 폴더를 다시
 - `identity`: OAuth PKCE 로그인 창과 `chromiumapp.org` 콜백
 - `storage`: 이 브라우저에 OAuth 토큰과 행 진행 상태 저장
 - `clipboardWrite`: 회원이 누른 행의 텍스트·서식·사진 복사
-- `scripting`, `activeTab`, 네이버 호스트 권한: 네이버 편집기에서 제목·본문·사진 표식·소제목 위치 찾기
+- `scripting`, `activeTab`, 네이버 호스트 권한: 네이버 SmartEditor ONE에서 제목·본문·보이지 않는 사진 앵커·소제목 위치 찾기
 - 선택적 호스트 권한: 회원이 입력하고 승인한 NAEO 서버 한 곳에 OAuth/MCP 요청
 
 확장은 키 입력, 자동 붙여넣기, 자동 발행, 네이버 계정 비밀번호 접근을 하지 않습니다.

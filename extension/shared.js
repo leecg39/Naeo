@@ -2,6 +2,7 @@ const encoder = new TextEncoder();
 
 export const DEFAULT_SERVICE_BASE = 'https://www.naeo.kr';
 export const EXTENSION_ID = 'lacdnccodopejadkbeannbcmbljiodik';
+export const IMAGE_ANCHOR = '\u2063';
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
@@ -146,14 +147,14 @@ export function parseDraftBlocks(markdown = '') {
 }
 
 const blockPlain = (block) => {
-  if (block.kind === 'image') return block.marker;
+  if (block.kind === 'image') return IMAGE_ANCHOR;
   if (block.kind === 'table') return block.rows.map((row) => row.join('\t')).join('\n');
   if (block.kind === 'list') return block.items.map((item, i) => `${block.ordered ? `${i + 1}.` : '•'} ${item}`).join('\n');
   return block.text || '';
 };
 
 const blockHtml = (block) => {
-  if (block.kind === 'image') return `<p>${escapeHtml(block.marker)}</p>`;
+  if (block.kind === 'image') return `<p>${IMAGE_ANCHOR}</p>`;
   if (block.kind === 'heading') return `<p>${inlineHtml(block.text)}</p>`;
   if (block.kind === 'paragraph') return `<p>${block.text.split('\n').map(inlineHtml).join('<br>')}</p>`;
   if (block.kind === 'quote') return `<blockquote><p>${block.text.split('\n').map(inlineHtml).join('<br>')}</p></blockquote>`;
@@ -178,10 +179,14 @@ export function buildDraftTransfer(draft) {
   const rows = [{ key: 'title', kind: 'title', label: '제목', action: '제목 복사 + 위치', preview: draft.title || '제목 없음', text: draft.title || '' }];
   if (representative) rows.push({ key: `image:${representative.index}`, kind: 'image', label: '대표 사진', action: '사진 복사 + 위치', preview: representative.alt || '대표 사진', url: representative.url, target: '' });
   rows.push({ key: 'body', kind: 'body', label: '본문', action: '본문 복사 + 위치', preview: plain.slice(0, 100) || '본문 없음', text: plain, html });
+  let bodyImageIndex = 0;
   for (const block of blocks) {
     if (block === representative) continue;
     if (block.kind === 'heading') rows.push({ key: `heading:${rows.length}`, kind: 'heading', label: '소제목', action: '소제목으로 변환', preview: block.text, target: block.text });
-    if (block.kind === 'image') rows.push({ key: `image:${block.index}`, kind: 'image', label: '사진', action: '사진 복사 + 위치', preview: block.alt || `사진 ${block.index + 1}`, url: block.url, target: block.marker });
+    if (block.kind === 'image') {
+      rows.push({ key: `image:${block.index}`, kind: 'image', label: '사진', action: '사진 복사 + 위치', preview: block.alt || `사진 ${block.index + 1}`, url: block.url, target: IMAGE_ANCHOR, imageAnchorIndex: bodyImageIndex });
+      bodyImageIndex += 1;
+    }
   }
   return { blocks, rows, plain, html, representative };
 }

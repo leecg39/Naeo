@@ -3,7 +3,7 @@ import { Buffer } from 'node:buffer';
 import { createHash, webcrypto } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { buildDraftTransfer, createPkce, EXTENSION_ID, markerForImage, normalizeServiceBase, parseDraftBlocks, parseMcpToolData, permissionOrigin } from '../extension/shared.js';
+import { buildDraftTransfer, createPkce, EXTENSION_ID, IMAGE_ANCHOR, markerForImage, normalizeServiceBase, parseDraftBlocks, parseMcpToolData, permissionOrigin } from '../extension/shared.js';
 
 test('extension service URL accepts HTTPS and loopback HTTP only', () => {
   assert.equal(normalizeServiceBase('https://www.naeo.kr/'), 'https://www.naeo.kr');
@@ -37,7 +37,8 @@ test('draft transfer preserves structure, isolates images and escapes unsafe mar
   assert.equal(markerForImage(0, '대표 사진'), '〔NAEO 사진 1: 대표 사진〕');
   const transfer = buildDraftTransfer({ title: '테스트 글', body });
   assert.deepEqual(transfer.rows.map((row) => row.kind), ['title', 'body', 'heading', 'image']);
-  assert.match(transfer.plain, /〔NAEO 사진 1: 대표 사진〕/);
+  assert.match(transfer.plain, new RegExp(IMAGE_ANCHOR));
+  assert.doesNotMatch(transfer.plain, /NAEO 사진/);
   assert.match(transfer.html, /<table>/);
   assert.match(transfer.html, /<blockquote>/);
   assert.match(transfer.html, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
@@ -54,7 +55,8 @@ test('only a leading image is treated as the representative and copied before th
   const later = buildDraftTransfer({ title: '본문 사진', body: '본문\n\n![중간](https://example.com/inside.jpg)' });
   assert.deepEqual(later.rows.map((row) => row.kind), ['title', 'body', 'image']);
   assert.equal(later.rows[2].label, '사진');
-  assert.match(later.plain, /〔NAEO 사진 1: 중간〕/);
+  assert.match(later.plain, new RegExp(IMAGE_ANCHOR));
+  assert.equal(later.rows[2].imageAnchorIndex, 0);
 });
 
 test('MCP tool responses prefer structured content and surface errors', () => {
