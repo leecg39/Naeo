@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
@@ -38,7 +39,7 @@ export default function EntriesReview({events,initial}:{events:PageResult<{slug:
   await load();setNotice(decision==='approved'?`${e.ownerNickname||e.ownerEmail} 참여를 승인했습니다.`:`${e.ownerNickname||e.ownerEmail} 참여를 반려했습니다.`);
  });
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(()=>load())}>최신 정보 불러오기</button></div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(()=>load())}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
    <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>loadOptions(1,eventQuery));}}>
     <label>이벤트 검색<input className="field" value={eventQuery} onChange={e=>setEventQuery(e.target.value)} maxLength={100} disabled={busy} placeholder="제목·주소"/></label>

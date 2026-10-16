@@ -111,7 +111,7 @@
 
 - [x] P11.1 문서·FAQ·공지 100개 이후 조회/편집/삭제 접근 복구. 각101개 API 생성·2페이지 수정/삭제·마지막 페이지 복귀 검증, 전체409·lint/typecheck/build 통과. `docs/fullstack/admin-list-pagination.md`
 - [x] P11.2 리워드 및 선택된 이벤트의 참여 목록 페이지 이동·필터·회수/승인 후 복귀. 각101건 도메인/DB 검증, 전체411·lint/typecheck/build 통과. 이벤트 자체 선택 목록은 P11.4로 별도 추적.
-- [ ] P11.3 수정한 목록의 실제 브라우저 페이지 이동·검색·삭제·포커스/모바일 검증. (2026-10-16 사용자 제어권 재개 후 FAQ·문서·공지101건 검색/페이지 이동/삭제 복귀·390px 검증, 삭제 후 포커스 손실 수정 및 재검증. 다른 목록 조합은 미완료. `docs/fullstack/ego-pagination-2026-10-16.md`)
+- [ ] P11.3 수정한 목록의 실제 브라우저 페이지 이동·검색·삭제·포커스/모바일 검증. (2026-10-16 사용자 제어권 재개 후 FAQ·문서·공지101건 검색/페이지 이동/삭제 복귀·390px 검증, 삭제 후 포커스 손실 수정 및 재검증. 이벤트 목록·선택기, 보상 회수 및 참여 심사 승인/반려의 마지막 페이지 복귀도 검증. 보상·참여 심사 모바일은 키보드로 검증했으며 포인터는 미완료. 다른 목록 조합은 미완료. `docs/fullstack/ego-pagination-2026-10-16.md`, `docs/fullstack/ego-event-pagination-2026-10-16.md`, `docs/fullstack/ego-rewards-2026-10-16.md`, `docs/fullstack/ego-entries-2026-10-16.md`)
 
 - [x] P11.4 EventsManager·참여 심사 이벤트 선택기·PlansCoupons·PaymentsRefunds의 첫100개 제한 해소 및 검증. (이벤트 목록/선택기, 쿠폰·결제·환불 페이지 이동 구현. 전체414 및 production HTTP/SSR 검증 완료. 실제 브라우저 검증은 P11.3에 남김.)
 

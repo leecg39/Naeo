@@ -1,0 +1,32 @@
+[
+  {
+    "email": "entry100@example.test",
+    "status": "rejected",
+    "note": "Ego 실제 승인 검증",
+    "ledger": [
+      {
+        "delta": 15,
+        "reason": "grant"
+      },
+      {
+        "delta": -15,
+        "reason": "adjust"
+      }
+    ]
+  },
+  {
+    "email": "entry101@example.test",
+    "status": "rejected",
+    "note": "Ego 승인 취소 검증",
+    "ledger": [
+      {
+        "delta": 15,
+        "reason": "grant"
+      },
+      {
+        "delta": -15,
+        "reason": "adjust"
+      }
+    ]
+  }
+]

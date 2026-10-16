@@ -1,0 +1,10 @@
+{
+  "status": "approved",
+  "note": "Ego 실제 승인 검증",
+  "ledger": [
+    {
+      "delta": 15,
+      "reason": "grant"
+    }
+  ]
+}
