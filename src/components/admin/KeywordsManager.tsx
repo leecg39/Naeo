@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {kstDate} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
@@ -78,7 +79,7 @@ export default function KeywordsManager({initial}:{initial:PageResult<Row>}){
  const open=(id:string)=>run(async()=>{setCreating(false);setSelected(await api<Detail>(`/api/admin/keywords/${id}`));});
  const saved=async(id:string|null,m:string)=>{setCreating(false);setSelected(id?await api<Detail>(`/api/admin/keywords/${id}`):null);await load();setNotice(m);};
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={()=>void open(selected.id)}>최신 정보 불러오기</button>}</div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={()=>void open(selected.id)}>최신 정보 불러오기</button>}</div>}</div>
   <section className="panel account-card">
    <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(1));}}>
     <label>키워드 검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="키워드·분류" disabled={busy}/></label>

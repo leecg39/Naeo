@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
@@ -28,7 +29,7 @@ export default function PaymentsRefunds({initialPayments,initialRefunds,configur
  const decide=(r:RefundRow,decision:'approved'|'rejected')=>void run(async()=>{await api(`/api/admin/refunds/${r.id}/decide`,{method:'POST',body:{decision,note:notes[r.id]??'',version:r.version}});return decision==='approved'?`${r.email} 환불을 완료했습니다.`:'환불 요청을 거절했습니다.';});
  const refund=(p:PayRow)=>void run(async()=>{const amount=amounts[p.id]?Number(amounts[p.id]):undefined;await api(`/api/admin/payments/${p.id}/refund`,{method:'POST',body:{reason:notes[p.id]||'운영자 환불',...(amount?{amount}:{})}});return `${p.orderName} 환불을 완료했습니다.`;});
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   {!configured&&<p className="account-error">결제 키가 설정되지 않았습니다(미설정). 결제사 취소가 필요한 환불은 처리할 수 없습니다.</p>}
   <section className="panel account-card" aria-label="환불 요청">
    <h2>환불 요청</h2><p className="muted">처리 중인 요청은 1분 후 같은 환불로 다시 확인할 수 있습니다. 새 환불을 만들지 않습니다.</p>

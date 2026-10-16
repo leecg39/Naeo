@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
@@ -46,7 +47,7 @@ export default function ArticlesManager({initial,initialCategories,now:serverNow
  }
 
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <div className="account-tabs" role="tablist" aria-label="매거진 관리">
    <button type="button" role="tab" aria-selected={tab==='articles'} onClick={()=>setTab('articles')}>글</button>
    <button type="button" role="tab" aria-selected={tab==='categories'} onClick={()=>setTab('categories')}>분류</button>

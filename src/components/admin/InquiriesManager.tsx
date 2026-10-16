@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,apiResponse,ApiError,type PageResult} from '@/lib/api-client';
@@ -34,7 +35,7 @@ export default function InquiriesManager({initial,templates}:{initial:PageResult
  const reloadSelected=()=>run(async()=>{await load();if(selected)setSelected(await api<AdminInquiryDetail>(`/api/admin/inquiries/${selected.id}`));setNotice('최신 정보를 불러왔습니다.');});
 
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={reloadSelected}>최신 정보 불러오기</button></div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={reloadSelected}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
    <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(1));}}>
     <label>문의 검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="이메일·제목·내용" disabled={busy}/></label>

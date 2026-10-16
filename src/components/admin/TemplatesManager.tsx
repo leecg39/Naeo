@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {api,ApiError} from '@/lib/api-client';
@@ -39,7 +40,7 @@ export default function TemplatesManager({initial}:{initial:InquiryTemplate[]}){
  });
 
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{await reload();setEditing(false);setSelected(null);setNotice('최신 목록을 불러왔습니다.');})}>최신 정보 불러오기</button></div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{await reload();setEditing(false);setSelected(null);setNotice('최신 목록을 불러왔습니다.');})}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
    <div className="account-actions"><button className="button" type="button" disabled={busy} onClick={startNew}>새 템플릿</button></div>
    <div className="responsive-table"><table className="data-table">

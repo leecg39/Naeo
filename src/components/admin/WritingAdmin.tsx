@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
@@ -56,7 +57,7 @@ export default function WritingAdmin({initialTemplates,initialJobs,aiConfigured}
  const loadJobs=async()=>setJobs(await apiResponse<PageResult<AdminGeneration>>(`/api/admin/generations?${new URLSearchParams({pageSize:'30',q,...(state?{state}:{})})}`));
  const doneTemplate=async(m:string)=>{setTemplates(await api<WritingTemplate[]>('/api/admin/writing-templates'));setEditing(null);setNotice(m);};
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <section className="panel account-card">
    <h2>글쓰기 템플릿</h2>
    <p className="muted">회원이 AI 글 생성 때 고를 수 있는 작성 지침입니다. AI 글 공급자: <strong>{aiConfigured?'설정됨':'미설정'}</strong>{aiConfigured?'':' · 서버에 ANTHROPIC_API_KEY가 없어 생성 요청은 토큰 차감 없이 거절됩니다.'} AI 이미지 공급자: <strong>미설정</strong></p>

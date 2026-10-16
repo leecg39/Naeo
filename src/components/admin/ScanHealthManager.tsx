@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
 import {useRouter} from 'next/navigation';
@@ -43,7 +44,7 @@ export default function ScanHealthManager({initialHealth,initialJobs}:{initialHe
   await refresh();setNotice(kind==='cancel'?(job.state==='running'?'취소를 요청했습니다. worker가 다음 단계에서 멈춥니다.':'작업을 취소했습니다.'):'새 작업으로 다시 시도합니다.');
  });
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <Summary h={health}/>
   <section className="panel account-card">
    <h2>진단 작업</h2>

@@ -133,3 +133,4 @@
 - P11.8 정정: 원본 최신 번들에서 JPEG0.85·긴 변1600px 변환과 서버 응답 markdown 복사를 확인했다. 기존 형식 보존을 JPEG 변환으로 수정·실제 저장 검증. 독립 이미지 공유/마크다운 서버 계약 및 UI는 남아 있다. `docs/fullstack/images-rea-contract-2026-10-16.md`.
 - P11.8 진행: 독립 `media_markdown_links` 모델, `/api/images` 업로드·공개 조회, 기존 사진 링크 발행, 사진별/현재 페이지 전체 마크다운 복사 UI, 삭제 시 링크 폐기를 구현했다. HTTP·저장 파일·루트6+서버417개 테스트 검증 완료. Ego 클립보드 읽기는 사용자 제어권 전환으로 중단됐고 확장 프로그램→네이버 발행 종단 검증이 남아 있다. `docs/fullstack/image-markdown-links-2026-10-16.md`.
 - P11.8 진행: 사진 보관 상태에서 공개 링크만 명시적으로 폐기하고, 다시 복사할 때 다른 토큰으로 재발행하는 API·UI를 추가했다. 소유자 격리·구 링크404·신 링크200·사진 삭제 후 신 링크404를 단위/HTTP로 검증했다.
+- P11.3 진행: 실제 Ego에서 반복 확인된 “조작 버튼 제거 후 BODY 포커스 손실” 패턴을 나머지 관리자 CRUD 11개 화면에도 공통 `OperationNotice`로 적용했다. typecheck·lint·production build 통과. 해당 11개 화면의 실제 Ego 재검증은 사용자 제어권 때문에 미완료. `docs/fullstack/admin-operation-focus-2026-10-16.md`.

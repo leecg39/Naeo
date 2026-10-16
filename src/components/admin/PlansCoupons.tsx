@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
@@ -37,7 +38,7 @@ export default function PlansCoupons({initialPlans,initialCoupons,now}:{initialP
  });};
  const toggleCoupon=(c:Coupon)=>void run(async()=>{await api(`/api/admin/coupons/${c.id}`,{method:'PATCH',body:{status:c.status==='active'?'disabled':'active',version:c.version}});await loadCoupons();return c.status==='active'?'쿠폰을 중지했습니다.':'쿠폰을 다시 켰습니다.';});
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <section className="panel account-card" aria-label="요금제">
    <h2>요금제</h2>
    <div className="responsive-table"><table className="data-table"><caption className="sr-only">요금제 목록</caption>

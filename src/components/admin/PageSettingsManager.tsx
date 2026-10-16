@@ -1,4 +1,5 @@
 'use client';
+import OperationNotice from './OperationNotice';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
 import {api} from '@/lib/api-client';
@@ -43,7 +44,7 @@ export default function PageSettingsManager({initial}:{initial:PageSetting[]}){
  const load=async()=>setItems(await api<PageSetting[]>('/api/admin/page-settings'));
  const saved=async(d:Detail,m:string)=>{setSelected(d);await load();setNotice(m);};
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{await load();setSelected(await api<Detail>(`/api/admin/page-settings/${selected.id}`));setNotice('최신 내용을 불러왔습니다.');})}>최신 정보 불러오기</button>}</div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{await load();setSelected(await api<Detail>(`/api/admin/page-settings/${selected.id}`));setNotice('최신 내용을 불러왔습니다.');})}>최신 정보 불러오기</button>}</div>}</div>
   <section className="panel account-card">
    <h2>고정 디자인 페이지</h2>
    <div className="responsive-table"><table className="data-table">
