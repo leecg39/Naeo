@@ -14,6 +14,8 @@ import { buildCompetitorsPage } from '@/server/competitors/competitors-page';
 import DraftsWorkspace from '@/components/writing/DraftsWorkspace';
 import { buildWritingPage } from '@/server/writing/writing-page';
 import { memberChrome } from '@/server/content/member-chrome';
+import { publicChrome } from '@/server/content/public-chrome';
+import {getProfile} from '@/server/profiles';
 import { ImagesLibrary,SharedImages } from '@/components/writing/ImagePages';
 import { buildRankingPage } from '@/server/ranking/ranking-page';
 import { ensureConfirmed } from '@/server/ranking/ranking-api';
@@ -50,7 +52,7 @@ const databasePage=cache(resolveDatabasePage);
 function eventMeta(path:string){const slug=path.match(/^\/(?:dashboard\/events|event)\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];const e=slug?getPublicEvent(contentDatabase(),slug):null;return e?{title:`${e.title} | NAEO`,description:e.summary}:undefined;}
 export async function generateMetadata({params,searchParams}:Props):Promise<Metadata>{const path='/'+(await params).segments.join('/');if(['/social/aeo-carousel','/social/mate-ad','/youtube/aeo-intro'].includes(path.replace(/\/export$/,''))&&first((await searchParams).project))return{title:path.endsWith('/export')?'소셜 프로젝트 내보내기':'소셜 프로젝트 보기',robots:{index:false,follow:false}};const data=eventMeta(path)??(await databasePage(path))??await getCapturedPage(path);return{title:data?.title.replace(/(?: \| NAEO)+$/,'')||'NAEO',...(data?.description?{description:data.description}:{}),robots:{index:false,follow:false}}}
 /** 경로별 대상과 기간을 만족하는 공지를 순서대로 표시한다. */
-function withNotice(path:string,data:CapturedPageData){return <><PageExperience data={data}/><PageAnnouncements path={path}/></>;}
+async function withNotice(path:string,data:CapturedPageData){const viewer=await currentUser();return <><PageExperience data={publicChrome(data,viewer?getProfile(database(),viewer.id).nickname:null)}/><PageAnnouncements path={path}/></>;}
 /** 결제창에서 돌아온 결과: 성공이면 서버에서 승인(멱등), 실패면 주문 실패 처리. 화면은 저장된 주문 상태로 그린다. */
 async function paymentCompletePage(sp:Record<string,string|string[]|undefined>){
  const query=new URLSearchParams(Object.entries(sp).flatMap(([k,v])=>typeof v==='string'?[[k,v]]:[]));

@@ -1,0 +1,127 @@
+[p1 "문의하기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "문의하기 | NAEO"]
+root
+  container
+    alert
+      text "문의하기 | NAEO"
+    container
+      container
+        anchor [ref=2134, loc=href:/, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2135, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2136, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2137, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2138, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2139, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2140, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          anchor [ref=2141, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+            text "Ego 수정 검증"
+          button "테마 전환" [ref=2142, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2143, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      container
+        heading
+          text "문의하기"
+        paragraph
+          text "NAEO 서비스 이용, 기업 도입, 파트너십 등 어떤 문의든 환영합니다."
+        container
+          svg_root
+          heading
+            text "이메일 문의"
+          anchor [ref=2144, loc=href:mailto:ask@naeo.kr, url=mailto:ask@naeo.kr]
+            text "ask@naeo.kr"
+          paragraph
+            text "서비스 이용, 기술 문의, 기업/B2B 도입 문의"
+        container
+          svg_root
+          heading
+            text "상담 가능 시간"
+          heading
+            text "평일 10:00 ~ 18:00"
+          paragraph
+            text "주말·공휴일 제외, 이메일은 24시간 접수 가능"
+        container
+          text "문의 유형"
+          comboboxgrouping "문의 유형 기타" [ref=2145]
+            text "기타"
+          textbox [ref=2146]
+            text "etc"
+          svg_root
+          group [ref=2147]
+            text "문의 유형"
+          text "회신받을 이메일"
+          textbox [ref=2148, loc=css:input[placeholder="demo@example.com"]]
+            text "demo@example.com"
+          group [ref=2149]
+            text "회신받을 이메일"
+          text "제목 (선택)"
+          textbox [ref=2150]
+          group [ref=2151]
+            text "제목 (선택)"
+          container
+            text "문의 내용"
+            container
+              textbox [ref=2152, loc=css:textarea[placeholder="문의하실 내용을 자세히 적어주세요."]]
+                text "문의하실 내용을 자세히 적어주세요."
+              group [ref=2153]
+                text "문의 내용"
+          button [ref=2154]
+            text "문의 보내기"
+          button [ref=2155]
+            text "내 문의 내역"
+      container
+        container
+          container
+            text "NAEO"
+            paragraph
+              text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+            container
+              anchor "NAEO YouTube @naeo_kr" [ref=2156, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+                svg_root
+              anchor "NAEO Instagram @naeo.kr" [ref=2157, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+                svg_root
+              anchor "NAEO Threads @naeo.kr" [ref=2158, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+                svg_root
+              anchor "NAEO 네이버 카페 커뮤니티" [ref=2159, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+          container
+            container "서비스 링크"
+              text "서비스"
+              anchor [ref=2160, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+                text "FAQ"
+              anchor [ref=2161, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+                text "문의하기"
+              anchor [ref=2162, url=http://127.0.0.1:3000/blog]
+                text "매거진"
+              anchor [ref=2163, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+                text "업데이트"
+            container "법적 고지 링크"
+              text "법적 고지"
+              anchor [ref=2164, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+                text "이용약관"
+              anchor [ref=2165, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+                text "개인정보처리방침"
+              anchor [ref=2166, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+                text "환불규정"
+        container
+          container
+            container
+              text "주식회사 어크로스"
+              text "| 대표:"
+              text "이재홍"
+              text "| 사업자등록번호:"
+              text "288-86-03687"
+            container
+              text "주소:"
+              text "서울특별시 강남구 테헤란로63길 9, 1801"
+            container
+              text "문의:"
+              text "ask@naeo.kr"
+            text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+          text "© 2026 NAEO. All rights reserved."

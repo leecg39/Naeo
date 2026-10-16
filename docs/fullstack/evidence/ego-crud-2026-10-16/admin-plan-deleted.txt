@@ -1,0 +1,236 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "요금제·쿠폰"
+    container
+      container
+        anchor [ref=1571, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1572, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1573]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1574, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1575, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1576, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1577, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1578, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1579, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1580, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1581, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1582, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1583, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1584, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1585, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1586, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1587, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1588, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1589, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1590, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "요금제·쿠폰"
+          container
+            status
+              text "요금제를 삭제했습니다."
+            container "요금제"
+              heading
+                text "요금제"
+              table
+                table_row
+                  table_cell
+                    text "요금제 목록"
+                table_row
+                  table_cell
+                    text "이름(코드)"
+                  table_cell
+                    text "가격"
+                  table_cell
+                    text "30일 토큰"
+                  table_cell
+                    text "체험"
+                  table_cell
+                    text "상태"
+                  table_cell
+                    text "관리"
+                table_row
+                  table_cell
+                    text "무료"
+                    container
+                      text "("
+                      text "free"
+                      text ")"
+                  table_cell
+                    text "₩"
+                    text "0"
+                  table_cell
+                    text "0"
+                  table_cell
+                    text "-"
+                  table_cell
+                    text "판매"
+                  table_cell
+                    button [ref=1591]
+                      text "편집"
+                      text "무료"
+                table_row
+                  table_cell
+                    text "베이직"
+                    container
+                      text "("
+                      text "basic"
+                      text ")"
+                  table_cell
+                    text "₩"
+                    text "19,900"
+                  table_cell
+                    text "750"
+                  table_cell
+                    text "7일"
+                  table_cell
+                    text "판매"
+                  table_cell
+                    button [ref=1592]
+                      text "편집"
+                      text "베이직"
+              button [ref=1593]
+                text "새 요금제"
+            container "쿠폰"
+              heading
+                text "쿠폰"
+              form "새 쿠폰"
+                container
+                  text "코드"
+                  textbox [ref=1594]
+                container
+                  text "종류"
+                  combobox [ref=1595]
+                    text "토큰 지급"
+                container
+                  text "값"
+                  spinbutton [ref=1596]
+                    text "10"
+                container
+                  text "요금제 코드(선택)"
+                  textbox [ref=1597]
+                container
+                  text "총 사용 한도(비우면 무제한)"
+                  spinbutton [ref=1598]
+                    text "1"
+                container
+                  text "시작(한국 시간)"
+                  textbox [ref=1599]
+                    spinbutton "연도" [ref=1600]
+                      text "2026"
+                    text "."
+                    spinbutton "월" [ref=1601]
+                      text "10"
+                    text "."
+                    spinbutton "일" [ref=1602]
+                      text "16"
+                    text "."
+                    spinbutton "오전/오후" [ref=1603]
+                      text "오전"
+                    spinbutton "시간" [ref=1604]
+                      text "08"
+                    text ":"
+                    spinbutton "분"
+                      text "51"
+                container
+                  text "종료(한국 시간)"
+                  textbox [ref=1605]
+                    container
+                      spinbutton "연도" [ref=1606]
+                        text "2026"
+                      text "."
+                      spinbutton "월" [ref=1607]
+                        text "11"
+                      text "."
+                      spinbutton "일" [ref=1608]
+                        text "15"
+                      text "."
+                      spinbutton "오전/오후" [ref=1609]
+                        text "오전"
+                      spinbutton "시간" [ref=1610]
+                        text "08"
+                      text ":"
+                      spinbutton "분" [ref=1611]
+                        text "51"
+                    button [ref=1639]
+                container
+                  text "메모"
+                  textbox [ref=1612]
+                button [ref=1613]
+                  text "쿠폰 만들기"
+              table
+                table_row
+                  table_cell
+                    text "쿠폰 목록"
+                table_row
+                  table_cell
+                    text "코드"
+                  table_cell
+                    text "혜택"
+                  table_cell
+                    text "사용"
+                  table_cell
+                    text "기간"
+                  table_cell
+                    text "상태"
+                  table_cell
+                    text "관리"
+                table_row
+                  table_cell
+                    text "EGOQA1016"
+                    container
+                      text "·"
+                      text "브라우저 QA 쿠폰"
+                  table_cell
+                    text "10"
+                    text "토큰"
+                  table_cell
+                    text "0"
+                    text "/ 1"
+                  table_cell
+                    text "2026. 10. 16. 오전 8:51:00"
+                    text "~"
+                    text "2026. 11. 15. 오전 8:51:00"
+                  table_cell
+                    text "사용 가능"
+                  table_cell
+                    button [ref=1616]
+                      text "중지"
+                      text "EGOQA1016"
+              container "쿠폰 페이지"
+                button [ref=1614]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=1615]
+                  text "다음"

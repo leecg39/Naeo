@@ -1,0 +1,108 @@
+[p1 "메이트 진단 결과 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "메이트 진단 결과 | NAEO"]
+root
+  container
+    alert
+    container
+      container
+        container
+          anchor [ref=778, loc=href:/, url=http://127.0.0.1:3000/]
+            paragraph
+              text "NAEO"
+          button "테마 전환" [ref=779, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+        paragraph
+          text "대시보드"
+        container
+          anchor [ref=780, url=http://127.0.0.1:3000/dashboard]
+            svg_root
+            paragraph
+              text "대시보드"
+          anchor [ref=781, url=http://127.0.0.1:3000/dashboard/recommendations]
+            svg_root
+            paragraph
+              text "키워드 추천"
+            text "무료 이용"
+          anchor [ref=782, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "AI 글쓰기"
+            text "무료 이용"
+          anchor [ref=783, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+            svg_root
+            paragraph
+              text "이벤트"
+        paragraph
+          text "분석 도구"
+        container
+          anchor [ref=784, url=http://127.0.0.1:3000/dashboard/ai-picks]
+            svg_root
+            paragraph
+              text "AI 인용 현황"
+          anchor [ref=785, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+            svg_root
+            paragraph
+              text "경쟁 블로그"
+            text "무료 이용"
+          anchor [ref=786, url=http://127.0.0.1:3000/dashboard/mate]
+            svg_root
+            paragraph
+              text "메이트 진단"
+        paragraph
+          text "계정"
+        anchor [ref=787, url=http://127.0.0.1:3000/dashboard/settings]
+          svg_root
+          paragraph
+            text "설정"
+        container
+          container
+            anchor "Ego 수정 검증 설정" [ref=788, loc=css:a[aria-label="Ego 수정 검증 설정"], url=http://127.0.0.1:3000/dashboard/settings]
+              text "E"
+              paragraph
+                text "Ego 수정 검증"
+            button "더보기 메뉴" [ref=789, loc=css:button[aria-label="더보기 메뉴"]]
+              svg_root
+          container
+            svg_root
+            paragraph
+              text "무료 이용"
+            paragraph
+              text "스캔 20회"
+          anchor [ref=790, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "글쓰기"
+            paragraph
+              text "잔액 0토큰"
+          container
+            anchor [ref=791, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+              paragraph
+                text "요금제 안내"
+            anchor [ref=792, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+              paragraph
+                text "이용약관"
+            anchor [ref=793, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+              paragraph
+                text "문의하기"
+      container
+        status
+          container
+            container
+              container
+                paragraph
+                  text "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?"
+                text "매주 월요일 발표"
+              paragraph
+                text "주간 랭킹 1~5위"
+                text "32개 주제마다 1명"
+                text "신규 등록 10명"
+            anchor [ref=794, url=http://127.0.0.1:3000/dashboard/settings]
+              text "참여하기"
+          button "배너 닫기" [ref=795, loc=css:button[aria-label="배너 닫기"]]
+            svg_root
+        container
+          heading
+            text "아직 메이트 진단 기록이 없어요"
+          paragraph
+            text "내 블로그 글을 AI가 읽고 글쓰기 습관을 짚어주는 무료 진단이에요."
+          anchor [ref=796, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "무료 진단 받으러 가기"

@@ -1,0 +1,383 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "NAEO | 네이버 블로그 AI 브리핑 인용 진단"
+    container
+      container
+        anchor [ref=199, url=http://127.0.0.1:3000/]
+          text "NAEO"
+          text "●"
+        text "Ego 수정 검증"
+        button [ref=200]
+          text "로그아웃"
+      container
+        container
+          container "대시보드 메뉴"
+            anchor [ref=201, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+              text "대시보드"
+            anchor [ref=202, url=http://127.0.0.1:3000/dashboard/ai-picks]
+              text "AI 인용 현황"
+            anchor [ref=203, loc=href:/dashboard/recommendations, url=http://127.0.0.1:3000/dashboard/recommendations]
+              text "키워드 추천"
+            anchor [ref=204, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+              text "경쟁 블로그"
+            anchor [ref=205, loc=href:/dashboard/write, url=http://127.0.0.1:3000/dashboard/write]
+              text "AI 글쓰기"
+            anchor [ref=206, url=http://127.0.0.1:3000/dashboard/mate]
+              text "네이버 메이트"
+            anchor [ref=207, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+              text "이벤트"
+            anchor [ref=208, loc=href:/dashboard/social, url=http://127.0.0.1:3000/dashboard/social]
+              text "소셜 제작"
+            anchor [ref=209, url=http://127.0.0.1:3000/dashboard/settings]
+              text "계정 설정"
+          anchor [ref=210, url=http://127.0.0.1:3000/]
+            text "사이트로 돌아가기 ↗"
+        container
+          paragraph
+            text "MY NAEO"
+          heading
+            text "계정 설정"
+          container
+            status
+              text "블로그를 저장했습니다."
+            container
+              heading
+                text "내 프로필"
+              paragraph
+                text "로그인 계정:"
+                text "ego-qa-1792107363896@example.test"
+              form
+                container
+                  text "닉네임"
+                  textbox [ref=265, loc=css:input[name="nickname"]]
+                    text "Ego 수정 검증"
+                container
+                  checkbox [ref=266, loc=css:input[name="rankingPublic"]]
+                  text "랭킹에 내 프로필 공개"
+                button [ref=267]
+                  text "프로필 저장"
+            container
+              heading
+                text "내 블로그"
+              paragraph
+                text "등록한 블로그를 관리하고 대표 블로그를 선택하세요."
+              unordered_list
+                list_item
+                  text "Ego CRUD 수정됨"
+                  text "대표"
+                  anchor [ref=268, loc=href:https://blog.naver.com/naeo_ego_qa_1016, url=https://blog.naver.com/naeo_ego_qa_1016]
+                    text "blog.naver.com/"
+                    text "naeo_ego_qa_1016"
+                    text "↗"
+                  text "여행"
+                  button [ref=269]
+                    text "수정"
+                    text "Ego CRUD 수정됨"
+                  button [ref=270]
+                    text "삭제"
+                    text "Ego CRUD 수정됨"
+              heading
+                text "블로그 추가"
+              form
+                container
+                  text "네이버 블로그 ID"
+                  textbox [ref=287, loc=css:input[name="naverId"]]
+                    text "my_blog"
+                container
+                  text "블로그 이름"
+                  textbox [ref=288, loc=css:input[name="title"]]
+                container
+                  text "주제"
+                  textbox [ref=289, loc=css:input[name="category"]]
+                    text "예: 일상·생각"
+                container
+                  checkbox [ref=290, loc=css:input[name="isPrimary"]]
+                  text "대표 블로그로 설정"
+                button [ref=291]
+                  text "블로그 등록"
+            container "포인트와 시작 가이드"
+              heading
+                text "포인트와 출석"
+              button [ref=292]
+                text "새로고침"
+              paragraph
+                text "35"
+                text "P"
+              paragraph
+                text "매일 5P · 연속 7일마다 15P 추가 · 한국 시간 자정 기준"
+              paragraph
+                text "2026-10-16"
+                text "· 연속"
+                text "1"
+                text "일"
+              button [ref=293]
+                text "오늘 출석 완료"
+              status
+                text "서브 주제를 저장했습니다."
+              heading
+                text "시작 가이드 ·"
+                text "30"
+                text "/"
+                text "300"
+                text "P"
+              ordered_list
+                list_item
+                  anchor [ref=294, url=http://127.0.0.1:3000/dashboard/settings]
+                    text "블로그 등록"
+                  text "30"
+                  text "P"
+                  button [ref=295]
+                    text "수령 완료"
+                list_item
+                  anchor [ref=296, url=http://127.0.0.1:3000/dashboard/mate]
+                    text "메이트 진단"
+                  text "30"
+                  text "P"
+                  paragraph
+                    text "본인 블로그의 글이 있는 진단을 완료해주세요."
+                  button [ref=297]
+                    text "30P 받기"
+                list_item
+                  anchor [ref=298, url=http://127.0.0.1:3000/dashboard/ai-picks]
+                    text "AI 인용 현황"
+                  text "30"
+                  text "P"
+                  paragraph
+                    text "AI 인용 확인 공급자가 연결되면 수령할 수 있습니다."
+                  button [ref=299]
+                    text "30P 받기"
+                list_item
+                  container
+                    anchor [ref=300, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+                      text "랭킹 둘러보기 + 서브 주제"
+                    container
+                      text "90"
+                      text "P"
+                  paragraph
+                    text "랭킹을 먼저 둘러봐주세요."
+                  button [ref=301]
+                    text "90P 받기"
+                list_item
+                  container
+                    anchor [ref=302, url=http://127.0.0.1:3000/dashboard/settings]
+                      text "휴대폰 인증"
+                    container
+                      text "120"
+                      text "P"
+                  paragraph
+                    text "휴대폰 인증 보상 설정이 준비되지 않았습니다."
+                  button [ref=303]
+                    text "120P 받기"
+              form
+                container
+                  text "내 서브 주제"
+                  textbox [ref=308, loc=css:input[name="subTopic"]]
+                    text "여행"
+                paragraph
+                  text "첫 저장 후 7일 동안 수정·삭제할 수 없습니다."
+                  text "변경 가능: 2026. 10. 23. 오전 8:37"
+                container
+                  button [ref=309]
+                    text "서브 주제 저장"
+                  button [ref=310]
+                    text "서브 주제 삭제"
+              heading
+                text "포인트 내역"
+              unordered_list
+                list_item
+                  container
+                    text "시작 가이드"
+                    text "·"
+                    text "2026. 10. 16. 오전 8:36"
+                  container
+                    text "+"
+                    text "30"
+                    text "P"
+                list_item
+                  container
+                    text "출석"
+                    text "·"
+                    text "2026. 10. 16. 오전 8:36"
+                  container
+                    text "+"
+                    text "5"
+                    text "P"
+              container
+                button [ref=306]
+                  text "이전 내역"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=307]
+                  text "다음 내역"
+            container
+              heading
+                text "연락처와 알림"
+              status
+                text "연락처를 저장했습니다."
+              form
+                container
+                  text "이름"
+                  textbox [ref=235, loc=css:input[name="name"]]
+                    text "Ego 검증"
+                container
+                  text "연락 이메일"
+                  textbox [ref=236, loc=css:input[name="email"]]
+                    text "ego-contact@example.test"
+                container
+                  text "휴대폰 번호 (선택)"
+                  textbox [ref=237, loc=css:input[name="phone"]]
+                button [ref=238]
+                  text "연락처 저장"
+              button [ref=311]
+                text "연락처 삭제"
+              heading
+                text "알림 수신 설정"
+              form
+                container
+                  checkbox [ref=239, loc=css:input[name="marketingEmail"]]
+                  text "혜택·이벤트 이메일 수신 (선택)"
+                container
+                  checkbox [ref=240, loc=css:input[name="scanEmail"]]
+                  text "분석 완료 이메일 수신 (선택)"
+                container
+                  checkbox [ref=241, loc=css:input[name="autoscan"]]
+                  text "자동 스캔 요청"
+                button [ref=242]
+                  text "알림 설정 저장"
+            container "구독·결제"
+              heading
+                text "구독·결제"
+              paragraph
+                text "보유 토큰"
+                text "0"
+              paragraph
+                text "무료 이용 중이에요."
+              anchor [ref=243, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+                text "요금제·무료 체험 보기"
+              paragraph
+                text "결제 기능은 아직 설정되지 않았어요(미설정)."
+              form "쿠폰 사용"
+                container
+                  text "쿠폰 코드"
+                  textbox [ref=244]
+                button [ref=245]
+                  text "쿠폰 사용"
+                paragraph
+                  text "토큰 쿠폰은 여기서 바로 받고, 할인 쿠폰은 결제할 때 입력해요."
+              heading
+                text "결제 내역"
+              paragraph
+                text "결제 내역이 없어요."
+              container "내 결제 페이지"
+                button [ref=246]
+                  text "이전"
+                text "1"
+                text "/"
+                text "1"
+                button [ref=247]
+                  text "다음"
+              heading
+                text "환불 요청 내역"
+              paragraph
+                text "환불 요청 내역이 없어요."
+              container "내 환불 페이지"
+                button [ref=248]
+                  text "이전"
+                text "1"
+                text "/"
+                text "1"
+                button [ref=249]
+                  text "다음"
+            container "로그인 연결"
+              heading
+                text "로그인 연결"
+              text "Google"
+              text "· 연결 안 됨"
+              button [ref=250]
+                text "미설정"
+              text "네이버"
+              text "· 연결 안 됨"
+              button [ref=251]
+                text "미설정"
+            container "연결된 앱"
+              heading
+                text "연결된 앱"
+              paragraph
+                text "ChatGPT·Claude 같은 AI 앱에 MCP 서버 주소"
+                text "http://127.0.0.1:3000/api/mcp"
+                text "를 추가하면 NAEO 로그인 후 연결할 수 있어요."
+              paragraph
+                text "연결된 앱이 없어요."
+            container
+              heading
+                text "내 데이터 내려받기"
+              paragraph
+                text "계정 정보, 글과 수정 이력, 블로그 진단, 활동·결제·문의 기록과 보관 중인 사진·제작 파일을 TAR 파일로 내려받습니다. 압축을 풀면 항목별 JSON Lines�..."
+              paragraph
+                text "요청 후 최대 1시간 동안 이 로그인에서만 받을 수 있습니다. 로그아웃·비밀번호 변경·탈퇴 시 요청도 삭제됩니다. 파일에는 개인정보가 포함되므로 �..."
+              form
+                container
+                  text "본인 확인 비밀번호"
+                  textbox [ref=276]
+                button [ref=277]
+                  text "내 데이터 내보내기 요청"
+              unordered_list
+              button [ref=278]
+                text "내보내기 상태 새로고침"
+            container
+              heading
+                text "이메일 인증"
+              paragraph
+                text "ego-qa-1792107363896@example.test"
+              status
+                text "현재 이메일 안내를 이용할 수 없습니다."
+              button [ref=279]
+                text "인증 메일 요청"
+              button [ref=280]
+                text "인증 상태 새로고침"
+            container
+              heading
+                text "계정 보안"
+              heading
+                text "비밀번호 변경"
+              paragraph
+                text "변경하면 다른 기기의 로그인과 연결된 외부 앱의 접근 권한이 종료됩니다."
+              form
+                container
+                  text "현재 비밀번호"
+                  textbox [ref=257]
+                container
+                  text "새 비밀번호"
+                  textbox [ref=258, loc=css:input[name="newPassword"]]
+                container
+                  text "새 비밀번호 확인"
+                  textbox [ref=259, loc=css:input[name="confirmPassword"]]
+                button [ref=260]
+                  text "비밀번호 변경"
+              heading
+                text "로그인한 기기"
+              unordered_list
+                list_item
+                  text "현재 로그인"
+                  text "로그인:"
+                  text "2026-10-15 23:36"
+                  text "UTC"
+                  text "만료:"
+                  text "2026-10-22"
+                  button [ref=261]
+                    text "로그인 종료"
+                    text "현재"
+              button [ref=262]
+                text "다른 기기 모두 로그아웃"
+              button [ref=263]
+                text "로그인 목록 새로고침"
+              heading
+                text "회원 탈퇴"
+              paragraph
+                text "탈퇴하면 프로필·등록한 블로그·연락처·알림 설정과 모든 로그인 세션이 삭제됩니다. 삭제한 데이터는 복구할 수 없습니다. 같은 번호로 휴대폰 인�..."
+              button [ref=264]
+                text "회원 탈퇴"

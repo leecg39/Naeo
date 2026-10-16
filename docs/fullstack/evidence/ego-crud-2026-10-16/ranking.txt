@@ -1,0 +1,77 @@
+[p1 "AI 추천 순위 리더보드 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "AI 추천 순위 리더보드 | NAEO"]
+root
+  container
+    container
+      anchor [ref=68, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=69, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=70, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=71, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=72, loc=href:/event, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=73, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=74, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        button [ref=75]
+          container
+            svg_root
+            image
+          text "NAEO 블로거"
+        button "테마 전환" [ref=76, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        anchor [ref=77, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+          text "대시보드"
+    container
+      container
+        container
+          heading
+            text "도전! AI인용 랭킹왕"
+          container
+            svg_root
+            paragraph
+              text "전체 기간 · 실시간 집계 · 기간이 끝나면 확정"
+        container
+          paragraph
+            text "랭킹 공개를 켠 회원의 블로그 진단 점수(발행 빈도·최근성·제목·태그·주제) 순위입니다."
+          anchor [ref=78, loc=href:/ranking#scoring-criteria, url=http://127.0.0.1:3000/ranking#scoring-criteria]
+            text "산정 기준 보기"
+      tablist "랭킹 기간 선택"
+        tab [ref=79]
+          text "전체 랭킹"
+        tab [ref=80]
+          text "월간 랭킹"
+        tab [ref=81]
+          text "주간 랭킹"
+      paragraph
+        text "총"
+        text "0명"
+        text "이 전체 기간 랭킹에 참여 중이에요 (랭킹 공개 회원)"
+      container
+        text "내 랭킹"
+        paragraph
+          text "로그인하면 내 순위를 볼 수 있어요."
+        anchor [ref=82, loc=href:/login?next=%2Franking, url=http://127.0.0.1:3000/login?next=%2Franking]
+          text "로그인"
+      button [ref=83]
+        text "전체"
+      container
+        paragraph
+          text "순위"
+        paragraph
+          text "블로그"
+        columnheader [ref=84]
+          paragraph
+            text "진단 점수"
+        columnheader "발행 빈도 (20점 만점)" [ref=85, loc=role:columnheader[name="발행 빈도 (20점 만점)"]]
+          paragraph
+            text "발행 빈도"
+        columnheader "최근성 (20점 만점)" [ref=86, loc=role:columnheader[name="최근성 (20점 만점)"]]
+          paragraph
+            text "최근성"
+      paragraph
+        text "아직 랭킹에 오른 회원이 없습니다. 설정에서 '랭킹 공개'를 켜고 블로그를 진단하면 참여할 수 있어요."

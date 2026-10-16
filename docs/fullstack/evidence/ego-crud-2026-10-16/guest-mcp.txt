@@ -1,0 +1,369 @@
+[p1 "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO"]
+root
+  container
+    alert
+    container
+      container
+        anchor [ref=2825, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2826, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2827, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2828, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2829, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2830, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2831, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          button "테마 전환" [ref=2832, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2833, loc=href:/login, url=http://127.0.0.1:3000/login]
+            text "시작하기"
+      container
+        paragraph
+          text "//"
+          text "AI WRITING"
+        heading "내 블로그 글, 이제 AI가 씁니다"
+          text "내 블로그 글, 이제"
+          container
+            container
+              svg_root
+              text "ChatGPT"
+              svg_root
+              text "Claude"
+              image
+              text "NAEO"
+            text "가 씁니다"
+        paragraph
+          text "두 방법 모두"
+          text "오늘 0원"
+          text "으로 시작합니다. 발행 후 AI 인용 추적은 어느 쪽이든 똑같이 따라와요."
+        container
+          button [ref=2834]
+            text "NAEO가 다 써주기"
+            text "7일 무료 체험"
+          button [ref=2835]
+            text "내 AI로 직접 쓰기"
+            text "평생 무료"
+        container
+          paragraph
+            text "나의 ChatGPT·Claude에 연결만 하면 됩니다. 계속 무료예요."
+          paragraph
+            text "API 키 불필요 · 내 계정 데이터만 · 무료"
+      container
+        container
+          paragraph
+            text "[ NAEO × MCP ]"
+          heading
+            text "나의"
+            container
+              svg_root
+              text "ChatGPT"
+            text "·"
+            container
+              svg_root
+              text "Claude"
+            text "에 연결하세요"
+          paragraph
+            text "키워드 추천부터 글쓰기, 네이버 발행까지 대화로 끝납니다."
+          paragraph
+            text "연결 4단계 · API 키 불필요 · 내 계정 데이터만"
+        container
+          paragraph
+            text "chatgpt.com ·"
+            text "NAEO CONNECTED"
+          container
+            paragraph
+              text "내 황금 키워드 보여줘"
+            container
+              paragraph
+                text "성수동 브런치 BEST 5, 웨이팅 없이 가는 법"
+              paragraph
+                text "본문 약"
+                text "2,140자"
+                text "· NAEO 권장 분량 · 내 말투 반영"
+              paragraph
+                text "⌕ Created image cards"
+              container
+                image
+                container
+                  image
+                  image
+                  image
+          svg_root
+          paragraph
+            text "이"
+          svg_root
+          svg_root
+      paragraph
+        text "//"
+        text "CONNECT"
+      heading
+        text "연결은 4단계면 끝"
+      paragraph
+        text "NAEO MCP · SETUP"
+      button [ref=2836]
+        svg_root
+        text "Claude"
+      button [ref=2837]
+        svg_root
+        text "ChatGPT"
+      paragraph
+        text "연결 주소"
+      paragraph
+        text "$"
+        text "http://127.0.0.1:3000/api/mcp"
+      button [ref=2838]
+        svg_root
+        text "복사"
+      image
+      paragraph
+        text "플러그인 아이콘"
+      paragraph
+        text "이름 옆에 넣을 NAEO 로고 (선택)"
+      anchor [ref=2839, loc=href:/naeo-icon.png, url=http://127.0.0.1:3000/naeo-icon.png]
+        svg_root
+        text "다운로드"
+      paragraph
+        text "chatgpt.com 웹브라우저"
+        text "에서 연결해 주세요. 데스크톱 앱은 로그인 창이 막히는 경우가 있습니다. 로그인 후"
+        text "허용"
+        text "까지 눌러"
+        text ""연결됨""
+        text "상태가 되어야 저장 도구가 나타납니다."
+      container
+        text "01"
+        svg_root
+        paragraph
+          text "MCP 주소 복사"
+        paragraph
+          text "위 "연결 주소" 박스에서"
+          text "복사 버튼"
+          text "한 번이면 됩니다."
+      svg_root
+      container
+        text "02"
+        svg_root
+        paragraph
+          text "MCP 앱 만들기"
+        paragraph
+          text "chatgpt.com 왼쪽 사이드바의"
+          text "플러그인"
+          text "을 열고, 오른쪽 위"
+          text "추가 ▾ → MCP 앱 만들기"
+          text "를 누르세요. (ChatGPT Plus 이상 ·"
+          text "PC 웹"
+          text ")"
+      svg_root
+      container
+        text "03"
+        svg_root
+        paragraph
+          text "주소 입력 → 만들기"
+        paragraph
+          text "이름은"
+          text "NAEO"
+          text ", 연결의"
+          text "서버 URL"
+          text "에 복사한 주소를 붙여넣고 인증은"
+          text "OAuth"
+          text "그대로."
+          text ""이해했으며 계속 진행하겠습니다""
+          text "에 체크하고"
+          text "만들기"
+          text "."
+      svg_root
+      container
+        text "04"
+        svg_root
+        paragraph
+          text "설치 → 로그인 → 허용"
+        paragraph
+          text "추가한"
+          text "NAEO 플러그인"
+          text "을 열어"
+          text "플러그인 설치"
+          text "를 누르고, 뜨는 창에서"
+          text "NAEO 로그인"
+          text "과"
+          text "허용"
+          text "까지 마치면 끝. "추가"만 하고 허용을 건너뛰면 도구가 안 보여요. 연결되면 채팅창에"
+          text "@"
+          text "를 입력하고"
+          text "NAEO"
+          text "를 고르면 됩니다."
+      paragraph
+        text "연결 후 첫 마디 →"
+        text ""내 황금 키워드 보여줘""
+      paragraph
+        text "//"
+        text "HOW TO USE"
+      heading
+        text "연결했다면, 이렇게 쓰세요"
+      paragraph
+        text "키워드부터 네이버 발행까지, 프롬프트는 그대로 복사해서 쓸 수 있어요."
+      paragraph
+        text "chatgpt.com"
+      paragraph
+        text "STEP 01"
+      paragraph
+        text "황금 키워드부터"
+      paragraph
+        text "“내 황금 키워드 보여주고, 글쓰기 좋은 것 3개만 추천해줘”"
+      button [ref=2840]
+        svg_root
+        text "프롬프트 복사"
+      paragraph
+        text "검색량은 높고 경쟁은 비어 있는 황금 키워드를 대화에서 바로 확인합니다."
+      paragraph
+        text "chatgpt.com"
+      paragraph
+        text "STEP 02"
+      paragraph
+        text "내 말투로, 이미지까지"
+      paragraph
+        text "“이 키워드로 내 블로그 말투에 맞춰 글 써줘”"
+      button [ref=2841]
+        svg_root
+        text "프롬프트 복사"
+      paragraph
+        text "NAEO의 AEO 처방(인용되기 좋은 구조·검색 데이터 근거·내 말투)을 받아 ChatGPT가 이미지까지 만듭니다."
+      paragraph
+        text "chatgpt.com"
+      paragraph
+        text "STEP 03"
+      paragraph
+        text "저장도, 수정도 대화로"
+      paragraph
+        text "“만든 이미지도 올려줘”"
+      button [ref=2842]
+        svg_root
+        text "프롬프트 복사"
+      paragraph
+        text "글은 이미 발행 대기함에 저장된 상태. 나중에 만든 이미지도 한마디면 그 글에 순서대로 첨부됩니다. 첫 장은 썸네일로."
+      paragraph
+        text "blog.naver.com · NAEO extension"
+      paragraph
+        text "STEP 04"
+      paragraph
+        text "복사는 익스텐션, 붙여넣기는 Cmd+V"
+      paragraph
+        text "PC에서 NAEO 크롬 익스텐션 "내 글"을 열면 제목·본문·사진을 조각마다 복사해 주고, 들어갈 자리로 커서까지 옮겨 줍니다. 붙여넣기(Cmd+V)는 직접 하시�..."
+      anchor [ref=2843, loc=href:https://chromewebstore.google.com/detail/fbcdjkglekdbdnafnaofgpemooepdgha, url=https://chromewebstore.google.com/detail/fbcdjkglekdbdnafnaofgpemooepdgha]
+        text "크롬 익스텐션 설치 →"
+      paragraph
+        text "blog.naver.com"
+      paragraph
+        text "STEP 05"
+      paragraph
+        text "발행 버튼, 끝"
+      paragraph
+        text "네이버에서 발행 버튼만 누르면 끝. 발행된 글의 순위와 AI 브리핑 채택은 NAEO가 이어서 추적합니다."
+      paragraph
+        text "//"
+        text "FAQ"
+      heading
+        text "자주 묻는 질문"
+      heading
+        button [ref=2844]
+          paragraph
+            text "어떤 요금제가 필요한가요?"
+          svg_root
+      heading
+        button [ref=2845]
+          paragraph
+            text "API 키를 발급받아야 하나요?"
+          svg_root
+      heading
+        button [ref=2846]
+          paragraph
+            text "내 데이터는 안전한가요?"
+          svg_root
+      heading
+        button [ref=2847]
+          paragraph
+            text "이미지도 만들어지나요?"
+          svg_root
+      heading
+        button [ref=2848]
+          paragraph
+            text "ChatGPT와 Claude(클로드) 중 뭘 써야 하나요?"
+          svg_root
+      heading
+        button [ref=2849]
+          paragraph
+            text "글은 어떻게 네이버에 발행하나요?"
+          svg_root
+      heading
+        button [ref=2850]
+          paragraph
+            text "연결했는데 추천 키워드가 안 나와요"
+          svg_root
+      heading
+        button [ref=2851]
+          paragraph
+            text "GPT가 "저장 기능이 없다"고 하거나 도구가 안 보여요"
+          svg_root
+      heading
+        button [ref=2852]
+          paragraph
+            text "연결했는데 NAEO가 응답하지 않아요"
+          svg_root
+      paragraph
+        text "//"
+        text "CITATION TRACKING"
+      heading
+        text "어느 쪽으로 쓰든, 발행하면 인용을 추적합니다"
+      paragraph
+        text "발행된 글의 주소가 자동으로 연결되고, AI 답변에 인용되는지 판정해 인용 배지로 보여드립니다. 글 쓰는 데서 멈추지 않는 이유입니다."
+      heading
+        text "아직 NAEO 계정이 없다면"
+      paragraph
+        text "블로그 주소만 입력하면 무료 분석과 함께"
+        text "황금 키워드 추천이 시작됩니다."
+      anchor [ref=2853, url=http://127.0.0.1:3000/]
+        text "무료로 시작하기"
+      container
+        text "NAEO"
+        paragraph
+          text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+        anchor "NAEO YouTube @naeo_kr" [ref=2854, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+          svg_root
+        anchor "NAEO Instagram @naeo.kr" [ref=2855, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+          svg_root
+        anchor "NAEO Threads @naeo.kr" [ref=2856, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+          svg_root
+        anchor "NAEO 네이버 카페 커뮤니티" [ref=2857, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+        container "서비스 링크"
+          text "서비스"
+          anchor [ref=2858, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+            text "FAQ"
+          anchor [ref=2859, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+            text "문의하기"
+          anchor [ref=2860, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2861, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+            text "업데이트"
+        container "법적 고지 링크"
+          text "법적 고지"
+          anchor [ref=2862, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+            text "이용약관"
+          anchor [ref=2863, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+            text "개인정보처리방침"
+          anchor [ref=2864, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+            text "환불규정"
+        text "주식회사 어크로스"
+        text "| 대표:"
+        text "이재홍"
+        text "| 사업자등록번호:"
+        text "288-86-03687"
+        text "주소:"
+        text "서울특별시 강남구 테헤란로63길 9, 1801"
+        text "문의:"
+        text "ask@naeo.kr"
+        text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+        text "© 2026 NAEO. All rights reserved."

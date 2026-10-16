@@ -75,5 +75,5 @@ function Workspace(){
 export default function DraftsWorkspace(){
  const [host,setHost]=useState<HTMLElement|null>(null);
  useEffect(()=>{const find=()=>document.querySelector<HTMLElement>('main');const t=window.setTimeout(()=>setHost(find()),0);return()=>window.clearTimeout(t);},[]);
- return host?createPortal(<div style={{maxWidth:1100,margin:'0 auto',padding:'0 16px'}}><Workspace/></div>,host):null;
+ return host?createPortal(<div data-naeo-live style={{maxWidth:1100,margin:'0 auto',padding:'0 16px'}}><Workspace/></div>,host):null;
 }

@@ -1,0 +1,135 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "결제·환불"
+    container
+      container
+        anchor [ref=1760, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1761, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1762]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1763, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1764, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1765, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1766, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1767, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1768, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1769, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1770, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1771, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1772, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1773, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1774, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1775, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1776, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1777, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1778, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1779, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "결제·환불"
+          container
+            paragraph
+              text "결제 키가 설정되지 않았습니다(미설정). 결제사 취소가 필요한 환불은 처리할 수 없습니다."
+            container "환불 요청"
+              heading
+                text "환불 요청"
+              paragraph
+                text "처리 중인 요청은 1분 후 같은 환불로 다시 확인할 수 있습니다. 새 환불을 만들지 않습니다."
+              container
+                table
+                  table_row
+                    table_cell
+                      text "환불 요청 목록"
+                  table_row
+                    table_cell
+                      text "회원·주문"
+                    table_cell
+                      text "금액"
+                    table_cell
+                      text "사유"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "결정"
+                paragraph
+                  text "환불 요청이 없습니다."
+              container "환불 요청 페이지"
+                button [ref=1780]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=1781]
+                  text "다음"
+            container "결제 내역"
+              heading
+                text "결제 내역"
+              form
+                container
+                  text "검색"
+                  textbox [ref=1782, loc=css:input[placeholder="주문 번호·이메일"]]
+                    text "주문 번호·이메일"
+                container
+                  text "상태"
+                  combobox [ref=1783]
+                    text "전체"
+                button [ref=1784]
+                  text "검색"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "결제 목록"
+                  table_row
+                    table_cell
+                      text "회원"
+                    table_cell
+                      text "주문"
+                    table_cell
+                      text "금액"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "일시"
+                    table_cell
+                      text "직접 환불"
+                paragraph
+                  text "결제가 없습니다."
+              container "결제 내역 페이지"
+                button [ref=1785]
+                  text "이전"
+                text "1"
+                text "/"
+                text "1"
+                button [ref=1786]
+                  text "다음"
+              paragraph
+                text "결제·환불 기록은 회계 기록이라 삭제되지 않고, 금액은 바꿀 수 없습니다."

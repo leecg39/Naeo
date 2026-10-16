@@ -1,0 +1,56 @@
+[p1 "NAEO 이벤트 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO 이벤트 | NAEO"]
+root
+  container
+    container
+      button "Open issues overlay" [ref=87, loc=css:button[aria-label="Open issues overlay"]]
+        svg_root
+        container
+          text "0"
+          text "1"
+        text "Issue"
+      button "Collapse issues badge" [ref=88, loc=css:button[aria-label="Collapse issues badge"]]
+        svg_root
+    container
+      anchor [ref=102, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=103, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=104, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=105, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=106, loc=href:/event, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=107, loc=href:/blog, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=108, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        button "테마 전환" [ref=109, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        button [ref=110]
+          text "시작하기"
+    container
+      container
+        heading
+          text "이벤트"
+        paragraph
+          text "NAEO 회원을 위한 이벤트와 리워드 소식이에요."
+      container
+        text "진행·예정"
+        anchor "주간 랭킹 리워드 (진행 중)" [ref=111, loc=css:a[aria-label="주간 랭킹 리워드 (진행 중)"], url=http://127.0.0.1:3000/event/ranking-reward]
+          container
+            text "진행 중"
+            heading
+              text "주간 랭킹 리워드"
+            text "2026.01.05 ~ 2027.12.31"
+          svg_root
+      container
+        text "종료된 이벤트"
+        anchor "사용 후기 이벤트 (종료)" [ref=112, loc=css:a[aria-label="사용 후기 이벤트 (종료)"], url=http://127.0.0.1:3000/event/naeo-review]
+          container
+            text "종료"
+            heading
+              text "사용 후기 이벤트"
+            text "2026.09.01 ~ 2026.09.30"
+          svg_root

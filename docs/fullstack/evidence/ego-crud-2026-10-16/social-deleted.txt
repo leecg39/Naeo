@@ -1,0 +1,55 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    container
+      anchor [ref=693, url=http://127.0.0.1:3000/]
+        text "NAEO"
+        text "●"
+      container
+        text "Ego 수정 검증"
+        button [ref=694]
+          text "로그아웃"
+    container
+      container
+        container "대시보드 메뉴"
+          anchor [ref=695, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+          anchor [ref=696, loc=href:/dashboard/ai-picks, url=http://127.0.0.1:3000/dashboard/ai-picks]
+            text "AI 인용 현황"
+          anchor [ref=697, loc=href:/dashboard/recommendations, url=http://127.0.0.1:3000/dashboard/recommendations]
+            text "키워드 추천"
+          anchor [ref=698, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+            text "경쟁 블로그"
+          anchor [ref=699, loc=href:/dashboard/write, url=http://127.0.0.1:3000/dashboard/write]
+            text "AI 글쓰기"
+          anchor [ref=700, loc=href:/dashboard/mate, url=http://127.0.0.1:3000/dashboard/mate]
+            text "네이버 메이트"
+          anchor [ref=701, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+            text "이벤트"
+          anchor [ref=702, loc=href:/dashboard/social, url=http://127.0.0.1:3000/dashboard/social]
+            text "소셜 제작"
+          anchor [ref=703, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+            text "계정 설정"
+        anchor [ref=704, url=http://127.0.0.1:3000/]
+          text "사이트로 돌아가기 ↗"
+      container
+        paragraph
+          text "MY NAEO"
+        heading
+          text "소셜 제작"
+        container
+          status
+            text "프로젝트를 지웠어요."
+          container "내 프로젝트"
+            form "새 프로젝트"
+              container
+                text "종류"
+                combobox [ref=705]
+                  text "캐러셀(1080×1440)"
+              container
+                text "제목"
+                textbox [ref=706]
+              button [ref=707]
+                text "새 프로젝트"
+            paragraph
+              text "아직 프로젝트가 없어요."

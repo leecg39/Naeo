@@ -1,0 +1,158 @@
+[p1 "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "ChatGPT·Claude에 NAEO 연결하기 | AI로 네이버 블로그 글쓰기 | NAEO"]
+root
+  container
+    alert
+      text "내 블로그 글, 이제 ChatGPT Claude NAEO 가 씁니다"
+    container
+      container
+        anchor [ref=2275, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2276, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2277, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2278, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2279, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2280, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2281, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          anchor [ref=2282, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+            text "Ego 수정 검증"
+          button "테마 전환" [ref=2283, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2284, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      paragraph
+        text "//"
+        text "AI WRITING"
+      heading "내 블로그 글, 이제 AI가 씁니다"
+        text "내 블로그 글, 이제"
+        container
+          container
+            svg_root
+            text "ChatGPT"
+            svg_root
+            text "Claude"
+            image
+            text "NAEO"
+          text "가 씁니다"
+      paragraph
+        text "두 방법 모두"
+        text "오늘 0원"
+        text "으로 시작합니다. 발행 후 AI 인용 추적은 어느 쪽이든 똑같이 따라와요."
+      button [ref=2285]
+        text "NAEO가 다 써주기"
+        text "7일 무료 체험"
+      button [ref=2286]
+        text "내 AI로 직접 쓰기"
+        text "평생 무료"
+      paragraph
+        text "키워드를 고르고 내 경험 한 줄을 적으면 내 블로그 말투로 글·이미지·썸네일까지 만들어 발행 대기함에 보내드려요."
+      container
+        paragraph
+          text "naeo.kr · AI 글쓰기"
+        video
+      paragraph
+        text "STEP 01"
+      paragraph
+        text "키워드 고르기"
+      paragraph
+        text "내 블로그 분석으로 선별된 추천 키워드가 황금 표시·검색량·포화도와 함께 표로 보입니다. 클릭 한 번이면 입력 끝."
+      container
+        paragraph
+          text "naeo.kr · AI 글쓰기"
+        video
+      paragraph
+        text "STEP 02"
+      paragraph
+        text "사진 올리고, 생성 버튼"
+      paragraph
+        text "내 사진은 최대 20장까지 글에 우선 배치되고, 사진이 채운 자리는 이미지 토큰이 차감되지 않습니다. 약 1분이면 내 말투로 쓴 본문과 썸네일·이미지�..."
+      paragraph
+        text "naeo.kr · 미리보기"
+      paragraph
+        text "STEP 03"
+      paragraph
+        text "미리보기로 확인, 저장"
+      paragraph
+        text "마음에 들면 발행 대기함으로, 아니면 삭제 후 다시 생성. 저장하기 전에는 글이 밖으로 나가지 않습니다."
+      paragraph
+        text "blog.naver.com · NAEO extension"
+      paragraph
+        text "STEP 04"
+      paragraph
+        text "복사는 익스텐션, 붙여넣기는 Cmd+V"
+      paragraph
+        text "PC에서 NAEO 크롬 익스텐션 "내 글"을 열면 제목·본문·사진을 조각마다 복사해 주고, 들어갈 자리로 커서까지 옮겨 줍니다. 붙여넣기(Cmd+V)는 직접 하시�..."
+      anchor [ref=2287, url=http://127.0.0.1:3000/pricing]
+        text "7일 무료 체험 시작하기"
+      paragraph
+        text "카드 등록만 · 오늘 결제 ₩0 · 체험 중 언제든 해지"
+      paragraph
+        text "//"
+        text "CITATION TRACKING"
+      heading
+        text "어느 쪽으로 쓰든, 발행하면 인용을 추적합니다"
+      paragraph
+        text "발행된 글의 주소가 자동으로 연결되고, AI 답변에 인용되는지 판정해 인용 배지로 보여드립니다. 글 쓰는 데서 멈추지 않는 이유입니다."
+      container
+        heading
+          text "아직 NAEO 계정이 없다면"
+        paragraph
+          text "블로그 주소만 입력하면 무료 분석과 함께"
+          text "황금 키워드 추천이 시작됩니다."
+        anchor [ref=2288, url=http://127.0.0.1:3000/]
+          text "무료로 시작하기"
+      container
+        container
+          container
+            text "NAEO"
+            paragraph
+              text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+            container
+              anchor "NAEO YouTube @naeo_kr" [ref=2289, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+                svg_root
+              anchor "NAEO Instagram @naeo.kr" [ref=2290, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+                svg_root
+              anchor "NAEO Threads @naeo.kr" [ref=2291, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+                svg_root
+              anchor "NAEO 네이버 카페 커뮤니티" [ref=2292, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+          container
+            container "서비스 링크"
+              text "서비스"
+              anchor [ref=2293, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+                text "FAQ"
+              anchor [ref=2294, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+                text "문의하기"
+              anchor [ref=2295, url=http://127.0.0.1:3000/blog]
+                text "매거진"
+              anchor [ref=2296, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+                text "업데이트"
+            container "법적 고지 링크"
+              text "법적 고지"
+              anchor [ref=2297, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+                text "이용약관"
+              anchor [ref=2298, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+                text "개인정보처리방침"
+              anchor [ref=2299, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+                text "환불규정"
+        container
+          container
+            container
+              text "주식회사 어크로스"
+              text "| 대표:"
+              text "이재홍"
+              text "| 사업자등록번호:"
+              text "288-86-03687"
+            container
+              text "주소:"
+              text "서울특별시 강남구 테헤란로63길 9, 1801"
+            container
+              text "문의:"
+              text "ask@naeo.kr"
+            text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+          text "© 2026 NAEO. All rights reserved."

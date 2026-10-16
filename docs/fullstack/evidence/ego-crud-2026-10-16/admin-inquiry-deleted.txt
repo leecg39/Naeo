@@ -1,0 +1,108 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "NAEO | 네이버 블로그 AI 브리핑 인용 진단"
+    container
+      container
+        anchor [ref=2336, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=2337, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=2338]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=2339, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=2340, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=2341, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=2342, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=2343, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=2344, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=2345, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=2346, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=2347, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=2348, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=2349, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=2350, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=2351, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=2352, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=2353, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=2354, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=2355, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "문의 관리"
+          container
+            status
+              text "문의를 삭제했습니다."
+            container
+              form
+                container
+                  text "문의 검색"
+                  textbox [ref=2356, loc=css:input[placeholder="이메일·제목·내용"]]
+                    text "이메일·제목·내용"
+                container
+                  text "상태"
+                  combobox [ref=2357]
+                    text "전체 상태"
+                container
+                  text "유형"
+                  combobox [ref=2358]
+                    text "전체 유형"
+                button [ref=2359]
+                  text "검색"
+              paragraph
+                text "총"
+                text "0"
+                text "건"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "문의 목록"
+                  table_row
+                    table_cell
+                      text "제목 / 회신 이메일"
+                    table_cell
+                      text "유형"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "답변"
+                    table_cell
+                      text "접수일"
+                    table_cell
+                      text "관리"
+                paragraph
+                  text "조건에 맞는 문의가 없습니다."
+              container
+                button [ref=2361]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=2362]
+                  text "다음"

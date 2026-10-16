@@ -1,0 +1,140 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "NAEO | 네이버 블로그 AI 브리핑 인용 진단"
+    container
+      container
+        anchor [ref=1810, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1811, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1812]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1813, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1814, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1815, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1816, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1817, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1818, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1819, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1820, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1821, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1822, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1823, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1824, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1825, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1826, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1827, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1828, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1829, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "글쓰기 관리"
+          container
+            container
+              heading
+                text "글쓰기 템플릿"
+              paragraph
+                text "회원이 AI 글 생성 때 고를 수 있는 작성 지침입니다. AI 글 공급자:"
+                text "미설정"
+                text "· 서버에 ANTHROPIC_API_KEY가 없어 생성 요청은 토큰 차감 없이 거절됩니다."
+                text "AI 이미지 공급자:"
+                text "미설정"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "글쓰기 템플릿"
+                  table_row
+                    table_cell
+                      text "이름"
+                    table_cell
+                      text "주제"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "관리"
+                paragraph
+                  text "템플릿이 없습니다."
+              button [ref=1830]
+                text "새 템플릿"
+            container
+              heading
+                text "토큰 지급"
+              form "토큰 지급"
+                container
+                  text "회원 이메일"
+                  textbox [ref=1831]
+                container
+                  text "토큰(음수면 회수)"
+                  spinbutton [ref=1832]
+                    text "10"
+                container
+                  text "사유"
+                  textbox [ref=1833]
+                button [ref=1834]
+                  text "지급·회수"
+            container
+              heading
+                text "AI 생성 작업"
+              form
+                container
+                  text "검색"
+                  textbox [ref=1835, loc=css:input[placeholder="이메일·키워드·오류 코드"]]
+                    text "이메일·키워드·오류 코드"
+                container
+                  text "상태"
+                  combobox [ref=1836]
+                    text "전체"
+                button [ref=1837]
+                  text "검색"
+              paragraph
+                text "총"
+                text "0"
+                text "개"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "AI 생성 작업"
+                  table_row
+                    table_cell
+                      text "회원"
+                    table_cell
+                      text "키워드"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "토큰"
+                    table_cell
+                      text "오류"
+                    table_cell
+                      text "요청"
+                    table_cell
+                      text "관리"
+                paragraph
+                  text "생성 작업이 없습니다."

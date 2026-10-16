@@ -1,0 +1,203 @@
+[p1 "AI 인용 현황 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "AI 인용 현황 | NAEO"]
+root
+  container
+    alert
+    container
+      container
+        container
+          anchor [ref=746, loc=href:/, url=http://127.0.0.1:3000/]
+            paragraph
+              text "NAEO"
+          button "테마 전환" [ref=747, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+        paragraph
+          text "대시보드"
+        container
+          anchor [ref=748, url=http://127.0.0.1:3000/dashboard]
+            svg_root
+            paragraph
+              text "대시보드"
+          anchor [ref=749, url=http://127.0.0.1:3000/dashboard/recommendations]
+            svg_root
+            paragraph
+              text "키워드 추천"
+            text "무료 이용"
+          anchor [ref=750, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "AI 글쓰기"
+            text "무료 이용"
+          anchor [ref=751, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+            svg_root
+            paragraph
+              text "이벤트"
+        paragraph
+          text "분석 도구"
+        container
+          anchor [ref=752, url=http://127.0.0.1:3000/dashboard/ai-picks]
+            svg_root
+            paragraph
+              text "AI 인용 현황"
+          anchor [ref=753, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+            svg_root
+            paragraph
+              text "경쟁 블로그"
+            text "무료 이용"
+          anchor [ref=754, url=http://127.0.0.1:3000/dashboard/mate]
+            svg_root
+            paragraph
+              text "메이트 진단"
+        paragraph
+          text "계정"
+        anchor [ref=755, url=http://127.0.0.1:3000/dashboard/settings]
+          svg_root
+          paragraph
+            text "설정"
+        container
+          container
+            anchor "Ego 수정 검증 설정" [ref=756, loc=css:a[aria-label="Ego 수정 검증 설정"], url=http://127.0.0.1:3000/dashboard/settings]
+              text "E"
+              paragraph
+                text "Ego 수정 검증"
+            button "더보기 메뉴" [ref=757, loc=css:button[aria-label="더보기 메뉴"]]
+              svg_root
+          container
+            svg_root
+            paragraph
+              text "무료 이용"
+            paragraph
+              text "스캔 20회"
+          anchor [ref=758, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "글쓰기"
+            paragraph
+              text "잔액 0토큰"
+          container
+            anchor [ref=759, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+              paragraph
+                text "요금제 안내"
+            anchor [ref=760, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+              paragraph
+                text "이용약관"
+            anchor [ref=761, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+              paragraph
+                text "문의하기"
+      container
+        status
+          container
+            container
+              container
+                paragraph
+                  text "10월 5일부터 매주 NAEO에서 커피 한 잔 어떠세요?"
+                text "매주 월요일 발표"
+              paragraph
+                text "주간 랭킹 1~5위"
+                text "32개 주제마다 1명"
+                text "신규 등록 10명"
+            anchor [ref=762, url=http://127.0.0.1:3000/dashboard/settings]
+              text "참여하기"
+          button "배너 닫기" [ref=763, loc=css:button[aria-label="배너 닫기"]]
+            svg_root
+        container
+          container
+            heading
+              text "AI 인용 현황"
+            container
+              svg_root
+              paragraph
+                text "AI 브리핑 인용 확인 공급자가 설정되지 않았습니다."
+                text "설정되면 내 키워드에서 AI 브리핑 인용 여부를 확인해 여기에 보여드립니다."
+          container
+            region "AI 인용 현황 핵심 지표"
+              container
+                paragraph
+                  text "전체 글"
+                paragraph
+                  text "-"
+                paragraph
+                  text "미설정"
+              container
+                paragraph
+                  text "통합검색 노출"
+                paragraph
+                  text "-"
+                paragraph
+                  text "미설정"
+              container
+                paragraph
+                  text "AI 추천"
+                paragraph
+                  text "-"
+                paragraph
+                  text "미설정"
+              container
+                paragraph
+                  text "AI 브리핑 노출"
+                paragraph
+                  text "-"
+                paragraph
+                  text "미설정"
+              container
+                paragraph
+                  text "AI 추천률"
+                paragraph
+                  text "-"
+                paragraph
+                  text "미설정"
+            container
+              paragraph
+                text "카테고리별 분포"
+              paragraph
+                text "데이터 없음"
+          container
+            container
+              container
+                container
+                  comboboxgrouping [ref=764]
+                    text "전체"
+                  textbox [ref=765]
+                    text "all"
+                  svg_root
+                  group [ref=766]
+                button [ref=767]
+                  text "전체 0"
+                button [ref=768]
+                  text "통합검색 노출 0"
+                button [ref=769]
+                  text "AI 브리핑 0"
+                button [ref=770]
+                  text "AI 추천됨 0"
+              container
+                button "최신순 정렬, 내림차순" [ref=771, loc=role:button[name="최신순 정렬, 내림차순"]]
+                  paragraph
+                    text "최신순"
+                button "검색량순 정렬" [ref=772, loc=role:button[name="검색량순 정렬"]]
+                  paragraph
+                    text "검색량순"
+                button "포화도순 정렬" [ref=773, loc=role:button[name="포화도순 정렬"]]
+                  paragraph
+                    text "포화도순"
+            container
+              container
+                text "분석일 / 발행일"
+                text "포스트 정보"
+                container
+                  text "대표 키워드"
+                  button "대표 키워드 설명" [ref=774, loc=css:button[aria-label="대표 키워드 설명"]]
+                    svg_root
+                container
+                  text "검색량 / 포화도"
+                  button "검색량 및 포화도 설명" [ref=775, loc=css:button[aria-label="검색량 및 포화도 설명"]]
+                    svg_root
+                container
+                  text "통합검색 노출"
+                  button "통합검색 노출 설명" [ref=776, loc=css:button[aria-label="통합검색 노출 설명"]]
+                    svg_root
+                container
+                  text "AI 성과 (추천)"
+                  button [ref=777]
+                    svg_root
+                text "관리"
+              status
+                text "AI 브리핑 인용 확인 공급자가 설정되지 않았습니다. (미설정) 인용 기록이 아직 없습니다."

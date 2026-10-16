@@ -1,0 +1,207 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "키워드 관리"
+    container
+      container
+        anchor [ref=1086, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1087, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1088]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1089, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1090, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1091, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1092, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1093, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1094, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1095, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1096, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1097, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1098, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1099, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1100, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1101, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1102, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1103, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1104, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1105, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "키워드 관리"
+          container
+            status
+              text "지표를 기록했습니다."
+            container
+              form
+                container
+                  text "키워드 검색"
+                  textbox [ref=1106, loc=css:input[placeholder="키워드·분류"]]
+                    text "키워드·분류"
+                container
+                  text "상태"
+                  combobox [ref=1107]
+                    text "전체"
+                button [ref=1108]
+                  text "검색"
+                button [ref=1109]
+                  text "새 키워드"
+              paragraph
+                text "총"
+                text "1"
+                text "개 · 황금 키워드(포화도 1 미만·검색량 1,000 이상)와 선점기회(포화도 3 미만·검색량 300 이상)는 이 복제본의 새 규칙입니다."
+              table
+                table_row
+                  table_cell
+                    text "키워드 목록"
+                table_row
+                  table_cell
+                    text "키워드"
+                  table_cell
+                    text "분류"
+                  table_cell
+                    text "상태"
+                  table_cell
+                    text "검색량"
+                  table_cell
+                    text "문서수"
+                  table_cell
+                    text "포화도"
+                  table_cell
+                    text "관리"
+                table_row
+                  table_cell
+                    text "Ego 수정 여행"
+                    text "🏆"
+                  table_cell
+                    text "여행"
+                  table_cell
+                    text "노출"
+                  table_cell
+                    text "1,200"
+                  table_cell
+                    text "300"
+                  table_cell
+                    text "0.25"
+                  table_cell
+                    button [ref=1118]
+                      text "편집"
+                      text "Ego 수정 여행"
+              button [ref=1110]
+                text "이전"
+              text "1"
+              text "/"
+              text "1"
+              button [ref=1111]
+                text "다음"
+            container "키워드 편집"
+              heading
+                text "키워드 편집"
+              paragraph
+                text "버전"
+                text "2"
+                text "· 등록"
+                text "2026. 10. 16."
+              form
+                container
+                  text "키워드"
+                  textbox [ref=1141]
+                    text "Ego 수정 여행"
+                container
+                  text "분류"
+                  textbox [ref=1142]
+                    text "여행"
+                container
+                  text "메모(관리용)"
+                  textbox [ref=1143]
+                container
+                  text "상태"
+                  combobox [ref=1144]
+                    text "추천에 노출"
+                container
+                  button [ref=1145]
+                    text "저장"
+                  button [ref=1146]
+                    text "삭제"
+                  button [ref=1147]
+                    text "닫기"
+              container
+                heading
+                  text "지표 이력"
+                paragraph
+                  text "네이버 검색광고 API가 설정되지 않아 관리자가 확인한 월간 검색량·문서수를 직접 기록합니다(출처: 관리자 입력)."
+                form
+                  container
+                    text "PC 검색량"
+                    spinbutton [ref=1148]
+                  container
+                    text "모바일 검색량"
+                    spinbutton [ref=1149]
+                  container
+                    text "문서수"
+                    spinbutton [ref=1150]
+                  button [ref=1151]
+                    text "지표 기록"
+                table
+                  table_row
+                    table_cell
+                      text "지표 이력"
+                  table_row
+                    table_cell
+                      text "측정일"
+                    table_cell
+                      text "PC"
+                    table_cell
+                      text "모바일"
+                    table_cell
+                      text "문서수"
+                    table_cell
+                      text "포화도"
+                    table_cell
+                      text "출처"
+                    table_cell
+                      text "관리"
+                  table_row
+                    table_cell
+                      text "2026. 10. 16."
+                    table_cell
+                      text "200"
+                    table_cell
+                      text "1,000"
+                    table_cell
+                      text "300"
+                    table_cell
+                      text "0.25"
+                    table_cell
+                      text "관리자 입력"
+                    table_cell
+                      button [ref=1152]
+                        text "삭제"
+                        container
+                          text "2026. 10. 16."
+                          text "지표"

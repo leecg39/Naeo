@@ -1,0 +1,74 @@
+[p2 "Ego 검증 이벤트 | NAEO" | space "NAEO 클론 화면"(15): 2 managed, 0 untracked — p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단", p2* "Ego 검증 이벤트 | NAEO"]
+root
+  container
+    container
+      anchor [ref=1, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=2, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=3, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=4, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=5, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=6, loc=href:/blog, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=7, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        button "테마 전환" [ref=8, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        button [ref=9]
+          text "시작하기"
+    container
+      anchor [ref=10, url=http://127.0.0.1:3000/event]
+        text "← 이벤트 목록"
+      container
+        heading
+          text "Ego 검증 이벤트"
+        paragraph
+          text "검증용 이벤트"
+      paragraph "이벤트 정보"
+        text "기간 2026.10.16 ~ 2026.10.23 · 진행 중 · 참여 0명"
+      container
+        heading
+          text "참여 안내"
+        paragraph
+          text "브라우저 검증용 이벤트입니다."
+      container
+        status
+          text "참여를 철회했습니다."
+        form "이벤트 참여"
+          container
+            text "인증할 블로그 글 주소"
+            text "(선택)"
+            textbox [ref=23, loc=css:input[placeholder="https://blog.naver.com/내아이디/글번호"]]
+              text "https://blog.naver.com/내아이디/글번호"
+          container
+            text "남길 말 (선택)"
+            textbox [ref=24]
+          paragraph
+            text "설정에 등록한 내 네이버 블로그의 글만 인증할 수 있어요."
+          button [ref=25]
+            text "참여하기"
+    container
+      container "법적 고지 링크"
+        anchor [ref=14, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+          text "이용약관"
+        anchor [ref=15, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+          text "개인정보처리방침"
+        anchor [ref=16, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+          text "환불규정"
+      text "주식회사 어크로스"
+      text "| 대표:"
+      text "이재홍"
+      text "| 사업자등록번호:"
+      text "288-86-03687"
+      text "주소:"
+      text "서울특별시 강남구 테헤란로63길 9, 1801"
+      text "문의:"
+      text "ask@naeo.kr"
+      text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+      text "© 2026 NAEO. All rights reserved."
+    alert

@@ -78,6 +78,6 @@ function SharedGallery({token}:{token:string}){
  </div>;
 }
 
-const wrap=(child:React.ReactNode)=><section style={{maxWidth:1100,margin:'32px auto',padding:'0 16px'}}>{child}</section>;
+const wrap=(child:React.ReactNode)=><section data-naeo-live style={{maxWidth:1100,margin:'32px auto',padding:'0 16px'}}>{child}</section>;
 export function ImagesLibrary(){const host=useMain();return host?createPortal(wrap(<Library/>),host):null;}
 export function SharedImages({token}:{token:string}){const host=useMain();return host?createPortal(wrap(<SharedGallery token={token}/>),host):null;}

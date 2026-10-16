@@ -1,0 +1,106 @@
+[p1 "매거진 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "매거진 | NAEO"]
+root
+  container
+    container
+      button "Open issues overlay" [ref=87, loc=css:button[aria-label="Open issues overlay"]]
+        svg_root
+        container
+          text "0"
+          text "1"
+        text "Issue"
+      button "Collapse issues badge" [ref=88, loc=css:button[aria-label="Collapse issues badge"]]
+        svg_root
+    container
+      anchor [ref=113, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=114, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=115, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=116, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=117, loc=href:/event, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=118, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=119, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        button [ref=120]
+          container
+            svg_root
+            image
+          text "NAEO 블로거"
+        button "테마 전환" [ref=121, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        anchor [ref=122, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+          text "대시보드"
+    container
+      container "블로그 사이드바" [ref=123]
+        container
+          svg_root
+          textbox "블로그 글 검색" [ref=124]
+            text "글 검색..."
+        container
+          text "마케팅"
+          unordered_list
+            list_item
+              anchor [ref=125, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-tips-1-travel-life]
+                text "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+            list_item
+              anchor [ref=126, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-tips-2-life-culture]
+                text "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+            list_item
+              anchor [ref=127, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-tips-3-knowledge-hobby]
+                text "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지"
+            list_item
+              anchor [ref=128, url=http://127.0.0.1:3000/blog/marketing/golden-keywords]
+                text "내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요"
+            list_item
+              anchor [ref=129, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-image-citation]
+                text "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형"
+            list_item
+              anchor [ref=130, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-food-playbook]
+                text "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개"
+            list_item
+              anchor [ref=131, url=http://127.0.0.1:3000/blog/marketing/mate-free-diagnosis]
+                text "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요"
+            list_item
+              anchor [ref=132, url=http://127.0.0.1:3000/blog/marketing/ai-briefing-cited-posts]
+                text "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것"
+            list_item
+              anchor [ref=133, url=http://127.0.0.1:3000/blog/marketing/what-is-ai-briefing]
+                text "AI 브리핑이란? 블로거가 알아야 할 모든 것"
+        container
+          text "사용 가이드"
+          unordered_list
+            list_item
+              anchor [ref=134, url=http://127.0.0.1:3000/blog/guide/golden-keywords-guide]
+                text "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법"
+      container
+        container
+          heading
+            text "AI 답변에 인용되는 글이 되고 있나요?"
+          paragraph
+            text "네이버 AI 검색 시대의 콘텐츠 전략 · 알고리즘 · 실전 사례"
+        container
+          container
+            container
+              svg_root
+              heading
+                text "이벤트"
+            anchor [ref=135, url=http://127.0.0.1:3000/blog/event/naeo-review-event]
+              text "자세히 보기 →"
+          anchor "이벤트 보기: NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지" [ref=136, url=http://127.0.0.1:3000/blog/event/naeo-review-event]
+            image
+            container
+              paragraph
+                text "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지"
+              text "NAEO를 써본 소감 한 줄이면 선착순 500명 스타벅스 아메리카노. 블로그·릴스·쇼츠 후기를 남기면 커피에 에어팟 프로·아이패드 에어 추첨까지. 9월 27�..."
+        container
+          container
+            svg_root
+            heading
+              text "최신 영상"
+          anchor [ref=137, url=https://www.youtube.com/@naeo_kr]
+            text "채널 전체 보기 →"

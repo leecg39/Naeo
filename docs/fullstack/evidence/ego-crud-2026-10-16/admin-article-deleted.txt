@@ -1,0 +1,432 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "매거진 관리"
+    container
+      container
+        anchor [ref=1269, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1270, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1271]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1272, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1273, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1274, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1275, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1276, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1277, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1278, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1279, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1280, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1281, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1282, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1283, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1284, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1285, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1286, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1287, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1288, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "매거진 관리"
+          container
+            status
+              text "글을 삭제했습니다. 공개 주소는 이제 404입니다."
+            tab [ref=1289]
+              text "글"
+            tab [ref=1290]
+              text "분류"
+            container
+              form
+                container
+                  text "글 검색"
+                  textbox [ref=1291, loc=css:input[placeholder="제목·주소·요약"]]
+                    text "제목·주소·요약"
+                container
+                  text "상태"
+                  combobox [ref=1292]
+                    text "전체 상태"
+                container
+                  text "분류"
+                  combobox [ref=1293]
+                    text "전체 분류"
+                button [ref=1294]
+                  text "검색"
+                button [ref=1295]
+                  text "새 글 쓰기"
+              paragraph
+                text "총"
+                text "20"
+                text "개"
+              container [ref=1296]
+                table
+                  table_row
+                    table_cell
+                      text "매거진 글 목록"
+                  table_row
+                    table_cell
+                      text "제목 / 주소"
+                    table_cell
+                      text "분류"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "게시일"
+                    table_cell
+                      text "수정일"
+                    table_cell
+                      text "관리"
+                  table_row
+                    table_cell
+                      text "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개"
+                      text "/blog/marketing/ai-briefing-food-playbook"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 11. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1297]
+                        text "편집"
+                        text "맛집 블로그가 AI 브리핑에 인용되려면, 실측 벤치마크와 글감 5개"
+                  table_row
+                    table_cell
+                      text "AI 브리핑이란? 블로거가 알아야 할 모든 것"
+                      text "/blog/marketing/what-is-ai-briefing"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 3. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1298]
+                        text "편집"
+                        text "AI 브리핑이란? 블로거가 알아야 할 모든 것"
+                  table_row
+                    table_cell
+                      text "키워드 추천 사용법, 다음에 쓸 글을 1분 만에 정하기"
+                      text "/blog/guide/keyword-recommendation-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 15. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1299]
+                        text "편집"
+                        text "키워드 추천 사용법, 다음에 쓸 글을 1분 만에 정하기"
+                  table_row
+                    table_cell
+                      text "NAEO 대시보드 사용법, 처음부터 끝까지"
+                      text "/blog/guide/dashboard-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 3. 30. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1300]
+                        text "편집"
+                        text "NAEO 대시보드 사용법, 처음부터 끝까지"
+                  table_row
+                    table_cell
+                      text "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지"
+                      text "/blog/marketing/ai-briefing-tips-3-knowledge-hobby"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1301]
+                        text "편집"
+                        text "지식·취미 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 9가지"
+                  table_row
+                    table_cell
+                      text "경쟁 콘텐츠 사용법, 누가 1등이고, AI는 누구를 추천하는지"
+                      text "/blog/guide/competitor-analysis-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 4. 3. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1302]
+                        text "편집"
+                        text "경쟁 콘텐츠 사용법, 누가 1등이고, AI는 누구를 추천하는지"
+                  table_row
+                    table_cell
+                      text "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형"
+                      text "/blog/marketing/ai-briefing-image-citation"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 12. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1303]
+                        text "편집"
+                        text "검색 순위 낮아도 AI 브리핑에 뜨는 법, 이미지 인용의 3가지 원형"
+                  table_row
+                    table_cell
+                      text "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법"
+                      text "/blog/guide/golden-keywords-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1304]
+                        text "편집"
+                        text "황금 키워드 사용법, 통계 카드부터 포화도까지 읽는 법"
+                  table_row
+                    table_cell
+                      text "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지"
+                      text "/blog/event/naeo-review-event"
+                    table_cell
+                      text "이벤트"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 9. 3. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1305]
+                        text "편집"
+                        text "NAEO 사용 후기 이벤트, 한 줄 평 쓰고 커피 받고 후기 쓰면 아이패드·에어팟까지"
+                  table_row
+                    table_cell
+                      text "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요"
+                      text "/blog/marketing/mate-free-diagnosis"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 11. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1306]
+                        text "편집"
+                        text "네이버 메이트, 내 블로그도 될까? 30초 무료 진단으로 확인하세요"
+                  table_row
+                    table_cell
+                      text "[바이라인네트워크] 네이버 메이트 겨냥한 어크로스 'NAEO'…AI 브리핑 인용 여부 확인"
+                      text "/blog/news/naver-mate-naeo-byline"
+                    table_cell
+                      text "언론 보도"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 31. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1307]
+                        text "편집"
+                        text "[바이라인네트워크] 네이버 메이트 겨냥한 어크로스 'NAEO'…AI 브리핑 인용 여부 확인"
+                  table_row
+                    table_cell
+                      text "[머니투데이] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정"
+                      text "/blog/news/across-modu-startup-mt"
+                    table_cell
+                      text "언론 보도"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 13. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1308]
+                        text "편집"
+                        text "[머니투데이] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정"
+                  table_row
+                    table_cell
+                      text "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것"
+                      text "/blog/marketing/ai-briefing-cited-posts"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 10. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1309]
+                        text "편집"
+                        text "AI 브리핑에 인용되는 글의 공통점, 인용 글 786개를 직접 읽고 찾은 것"
+                  table_row
+                    table_cell
+                      text "AI 인용 현황 사용법, 카테고리별 인용률 정확히 읽기"
+                      text "/blog/guide/ai-picks-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 15. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1310]
+                        text "편집"
+                        text "AI 인용 현황 사용법, 카테고리별 인용률 정확히 읽기"
+                  table_row
+                    table_cell
+                      text "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+                      text "/blog/marketing/ai-briefing-tips-2-life-culture"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1311]
+                        text "편집"
+                        text "라이프·문화 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+                  table_row
+                    table_cell
+                      text "내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요"
+                      text "/blog/marketing/golden-keywords"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1312]
+                        text "편집"
+                        text "내 주제에서 아직 비어 있는 '황금 키워드'를 찾아드려요"
+                  table_row
+                    table_cell
+                      text "새 대시보드 활용법, 한 화면에서 다음 행동까지"
+                      text "/blog/guide/today-action-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 15. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1313]
+                        text "편집"
+                        text "새 대시보드 활용법, 한 화면에서 다음 행동까지"
+                  table_row
+                    table_cell
+                      text "채널 분석 사용법, 키워드별 채널 전략 세우기"
+                      text "/blog/guide/channel-analysis-guide"
+                    table_cell
+                      text "사용 가이드"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 4. 3. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1314]
+                        text "편집"
+                        text "채널 분석 사용법, 키워드별 채널 전략 세우기"
+                  table_row
+                    table_cell
+                      text "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+                      text "/blog/marketing/ai-briefing-tips-1-travel-life"
+                    table_cell
+                      text "마케팅"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 6. 24. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1315]
+                        text "편집"
+                        text "여행·먹거리·생활 블로그가 AI 브리핑에 인용되려면, 분야별 글쓰기 팁 8가지"
+                  table_row
+                    table_cell
+                      text "[디지털 인사이트] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정"
+                      text "/blog/news/across-modu-startup-ditoday"
+                    table_cell
+                      text "언론 보도"
+                    table_cell
+                      text "공개"
+                    table_cell
+                      text "2026. 5. 15. 오전 9:00"
+                    table_cell
+                      text "2026. 10. 16. 오전 8:33"
+                    table_cell
+                      button [ref=1394]
+                        text "편집"
+                        text "[디지털 인사이트] 어크로스, '모두의 창업' AI 솔루션 공급기업 선정"
+              container
+                button [ref=1317]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=1318]
+                  text "다음"

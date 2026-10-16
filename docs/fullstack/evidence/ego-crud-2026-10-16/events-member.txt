@@ -1,0 +1,119 @@
+[p1 "이벤트 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "이벤트 | NAEO"]
+root
+  container
+    alert
+      text "이벤트"
+    container
+      container
+        container
+          anchor [ref=797, loc=href:/, url=http://127.0.0.1:3000/]
+            paragraph
+              text "NAEO"
+          button "테마 전환" [ref=798, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+        paragraph
+          text "대시보드"
+        container
+          anchor [ref=799, url=http://127.0.0.1:3000/dashboard]
+            svg_root
+            paragraph
+              text "대시보드"
+          anchor [ref=800, url=http://127.0.0.1:3000/dashboard/recommendations]
+            svg_root
+            paragraph
+              text "키워드 추천"
+            text "무료 이용"
+          anchor [ref=801, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "AI 글쓰기"
+            text "무료 이용"
+          anchor [ref=802, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+            svg_root
+            paragraph
+              text "이벤트"
+        paragraph
+          text "분석 도구"
+        container
+          anchor [ref=803, url=http://127.0.0.1:3000/dashboard/ai-picks]
+            svg_root
+            paragraph
+              text "AI 인용 현황"
+          anchor [ref=804, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+            svg_root
+            paragraph
+              text "경쟁 블로그"
+            text "무료 이용"
+          anchor [ref=805, url=http://127.0.0.1:3000/dashboard/mate]
+            svg_root
+            paragraph
+              text "메이트 진단"
+        paragraph
+          text "계정"
+        anchor [ref=806, url=http://127.0.0.1:3000/dashboard/settings]
+          svg_root
+          paragraph
+            text "설정"
+        container
+          container
+            anchor "Ego 수정 검증 설정" [ref=807, loc=css:a[aria-label="Ego 수정 검증 설정"], url=http://127.0.0.1:3000/dashboard/settings]
+              text "E"
+              paragraph
+                text "Ego 수정 검증"
+            button "더보기 메뉴" [ref=808, loc=css:button[aria-label="더보기 메뉴"]]
+              svg_root
+          container
+            svg_root
+            paragraph
+              text "무료 이용"
+            paragraph
+              text "스캔 20회"
+          anchor [ref=809, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "글쓰기"
+            paragraph
+              text "잔액 0토큰"
+          container
+            anchor [ref=810, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+              paragraph
+                text "요금제 안내"
+            anchor [ref=811, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+              paragraph
+                text "이용약관"
+            anchor [ref=812, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+              paragraph
+                text "문의하기"
+      container
+        container
+          heading
+            text "이벤트"
+          paragraph
+            text "참여할 수 있는 이벤트와 내 참여·리워드 내역이에요."
+        container "내 이벤트 활동"
+          paragraph
+            text "아직 참여한 이벤트가 없어요."
+          container "내 참여 페이지"
+            text "1 / 1 · 총 0건"
+          paragraph
+            text "받은 리워드가 없어요."
+          container "내 리워드 페이지"
+            text "1 / 1 · 총 0건"
+        container
+          text "진행·예정"
+          anchor "주간 랭킹 리워드 (진행 중)" [ref=813, loc=css:a[aria-label="주간 랭킹 리워드 (진행 중)"], url=http://127.0.0.1:3000/dashboard/events/ranking-reward]
+            container
+              text "진행 중"
+              heading
+                text "주간 랭킹 리워드"
+              text "2026.01.05 ~ 2027.12.31"
+            svg_root
+        container
+          text "종료된 이벤트"
+          anchor "사용 후기 이벤트 (종료)" [ref=814, loc=css:a[aria-label="사용 후기 이벤트 (종료)"], url=http://127.0.0.1:3000/dashboard/events/naeo-review]
+            container
+              text "종료"
+              heading
+                text "사용 후기 이벤트"
+              text "2026.09.01 ~ 2026.09.30"
+            svg_root

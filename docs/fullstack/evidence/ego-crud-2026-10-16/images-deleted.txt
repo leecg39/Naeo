@@ -1,0 +1,36 @@
+[p1 "발행용 사진 올리기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "발행용 사진 올리기 | NAEO"]
+root
+  container
+    container
+      heading
+        text "발행용 사진 올리기"
+      paragraph
+        text "여기 올린 사진의"
+        text "마크다운을 복사해 AI 채팅에 붙여넣으면"
+        text ", 글에 이미지 자리가 들어가고 발행 시 익스텐션이 자동으로 가져와요. (자동 1600px 최적화)"
+      text "탭해서 사진 선택 (여러 장 가능)"
+      container
+        heading
+          text "내 사진함"
+          text "(0)"
+        paragraph
+          text "JPG·PNG·WEBP, 10MB 이하. 사진은 본인만 볼 수 있고, 공유 링크를 만든 글의 사진만 링크로 열 수 있습니다."
+        textbox "사진 올리기" [ref=2683, loc=css:input[aria-label="사진 올리기"]]
+          button [ref=2684]
+            text "파일 선택"
+          text "선택된 파일 없음"
+        status
+          text "사진을 삭제했습니다."
+        unordered_list
+        paragraph
+          text "아직 올린 사진이 없습니다."
+        container "내 사진함 페이지"
+          button [ref=2685]
+            text "이전"
+          container
+            text "1"
+            text "/"
+            text "1"
+          button [ref=2686]
+            text "다음"
+    alert

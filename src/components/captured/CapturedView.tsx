@@ -99,6 +99,7 @@ export default function CapturedView({ data, install }: { data: CapturedPageData
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || !(event.target instanceof Element)) return;
       const target = event.target;
+      if (target.closest('[data-naeo-live]')) return;
       const button = target.closest<HTMLElement>('button,[role="button"]');
       const label = button?.getAttribute('aria-label') || '';
       const buttonText = button?.textContent?.replace(/\s+/g, ' ').trim() || '';
@@ -180,7 +181,7 @@ export default function CapturedView({ data, install }: { data: CapturedPageData
       }
     };
     const onSubmit = (event: SubmitEvent) => {
-      if (event.defaultPrevented) return;
+      if (event.defaultPrevented || (event.target instanceof Element && event.target.closest('[data-naeo-live]'))) return;
       event.preventDefault();
       toast('로컬 데모에서는 실제 서비스에 양식을 전송하지 않습니다.');
     };

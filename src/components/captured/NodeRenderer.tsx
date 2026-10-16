@@ -65,6 +65,7 @@ function parseStyle(source: string): CSSProperties {
 
 function safeUrl(value: string, attribute: string): string | undefined {
   const trimmed = value.trim();
+  if (trimmed === '' && ['src', 'poster'].includes(attribute)) return;
   if (trimmed.startsWith('#') || trimmed === '') return trimmed;
   if (/^(?:javascript|vbscript):/i.test(trimmed.replace(/[\u0000-\u0020]/g, ''))) return;
   if (/^data:/i.test(trimmed) && !(attribute === 'src' && /^data:image\//i.test(trimmed))) return;

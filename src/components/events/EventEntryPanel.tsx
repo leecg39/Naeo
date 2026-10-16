@@ -1,6 +1,7 @@
 'use client';
 import {useCallback,useEffect,useState,type FormEvent} from 'react';
 import {createPortal} from 'react-dom';
+import {useRouter} from 'next/navigation';
 import {api,ApiError} from '@/lib/api-client';
 
 type Entry={id:string;proofUrl:string;note:string;status:'submitted'|'approved'|'rejected'|'withdrawn';reviewNote:string;version:number};
@@ -12,6 +13,7 @@ const button={padding:'10px 18px',borderRadius:999,border:0,background:'#03c75a'
 const secondary={...button,background:'#f5f5f5',color:'#171717'} as const;
 
 function Panel({host}:{host:Host}){
+ const router=useRouter();
  const [entry,setEntry]=useState<Entry|null>(null),[state,setState]=useState<'loading'|'guest'|'ready'>('loading');
  const [proofUrl,setProofUrl]=useState(''),[note,setNote]=useState(''),[editing,setEditing]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
@@ -22,7 +24,7 @@ function Panel({host}:{host:Host}){
  useEffect(()=>{const t=window.setTimeout(()=>void load(),0);return()=>window.clearTimeout(t);},[load]);
  async function run(action:()=>Promise<string>){
   setBusy(true);setError('');setNotice('');
-  try{const message=await action();await load();setEditing(false);setNotice(message);}
+  try{const message=await action();await load();setEditing(false);setNotice(message);router.refresh();}
   catch(e){setError(e instanceof Error?e.message:'처리하지 못했습니다.');}
   finally{setBusy(false);}
  }
@@ -63,5 +65,5 @@ export default function EventEntryPanel(){
   if(el)setHost({el,slug:el.dataset.eventEntry??'',phase:el.dataset.phase??'',requiresProof:el.dataset.requiresProof==='true',next:el.dataset.loginNext??'/event'});
  },0);return()=>window.clearTimeout(t);},[]);
  if(!host)return null;
- return createPortal(<Panel host={host}/>,host.el);
+ return createPortal(<div data-naeo-live><Panel host={host}/></div>,host.el);
 }

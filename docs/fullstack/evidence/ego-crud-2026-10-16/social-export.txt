@@ -1,0 +1,36 @@
+[p1 "소셜 프로젝트 내보내기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "소셜 프로젝트 내보내기 | NAEO"]
+root
+  container
+    paragraph
+      text "EXPORT"
+    heading
+      text "Ego 소셜 CRUD"
+      text "내보내기"
+    paragraph
+      text "1"
+      text "장 ·"
+      text "1080"
+      text "×"
+      text "1440"
+      text "px. 이 브라우저에서 PNG로 그린 뒤 서버가 검증해 PDF(장마다 한 페이지) 또는 PNG 묶음(ZIP)을 만들어요. 파일은 7일 보관돼요. 영상 파일은 지원하지 않아�..."
+    container
+      button [ref=689]
+        text "PDF로 내보내기"
+      button [ref=690]
+        text "PNG 묶음(ZIP)"
+      anchor [ref=691, loc=href:/dashboard/social, url=http://127.0.0.1:3000/dashboard/social]
+        text "편집으로 돌아가기"
+    status
+      text "완료했어요."
+    heading
+      text "최근 내보내기"
+    unordered_list "최근 내보내기"
+      list_item
+        text "PDF"
+        text "·"
+        text "2026. 10. 16. 오전 8:41:58"
+        text "·"
+        anchor [ref=692, loc=href:/api/creative/exports/980a0f94-de18-4e40-86fa-d4472768193b/file, url=http://127.0.0.1:3000/api/creative/exports/980a0f94-de18-4e40-86fa-d4472768193b/file]
+          text "내려받기 ("
+          text "21"
+          text "KB)"

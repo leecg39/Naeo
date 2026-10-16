@@ -1,0 +1,427 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "업데이트 소식 관리"
+    container
+      container
+        anchor [ref=1395, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=1396, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=1397]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1398, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1399, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1400, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1401, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1402, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1403, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1404, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1405, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1406, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1407, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1408, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1409, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1410, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1411, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1412, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1413, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1414, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "업데이트 소식 관리"
+          container
+            status
+              text "업데이트를 삭제했습니다."
+            container
+              form
+                container
+                  text "업데이트 검색"
+                  textbox [ref=1415, loc=css:input[placeholder="제목·주소·버전·요약"]]
+                    text "제목·주소·버전·요약"
+                container
+                  text "분류"
+                  combobox [ref=1416]
+                    text "전체 분류"
+                container
+                  text "상태"
+                  combobox [ref=1417]
+                    text "전체 상태"
+                button [ref=1418]
+                  text "검색"
+                button [ref=1419]
+                  text "새 업데이트"
+              paragraph
+                text "총"
+                text "23"
+                text "개"
+              table
+                table_row
+                  table_cell
+                    text "업데이트 목록"
+                table_row
+                  table_cell
+                    text "제목 / 주소"
+                  table_cell
+                    text "버전"
+                  table_cell
+                    text "분류"
+                  table_cell
+                    text "날짜"
+                  table_cell
+                    text "상태"
+                  table_cell
+                    text "관리"
+                table_row
+                  table_cell
+                    text "검색 노출을 글 단위로 판정해요. 일부 글의 노출 표시가 내려간 이유"
+                    text "2026-09-16-post-level-exposure"
+                  table_cell
+                    text "v1.15.0"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-09-16"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1420]
+                      text "편집"
+                      text "검색 노출을 글 단위로 판정해요. 일부 글의 노출 표시가 내려간 이유"
+                table_row
+                  table_cell
+                    text "내 주제에서 선점할 '황금 키워드'를 매주 찾아드려요"
+                    text "2026-06-24-golden-keywords"
+                  table_cell
+                    text "v1.14.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-06-24"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1421]
+                      text "편집"
+                      text "내 주제에서 선점할 '황금 키워드'를 매주 찾아드려요"
+                table_row
+                  table_cell
+                    text "내 블로그는 네이버 메이트 기준에 맞을까? 30초 무료 진단이 생겼어요"
+                    text "2026-06-11-mate-free-diagnosis"
+                  table_cell
+                    text "v1.13.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-06-11"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1422]
+                      text "편집"
+                      text "내 블로그는 네이버 메이트 기준에 맞을까? 30초 무료 진단이 생겼어요"
+                table_row
+                  table_cell
+                    text "지난주·지난달 랭킹을 다시 볼 수 있어요, 명예의 전당과 새 칭호도 함께"
+                    text "2026-06-10-ranking-archive-hall-of-fame"
+                  table_cell
+                    text "v1.12.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-06-10"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1423]
+                      text "편집"
+                      text "지난주·지난달 랭킹을 다시 볼 수 있어요, 명예의 전당과 새 칭호도 함께"
+                table_row
+                  table_cell
+                    text "'AI 추천 진단'이 'AI 인용 현황'으로 바뀌었어요"
+                    text "2026-06-09-ai-citation-status"
+                  table_cell
+                    text "v1.10.1"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-06-09"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1424]
+                      text "편집"
+                      text "'AI 추천 진단'이 'AI 인용 현황'으로 바뀌었어요"
+                table_row
+                  table_cell
+                    text "네이버 공식 '메이트' 블로거를 랭킹에서 바로 확인하세요"
+                    text "2026-06-09-naver-mate-badge"
+                  table_cell
+                    text "v1.11.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-06-09"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1425]
+                      text "편집"
+                      text "네이버 공식 '메이트' 블로거를 랭킹에서 바로 확인하세요"
+                table_row
+                  table_cell
+                    text "AI 브리핑 모니터링 + 변화 피드 개편"
+                    text "2026-06-05-ai-briefing-monitor"
+                  table_cell
+                    text "v1.10.0"
+                  table_cell
+                    text "새 기능, 개선"
+                  table_cell
+                    text "2026-06-05"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1426]
+                      text "편집"
+                      text "AI 브리핑 모니터링 + 변화 피드 개편"
+                table_row
+                  table_cell
+                    text "5월 둘째 주 업데이트, 대시보드 개편 + 랜딩 새단장"
+                    text "2026-05-15-dashboard-landing"
+                  table_cell
+                    text "v1.9.0"
+                  table_cell
+                    text "개선, 새 기능, 디자인"
+                  table_cell
+                    text "2026-05-15"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1427]
+                      text "편집"
+                      text "5월 둘째 주 업데이트, 대시보드 개편 + 랜딩 새단장"
+                table_row
+                  table_cell
+                    text "블로그 페이지 새단장, docs 스타일 3컬럼 레이아웃"
+                    text "2026-04-20-blog-redesign"
+                  table_cell
+                    text "v1.8.0"
+                  table_cell
+                    text "개선, 새 기능"
+                  table_cell
+                    text "2026-04-20"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1428]
+                      text "편집"
+                      text "블로그 페이지 새단장, docs 스타일 3컬럼 레이아웃"
+                table_row
+                  table_cell
+                    text "보안 강화 & 사용성 개선"
+                    text "2026-04-09-security-ux"
+                  table_cell
+                    text "v1.7.0"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-04-09"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1429]
+                      text "편집"
+                      text "보안 강화 & 사용성 개선"
+                table_row
+                  table_cell
+                    text "요금제별 기능 차별화 & 안정성 개선"
+                    text "2026-04-08-plan-gating"
+                  table_cell
+                    text "v1.6.1"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-04-08"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1430]
+                      text "편집"
+                      text "요금제별 기능 차별화 & 안정성 개선"
+                table_row
+                  table_cell
+                    text "결제 시스템 출시, 베이직 플랜 정기구독"
+                    text "2026-04-07-payment"
+                  table_cell
+                    text "v1.6.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-04-07"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1431]
+                      text "편집"
+                      text "결제 시스템 출시, 베이직 플랜 정기구독"
+                table_row
+                  table_cell
+                    text "채널 분석 & 경쟁 콘텐츠 페이지 추가"
+                    text "2026-04-03-channel-competitor"
+                  table_cell
+                    text "v1.5.2"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-04-03"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1432]
+                      text "편집"
+                      text "채널 분석 & 경쟁 콘텐츠 페이지 추가"
+                table_row
+                  table_cell
+                    text "사이드바 네비게이션 & 안정성 개선"
+                    text "2026-04-02-sidebar-nav"
+                  table_cell
+                    text "v1.5.1"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-04-02"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1433]
+                      text "편집"
+                      text "사이드바 네비게이션 & 안정성 개선"
+                table_row
+                  table_cell
+                    text "랭킹 시스템 개편"
+                    text "2026-04-01-channel-competitor"
+                  table_cell
+                    text "v1.5.0"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-04-01"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1434]
+                      text "편집"
+                      text "랭킹 시스템 개편"
+                table_row
+                  table_cell
+                    text "블로그 및 업데이트 페이지 추가"
+                    text "2026-03-30-blog"
+                  table_cell
+                    text "v1.4.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-03-30"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1435]
+                      text "편집"
+                      text "블로그 및 업데이트 페이지 추가"
+                table_row
+                  table_cell
+                    text "자동 스캔 기능 출시"
+                    text "2026-03-24-auto-scan"
+                  table_cell
+                    text "v1.3.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-03-24"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1436]
+                      text "편집"
+                      text "자동 스캔 기능 출시"
+                table_row
+                  table_cell
+                    text "QuickCheck 빠른 진단 추가"
+                    text "2026-03-23-quickcheck"
+                  table_cell
+                    text "v1.2.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-03-23"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1437]
+                      text "편집"
+                      text "QuickCheck 빠른 진단 추가"
+                table_row
+                  table_cell
+                    text "AI 랭킹 페이지 추가"
+                    text "2026-03-20-ranking"
+                  table_cell
+                    text "v1.1.0"
+                  table_cell
+                    text "새 기능"
+                  table_cell
+                    text "2026-03-20"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1438]
+                      text "편집"
+                      text "AI 랭킹 페이지 추가"
+                table_row
+                  table_cell
+                    text "분석 실패 시 크레딧 자동 환불"
+                    text "2026-03-18-credit"
+                  table_cell
+                    text "v1.0.3"
+                  table_cell
+                    text "개선"
+                  table_cell
+                    text "2026-03-18"
+                  table_cell
+                    text "공개"
+                  table_cell
+                    button [ref=1501]
+                      text "편집"
+                      text "분석 실패 시 크레딧 자동 환불"
+              container
+                button [ref=1440]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "2"
+                button [ref=1441]
+                  text "다음"

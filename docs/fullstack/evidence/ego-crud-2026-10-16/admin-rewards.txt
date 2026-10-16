@@ -1,0 +1,160 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "보상"
+    container
+      container
+        anchor [ref=1722, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        container
+          anchor [ref=1723, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+            text "내 계정"
+          button [ref=1724]
+            text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=1725, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1726, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1727, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1728, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1729, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1730, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1731, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1732, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1733, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1734, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1735, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1736, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1737, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1738, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1739, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1740, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1741, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "보상"
+          container
+            container "수동 지급"
+              heading
+                text "토큰 리워드 지급"
+              form
+                container
+                  text "회원 이메일"
+                  textbox [ref=1742]
+                container
+                  text "종류"
+                  combobox [ref=1743]
+                    text "토큰"
+                container
+                  text "토큰"
+                  spinbutton [ref=1744]
+                    text "10"
+                container
+                  text "당첨 내역에 표시할 이벤트 주소(선택)"
+                  textbox [ref=1745]
+                    text "ranking-reward"
+                container
+                  text "사유(회원에게 표시)"
+                  textbox [ref=1746]
+                button [ref=1747]
+                  text "지급"
+            container "랭킹 리워드"
+              heading
+                text "랭킹 리워드"
+              paragraph
+                text "확정된 지난 기간의 상위 회원에게 지급합니다. 같은 기간·회원은 여러 번 눌러도 한 번만 지급됩니다."
+              form
+                container
+                  text "기간"
+                  combobox [ref=1748]
+                    text "주간"
+                container
+                  text "몇 기간 전"
+                  spinbutton [ref=1749]
+                    text "-1"
+                container
+                  text "상위 몇 명"
+                  spinbutton [ref=1750]
+                    text "3"
+                container
+                  text "1인당 토큰"
+                  spinbutton [ref=1751]
+                    text "10"
+                container
+                  text "당첨 내역 이벤트(선택)"
+                  textbox [ref=1752]
+                    text "ranking-reward"
+                button [ref=1753]
+                  text "랭킹 리워드 지급"
+            container "지급 내역"
+              form
+                container
+                  text "검색"
+                  textbox [ref=1754, loc=css:input[placeholder="이메일·닉네임·사유"]]
+                    text "이메일·닉네임·사유"
+                container
+                  text "종류"
+                  combobox [ref=1755]
+                    text "전체"
+                container
+                  text "상태"
+                  combobox [ref=1756]
+                    text "전체"
+                button [ref=1757]
+                  text "검색"
+              paragraph
+                text "총"
+                text "0"
+                text "건"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "리워드 지급 내역"
+                  table_row
+                    table_cell
+                      text "회원"
+                    table_cell
+                      text "내용"
+                    table_cell
+                      text "종류"
+                    table_cell
+                      text "토큰·상품"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "지급 시각"
+                    table_cell
+                      text "관리"
+                paragraph
+                  text "지급 내역이 없습니다."
+              container "목록 페이지"
+                button [ref=1758]
+                  text "이전"
+                text "1"
+                text "/"
+                text "1"
+                button [ref=1759]
+                  text "다음"

@@ -1,0 +1,61 @@
+[p1 "내 블로그, 네이버 메이트 될 수 있을까? 30초 무료 진단 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "내 블로그, 네이버 메이트 될 수 있을까? 30초 무료 진단 | NAEO"]
+root
+  container
+    container
+      button "Open issues overlay" [ref=87, loc=css:button[aria-label="Open issues overlay"]]
+        svg_root
+        container
+          text "0"
+          text "1"
+        text "Issue"
+      button "Collapse issues badge" [ref=88, loc=css:button[aria-label="Collapse issues badge"]]
+        svg_root
+    container
+      anchor [ref=89, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=90, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=91, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=92, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=93, loc=href:/event, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=94, loc=href:/blog, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=95, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        button [ref=96]
+          container
+            svg_root
+            image
+          text "NAEO 블로거"
+        button "테마 전환" [ref=97, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        anchor [ref=98, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+          text "대시보드"
+    container
+      heading
+        container
+          text "매달"
+          text "2,605"
+          text "명이 받아요"
+      container
+        paragraph
+          text "네이버가 AI에 인용된 블로거에게 주는 활동비, 기본 30만원부터. 나만 빼고 받는 건 아닌지 30초면 확인."
+        container
+          container "네이버 블로그 주소 또는 아이디"
+            textbox [ref=99]
+              text "blog.naver.com/아이디 또는 아이디"
+            group [ref=100]
+          button [ref=101]
+            text "블로그 확인하기 →"
+        container
+          text "기준 5가지 충족도 · 내 주제 맞춤 글감 · 지금은"
+          text "무료"
+        container
+          paragraph
+            text "N"
+          paragraph
+            text "|"

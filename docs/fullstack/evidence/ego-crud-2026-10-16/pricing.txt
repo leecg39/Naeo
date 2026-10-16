@@ -1,0 +1,127 @@
+[p1 "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO 요금제 | 네이버 AI 검색 최적화 진단 | NAEO"]
+root
+  container
+    container
+      button "Open issues overlay" [ref=87, loc=css:button[aria-label="Open issues overlay"]]
+        svg_root
+        container
+          text "0"
+          text "1"
+        text "Issue"
+      button "Collapse issues badge" [ref=88, loc=css:button[aria-label="Collapse issues badge"]]
+        svg_root
+    container
+      container
+        anchor [ref=138, loc=href:/, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=139, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=140, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=141, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=142, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=143, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=144, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          button [ref=145]
+            container
+              svg_root
+              image
+            text "NAEO 블로거"
+          button "테마 전환" [ref=146, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=147, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      container
+        text "요금제"
+        heading
+          text "내 블로그에 맞는 요금제를 선택하세요"
+        paragraph
+          text "분석은 무료로 시작하고, 글쓰기는 베이직으로."
+          text "베이직은 매월 750토큰으로 AI가 글·이미지를 만들어 발행 대기함까지 보내드립니다. 매일 1편꼴입니다."
+      container
+        alert
+          text "지금은 결제 기능이 설정되지 않았어요(미설정). 무료 체험과 쿠폰은 이용할 수 있어요."
+        container
+          container
+            heading
+              text "무료"
+            paragraph
+              text "블로그 진단을 무료로 시작해요."
+            heading
+              text "₩0"
+            paragraph
+              text "결제 없이 이용"
+            container
+              container
+                svg_root
+                paragraph
+                  text "블로그 진단 하루 20회"
+              container
+                svg_root
+                paragraph
+                  text "랭킹·이벤트 참여"
+              container
+                svg_root
+                paragraph
+                  text "쿠폰 토큰 사용"
+          container
+            text "7일 무료 체험"
+            heading
+              text "베이직"
+            paragraph
+              text "AI 글쓰기와 분석을 넉넉하게 쓰는 30일 이용권이에요."
+            container
+              heading
+                text "₩19,900"
+              paragraph
+                text "/30일"
+            paragraph
+              text "30일 이용권 · 자동 결제 없음"
+            container
+              container
+                svg_root
+                paragraph
+                  text "30일마다 750토큰"
+              container
+                svg_root
+                paragraph
+                  text "7일 무료 체험(계정·블로그당 1회)"
+              container
+                svg_root
+                paragraph
+                  text "AI 글쓰기·블로그 진단·키워드 추천"
+              container
+                svg_root
+                paragraph
+                  text "결제 후 7일 안 환불 요청"
+          container
+            heading
+              text "커스텀"
+            paragraph
+              text "대규모 분석 및 맞춤 기능이 필요한 기업"
+            heading
+              text "별도 문의"
+            paragraph
+              text "맞춤형 분석 횟수 협의"
+            container
+              container
+                svg_root
+                paragraph
+                  text "베이직 플랜의 모든 기능"
+              container
+                svg_root
+                paragraph
+                  text "맞춤형 분석 횟수 및 스캔 한도"
+              container
+                svg_root
+                paragraph
+                  text "전용 고객 관리 매니저 배정"
+              container
+                svg_root
+                paragraph
+                  text "추가 기능 협의 가능"

@@ -1,0 +1,321 @@
+[p1 "업데이트 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "업데이트 | NAEO"]
+root
+  container
+    alert
+      text "업데이트"
+    container
+      anchor [ref=2167, loc=href:/, url=http://127.0.0.1:3000/]
+        text "NAEO"
+      container
+        anchor [ref=2168, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+          text "AI 글쓰기"
+        anchor [ref=2169, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+          text "랭킹"
+        anchor [ref=2170, url=http://127.0.0.1:3000/mate]
+          text "네이버 메이트"
+        anchor [ref=2171, loc=href:/event, url=http://127.0.0.1:3000/event]
+          text "이벤트"
+        anchor [ref=2172, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=2173, url=http://127.0.0.1:3000/pricing]
+          text "요금제"
+        anchor [ref=2174, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "Ego 수정 검증"
+        button "테마 전환" [ref=2175, loc=css:button[aria-label="테마 전환"]]
+          svg_root
+        anchor [ref=2176, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+          text "대시보드"
+    container
+      heading
+        text "업데이트"
+      paragraph
+        text "NAEO의 새 기능, 개선, 버그 수정 기록"
+      tab [ref=2177]
+        text "전체"
+      tab [ref=2178]
+        text "새 기능"
+        text "("
+        text "14"
+        text ")"
+      tab [ref=2179]
+        text "개선"
+        text "("
+        text "12"
+        text ")"
+      tab [ref=2180]
+        text "버그 수정"
+        text "("
+        text "0"
+        text ")"
+      container
+        heading
+          text "2026년 9월"
+        button [ref=2181]
+          text "v1.15.0"
+          text "개선"
+          text "2026년 9월 16일"
+          heading
+            text "검색 노출을 글 단위로 판정해요. 일부 글의 노출 표시가 내려간 이유"
+          svg_root
+          paragraph
+            text "9월 15일부터 검색 노출을 글 하나하나 기준으로 판정합니다."
+        container
+          heading
+            text "2026년 6월"
+          container
+            button [ref=2182]
+              text "v1.14.0"
+              text "새 기능"
+              text "2026년 6월 24일"
+              heading
+                text "내 주제에서 선점할 '황금 키워드'를 매주 찾아드려요"
+              svg_root
+              paragraph
+                text "키워드 추천에 황금 키워드가 추가됐습니다. 내 주제 전체에서 아직 안 쓴·경쟁이 낮은 키워드를 자동으로 발굴해요."
+            button [ref=2183]
+              text "v1.13.0"
+              text "새 기능"
+              text "2026년 6월 11일"
+              heading
+                text "내 블로그는 네이버 메이트 기준에 맞을까? 30초 무료 진단이 생겼어요"
+              svg_root
+              paragraph
+                text "네이버가 매달 약 3,000명을 선정하는 네이버 메이트. 내 블로그가 그 기준에 얼마나 가까운지 30초 만에 확인할 수 있는 무료 진단을 시작했습니다."
+            button [ref=2184]
+              container
+                text "v1.12.0"
+                text "새 기능"
+                text "2026년 6월 10일"
+              container
+                heading
+                  text "지난주·지난달 랭킹을 다시 볼 수 있어요, 명예의 전당과 새 칭호도 함께"
+                svg_root
+              paragraph
+                text "이제 랭킹이 매일 흘러가 버리지 않아요. 주간·월간 탭 옆의 ◀ ▶ 화살표로 지난 기간의 확정 랭킹을 넘겨볼 수 있습니다."
+            button [ref=2185]
+              container
+                text "v1.10.1"
+                text "개선"
+                text "2026년 6월 9일"
+              container
+                heading
+                  text "'AI 추천 진단'이 'AI 인용 현황'으로 바뀌었어요"
+                svg_root
+              paragraph
+                text "대시보드의 'AI 추천 진단' 메뉴를 'AI 인용 현황'으로 바꿨습니다."
+            button [ref=2186]
+              container
+                text "v1.11.0"
+                text "새 기능"
+                text "2026년 6월 9일"
+              container
+                heading
+                  text "네이버 공식 '메이트' 블로거를 랭킹에서 바로 확인하세요"
+                svg_root
+              paragraph
+                text "네이버가 공식 선정한 네이버 메이트 블로거를 AI 추천 순위 리더보드에서 바로 알아볼 수 있어요."
+            button [ref=2187]
+              container
+                text "v1.10.0"
+                text "새 기능"
+                text "개선"
+                text "2026년 6월 5일"
+              container
+                heading
+                  text "AI 브리핑 모니터링 + 변화 피드 개편"
+                svg_root
+              paragraph
+                text "대시보드 맨 위에 AI 브리핑 캡처 스트립이 생겼습니다. 내 글이 노리는 키워드에서 네이버 AI 브리핑이 실제로 어떻게 떴는지를 캡처 썸네일로 바로 보..."
+        heading
+          text "2026년 5월"
+        button [ref=2188]
+          text "v1.9.0"
+          text "개선"
+          text "새 기능"
+          text "디자인"
+          text "2026년 5월 15일"
+          heading
+            text "5월 둘째 주 업데이트, 대시보드 개편 + 랜딩 새단장"
+          svg_root
+          paragraph
+            text "오늘 할 일 카드에 연관 키워드 칩과 AI에 인용된 글 링크 카드를 함께 표시합니다. 카드 안에서 검색량·포화도·시그널을 바로 보고, 한 번의 클릭으로..."
+        heading
+          text "2026년 4월"
+        button [ref=2189]
+          text "v1.8.0"
+          text "개선"
+          text "새 기능"
+          text "2026년 4월 20일"
+          heading
+            text "블로그 페이지 새단장, docs 스타일 3컬럼 레이아웃"
+          svg_root
+          paragraph
+            text "카드 그리드 위주였던 /blog가 docs 스타일 3컬럼 레이아웃으로 개편되었습니다. 글이 늘어나도 원하는 글을 빠르게 찾을 수 있도록, 탐색·열람·이동 동�..."
+        button [ref=2190]
+          text "v1.7.0"
+          text "개선"
+          text "2026년 4월 9일"
+          heading
+            text "보안 강화 & 사용성 개선"
+          svg_root
+          paragraph
+            text "결제 및 로그인 보안이 한층 강화되었습니다."
+        button [ref=2191]
+          text "v1.6.1"
+          text "개선"
+          text "2026년 4월 8일"
+          heading
+            text "요금제별 기능 차별화 & 안정성 개선"
+          svg_root
+          paragraph
+            text "채널 분석과 경쟁 콘텐츠 페이지에 플랜별 접근 제어가 적용되었습니다."
+        button [ref=2192]
+          text "v1.6.0"
+          text "새 기능"
+          text "2026년 4월 7일"
+          heading
+            text "결제 시스템 출시, 베이직 플랜 정기구독"
+          svg_root
+          paragraph
+            text "이제 NAEO에서 직접 베이직 플랜을 결제할 수 있습니다. 기존에는 쿠폰으로만 플랜을 활성화할 수 있었지만, 이제 카드 결제로 바로 구독할 수 있습니다..."
+        button [ref=2193]
+          text "v1.5.2"
+          text "새 기능"
+          text "2026년 4월 3일"
+          heading
+            text "채널 분석 & 경쟁 콘텐츠 페이지 추가"
+          svg_root
+          paragraph
+            text "블로그 스캔을 하면 각 키워드가 네이버에서 어떤 채널에 얼마나 분포되어 있는지 궁금하셨죠? 이제 한눈에 확인할 수 있습니다."
+        button [ref=2194]
+          text "v1.5.1"
+          text "개선"
+          text "2026년 4월 2일"
+          heading
+            text "사이드바 네비게이션 & 안정성 개선"
+          svg_root
+          paragraph
+            text "대시보드에 좌측 고정 사이드바가 추가되었습니다. 이전에는 페이지 이동이 불편했는데, 이제 어디서든 한 번의 클릭으로 원하는 페이지로 이동할 수 ..."
+        button [ref=2195]
+          text "v1.5.0"
+          text "개선"
+          text "2026년 4월 1일"
+          heading
+            text "랭킹 시스템 개편"
+          svg_root
+          paragraph
+            text "기존에는 AI 추천 횟수 하나만으로 순위를 매겼습니다. 이제 4가지 지표를 종합해서 더 공정하고 의미 있는 순위를 제공합니다."
+        heading
+          text "2026년 3월"
+        button [ref=2196]
+          text "v1.4.0"
+          text "새 기능"
+          text "2026년 3월 30일"
+          heading
+            text "블로그 및 업데이트 페이지 추가"
+          svg_root
+          paragraph
+            text "NAEO 공식 블로그와 업데이트 페이지가 추가되었습니다."
+        button [ref=2197]
+          text "v1.3.0"
+          text "새 기능"
+          text "2026년 3월 24일"
+          heading
+            text "자동 스캔 기능 출시"
+          svg_root
+          paragraph
+            text "베이직 플랜 유저에게 자동 스캔 기능이 추가되었습니다."
+        button [ref=2198]
+          text "v1.2.0"
+          text "새 기능"
+          text "2026년 3월 23일"
+          heading
+            text "QuickCheck 빠른 진단 추가"
+          svg_root
+          paragraph
+            text "가입하지 않아도 블로그 주소만 입력하면 AI 추천 여부를 바로 확인할 수 있는 QuickCheck 기능이 추가되었습니다. 랜딩 페이지에서 바로 사용할 수 있습�..."
+        button [ref=2199]
+          text "v1.1.0"
+          text "새 기능"
+          text "2026년 3월 20일"
+          heading
+            text "AI 랭킹 페이지 추가"
+          svg_root
+          paragraph
+            text "네이버 AI가 가장 많이 추천한 블로그 순위를 확인할 수 있는 AI 랭킹 페이지가 추가되었습니다."
+        button [ref=2200]
+          text "v1.0.3"
+          text "개선"
+          text "2026년 3월 18일"
+          heading
+            text "분석 실패 시 크레딧 자동 환불"
+          svg_root
+          paragraph
+            text "분석 도중 오류가 발생하면 사용된 크레딧이 자동으로 환불됩니다. 일시적인 문제로 분석이 안 됐는데 크레딧만 차감되는 일이 없어졌습니다."
+        button [ref=2201]
+          text "v1.0.2"
+          text "개선"
+          text "2026년 3월 16일"
+          heading
+            text "로그인 속도 개선 및 안정성 강화"
+          svg_root
+          paragraph
+            text "전반적인 서비스 안정성과 속도를 개선했습니다."
+        button [ref=2202]
+          text "v1.0.1"
+          text "개선"
+          text "2026년 3월 12일"
+          heading
+            text "프로필 자동 인식 및 안정성 개선"
+          svg_root
+          paragraph
+            text "블로그 URL을 등록하면 닉네임, 프로필 사진, 카테고리 정보를 자동으로 가져옵니다. 별도 입력 없이 바로 대시보드에서 내 블로그 정보를 확인할 수 있..."
+        button [ref=2203]
+          text "v1.0.0"
+          text "새 기능"
+          text "2026년 3월 10일"
+          heading
+            text "NAEO 정식 출시"
+          svg_root
+          paragraph
+            text "네이버 AI 브리핑에 내 블로그가 추천되고 있는지 확인할 수 있는 서비스, NAEO가 정식 오픈했습니다."
+    container
+      text "NAEO"
+      paragraph
+        text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+      anchor "NAEO YouTube @naeo_kr" [ref=2204, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+        svg_root
+      anchor "NAEO Instagram @naeo.kr" [ref=2205, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+        svg_root
+      anchor "NAEO Threads @naeo.kr" [ref=2206, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+        svg_root
+      anchor "NAEO 네이버 카페 커뮤니티" [ref=2207, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+      container "서비스 링크"
+        text "서비스"
+        anchor [ref=2208, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+          text "FAQ"
+        anchor [ref=2209, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+          text "문의하기"
+        anchor [ref=2210, url=http://127.0.0.1:3000/blog]
+          text "매거진"
+        anchor [ref=2211, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+          text "업데이트"
+      container "법적 고지 링크"
+        text "법적 고지"
+        anchor [ref=2212, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+          text "이용약관"
+        anchor [ref=2213, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+          text "개인정보처리방침"
+        anchor [ref=2214, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+          text "환불규정"
+      text "주식회사 어크로스"
+      text "| 대표:"
+      text "이재홍"
+      text "| 사업자등록번호:"
+      text "288-86-03687"
+      text "주소:"
+      text "서울특별시 강남구 테헤란로63길 9, 1801"
+      text "문의:"
+      text "ask@naeo.kr"
+      text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+      text "© 2026 NAEO. All rights reserved."

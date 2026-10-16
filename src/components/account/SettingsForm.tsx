@@ -17,7 +17,7 @@ export default function SettingsForm({initialProfile,initialBlogs,email}:{initia
     catch(error) {setError(error instanceof Error?error.message:'저장하지 못했습니다.');if(error instanceof ApiError&&error.status===401)router.push('/login?next=/dashboard/settings');}
     finally {setBusy(false);}
   }
-  async function refreshBlogs() {setBlogs(await api<Blog[]>('/api/blogs?pageSize=100'));}
+  async function refreshBlogs() {setBlogs(await api<Blog[]>('/api/blogs?pageSize=100'));router.refresh();}
   async function saveProfile(event:FormEvent<HTMLFormElement>) {
     event.preventDefault();const fields=new FormData(event.currentTarget);
     await run(async()=>{

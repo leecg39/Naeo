@@ -1,0 +1,104 @@
+[p1 "NAEO | 네이버 블로그 AI 브리핑 인용 진단" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "NAEO | 네이버 블로그 AI 브리핑 인용 진단"]
+root
+  container
+    alert
+      text "공지 관리"
+    container
+      container
+        anchor [ref=996, url=http://127.0.0.1:3000/admin]
+          text "NAEO"
+          text "●"
+          text "관리자"
+        anchor [ref=997, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+          text "내 계정"
+        button [ref=998]
+          text "로그아웃"
+      container
+        container "관리자 메뉴"
+          anchor [ref=999, url=http://127.0.0.1:3000/admin]
+            text "운영 현황"
+          anchor [ref=1000, loc=href:/admin/users, url=http://127.0.0.1:3000/admin/users]
+            text "사용자"
+          anchor [ref=1001, loc=href:/admin/blog, url=http://127.0.0.1:3000/admin/blog]
+            text "매거진"
+          anchor [ref=1002, loc=href:/admin/pages, url=http://127.0.0.1:3000/admin/pages]
+            text "페이지·정책 문서"
+          anchor [ref=1003, loc=href:/admin/faq, url=http://127.0.0.1:3000/admin/faq]
+            text "FAQ"
+          anchor [ref=1004, loc=href:/admin/updates, url=http://127.0.0.1:3000/admin/updates]
+            text "업데이트"
+          anchor [ref=1005, loc=href:/admin/announcements, url=http://127.0.0.1:3000/admin/announcements]
+            text "공지"
+          anchor [ref=1006, loc=href:/admin/events, url=http://127.0.0.1:3000/admin/events]
+            text "이벤트 관리"
+          anchor [ref=1007, loc=href:/admin/event, url=http://127.0.0.1:3000/admin/event]
+            text "참여 심사"
+          anchor [ref=1008, loc=href:/admin/inquiries, url=http://127.0.0.1:3000/admin/inquiries]
+            text "문의"
+          anchor [ref=1009, loc=href:/admin/inquiries/templates, url=http://127.0.0.1:3000/admin/inquiries/templates]
+            text "답변 템플릿"
+          anchor [ref=1010, loc=href:/admin/keywords, url=http://127.0.0.1:3000/admin/keywords]
+            text "키워드"
+          anchor [ref=1011, loc=href:/admin/rewards, url=http://127.0.0.1:3000/admin/rewards]
+            text "보상"
+          anchor [ref=1012, loc=href:/admin/billing, url=http://127.0.0.1:3000/admin/billing]
+            text "요금제·쿠폰"
+          anchor [ref=1013, loc=href:/admin/payments, url=http://127.0.0.1:3000/admin/payments]
+            text "결제·환불"
+          anchor [ref=1014, loc=href:/admin/scan-health, url=http://127.0.0.1:3000/admin/scan-health]
+            text "스캔 상태"
+          anchor [ref=1015, loc=href:/admin/writing, url=http://127.0.0.1:3000/admin/writing]
+            text "글쓰기"
+        container
+          paragraph
+            text "NAEO ADMIN"
+          heading
+            text "공지 관리"
+          container
+            status
+              text "공지를 삭제했습니다."
+            container
+              form
+                container
+                  text "공지 검색"
+                  textbox [ref=1016, loc=css:input[placeholder="제목·내용"]]
+                    text "제목·내용"
+                container
+                  text "상태"
+                  combobox [ref=1017]
+                    text "전체 상태"
+                button [ref=1018]
+                  text "검색"
+                button [ref=1019]
+                  text "새 공지"
+              paragraph
+                text "총"
+                text "0"
+                text "개"
+              container
+                table
+                  table_row
+                    table_cell
+                      text "공지 목록"
+                  table_row
+                    table_cell
+                      text "제목"
+                    table_cell
+                      text "위치"
+                    table_cell
+                      text "상태"
+                    table_cell
+                      text "기간"
+                    table_cell
+                      text "관리"
+                paragraph
+                  text "공지가 없습니다. 공지가 없으면 첫 화면은 원래 디자인 그대로 보입니다."
+              container "목록 페이지"
+                button [ref=1020]
+                  text "이전"
+                container
+                  text "1"
+                  text "/"
+                  text "1"
+                button [ref=1021]
+                  text "다음"

@@ -1,0 +1,68 @@
+2026-10-16 final validation
+
+ℹ tests 6
+ℹ pass 6
+ℹ fail 0
+ℹ skipped 0
+ℹ tests 412
+ℹ pass 412
+ℹ fail 0
+ℹ skipped 0
+Total: 6 inventory/plan + 412 server = 418 passed
+Typecheck: passed
+Configured ESLint scope: passed
+Production build: passed
+Git diff --check: passed
+
+✓ Compiled successfully in 2.7s
+  Finished TypeScript in 6.5s ...
+
+Personal export: 45568 bytes
+SHA256: b3a1d43023f724c2236a93abb68532c1643d266516b25522acd474eb18c737c8
+Members:
+data/account_mail.ndjson
+data/account.ndjson
+data/profile.ndjson
+data/verified_phone.ndjson
+data/sms_challenges.ndjson
+data/contact.ndjson
+data/preferences.ndjson
+data/consents.ndjson
+data/sessions.ndjson
+data/activity.ndjson
+data/blogs.ndjson
+data/blog_posts.ndjson
+data/scans.ndjson
+data/scan_results.ndjson
+data/mate_reports.ndjson
+data/saved_keywords.ndjson
+data/competitors.ndjson
+data/actions.ndjson
+data/drafts.ndjson
+data/draft_revisions.ndjson
+data/media.ndjson
+data/shares.ndjson
+data/credits.ndjson
+data/generation.ndjson
+data/projects.ndjson
+data/slides.ndjson
+data/creative_exports.ndjson
+data/rankings.ndjson
+data/event_entries.ndjson
+data/rewards.ndjson
+data/points.ndjson
+data/attendance.ndjson
+data/tutorial.ndjson
+data/engagement_preferences.ndjson
+data/engagement_visits.ndjson
+data/subscriptions.ndjson
+data/payments.ndjson
+data/refunds.ndjson
+data/coupons.ndjson
+data/oauth_accounts.ndjson
+data/oauth_grants.ndjson
+data/mcp_calls.ndjson
+data/inquiries.ndjson
+data/inquiry_mail.ndjson
+data/inquiry_replies.ndjson
+manifest.json

@@ -1,0 +1,314 @@
+[p1 "AI 글쓰기 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "AI 글쓰기 | NAEO"]
+root
+  container
+    container
+      container
+        container
+          anchor [ref=484, loc=href:/, url=http://127.0.0.1:3000/]
+            paragraph
+              text "NAEO"
+          button "테마 전환" [ref=485, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+        paragraph
+          text "대시보드"
+        container
+          anchor [ref=486, url=http://127.0.0.1:3000/dashboard]
+            svg_root
+            paragraph
+              text "대시보드"
+          anchor [ref=487, url=http://127.0.0.1:3000/dashboard/recommendations]
+            svg_root
+            paragraph
+              text "키워드 추천"
+            text "무료 이용"
+          anchor [ref=488, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "AI 글쓰기"
+            text "무료 이용"
+          anchor [ref=489, loc=href:/dashboard/events, url=http://127.0.0.1:3000/dashboard/events]
+            svg_root
+            paragraph
+              text "이벤트"
+        paragraph
+          text "분석 도구"
+        container
+          anchor [ref=490, url=http://127.0.0.1:3000/dashboard/ai-picks]
+            svg_root
+            paragraph
+              text "AI 인용 현황"
+          anchor [ref=491, loc=href:/dashboard/competitors, url=http://127.0.0.1:3000/dashboard/competitors]
+            svg_root
+            paragraph
+              text "경쟁 블로그"
+            text "무료 이용"
+          anchor [ref=492, url=http://127.0.0.1:3000/dashboard/mate]
+            svg_root
+            paragraph
+              text "메이트 진단"
+        paragraph
+          text "계정"
+        anchor [ref=493, url=http://127.0.0.1:3000/dashboard/settings]
+          svg_root
+          paragraph
+            text "설정"
+        container
+          container
+            anchor "Ego 수정 검증 설정" [ref=494, loc=css:a[aria-label="Ego 수정 검증 설정"], url=http://127.0.0.1:3000/dashboard/settings]
+              text "E"
+              paragraph
+                text "Ego 수정 검증"
+            button "더보기 메뉴" [ref=495, loc=css:button[aria-label="더보기 메뉴"]]
+              svg_root
+          container
+            svg_root
+            paragraph
+              text "무료 이용"
+            paragraph
+              text "스캔 20회"
+          anchor [ref=496, url=http://127.0.0.1:3000/dashboard/write]
+            svg_root
+            paragraph
+              text "글쓰기"
+            paragraph
+              text "잔액 0토큰"
+          container
+            anchor [ref=497, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+              paragraph
+                text "요금제 안내"
+            anchor [ref=498, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+              paragraph
+                text "이용약관"
+            anchor [ref=499, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+              paragraph
+                text "문의하기"
+      container
+        svg_root
+        heading
+          text "AI 글쓰기"
+        text "베타"
+        text "잔액 0토큰"
+        paragraph
+          text "키워드를 고르고 사진을 올리면, 내 블로그의 말투와 데이터로 완성된 글이 발행 대기함에 도착해요."
+        paragraph
+          text "이용 중인 구독 없음"
+        paragraph
+          text "잔액 0토큰"
+        paragraph
+          text "글 생성 10토큰 · 실패·취소 시 환급"
+        paragraph
+          text "AI 글·이미지 공급자 미설정. 직접 작성·저장과 내 사진 업로드를 이용할 수 있습니다."
+        container
+          text "키워드"
+          text " *"
+        textbox [ref=500]
+        group [ref=501]
+          text "키워드 *"
+        paragraph
+          text "이 키워드로 검색·AI 인용을 노려요. 오른쪽 추천에서 골라도 돼요"
+        text "소분류"
+        text " *"
+        comboboxgrouping "소분류 * ​" [ref=502]
+        textbox [ref=503]
+        svg_root
+        group [ref=504]
+          text "소분류 *"
+        paragraph
+          text "선택한 주제와 입력한 경험·요청사항을 글 생성에 반영합니다."
+        paragraph
+          text "이미지"
+          text "사진 0/20"
+        button "사진 선택" [ref=505, loc=role:button[name="사진 선택"]]
+          svg_root
+          text "내가 찍은 사진을 올리면 글에 우선 배치돼요"
+        paragraph
+          text "AI 이미지"
+        button [ref=506]
+          text "1장"
+        button [ref=507]
+          text "3장"
+        button [ref=508]
+          text "5장"
+        paragraph
+          text "→ 총 이미지 수는 내 사진 수와 같습니다(AI 이미지 미설정)."
+        paragraph
+          text "AI 이미지 생성은 미설정입니다. 내 사진을 올리거나 글만 생성할 수 있습니다."
+        paragraph
+          text "내 경험·생각"
+        paragraph
+          text "선택이지만 넣는 걸 추천해요"
+        paragraph
+          text "AI 검색은 직접 겪은 이야기가 담긴 글을 우선 인용해요. 한두 줄이면 충분해요."
+        textbox [ref=509]
+          text "예) 직접 해보니 이런 점이 좋았어요. 겪은 일, 느낀 점, 나만의 팁 한두 줄"
+        group [ref=510]
+        paragraph
+          text "적은 내용만 내 목소리(1인칭)로 들어가요. AI가 경험을 지어내지 않아요"
+        heading
+          button [ref=511]
+            paragraph
+              text "세부 옵션"
+            paragraph
+              text "요청사항 · 제목"
+            svg_root
+        region
+          form_control [ref=512]
+            text "요청사항 (선택)"
+          form_control [ref=513]
+            text "제목 직접 지정 (선택)"
+        button [ref=514]
+          text "글 생성하기 (10토큰)"
+        paragraph
+          text "AI 이미지 생성은 미설정입니다. 내 사진을 올리거나 글만 생성할 수 있습니다."
+        heading
+          text "추천 키워드"
+        paragraph
+          text "등록된 공개 키워드입니다. 선택하면 글감으로 사용할 수 있습니다."
+        paragraph
+          text "등록된 추천 키워드가 없습니다."
+        anchor [ref=515, url=http://127.0.0.1:3000/dashboard/recommendations]
+          text "키워드 추천 전체 보기 →"
+        container "내 초안"
+          heading
+            text "내 초안"
+          text "토큰 잔액"
+          text "0"
+          text "· 글 생성 10토큰(실패·취소 시 환급)"
+          search
+            text "초안 검색"
+            textbox [ref=516, loc=css:input[placeholder="제목·키워드 검색"]]
+              text "제목·키워드 검색"
+            text "상태"
+            combobox [ref=517]
+              text "전체 상태"
+            button [ref=518]
+              text "검색"
+            button [ref=519]
+              text "새 초안"
+          unordered_list
+            list_item
+              button [ref=520]
+                text "Ego CRUD 초안"
+                text "발행 준비"
+                text "·"
+                text "여행"
+                text "· 사진"
+                text "1"
+                text "·"
+                text "26. 10. 16. 오전 8:37"
+          container "초안 편집"
+            text "초안 편집"
+            text "발행 준비"
+            text "· 버전"
+            text "3"
+            text "·"
+            text "2026. 10. 16. 오전 8:37"
+            form
+              container
+                text "제목"
+                textbox [ref=521]
+                  text "Ego CRUD 초안"
+              container
+                text "키워드"
+                textbox [ref=522]
+                  text "여행"
+              container
+                text "주제"
+                textbox [ref=523]
+                  text "여행"
+              container
+                text "본문(마크다운)"
+                textbox [ref=524]
+                  text "## 실제 화면 검증"
+                  text "Ego 브라우저에서 작성한 검증용 본문입니다."
+              container
+                button [ref=525]
+                  text "저장"
+                button [ref=526]
+                  text "초안"
+                  text "(으)로"
+                button [ref=527]
+                  text "발행함"
+                  text "(으)로"
+                button [ref=528]
+                  text "보관"
+                  text "(으)로"
+                button [ref=529]
+                  text "마크다운 복사"
+                button [ref=530]
+                  text "삭제"
+                button [ref=531]
+                  text "닫기"
+            container
+              text "내보내기"
+              container
+                button [ref=532]
+                  text "미리보기"
+                button [ref=533]
+                  text "서식째 복사"
+                anchor [ref=534, loc=href:/api/drafts/dca07036-c6be-463e-8f30-86973e27c8ab/export?format=html&download=1, url=http://127.0.0.1:3000/api/drafts/dca07036-c6be-463e-8f30-86973e27c8ab/export?format=html&download=1]
+                  text "HTML"
+                  text "받기"
+                anchor [ref=535, url=http://127.0.0.1:3000/api/drafts/dca07036-c6be-463e-8f30-86973e27c8ab/export?format=markdown&download=1]
+                  text "마크다운"
+                  text "받기"
+                anchor [ref=536, loc=href:/api/drafts/dca07036-c6be-463e-8f30-86973e27c8ab/export?format=text&download=1, url=http://127.0.0.1:3000/api/drafts/dca07036-c6be-463e-8f30-86973e27c8ab/export?format=text&download=1]
+                  text "텍스트"
+                  text "받기"
+            container
+              container
+                text "사진"
+                text "0"
+                text "/20"
+              textbox "초안에 사진 올리기" [ref=537, loc=css:input[aria-label="초안에 사진 올리기"]]
+                button [ref=538]
+                  text "파일 선택"
+                text "선택된 파일 없음"
+              status
+                text "사진을 삭제했습니다."
+              unordered_list
+            container
+              text "사진 공유 링크"
+              container
+                container
+                  text "기간"
+                  combobox [ref=541]
+                    text "7일"
+                button [ref=542]
+                  text "공유 링크 만들기"
+              status
+                text "공유 링크를 철회했습니다."
+              unordered_list
+                list_item
+                  anchor [ref=543, loc=href:/p/1iGu2scnt7UBxUt9GdFusw/images, url=http://127.0.0.1:3000/p/1iGu2scnt7UBxUt9GdFusw/images]
+                    text "/p/"
+                    text "1iGu2s"
+                    text "…/images"
+                  text "철회됨"
+            container
+              container [ref=545]
+                text "수정 이력"
+                text "2"
+                text "개"
+              unordered_list
+                list_item
+                  text "버전"
+                  text "2"
+                  text "·"
+                  text "2026. 10. 16. 오전 8:37"
+                  button [ref=546]
+                    text "이 버전으로 되돌리기"
+                    container
+                      text "버전"
+                      text "2"
+                list_item
+                  text "버전"
+                  text "1"
+                  text "·"
+                  text "2026. 10. 16. 오전 8:37"
+                  button [ref=547]
+                    text "이 버전으로 되돌리기"
+                    container
+                      text "버전"
+                      text "1"
+    alert

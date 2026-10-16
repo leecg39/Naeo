@@ -1,0 +1,193 @@
+[p1 "자주 묻는 질문 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "자주 묻는 질문 | NAEO"]
+root
+  container
+    alert
+      text "자주 묻는 질문"
+    container
+      container
+        anchor [ref=2092, loc=href:/, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2093, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2094, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2095, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2096, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2097, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2098, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          anchor [ref=2099, loc=href:/dashboard/settings, url=http://127.0.0.1:3000/dashboard/settings]
+            text "Ego 수정 검증"
+          button "테마 전환" [ref=2100, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2101, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      container
+        heading
+          text "자주 묻는 질문"
+        paragraph
+          text "NAEO 서비스 이용과 ChatGPT·Claude 연결에 대해 자주 묻는 질문을 모았습니다."
+        container
+          heading
+            text "서비스 이용"
+          heading
+            button [ref=2102]
+              paragraph
+                text "조회수를 올려주는 건가요?"
+              svg_root
+          heading
+            button [ref=2103]
+              paragraph
+                text "AI 브리핑이 뭔가요?"
+              svg_root
+          heading
+            button [ref=2104]
+              paragraph
+                text "블로그 주소만 있으면 되나요?"
+              svg_root
+          heading
+            button [ref=2105]
+              paragraph
+                text "분석에 시간이 얼마나 걸리나요?"
+              svg_root
+          heading
+            button [ref=2106]
+              paragraph
+                text "무료로 어디까지 되나요?"
+              svg_root
+          heading
+            button [ref=2107]
+              paragraph
+                text "유료 요금제도 있나요?"
+              svg_root
+          heading
+            button [ref=2108]
+              paragraph
+                text "글을 자동으로 발행해주나요?"
+              svg_root
+          heading
+            button [ref=2109]
+              paragraph
+                text "ChatGPT·Claude 연결이 어렵지 않나요?"
+              svg_root
+          heading
+            button [ref=2110]
+              paragraph
+                text "AI로 쓴 글이라 저품질이 되지 않을까요?"
+              svg_root
+          heading
+            button [ref=2111]
+              paragraph
+                text "어떤 블로거에게 적합한가요?"
+              svg_root
+          heading
+            button [ref=2112]
+              paragraph
+                text "네이버 로그인이 안 돼요."
+              svg_root
+          heading
+            button [ref=2113]
+              paragraph
+                text "NAEO는 네이버 공식 서비스인가요?"
+              svg_root
+        container
+          heading
+            text "MCP · ChatGPT·Claude 연결"
+          heading
+            button [ref=2114]
+              paragraph
+                text "어떤 요금제가 필요한가요?"
+              svg_root
+          heading
+            button [ref=2115]
+              paragraph
+                text "API 키를 발급받아야 하나요?"
+              svg_root
+          heading
+            button [ref=2116]
+              paragraph
+                text "내 데이터는 안전한가요?"
+              svg_root
+          heading
+            button [ref=2117]
+              paragraph
+                text "이미지도 만들어지나요?"
+              svg_root
+          heading
+            button [ref=2118]
+              paragraph
+                text "ChatGPT와 Claude(클로드) 중 뭘 써야 하나요?"
+              svg_root
+          heading
+            button [ref=2119]
+              paragraph
+                text "글은 어떻게 네이버에 발행하나요?"
+              svg_root
+          heading
+            button [ref=2120]
+              paragraph
+                text "연결했는데 추천 키워드가 안 나와요"
+              svg_root
+          heading
+            button [ref=2121]
+              paragraph
+                text "GPT가 "저장 기능이 없다"고 하거나 도구가 안 보여요"
+              svg_root
+          heading
+            button [ref=2122]
+              paragraph
+                text "연결했는데 NAEO가 응답하지 않아요"
+              svg_root
+      container
+        container
+          container
+            text "NAEO"
+            paragraph
+              text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+            container
+              anchor "NAEO YouTube @naeo_kr" [ref=2123, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+                svg_root
+              anchor "NAEO Instagram @naeo.kr" [ref=2124, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+                svg_root
+              anchor "NAEO Threads @naeo.kr" [ref=2125, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+                svg_root
+              anchor "NAEO 네이버 카페 커뮤니티" [ref=2126, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+          container
+            container "서비스 링크"
+              text "서비스"
+              anchor [ref=2127, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+                text "FAQ"
+              anchor [ref=2128, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+                text "문의하기"
+              anchor [ref=2129, url=http://127.0.0.1:3000/blog]
+                text "매거진"
+              anchor [ref=2130, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+                text "업데이트"
+            container "법적 고지 링크"
+              text "법적 고지"
+              anchor [ref=2131, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+                text "이용약관"
+              anchor [ref=2132, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+                text "개인정보처리방침"
+              anchor [ref=2133, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+                text "환불규정"
+        container
+          container
+            container
+              text "주식회사 어크로스"
+              text "| 대표:"
+              text "이재홍"
+              text "| 사업자등록번호:"
+              text "288-86-03687"
+            container
+              text "주소:"
+              text "서울특별시 강남구 테헤란로63길 9, 1801"
+            container
+              text "문의:"
+              text "ask@naeo.kr"
+            text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+          text "© 2026 NAEO. All rights reserved."

@@ -1,0 +1,122 @@
+[p1 "환불 규정 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "환불 규정 | NAEO"]
+root
+  container
+    alert
+    container
+      container
+        anchor [ref=2255, loc=href:/, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2256, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2257, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2258, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2259, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2260, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2261, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          button "테마 전환" [ref=2262, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2263, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      container
+        heading
+          text "환불 규정"
+        paragraph
+          text "시행일자: 2026년 8월 24일"
+        heading
+          text "1. 기본 원칙"
+        paragraph
+          text "NAEO(이하 "회사")는 이용자의 정당한 환불 요청을 적극적으로 수용하며, 「전자상거래 등에서의 소비자보호에 관한 법률」 및 「소비자기본법」에 따�..."
+        heading
+          text "2. 환불 대상 서비스"
+        paragraph
+          text "• 무료 요금제 (₩0): 무료 서비스로 환불 대상 아님 • 베이직 요금제 (₩19,900/월): ✅ 환불 가능 • 커스텀 요금제 (별도 문의): ✅ 환불 가능 (계약 조�..."
+        heading
+          text "3.1 청약 철회 (7일 이내, 서비스 미이용)"
+        paragraph
+          text "[적용 조건] • 유료 요금제 결제 후 7일 이내 • 서비스를 전혀 이용하지 않은 경우 (분석 이력 0회, AI 글쓰기 토큰 미사용, 3.4 참조) [환불 금액] • 결�..."
+        heading
+          text "3.2 중도 해지 (서비스 이용 이력이 있는 경우)"
+        paragraph
+          text "[환불 금액 계산 방식 - 일할 계산] 환불 금액 = (월 이용료 ÷ 30일) × 잔여 일수 [예시: 베이직 요금제] • 요금제: 베이직 (₩19,900/월) • 결제일: 2026년 3�..."
+        heading
+          text "3.3 중도 해지: AI 글쓰기 토큰을 사용한 경우"
+        paragraph
+          text "[적용 조건] • 해당 결제 기간에 AI 글쓰기 토큰을 1개 이상 사용한 경우 [환불 금액 계산 방식 - 이원 산정] 환불 금액 = 결제 금액 − max(경과 일수 일할..."
+        heading
+          text "3.4 청약철회의 제한 (AI 글쓰기 토큰)"
+        paragraph
+          text "[법적 근거] • 「전자상거래 등에서의 소비자보호에 관한 법률」 제17조 제2항: 디지털콘텐츠의 제공이 개시된 경우 청약철회 제한 [내용] • AI 글쓰기..."
+        heading
+          text "4. 환불 불가 사유"
+        paragraph
+          text "① 청약철회 기한 경과 후 단순 변심 (결제 후 7일 경과 + 서비스 이용) ② 회원의 귀책사유로 인한 이용 제한 (약관 위반, 부정 이용 등) ③ 무료 제공 분..."
+        heading
+          text "5. 환불 신청 방법"
+        paragraph
+          text "[방법 1] 이메일 신청 • 수신: ask@naeo.kr • 제목: [환불 요청] 회원 이메일 주소 • 내용: 회원 이메일, 결제일/금액, 환불 사유, 환불 계좌 정보 [방법 2] �..."
+        heading
+          text "6. 환불 처리 절차 및 기간"
+        paragraph
+          text "[처리 절차] ① 환불 요청 접수 ② 환불 가능 여부 확인 (영업일 기준 1~2일) ③ 환불 승인 및 처리 (영업일 기준 1~3일) ④ 환불 완료 안내 (이메일 발송) [�..."
+        container
+          heading
+            text "7. 분쟁 해결"
+          paragraph
+            text "환불 관련 분쟁 발생 시 회사 고객센터(ask@naeo.kr)를 통해 우선 협의합니다. 환불 요청이 부당하게 거부되었다고 판단되는 경우: • 한국소비자원: 전화 ..."
+        paragraph
+          text "본 환불 규정은 NAEO 이용약관 제9조와 함께 적용됩니다. 2026년 3월 1일 시행, 2026년 8월 24일 개정(AI 글쓰기 토큰 관련 3.3·3.4·4⑤ 신설)되어 같은 날부터 �..."
+      container
+        container
+          container
+            text "NAEO"
+            paragraph
+              text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+            container
+              anchor "NAEO YouTube @naeo_kr" [ref=2264, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+                svg_root
+              anchor "NAEO Instagram @naeo.kr" [ref=2265, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+                svg_root
+              anchor "NAEO Threads @naeo.kr" [ref=2266, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+                svg_root
+              anchor "NAEO 네이버 카페 커뮤니티" [ref=2267, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+          container
+            container "서비스 링크"
+              text "서비스"
+              anchor [ref=2268, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+                text "FAQ"
+              anchor [ref=2269, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+                text "문의하기"
+              anchor [ref=2270, url=http://127.0.0.1:3000/blog]
+                text "매거진"
+              anchor [ref=2271, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+                text "업데이트"
+            container "법적 고지 링크"
+              text "법적 고지"
+              anchor [ref=2272, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+                text "이용약관"
+              anchor [ref=2273, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+                text "개인정보처리방침"
+              anchor [ref=2274, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+                text "환불규정"
+        container
+          container
+            container
+              text "주식회사 어크로스"
+              text "| 대표:"
+              text "이재홍"
+              text "| 사업자등록번호:"
+              text "288-86-03687"
+            container
+              text "주소:"
+              text "서울특별시 강남구 테헤란로63길 9, 1801"
+            container
+              text "문의:"
+              text "ask@naeo.kr"
+            text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+          text "© 2026 NAEO. All rights reserved."

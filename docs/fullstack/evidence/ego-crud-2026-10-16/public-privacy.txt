@@ -1,0 +1,139 @@
+[p1 "개인정보처리방침 | NAEO" | space "NAEO 클론 화면"(15): 1 managed, 0 untracked — p1* "개인정보처리방침 | NAEO"]
+root
+  container
+    alert
+    container
+      container
+        anchor [ref=2235, loc=href:/, url=http://127.0.0.1:3000/]
+          text "NAEO"
+        container
+          anchor [ref=2236, loc=href:/mcp, url=http://127.0.0.1:3000/mcp]
+            text "AI 글쓰기"
+          anchor [ref=2237, loc=href:/ranking, url=http://127.0.0.1:3000/ranking]
+            text "랭킹"
+          anchor [ref=2238, loc=href:/mate, url=http://127.0.0.1:3000/mate]
+            text "네이버 메이트"
+          anchor [ref=2239, loc=href:/event, url=http://127.0.0.1:3000/event]
+            text "이벤트"
+          anchor [ref=2240, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2241, loc=href:/pricing, url=http://127.0.0.1:3000/pricing]
+            text "요금제"
+          button "테마 전환" [ref=2242, loc=css:button[aria-label="테마 전환"]]
+            svg_root
+          anchor [ref=2243, loc=href:/dashboard, url=http://127.0.0.1:3000/dashboard]
+            text "대시보드"
+      container
+        heading
+          text "개인정보처리방침"
+        paragraph
+          text "시행일자: 2026년 10월 13일"
+        heading
+          text "1. 개인정보의 수집 및 이용 목적"
+        paragraph
+          text "회사는 다음의 목적을 위하여 개인정보를 처리합니다. • 회원 가입 및 관리: 회원 가입의사 확인, 본인 식별·인증, 회원자격 유지·관리, 서비스 부정�..."
+        heading
+          text "2. 수집하는 개인정보 항목"
+        paragraph
+          text "[필수 항목] • 이메일 주소 • 비밀번호 (암호화하여 저장) [소셜 로그인 이용 시] • 소셜 로그인 제공자가 제공하는 이메일, 프로필 이름, 프로필 사�..."
+        container
+          heading
+            text "3. 개인정보의 보유 및 이용 기간"
+          paragraph
+            text "• 원칙: 회원 탈퇴 시까지 (서비스 이용 목적 달성 시까지) [저장한 글(초안)] • 이용자가 글 저장·발행 기능으로 저장한 글은 저장일로부터 30일이 지..."
+        container
+          heading
+            text "4. 개인정보의 제3자 제공"
+          paragraph
+            text "회사는 이용자의 개인정보를 본 방침에 명시한 범위를 넘어 제3자에게 제공하지 않습니다. 다만 다음의 경우에는 예외로 합니다. • 이용자가 사전에 �..."
+        container
+          heading
+            text "5. 개인정보 처리의 위탁"
+          paragraph
+            text "회사는 원활한 서비스 제공과 광고 성과 측정을 위해 다음과 같이 개인정보 처리업무를 위탁합니다. 위탁 계약 시 개인정보의 안전한 관리, 재위탁 제�..."
+        heading
+          text "6. 정보주체의 권리"
+        paragraph
+          text "이용자는 다음과 같은 권리를 행사할 수 있습니다. ① 개인정보 열람 요구 ② 개인정보 오류 정정 요구 ③ 개인정보 삭제 요구 ④ 개인정보 처리정지 �..."
+        heading
+          text "7. 개인정보의 안전성 확보 조치"
+        paragraph
+          text "• 관리적 조치: 내부관리계획 수립, 개인정보 취급 직원 최소화 및 교육 • 기술적 조치: 비밀번호 단방향 암호화 저장, SSL/TLS 암호화 전송, 방화벽 운�..."
+        heading
+          text "8. 개인정보 보호책임자"
+        paragraph
+          text "성명: 이재홍 직책: 대표이사 이메일: ask@naeo.kr 정보주체는 서비스 이용 중 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등을 개인정보 �..."
+        heading
+          text "9. 권익침해 구제 방법"
+        paragraph
+          text "• 개인정보 침해신고센터: privacy.kisa.or.kr / 전화 118 • 개인정보 분쟁조정위원회: www.kopico.go.kr / 전화 1833-6972 • 대검찰청 사이버범죄수사단: www.spo.go.k..."
+        heading
+          text "10. NAEO Chrome Extension 및 외부 AI 커넥터(MCP)"
+        paragraph
+          text "NAEO Chrome Extension은 별도의 개인정보 처리방침을 운영합니다. 다만 이용자가 확장 프로그램에서 NAEO 계정으로 로그인하는 경우, 다음과 같이 개인정보�..."
+        heading
+          text "11. 개인정보의 국외 이전"
+        paragraph
+          text "제5조의 수탁자 중 페이플·네이버클라우드·택배사를 제외한 사업자는 모두 국외에 소재합니다. 회사는 「개인정보 보호법」 제28조의8 제1항 제3호 가..."
+        heading
+          text "12. 쿠키 등 자동 수집 장치의 설치·운영 및 거부"
+        paragraph
+          text "회사는 이용자에게 맞춤 서비스를 제공하고 서비스 이용 현황을 분석하기 위해 쿠키를 사용합니다. 쿠키는 웹사이트를 운영하는 서버가 이용자의 브�..."
+        heading
+          text "13. 행태정보의 수집·이용·제공 및 거부에 관한 사항"
+        paragraph
+          text "회사는 서비스 개선과 광고 성과 측정을 위해 다음과 같이 행태정보를 수집·이용합니다. [수집하는 항목] • 웹사이트 방문 이력, 페이지 조회·클릭·�..."
+        heading
+          text "14. 만 14세 미만 아동의 개인정보"
+        paragraph
+          text "회사의 서비스는 만 14세 이상을 대상으로 하며, 만 14세 미만 아동의 회원 가입을 받지 않습니다. 서비스가 분석 대상으로 하는 네이버 블로그 역시 만 ..."
+        heading
+          text "15. 개인정보처리방침의 변경"
+        paragraph
+          text "• 본 방침은 상단에 기재된 시행일자부터 적용됩니다. • 법령·정책의 변경이나 서비스 변경에 따라 내용의 추가·삭제 및 수정이 있는 경우, 시행 7�..."
+        heading
+          text "16. 공개된 게시물 정보의 처리"
+        paragraph
+          text "회사는 서비스 제공(경쟁 블로그 비교, 키워드 추천, 블로그 순위 산정)을 위해 네이버 블로그에 공개된 게시물 정보를 수집·분석합니다. 이는 회원이 ..."
+        paragraph
+          text "공고일자: 2026년 10월 13일 | 시행일자: 2026년 10월 13일 주식회사 어크로스 | 대표: 이재홍 문의: ask@naeo.kr"
+      container
+        text "NAEO"
+        paragraph
+          text "네이버 AI 검색(AEO) 최적화 분석 솔루션"
+        anchor "NAEO YouTube @naeo_kr" [ref=2244, loc=css:a[aria-label="NAEO YouTube @naeo_kr"], url=https://www.youtube.com/@naeo_kr]
+          svg_root
+        anchor "NAEO Instagram @naeo.kr" [ref=2245, loc=css:a[aria-label="NAEO Instagram @naeo.kr"], url=https://www.instagram.com/naeo.kr/]
+          svg_root
+        anchor "NAEO Threads @naeo.kr" [ref=2246, loc=css:a[aria-label="NAEO Threads @naeo.kr"], url=https://www.threads.com/@naeo.kr]
+          svg_root
+        anchor "NAEO 네이버 카페 커뮤니티" [ref=2247, loc=css:a[aria-label="NAEO 네이버 카페 커뮤니티"], url=https://cafe.naver.com/blogaiuniv]
+        container "서비스 링크"
+          text "서비스"
+          anchor [ref=2248, loc=href:/faq, url=http://127.0.0.1:3000/faq]
+            text "FAQ"
+          anchor [ref=2249, loc=href:/contact, url=http://127.0.0.1:3000/contact]
+            text "문의하기"
+          anchor [ref=2250, url=http://127.0.0.1:3000/blog]
+            text "매거진"
+          anchor [ref=2251, loc=href:/updates, url=http://127.0.0.1:3000/updates]
+            text "업데이트"
+        container "법적 고지 링크"
+          text "법적 고지"
+          anchor [ref=2252, loc=href:/terms, url=http://127.0.0.1:3000/terms]
+            text "이용약관"
+          anchor [ref=2253, loc=href:/privacy, url=http://127.0.0.1:3000/privacy]
+            text "개인정보처리방침"
+          anchor [ref=2254, loc=href:/refund, url=http://127.0.0.1:3000/refund]
+            text "환불규정"
+        text "주식회사 어크로스"
+        text "| 대표:"
+        text "이재홍"
+        text "| 사업자등록번호:"
+        text "288-86-03687"
+        text "주소:"
+        text "서울특별시 강남구 테헤란로63길 9, 1801"
+        text "문의:"
+        text "ask@naeo.kr"
+        text "NAEO는 네이버(주)와 무관한 독립 서비스입니다."
+        text "© 2026 NAEO. All rights reserved."
