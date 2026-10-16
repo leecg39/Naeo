@@ -12,5 +12,19 @@ export default async function LoginPage({searchParams}:{searchParams:Promise<{ne
   const {next,oauthError}=await searchParams;
   const user=await currentUser();
   if(user)redirect(user.termsAcceptedAt?safeNext(next,'/dashboard/settings'):'/auth/terms');
-  return <main className="account-login"><Link className="account-logo" href="/">NAEO<span>●</span></Link><div className="panel account-card"><p className="eyebrow">WELCOME TO NAEO</p><h1 className="page-heading">내 블로그의 다음 단계</h1><p className="muted">계정에 로그인하고 블로그를 관리하세요.</p><SocialLogin next={next} error={oauthError} configured={{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}/><AuthForm next={next}/></div><Link className="muted" href="/">← 홈으로 돌아가기</Link></main>;
+  return <main className="account-login login-sheet-wrap">
+    <Link className="account-logo" href="/">NAEO<span>●</span></Link>
+    <section className="login-sheet" aria-labelledby="login-sheet-title">
+      <div className="login-sheet-head">
+        <h1 id="login-sheet-title">시작하기</h1>
+        <Link className="login-close" href="/" aria-label="닫기"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41 6.3 6.3-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z" fill="currentColor"/></svg></Link>
+      </div>
+      <SocialLogin next={next} error={oauthError} configured={{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}/>
+      <p className="login-terms">계속하면 <a href="/terms" target="_blank" rel="noreferrer">이용약관</a> 및 <a href="/privacy" target="_blank" rel="noreferrer">개인정보처리방침</a>에 동의하는 것으로 봅니다.</p>
+      <div className="login-email">
+        <p className="login-email-label">이메일 로그인</p>
+        <AuthForm next={next} variant="sheet"/>
+      </div>
+    </section>
+  </main>;
 }

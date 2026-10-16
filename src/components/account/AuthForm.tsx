@@ -5,7 +5,7 @@ import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { api, safeNext } from '@/lib/api-client';
 
-export default function AuthForm({next,onSuccess}:{next?:string;onSuccess?:()=>void}) {
+export default function AuthForm({next,onSuccess,variant}:{next?:string;onSuccess?:()=>void;variant?:'default'|'sheet'}) {
   const router=useRouter();
   const [mode,setMode]=useState<'login'|'register'>('login');
   const [busy,setBusy]=useState(false),[error,setError]=useState('');
@@ -20,6 +20,20 @@ export default function AuthForm({next,onSuccess}:{next?:string;onSuccess?:()=>v
     } catch(error) {setError(error instanceof Error?error.message:'로그인하지 못했습니다.');}
     finally {setBusy(false);}
   }
+  if(variant==='sheet')return <div className="account-form account-form-sheet">
+    <form method="post" onSubmit={submit}>
+      {mode==='register'&&<input className="field" name="nickname" placeholder="닉네임" autoComplete="nickname" minLength={1} maxLength={30} required disabled={busy} aria-label="닉네임"/>}
+      <input className="field" name="email" type="email" placeholder="이메일" autoComplete="username" maxLength={254} required disabled={busy} aria-label="이메일"/>
+      <input className="field" name="password" type="password" placeholder="비밀번호" autoComplete={mode==='login'?'current-password':'new-password'} minLength={mode==='register'?10:1} maxLength={128} required disabled={busy} aria-label="비밀번호"/>
+      {mode==='register'&&<><p className="muted account-hint">비밀번호는 10자 이상 입력해주세요.</p><label className="account-checkbox"><input name="terms" type="checkbox" required disabled={busy}/><span><a href="/terms" target="_blank" rel="noreferrer">이용약관</a> 및 <a href="/privacy" target="_blank" rel="noreferrer">개인정보 처리방침</a>에 동의합니다.</span></label></>}
+      {error&&<p role="alert" className="account-error">{error}</p>}
+      <button className="button login-submit" type="submit" disabled={busy}>{busy?'처리 중…':mode==='login'?'이메일로 로그인':'이메일로 가입하기'}</button>
+    </form>
+    <div className="login-sheet-foot">
+      <button type="button" className="login-text-btn" disabled={busy} onClick={()=>{setMode(mode==='login'?'register':'login');setError('');}}>{mode==='login'?'이메일로 회원가입':'로그인으로 돌아가기'}</button>
+      <Link href="/auth/forgot-password" className="login-text-btn">비밀번호를 잊으셨나요?</Link>
+    </div>
+  </div>;
   return <div className="account-form">
     <div role="tablist" aria-label="계정 이용 방법" className="account-tabs">
       <button type="button" role="tab" aria-selected={mode==='login'} disabled={busy} onClick={()=>{setMode('login');setError('');}}>로그인</button>

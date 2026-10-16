@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-16 — 픽셀 비교와 로그인 화면 복원
+
+- `scripts/qa/pixel-parity.ts`: 시스템 Chrome 스크린샷 + pixelmatch로 공개 10경로×1440/390px의 픽셀 diff를 측정하고 원본/복제본/차이 PNG와 report.json을 `docs/fullstack/evidence/pixel-parity-2026-10-16/`에 남긴다.
+- `/login`을 원본 캡처의 "시작하기" 시트 구조로 재배치했다(시작하기 제목+닫기, 네이버/구글 시작 버튼과 캡처 아이콘, 다른 네이버 아이디 링크, 약관 문구, 이메일 로그인 placeholder 폼). 회원가입·비밀번호 찾기는 복제본 고유 기능이라 보조 링크로 유지.
+- 결과: `/faq` 픽셀 일치, 대부분 2% 이하; `/ranking`은 빈 QA DB의 데이터 의존 차이. 전체 490개·lint·typecheck·build 통과.
+
 ## 2026-10-16 — MP4·홈 복원 및 TASKS 계정 게이트
 
 - 스키마 45: FFmpeg H.264 무음 슬라이드 MP4, 비동기 큐·진행률·취소·lease 복구·파일 보관·개인정보 이동성 반영. 실제 Ego 다운로드와 ffprobe 검증 완료.

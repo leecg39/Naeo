@@ -1,6 +1,9 @@
 import type {OAuthProviderName} from '@/server/oauth/providers';
 
-const LABEL:Record<OAuthProviderName,string>={google:'Google로 계속하기',naver:'네이버로 계속하기'};
+const META:Record<OAuthProviderName,{label:string;icon:string;round:boolean}>={
+ naver:{label:'네이버로 시작하기',icon:'/assets/6441c55cff8be2eb.PNG',round:true},
+ google:{label:'구글로 시작하기',icon:'/assets/756eab3df81c1727.svg',round:false},
+};
 /** 콜백이 돌려준 오류 코드 → 안내 문구(코드 외의 값은 표시하지 않는다). */
 export const OAUTH_ERRORS:Record<string,string>={
  OAUTH_NOT_CONFIGURED:'이 로그인 방식은 아직 설정되지 않았어요(미설정).',
@@ -15,10 +18,12 @@ export const OAUTH_ERRORS:Record<string,string>={
 };
 export default function SocialLogin({next,configured,error}:{next?:string;configured:Record<OAuthProviderName,boolean>;error?:string}){
  const q=next?`?next=${encodeURIComponent(next)}`:'';
- return <div className="account-form" aria-label="간편 로그인">
+ const providers=Object.keys(META) as OAuthProviderName[];
+ return <div className="login-social" aria-label="간편 로그인">
   {error&&<p role="alert" className="account-error">{OAUTH_ERRORS[error]??'로그인하지 못했어요. 다시 시도해주세요.'}</p>}
-  {(Object.keys(LABEL) as OAuthProviderName[]).map(p=>configured[p]
-   ?<a key={p} className="button secondary" href={`/api/auth/oauth/${p}/start${q}`} data-oauth={p}>{LABEL[p]}</a>
-   :<button key={p} className="button secondary" type="button" disabled data-oauth={p}>{LABEL[p]} (미설정)</button>)}
+  {providers.map(p=>configured[p]
+   ?<a key={p} className="login-provider" href={`/api/auth/oauth/${p}/start${q}`} data-oauth={p}><img className={META[p].round?'login-icon-round':'login-icon'} src={META[p].icon} alt="" aria-hidden/>{META[p].label}</a>
+   :<button key={p} className="login-provider" type="button" disabled data-oauth={p}><img className={META[p].round?'login-icon-round':'login-icon'} src={META[p].icon} alt="" aria-hidden/>{META[p].label} (미설정)</button>)}
+  {configured.naver&&<a className="login-text-btn login-alt-naver" href={`/api/auth/oauth/naver/start${q}`}>다른 네이버 아이디로 로그인</a>}
  </div>;
 }
