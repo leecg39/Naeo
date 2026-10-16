@@ -5,7 +5,7 @@
 ## 최신 검증
 
 - eced38a까지 포함한 최신 소스를 별도 디렉터리에서 production build해 컴파일·TypeScript·정적 페이지 생성을 확인했다. 실행 중인 Ego 임시 서버의 `.next`는 바꾸지 않았다.
-- 전체 427개 테스트, lint, typecheck, production build, `git diff --check`가 통과했다.
+- 전체 439개 테스트(루트 12 + 서버 427), lint, typecheck, production build, `git diff --check`가 통과했다. 이전 기록의 "427개"는 서버 묶음만 센 값이다.
 - 공용 페이지 이동의 포커스 처리, 목록 복귀 도중 동시 삭제 처리, 확장 Origin·토큰 clientId 대조, 사진함 마크다운 링크·폐기·재발행, 30일 초안 자동 삭제가 구현됐다.
 - 고정 개발 ID를 가진 Manifest V3 확장 본체를 추가했다. 실제 Next HTTP에서 PKCE 동의→토큰→MCP 초안 조회→철회 후 401을 확인했다. [확장 발행 기록](extension-publish-extension.md).
 - 실제 Ego Lite와 로그인된 네이버 SmartEditor ONE에서 제목·구조화 본문·소제목·PNG 사진의 4단계 전달, 진행 상태, 연결 해제, 테스트 글 정리를 확인했다. 공개 발행은 누르지 않았다.

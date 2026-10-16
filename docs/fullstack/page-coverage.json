@@ -747,7 +747,7 @@
    },
    {
     "type": "external_pending",
-    "reason": "확장 프로그램 코드는 구현됨. Chrome Web Store 등록과 실제 네이버 편집기 발행 E2E가 남음"
+    "reason": "Chrome Web Store 등록 확장 ID(NAEO_EXTENSION_IDS)와 배포 HTTPS 실환경 검증. 확장 본체·OAuth/MCP·네이버 편집기 전달은 로컬 검증 완료"
    },
    {
     "type": "live-http",
@@ -2661,7 +2661,7 @@
    },
    {
     "type": "external_pending",
-    "reason": "AI 글 생성 공급자 키(ANTHROPIC_API_KEY)"
+    "reason": "AI 글: 승인된 OpenAI client(NAEO_OPENAI_*) 또는 ANTHROPIC_API_KEY 실제 왕복 · AI 이미지 공급자 미구현"
    },
    {
     "type": "browser-render",
