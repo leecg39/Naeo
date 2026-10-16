@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-16T15:06:52.199Z",
+ "generatedAt": "2026-10-16T16:56:06.744Z",
  "orig": "https://www.naeo.kr",
  "clone": "http://127.0.0.1:3200",
  "rows": [
@@ -7,13 +7,13 @@
    "route": "/",
    "viewport": "desktop",
    "origDocH": 13924,
-   "cloneDocH": 12852,
-   "comparedH": 12852,
+   "cloneDocH": 13014,
+   "comparedH": 13014,
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 311139,
-   "diffRatio": 0.017,
+   "diffPixels": 295771,
+   "diffRatio": 0.0159,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -24,13 +24,13 @@
    "route": "/",
    "viewport": "mobile",
    "origDocH": 14554,
-   "cloneDocH": 13743,
-   "comparedH": 13743,
+   "cloneDocH": 14490,
+   "comparedH": 14490,
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 167907,
-   "diffRatio": 0.0313,
+   "diffPixels": 173859,
+   "diffRatio": 0.0308,
    "scrollW": {
     "orig": 390,
     "clone": 390
@@ -131,8 +131,8 @@
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 44889,
-   "diffRatio": 0.0583,
+   "diffPixels": 45603,
+   "diffRatio": 0.0592,
    "scrollW": {
     "orig": 390,
     "clone": 390
@@ -148,8 +148,8 @@
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 124997,
-   "diffRatio": 0.0209,
+   "diffPixels": 125761,
+   "diffRatio": 0.021,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -165,8 +165,8 @@
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 50355,
-   "diffRatio": 0.0314,
+   "diffPixels": 50460,
+   "diffRatio": 0.0315,
    "scrollW": {
     "orig": 390,
     "clone": 390
@@ -211,13 +211,13 @@
    "route": "/ranking",
    "viewport": "desktop",
    "origDocH": 17856,
-   "cloneDocH": 1501,
-   "comparedH": 1501,
+   "cloneDocH": 2232,
+   "comparedH": 2232,
    "comparedW": 1425,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 91814,
-   "diffRatio": 0.0429,
+   "diffPixels": 104931,
+   "diffRatio": 0.033,
    "scrollW": {
     "orig": 1425,
     "clone": 1425
@@ -228,13 +228,13 @@
    "route": "/ranking",
    "viewport": "mobile",
    "origDocH": 20728,
-   "cloneDocH": 1903,
-   "comparedH": 1903,
+   "cloneDocH": 2435,
+   "comparedH": 2435,
    "comparedW": 390,
    "widthMismatch": false,
    "fullDocHMismatch": true,
-   "diffPixels": 71690,
-   "diffRatio": 0.0966,
+   "diffPixels": 76476,
+   "diffRatio": 0.0805,
    "scrollW": {
     "orig": 390,
     "clone": 390

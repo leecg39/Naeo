@@ -60,3 +60,20 @@ test('rows, tabs, my rank, categories and hall of fame come from the database',a
  const privatePage=await buildRankingPage(db,{period:'week'},hidden.id,NOW);
  assert.match(text(all(privatePage.body,n=>(n.attrs.class??'').includes('mui-gtw5ek'))[0]),/랭킹 비공개/);
 });
+
+test('podium shows the top 3 with scores and titles; riser needs previous-week data',async t=>{
+ const db=await fixture(t);
+ const a=await member(db,'alpha@example.test','알파');const b=await member(db,'bravo@example.test','브라보');const c=await member(db,'charlie@example.test','찰리');
+ const last=periodRange('week',-1,NOW);
+ scored(db,b,last.start+DAY);scored(db,a,last.start+2*DAY);
+ confirmPeriod(db,'week',-1,NOW);
+ scored(db,a,NOW-2*DAY);scored(db,b,NOW-DAY);scored(db,c,NOW-DAY);
+ const page=await buildRankingPage(db,{period:'week'},null,NOW);
+ const podium=all(page.body,n=>/podium-name/.test(n.attrs.class??''));
+ assert.deepEqual(podium.map(text).sort(),['브라보','알파','찰리'].sort());
+ assert.match(JSON.stringify(page.body),/▲1계단/,'riser: 알파 climbed 2→1 since last week');
+ const mine=await buildRankingPage(db,{period:'week'},a.id,NOW);
+ assert.match(text(all(mine.body,n=>(n.attrs.class??'').includes('mui-gtw5ek'))[0]),/상위 \d+%/,'percentile line');
+ const thin=await buildRankingPage(await fixture(t),{},null,NOW);
+ assert.equal(all(thin.body,n=>/podium-name/.test(n.attrs.class??'')).length,0,'no podium without 3 members');
+});

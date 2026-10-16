@@ -34,7 +34,7 @@ npm start
 
 ## 검증
 
-최신 결과: **490개 테스트**, lint·typecheck·프로덕션 빌드 통과. 이메일 인증·비밀번호 복구·휴대폰 인증·설정·세션 철회·탈퇴를 실제 Ego에서 검증하고 성공 안내/포커스 결함을 수정했습니다. [TASKS 후속 결과와 외부 완료 조건](docs/fullstack/tasks-finish-2026-10-16.md).
+최신 결과: **491개 테스트**, lint·typecheck·프로덕션 빌드 통과. 이메일 인증·비밀번호 복구·휴대폰 인증·설정·세션 철회·탈퇴를 실제 Ego에서 검증하고 성공 안내/포커스 결함을 수정했습니다. [TASKS 후속 결과와 외부 완료 조건](docs/fullstack/tasks-finish-2026-10-16.md).
 
 ```bash
 npm test

@@ -86,6 +86,21 @@ export function confirmPeriod(db:Database,type:'week'|'month',offset:number,now=
  });
 }
 
+/** 이주의 급상승: 지난주 대비 이번 주 순위가 가장 많이 오른 공개 회원. 데이터가 없으면 null. */
+export function weeklyRiser(db:Database,now=Date.now()):{nickname:string;delta:number}|null{
+ const prev=snapshot(db,periodRange('week',-1,now))??measured(db,periodRange('week',-1,now),true);
+ if(!prev.length)return null;
+ const prevRank=new Map(prev.map(r=>[r.userId,r.rank]));
+ let best:{nickname:string;delta:number}|null=null;
+ for(const r of measured(db,periodRange('week',0,now),true)){
+  const before=prevRank.get(r.userId);
+  if(before==null)continue;
+  const delta=before-r.rank;
+  if(delta>0&&(!best||delta>best.delta))best={nickname:r.nickname,delta};
+ }
+ return best;
+}
+
 /** 명예의 전당: 확정 기간의 1위(최근 기간부터). */
 export function champions(db:Database,limit=12){
  return (db.prepare(`SELECT s.period_type AS periodType,s.period_key AS periodKey,s.nickname,s.naver_id AS naverId,s.score FROM ranking_snapshots s
