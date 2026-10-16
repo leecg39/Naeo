@@ -1,0 +1,24 @@
+[
+  {
+    "name": "wide.png",
+    "width": 1600,
+    "height": 800,
+    "mime": "image/png",
+    "hasAlpha": true
+  },
+  {
+    "name": "tall.jpeg",
+    "width": 533,
+    "height": 1600,
+    "mime": "image/jpeg",
+    "hasAlpha": false
+  },
+  {
+    "name": "small.webp",
+    "width": 320,
+    "height": 240,
+    "mime": "image/webp",
+    "hasAlpha": true,
+    "smallOriginalPreserved": true
+  }
+]
