@@ -1,0 +1,37 @@
+NAEO 회원별 OpenAI OAuth 검증 — 2026-10-16 (Asia/Seoul)
+
+정적·회귀 게이트
+- npm test: exit 0, 427/427 통과
+- npm run lint: exit 0
+- npm run typecheck: exit 0
+- npm run build: exit 0, Next.js 16.4.0 production build
+- git diff --check: exit 0
+
+전용 검증
+- tests/server/openai-connection.test.ts: 8/8 통과
+- generation/OpenAI 관련 묶음: 15/15 통과
+- 미설정 무저장, PKCE/nonce/state/browser binding, ID token 서명·범위,
+  암호화 저장, 토큰 회전/lease, terminal refresh 삭제, 모델 조회,
+  Responses completed 필수, 두 회원 credential 격리, 연결 해제 후 실패·환급,
+  HTTP 세션·Origin·연결 해제를 포함한다.
+
+Ego Lite 실제 화면
+- TaskSpace 0, http://127.0.0.1:3000
+- 새 마이그레이션 뒤 서버 미재시작 상태에서 /dashboard/settings가
+  "no such table: openai_connections" 500을 내는 것을 발견했다.
+- 웹 서버 재시작 뒤 /api/health schemaVersion=39, 설정 화면 HTTP 200.
+- 임시 QA 회원으로 설정과 글쓰기 화면 렌더 확인.
+- 승인 클라이언트 미설정 버튼 disabled=true.
+- 390px viewport: document scrollWidth=390, 가로 넘침 없음.
+- 글쓰기 화면: ChatGPT 연결 또는 직접 작성 안내를 표시.
+- 임시 QA 회원 영구 삭제 확인(qaUsers=0).
+- 승인 클라이언트가 없어 실제 OpenAI 승인 화면·토큰·추론은 실행하지 않음.
+
+로컬 DB 확인
+- schemaVersion: 39
+- openai_connections: 0
+- 임시 QA 사용자: 0
+
+증거 이미지
+- openai-settings-mobile.png
+- settings-mobile.png (설정 페이지 상단 모바일 렌더)

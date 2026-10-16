@@ -532,3 +532,11 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 ## 2026-10-15 — 사진 다운로드 경계
 
 신규3/전체398개(6+392), lint/typecheck/build 통과. 실제 파일 symlink/hardlink/누락/크기·서명 변경과 소유자·공유 API 처리기 거절 검사. media-download-boundary.md 및 evidence/media-boundary-* 참조. 별도 브라우저 E2E는 실행하지 않았다.
+
+## 2026-10-16 — 회원별 OpenAI OAuth와 AI 글 생성
+
+스키마 38·39에서 회원별 연결·일회 state·생성 작업 credential revision을 추가했다. 설정 UI/API, PKCE·nonce·브라우저 바인딩, RS256 ID token 검증, AES-256-GCM 토큰 저장, 회전 refresh token과 DB lease, 연결 해제·최종 오류 삭제를 구현했다. 작업자는 해당 소유자와 연결 revision의 자격 증명만 사용하며 계정 모델 조회와 Responses SSE의 `response.completed`를 성공 조건으로 삼는다. 연결을 해제한 대기 작업은 실패·환급하며 다른 회원이나 Anthropic 자격 증명으로 대체하지 않는다.
+
+전용 8개, 관련 묶음 15개, 전체 427개 테스트가 통과했다. lint·typecheck·production build·`git diff --check`도 exit 0이다. Ego TaskSpace 0에서 재시작 전 장기 실행 서버의 스키마 37 때문에 `openai_connections` 부재 500을 발견했고, 웹 재시작 뒤 `/api/health` 스키마 39와 설정·글쓰기 정상 렌더를 확인했다. 승인 클라이언트 미설정 버튼은 disabled이며 390px 가로 넘침은 0이다. 임시 QA 회원은 삭제했다. [상세 계약](openai-oauth.md), [검증 로그](evidence/openai-oauth-2026-10-16/verification.txt), [모바일 화면](evidence/openai-oauth-2026-10-16/openai-settings-mobile.png).
+
+실제 OpenAI 검증은 배포 서비스용 승인 client ID와 HTTPS 콜백 등록 후 남는다. 로컬 대역 검증을 실제 공급자 성공으로 세지 않으며 AI 이미지·네이버 인용 수집도 별도 미완료다.

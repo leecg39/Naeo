@@ -4,7 +4,7 @@ import type {Database} from '../database';
 import {memberChrome} from '../content/member-chrome';
 import {balance} from '../credits/ledger';
 import {currentSubscription} from '../billing/subscriptions';
-import {GENERATION_COST,providerConfig} from '../generation/generation';
+import {GENERATION_COST,generationAvailability} from '../generation/generation';
 import {listRecommendations} from '../keywords/recommendations';
 import {isTrackingPixel} from '../content/blog-pages';
 import {find,hasClass,mapTree,textOf,withAttrs,withChildren,type El} from '../content/tree';
@@ -23,12 +23,13 @@ export async function buildWritingPage(db:Database,userId:string,now=Date.now())
  const page=await getCapturedPage('/dashboard/write');
  if(!page)throw new Error('writing template missing');
  const tokens=balance(db,userId),sub=currentSubscription(db,userId,now);
+ const generation=generationAvailability(db,userId);
  const plan=sub?`${sub.planName} ${sub.trial?'체험 중':'이용 중'} · ${kstDate(sub.currentPeriodEnd)}까지`:'이용 중인 구독 없음';
  const credit=(n:El)=>withAttrs(withChildren(n,[`잔액 ${tokens}토큰`]),{'data-credit-balance':'true'});
  const body=mapTree(page.body.filter(n=>!isTrackingPixel(n)),n=>{
   if(n.attrs.role==='status'&&find(n.children,hasClass('mui-1a0o2bi')))return[];
   if(hasClass('mui-1a0o2bi')(n))return[]; // 캡처 당시의 고정 이벤트 홍보.
-  if(hasClass('mui-sw3xbd')(n))return[withChildren(n,[paragraph(plan),credit(paragraph('')),paragraph(`글 생성 ${GENERATION_COST}토큰 · 실패·취소 시 환급`),paragraph(providerConfig().apiKey?'AI 이미지는 미설정입니다. 내 사진을 사용할 수 있습니다.':'AI 글·이미지 공급자 미설정. 직접 작성·저장과 내 사진 업로드를 이용할 수 있습니다.')])];
+  if(hasClass('mui-sw3xbd')(n))return[withChildren(n,[paragraph(plan),credit(paragraph('')),paragraph(`글 생성 ${GENERATION_COST}토큰 · 실패·취소 시 환급`),paragraph(generation==='openai_oauth'?'연결한 ChatGPT 계정으로 글을 생성합니다. AI 이미지는 미설정이며 내 사진을 사용할 수 있습니다.':generation==='anthropic'?'서버 AI 공급자로 글을 생성합니다. AI 이미지는 미설정이며 내 사진을 사용할 수 있습니다.':'AI 글·이미지 공급자 미설정. 계정 설정에서 ChatGPT를 연결하거나 직접 작성·저장할 수 있습니다.')])];
   if(hasClass('mui-1a3imsy')(n))return[withChildren(n,recommendations(db,userId,now))];
   if(n.tag==='button'&&textOf(n).startsWith('글 생성하기'))return[withChildren(n,[`글 생성하기 (${GENERATION_COST}토큰)`])];
   if(!n.children.every(c=>typeof c==='string'))return undefined;

@@ -21,6 +21,7 @@ import {mcpApi} from './mcp/mcp-api';
 import {creativeApi} from './creative/creative-api';
 import {adminOpsApi,publicAnalyticsApi} from './ops/analytics-api';
 import {engagementApi} from './engagement/api';
+import {memberOpenAIApi,publicOpenAIApi} from './openai/api';
 import {acceptTerms} from './account-security';
 import { getProfile, updateProfile } from './profiles';
 import { listBlogs, getBlog, createBlog, updateBlog, deleteBlog } from './blogs';
@@ -61,6 +62,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(publicAuthz)return publicAuthz;
     const publicOAuth=await publicOAuthApi(db,request);
     if(publicOAuth)return publicOAuth;
+    const publicOpenAI=await publicOpenAIApi(db,request);
+    if(publicOpenAI)return publicOpenAI;
     const publicInquiry=await publicInquiryApi(db,request);
     if(publicInquiry)return publicInquiry;
     const publicMate=await publicMateApi(db,request,sessionUser(db,cookieToken(request)));
@@ -86,6 +89,8 @@ export function createApi(getDatabase:()=>Database=database) {
     if(authzResponse)return authzResponse;
     const oauthResponse=await memberOAuthApi(db,request,user);
     if(oauthResponse)return oauthResponse;
+    const openAIResponse=await memberOpenAIApi(db,request,user);
+    if(openAIResponse)return openAIResponse;
     const accountResponse=await accountApi(db,request,user);
     if(accountResponse)return accountResponse;
     const contentResponse=await contentApi(db,request,user);

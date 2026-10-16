@@ -225,10 +225,13 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 |---|---|---|---|---|
 | `/api/credits` | GET | 회원 | 잔액(원장 합계)과 원장(지급·생성 차감·환급·조정) | 401 |
 | `/api/admin/credits` | POST | 관리자 | `{userId,delta(±10만, 0 불가),note}` 지급·회수, 잔액이 음수가 되면 거절, 감사 기록 | 403, 409 `NEGATIVE_BALANCE` |
-| `/api/generations` | GET·POST | 회원 | 요청 `{keyword≤60,category,title,experience≤1000,instructions≤1000,photoIds(내 사진, ≤20),aiImages,idempotencyKey}`. 공급자 키가 없으면 503(차감 없음), AI 이미지 요청은 503(이미지 공급자 미설정). 같은 키는 같은 작업(1회 차감), 잔액 부족 402. 작업 등록·10토큰 차감은 한 트랜잭션. 시간당 30회 | 400, 402 `INSUFFICIENT_TOKENS`, 404 `PHOTO_NOT_FOUND`, 503 `PROVIDER_NOT_CONFIGURED`·`IMAGE_PROVIDER_NOT_CONFIGURED` |
+| `/api/generations` | GET·POST | 회원 | 요청 `{keyword≤60,category,title,experience≤1000,instructions≤1000,photoIds(내 사진, ≤20),aiImages,idempotencyKey}`. 회원 OpenAI 연결을 우선하고 없으면 설정된 Anthropic을 사용한다. 승인 OpenAI 클라이언트만 있고 회원 연결이 없거나 공급자가 전혀 없으면 503(차감 없음), AI 이미지 요청은 503. 같은 키는 같은 작업(1회 차감), 잔액 부족 402. 작업 등록·10토큰 차감은 한 트랜잭션. 시간당 30회 | 400, 402 `INSUFFICIENT_TOKENS`, 404 `PHOTO_NOT_FOUND`, 503 `OPENAI_CONNECTION_REQUIRED`·`PROVIDER_NOT_CONFIGURED`·`IMAGE_PROVIDER_NOT_CONFIGURED` |
 | `/api/generations/:id` · `/cancel` | GET·POST | 회원(본인) | 대기 작업 취소는 즉시 환급, 실행 중이면 결과 대신 취소·환급(초안 없음) | 404, 409 `GENERATION_FINISHED` |
+| `/api/account/openai` | GET·DELETE | 회원 | 안전한 연결 상태 조회, refresh token 원격 철회 시도 후 로컬 연결 항상 삭제. 토큰·subject·내부 id 미노출 | 401, 403 |
+| `/api/account/openai/start` | GET | 회원 | state·PKCE·nonce·브라우저 바인딩을 만들고 승인 주소로 302. 로그인 회원별 15분 20회 | 503 `OPENAI_NOT_CONFIGURED` |
+| `/api/account/openai/callback` | GET | 활성 로그인 회원 | 일회 state, 같은 회원·브라우저, ID token 서명/issuer/audience/nonce, 필수 direct-use 범위 확인 후 설정 화면으로 303 | 안전한 `openai_error` 코드로 복귀 |
 
-worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. 공급자: `ANTHROPIC_API_KEY`가 있을 때만 Anthropic Messages API(`NAEO_AI_MODEL`, 기본 `claude-sonnet-4-6`, 최대 4000토큰, 120초 제한). 사용자 입력은 사용자 메시지의 경계 태그 안에만 넣고 시스템 지시에는 넣지 않는다. 성공하면 초안 생성·사진 연결·작업 완료를 한 트랜잭션으로 처리, 실패(재시도 불가 또는 2회 초과)는 작업당 1회 환급(원장 유일 제약).
+worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. OpenAI 경로는 같은 회원 bearer로 계정 모델을 조회한 뒤 Responses API를 `store:false`·SSE로 호출하고 `response.completed`를 성공 조건으로 삼는다. 작업에는 회원 연결 revision을 저장하며 실행 중 연결이 사라지거나 바뀌면 실패·환급한다. 토큰 갱신은 회전 토큰·최초 갱신 시각·DB lease를 적용한다. Anthropic fallback은 Messages API(`NAEO_AI_MODEL`, 기본 `claude-sonnet-4-6`, 최대 4000토큰, 120초 제한)다. 사용자 입력은 사용자 메시지의 경계 태그 안에만 넣고 시스템 지시에는 넣지 않는다. 성공하면 초안 생성·사진 연결·작업 완료를 한 트랜잭션으로 처리, 실패(재시도 불가 또는 2회 초과)는 작업당 1회 환급(원장 유일 제약).
 
 ## P4.5 글쓰기 관리·내보내기 API (2026-10-13)
 

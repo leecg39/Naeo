@@ -23,6 +23,6 @@ export function runRetention(db:Database,now=Date.now()){
   drafts:cleanupExpiredDrafts(db,now),
   sessions:del('DELETE FROM sessions WHERE expires_at<=?',now),
   workers:del('DELETE FROM worker_heartbeats WHERE last_seen_at<?',now-DAY),
-  oauth:del('DELETE FROM oauth_codes WHERE expires_at<=?',now)+del('DELETE FROM oauth_states WHERE expires_at<=?',now)+del('DELETE FROM oauth_tokens WHERE expires_at<?',now-30*DAY),
+  oauth:del('DELETE FROM oauth_codes WHERE expires_at<=?',now)+del('DELETE FROM oauth_states WHERE expires_at<=?',now)+del('DELETE FROM openai_connection_states WHERE expires_at<=?',now)+del('DELETE FROM oauth_tokens WHERE expires_at<?',now-30*DAY),
  };
 }

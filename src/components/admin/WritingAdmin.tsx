@@ -60,7 +60,7 @@ export default function WritingAdmin({initialTemplates,initialJobs,aiConfigured}
   <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <section className="panel account-card">
    <h2>글쓰기 템플릿</h2>
-   <p className="muted">회원이 AI 글 생성 때 고를 수 있는 작성 지침입니다. AI 글 공급자: <strong>{aiConfigured?'설정됨':'미설정'}</strong>{aiConfigured?'':' · 서버에 ANTHROPIC_API_KEY가 없어 생성 요청은 토큰 차감 없이 거절됩니다.'} AI 이미지 공급자: <strong>미설정</strong></p>
+   <p className="muted">회원이 AI 글 생성 때 고를 수 있는 작성 지침입니다. AI 글 공급자 또는 회원별 ChatGPT 연결: <strong>{aiConfigured?'설정 가능':'미설정'}</strong>{aiConfigured?'':' · 공급자 설정이 없어 생성 요청은 토큰 차감 없이 거절됩니다.'} AI 이미지 공급자: <strong>미설정</strong></p>
    <div className="responsive-table"><table className="data-table"><caption className="sr-only">글쓰기 템플릿</caption>
     <thead><tr><th>이름</th><th>주제</th><th>상태</th><th>관리</th></tr></thead>
     <tbody>{templates.map(t=><tr key={t.id}><td><strong>{t.name}</strong></td><td>{t.category||'—'}</td><td>{t.status==='active'?'노출':'숨김'}</td>

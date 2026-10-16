@@ -9,7 +9,9 @@
 | 개발 | `var/naeo.sqlite` | `var/uploads` | `http://127.0.0.1:3000` | `npm run dev` |
 | QA | `var/qa/foundation.sqlite` | `var/qa/uploads` | `http://127.0.0.1:3100` | 검증용, 운영 데이터와 섞지 않음 |
 
-`NAEO_TOSS_API_BASE`, `NAEO_OAUTH_ENDPOINT_BASE`는 로컬 스텁 검증 전용이라 localhost만 허용하며 운영에는 설정하지 않는다. 모든 변수는 `.env.example`에 있고, 비밀값(키·시크릿)은 저장소에 넣지 않는다.
+`NAEO_TOSS_API_BASE`, `NAEO_OAUTH_ENDPOINT_BASE`, `NAEO_OPENAI_OAUTH_BASE`, `NAEO_OPENAI_API_BASE`는 로컬 스텁 검증 전용이라 loopback만 허용하며 운영에는 설정하지 않는다. 모든 변수는 `.env.example`에 있고, 비밀값(키·시크릿)은 저장소에 넣지 않는다.
+
+회원별 ChatGPT 연결은 OpenAI에서 승인받은 배포 서비스용 `NAEO_OPENAI_CLIENT_ID`(`oaiapp_…`)와 64자리 hex `NAEO_OPENAI_TOKEN_ENCRYPTION_KEY`가 모두 있어야 활성화된다. confidential client라면 `NAEO_OPENAI_CLIENT_SECRET`도 설정한다. 공급자에 등록하는 콜백은 `${NAEO_APP_URL}/api/account/openai/callback`과 정확히 같아야 한다. 웹과 worker는 같은 암호화 키를 써야 하며 키를 잃으면 보관 중인 회원 토큰을 복구할 수 없으므로 연결을 삭제하고 재인증해야 한다. 기존 Codex/ChatGPT 로그인 토큰을 이 값으로 복사하지 않는다.
 
 ## 실행
 ```bash
@@ -25,6 +27,8 @@ Next.js 웹 서버는 `.env.local`을 읽지만 위 Node CLI들은 자동으로 
 
 ## 마이그레이션
 DB를 열 때 `src/server/migrations.ts`의 새 버전이 한 트랜잭션으로 자동 적용된다. 적용된 버전은 체크섬으로 고정되어, 이미 적용된 마이그레이션을 고치면 서버가 시작을 거부한다(새 번호로 추가해야 한다). 현재 상태는 `GET /api/health`의 `schemaVersion`과 관리자 운영 현황에서 확인한다.
+
+개발 서버가 실행 중인 동안 새 마이그레이션을 추가하면 hot reload만으로 DB가 다시 열리지 않을 수 있다. 2026-10-16 OpenAI 연결 검증에서 이전 스키마 37 프로세스가 새 테이블을 읽어 설정 화면이 500이 되는 것을 재현했다. 마이그레이션 변경 뒤에는 웹과 worker를 모두 재시작하고 `/api/health`가 현재 버전(이 변경은 39)을 반환하는지 확인한다.
 
 ## 재시작
 1. 웹 프로세스를 멈추고 `npm run build` 후 `npm start`.
@@ -48,7 +52,7 @@ npm run restore -- --offline --recover
 복원 기록·`.before-restore-*`·`.naeo-restore-*`·`.naeo-uploads-*`를 작업 중 수동 삭제하지 않는다. 기록 게시 전 프로세스가 중단되면 기존 자료는 바뀌지 않지만 임시 폴더·JSON 임시 파일이 남을 수 있다. 운영자가 실행 중인 작업과 pending 기록이 없음을 확인한 뒤 정리한다. 보존 사본과 백업의 개인정보 보관 기간은 별도 운영 정책으로 관리한다. [검증 범위](backup-recovery.md).
 
 ## 보관 정책(작업자가 1시간마다)
-최근 저장 후 30일 지난 글 초안, 방문 원본 30일(일별 집계는 보존), 방문자 salt 2일, 감사 로그 1년, 하루 지난 작업자 기록, 만료된 세션·인가 코드·OAuth state 즉시, 만료 30일 지난 OAuth 토큰. 초안 자동 삭제 시 버전 이력과 공유 링크도 삭제하며 연결 사진은 내 사진함에 남긴다. 제작 내보내기 파일 7일(주인 없는 파일은 1시간 뒤). 개인 데이터 TAR는 요청 후 최대 1시간이며 세션 철회·탈퇴 시 삭제 큐로 회수한다. 결제·환불은 회계 기록이라 삭제하지 않는다(트리거로 보호, 회원 탈퇴 후에도 보존).
+최근 저장 후 30일 지난 글 초안, 방문 원본 30일(일별 집계는 보존), 방문자 salt 2일, 감사 로그 1년, 하루 지난 작업자 기록, 만료된 세션·인가 코드·자체 OAuth state·OpenAI 연결 state 즉시, 만료 30일 지난 자체 OAuth 토큰. 회원 OpenAI 연결 토큰은 연결 해제·회원 탈퇴·최종 갱신 오류 때 삭제한다. 초안 자동 삭제 시 버전 이력과 공유 링크도 삭제하며 연결 사진은 내 사진함에 남긴다. 제작 내보내기 파일 7일(주인 없는 파일은 1시간 뒤). 개인 데이터 TAR는 요청 후 최대 1시간이며 세션 철회·탈퇴 시 삭제 큐로 회수한다. 결제·환불은 회계 기록이라 삭제하지 않는다(트리거로 보호, 회원 탈퇴 후에도 보존).
 
 ## 점검
 - `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`

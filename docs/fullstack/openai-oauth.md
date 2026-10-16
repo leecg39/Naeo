@@ -1,32 +1,43 @@
-# OpenAI OAuth 적용 범위와 남은 구현
+# 회원별 OpenAI OAuth 연결
 
-2026-10-15 확인. 사용자는 API 키 생성 대신 OpenAI OAuth를 선택했다. 키 선택 질문은 답변 완료이며, 새 API 키를 만들거나 기존 Codex 인증 파일을 재사용하지 않는다.
+2026-10-16 현재 로컬 구현과 모의 공급자 검증은 완료했다. 사용자는 API 키가 아니라 회원이 각자 ChatGPT 계정을 연결하는 배포 서비스를 선택했다. Codex 인증 파일이나 운영자 개인 토큰은 사용하지 않는다. 실제 OpenAI 왕복은 NAEO 배포 서비스용 승인 클라이언트가 발급되고 콜백이 등록된 뒤에만 검증할 수 있다.
 
-## 확인된 범위
+## 구현 범위
 
-- [ChatGPT plan usage](https://developers.openai.com/siwc/token-sharing-open-source): 로컬·오픈소스 앱의 이용 경로와 유료·원격 호스팅 앱의 신청 경로가 다르다. 사용자는 회원들이 각자 로그인하는 배포 서비스로 확정했다. 로컬 동적 등록 경로는 배포 서비스에 적용하지 않는다.
-- [등록 및 로그인](https://developers.openai.com/siwc/token-sharing-open-source/sign-in): 로컬 앱은 동적 등록, 호스트 식별자, loopback 콜백, state/nonce/PKCE와 ID 토큰 검증을 사용한다. 사용자 동의를 거친 앱 전용 등록이 필요하다.
-- [추론](https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference): 계정별 모델 목록과 Responses 스트림을 사용한다. 완료 이벤트 전의 일부 텍스트를 성공으로 처리하면 안 된다.
-- [지원 제한](https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations): OAuth 사용 경로의 이미지 생성은 지원되지 않는다. 웹 검색은 계정·모델 정책에 따르며 NAEO가 요구하는 네이버 AI 브리핑 인용 근거를 자동으로 증명하지 않는다.
-- [상용 클라이언트 신청](https://developers.openai.com/siwc/request-client-id): 별도 신청이 필요하다. 신청 또는 승인됐다는 근거는 현재 없다.
+- `/dashboard/settings`에서 연결 상태·계정 메타데이터를 조회하고 연결 시작·해제를 수행한다. 토큰 원문은 화면·API·감사 로그·개인정보 내보내기에 포함하지 않는다.
+- `/api/account/openai/start`는 로그인·Origin·요청 제한을 확인한 뒤 state 해시, PKCE verifier/challenge, nonce, 브라우저 바인딩 쿠키를 만든다. 설정이 없으면 DB에 state를 남기지 않고 503을 돌려준다.
+- `/api/account/openai/callback`은 일회 state, 동일 로그인 회원, 브라우저 바인딩, 만료, issuer, audience/azp, RS256 서명, nonce, 필수 범위 `openid profile email offline_access chatgpt.tokens.use.direct`를 확인한다.
+- access·refresh·ID 토큰은 AES-256-GCM으로 암호화하고 연결·토큰 버전을 AAD에 묶는다. 회원당 연결 하나, OpenAI subject는 전체 회원에서 하나만 허용한다.
+- 갱신은 DB lease로 직렬화하고 회전된 refresh token을 원자적으로 교체한다. `invalid_grant` 같은 최종 오류는 연결을 제거해 재인증을 요구하고, 일시 오류는 작업 재시도 시각을 보존한다.
+- 글 생성은 작업 소유자와 연결 revision을 함께 저장한다. 실행 시 같은 회원·같은 revision의 자격 증명만 사용한다. 연결을 해제한 뒤 대기 중인 작업은 다른 회원 또는 Anthropic 자격 증명으로 대체 실행하지 않고 실패·환급한다.
+- 계정 모델은 같은 bearer로 `GET /v1/models`에서 조회하고 `visibility=list`인 slug를 선택한다. `POST /v1/responses`는 `store:false`, `stream:true`로 호출하며 `response.completed` 이전의 델타를 성공으로 처리하지 않는다.
+- OpenAI 연결이 없고 `ANTHROPIC_API_KEY`가 있으면 기존 Anthropic 경로를 사용한다. 승인 OpenAI 클라이언트는 설정됐지만 회원 연결이 없으면 연결을 요구한다.
 
-## 코드와 차이
+## API와 데이터
 
-현재 `src/server/generation/provider.ts`는 Anthropic Messages 공급자다. `generation.ts`의 설정 검사와 worker는 기존 공급자 경로를 사용한다. OAuth 로그인·토큰 저장·갱신·OpenAI 스트림 공급자는 아직 구현되지 않았다. 사용자 답변만으로 연결됐다고 표시하지 않는다.
+| 항목 | 계약 |
+|---|---|
+| `GET /api/account/openai` | 로그인 회원의 안전한 연결 상태. 토큰·subject·내부 ID 미노출 |
+| `GET /api/account/openai/start` | OAuth 승인 주소로 302. 설정 미완료는 503 `OPENAI_NOT_CONFIGURED` |
+| `GET /api/account/openai/callback` | OpenAI 콜백. 성공·오류를 안전한 설정 화면 주소로 302 |
+| `DELETE /api/account/openai` | 원격 refresh token 철회를 시도한 뒤 로컬 연결은 항상 삭제 |
+| `openai_connections` | 회원·issuer·subject, 암호화 토큰, 만료·최초 갱신 시각, revision/token_version, refresh lease |
+| `openai_connection_states` | state 해시, 회원, 바인딩 해시, PKCE verifier, nonce, 복귀 주소, 만료 |
+| `generation_jobs.credential_revision` | 큐 등록 시 연결 버전 고정 |
 
-OAuth의 개인별 사용량을 기존 운영자 공용 API 키 설정에 끼워 넣으면 회원 간 인증 주체가 섞인다. 작업 소유자인 NAEO 회원과 해당 회원의 ChatGPT 연결을 명시적으로 묶어야 한다. 현재 이미지 미설정 오류와 차감 전 거절은 유지한다.
+필수 환경 변수는 `.env.example`에 있다. `NAEO_OPENAI_CLIENT_ID`는 발급된 `oaiapp_…` 값만 받고, `NAEO_OPENAI_TOKEN_ENCRYPTION_KEY`는 64자리 hex다. `NAEO_APP_URL`과 정확히 일치하는 `/api/account/openai/callback`을 공급자에 등록해야 한다. client secret이 있는 confidential client와 없는 public client를 모두 처리한다. OAuth/API base override는 loopback 로컬 모의 검증에서만 허용한다.
 
-## 실행 항목
+## 확인한 근거
 
-1. 회원별 배포 서비스로 확정. 해당 유형에 승인된 클라이언트, 실제 서비스 도메인, 등록된 HTTPS 콜백 및 ChatGPT plan usage 권한 조건을 확보한다. 기본 로그인 권한만으로 모델 사용량 위임까지 승인된 것으로 판단하지 않는다. 기존 Codex 로그인 토큰을 웹서비스 공용 자격 증명으로 복사하지 않는다.
-2. 인증 수명주기 구현: 등록/연결/상태 조회/연결 해제, 회원과 계정의 소유권, 일회용 state·nonce·PKCE, 서명/issuer/audience/만료 검증, 토큰 보호 저장 및 갱신 경합 처리. 거절·로그아웃·계정 불일치가 기존 연결을 덮어쓰지 않는지 검증한다.
-3. 글 생성 연결: 해당 계정의 모델 조회, 토큰 갱신 후 Responses 스트림, 요청 시간·출력 크기 제한, 완료 이벤트 필수, 실패/중단/재시도와 기존 차감·환급 원장 통합. 서로 다른 두 회원의 작업이 같은 자격 증명을 사용하지 않는지 확인한다.
-4. 실제 검증: 사용자 동의부터 글 저장까지 왕복, 만료/갱신/연결 해제/사용량 초과/중단/중복 요청, 두 회원 격리, UI 오류와 모바일. 스텁 테스트와 실제 공급자 검증은 별도 증거로 기록한다.
+- 전용 8개 테스트에서 미설정 무저장, PKCE·nonce·일회 state·브라우저 바인딩, 잘못된 서명·범위·계정 충돌, 토큰 암호화·철회, 회전 갱신과 최종 오류, 모델·Responses 완료 이벤트, 두 회원 격리, 연결 해제 후 실패·환급, HTTP Origin·세션을 확인했다.
+- 전체 427개 테스트, lint, typecheck, production build가 통과했다.
+- Ego Lite에서 임시 회원으로 설정·글쓰기 화면을 확인했다. 설정 전 연결 버튼은 실제 disabled이고 `승인 클라이언트 미설정`을 표시하며, 390px에서 가로 넘침이 없다. 실행 중 서버가 스키마 37을 계속 쓰면서 설정 화면이 500이 되는 문제를 발견했고 서버 재시작 후 스키마 39와 정상 렌더를 확인했다. 임시 회원은 영구 삭제했다.
+- 증거: [검증 로그](evidence/openai-oauth-2026-10-16/verification.txt), [모바일 설정 화면](evidence/openai-oauth-2026-10-16/openai-settings-mobile.png).
 
-AI 이미지는 여전히 P4.2 미완료다. OAuth 텍스트 연결을 마쳐도 이미지·네이버 인용 근거·나머지 외부 공급자·최근 UI 브라우저 검증을 완료한 것으로 처리하지 않는다.
+## 남은 외부 조건
 
-## 배포 서비스 연결 계약
+NAEO 배포 서비스용 OpenAI client ID 승인, 실제 HTTPS 서비스 도메인과 콜백 등록, 허용된 ChatGPT plan usage 범위가 필요하다. 승인 후 실제 회원 두 명으로 동의→모델 조회→글 생성→초안 저장, 만료 갱신, 연결 해제, 사용량 초과, 중단·중복 요청을 검증한다. 현재 로컬 모의 공급자 결과를 실제 OpenAI 성공으로 확대하지 않는다.
 
-NAEO 로그인과 ChatGPT 연결은 별도 상태로 관리한다. 로그인한 회원만 자신의 연결을 추가·조회·해제하며, 표시 정보에는 토큰을 포함하지 않는다. 작업에는 연결 소유자와 연결 버전을 기록하고 실행 시 재검증한다. 연결 해제 이후 대기 작업은 다른 회원이나 운영자 토큰으로 대체 실행하지 않는다. 갱신 토큰은 서버에서 암호화 보관하며 같은 연결의 갱신을 직렬화한다. 탈퇴 시 연결과 인증 자료를 삭제한다.
+OpenAI의 이 OAuth 경로는 AI 이미지 생성을 제공하지 않는다. 이미지 생성, 네이버 AI 브리핑 인용 근거 수집, 실제 외부 공급자 왕복은 별도 미완료 항목이다.
 
-다음 외부 전제: NAEO 배포 서비스용 OpenAI 클라이언트 발급/승인 여부, 허용된 사용량 위임 범위, 서비스 도메인과 콜백 등록. 현재 이 자료는 제공되지 않았다. 별도 승인 없이 상용 신청서를 제출하거나 지원 여부가 확인되지 않은 로그인 버튼을 노출하지 않는다.
+공식 계약 확인: [토큰 수명주기](https://developers.openai.com/siwc/token-sharing-open-source/profiles-and-sessions), [모델과 추론](https://developers.openai.com/siwc/token-sharing-open-source/models-and-inference), [토큰 참조](https://developers.openai.com/siwc/token-sharing-open-source/token-reference), [오류와 복구](https://developers.openai.com/siwc/token-sharing-open-source/errors-and-recovery), [배포 서비스 로그인](https://developers.openai.com/siwc/website), [클라이언트 신청](https://developers.openai.com/siwc/request-client-id).

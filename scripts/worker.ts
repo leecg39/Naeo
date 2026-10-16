@@ -10,8 +10,7 @@ import {hostname} from 'node:os';
 import {database} from '../src/server/database';
 import {runWorkerOnce} from '../src/server/jobs/worker';
 import {runGenerationOnce} from '../src/server/generation/worker';
-import {anthropicProvider,ProviderError,type Provider} from '../src/server/generation/provider';
-import {providerConfig} from '../src/server/generation/generation';
+import {runtimeGenerationProvider} from '../src/server/generation/runtime-provider';
 import {scanHandler} from '../src/server/analysis/scan-handler';
 import {billingMaintenance} from '../src/server/billing/maintenance';
 import {cleanupExports} from '../src/server/creative/exports';
@@ -25,9 +24,7 @@ async function main(){
  for(const signal of ['SIGINT','SIGTERM'] as const)process.on(signal,()=>controller.abort());
  const db=database();
  process.stdout.write(`[worker] ${workerId} started\n`);
- const config=providerConfig();
- // 키가 없으면 남은 작업을 실패·환급으로 정리한다(요청 단계에서 이미 거절하므로 보통 생기지 않는다).
- const provider:Provider=config.apiKey?anthropicProvider(config):async()=>{throw new ProviderError('PROVIDER_NOT_CONFIGURED','AI 글 생성 공급자가 설정되지 않았습니다.',false);};
+ const provider=runtimeGenerationProvider(db);
  const scans=scanHandler(db),idleMs=Number(process.env.NAEO_WORKER_IDLE_MS)||2000;
  let maintained=0,retained=0;
  while(!controller.signal.aborted){

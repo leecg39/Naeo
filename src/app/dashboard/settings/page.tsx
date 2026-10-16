@@ -28,16 +28,18 @@ import ConnectedApps from '@/components/account/ConnectedApps';
 import {listAuthorizedApps,mcpResource} from '@/server/oauth/authz';
 import EngagementPanel from '@/components/account/EngagementPanel';
 import {points,tutorial} from '@/server/engagement/service';
+import OpenAIConnectionSection from '@/components/account/OpenAIConnectionSection';
+import {openAIConnectionStatus} from '@/server/openai/connection';
 
 export const dynamic='force-dynamic';
 function billingState(db:ReturnType<typeof database>,userId:string){
   return{subscription:currentSubscription(db,userId),...billingHistory(db,userId),paymentsConfigured:tossProvider()!==null,balance:balance(db,userId),now:Date.now()};
 }
-export default async function SettingsPage({searchParams}:{searchParams:Promise<{oauthLinked?:string;oauthError?:string}>}) {
-  const {oauthLinked,oauthError}=await searchParams;
+export default async function SettingsPage({searchParams}:{searchParams:Promise<{oauthLinked?:string;oauthError?:string;openaiConnected?:string;openaiError?:string}>}) {
+  const {oauthLinked,oauthError,openaiConnected,openaiError}=await searchParams;
   const user=await pageUser('/dashboard/settings'),db=database();
   const profile=getProfile(db,user.id),blogs=listBlogs(db,user.id,{pageSize:100}).data;
   const token=(await cookies()).get(SESSION_COOKIE)!.value;
   const sessions=listSessions(db,user.id,token);
-  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><EngagementPanel key={blogs.map(b=>`${b.id}:${b.version}`).join(',')} initialPoints={points(db,user.id,{pageSize:10})} initialTutorial={tutorial(db,user.id)}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><ConnectedApps key={user.version} initial={listAuthorizedApps(db,user.id)} mcpUrl={mcpResource()}/><PersonalDataExport key={`export-${user.version}`} initial={listPersonalExports(db,user.id,token)} hasPassword={hasPassword(db,user.id)}/><EmailVerification key={`mail-${user.version}`} email={user.email} initial={mailStatus(db,user.id,mailConfig())}/><SecurityForm user={user} initialSessions={sessions}/></div><PageAnnouncements path="/dashboard/settings"/></AccountShell>;
+  return <AccountShell title="계정 설정" nickname={profile.nickname} path="/dashboard/settings" admin={user.role==='admin'}><div className="settings-sections"><SettingsForm initialProfile={profile} initialBlogs={blogs} email={user.email}/><EngagementPanel key={blogs.map(b=>`${b.id}:${b.version}`).join(',')} initialPoints={points(db,user.id,{pageSize:10})} initialTutorial={tutorial(db,user.id)}/><ContactPreferencesForm initialContact={getContact(db,user.id)} initialPreferences={getPreferences(db,user.id)}/><BillingSection initial={billingState(db,user.id)}/><ConnectionsSection initial={{connections:listConnections(db,user.id),hasPassword:hasPassword(db,user.id),configured:{google:oauthConfig('google')!==null,naver:oauthConfig('naver')!==null}}} linked={oauthLinked} error={oauthError}/><OpenAIConnectionSection initial={openAIConnectionStatus(db,user.id)} connected={openaiConnected} error={openaiError}/><ConnectedApps key={user.version} initial={listAuthorizedApps(db,user.id)} mcpUrl={mcpResource()}/><PersonalDataExport key={`export-${user.version}`} initial={listPersonalExports(db,user.id,token)} hasPassword={hasPassword(db,user.id)}/><EmailVerification key={`mail-${user.version}`} email={user.email} initial={mailStatus(db,user.id,mailConfig())}/><SecurityForm user={user} initialSessions={sessions}/></div><PageAnnouncements path="/dashboard/settings"/></AccountShell>;
 }

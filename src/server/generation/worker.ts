@@ -39,14 +39,15 @@ function complete(db:Database,id:string,workerId:string,output:{title:string;bod
 }
 
 function fail(db:Database,id:string,workerId:string,e:unknown,now:number){
- const err=e as {code?:unknown;retryable?:unknown;message?:unknown};
+ const err=e as {code?:unknown;retryable?:unknown;message?:unknown;retryAfterMs?:unknown};
  const code=typeof err.code==='string'?err.code.slice(0,60):'INTERNAL_ERROR',message=(typeof err.message==='string'?err.message:'생성 중 오류가 발생했습니다.').slice(0,500);
  const retryable=err.retryable===true;
  transaction(db,()=>{
   const r=db.prepare("SELECT * FROM generation_jobs WHERE id=? AND state='running' AND lease_owner=?").get(id,workerId) as JobRow|undefined;
   if(!r)return;
   if(retryable&&r.cancel_requested===0&&r.attempt<r.max_attempts){
-   db.prepare("UPDATE generation_jobs SET state='queued',run_after=?,error_code=?,error_message=?,lease_owner=NULL,lease_until=NULL,updated_at=? WHERE id=?").run(now+backoff(r.attempt),code,message,now,id);
+   const providerDelay=typeof err.retryAfterMs==='number'&&Number.isFinite(err.retryAfterMs)?Math.max(0,Math.min(err.retryAfterMs,7*24*60*60*1000)):0;
+   db.prepare("UPDATE generation_jobs SET state='queued',run_after=?,error_code=?,error_message=?,lease_owner=NULL,lease_until=NULL,updated_at=? WHERE id=?").run(now+Math.max(backoff(r.attempt),providerDelay),code,message,now,id);
    return;
   }
   db.prepare("UPDATE generation_jobs SET state=?,error_code=?,error_message=?,lease_owner=NULL,lease_until=NULL,completed_at=?,updated_at=? WHERE id=?").run(r.cancel_requested===1?'canceled':'failed',code,message,now,now,id);
@@ -59,7 +60,7 @@ export async function runGenerationOnce(db:Database,workerId:string,provider:Pro
  const job=claim(db,workerId,now());
  if(!job)return null;
  const input=JSON.parse(job.input_json) as StoredInput;
- try{complete(db,job.id,workerId,await provider(input),now());}
+ try{complete(db,job.id,workerId,await provider(input,{ownerId:job.owner_id,jobId:job.id,provider:job.provider,model:job.model,credentialRevision:job.credential_revision}),now());}
  catch(e){fail(db,job.id,workerId,e,now());}
  return job.id;
 }

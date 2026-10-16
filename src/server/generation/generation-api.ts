@@ -3,7 +3,7 @@ import type {Database} from '../database';
 import {requireAdmin,type User} from '../auth';
 import {body,json,rateLimit} from '../http';
 import {grantCredits,ledger} from '../credits/ledger';
-import {cancelGeneration,getGeneration,listGenerations,providerConfig,requestGeneration} from './generation';
+import {cancelGeneration,getGeneration,listGenerations,requestGeneration} from './generation';
 import {activeTemplates,createWritingTemplate,deleteWritingTemplate,listAdminTemplates,updateWritingTemplate} from './templates';
 import {adminCancelGeneration,listAdminGenerations} from './admin-generations';
 
@@ -25,7 +25,7 @@ export async function generationApi(db:Database,request:Request,user:User):Promi
  }
  if(path==='/api/generations'){
   if(method==='GET')return json(listGenerations(db,user.id,Object.fromEntries(searchParams)));
-  if(method==='POST'){rateLimit(db,`generation:${user.id}`,30,60*60_000);return json({data:requestGeneration(db,user.id,await body(request,anyJson),providerConfig())},201);}
+  if(method==='POST'){rateLimit(db,`generation:${user.id}`,30,60*60_000);return json({data:requestGeneration(db,user.id,await body(request,anyJson))},201);}
  }
  const one=path.match(new RegExp(`^/api/generations/${ID}$`));
  if(one&&method==='GET')return json({data:getGeneration(db,user.id,one[1])});
