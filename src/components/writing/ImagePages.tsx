@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from '../admin/ListPagination';
+import OperationNotice from '../admin/OperationNotice';
 import {loadValidPage} from '../admin/pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useCallback,useEffect,useState} from 'react';
@@ -43,7 +44,7 @@ function Library(){
   <p style={{margin:0,fontSize:13,color:'#a3a3a3'}}>JPG·PNG·WEBP, 10MB 이하. 사진은 본인만 볼 수 있고, 공유 링크를 만든 글의 사진만 링크로 열 수 있습니다.</p>
   <input type="file" accept="image/jpeg,image/png,image/webp" multiple aria-label="사진 올리기" disabled={busy}
    onChange={e=>{const files=[...e.target.files??[]];e.target.value='';void run(async()=>{for(const f of files)await uploadPhoto(f);return`사진 ${files.length}장을 올렸습니다.`;});}}/>
-  {message&&<p role="status" style={{margin:0}}>{message}</p>}
+  <OperationNotice message={message} className="" style={{margin:0}}/>
   <ul style={grid}>{items?.data.map(m=><li key={m.publicId} style={{display:'grid',gap:6}}>
    {/* 로그인한 본인만 받는 개인 사진 */}
    <img src={`/api/media/${m.publicId}`} alt={m.originalName||'내 사진'} style={img}/>
