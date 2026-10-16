@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-16",
+  "browser": "Ego Lite 2.1.0",
+  "viewport": "390x844",
+  "environment": "isolated SQLite + production Next server",
+  "rewards": {
+    "seeded": 101,
+    "pointerFlow": ["next page", "revoke", "confirm revoke"],
+    "horizontalOverflowPx": 0,
+    "stored": {"description": "모바일 리워드 100", "status": "revoked", "version": 2},
+    "focus": "P[role=status]",
+    "result": "pass"
+  },
+  "entryReview": {
+    "seededSubmitted": 101,
+    "pointerFlow": ["next page", "approve"],
+    "decisionNote": "390px 포인터 승인 검증",
+    "stored": {"status": "approved", "version": 2},
+    "remainingSubmitted": 100,
+    "pagerAfterAction": "1/1",
+    "horizontalOverflowPx": 0,
+    "focus": "P[role=status]",
+    "result": "pass"
+  },
+  "imageLibrary": {
+    "seeded": 101,
+    "decodedOnLastPage": {"name": "mobile-photo-100.png", "width": 1, "height": 1},
+    "pointerFlow": ["next page", "delete", "confirm browser dialog"],
+    "afterDelete": {"total": 100, "pager": "1/1"},
+    "horizontalOverflowPx": 0,
+    "focus": "P[role=status]",
+    "result": "pass"
+  },
+  "adminCoupons": {
+    "seeded": 101,
+    "pointerFlow": ["next page", "disable last coupon"],
+    "stored": {"code": "MOBILE000", "status": "disabled", "version": 2},
+    "pagerAfterAction": "2/2",
+    "horizontalOverflowPx": 0,
+    "focus": "P[role=status]",
+    "result": "pass"
+  },
+  "adminRefund": {
+    "seededPayments": 101,
+    "seededRefunds": 101,
+    "pointerFlow": ["next refund page", "fill decision note", "reject last refund"],
+    "decisionNote": "390px 환불 거절 검증",
+    "stored": {"orderId": "mobile-order-100", "status": "rejected", "version": 2},
+    "pagerAfterAction": "2/2",
+    "horizontalOverflowPx": 0,
+    "focus": "P[role=status]",
+    "result": "pass"
+  },
+  "memberBillingHistory": {
+    "seededPayments": 101,
+    "seededRefunds": 101,
+    "pointerFlow": ["payment next twice", "refund next twice"],
+    "finalPaymentPage": {"page": "3/3", "rows": 1, "orderName": "모바일 결제 100"},
+    "finalRefundPage": {"page": "3/3", "rows": 1, "reason": "모바일 환불 100"},
+    "independentPagination": true,
+    "horizontalOverflowPx": 0,
+    "result": "pass"
+  },
+  "memberEventHistory": {
+    "seededEntries": 101,
+    "seededRewards": 101,
+    "pointerFlow": ["entry previous", "reward previous"],
+    "finalEntryPage": {"page": "1/2", "rows": 100, "first": "모바일 이력 이벤트 000"},
+    "finalRewardPage": {"page": "1/2", "rows": 100, "first": "모바일 이력 리워드 000"},
+    "independentPagination": true,
+    "horizontalOverflowPx": 0,
+    "result": "pass"
+  },
+  "engagement": {
+    "initialBalance": 0,
+    "initialLedgerRows": 0,
+    "lockedSteps": 5,
+    "firstTab": {"awarded": 5, "balance": 5, "ledgerRows": 1},
+    "staleSecondTab": {"message": "이미 수령한 보상입니다.", "additionalAward": 0, "balance": 5, "ledgerRows": 1},
+    "refresh": {"balance": 5, "ledgerRows": 1},
+    "database": {"attendanceRows": 1, "attendancePoints": 5, "pointLedgerRows": 1, "balance": 5},
+    "horizontalOverflowPx": 0,
+    "result": "pass"
+  }
+}
