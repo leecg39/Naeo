@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState} from 'react';
@@ -38,7 +39,7 @@ export default function DocumentsManager({initial}:{initial:PageResult<SiteDocum
  const reloadLatest=()=>void run(async()=>{await load();if(selected)setSelected(await api<DocumentDetail>(`/api/admin/documents/${selected.id}`));setNotice('최신 내용을 불러왔습니다.');});
 
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={reloadLatest}>최신 정보 불러오기</button>}</div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} {selected&&<button className="button secondary" type="button" disabled={busy} onClick={reloadLatest}>최신 정보 불러오기</button>}</div>}</div>
   <section className="panel account-card">
    <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(1,{q,status}));}}>
     <label>문서 검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="제목·주소" disabled={busy}/></label>

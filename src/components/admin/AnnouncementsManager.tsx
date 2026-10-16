@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
@@ -89,7 +90,7 @@ export default function AnnouncementsManager({initial,now:serverNow}:{initial:Pa
  }
  const saved=async(m:string)=>{setSelected(null);setCreating(false);await load(creating?1:result.pagination.page);setNotice(m);};
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{setSelected(null);await load();setNotice('최신 목록을 불러왔습니다. 다시 편집해주세요.');})}>최신 정보 불러오기</button></div>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<div role="alert" className="account-error">{error} <button className="button secondary" type="button" disabled={busy} onClick={()=>void run(async()=>{setSelected(null);await load();setNotice('최신 목록을 불러왔습니다. 다시 편집해주세요.');})}>최신 정보 불러오기</button></div>}</div>
   <section className="panel account-card">
    <form className="admin-filters" onSubmit={e=>{e.preventDefault();void run(()=>load(1,{q,status}));}}>
     <label>공지 검색<input className="field" value={q} onChange={e=>setQ(e.target.value)} maxLength={100} placeholder="제목·내용" disabled={busy}/></label>
