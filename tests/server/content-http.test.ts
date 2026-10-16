@@ -9,6 +9,30 @@ const origin='http://127.0.0.1:3000';
 process.env.NAEO_APP_URL=origin;
 const password='content-http-test-password';
 
+test('pagination recovers when another administrator deletes the fallback page during reload',async t=>{
+ const f=fixture(t),admin=await account(f,'concurrent-paging@example.test',true);
+ const ids:string[]=[];
+ for(let i=0;i<3;i++){
+  const response=await f.send('/api/admin/faq','POST',{question:`concurrent-paging-${i}`,category:'경쟁 조회',answer:'답변'},admin);
+  assert.equal(response.status,201);ids.push((await response.json()).data.id);
+ }
+ const requests:number[]=[];
+ const result=await loadValidPage(async page=>{
+  requests.push(page);
+  // 각 조회 직전에 다른 관리자가 마지막 항목을 삭제하는 순서를 재현한다.
+  if(requests.length<=2){
+   const response=await f.send(`/api/admin/faq/${ids.pop()}`,'DELETE',{version:1},admin);
+   assert.equal(response.status,200);
+  }
+  const response=await f.send(`/api/admin/faq?q=concurrent-paging&pageSize=1&page=${page}`,'GET',undefined,admin);
+  assert.equal(response.status,200);
+  return response.json() as Promise<{data:{id:string}[];pagination:{page:number;pageSize:number;total:number}}>;
+ },3);
+ assert.deepEqual(requests,[3,2,1]);
+ assert.equal(result.pagination.page,1);assert.equal(result.pagination.total,1);
+ assert.deepEqual(result.data.map(row=>row.id),ids);
+});
+
 test('documents, FAQ and announcements remain editable beyond 100 records and recover after deleting last page',async t=>{
  for(const kind of ['documents','faq','announcements']){
   const f=fixture(t),admin=await account(f,'pagination-admin@example.test',true);
