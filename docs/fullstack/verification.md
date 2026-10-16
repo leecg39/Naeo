@@ -51,7 +51,7 @@ AI/OAuth/결제/SMS/메일 개발 설정은 미확인이다. 원본 로그인 �
 
 브라우저 기록: `evidence/account-security-browser.txt`, `evidence/admin-users-created-updated.txt`, `evidence/admin-audit-deletions.txt`, `evidence/account-responsive.json`, `evidence/admin-responsive.json`(반응형 수정 전 측정, 경로 미기재 — 위 표의 수정 후 수치가 최신).
 
-미구현: 비밀번호 재설정 메일, 이메일 검증, SMS 휴대폰 인증, 이메일 알림 실제 발송. 메일·SMS 공급자 설정이 필요하며 저장 성공을 발송·인증 성공으로 간주하지 않는다.
+미구현(이 시점): 비밀번호 재설정 메일, 이메일 검증, SMS 휴대폰 인증, 이메일 알림 실제 발송. 메일·SMS 공급자 설정이 필요하며 저장 성공을 발송·인증 성공으로 간주하지 않는다. (이후 업데이트: Resend 계정 메일·문의 메일은 account-mail 아웃박스로, 분석 완료·혜택 알림 메일은 `notify_mail` 아웃박스(스키마 43)로 구현되어 수신 동의·회수 연동·멱등 재시도를 거쳐 발송된다 — 로컬 프로덕션 왕복 검증 `evidence/notify-mail-runtime.json`, 실제 Resend 수신은 외부 검증 대기)
 
 ## 2026-10-13 — P2.1 매거진 기사 DB 이관 (기사·카테고리)
 

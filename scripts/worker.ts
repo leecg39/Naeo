@@ -20,6 +20,8 @@ import {cleanupMedia} from '../src/server/writing/media-cleanup';
 import {citationConfig,serpApiProvider} from '../src/server/citations/provider';
 import {imageConfig,openAIImageProvider} from '../src/server/generation/image-provider';
 import {runCitationOnce} from '../src/server/citations/worker';
+import {runNotifyMailOnce} from '../src/server/mail/notify';
+import {enqueueAutoscans} from '../src/server/jobs/autoscan';
 
 async function main(){
  const workerId=`${hostname()}-${process.pid}`;
@@ -35,10 +37,10 @@ async function main(){
   const billing=billingMaintenance(db,maintained);
   if(billing){const personal=cleanupPersonalExports(db,uploadDir(),billing.at);if(personal.removed||personal.failed||personal.scanError)process.stdout.write(`[worker] personal export cleanup ${JSON.stringify(personal)}\n`);const media=cleanupMedia(db,uploadDir(),billing.at);if(media.removed||media.failed||media.scanError)process.stdout.write(`[worker] media cleanup ${JSON.stringify(media)}\n`);}
   if(billing&&billing.at-retained>=3600_000){retained=billing.at;const r=runRetention(db,billing.at);process.stdout.write(`[worker] retention ${JSON.stringify(r)}\n`);}
-  if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
-  const replied=await runInquiryMailOnce(db,mailConfig()),mailed=await runMailOnce(db,mailConfig()),exported=runPersonalExportOnce(db,uploadDir());
+  if(billing){const removed=cleanupExports(db,uploadDir(),billing.at);if(removed)process.stdout.write(`[worker] exports removed=${removed}\n`);maintained=billing.at;const autoscan=enqueueAutoscans(db,billing.at);if(autoscan)process.stdout.write(`[worker] autoscan queued=${autoscan}\n`);if(billing.ended||billing.renewed||billing.expiredOrders)process.stdout.write(`[worker] billing ended=${billing.ended} renewed=${billing.renewed} expiredOrders=${billing.expiredOrders}\n`);}
+  const replied=await runInquiryMailOnce(db,mailConfig()),mailed=await runMailOnce(db,mailConfig()),notified=await runNotifyMailOnce(db,mailConfig()),exported=runPersonalExportOnce(db,uploadDir());
   const citation=citationConfig();
-  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider,imageOptions()))??(replied||mailed||exported);
+  const ran=(await runWorkerOnce(db,workerId,scans))??(await runCitationOnce(db,workerId,citation?serpApiProvider(citation):null))??(await runGenerationOnce(db,workerId,provider,imageOptions()))??(replied||mailed||notified||exported);
   if(!ran)await new Promise<void>(resolve=>{const t=setTimeout(resolve,idleMs);controller.signal.addEventListener('abort',()=>{clearTimeout(t);resolve();},{once:true});});
  }
  process.stdout.write(`[worker] ${workerId} stopped\n`);

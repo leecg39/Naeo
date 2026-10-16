@@ -48,6 +48,7 @@ export const datasets=[
  owned('openai_connection','openai_connections','issuer,subject,email,display_name,scope,access_expires_at,earliest_refresh_at,connected_at,updated_at,last_refreshed_at','user_id'),
  {name:'oauth_grants',sql:'SELECT t.kind,t.client_id,c.name,c.kind AS client_kind,t.scope,t.resource,t.expires_at,t.revoked_at,t.last_used_at,t.created_at FROM oauth_tokens t JOIN oauth_clients c ON c.client_id=t.client_id WHERE t.user_id=? ORDER BY t.rowid'},
  owned('mcp_calls','mcp_calls','id,client_id,tool,ok,created_at','user_id'),
+ owned('notify_mail','notify_mail','id,kind,ref_id,state,attempt,error_code,provider_id,created_at,updated_at','user_id'),
  owned('inquiries','inquiries','id,email,type,subject,message,status,answered_at,version,created_at,updated_at'),
  {name:'inquiry_mail',sql:'SELECT m.id,m.reply_id,m.state,m.attempt,m.created_at,m.updated_at,m.error_code FROM inquiry_mail m JOIN inquiry_messages r ON r.id=m.reply_id JOIN inquiries i ON i.id=r.inquiry_id WHERE i.owner_id=? ORDER BY m.rowid'},
  {name:'inquiry_replies',sql:'SELECT m.id,m.inquiry_id,m.body,m.delivery,m.created_at,m.updated_at FROM inquiry_messages m JOIN inquiries i ON i.id=m.inquiry_id WHERE i.owner_id=? ORDER BY m.rowid'},

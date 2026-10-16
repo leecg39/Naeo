@@ -11,10 +11,20 @@ export class CollectError extends Error{
  constructor(public code:string,message:string,public retryable:boolean){super(message);}
 }
 
+/** RSS 호스트는 운영에서 네이버만 허용한다. NAEO_RSS_BASE는 격리 테스트용으로 루프백 http만 받는다. */
+function rssBase():string{
+ const override=process.env.NAEO_RSS_BASE;
+ if(!override)return'https://rss.blog.naver.com';
+ try{
+  const u=new URL(override);
+  if(u.username||u.password||u.search||u.hash||u.pathname!=='/'||!['127.0.0.1','localhost','[::1]'].includes(u.hostname)||u.protocol!=='http:')return'https://rss.blog.naver.com';
+  return u.origin;
+ }catch{return'https://rss.blog.naver.com';}
+}
 /** 요청 주소는 고정 호스트 + 검증된 블로그 ID로만 만든다(사용자 입력 URL을 요청하지 않아 SSRF 차단). */
 export function rssUrl(naverId:string):string{
  if(!/^[a-z0-9][a-z0-9_-]{1,49}$/i.test(naverId))throw new CollectError('INVALID_BLOG_ID','블로그 ID 형식이 올바르지 않습니다.',false);
- return`https://rss.blog.naver.com/${naverId}.xml`;
+ return`${rssBase()}/${naverId}.xml`;
 }
 
 async function readLimited(res:Response):Promise<string>{

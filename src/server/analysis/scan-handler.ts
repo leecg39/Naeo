@@ -7,6 +7,8 @@ import {saveScanResult} from './results';
 import {AppError} from '../errors';
 import {citationConfig} from '../citations/provider';
 import {enqueueCitation} from '../citations/runs';
+import {mailConfig} from '../mail/provider';
+import {queueNotifyMail} from '../mail/notify';
 
 /** 진단이 끝나면 AI 인용 확인을 자동 예약한다(같은 진단 작업은 한 번만). 한도·진행 중이면 이유만 남긴다. */
 function scheduleCitation(db:Database,ownerId:string,blogId:string,jobId:string,now:number):AiCitationStatus{
@@ -29,6 +31,11 @@ export function scanHandler(db:Database,fetchImpl:FetchLike=fetch,now:()=>number
   const {owner_id:ownerId}=db.prepare('SELECT owner_id FROM scan_jobs WHERE id=?').get(job.id) as {owner_id:string};
   report.aiCitation=scheduleCitation(db,ownerId,job.blogId,job.id,now());
   const resultId=saveScanResult(db,{ownerId,blogId:job.blogId,jobId:job.id,report,postCount:posts.length,measuredAt:now()});
+  const blog=db.prepare('SELECT title FROM blogs WHERE id=?').get(job.blogId) as {title:string}|undefined;
+  const mail=mailConfig();
+  // 알림 메일은 부가 기능이므로 큐 적재에 실패해도 진단 결과는 성공으로 남긴다.
+  try{queueNotifyMail(db,ownerId,'scan_done',job.id,'NAEO 블로그 분석이 끝났습니다',`${blog?.title??'등록한 블로그'} 진단이 끝났습니다. 점수 ${report.score}점, 수집한 글 ${posts.length}개입니다.\n\n결과 보기: ${mail?mail.appOrigin:''}/dashboard`,mail,now());}
+  catch{/* 큐 문제는 진단 결과에 영향을 주지 않는다 */}
   return{resultId,score:report.score,postCount:posts.length,collected};
  };
 }

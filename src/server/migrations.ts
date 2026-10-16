@@ -1074,5 +1074,22 @@ export const migrations = [{
   created_at INTEGER NOT NULL
  ) STRICT;
  CREATE INDEX keyword_exposures_owner ON keyword_exposures(owner_id,checked_at DESC,id DESC);
+ `},{
+ version:43,name:'notify_mail_outbox',sql:`
+ CREATE TABLE notify_mail (
+  id TEXT PRIMARY KEY NOT NULL,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  kind TEXT NOT NULL CHECK(kind IN ('scan_done','benefit')),
+  ref_id TEXT NOT NULL CHECK(length(ref_id)<=100),
+  payload TEXT,
+  state TEXT NOT NULL DEFAULT 'queued' CHECK(state IN ('queued','sending','retry','accepted','failed')),
+  attempt INTEGER NOT NULL DEFAULT 0,
+  lease TEXT, lease_until INTEGER, run_after INTEGER NOT NULL,
+  error_code TEXT NOT NULL DEFAULT '', provider_id TEXT,
+  expires_at INTEGER NOT NULL,
+  created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL,
+  UNIQUE(kind,ref_id)
+ ) STRICT;
+ CREATE INDEX notify_mail_queue ON notify_mail(state,run_after);
  `}];
 

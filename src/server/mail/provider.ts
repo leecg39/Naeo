@@ -26,9 +26,9 @@ async function responseJson(response:Response){
  finally{reader.releaseLock();}
 }
 /** Same immutable body + idempotency key on retry; all token TTLs are shorter than the provider's 24-hour deduplication window. */
-export function resendSender(config:MailConfig):MailSender{return async(message,id)=>{
+export function resendSender(config:MailConfig,namespace='account-mail'):MailSender{return async(message,id)=>{
  try{
-  const r=await fetch(config.apiBase+'/emails',{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{Authorization:`Bearer ${config.apiKey}`,'Content-Type':'application/json','Idempotency-Key':`account-mail/${id}`},body:JSON.stringify(message)});
+  const r=await fetch(config.apiBase+'/emails',{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{Authorization:`Bearer ${config.apiKey}`,'Content-Type':'application/json','Idempotency-Key':`${namespace}/${id}`},body:JSON.stringify(message)});
   const data=await responseJson(r);
   if(!r.ok){const retry=r.status===429||r.status>=500||(r.status===409&&data.name==='concurrent_idempotent_requests');throw new MailError(r.status===429?'RATE_LIMITED':'PROVIDER_REJECTED',retry,Math.min(3600_000,Math.max(0,Number(r.headers.get('retry-after'))||0)*1000));}
   if(typeof data.id!=='string'||data.id.length<1||data.id.length>200)throw new MailError('PROVIDER_RESPONSE_INVALID',true);

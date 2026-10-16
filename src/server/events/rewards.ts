@@ -6,6 +6,8 @@ import {AppError} from '../errors';
 import {deleteInput} from '../validation';
 import {balance,record} from '../credits/ledger';
 import {periodRange} from '../ranking/ranking';
+import {mailConfig} from '../mail/provider';
+import {queueNotifyMail,retractNotifyMail} from '../mail/notify';
 import {grantRewardInput,rankingRewardInput,rewardQueryInput} from './validation';
 
 export type RewardKind='event'|'ranking'|'manual'|'gift';
@@ -42,6 +44,9 @@ export function issueReward(db:Database,e:{userId:string;kind:RewardKind;tokens:
  db.prepare('INSERT INTO rewards(id,user_id,kind,tokens,item,description,event_id,source_key,entry_id,granted_by,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
   .run(id,e.userId,e.kind,e.tokens,e.item??'',e.description,e.eventId??null,e.sourceKey??null,e.entryId??null,e.actorId,now);
  if(e.tokens>0)record(db,{ownerId:e.userId,delta:e.tokens,reason:'grant',refType:'reward',refId:id,note:e.description.slice(0,200),createdBy:e.actorId},now);
+ const mailCfg=mailConfig();
+ // 알림 큐 적재가 실패해도 리워드 지급 자체는 굴리지 않는다(메일은 부가 기능).
+ if(mailCfg)try{queueNotifyMail(db,e.userId,'benefit',id,'NAEO 혜택이 지급됐습니다',`${e.description}${e.tokens>0?` — 토큰 ${e.tokens}개`:''}${e.item?` — ${e.item}`:''}.\n\n내 보상: ${mailCfg.appOrigin}/dashboard/rewards`,mailCfg,now);}catch{/* 알림 실패는 지급에 영향 없음 */}
  return rewardById(db,id);
 }
 
@@ -50,6 +55,7 @@ export function cancelReward(db:Database,reward:Reward,actorId:string,now:number
  if(reward.status!=='granted')throw new AppError(409,'REWARD_REVOKED','이미 회수된 리워드입니다.');
  if(balance(db,reward.userId)<reward.tokens)throw new AppError(409,'NEGATIVE_BALANCE','회원이 이미 토큰을 사용해 회수할 수 없습니다.');
  db.prepare("UPDATE rewards SET status='revoked',version=version+1,revoked_by=?,revoked_at=? WHERE id=?").run(actorId,now,reward.id);
+ retractNotifyMail(db,'benefit',reward.id,now);
  if(reward.tokens>0)record(db,{ownerId:reward.userId,delta:-reward.tokens,reason:'adjust',refType:'reward',refId:reward.id,note:`회수: ${reward.description}`.slice(0,200),createdBy:actorId},now);
  return rewardById(db,reward.id);
 }

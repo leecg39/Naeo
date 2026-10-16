@@ -1,0 +1,15 @@
+{
+  "verifiedAt": "2026-10-16T09:23:16.032Z",
+  "schemaVersion": 43,
+  "mailAttempts": 3,
+  "notifyDeliveries": 2,
+  "checks": [
+    "Production Next + worker; loopback Resend and RSS doubles only",
+    "No mail without consent; scan_email opt-in produces one notify-mail/ idempotent delivery after a 503 retry with identical payload",
+    "autoscan enqueues the stale primary blog once per KST day through the worker maintenance tick",
+    "API key never rendered in HTML, JSON or mail bodies"
+  ],
+  "externalMailSent": false,
+  "realProviderVerified": false,
+  "temporaryDataRemoved": true
+}
