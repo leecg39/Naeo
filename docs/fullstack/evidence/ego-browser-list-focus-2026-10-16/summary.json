@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-16",
+  "browser": "Ego Lite 2.1.0",
+  "taskSpace": {
+    "id": 0,
+    "name": "NAEO 클론 화면"
+  },
+  "server": {
+    "origin": "http://127.0.0.1:62570",
+    "build": "production",
+    "database": "isolated temporary SQLite"
+  },
+  "seedCounts": {
+    "coupons": 101,
+    "payments": 101,
+    "refunds": 101,
+    "events": 101,
+    "entries": 101,
+    "rewards": 101
+  },
+  "checks": {
+    "adminCoupons": {
+      "pages": "2/2",
+      "lastCouponAction": "active to disabled",
+      "result": "pass"
+    },
+    "adminPaymentsRefunds": {
+      "refundPages": "2/2",
+      "paymentPages": "2/2",
+      "independentPagination": true,
+      "lastRefundDecision": "rejected",
+      "decisionNote": "Ego 실제 거절 검증",
+      "paymentSearch": "browser-order-100 + paid => 1 row / 1 page",
+      "result": "pass"
+    },
+    "operationFocus": {
+      "beforeFix": {
+        "activeTag": "BODY",
+        "result": "fail"
+      },
+      "afterFix": {
+        "activeTag": "P",
+        "activeRole": "status",
+        "activeText": "환불 요청을 거절했습니다.",
+        "result": "pass"
+      }
+    },
+    "memberBillingHistory": {
+      "paymentPages": "3/3",
+      "refundPages": "3/3",
+      "independentPagination": true,
+      "lastPageRows": 1,
+      "result": "pass"
+    },
+    "memberEvents": {
+      "entryPages": "2/2",
+      "rewardPages": "2/2",
+      "independentPagination": true,
+      "lastPageRows": 1,
+      "firstPageRows": 100,
+      "result": "pass"
+    },
+    "mobileAdminPayments": {
+      "viewport": "390x844",
+      "horizontalOverflowPx": 0,
+      "pointerPagination": "refund 1/2 to 2/2",
+      "lastPageRows": 1,
+      "result": "pass"
+    }
+  },
+  "remaining": [
+    "390px pointer combinations for rewards and entry review",
+    "other P11.3 list combinations not yet exercised",
+    "real payment-provider cancellation"
+  ]
+}

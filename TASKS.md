@@ -82,7 +82,7 @@
 - [x] P7.3 /api/mcp 표준 연결/도구 목록/호출·인증·권한·크레딧, /mcp 안내 설정을 실제 로컬/배포 URL로 연결. (Streamable HTTP·OAuth 발견·도구 6개·범위·토큰 차감, 설정에 실제 MCP 주소, 공식 Inspector로 확인)
 - [x] P7.4 소셜 프로젝트/슬라이드 CRUD·정렬·저장·복제, /social/* 및 /youtube/aeo-intro·배너 화면 연결. (/dashboard/social 편집기·SVG 미리보기·?project= 보기. /social/banner-preview는 캡처가 없어 홈으로 이동 유지)
 - [x] P7.5 실제 이미지/PDF/영상 내보내기·진행/실패·파일 검증; /preview /dev/* 권한·미리보기 동작. (PNG·PDF·ZIP 내보내기와 진행/실패·파일 검증, /preview 내 초안, /dev 관리자 전용. 영상 인코딩은 지원 안 함)
-- [ ] P7.6 OAuth 실제 왕복·MCP 클라이언트·확장·내보내기·모바일·접근 제어 E2E 검증. (MCP 공식 클라이언트·내보내기·모바일·접근 제어 검증 완료. 2026-10-16 확장 Origin 결함 수정 후 Manifest V3 확장 본체·고정 개발 ID·PKCE 로그인·토큰 갱신/철회·초안 목록/조회·마크다운 조각·서식/사진 복사·네이버 위치 선택을 구현했다. 실제 Next HTTP에서 확장 OAuth→MCP 초안 조회→철회 후401 통과, 확장 패키징/순수 모듈 테스트 통과. Ego 폴더 선택·실제 사이드 패널/네이버 편집기 발행 및 Chrome Web Store 등록은 남음. `docs/fullstack/extension-origin.md`, `docs/fullstack/extension-publish-extension.md`)
+- [ ] P7.6 OAuth 실제 왕복·MCP 클라이언트·확장·내보내기·모바일·접근 제어 E2E 검증. (MCP 공식 클라이언트·내보내기·모바일·접근 제어 검증 완료. 2026-10-16 확장 Origin 결함 수정 후 Manifest V3 확장 본체·고정 개발 ID·PKCE 로그인·토큰 갱신/철회·초안 목록/조회·마크다운 조각·서식/사진 복사·네이버 위치 선택을 구현했다. 실제 Next HTTP에서 확장 OAuth→MCP 초안 조회→철회 후401 통과했고, Ego에서 압축해제 확장·사이드 패널 OAuth/MCP와 로그인된 SmartEditor ONE의 제목·서식 본문·소제목·936×468 PNG 전달 4단계를 실제 확인했다. 게시하지 않고 자동저장 복원 취소·확장 연결 해제로 정리했다. Chrome Web Store 등록과 배포 ID 실환경 검증은 남음. `docs/fullstack/extension-origin.md`, `docs/fullstack/extension-publish-extension.md`)
 
 ### P8 — 운영·완료 감사 (P0–P7 의존)
 
@@ -113,7 +113,7 @@
 
 - [x] P11.1 문서·FAQ·공지 100개 이후 조회/편집/삭제 접근 복구. 각101개 API 생성·2페이지 수정/삭제·마지막 페이지 복귀 검증, 전체409·lint/typecheck/build 통과. `docs/fullstack/admin-list-pagination.md`
 - [x] P11.2 리워드 및 선택된 이벤트의 참여 목록 페이지 이동·필터·회수/승인 후 복귀. 각101건 도메인/DB 검증, 전체411·lint/typecheck/build 통과. 이벤트 자체 선택 목록은 P11.4로 별도 추적.
-- [ ] P11.3 수정한 목록의 실제 브라우저 페이지 이동·검색·삭제·포커스/모바일 검증. (2026-10-16 사용자 제어권 재개 후 FAQ·문서·공지101건 검색/페이지 이동/삭제 복귀·390px 검증, 삭제 후 포커스 손실 수정 및 재검증. 이벤트 목록·선택기, 보상 회수 및 참여 심사 승인/반려의 마지막 페이지 복귀도 검증. 보상·참여 심사 모바일은 키보드로 검증했으며 포인터는 미완료. 다른 목록 조합은 미완료. `docs/fullstack/ego-pagination-2026-10-16.md`, `docs/fullstack/ego-event-pagination-2026-10-16.md`, `docs/fullstack/ego-rewards-2026-10-16.md`, `docs/fullstack/ego-entries-2026-10-16.md`)
+- [ ] P11.3 수정한 목록의 실제 브라우저 페이지 이동·검색·삭제·포커스/모바일 검증. (2026-10-16 FAQ·문서·공지101건 검색/페이지 이동/삭제 복귀·390px, 이벤트 목록·선택기, 보상 회수·참여 심사 승인/반려를 검증했다. 이어서 쿠폰101건, 관리자 결제·환불101건의 독립 페이지·검색·환불 거절, 회원 결제·환불101건의 독립 3페이지, 회원 참여·리워드101건의 독립 2페이지를 실제 Ego 포인터로 확인했다. 환불 처리 뒤 늦은 행 제거로 `BODY`에 빠지던 포커스를 공통 성공 안내로 복원했고, 관리자 결제·환불은 390px에서 가로 넘침0·포인터 페이지 이동까지 재검증했다. 보상·참여 심사의 390px 포인터와 아직 실행하지 않은 목록 조합은 남음. `docs/fullstack/ego-pagination-2026-10-16.md`, `docs/fullstack/ego-event-pagination-2026-10-16.md`, `docs/fullstack/ego-rewards-2026-10-16.md`, `docs/fullstack/ego-entries-2026-10-16.md`, `docs/fullstack/ego-browser-list-focus-2026-10-16.md`)
 
 - [x] P11.4 EventsManager·참여 심사 이벤트 선택기·PlansCoupons·PaymentsRefunds의 첫100개 제한 해소 및 검증. (이벤트 목록/선택기, 쿠폰·결제·환불 페이지 이동 구현. 전체414 및 production HTTP/SSR 검증 완료. 실제 브라우저 검증은 P11.3에 남김.)
 
