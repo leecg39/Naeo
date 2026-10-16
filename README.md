@@ -13,7 +13,7 @@ NAEO의 79개 구체 URL과 4개 동적 경로를 바탕으로 만든 로컬 재
 - 랭킹·이벤트: 기간별 스냅숏·동점 규칙·공개 설정, 이벤트·참여·심사·보상·회수·쿠폰·원장.
 - 포인트·시작 가이드: 별도 원장·KST 출석·단계별 수령·서브 주제 CRUD. 휴대폰 단계는 승인 근거·동일 번호 중복 방지 후 120P를 지급하며 별도 키 설정이 필요합니다. AI 인용 단계는 공급자 연결 전까지 잠금입니다. [REA 반영 계획](docs/fullstack/engagement-plan.md).
 - 요금제·결제: 체험·쿠폰·기간 지급/소멸·해지/재개, 토스 주문·승인·웹훅 재조회·환불·회계 기록 보호. 미확정 승인 조회·중단 환불 복구를 포함합니다. [서버 강제 종료/복구 검증](docs/fullstack/payment-recovery.md)과 실제 샌드박스 검증을 구분합니다.
-- 연동·제작: Google/네이버 OAuth 어댑터, OAuth 동의·확장 연결·철회, MCP 도구 6개, 소셜 프로젝트·슬라이드 CRUD, PNG/PDF/ZIP 내보내기, 소유자 미리보기·관리자 개발 화면.
+- 연동·제작: Google/네이버 OAuth 어댑터, OAuth 동의·연결·철회, MCP 도구 6개, [Manifest V3 네이버 발행 확장](extension/README.md), 30일 초안 자동 삭제, 소셜 프로젝트·슬라이드 CRUD, PNG/PDF/ZIP 내보내기, 소유자 미리보기·관리자 개발 화면.
 - 운영: 개인정보를 최소화한 방문 집계, 서비스/작업자 상태, 보관 정책, 일관된 DB 백업·업로드 복사·검증 후 복원.
 
 ## 실행
@@ -51,7 +51,7 @@ HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO
 
 ## 남은 구현·검증
 
-메일 기반 비밀번호 재설정·이메일 인증·실제 알림 발송, SMS 인증, AI 인용/검색 지표 공급자, AI 이미지 생성은 추가 연동 구현이 필요합니다. Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 실제 확장 프로그램 코드는 이 저장소에 없고, 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
+메일 기반 비밀번호 재설정·이메일 인증·실제 알림 발송, SMS 인증, AI 인용/검색 지표 공급자, AI 이미지 생성은 추가 연동 구현이 필요합니다. Anthropic 글 생성, 토스 결제, Google/네이버 로그인은 실제 키·앱 등록 후 공급자 왕복 검증이 필요합니다. 확장 프로그램은 로컬 설치용 코드와 실제 서버 OAuth/MCP 검증까지 갖췄으며 Chrome Web Store 등록·배포 환경·실제 네이버 편집기 전체 발행 검증이 남았습니다. 배포 URL에서 ChatGPT·Claude 연결도 미검증입니다. MP4 인코딩은 지원하지 않습니다. 자세한 항목은 [최종 감사](docs/fullstack/final-audit.md)를 확인하세요.
 
 소셜 견본과 소개 영상의 캡처 콘텐츠는 유지하며, `/social/banner-preview`는 캡처 부재로 홈으로 이동합니다. 원본에서도 없었던 대시보드 가이드 이미지 5개는 현재도 404로 표시됩니다. 원본 대비 전 화면 시각적 일치 검증은 완료하지 않았습니다.
 
@@ -59,6 +59,6 @@ HTTP 감사 변수는 `NAEO_AUDIT_EMAIL`, `NAEO_AUDIT_PASSWORD`, 선택적 `NAEO
 
 ## 구조
 
-`src/data/pages`·`src/components/captured`는 캡처 화면, `src/behaviors`는 화면 상호작용, `src/components`는 API와 연결된 UI, `src/server`는 DB·도메인·API·공급자, `scripts`는 운영·검증, `docs/fullstack`은 계약·설계·증거를 담습니다. `var`의 DB·업로드·백업 및 환경 비밀값은 Git에서 제외합니다.
+`src/data/pages`·`src/components/captured`는 캡처 화면, `src/behaviors`는 화면 상호작용, `src/components`는 API와 연결된 UI, `src/server`는 DB·도메인·API·공급자, `extension`은 로컬 설치 가능한 발행 확장, `scripts`는 운영·검증, `docs/fullstack`은 계약·설계·증거를 담습니다. `var`의 DB·업로드·백업 및 환경 비밀값은 Git에서 제외합니다.
 
 최신 적대적 QA와 반복 개선 결과: [감사 보고서](docs/audit/audit-report-2026-10-14.md). 요청 스트림 제한·사진 삭제 자동 복구·외부 앱 접근 철회 보강과 293개 회귀 테스트를 포함한다.

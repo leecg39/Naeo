@@ -6,9 +6,10 @@ import {AppError} from '../errors';
 import {deleteInput,paginationInput,version} from '../validation';
 
 export type DraftStatus='draft'|'ready'|'published'|'archived';
-export type Draft={id:string;title:string;keyword:string;category:string;body:string;status:DraftStatus;publishedAt:number|null;version:number;createdAt:number;updatedAt:number};
+export const DRAFT_TTL=30*86_400_000;
+export type Draft={id:string;title:string;keyword:string;category:string;body:string;status:DraftStatus;publishedAt:number|null;version:number;createdAt:number;updatedAt:number;expiresAt:number};
 export type DraftSummary=Omit<Draft,'body'>&{imageCount:number};
-const SELECT='SELECT id,title,keyword,category,body,status,published_at AS publishedAt,version,created_at AS createdAt,updated_at AS updatedAt FROM drafts';
+const SELECT=`SELECT id,title,keyword,category,body,status,published_at AS publishedAt,version,created_at AS createdAt,updated_at AS updatedAt,updated_at+${DRAFT_TTL} AS expiresAt FROM drafts`;
 const fields={title:z.string().trim().min(1).max(200),keyword:z.string().trim().max(60),category:z.string().trim().max(30),body:z.string().max(100000)};
 const createInput=z.object({...fields,keyword:fields.keyword.default(''),category:fields.category.default(''),body:fields.body.default('')}).strict();
 const updateInput=z.object({...fields,status:z.enum(['draft','ready','published','archived'])}).partial().extend({version}).strict().refine(v=>Object.keys(v).length>1,'수정할 항목이 필요합니다.');
@@ -54,9 +55,15 @@ export function listDrafts(db:Database,ownerId:string,query:unknown){
  if(status){where.push('status=?');params.push(status);}
  const sql=`WHERE ${where.join(' AND ')}`;
  const {total}=db.prepare(`SELECT count(*) AS total FROM drafts ${sql}`).get(...params) as {total:number};
- const rows=db.prepare(`SELECT id,title,keyword,category,status,published_at AS publishedAt,version,created_at AS createdAt,updated_at AS updatedAt,
+ const rows=db.prepare(`SELECT id,title,keyword,category,status,published_at AS publishedAt,version,created_at AS createdAt,updated_at AS updatedAt,updated_at+${DRAFT_TTL} AS expiresAt,
   (SELECT count(*) FROM media_files m WHERE m.draft_id=drafts.id) AS imageCount FROM drafts ${sql} ORDER BY updated_at DESC,rowid DESC LIMIT ? OFFSET ?`).all(...params,pageSize,(page-1)*pageSize) as DraftSummary[];
  return{data:rows.map(r=>({...r})),pagination:{page,pageSize,total}};
+}
+
+/** 원본 안내의 30일 보관 정책. 최근 저장 시각부터 30일이 지난 글만 지우고 사진은 사진함에 남긴다. */
+export function cleanupExpiredDrafts(db:Database,now=Date.now()):number{
+ const cutoff=now-DRAFT_TTL;
+ return transaction(db,()=>Number(db.prepare('DELETE FROM drafts WHERE updated_at<=?').run(cutoff).changes));
 }
 
 function apply(db:Database,ownerId:string,id:string,changes:Partial<Pick<Draft,'title'|'keyword'|'category'|'body'|'status'>>,expected:number,action:string):Draft{

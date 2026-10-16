@@ -33,7 +33,7 @@ export default function DraftEditor({draft,onChanged,onClosed}:{draft:DraftDetai
  return <section className="naeo-panel" aria-label="초안 편집" style={{padding:20,display:'grid',gap:14}}>
   <div style={{display:'flex',justifyContent:'space-between',gap:12,flexWrap:'wrap',alignItems:'center'}}>
    <strong style={{fontSize:18}}>초안 편집</strong>
-   <span style={{fontSize:13,color:'#a3a3a3'}}>{STATUS[draft.status]} · 버전 {draft.version} · {fmt(draft.updatedAt)}{dirty?' · 저장하지 않은 변경 있음':''}</span>
+   <span style={{fontSize:13,color:'#a3a3a3'}}>{STATUS[draft.status]} · 버전 {draft.version} · {fmt(draft.updatedAt)} 저장 · {fmt(draft.expiresAt)} 자동 삭제{dirty?' · 저장하지 않은 변경 있음':''}</span>
   </div>
   {error&&<div role="alert" style={{color:'#f87171'}}>{error} {conflict&&<button type="button" className="naeo-button" onClick={()=>void run(async()=>{const d=await reload();onChanged(d,'최신 내용을 불러왔습니다.');})}>최신 내용 불러오기</button>}</div>}
   <form onSubmit={save} style={{display:'grid',gap:12}}>

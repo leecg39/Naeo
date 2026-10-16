@@ -747,7 +747,13 @@
    },
    {
     "type": "external_pending",
-    "reason": "실제 크롬 확장 프로그램 코드가 저장소에 없음"
+    "reason": "확장 프로그램 코드는 구현됨. Chrome Web Store 등록과 실제 네이버 편집기 발행 E2E가 남음"
+   },
+   {
+    "type": "live-http",
+    "at": "2026-10-16T04:54:50.374Z",
+    "file": "docs/fullstack/evidence/extension-e2e-2026-10-16/http-oauth-mcp.json",
+    "scope": "고정 확장 ID로 OAuth PKCE 동의·토큰·MCP 초안 조회·철회 후 401"
    },
    {
     "type": "browser-render",

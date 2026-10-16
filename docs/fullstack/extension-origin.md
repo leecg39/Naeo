@@ -23,6 +23,6 @@
 
 `tests/server/mcp.test.ts`의 확장 전용 회귀 테스트는 정상 호출, 허용된 다른 확장과의 토큰 불일치, 미등록/변조 Origin, 일반 MCP 토큰, 잘못된 토큰, 읽기 전용 scope의 쓰기 거부, 허용 목록 제거를 검증한다.
 
-실제 확장 코드·설치 ID·host_permissions·브라우저 로그인/호출/철회·네이버 편집기 발행 흐름은 아직 검증하지 않았다. 이 수정으로 P7.6이나 전체 목표를 완료 처리하지 않는다. 원본 확장의 내부 프로토콜을 복원했다는 의미도 아니다.
+후속 작업으로 `extension/`에 고정 개발 ID와 필요한 host permissions를 가진 Manifest V3 확장을 구현했다. 실제 Next 서버에서 해당 ID의 로그인·동의·PKCE 토큰·확장 Origin MCP 초안 조회·철회 후 401을 확인했다. 브라우저 설치와 네이버 편집기 발행 범위는 [확장 구현 기록](extension-publish-extension.md)을 따른다. P7.6과 전체 목표는 계속 미완료다.
 
 검증 결과: `npm test` 전체 420개(기본 6 + 서버 414), `npm run typecheck`, `npm run lint`, `git diff --check` 통과. [전체 테스트 기록](evidence/extension-origin-tests.txt).

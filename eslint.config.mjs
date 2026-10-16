@@ -11,4 +11,19 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: { ...reactHooks.configs.recommended.rules },
   },
+  {
+    files: ['extension/**/*.js'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      globals: Object.fromEntries([
+        'Blob', 'ClipboardItem', 'NodeFilter', 'OffscreenCanvas', 'TextEncoder', 'URL', 'URLSearchParams',
+        'btoa', 'chrome', 'createImageBitmap', 'crypto', 'document', 'fetch', 'getComputedStyle', 'getSelection', 'navigator',
+      ].map((name) => [name, 'readonly'])),
+    },
+  },
+  {
+    files: ['tests/*.test.mjs'],
+    extends: [js.configs.recommended],
+    languageOptions: { globals: { URL: 'readonly' } },
+  },
 );

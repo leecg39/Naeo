@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "NAEO 네이버 블로그 발행 도우미",
+  "description": "NAEO에 저장한 글을 조각별로 복사하고 네이버 블로그 편집 위치를 찾아줍니다.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "116",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsB50sQGGxuPZbIRvsRRcH0kgMc6cOkgc2Prs6p34wljhFBLHiw6/y3YBQCAjWOl9vAeyZxM5+DxwfI0AQA04WVKN0SuShsRQtUlBhFuSEqPA6BN4+sZ9340MGVw4sYOmyQGy7gOW7bOS035v0SKlw/q566715wfq749rQnDiJhmugtmEjSpbjlIgJUzqXvs6Ws/QieYEzmymzin2P3Nk5B7FhHvYX2WCTgHjGOzUOVYV4ZUn5ovvtqGtYuShVnYbvxjrl+HbOmj8ho57jOiBfaJvjiF+RgIHdccWFP+yVUhDvlakbB9qtIkr6yVQZZGm37W07/TVOrn22ztOmlRVIQIDAQAB",
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "identity",
+    "sidePanel",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://blog.naver.com/*",
+    "https://m.blog.naver.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "NAEO 발행 도우미 열기"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

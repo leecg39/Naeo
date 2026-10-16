@@ -61,7 +61,7 @@ function Workspace(){
   <ul style={{listStyle:'none',padding:0,margin:0,display:'grid',gap:8}}>{result?.data.map(d=><li key={d.id}><button type="button" onClick={()=>void open(d.id)} className="naeo-panel"
    style={{width:'100%',textAlign:'left',padding:'12px 14px',font:'inherit',color:'inherit',cursor:'pointer',border:selected?.id===d.id?'1px solid #03c75a':undefined}}>
    <strong style={{display:'block',overflowWrap:'anywhere'}}>{d.title}</strong>
-   <span style={{fontSize:13,color:'#a3a3a3'}}>{STATUS[d.status]} · {d.keyword||'키워드 없음'} · 사진 {d.imageCount} · {fmt(d.updatedAt)}</span>
+   <span style={{fontSize:13,color:'#a3a3a3'}}>{STATUS[d.status]} · {d.keyword||'키워드 없음'} · 사진 {d.imageCount} · {fmt(d.updatedAt)} 저장 · {fmt(d.expiresAt)} 자동 삭제</span>
   </button></li>)}</ul>
   {result&&!result.data.length&&<p style={{color:'#a3a3a3'}}>초안이 없습니다. 위에서 AI로 글을 만들거나 &lsquo;새 초안&rsquo;으로 직접 써보세요.</p>}
   {pages>1&&<nav aria-label="초안 페이지" style={{display:'flex',gap:12,alignItems:'center'}}>

@@ -210,7 +210,7 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 
 | 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
 |---|---|---|---|---|
-| `/api/drafts` | GET·POST | 회원 | 목록: `q`(제목·키워드)·`status`·페이지, 본문 제외·사진 수 포함. 생성: `title≤200`, `keyword≤60`, `category≤30`, `body≤10만 자`(512KB 요청) | 400, 401 |
+| `/api/drafts` | GET·POST | 회원 | 목록: `q`(제목·키워드)·`status`·페이지, 본문 제외·사진 수·`expiresAt` 포함. 생성: `title≤200`, `keyword≤60`, `category≤30`, `body≤10만 자`(512KB 요청). 최근 저장부터 30일 뒤 worker가 자동 삭제하며 사진은 사진함에 남김 | 400, 401 |
 | `/api/drafts/:id` | GET·PATCH·DELETE | 회원(본인) | 상세는 수정 이력 포함. 상태 전이 draft→ready/archived, ready→draft/published/archived, published→archived, archived→draft. 본문 없으면 ready·published 불가. 삭제 시 사진은 내 사진함에 남고 공유 링크는 삭제 | 404, 409 `VERSION_CONFLICT`·`INVALID_TRANSITION`·`DRAFT_EMPTY` |
 | `/api/drafts/:id/restore` | POST | 회원(본인) | `{revision,version}` 제목·본문만 되돌림 | 404 |
 | `/api/media` | GET·POST | 회원 | 업로드는 multipart(`file`, `draftId?`). 형식은 파일 서명으로만 판정(JPG·PNG·WEBP), 10MB, 글당 20장·계정당 500장, 시간당 120회. 디스크에는 무작위 이름으로 저장(`NAEO_UPLOAD_DIR`, 기본 `var/uploads`) | 413, 415, 409 `TOO_MANY_IMAGES` |

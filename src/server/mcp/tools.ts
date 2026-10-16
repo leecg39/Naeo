@@ -23,10 +23,10 @@ export const TOOLS:Tool[]=[
    return{blog:{naverId:blog.naverId,title:blog.title},latest:r?{score:r.score,measuredAt:new Date(r.measuredAt).toISOString(),criteria:r.criteria.map(c=>({key:c.key,score:c.score})),actions:r.actions.slice(0,5)}:null,scansLeftToday:remainingScansToday(db,userId,now)};
   }},
  {name:'naeo_token_balance',title:'토큰 잔액',description:'AI 글쓰기에 쓰는 내 토큰 잔액.',scope:'naeo:read',inputSchema:object({}),run:({db,userId})=>({balance:balance(db,userId)})},
- {name:'naeo_list_drafts',title:'내 초안 목록',description:'최근 초안(제목·상태·수정 시각)을 20개까지 보여준다.',scope:'naeo:read',inputSchema:object({q:str('제목 검색어',100)}),
-  run:({db,userId},args)=>{const {q}=z.object({q:z.string().max(100).default('')}).strict().parse(args??{});return{drafts:listDrafts(db,userId,{q,pageSize:20}).data.map(d=>({id:d.id,title:d.title,status:d.status,updatedAt:new Date(d.updatedAt).toISOString()}))};}},
+ {name:'naeo_list_drafts',title:'내 초안 목록',description:'최근 초안(제목·상태·수정·자동 삭제 시각)을 20개까지 보여준다.',scope:'naeo:read',inputSchema:object({q:str('제목 검색어',100)}),
+  run:({db,userId},args)=>{const {q}=z.object({q:z.string().max(100).default('')}).strict().parse(args??{});return{drafts:listDrafts(db,userId,{q,pageSize:20}).data.map(d=>({id:d.id,title:d.title,status:d.status,updatedAt:new Date(d.updatedAt).toISOString(),expiresAt:new Date(d.expiresAt).toISOString()}))};}},
  {name:'naeo_get_draft',title:'초안 보기',description:'초안 하나의 제목·키워드·본문(마크다운)을 가져온다.',scope:'naeo:read',inputSchema:object({id:str('초안 id',36)},['id']),
-  run:({db,userId},args)=>{const {id}=z.object({id:z.uuid()}).strict().parse(args);const d=getDraft(db,userId,id) as {id:string;title:string;keyword:string;body:string;status:string};return{id:d.id,title:d.title,keyword:d.keyword,status:d.status,body:d.body};}},
+  run:({db,userId},args)=>{const {id}=z.object({id:z.uuid()}).strict().parse(args);const d=getDraft(db,userId,id);return{id:d.id,title:d.title,keyword:d.keyword,status:d.status,body:d.body,expiresAt:new Date(d.expiresAt).toISOString()};}},
  {name:'naeo_create_draft',title:'초안 만들기',description:'제목과 본문(마크다운)으로 NAEO에 새 초안을 저장한다.',scope:'naeo:write',inputSchema:object({title:str('제목',200),keyword:str('대표 키워드',60),body:str('본문(마크다운)',100000)},['title']),
   run:({db,userId,now},args)=>{const d=createDraft(db,userId,args,now);return{id:d.id,title:d.title,editUrl:`/dashboard/write?draft=${d.id}`};}},
  {name:'naeo_request_generation',title:'AI 글 생성 요청',description:'키워드로 AI 글 생성을 요청하고 토큰을 차감한다(공급자 미설정이면 차감 없이 실패).',scope:'naeo:generate',

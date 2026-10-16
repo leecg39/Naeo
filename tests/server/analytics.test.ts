@@ -6,6 +6,7 @@ import {register} from '../../src/server/auth';
 import {recordView,recordDwell,shouldTrack,normalizePath,rollupAnalytics,analyticsSummary,RAW_RETENTION_DAYS} from '../../src/server/ops/analytics';
 import {runRetention} from '../../src/server/ops/retention';
 import {serviceHealth} from '../../src/server/ops/health';
+import {createDraft,DRAFT_TTL} from '../../src/server/writing/drafts';
 
 const NOW=Date.parse('2026-10-14T03:00:00Z'),DAY=86_400_000;
 async function fixture(t:TestContext){
@@ -59,8 +60,9 @@ test('retention policy and service health',async t=>{
  recordView(db,{path:'/',visitorId:'visitor-old-000000001',referrer:''},NOW-(RAW_RETENTION_DAYS+1)*DAY);
  db.prepare("INSERT INTO audit_logs VALUES('old-audit',NULL,'x','x','x','{}',?)").run(NOW-400*DAY);
  db.prepare("INSERT INTO audit_logs VALUES('new-audit',NULL,'x','x','x','{}',?)").run(NOW-10*DAY);
+ createDraft(db,member,{title:'보관 만료 글',body:'본문'},NOW-DRAFT_TTL);
  const r=runRetention(db,NOW);
- assert.ok(r.pageViews>=1);assert.equal(r.auditLogs,1);
+ assert.ok(r.pageViews>=1);assert.equal(r.auditLogs,1);assert.equal(r.drafts,1);
  assert.equal((db.prepare('SELECT count(*) AS n FROM page_views').get() as {n:number}).n,0);
  assert.equal((db.prepare("SELECT count(*) AS n FROM page_stats WHERE day<='2026-09-13'").get() as {n:number}).n>=1,true,'raw rows are rolled up before deletion');
  assert.equal((db.prepare("SELECT count(*) AS n FROM audit_logs WHERE id IN ('old-audit','new-audit')").get() as {n:number}).n,1);

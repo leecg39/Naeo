@@ -2,7 +2,7 @@ import {test,type TestContext} from 'node:test';
 import assert from 'node:assert/strict';
 import {openDatabase,type Database} from '../../src/server/database';
 import {register} from '../../src/server/auth';
-import {createDraft,getDraft,listDrafts,updateDraft,deleteDraft,restoreDraftRevision} from '../../src/server/writing/drafts';
+import {cleanupExpiredDrafts,createDraft,DRAFT_TTL,getDraft,listDrafts,updateDraft,deleteDraft,restoreDraftRevision} from '../../src/server/writing/drafts';
 
 async function fixture(t:TestContext){
  const db=openDatabase(':memory:');t.after(()=>db.close());
@@ -59,4 +59,30 @@ test('validation, search, status filter and paging',async t=>{
  assert.equal(listDrafts(db,a,{status:'ready'}).pagination.total,0);
  assert.equal(listDrafts(db,b,{}).pagination.total,1);
  assert.ok(!('body' in page1.data[0]),'list omits bodies');
+});
+
+test('saved drafts expire 30 days after the latest save while photos stay in the library',async t=>{
+ const {db,a}=await fixture(t),now=Date.parse('2026-10-16T03:00:00Z');
+ const expired=createDraft(db,a,{title:'만료 글',body:'본문'},now-DRAFT_TTL);
+ const fresh=createDraft(db,a,{title:'유지 글',body:'본문'},now-DRAFT_TTL+1);
+ db.prepare("INSERT INTO media_files(id,public_id,owner_id,draft_id,mime,size,storage_key,original_name,source,created_at) VALUES('m1','abcdefghijklmnopqrstuv',?,?, 'image/jpeg',9,'00000000-0000-4000-8000-000000000000.jpg','photo.jpg','upload',?)").run(a,expired.id,now-DRAFT_TTL);
+ db.prepare("INSERT INTO media_markdown_links(token,public_id,owner_id,created_at) VALUES('zyxwvutsrqponmlkjihgfe','abcdefghijklmnopqrstuv',?,?)").run(a,now-DRAFT_TTL);
+ db.prepare("INSERT INTO share_links(token,owner_id,draft_id,expires_at,created_at) VALUES('aaaaaaaaaaaaaaaaaaaaaa',?,?,?,?)").run(a,expired.id,now+DRAFT_TTL,now-DRAFT_TTL);
+ assert.equal(getDraft(db,a,expired.id).expiresAt,now);
+ assert.equal(cleanupExpiredDrafts(db,now),1,'the exact 30-day boundary is due');
+ assert.throws(()=>getDraft(db,a,expired.id),{status:404});
+ assert.equal(getDraft(db,a,fresh.id).id,fresh.id);
+ assert.equal((db.prepare('SELECT draft_id AS draftId FROM media_files WHERE id=?').get('m1') as {draftId:string|null}).draftId,null,'photo remains detached');
+ assert.equal((db.prepare('SELECT count(*) AS n FROM media_markdown_links').get() as {n:number}).n,1,'independent photo link remains');
+ assert.equal((db.prepare('SELECT count(*) AS n FROM share_links').get() as {n:number}).n,0,'draft share link is removed');
+ assert.equal((db.prepare('SELECT count(*) AS n FROM draft_revisions WHERE draft_id=?').get(expired.id) as {n:number}).n,0,'revisions are removed');
+ assert.equal(cleanupExpiredDrafts(db,now),0,'cleanup is idempotent');
+});
+
+test('retention removes every due draft in one run even when more than 500 accumulated',async t=>{
+ const {db,a}=await fixture(t),now=Date.parse('2026-10-16T03:00:00Z');
+ const insert=db.prepare("INSERT INTO drafts(id,owner_id,title,keyword,category,body,status,version,created_at,updated_at) VALUES(?,?,?,'','','','draft',1,?,?)");
+ for(let i=0;i<501;i++)insert.run(`expired-${i}`,a,`만료 글 ${i}`,now-DRAFT_TTL,now-DRAFT_TTL);
+ assert.equal(cleanupExpiredDrafts(db,now),501);
+ assert.equal((db.prepare('SELECT count(*) AS n FROM drafts').get() as {n:number}).n,0);
 });

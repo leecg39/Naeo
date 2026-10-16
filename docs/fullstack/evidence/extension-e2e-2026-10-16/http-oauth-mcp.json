@@ -1,0 +1,13 @@
+{
+  "extensionId": "lacdnccodopejadkbeannbcmbljiodik",
+  "transport": "live-next-http",
+  "startStatus": 307,
+  "consentStatus": 200,
+  "approveStatus": 200,
+  "tokenStatus": 200,
+  "mcpStatus": 200,
+  "draftFound": true,
+  "revokeStatus": 200,
+  "afterRevokeStatus": 401,
+  "checkedAt": "2026-10-16T04:54:50.374Z"
+}
