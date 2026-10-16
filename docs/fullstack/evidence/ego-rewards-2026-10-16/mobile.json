@@ -1,0 +1,8 @@
+{
+  "width": 390,
+  "rows": 100,
+  "paging": "이전목록 페이지: 1 / 1 페이지다음",
+  "focusTag": "P",
+  "focusText": "qa-rewards@example.test의 리워드 1토큰을 회수했습니다.",
+  "input": "keyboard Enter; pointer attempt failed before next page"
+}

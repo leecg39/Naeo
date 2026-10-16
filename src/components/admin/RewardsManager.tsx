@@ -1,5 +1,6 @@
 'use client';
 import ListPagination from './ListPagination';
+import OperationNotice from './OperationNotice';
 import {loadValidPage} from './pagination';
 import {kstDateTime} from '@/lib/kst-time';
 import {useState,type FormEvent} from 'react';
@@ -34,7 +35,7 @@ export default function RewardsManager({initial}:{initial:PageResult<Row>}){
  const ranking=(e:FormEvent)=>{e.preventDefault();void run(async()=>{const r=await api<{granted:number;eligible:number;period:{label:string}}>('/api/admin/rewards/ranking',{method:'POST',body:{period:rank.period,offset:Number(rank.offset),top:Number(rank.top),tokens:Number(rank.tokens),...(rank.eventSlug?{eventSlug:rank.eventSlug}:{})}});await load(1);return `${r.period.label}: 대상 ${r.eligible}명 중 ${r.granted}명에게 새로 지급했습니다(이미 받은 회원 제외).`;});};
  const revoke=(r:Row)=>void run(async()=>{await api(`/api/admin/rewards/${r.id}/revoke`,{method:'POST',body:{version:r.version}});setConfirm('');await load();return `${r.email}의 리워드 ${r.tokens}토큰을 회수했습니다.`;});
  return <div className="settings-sections">
-  <div aria-live="polite">{notice&&<p role="status" className="account-success">{notice}</p>}{error&&<p role="alert" className="account-error">{error}</p>}</div>
+  <div aria-live="polite"><OperationNotice message={notice}/>{error&&<p role="alert" className="account-error">{error}</p>}</div>
   <section className="panel account-card" aria-label="수동 지급">
    <h2>토큰 리워드 지급</h2>
    <form className="admin-filters" onSubmit={manual}>
