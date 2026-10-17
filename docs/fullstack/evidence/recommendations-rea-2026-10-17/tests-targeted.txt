@@ -1,0 +1,48 @@
+(node:48421) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ rules score five criteria out of 20 each with evidence and a new-rule disclosure (21.918708ms)
+✔ scores are deterministic and bounded (0.331708ms)
+✔ the scan handler collects RSS, stores a result with history, and reports progress (222.903958ms)
+✔ a blog with no public posts fails the scan permanently with a clear error (163.021708ms)
+(node:48422) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ discovery explains genuinely new owned-blog candidates without inventing demand; unrelated catalog is excluded (270.370333ms)
+✔ golden uses raw ratio, zero demand is unknown saturation, zero documents never gives opportunity, no invented upper volume cap (153.220333ms)
+✔ saving and writing keep recommendation visible; explicit dismiss removes it, versions and cascade protect private state (220.022834ms)
+✔ monthly quota is shared between owned blogs and a due refresh revisits uncompleted recommendations without duplicating them (132.793167ms)
+✔ citation loss compares actual successful AI ranks, ignores error results, and applies within cadence (124.43025ms)
+✔ post keyword override prevents attributing a different query citation history to the new phrase (133.243542ms)
+✔ first provider enrichment after local bootstrap preserves quota and history, missing documents stay unknown (242.387834ms)
+✔ provider failure never erases complete measurements or combines fresh volumes with stale documents (149.320166ms)
+✔ concurrent refresh is locked across asynchronous providers and blog changes cannot overwrite results (162.112125ms)
+✔ manual refresh collects only the registered owner RSS when posts are absent (117.150791ms)
+✔ competition is subscription-gated, owns and versions results, preserves partial failure data, sanitizes external URLs (115.151709ms)
+✔ related search preserves provider terms while legacy exact lookups remain exact; malformed document totals are never zero metrics (0.51625ms)
+✔ golden limit does not hide overflow recommendations and sorting/filtering cover records before pagination (130.035375ms)
+✔ published posts and citation candidates are excluded from golden even after real metrics arrive (160.776083ms)
+✔ paid builds enforce 25 per cycle and 100 across all owned blogs in one KST month (195.855792ms)
+(node:48423) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ SSR bootstraps recommendations from owned posts and the authenticated feed preserves them (231.317166ms)
+✔ feed HTTP mutations enforce authentication, origin, ownership, versions and persistence (140.142583ms)
+(node:48424) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ keyword workspace replaces captured rows and exposes a real empty state (218.609542ms)
+✔ SSR includes actual catalog and owned personal data with metrics and states (174.968334ms)
+✔ URL search, filters, sort and pagination are reflected before rendering (186.317916ms)
+(node:48425) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ searchAdConfig: all three keys required, https or loopback only (1.149542ms)
+✔ keywordStats: HMAC signature, exact-phrase match, bounded fields, error mapping, key in headers only (86.678583ms)
+✔ naverSearchConfig + blogSearch: item cleanup, total, error mapping, secrets in headers only (5.394334ms)
+✔ checkExposure: config gate, marking, persistence, quota, isolation (224.600917ms)
+✔ collectKeywordMetrics: admin gate, batches of 5, document count, missing/failed reporting (197.0205ms)
+✔ exposure rows are pruned to the latest 50 per member and removed with the account (196.619416ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2765.697875

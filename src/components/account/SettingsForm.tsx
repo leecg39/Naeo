@@ -43,7 +43,7 @@ export default function SettingsForm({initialProfile,initialBlogs,email}:{initia
         <button className="button" type="submit" disabled={busy}>프로필 저장</button>
       </form>
     </section>
-    <section className="panel account-card"><h2>내 블로그</h2><p className="muted">등록한 블로그를 관리하고 대표 블로그를 선택하세요.</p>
+    <section id="blogs" className="panel account-card"><h2>내 블로그</h2><p className="muted">등록한 블로그를 관리하고 대표 블로그를 선택하세요.</p>
       {blogs.length===0?<p className="empty-state">등록한 블로그가 없습니다. 아래에서 첫 블로그를 추가하세요.</p>:<ul className="account-blog-list">{blogs.map(blog=><li key={blog.id}>
         <div><strong>{blog.title}</strong> {blog.isPrimary&&<span className="pill">대표</span>}<a className="muted" href={`https://blog.naver.com/${blog.naverId}`} target="_blank" rel="noreferrer">blog.naver.com/{blog.naverId} ↗</a>{blog.category&&<small>{blog.category}</small>}</div>
         <div><button type="button" className="button secondary" disabled={busy} onClick={()=>{setEditing(blog);setConfirming(null);setFormKey(k=>k+1);}}>수정<span className="sr-only"> {blog.title}</span></button><button type="button" className="button secondary" disabled={busy} onClick={()=>setConfirming(blog)}>삭제<span className="sr-only"> {blog.title}</span></button></div>

@@ -1,0 +1,100 @@
+(node:58770) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ refresh gives an actionable source error for missing RSS without consuming quota (142.836917ms)
+✖ refresh gives an actionable source error for empty error page without consuming quota (81.146958ms)
+✖ refresh gives an actionable source error for blog with no public posts without consuming quota (75.182542ms)
+✖ temporary RSS outage remains retryable and succeeds immediately after recovery (78.14375ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1416.533833
+
+✖ failing tests:
+
+test at tests/server/recommendation-refresh-errors.test.ts:2:1980
+✖ refresh gives an actionable source error for missing RSS without consuming quota (142.836917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  502 !== 422
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/recommendation-refresh-errors.test.ts:21:10)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 502,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server/recommendation-refresh-errors.test.ts:2:1980
+✖ refresh gives an actionable source error for empty error page without consuming quota (81.146958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  502 !== 422
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/recommendation-refresh-errors.test.ts:21:10)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 502,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server/recommendation-refresh-errors.test.ts:2:1980
+✖ refresh gives an actionable source error for blog with no public posts without consuming quota (75.182542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  200 !== 422
+
+      at TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/recommendation-refresh-errors.test.ts:21:10)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 200,
+    expected: 422,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/server/recommendation-refresh-errors.test.ts:2:3045
+✖ temporary RSS outage remains retryable and succeeds immediately after recovery (78.14375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+    Comparison {
+  +   code: 'RECOMMENDATION_REFRESH_FAILED',
+  +   details: undefined,
+  +   status: 502
+  -   code: 'RECOMMENDATION_RSS_UNAVAILABLE',
+  -   details: {
+  -     retryable: true
+  -   },
+  -   status: 503
+    }
+
+      at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/recommendation-refresh-errors.test.ts:31:2)
+      at async Test.run (node:internal/test_runner/test:1102:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:777:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AppError: 추천을 만들지 못했습니다. 기존 추천은 유지했습니다. 잠시 후 다시 시도해주세요.
+        at refreshRecommendationFeed (/Users/user01/Desktop/NAEO/naeo-clone/src/server/keywords/discovery-feed.ts:199:126)
+        at async waitForActual (node:assert:621:5)
+        at async strict.rejects (node:assert:744:25)
+        at async TestContext.<anonymous> (/Users/user01/Desktop/NAEO/naeo-clone/tests/server/recommendation-refresh-errors.test.ts:31:2)
+        at async Test.run (node:internal/test_runner/test:1102:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:777:7),
+    expected: { status: 503, code: 'RECOMMENDATION_RSS_UNAVAILABLE', details: { retryable: true } },
+    operator: 'rejects',
+    diff: 'simple'
+  }

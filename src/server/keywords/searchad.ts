@@ -65,7 +65,8 @@ export async function relatedKeywordStats(config:SearchAdConfig,phrases:string[]
  const list=data&&typeof data==='object'?(data as {keywordList?:unknown}).keywordList:null;
  const out=new Map<string,KeywordStat>();
  if(!Array.isArray(list))return out;
- for(const row of list){
+ const exact=(row:unknown)=>!!row&&typeof row==='object'&&typeof (row as {relKeyword?:unknown}).relKeyword==='string'&&phrases.some(p=>normalizePhrase(p)===normalizePhrase(String((row as {relKeyword:string}).relKeyword)));
+ for(const row of [...list].sort((a,b)=>Number(exact(b))-Number(exact(a)))){
   if(!row||typeof row!=='object')continue;
   const rel=(row as {relKeyword?:unknown}).relKeyword;
   if(typeof rel!=='string'||!rel)continue;

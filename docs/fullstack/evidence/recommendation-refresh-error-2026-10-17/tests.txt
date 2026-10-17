@@ -1,0 +1,47 @@
+(node:59531) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ discovery explains genuinely new owned-blog candidates without inventing demand; unrelated catalog is excluded (304.975041ms)
+✔ golden uses raw ratio, zero demand is unknown saturation, zero documents never gives opportunity, no invented upper volume cap (179.407292ms)
+✔ saving and writing keep recommendation visible; explicit dismiss removes it, versions and cascade protect private state (177.088417ms)
+✔ monthly quota is shared between owned blogs and a due refresh revisits uncompleted recommendations without duplicating them (130.698542ms)
+✔ citation loss compares actual successful AI ranks, ignores error results, and applies within cadence (135.996042ms)
+✔ post keyword override prevents attributing a different query citation history to the new phrase (139.07975ms)
+✔ first provider enrichment after local bootstrap preserves quota and history, missing documents stay unknown (176.056708ms)
+✔ provider failure never erases complete measurements or combines fresh volumes with stale documents (119.184708ms)
+✔ concurrent refresh is locked across asynchronous providers and blog changes cannot overwrite results (111.345792ms)
+✔ manual refresh collects only the registered owner RSS when posts are absent (120.150292ms)
+✔ competition is subscription-gated, owns and versions results, preserves partial failure data, sanitizes external URLs (117.386625ms)
+✔ related search preserves provider terms while legacy exact lookups remain exact; malformed document totals are never zero metrics (0.612125ms)
+✔ golden limit does not hide overflow recommendations and sorting/filtering cover records before pagination (121.035042ms)
+✔ published posts and citation candidates are excluded from golden even after real metrics arrive (114.736416ms)
+✔ paid builds enforce 25 per cycle and 100 across all owned blogs in one KST month (148.04625ms)
+(node:59532) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ SSR bootstraps recommendations from owned posts and the authenticated feed preserves them (299.049458ms)
+✔ feed HTTP mutations enforce authentication, origin, ownership, versions and persistence (149.667042ms)
+(node:59533) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ refresh gives an actionable source error for missing RSS without consuming quota (298.827625ms)
+✔ refresh gives an actionable source error for empty error page without consuming quota (180.699875ms)
+✔ refresh gives an actionable source error for blog with no public posts without consuming quota (120.023ms)
+✔ temporary RSS outage remains retryable and succeeds immediately after recovery (108.196667ms)
+(node:59534) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ keyword workspace replaces captured rows and exposes a real empty state (314.029208ms)
+✔ SSR includes actual catalog and owned personal data with metrics and states (176.848542ms)
+✔ URL search, filters, sort and pagination are reflected before rendering (205.503708ms)
+(node:59535) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only the fixed Naver RSS host is ever requested (4.675042ms)
+✔ parser reads Naver RSS items: canonical URL, plain-text excerpt, tags, dates (2.334208ms)
+✔ parser ignores items pointing outside the blog and caps field sizes (0.298542ms)
+✔ fetch errors are classified: missing blog is permanent, server errors retry, redirects and huge bodies are refused (83.741792ms)
+✔ collectBlog upserts posts with source and collection time, keeping one row per post (329.074542ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2698.354083

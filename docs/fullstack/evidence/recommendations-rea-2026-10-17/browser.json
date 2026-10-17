@@ -1,0 +1,23 @@
+{
+  "verifiedAt": "2026-10-17T04:23:59.414Z",
+  "browser": "Ego Lite",
+  "viewport": [
+    1428,
+    747
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "mobileOverflow": 0,
+  "checks": [
+    "Recommendation reason and measured history visible",
+    "Actual pointer competition fetch from isolated loopback provider",
+    "Save to personal library and tab switch",
+    "Written mark persists while item remains",
+    "Dismiss and undo, success notice receives focus",
+    "Mobile search produces one card without overflow",
+    "Keyword link fills writing keyword field after hydration",
+    "Latest production golden filter avoids duplicate section and calendar-month label matches server"
+  ]
+}

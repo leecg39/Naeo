@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){.workspace *{scroll-behavior:auto!important}}
 
 .workspace>[data-naeo-live="keyword-workspace"]{padding:0;max-width:none}
+
+.messages>.error{padding:12px 14px;border-radius:7px;margin-bottom:16px;overflow-wrap:anywhere}.sourceAction{display:inline-block;margin-top:8px;text-decoration:underline!important;font-weight:600}

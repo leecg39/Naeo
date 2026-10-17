@@ -4,7 +4,7 @@ import {transaction,type Database} from '../database';
 import {AppError} from '../errors';
 import {autoKeyword} from '../citations/keywords';
 import {currentSubscription} from '../billing/subscriptions';
-import {collectBlog} from '../collect/rss';
+import {collectBlog,CollectError} from '../collect/rss';
 import {rateLimit} from '../http';
 import {paginationInput} from '../validation';
 import {type FetchLike,ProviderError} from '../generation/provider';
@@ -115,8 +115,8 @@ function persistBuild(db:Database,ownerId:string,blog:Blog,build:{id:string;limi
    const total=pc===null||mobile===null?null:pc+mobile;
    const signal=c?.signal==='rewritten'?'rewritten':build.enrich?(old.signal==='new'&&total!==null&&total>=1000&&docs!==null&&docs>0&&docs<10000?'opportunity':old.signal):'revisit';
    const history=mergeHistory(old.history,c?.history??[]);
-   db.prepare('UPDATE member_recommendations SET signal=?,reason=?,score=?,pc_volume=?,mobile_volume=?,document_count=?,measured_at=?,history_json=?,related_json=?,recommended_at=?,updated_at=?,version=version+1 WHERE id=? AND owner_id=?')
-    .run(signal,build.enrich?(c?.reason??old.reason):c?.signal==='rewritten'?c.reason:`이전에 추천한 ‘${old.phrase}’의 작성 완료가 아직 표시되지 않아 다시 추천합니다. ${c?.reason??old.reason.replace(/^이전에 추천한.*?다시 추천합니다\. /,'')}`,c?.score??old.score,pc,mobile,docs,measured,JSON.stringify(history),JSON.stringify(c?.related.length?c.related:old.related),build.enrich?old.recommendedAt:now,now,old.id,ownerId);
+   db.prepare('UPDATE member_recommendations SET signal=?,reason=?,score=?,source=?,source_post_id=?,category=?,pc_volume=?,mobile_volume=?,document_count=?,measured_at=?,history_json=?,related_json=?,recommended_at=?,updated_at=?,version=version+1 WHERE id=? AND owner_id=?')
+    .run(signal,build.enrich?(c?.reason??old.reason):c?.signal==='rewritten'?c.reason:`이전에 추천한 ‘${old.phrase}’의 작성 완료가 아직 표시되지 않아 다시 추천합니다. ${c?.reason??old.reason.replace(/^이전에 추천한.*?다시 추천합니다\. /,'')}`,c?.score??old.score,c?.source??old.source,c?.sourcePost?.id??old.sourcePost?.id??null,c?.category??old.category,pc,mobile,docs,measured,JSON.stringify(history),JSON.stringify(c?.related.length?c.related:old.related),build.enrich?old.recommendedAt:now,now,old.id,ownerId);
   }
   let inserted=0;
   for(const c of candidates){
@@ -140,7 +140,7 @@ function mergeHistory(a:RecommendationMetricPoint[],b:RecommendationMetricPoint[
 function reassessCitations(db:Database,ownerId:string,blogId:string,candidates:DiscoveryCandidate[],now:number){
  transaction(db,()=>{for(const c of candidates){
   if(c.signal!=='rewritten')continue;
-  db.prepare("UPDATE member_recommendations SET signal='rewritten',reason=?,score=?,updated_at=?,version=version+1 WHERE owner_id=? AND blog_id=? AND phrase_key=? AND written=0 AND dismissed=0 AND (signal<>'rewritten' OR reason<>?)").run(c.reason,c.score,now,ownerId,blogId,phraseKey(c.phrase),c.reason);
+  db.prepare("UPDATE member_recommendations SET signal='rewritten',reason=?,score=?,source='citation',source_post_id=?,updated_at=?,version=version+1 WHERE owner_id=? AND blog_id=? AND phrase_key=? AND written=0 AND dismissed=0 AND (signal<>'rewritten' OR reason<>?)").run(c.reason,c.score,c.sourcePost?.id??null,now,ownerId,blogId,phraseKey(c.phrase),c.reason);
  }});
 }
 /** 스캔 완료 훅 또는 첫 화면 bootstrap 전용. 네트워크를 사용하지 않는다. */
@@ -165,7 +165,7 @@ export async function refreshRecommendationFeed(db:Database,ownerId:string,input
  try{
   let local=localDiscoveryCandidates(db,ownerId,blog.id,now);
   if(!local.posts.length){await collectBlog(db,blog.id,options.fetchImpl,now);ownedBlog(db,ownerId,blog.id);local=localDiscoveryCandidates(db,ownerId,blog.id,now);}
-  if(!local.posts.length){failBuild(db,build.id,ownerId,'공개 글을 수집하지 못했습니다. 블로그 진단을 먼저 실행해주세요.',now);return{...getRecommendationFeed(db,ownerId,{blogId:blog.id},now),notice:'공개 글을 수집하지 못했습니다. 블로그 진단을 먼저 실행해주세요.'};}
+  if(!local.posts.length)throw new CollectError('NO_PUBLIC_POSTS','추천에 사용할 공개 글이 없습니다.',false);
   const candidates=local.candidates;
   if(ads&&local.topics.length){
    try{
@@ -196,7 +196,15 @@ export async function refreshRecommendationFeed(db:Database,ownerId:string,input
   if(!ads||retryable)db.prepare("UPDATE recommendation_builds SET source='local' WHERE id=?").run(build.id);
   persistBuild(db,ownerId,blog,build,candidates,[...new Set(notes)].join(' ')||null,now);
   return getRecommendationFeed(db,ownerId,{blogId:blog.id},now);
- }catch(e){failBuild(db,build.id,ownerId,e instanceof Error?e.message:'추천 생성 실패',now);if(e instanceof AppError)throw e;throw new AppError(502,'RECOMMENDATION_REFRESH_FAILED','추천을 만들지 못했습니다. 기존 추천은 유지했습니다. 잠시 후 다시 시도해주세요.');}
+ }catch(e){
+  failBuild(db,build.id,ownerId,e instanceof Error?e.message:'추천 생성 실패',now);
+  if(e instanceof AppError)throw e;
+  if(e instanceof CollectError){
+   if(['BLOG_NOT_FOUND','NO_PUBLIC_POSTS','INVALID_BLOG_ID'].includes(e.code))throw new AppError(422,'RECOMMENDATION_BLOG_UNAVAILABLE',`‘${blog.naver_id}’에서 공개 글을 가져올 수 없습니다. 블로그 ID와 글·RSS 공개 설정을 확인해주세요.`,{retryable:false});
+   throw new AppError(e.retryable?503:422,e.retryable?'RECOMMENDATION_RSS_UNAVAILABLE':'RECOMMENDATION_RSS_INVALID',e.message,{retryable:e.retryable});
+  }
+  throw new AppError(502,'RECOMMENDATION_REFRESH_FAILED','추천을 만들지 못했습니다. 기존 추천은 유지했습니다. 잠시 후 다시 시도해주세요.');
+ }
 }
 
 export function updateRecommendation(db:Database,ownerId:string,id:string,input:unknown,now=Date.now()):DiscoveredRecommendation{

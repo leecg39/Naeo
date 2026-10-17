@@ -39,4 +39,11 @@
 - 기존 `/api/recommendations`의 보관함 계약은 유지
 - DB migration 48: `member_recommendations`, `recommendation_builds`. 개인정보 내보내기 및 회원/블로그 삭제 연쇄 적용
 
-검증 결과와 스크린샷은 이 폴더에 함께 기록한다.
+## 검증 결과
+
+- 전체 기존/통합 테스트: 루트 12개 + 서버 504개 통과. 신규 추천 엔진 15개를 추가했고, 최종 수정 후 관련 30개 테스트를 재실행해 모두 통과했다(중복 제외 총 531개).
+- ESLint·전체 타입 검사·최종 production build 통과. [전체 테스트](tests-full.txt), [최종 관련 테스트](tests-targeted.txt), [빌드](build.txt).
+- 별도 임시 SQLite와 production HTTP 서버에서 초기 추천·황금 목록·초기 생성 후 지표 보강·경쟁 블로그/뉴스·작성 완료·보관함 저장을 확인했다. [HTTP 결과](http.json).
+- Ego Lite 실제 포인터로 상세 열기, 경쟁 콘텐츠 조회, 보관함 저장과 탭 전환, 작성 완료, 숨김·되돌리기, 검색, 글쓰기 키워드 전달을 검증했다. 성공 알림으로 포커스가 이동하며, 390px에서 가로 넘침은 0이었다.
+- 스크린샷: [데스크톱](desktop.png), [상세](desktop-details.png), [모바일](mobile.png), [모바일 상세](mobile-detail.png). 스크린샷 수치는 격리 QA 데이터이며 실제 외부 검색량을 뜻하지 않는다.
+- 실제 개발 서버는 schema 48로 응답한다. 외부 네이버 실서비스 측정은 자격 증명 미설정으로 미검증이다.
