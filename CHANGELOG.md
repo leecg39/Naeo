@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-10-17 — 대시보드 진단 결과 미표시 수정 (in-process 작업자)
+
+- 증상: `/dashboard`에서 블로그 스캔 요청 후에도 진단 결과가 계속 나타나지 않았다. 원인: `scan_jobs`에 들어간 작업을 처리하는 프로세스가 `npm run worker`뿐이라 웹만 띄운 환경에서는 작업이 영원히 `queued`에 머물렀고, `scan_results`가 생기지 않아 대시보드가 "첫 진단을 받아보세요" 상태에 갇혔다.
+- `src/instrumentation.ts` + `src/server/jobs/inprocess.ts` 추가: 웹 서버가 시작할 때 in-process 작업자가 같은 루프를 돌린다. `NAEO_INPROCESS_WORKER=0`으로 끌 수 있다.
+- `src/server/jobs/drain.ts`: 워커 루프 한 차례(스캔·인용·AI 생성·메일·내보내기·정기 유지)를 `runAllJobsOnce`로 추출해 `scripts/worker.ts`와 in-process 작업자가 공유한다. lease로 양쪽 동시 기동 시에도 같은 작업을 두 번 실행하지 않는다.
+- 적대적 검토에서 찾은 문제 수정: abort 리스너가 매 대기마다 쌓이던 누수를 `removeEventListener`로 해소(in-process·standalone 양쪽), standalone 루프가 단일 작업 오류로 프로세스가 죽던 것을 로그 후 계속 진행하도록 함.
+- 회귀 테스트 `tests/server/drain.test.ts`: 실제 `scanHandler`+스텁 RSS로 "외부 워커 없이 큐잉→처리→scan_results 저장→대시보드 렌더" 전체 체인을 검증한다.
+- 런타임 검증: `next start` 인스턴스에서 직접 큐잉한 스캔이 `queued→succeeded`로 처리되고 `/dashboard` HTML에 점수·"마지막 스캔"·추이·피드가 표시됨을 확인했다.
+
 ## 2026-10-17 — 애니메이션 패리티 + 시간 의존 테스트 수정
 
 - `scripts/qa/animation-parity.ts` 추가: 원본과 클론의 실행 중 CSS/WAAPI 애니메이션·숨김 요소·전환 수를 스크롤 전후로 대조한다.

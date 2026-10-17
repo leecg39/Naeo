@@ -1,6 +1,6 @@
 # 운영 안내
 
-이 서비스는 Next.js 서버 하나와 작업자(worker) 하나, SQLite 파일, 업로드 폴더로 동작한다. 지속 볼륨이 없는 serverless 환경에는 배포하지 않는다.
+이 서비스는 Next.js 서버와 작업 큐(SQLite), 업로드 폴더로 동작한다. 큐 작업은 웹 프로세스 안의 in-process 작업자가 기본으로 처리하며(스캔·인용 확인·AI 생성·메일·내보내기·정기 유지), 별도 `npm run worker`를 함께 띄워도 lease로 중복 실행 없이 공존한다. 웹과 분리해 워커만 돌리려면 `NAEO_INPROCESS_WORKER=0`으로 끈다. 지속 볼륨이 없는 serverless 환경에는 배포하지 않는다.
 
 ## 환경 분리
 | 환경 | `NAEO_DATABASE_PATH` | `NAEO_UPLOAD_DIR` | `NAEO_APP_URL` | 비고 |
@@ -18,10 +18,10 @@
 npm ci
 cp .env.example .env.local        # 값 채우기
 npm run build
-npm start                          # 웹(포트는 package.json 또는 next start 옵션)
-npm run worker                     # 작업자: 개인정보 내보내기·진단·글 생성 큐, 1분마다 구독 기간 처리·주문 만료·내보내기 정리, 1시간마다 보관 정책
+npm start                          # 웹(포트는 package.json 또는 next start 옵션) — 큐 작업도 같이 처리
+npm run worker                     # 선택: 별도 작업자 프로세스(부하 분리 시). lease로 in-process와 공존 가능
 ```
-웹과 작업자는 같은 `NAEO_DATABASE_PATH`·`NAEO_UPLOAD_DIR`을 써야 한다. 관리자 계정은 `/login`에서 가입한 뒤 `npm run admin -- promote 이메일`로 승격한다(기본 관리자·공유 비밀번호 없음).
+웹과 작업자는 같은 `NAEO_DATABASE_PATH`·`NAEO_UPLOAD_DIR`을 써야 한다. `npm run worker`는 개인정보 내보내기·진단·글 생성 큐와 1분 주기 구독/주문 유지, 1시간 주기 보관 정책을 돌며, 웹 프로세스의 in-process 작업자(`src/instrumentation.ts`)가 같은 루프를 실행하므로 별도 기동은 선택이다. 관리자 계정은 `/login`에서 가입한 뒤 `npm run admin -- promote 이메일`로 승격한다(기본 관리자·공유 비밀번호 없음).
 
 Next.js 웹 서버는 `.env.local`을 읽지만 위 Node CLI들은 자동으로 읽지 않는다. 셸에서 환경 변수를 전달하거나, 환경 파일을 사용한다면 `node --env-file=.env.local --import tsx scripts/worker.ts`처럼 명시한다. 관리자·백업·복원 CLI에도 같은 방식으로 올바른 DB·업로드 경로를 전달한다.
 
