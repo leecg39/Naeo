@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-17 — 애니메이션 패리티 + 시간 의존 테스트 수정
+
+- `scripts/qa/animation-parity.ts` 추가: 원본과 클론의 실행 중 CSS/WAAPI 애니메이션·숨김 요소·전환 수를 스크롤 전후로 대조한다.
+- `/ranking` 칭호 배지에 원본의 광택 스윕(titleShine, `::after` -80%→120% 3.2s)을, 명예의 전당 카드에 셈 오버레이(hof-sheen, 5s·카드당 0.4s 시차)를 캡처 규격으로 복원했다. `prefers-reduced-motion`에서는 끈다. 시드된 QA 인스턴스에서 실행 중 애니메이션 12개를 브라우저로 확인.
+- `scripts/qa/seed-ranking.ts` 추가: 회원 3명·전주/전월 확정 스냅숏·메이트·지표를 도메인 함수로 시드해 `/ranking`의 포디움·급상승·명예의 전당을 실데이터로 채운다.
+- `notify-mail.test.ts` 시간 의존 결함 수정: 고정 `NOW`(2026-10-16)로 큐에 넣은 메일이 실제 시계 기준 24시간 만료를 넘겨 날짜가 지나면 깨졌다 → `NOW=Date.now()`.
+- 측정 결과 홈 스크롤 reveal과 `/mate` reveal은 원본과 같이 동작하고, 공지 마르퀴(evt-ticker)는 자체 `AnnouncementTicker`로 대응됨을 확인했다.
+
 ## 2026-10-17 — 랭킹 실측 지표·메이트 필터·명예의 전당 카드 (스키마 46)
 
 - 스키마 46: `ranking_snapshots`에 `metrics_json`(기간 실측 지표 배열)과 `mate`(확정 시점 메이트 상태) 열을 추가해 확정 기간의 지표를 동결한다.

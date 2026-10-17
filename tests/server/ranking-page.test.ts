@@ -51,6 +51,8 @@ test('rows, tabs, my rank, categories and hall of fame come from the database',a
  assert.match(text(rows[0]),/알파/);assert.match(text(rows[0]),new RegExp(`${report.score}점`));
  assert.equal(all([rows[0]],n=>n.tag==='a'&&n.attrs.href==='https://blog.naver.com/alpha').length,1);
  assert.match(text(rows[0]),/주간 1위 1회/,'title from confirmed snapshot');
+ assert.ok(all([rows[0]],n=>(n.attrs.class??'').includes('naeo-title-shine')).length>=1,'title chip carries the shine sweep');
+ assert.match(page.css,/naeo-title-shine|naeo-hof-sheen/,'shine keyframes shipped in page css');
  assert.ok(!JSON.stringify(page.body).includes('비공개'),'private members never appear');
  const tabs=all(page.body,n=>n.attrs.role==='tab');
  assert.deepEqual(tabs.map(t=>[t.attrs['data-period'],t.attrs['aria-selected']]),[['all','false'],['month','false'],['week','true']]);
@@ -85,6 +87,7 @@ test('mate toggle, metric cells and hall-of-fame cards render real data',async t
  const allText=withHall.body.map(text).join('');
  assert.match(allText,/년 \d+월 왕/,'monthly champion card');
  assert.match(allText,/주제별 왕/);assert.match(allText,/여행 왕/,'category champion card');
+ assert.ok(all(withHall.body,n=>(n.attrs.class??'').includes('naeo-hof-sheen')).length>=2,'sheen overlay on each hall card');
 });
 
 test('podium shows the top 3 with scores and titles; riser needs previous-week data',async t=>{
@@ -97,6 +100,7 @@ test('podium shows the top 3 with scores and titles; riser needs previous-week d
  const page=await buildRankingPage(db,{period:'week'},null,NOW);
  const podium=all(page.body,n=>/podium-name/.test(n.attrs.class??''));
  assert.deepEqual(podium.map(text).sort(),['브라보','알파','찰리'].sort());
+ assert.ok(all(page.body,n=>(n.attrs.class??'').includes('naeo-title-shine')).length>=1,'podium title badge shines');
  assert.match(JSON.stringify(page.body),/▲1계단/,'riser: 알파 climbed 2→1 since last week');
  const mine=await buildRankingPage(db,{period:'week'},a.id,NOW);
  assert.match(text(all(mine.body,n=>(n.attrs.class??'').includes('mui-gtw5ek'))[0]),/상위 \d+%/,'percentile line');

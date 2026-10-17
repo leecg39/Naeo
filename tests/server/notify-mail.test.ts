@@ -13,7 +13,9 @@ import {issueReward,cancelReward,rewardById} from '../../src/server/events/rewar
 import type {MailConfig,MailMessage} from '../../src/server/mail/provider';
 import {MailError} from '../../src/server/mail/provider';
 
-const NOW=Date.parse('2026-10-16T00:00:00Z');
+// 실제 시계 기준 — queueNotifyMail/runNotifyMailOnce의 기본 now는 Date.now()라
+// 과거로 고정하면 expires_at(24h)을 넘겨 실제 실행 시점에 만료 실패한다.
+const NOW=Date.now();
 const config:MailConfig={apiKey:'synthetic-notify-key',from:'notify@example.test',key:Buffer.alloc(32,7),apiBase:'http://127.0.0.1:3000',appOrigin:'http://127.0.0.1:3000'};
 
 async function fixture(t:TestContext){

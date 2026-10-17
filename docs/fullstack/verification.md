@@ -1,5 +1,11 @@
 # 풀스택 검증 기록
 
+## 2026-10-17 — 애니메이션 대조 + 시간 의존 테스트 수정
+
+`scripts/qa/animation-parity.ts`로 원본과 클론의 실행 중 애니메이션을 대조했다: 원본 `/ranking`의 칭호 배지 광택 스윕(titleShine 32개)·명예의 전당 카드 셈(hof-sheen 6개)과 홈의 reveal이 클론에 없거나 데이터 부재로 0이었다. 캡처 CSS 규격 그대로 `.naeo-title-shine::after`(3.2s ease-in-out, -80%→120%)와 `.naeo-hof-sheen`(5s, 카드당 0.4s 시차)을 복원해 시드된 QA 인스턴스에서 실행 중 애니메이션 12개를 확인했다(칭호 7 + 카드 셈 4 + 캡처 요소 1). 스크롤 reveal은 양쪽 모두 동작(느린 스크롤 기준 클론 64·원본 78개 공개, 나머지는 데모/패널 상호작용 전 정상 숨김). 공지 마르퀴는 자체 `AnnouncementTicker`가 같은 역할을 한다.
+
+적대적 검토로 `tests/server/notify-mail.test.ts`의 시간 의존 결함을 찾았다: 고정 `NOW`(2026-10-16)로 큐에 넣고 `runNotifyMailOnce`는 실제 `Date.now()`로 돌려, 24시간이 지나면 만료(EXPIRED)로 실패하는 시한폭탄. `NOW=Date.now()`로 고쳐 8/8 통과·495개 전체 통과.
+
 ## 2026-10-16~17 — 픽셀 비교·로그인 시트·랭킹 포디움/급상승 복원
 
 `scripts/qa/pixel-parity.ts`(puppeteer-core+pixelmatch)로 공개 10경로×1440/390px 전체 페이지를 원본과 비교했다. `/faq`는 픽셀 일치(0.00%), `/contact`·`/features`·`/event`(모바일)·`/mate`·`/`·`/blog`·`/pricing`은 0.4–6%(동적 콘텐츠·원본 추가분 잔차). `/ranking`은 실제 플로우(가입→랭킹 공개→블로그 등록→RSS double 스캔)로 회원 3명을 올려 검증했고, 캡처 템플릿에서 빠져 있던 상위 3명 포디움·이주의 급상승 스포트라이트·내 위치 백분위를 실데이터로 복원하고, 네이버 메이트만 필터(활성 mate_reports)·기간 실측 지표 열(AI 본문·AI 이미지·검색 노출·키워드 전략·포스팅 활동)·신규 진입 수·명예의 전당 월별/주제별 왕 카드를 추가했다(스키마 46: 스냅숏에 metrics_json·mate 동결). 잔차는 원본 15,214명 대 QA 3명의 데이터 볼륨 차이다. `/login`은 기존 마케팅 카드 대신 원본 캡처의 "시작하기" 시트 구조로 재배치해 모바일 구조 불일치를 수정했다. 잔차는 `(미설정)` 표기·회원가입/비밀번호 보조 링크 등 기능 추가분. 증거: `docs/fullstack/evidence/pixel-parity-2026-10-16/`(diff PNG·report.json; 원본·복제본 PNG는 스크립트 재실행으로 재생), 기록: `docs/fullstack/visual-parity-2026-10-16.md`. 전체 495개·lint·typecheck·build 통과.
@@ -29,7 +35,7 @@ MP4·홈 복원과 계정 성공 안내/포커스 수정·랭킹 포디움/급�
 | 실제 Ego UI | 통과 | 미인증 리다이렉트 → 회원가입 → 프로필 변경 → 블로그 생성/조회/수정 → 로그아웃/재로그인 → 서버 재시작 보존 → 삭제 확인 → 재조회 빈 목록 |
 | 관리자 초기 지정 CLI | 통과 | 별도 QA DB의 기존 계정에 `npm run admin -- promote` 실행 후 `/api/auth/me`의 role=admin 확인. 관리자 CRUD UI는 미구현 |
 | 반응형 DOM | 통과 | 1440px: scrollWidth 1425, 768px: 753, 390px: 390. 프로필·폼·빈 목록 존재 |
-| 스크린샷 시각 비교 | 부분 완료 | 당시 Ego `Page.captureScreenshot` 시간 초과로 미완료였으나, 10-16에 Chrome DevTools 브라우저로 원본 naeo.kr과 공개 16경로를 SSR 구조·1440/390px 실측 비교해 `visual-parity-2026-10-16.md`에 기록. 픽셀 단위 diff는 미수행 |
+| 스크린샷 시각 비교 | 완료 | 당시 Ego `Page.captureScreenshot` 시간 초과로 미완료였으나, 10-16에 Chrome DevTools 브라우저로 SSR 구조·1440/390px 실측 비교, 10-17에 `scripts/qa/pixel-parity.ts`로 공개 10경로 픽셀 diff까지 수행. `visual-parity-2026-10-16.md`에 기록 |
 
 서버 테스트: `tests/server/foundation.test.ts`, `tests/server/http.test.ts`. 브라우저 실측: `evidence/foundation-browser.json`, `evidence/settings-after-crud.txt`. 스크린샷 시도 중 발생한 emulation 좌표 문제는 1440px override를 다시 설정해 회복했고, 이후 키보드와 포인터로 삭제 확인 흐름을 마쳤다. 최종 브라우저 공간은 7, 페이지 p1이며 전체 목표의 후속 검증에 재사용한다.
 
@@ -605,4 +611,4 @@ P8.5 로컬 검증은 완료했다. 외부 공급자 미구현·실연동 미검
 | 수정 결함 | 수정 후 통과 | `/event` 카드 포스터 부재 → `events.cover_image`(스키마 44, 로컬 경로만)·시드·목록/상세 렌더·관리자 필드로 구현(390px docH 1082/1082 일치). `/login` 제목을 원본과 동일하게 교정 |
 | 원본 변동 | 기록 | 홈 신규 섹션·이미지(+34), `/blog` 신규 글, 홈 제목 접두어 제거 — 10-13 캡처 이후 원본 변경분. 공지 티커는 자체 공지 시스템으로 의도적 대체 |
 
-전체 기록·한계(픽셀 diff 미수행, 로그인 후 화면 범위 밖): `docs/fullstack/visual-parity-2026-10-16.md`. `npm test` 495(12+483), lint·typecheck·build·`git diff --check` 통과.
+전체 기록·한계(로그인 후 화면 범위 밖): `docs/fullstack/visual-parity-2026-10-16.md`. 픽셀 diff는 10-17에 수행(`evidence/pixel-parity-2026-10-16/`). `npm test` 495(12+483), lint·typecheck·build·`git diff --check` 통과.

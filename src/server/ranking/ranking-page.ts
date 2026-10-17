@@ -25,11 +25,11 @@ function row(tpl:El,r:RankRow,titles:string[],mateBadge:El|undefined):El{
   if(n.tag==='a'&&n.attrs.href)return[mapTree([withAttrs(n,{href:`https://blog.naver.com/${r.naverId}`,target:'_blank',rel:'noopener noreferrer','aria-label':`${r.nickname} 블로그 새 창에서 열기`})],x=>cls('mui-e5niar')(x)?[set(x,r.nickname)]:undefined)[0]];
   if(cls('mui-1z10mwa')(n)){
    if(!titles.length)return[];
-   return[withChildren(withAttrs(n,{'aria-label':`보유 칭호: ${titles.join(', ')}`}),titles.map(t=>mapTree([itemTpl],x=>{
+   return[withChildren(withAttrs(n,{'aria-label':`보유 칭호: ${titles.join(', ')}`}),titles.map(t=>shine(mapTree([itemTpl],x=>{
     if(cls('mui-ixm4ez')(x))return[set(x,t)];
     if(x.attrs['aria-label']?.startsWith('칭호'))return[{...withAttrs(x,{'aria-label':`칭호: ${t}`}),children:mapTree(x.children,y=>cls('mui-ixm4ez')(y)?[set(y,t)]:undefined)}];
     return undefined;
-   })[0]))];
+   })[0] as El)))];
   }
   if(cls('mui-yjsvyy')(n))return[set(n,r.category||'(분류 없음)')];
   if(cls('mui-1y95vmu')(n)){const unit=n.children.find(isEl);return[withChildren(n,[String(r.score),...(unit?[unit]:[])])];}
@@ -72,7 +72,7 @@ function chips(box:El,view:View,dialog:boolean):El{
 function hallOfFame(box:El,db:Database):El{
  const monthly=champions(db).filter(c=>c.periodType==='month').slice(0,6);
  const cats=categoryChampions(db);
- const card=(tpl:El,nick:string,naver:string,label:string,title:string|undefined)=>{
+ const card=(tpl:El,nick:string,naver:string,label:string,title:string|undefined,delay=0)=>{
   const fill=(n:El):CapturedNode[]|undefined=>{
    if(cls('MuiAvatar-colorDefault')(n))return[withChildren(n,[[...nick][0]??'?'])];
    if(cls('hof-name')(n))return[set(n,nick)];
@@ -81,16 +81,18 @@ function hallOfFame(box:El,db:Database):El{
     if(!title)return[];
     return[withChildren(n,mapTree(n.children,x=>{
      if(cls('mui-y70f8r')(x))return[set(x,title)];
-     if(x.attrs['aria-label']?.startsWith('칭호'))return[withAttrs(x,{'aria-label':`칭호: ${title}`})];
+     if(x.attrs['aria-label']?.startsWith('칭호'))return[shine(withAttrs(x,{'aria-label':`칭호: ${title}`}))];
      return undefined;
     }))];
    }
    return undefined;
   };
-  return stripMotion(mapTree([tpl],n=>{
+  const filled=mapTree([tpl],n=>{
    if(n.tag==='a'&&n.attrs.href)return[mapTree([withAttrs(n,{href:`https://blog.naver.com/${naver}`,target:'_blank',rel:'noopener noreferrer','aria-label':`${nick} 블로그 새 창에서 열기`})],x=>fill(x))[0]];
    return fill(n);
-  })[0] as El);
+  })[0] as El;
+  return stripMotion(withChildren(withAttrs(filled,{class:`${filled.attrs.class??''} naeo-hof-card`.trim()}),
+   [...filled.children,el('span',{class:'naeo-hof-sheen','aria-hidden':'true',style:`animation-delay:${(delay*0.4).toFixed(1)}s`})]));
  };
  let section=0;
  return mapTree([box],n=>{
@@ -108,8 +110,8 @@ function hallOfFame(box:El,db:Database):El{
    if(!tpl)return[n];
    const data=isMonthly?monthly:cats;
    if(!data.length)return isMonthly?[withChildren(n,[el('p',{style:muted},['아직 확정된 월간 1위가 없습니다. 월간 기간이 끝나면 이곳에 기록됩니다.'])])]:[];
-   const cards=isMonthly?monthly.map(c=>card(tpl,c.nickname,c.naverId,`${c.periodKey.slice(0,4)}년 ${Number(c.periodKey.slice(5,7))}월 왕`,titlesOf(db,c.userId)[0]))
-    :cats.map(c=>card(tpl,c.nickname,c.naverId,`${c.category} 왕`,titlesOf(db,c.userId)[0]));
+   const cards=isMonthly?monthly.map((c,i)=>card(tpl,c.nickname,c.naverId,`${c.periodKey.slice(0,4)}년 ${Number(c.periodKey.slice(5,7))}월 왕`,titlesOf(db,c.userId)[0],i))
+    :cats.map((c,i)=>card(tpl,c.nickname,c.naverId,`${c.category} 왕`,titlesOf(db,c.userId)[0],i));
    return[withChildren(n,cards)];
   }
   return undefined;
@@ -121,6 +123,19 @@ const RULES:CapturedNode[]=[el('div',{style:'display:grid;gap:8px;padding:20px'}
  el('p',{style:muted},['랭킹 공개를 켠 회원의 대표 블로그를 기간 안에서 가장 최근에 진단한 점수(5가지 기준 × 20점)로 순위를 매깁니다. 동점이면 그 점수를 먼저 기록한 회원이 앞섭니다. 원본 서비스의 종합 가중치는 공개되지 않아 이 복제본이 정한 새 규칙입니다.']),
  el('p',{style:muted},['주간은 월요일 0시~일요일, 월간은 매월 1일~말일(한국 시간)이며 기간이 끝나면 순위를 확정해 다시 바뀌지 않습니다. 표의 AI 본문·AI 이미지·검색 노출·키워드 전략은 기간 안에 실측한 횟수이고, 포스팅 활동은 발행 빈도 점수(20점 만점)입니다. 원본의 종합 가중치를 알 수 없어 이 지표들은 순위에 쓰지 않고 참고 정보로만 보여 줍니다.'])
 ])];
+
+/** 원본의 칭호 배지 광택 스윕(titleShine)과 명예의 전당 카드 셈(hof-sheen)을 캡처 규격으로 재현한다. */
+const shineStyles=`
+.naeo-title-shine { position: relative; overflow: hidden; }
+.naeo-title-shine::after { content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%; background: linear-gradient(115deg, transparent, rgba(255,255,255,.28), transparent); animation: 3.2s ease-in-out 0s infinite normal none running naeo-title-shine; pointer-events: none; }
+@keyframes naeo-title-shine { 0% { left: -80%; } 60%, 100% { left: 120%; } }
+.naeo-hof-card { position: relative; overflow: hidden; }
+.naeo-hof-sheen { position: absolute; top: 0; left: -60%; width: 45%; height: 100%; pointer-events: none; background: linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent); animation: 5s ease-in-out 0s infinite normal none running naeo-hof-sheen; }
+@keyframes naeo-hof-sheen { 0% { left: -60%; } 55%, 100% { left: 140%; } }
+@media (prefers-reduced-motion: reduce) { .naeo-title-shine::after, .naeo-hof-sheen { animation: none; display: none; } }`;
+
+/** 칭호 칩에 광택 스윕 클래스를 더한다. */
+const shine=(n:El):El=>withAttrs(n,{class:`${n.attrs.class??''} naeo-title-shine`.trim()});
 
 /** 캡처 중인 애니메이션 스타일(opacity/transform)을 벗겨 SSR에서도 보이게 한다. */
 const stripMotion=(n:El):El=>mapTree([n],x=>{
@@ -141,11 +156,11 @@ function podiumCard(card:El,r:RankRow,titles:string[]):El{
   if(cls('mui-xi606m')(n))return[withChildren(n,n.children.map(c=>isEl(c)&&c.tag==='p'?withChildren(c,[String(r.score),...c.children.filter(isEl)]):c))];
   if(cls('mui-1s8s8qe')(n)){
    if(!titles.length||!badgeTpl)return[];
-   return[withChildren(n,titles.map(t=>mapTree([badgeTpl],x=>{
+   return[withChildren(n,titles.map(t=>shine(mapTree([badgeTpl],x=>{
     if(cls('mui-ztoy9z')(x))return[set(x,t)];
     if(x.attrs['aria-label']?.startsWith('칭호'))return[withAttrs(x,{'aria-label':`칭호: ${t}`})];
     return undefined;
-   })[0]))];
+   })[0] as El)))];
   }
   return undefined;
  })[0] as El;
@@ -218,5 +233,5 @@ export async function buildRankingPage(db:Database,params:{period?:string;page?:
   ];
   return[withChildren(n,[withChildren(inner,built as CapturedNode[])])];
  });
- return{...tpl,body,source:'database'};
+ return{...tpl,body,css:`${tpl.css}\n${shineStyles}`,source:'database'};
 }
