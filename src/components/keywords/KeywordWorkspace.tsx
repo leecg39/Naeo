@@ -27,7 +27,7 @@ function Details({item,busy,configured,edit,remove,measure}:{item:Recommendation
  </div>;
 }
 
-export default function KeywordWorkspace({initial}:{initial:KeywordWorkspaceData}){
+export default function KeywordWorkspace({initial,libraryMode=false}:{initial:KeywordWorkspaceData;libraryMode?:boolean}){
  const [list,setList]=useState(initial.list),[suggestions,setSuggestions]=useState(initial.suggestions),[query,setQuery]=useState(initial.list.query),[search,setSearch]=useState(initial.list.query.q);
  const [phrase,setPhrase]=useState(''),[category,setCategory]=useState(''),[open,setOpen]=useState<string|null>(null);
  const [busy,setBusy]=useState(false),[notice,setNotice]=useState(''),[error,setError]=useState('');
@@ -35,7 +35,7 @@ export default function KeywordWorkspace({initial}:{initial:KeywordWorkspaceData
  const reload=async(next:RecommendationQuery=query)=>{
   const result=await apiResponse<RecommendationList>(`/api/recommendations?${new URLSearchParams(Object.entries(next).map(([k,v])=>[k,String(v)]))}`);
   setList(result);setQuery(result.query);setSearch(result.query.q);
-  const params=queryString(result.query);window.history.replaceState(null,'',`/dashboard/recommendations${params?'?'+params:''}`);
+  const params=queryString(result.query);window.history.replaceState(null,'',`/dashboard/recommendations${libraryMode?'?view=library'+(params?'&'+params:''):params?'?'+params:''}`);
  };
  const perform=async(action:()=>Promise<void>)=>{
   if(locked.current)return;locked.current=true;setBusy(true);setError('');setNotice('');
@@ -65,7 +65,7 @@ export default function KeywordWorkspace({initial}:{initial:KeywordWorkspaceData
  const written=(item:Recommendation)=><label className={styles.check}><input type="checkbox" checked={item.written} disabled={busy} onChange={e=>edit(item,{written:e.target.checked})} aria-label={`${item.phrase} 작성 완료`}/><span>작성 완료</span></label>;
  const signal=(item:Recommendation)=><span className={`${styles.badge} ${item.golden?styles.gold:item.preempt?styles.green:''}`}>{item.golden?'황금 키워드':item.preempt?'선점 기회':item.saturation===null?'미측정':item.level}</span>;
  return <div data-naeo-live="keyword-workspace" className={styles.workspace} aria-busy={busy}>
-  <header className={styles.header}><div><p className={styles.eyebrow}>KEYWORD WORKSPACE</p><h1>키워드 추천</h1><p>내 블로그의 다음 글감을 찾고, 작성까지 한곳에서 관리하세요.</p></div><button type="button" disabled={busy} onClick={()=>load({})}>목록 새로고침 ↻</button></header>
+  <header className={styles.header}><div><p className={styles.eyebrow}>KEYWORD WORKSPACE</p>{libraryMode?<h2>내 키워드 보관함</h2>:<h1>키워드 추천</h1>}<p>{libraryMode?'관심 있는 키워드를 저장하고, 메모와 작성 상태를 관리하세요.':'내 블로그의 다음 글감을 찾고, 작성까지 한곳에서 관리하세요.'}</p></div><button type="button" disabled={busy} onClick={()=>load({})}>목록 새로고침 ↻</button></header>
   <section className={styles.stats} aria-label="키워드 현황">{filters.map(([filter,label,count])=><button key={filter} type="button" aria-pressed={query.filter===filter} disabled={busy} onClick={()=>load({filter})}><span>{label}</span><strong>{number(count)}</strong><small>{filter==='written'?`${list.summary.total?Math.round(count/list.summary.total*100):0}% 작성`:'클릭하여 보기'}</small></button>)}</section>
   <section className={styles.panel} aria-labelledby="keyword-add-title"><div className={styles.sectionHeading}><div><h2 id="keyword-add-title">내 키워드 추가</h2><p>추가한 키워드와 메모는 나에게만 보입니다.</p></div><span className={styles.badge}>직접 추가</span></div><form className={styles.addForm} onSubmit={e=>{e.preventDefault();add({phrase,category});}}><label>키워드<input name="phrase" value={phrase} onChange={e=>setPhrase(e.target.value)} maxLength={60} required disabled={busy} placeholder="예: 제주 3박4일 여행 코스"/></label><label><span>분류 (선택)</span><input name="category" value={category} onChange={e=>setCategory(e.target.value)} maxLength={30} disabled={busy} placeholder="예: 여행"/></label><button type="submit" className={styles.primary} disabled={busy||!phrase.trim()}>+ 키워드 추가</button></form></section>
   <div className={styles.messages}><OperationNotice message={notice} className={styles.success}/>{error&&<p role="alert" className={styles.error}>{error}</p>}{busy&&<p role="status" className={styles.loading}>처리 중입니다…</p>}</div>

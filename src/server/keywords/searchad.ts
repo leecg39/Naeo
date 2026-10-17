@@ -48,11 +48,8 @@ export const volumeOf=(v:unknown):number=>{
 export const normalizePhrase=(s:string)=>s.replace(/\s+/g,'').toLowerCase();
 
 export type KeywordStat={phrase:string;pcVolume:number;mobileVolume:number;compIdx:string};
-/**
- * hintKeywords는 한 번에 최대 5개. 반환 목록에서 입력과 같은 키워드(공백·대소문자 무시)만 돌려준다.
- * 관련 키워드 목록은 저장하지 않는다.
- */
-export async function keywordStats(config:SearchAdConfig,phrases:string[],fetchImpl:FetchLike=fetch):Promise<Map<string,KeywordStat>>{
+/** 검색광고가 반환한 실측 연관어를 보존한다. 입력은 최대 5개, 출력은 최대 100개다. */
+export async function relatedKeywordStats(config:SearchAdConfig,phrases:string[],fetchImpl:FetchLike=fetch):Promise<Map<string,KeywordStat>>{
  if(!phrases.length||phrases.length>MAX_HINTS)throw new ProviderError('SEARCHAD_REQUEST','검색광고 지표는 한 번에 1~5개 키워드만 조회합니다.',false);
  const uri='/keywordstool';
  const url=`${config.baseUrl}${uri}?hintKeywords=${encodeURIComponent(phrases.join(','))}&showDetail=1`;
@@ -73,9 +70,15 @@ export async function keywordStats(config:SearchAdConfig,phrases:string[],fetchI
   const rel=(row as {relKeyword?:unknown}).relKeyword;
   if(typeof rel!=='string'||!rel)continue;
   const key=normalizePhrase(rel);
-  if(!phrases.some(p=>normalizePhrase(p)===key)||out.has(key))continue;
+  if(out.has(key)||rel.length>60||out.size>=100)continue;
   const comp=(row as {compIdx?:unknown}).compIdx;
   out.set(key,{phrase:rel.slice(0,60),pcVolume:volumeOf((row as {monthlyPcQcCnt?:unknown}).monthlyPcQcCnt),mobileVolume:volumeOf((row as {monthlyMobileQcCnt?:unknown}).monthlyMobileQcCnt),compIdx:typeof comp==='string'?comp.slice(0,10):''});
  }
  return out;
+}
+
+/** 기존 수집기는 입력한 키워드와 일치하는 지표만 받는다. */
+export async function keywordStats(config:SearchAdConfig,phrases:string[],fetchImpl:FetchLike=fetch):Promise<Map<string,KeywordStat>>{
+ const hints=new Set(phrases.map(normalizePhrase));
+ return new Map([...await relatedKeywordStats(config,phrases,fetchImpl)].filter(([key])=>hints.has(key)));
 }

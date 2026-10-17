@@ -5,6 +5,7 @@ import {effectiveKeyword} from './keywords';
 import {matchCitation} from './match';
 import {CitationError,type CitationProvider,type SearchEvidence} from './provider';
 import type {Evidence,RunRow} from './runs';
+import {rebuildLocalRecommendations} from '../keywords/discovery-feed';
 
 export const CITATION_LEASE_MS=5*60_000;
 const backoff=(attempt:number)=>60_000*2**Math.max(0,attempt-1);
@@ -114,6 +115,9 @@ export async function runCitationOnce(db:Database,workerId:string,provider:Citat
    save(db,run,workerId,blog.naver_id,post,keyword,outcome,searches,Math.min(99,Math.round(index/Math.max(1,posts.length)*100)),now());
   }
   finish(db,run.id,workerId,now());
+  if(db.prepare('SELECT state FROM citation_runs WHERE id=?').get(run.id)?.state==='succeeded'){
+   try{rebuildLocalRecommendations(db,run.owner_id,run.blog_id,now());}catch{/* 인용 확인 결과는 유지하고 추천 화면에서 재시도 */}
+  }
  }catch(e){
   if(e instanceof AppError&&e.code==='LEASE_LOST')return run.id;
   fail(db,run.id,workerId,e,now());

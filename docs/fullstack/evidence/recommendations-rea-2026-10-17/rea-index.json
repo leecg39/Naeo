@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-17",
+  "evidenceId": "ev_7d09b5265e84042c3b865b9dd7f8e87519b65c99a4f271dcec4dc28dea400a6e",
+  "operation": "analyze_javascript_application",
+  "authority": "shipped-artifact",
+  "confidence": "derived",
+  "bundlePath": "/Users/user01/Desktop/NAEO/reverse-engineering/keyword-rea-2026-10-17/rea-bundle.json",
+  "bundleSha256": "694e16f64022f5f988aebcf9c02142710d607e72ae6feb23c1c6e23d45af8f83",
+  "artifacts": [
+    {
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/26sgko4vy0pyh.js",
+      "path": "input/26sgko4vy0pyh.js",
+      "sha256": "e5146ca0fbfe0117dfcba011bfe46ac5adfb67901c88eaed3ca02df367d1d01d",
+      "bytes": 32242
+    },
+    {
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/3jk-64vz-7c5w.js",
+      "path": "input/3jk-64vz-7c5w.js",
+      "sha256": "0090fc0a1774d3bafc29b44e4573883b3c7133dcc9b7d2789f4275e90f58d944",
+      "bytes": 56852
+    },
+    {
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/1whv-woz1lg8z.js",
+      "path": "input/1whv-woz1lg8z.js",
+      "sha256": "cb86c6a9ef96e21b8a35a9bfba3732d536bd0f5aa33ebeb1738126cb85f3ae38",
+      "bytes": 36198
+    }
+  ],
+  "statistics": {
+    "findings": 4,
+    "invalid_utf8_files": 0,
+    "modules": 0,
+    "nested_asar_containers": 0,
+    "parse_failures": 0,
+    "parsed_javascript_files": 3,
+    "relevant_files": 3,
+    "text_bytes_read": 125292,
+    "truncated_scopes": 0,
+    "visited_ast_nodes": 36962
+  },
+  "summary": {
+    "browser_windows": 0,
+    "context_bridge_apis": 0,
+    "explicit_web_preferences": 0,
+    "exposed_api_members": 0,
+    "ipc": {
+      "ambiguous_renderer_transmissions": 0,
+      "dynamic_channel_operations": 0,
+      "literal_channels": 0,
+      "main_handlers": 0,
+      "operations": 0,
+      "paired_renderer_transmissions": 0,
+      "renderer_listeners": 0,
+      "renderer_transmissions": 0,
+      "unpaired_literal_renderer_transmissions": 0
+    },
+    "native_addon_bindings": 0,
+    "preload_entrypoints": 0,
+    "resolved_native_addon_bindings": 0,
+    "resolved_utility_entrypoints": 0,
+    "sender_validation_observations": 0,
+    "utility_processes": 0
+  },
+  "limitations": [
+    "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+    "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+    "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+    "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+    "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+  ],
+  "sourceObservations": [
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "/api/recommendations?period=",
+      "utf8ByteOffset": 3564,
+      "excerpt": "),S=e.i(667320);async function C(e,t=!1){let l=await fetch(`/api/recommendations?period=${e}${t?\"&golden=all\":\"\"}`);if(!l.ok)throw Error((await l.json().catch(()=>({}))).message||`HTTP ${l.status}`);return l.json()}function I(){return{user_state:\"ready\",is_building:!1,has_rivals:!0,cap_used:78,cap_total:100,items:(0,S."
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "/mark",
+      "utf8ByteOffset": 44991,
+      "excerpt": ")=>{if(y)return;let l=await fetch(`/api/recommendations/${e}/mark`,{method:\"POST\",headers:{\"Content-Type\":\"application/json\"},body:JSON.stringify({marked:t})});if(!l.ok)throw Error(`mark failed: ${l.status}`);await j.invalidateQueries({queryKey:[\"recommendations\"]})},V=async e=>{if(y)return;let t=await fetch(`/api/reco"
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "/dismiss",
+      "utf8ByteOffset": 45267,
+      "excerpt": "e=>{if(y)return;let t=await fetch(`/api/recommendations/${e}/dismiss`,{method:\"POST\"});if(!t.ok)throw Error(`dismiss failed: ${t.status}`);await j.invalidateQueries({queryKey:[\"recommendations\"]})},{isLoading:E,error:O,allItems:B,statsItems:H,items:K,revisitItems:P,goldenItems:M,capUsed:L?.cap_used??0,capTotal:L?.cap_t"
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "revisit_items",
+      "utf8ByteOffset": 3850,
+      "excerpt": "_used:78,cap_total:100,items:(0,S.getDemoRecommendations)(),revisit_items:[],golden_items:(0,S.getDemoGoldenRecommendations)()}}async function z(){let e=await fetch(\"/api/backfill/progress\");if(!e.ok)throw Error(`HTTP ${e.status}`);return e.json()}var W=e.i(520956);function _({label:e,value:l,format:r,tone:i=\"default\","
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "e.doc_count<1e4",
+      "utf8ByteOffset": 3332,
+      "excerpt": "\"opportunity\"===e.signal&&null!=e.doc_count&&e.doc_count>0&&e.doc_count<1e4&&e.total>=1e3}}),o=\"desc\"===n?1:-1;return[...i].sort((e,t)=>{let l=w(e,r),n=w(t,r);return null==l&&null==n?0:null==l?1:null==n?-1:(n-l)*o})}var v=e.i(220911),S=e.i(667320);async function C(e,t=!1){let l=await fetch(`/api/recommendations?period="
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "related_keywords",
+      "utf8ByteOffset": 16188,
+      "excerpt": "rim().toLowerCase().replace(/\\s+/g,\"\"))(e.keyword),0===(i=e.related_keywords.filter(e=>l(e.keyword)!==r)).length?null:(0,t.jsxs)(n.default,{sx:{mb:2.5},children:[(0,t.jsx)(Z,{icon:\"R\",title:\"연관 키워드\"}),(0,t.jsx)(n.default,{sx:{display:\"flex\",flexWrap:\"wrap\",gap:.8},children:i.map(e=>(0,t.jsxs)(n.default,{sx:J,children:["
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "top_blogs",
+      "utf8ByteOffset": 16965,
+      "excerpt": ",e.mobile.toLocaleString(\"ko-KR\")]})]},e.keyword))})]})),(e.top_blogs.length>0||h.length>0)&&(0,t.jsxs)(n.default,{sx:{display:\"grid\",gridTemplateColumns:{xs:\"1fr\",md:e.top_blogs.length>0&&h.length>0?\"1fr 1fr\":\"1fr\"},gap:2.5},children:[e.top_blogs.length>0&&(0,t.jsxs)(n.default,{children:[(0,t.jsx)(Z,{icon:\"B\",title:\"검"
+    },
+    {
+      "file": "3jk-64vz-7c5w.js",
+      "needle": "next_build_at",
+      "utf8ByteOffset": 45683,
+      "excerpt": "awaitingFirstPost:L?.awaiting_first_post??!1,nextBuildAt:L?.next_build_at??null,mark:N,dismiss:V}),ex=(0,l.useMemo)(()=>[...Y,...Z,...X],[Y,Z,X]),{inProgress:eu}=function(){let e=(0,v.useIsDemoMode)(),{data:t,isLoading:l}=(0,f.useQuery)({queryKey:[\"backfill-progress\"],queryFn:z,staleTime:3e4,refetchOnWindowFocus:!1,ret"
+    },
+    {
+      "file": "1whv-woz1lg8z.js",
+      "needle": "new:{label:",
+      "utf8ByteOffset": 24389,
+      "excerpt": "773,e=>{\"use strict\";var t=e.i(843476),r=e.i(819646);let i={new:{label:\"신규\",bg:\"#03C75A\"},revisit:{label:\"재추천\",bg:\"#a76500\"},rewritten:{label:\"재공략\",bg:\"#9C27B0\"},opportunity:{label:\"선점기회\",bg:\"#2868b7\"}};e.s([\"SignalTag\",0,function({signal:e}){let a=i[e];return(0,t.jsx)(r.default,{component:\"span\",sx:{display:\"inline-bl"
+    },
+    {
+      "file": "1whv-woz1lg8z.js",
+      "needle": "rewritten:{label:",
+      "utf8ByteOffset": 24464,
+      "excerpt": "label:\"신규\",bg:\"#03C75A\"},revisit:{label:\"재추천\",bg:\"#a76500\"},rewritten:{label:\"재공략\",bg:\"#9C27B0\"},opportunity:{label:\"선점기회\",bg:\"#2868b7\"}};e.s([\"SignalTag\",0,function({signal:e}){let a=i[e];return(0,t.jsx)(r.default,{component:\"span\",sx:{display:\"inline-block\",flexShrink:0,px:.7,py:.2,borderRadius:.7,bgcolor:a.bg,color:"
+    },
+    {
+      "file": "1whv-woz1lg8z.js",
+      "needle": "calcSaturation",
+      "utf8ByteOffset": 25485,
+      "excerpt": "e strict\";function t(e){return\"number\"==typeof e&&e<0}e.s([\"calcSaturation\",0,function(e,t){return null==e?null:e<0?-1:t<=0?1/0:e/t},\"compareSaturation\",0,function(e,r,i){let a=null==e||t(e),n=null==r||t(r);return a&&n?0:a?1:n?-1:\"asc\"===i?e-r:r-e},\"formatSaturationPct\",0,function(e,r=1){let i=function(e,r=1){return nu"
+    }
+  ],
+  "runtime": {
+    "browser": "Ego Lite",
+    "url": "https://www.naeo.kr/dashboard/recommendations",
+    "readOnly": true,
+    "recommendationsGet": {
+      "path": "/api/recommendations?period=week",
+      "status": 200,
+      "fields": [
+        "user_state",
+        "is_building",
+        "awaiting_first_post",
+        "has_rivals",
+        "next_build_at",
+        "cap_used",
+        "cap_total",
+        "items",
+        "revisit_items",
+        "golden_items"
+      ],
+      "itemFields": [
+        "id",
+        "keyword",
+        "signal",
+        "score",
+        "recommended_at",
+        "first_recommended_at",
+        "pc",
+        "mobile",
+        "total",
+        "competition",
+        "related_keywords",
+        "doc_count",
+        "top_blogs",
+        "news",
+        "user_match_exact",
+        "user_match_overlap_tokens",
+        "user_marked_at"
+      ]
+    },
+    "observationLimit": "Original mark/dismiss POST was not executed. Server ranking algorithm is unknown. No account identifiers or full member response stored."
+  }
+}

@@ -6,6 +6,7 @@ import {addKeywordMetric,createKeyword,deleteKeyword,deleteKeywordMetric,getAdmi
 import {collectKeywordMetrics} from './collect';
 import {createMemberKeyword,updateMemberKeyword,deleteMemberKeyword,keywordSuggestions,measureMemberKeyword} from './member-keywords';
 import {listRecommendations,setKeywordState} from './recommendations';
+import {getRecommendationFeed,refreshRecommendationFeed,updateRecommendation,loadRecommendationCompetition} from './discovery-feed';
 
 const ID='([a-f0-9-]{36})';
 const anyJson=z.unknown();
@@ -14,6 +15,20 @@ const anyJson=z.unknown();
 export async function keywordsApi(db:Database,request:Request,user:User):Promise<Response|null>{
  const {pathname:path,searchParams}=new URL(request.url),method=request.method;
  const input=()=>body(request,anyJson);
+ if(path==='/api/recommendations/feed'&&method==='GET')return json({data:getRecommendationFeed(db,user.id,Object.fromEntries(searchParams))});
+ if(path==='/api/recommendations/refresh'&&method==='POST'){
+  rateLimit(db,`recommendation-refresh:${user.id}`,12,3600000);
+  return json({data:await refreshRecommendationFeed(db,user.id,await input())});
+ }
+ const feedItem=path.match(new RegExp(`^/api/recommendations/feed/${ID}$`));
+ if(feedItem&&method==='PATCH'){
+  rateLimit(db,`recommendation-state:${user.id}`,300,15*60000);
+  return json({data:updateRecommendation(db,user.id,feedItem[1],await input())});
+ }
+ const competition=path.match(new RegExp(`^/api/recommendations/feed/${ID}/competition$`));
+ if(competition&&method==='POST'){
+  return json({data:await loadRecommendationCompetition(db,user.id,competition[1],await input())});
+ }
  if(path==='/api/recommendations'&&method==='GET')return json(listRecommendations(db,user.id,Object.fromEntries(searchParams)));
  if(path==='/api/recommendations'&&method==='POST'){rateLimit(db,`member-keyword-create:${user.id}`,100,3600000);return json({data:createMemberKeyword(db,user.id,await input())},201);}
  if(path==='/api/recommendations/suggestions'&&method==='GET')return json({data:keywordSuggestions(db,user.id)});

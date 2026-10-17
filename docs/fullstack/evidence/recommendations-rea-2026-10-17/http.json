@@ -1,0 +1,22 @@
+{
+  "verifiedAt": "2026-10-17T04:21:11.992Z",
+  "checks": [
+    "SSR source-backed discovery bootstrap",
+    "Authenticated feed and separate golden section",
+    "Provider enrichment after local bootstrap",
+    "Actual HTTP related SearchAd and blog/news adapters on loopback",
+    "Written and personal-library save persist",
+    "Written filter and undo"
+  ],
+  "summary": {
+    "total": 25,
+    "golden": 6,
+    "written": 0,
+    "opportunity": 25,
+    "revisit": 0,
+    "rewritten": 0,
+    "new": 0
+  },
+  "providerRequests": 7,
+  "externalProviderVerified": false
+}

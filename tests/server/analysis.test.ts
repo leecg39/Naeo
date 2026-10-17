@@ -8,6 +8,7 @@ import {scanHandler} from '../../src/server/analysis/scan-handler';
 import {enqueueScan,getScan} from '../../src/server/jobs/queue';
 import {runWorkerOnce} from '../../src/server/jobs/worker';
 import {listScanResults,latestScanResult} from '../../src/server/analysis/results';
+import {getRecommendationFeed} from '../../src/server/keywords/discovery-feed';
 
 const DAY=86_400_000;
 const NOW=Date.parse('2026-10-13T00:00:00Z');
@@ -56,6 +57,9 @@ test('the scan handler collects RSS, stores a result with history, and reports p
  const latest=latestScanResult(db,owner,blog)!;
  assert.equal(latest.id,result.resultId);assert.equal(latest.score,result.score);
  assert.equal(latest.criteria.length,5);assert.equal(latest.methodVersion,METHOD_VERSION);
+ const feed=getRecommendationFeed(db,owner,{blogId:blog},NOW);
+ assert.equal(feed.status,'ready');assert.ok(feed.summary.total>0,'completed scans generate owned, evidence-backed recommendations');
+ assert.ok(feed.items.every(item=>item.sourcePost&&item.total===null),'without metric providers no search volume is invented');
  assert.throws(()=>latestScanResult(db,other,blog),{status:404},'other members cannot read the report');
  enqueueScan(db,owner,{blogId:blog});
  await runWorkerOnce(db,'w',handler);

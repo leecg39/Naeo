@@ -49,11 +49,11 @@ const postDate=(v:unknown)=>{
 
 export type BlogItem={title:string;link:string;bloggerName:string;bloggerLink:string;postDate:string};
 /** blog.json 한 페이지를 조회한다. total은 전체 문서 수(상한 9천만)다. */
-export async function blogSearch(config:NaverSearchConfig,query:string,{display=20,start=1}={},fetchImpl:FetchLike=fetch):Promise<{total:number;items:BlogItem[]}>{
+async function searchPage(config:NaverSearchConfig,query:string,kind:'blog'|'news',{display=20,start=1}={},fetchImpl:FetchLike=fetch):Promise<{total:number;rows:Record<string,unknown>[]}>{
  const q=query.trim();
  if(!q||q.length>256)throw new ProviderError('NAVER_SEARCH_REQUEST','검색어는 1~256자입니다.',false);
  const size=Math.max(1,Math.min(MAX_DISPLAY,Math.floor(display))),from=Math.max(1,Math.min(1000,Math.floor(start)));
- const url=`${config.baseUrl}/v1/search/blog.json?query=${encodeURIComponent(q)}&display=${size}&start=${from}&sort=sim`;
+ const url=`${config.baseUrl}/v1/search/${kind}.json?query=${encodeURIComponent(q)}&display=${size}&start=${from}&sort=sim`;
  let res:Response;
  try{
   res=await fetchImpl(url,{method:'GET',redirect:'error',signal:AbortSignal.timeout(TIMEOUT_MS),headers:{accept:'application/json','x-naver-client-id':config.clientId,'x-naver-client-secret':config.clientSecret}});
@@ -64,11 +64,19 @@ export async function blogSearch(config:NaverSearchConfig,query:string,{display=
  if(!res.ok)throw statusError(res.status,code);
  const total=data&&typeof data==='object'?Number((data as {total?:unknown}).total):0;
  const items=data&&typeof data==='object'?(data as {items?:unknown}).items:null;
- const list=(Array.isArray(items)?items:[]).slice(0,MAX_DISPLAY).flatMap(it=>{
-  if(!it||typeof it!=='object')return[];
-  const r=it as Record<string,unknown>;
-  const link=typeof r.link==='string'&&r.link.length<=1000&&(r.link.startsWith('https://')||r.link.startsWith('http://'))?r.link:'';
-  return link?[{title:cleanText(r.title,200),link,bloggerName:cleanText(r.bloggername,100),bloggerLink:typeof r.bloggerlink==='string'&&r.bloggerlink.length<=1000?r.bloggerlink:'',postDate:postDate(r.postdate)}]:[];
- });
- return{total:Number.isFinite(total)?Math.max(0,Math.min(90_000_000,Math.floor(total))):0,items:list};
+ if(typeof (data as {total?:unknown})?.total!=='number'||!Number.isInteger(total)||total<0)throw new ProviderError('NAVER_SEARCH_RESPONSE','네이버 검색에서 문서수를 확인하지 못했습니다.',false);
+ return{total:Math.min(90_000_000,total),rows:(Array.isArray(items)?items:[]).slice(0,MAX_DISPLAY).filter((r):r is Record<string,unknown>=>!!r&&typeof r==='object')};
+}
+const safeLink=(v:unknown)=>{
+ if(typeof v!=='string'||v.length>1000)return'';
+ try{const u=new URL(v);return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password?u.href:'';}catch{return'';}
+};
+export async function blogSearch(config:NaverSearchConfig,query:string,options:{display?:number;start?:number}={},fetchImpl:FetchLike=fetch):Promise<{total:number;items:BlogItem[]}>{
+ const page=await searchPage(config,query,'blog',options,fetchImpl);
+ return{total:page.total,items:page.rows.flatMap(r=>{const link=safeLink(r.link);return link?[{title:cleanText(r.title,200),link,bloggerName:cleanText(r.bloggername,100),bloggerLink:safeLink(r.bloggerlink),postDate:postDate(r.postdate)}]:[];})};
+}
+export type NewsItem={title:string;link:string;originalLink:string;description:string;pubDate:string};
+export async function newsSearch(config:NaverSearchConfig,query:string,options:{display?:number;start?:number}={display:5},fetchImpl:FetchLike=fetch):Promise<{total:number;items:NewsItem[]}>{
+ const page=await searchPage(config,query,'news',options,fetchImpl);
+ return{total:page.total,items:page.rows.flatMap(r=>{const link=safeLink(r.link);return link?[{title:cleanText(r.title,200),link,originalLink:safeLink(r.originallink),description:cleanText(r.description,300),pubDate:typeof r.pubDate==='string'&&Number.isFinite(Date.parse(r.pubDate))?new Date(r.pubDate).toISOString():''}]:[];})};
 }

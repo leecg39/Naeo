@@ -22,6 +22,8 @@ export const datasets=[
  {name:'saved_keywords',sql:'SELECT s.id,s.keyword_id,k.phrase,k.category,s.status,s.favorite,s.note,s.version,s.created_at,s.updated_at FROM saved_keywords s JOIN keywords k ON k.id=s.keyword_id WHERE s.owner_id=? ORDER BY s.rowid'},
  owned('competitors','competitor_blogs','id,naver_id,note,snapshot_json,last_collected_at,last_attempt_at,last_error,version,created_at,updated_at'),
  owned('member_keywords','member_keywords','id,phrase,category,note,favorite,written,pc_volume,mobile_volume,document_count,measured_at,version,created_at,updated_at'),
+ owned('member_recommendations','member_recommendations','id,blog_id,phrase,category,signal,score,reason,source,source_post_id,pc_volume,mobile_volume,document_count,measured_at,history_json,related_json,competition_json,written,dismissed,version,recommended_at,created_at,updated_at'),
+ owned('recommendation_builds','recommendation_builds','id,blog_id,state,source,new_count,started_at,completed_at,error_message,notice'),
  owned('keyword_exposures','keyword_exposures','id,keyword,total,results_json,checked_at,created_at'),
  owned('actions','action_items','id,result_id,criterion,title,status,version,created_at,updated_at'),
  owned('drafts','drafts','id,title,keyword,category,body,status,published_at,version,created_at,updated_at'),
