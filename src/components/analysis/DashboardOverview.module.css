@@ -135,6 +135,10 @@
 .badgeScan {color:var(--overview-muted);background:var(--overview-raised)}
 .empty {display:flex;min-height:136px;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px;padding:22px 16px;color:var(--overview-muted);font-size:12px;line-height:1.8}
 .monitoring>.empty {min-height:188px;background:var(--overview-card);border:1px solid var(--overview-line);border-radius:6px}
+.connectButton {display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:6px;border:1px solid var(--overview-green);background:color-mix(in srgb,var(--overview-green) 14%,transparent);color:var(--overview-green);font-size:12px;font-weight:750;transition:background .15s}
+.connectButton:hover:not(:disabled) {background:color-mix(in srgb,var(--overview-green) 24%,transparent)}
+.connectButton:disabled {opacity:.6;cursor:default}
+.connectError {display:block;color:var(--overview-red);font-size:11px;margin-top:4px}
 .diagnosis {min-width:0;border:1px solid var(--overview-line);border-radius:6px;background:var(--overview-card)}
 .diagnosis>summary {cursor:pointer;padding:13px 18px;color:var(--overview-muted);font-size:12px;font-weight:650}
 .diagnosis>div {padding:0 12px 0}

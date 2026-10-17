@@ -46,8 +46,8 @@ function planRow(n:El,d:DashboardData,subscription:Subscription|null):El{
 
 function scanButton(n:El,d:DashboardData):El{
  const icon=n.children.filter(isEl);
- const label=d.activeJob?`진단 중… ${d.activeJob.progress}%`:!d.blog&&d.subject?'블로그 연결':'블로그 스캔';
- return withChildren(withAttrs(n,{id:'dashboard-scan','data-scan-blog':d.blog?.id??'','data-scan-job':d.activeJob?.id??'',...(d.activeJob?{'aria-busy':'true'}:{})}),[...icon,label]);
+ const label=d.activeJob?`진단 중… ${d.activeJob.progress}%`:!d.blog&&d.subject?'내 블로그로 연결':'블로그 스캔';
+ return withChildren(withAttrs(n,{id:'dashboard-scan','data-scan-blog':d.blog?.id??'','data-connect-naver-id':!d.blog&&d.subject?d.subject.naverId:'','data-connect-title':!d.blog&&d.subject?(d.latestSource?.title||d.subject.title||d.subject.naverId):'','data-scan-job':d.activeJob?.id??'',...(d.activeJob?{'aria-busy':'true'}:{})}),[...icon,label]);
 }
 
 function todos(box:El,d:DashboardData):El{

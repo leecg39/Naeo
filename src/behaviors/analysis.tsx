@@ -585,7 +585,7 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
     const exposedCount = scoped.filter(r => r.exposed).length;
     const briefingCount = scoped.filter(r => r.briefing).length;
     const citedCount = scoped.filter(r => r.recommended).length;
-    const counts = [`전체 ${scoped.length}`, `통합검색 노출 ${exposedCount}`, `AI 브리핑 ${briefingCount}`, `AI 추천됨 ${citedCount}`];
+    const counts = [`전체 ${scoped.length}`, `통합검색 노출 ${exposedCount}`, `AI 브리핑 ${briefingCount}`, `AI 인용됨 ${citedCount}`];
     filters.forEach((btn, idx) => { if (counts[idx]) mutate.content(btn, counts[idx]); });
     const visible = scoped.filter(row => filter === 0 || filter === 1 && row.exposed || filter === 2 && row.briefing || filter === 3 && row.recommended);
     const accepted = new Set(visible);
@@ -715,8 +715,8 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
         "AI 성과 설명": <div style={{ display: "grid", gap: 12, lineHeight: 1.7, fontSize: 14 }}>
           <div><span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 12, fontWeight: 700, background: "rgba(3,199,90,0.14)", color: "#03c75a", marginBottom: 4 }}>본문 · 이미지 인용</span>
             <p style={{ margin: 0 }}>네이버 AI 브리핑 답변의 본문 출처나 이미지(썸네일) 출처에 내 블로그 글이 인용된 상태이며, 출처 순위를 표시합니다.</p></div>
-          <div><span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 12, fontWeight: 700, background: "rgba(148,163,184,0.16)", color: "#94a3b8", marginBottom: 4 }}>미추천 / -</span>
-            <p style={{ margin: 0 }}>미추천(미인용)은 해당 키워드에 AI 브리핑이 존재하지만 내 블로그가 출처에 포함되지 않은 상태이며, -는 AI 브리핑 자체가 없는 키워드입니다.</p></div>
+          <div><span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 12, fontWeight: 700, background: "rgba(148,163,184,0.16)", color: "#94a3b8", marginBottom: 4 }}>미인용 / -</span>
+            <p style={{ margin: 0 }}>미인용은 해당 키워드에 AI 브리핑이 존재하지만 내 블로그가 출처에 포함되지 않은 상태이며, -는 AI 브리핑 자체가 없는 키워드입니다.</p></div>
         </div>,
       };
       tools.openDialog(helpLabel, descriptions[helpLabel] || descriptions["AI 성과 설명"]); return true;
@@ -758,8 +758,41 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
   };
   const scan = async () => {
     if (!scanButton || polling) return;
-    const blogId = scanButton.dataset.scanBlog;
-    if (!blogId) { tools.toast("먼저 설정에서 네이버 블로그를 연결해주세요."); tools.navigate("/dashboard/settings"); return; }
+    let blogId = scanButton.dataset.scanBlog;
+    if (!blogId) {
+      const connectNaverId = scanButton.dataset.connectNaverId?.trim();
+      if (!connectNaverId) { tools.toast("먼저 설정에서 네이버 블로그를 연결해주세요."); tools.navigate("/dashboard/settings"); return; }
+      const title = (scanButton.dataset.connectTitle?.trim() || connectNaverId).slice(0, 120) || connectNaverId;
+      busy(true); setScanLabel("연결 중…");
+      try {
+        try {
+          const created = await api<{ id: string; naverId: string }>("/api/blogs", { method: "POST", body: { naverId: connectNaverId, title, isPrimary: true } });
+          blogId = created.id;
+        } catch (error) {
+          if (error instanceof ApiError && error.code === "BLOG_EXISTS") {
+            const existing = await api<{ id: string; naverId: string; version: number; isPrimary: boolean }[]>(`/api/blogs?q=${encodeURIComponent(connectNaverId)}`);
+            const match = existing.find(b => b.naverId.toLowerCase() === connectNaverId.toLowerCase());
+            if (match) {
+              blogId = match.id;
+              if (!match.isPrimary) await api(`/api/blogs/${match.id}`, { method: "PATCH", body: { isPrimary: true, version: match.version } });
+            }
+          } else {
+            throw error;
+          }
+        }
+        if (blogId) {
+          scanButton.dataset.scanBlog = blogId;
+          try { await api("/api/scans", { method: "POST", body: { blogId, idempotencyKey: crypto.randomUUID() } }); } catch { /* ignore scan error */ }
+        }
+        tools.toast(`${connectNaverId} 블로그를 내 블로그로 연결했습니다.`);
+        window.location.assign(`/dashboard?blog=${encodeURIComponent(connectNaverId)}`);
+        return;
+      } catch (error) {
+        busy(false); setScanLabel("내 블로그로 연결");
+        tools.toast(error instanceof ApiError || error instanceof Error ? error.message : "블로그를 연결하지 못했습니다.");
+        return;
+      }
+    }
     busy(true); setScanLabel("대기 중…");
     try {
       const job = await api<ScanStatus>("/api/scans", { method: "POST", body: { blogId, idempotencyKey: crypto.randomUUID() } });

@@ -89,7 +89,8 @@ export default function DashboardBlogChange({subjects,selected}:{subjects:Dashbo
   if (owned.some(subject => subject.naverId.toLowerCase() === naverId)) {select(naverId);return;}
   saving.current = true;setBusy(true);
   try {
-   const blog = await api<{naverId:string}>('/api/blogs',{method:'POST',body:{naverId,title:naverId,isPrimary:false}});
+   const blog = await api<{id:string;naverId:string}>('/api/blogs',{method:'POST',body:{naverId,title:naverId,isPrimary:owned.length===0}});
+   try { await api('/api/scans',{method:'POST',body:{blogId:blog.id,idempotencyKey:crypto.randomUUID()}}); } catch { /* 스캔 한도 초과·진행 중이어도 연결은 유지한다. */ }
    select(blog.naverId);
   } catch (error) {
    if (error instanceof ApiError && error.code === 'BLOG_EXISTS') {select(naverId);return;}

@@ -2,7 +2,12 @@
 .header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:4px 0}
 .header h2{font-size:19px!important;font-weight:750;line-height:1.5;overflow-wrap:anywhere}
 .header p,.notice,.empty p{font-size:12px;line-height:1.7;color:var(--muted,#a3a3a3)}
+.headerActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .header a,.empty a{color:var(--primary,#03c75a)!important;font-size:12px;font-weight:650;white-space:nowrap}
+.connectBtn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:6px;border:1px solid var(--primary,#03c75a);background:color-mix(in srgb,var(--primary,#03c75a) 14%,transparent);color:var(--primary,#03c75a);font-size:12px;font-weight:750;white-space:nowrap}
+.connectBtn:hover:not(:disabled){background:color-mix(in srgb,var(--primary,#03c75a) 24%,transparent)}
+.connectBtn:disabled{opacity:.6;cursor:default}
+.connectError{font-size:11px;color:var(--overview-red,#ef4444);margin:0}
 .notice{padding:10px 14px;border:1px solid var(--border,#333);border-radius:7px;background:var(--surface,#171717)}
 .empty{padding:20px;border:1px solid var(--border,#333);border-radius:10px;display:grid;gap:12px}
-:global(html.light) .header a,:global(html.light) .empty a{color:#04853d!important}
+:global(html.light) .header a,:global(html.light) .empty a,:global(html.light) .connectBtn{color:#04853d!important;border-color:#04853d}

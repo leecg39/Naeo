@@ -83,6 +83,8 @@ test('selecting a diagnosed blog isolates records, scan controls, recommendation
  assert.equal(page.dashboard?.latestSource?.url,'https://blog.naver.com/free_blog');
  assert.equal(page.dashboard?.citations.length,0);assert.equal(page.dashboard?.citedPosts.length,0);
  assert.ok(!JSON.stringify(page.body).includes(`"data-scan-blog":"${primary.id}"`));
+ assert.ok(JSON.stringify(page.body).includes('"data-connect-naver-id":"free_blog"'));
+ assert.ok(JSON.stringify(page.body).includes('"data-connect-title":"진단 블로그"'));
  assert.equal(page.dashboard?.subjects.length,3);
  assert.equal(dashboardData(db,a,NOW,'unknown_blog').subject?.naverId,'primary_blog');
 });

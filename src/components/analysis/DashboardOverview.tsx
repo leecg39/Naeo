@@ -2,6 +2,7 @@
 
 import {useEffect, useId, useRef, useState} from 'react';
 import {ArrowRight, Check, ChevronLeft, ChevronRight, ExternalLink, Sparkles, X} from 'lucide-react';
+import {api, ApiError} from '@/lib/api-client';
 import type {DashboardBriefing, DashboardChange, DashboardOverview as OverviewData, DashboardRankCard} from '@/lib/dashboard-overview';
 import {inPeriod, percentage, type ChartPeriod, type CitationPoint, type DashboardVisualization} from '@/lib/dashboard-visualization';
 import DashboardCharts from './DashboardCharts';
@@ -25,8 +26,8 @@ function relativeTime(at:number, now:number) {
  return `${Math.floor(minutes / 1440)}일 전`;
 }
 
-function Empty({children, href, action}:{children:React.ReactNode; href?:string; action?:string}) {
- return <div className={styles.empty}><p>{children}</p>{href && <a className={styles.link} href={href}>{action ?? '자세히 보기'} <ArrowRight size={13}/></a>}</div>;
+function Empty({children, href, action, onAction, busy}:{children:React.ReactNode; href?:string; action?:string; onAction?:()=>void; busy?:boolean}) {
+ return <div className={styles.empty}><p>{children}</p>{onAction ? <button type="button" className={styles.connectButton} onClick={onAction} disabled={busy}>{action ?? '내 블로그로 연결하기'} <ArrowRight size={13}/></button> : href && <a className={styles.link} href={href}>{action ?? '자세히 보기'} <ArrowRight size={13}/></a>}</div>;
 }
 
 function PeriodButtons({value, onChange, feed=false}:{value:ChartPeriod; onChange:(period:ChartPeriod)=>void; feed?:boolean}) {
@@ -64,7 +65,7 @@ function BriefingDialog({items, initial, close}:{items:DashboardBriefing[]; init
  </dialog>;
 }
 
-function Monitoring({data}:{data:OverviewData}) {
+function Monitoring({data, onConnect, connecting, connectError}:{data:OverviewData; onConnect?:()=>void; connecting?:boolean; connectError?:string}) {
  const [opened,setOpened] = useState<number|null>(null);
  const stateText = {ready:'저장된 AI 브리핑이 없습니다.',running:'AI 인용을 확인하고 있습니다.',failed:'최근 AI 인용 확인에 실패했습니다.',not_configured:'AI 인용 확인이 아직 설정되지 않았습니다.',empty:'아직 AI 인용 확인 기록이 없습니다.'}[data.citationState];
  return <section className={styles.monitoring} aria-label="AI 브리핑 모니터링">
@@ -72,7 +73,7 @@ function Monitoring({data}:{data:OverviewData}) {
   {data.monitoring.length ? <div className={styles.gallery}>{data.monitoring.map((item,index) => <button type="button" key={item.id} className={`${styles.briefingCard} ${item.cited ? styles.briefingCited : ''}`} aria-label={`${item.keyword || item.title} AI 브리핑 상세보기`} onClick={() => setOpened(index)}>
    <div className={styles.briefingPreview}><div className={styles.previewHeading}><Sparkles size={10}/> AI 브리핑 <span>저장된 브리핑</span></div>{item.media.some(media => safeUrl(media.thumbnail)) && <div className={styles.previewImages}>{item.media.filter(media => safeUrl(media.thumbnail)).slice(0,3).map((media,i) => <img key={`${media.thumbnail}-${i}`} src={safeUrl(media.thumbnail)} alt="" loading="lazy" referrerPolicy="no-referrer"/>)}</div>}<p>{plain(item.markdown) || item.references.map(reference => reference.title).join(' · ') || '상세 보기에서 확인하세요.'}</p></div>
    {item.cited && <span className={styles.galleryBadge}><Check size={10}/> 내 글 인용</span>}<span className={styles.cardCaption}>{item.keyword || item.title}</span>
-  </button>)}</div> : <Empty href={data.connected ? data.citationHref : '/dashboard/settings'} action={data.connected ? 'AI 인용 현황' : '블로그 연결하기'}>{stateText}</Empty>}
+  </button>)}</div> : <Empty href={data.connected ? data.citationHref : '/dashboard/settings'} action={data.connected ? 'AI 인용 현황' : onConnect ? (connecting ? '내 블로그로 연결 중…' : '내 블로그로 연결하기') : '블로그 연결하기'} onAction={!data.connected ? onConnect : undefined} busy={connecting}>{!data.connected && data.subject?.naverId ? `${data.subject.naverId} 블로그를 내 블로그로 연결하면 AI 브리핑 모니터링과 인용 현황을 확인할 수 있습니다.` : stateText}{connectError && <span role="alert" className={styles.connectError}>{connectError}</span>}</Empty>}
   {opened !== null && <BriefingDialog items={data.monitoring} initial={opened} close={() => setOpened(null)}/>}
  </section>;
 }
@@ -138,6 +139,47 @@ export default function DashboardOverview({data, diagnosis}:{data:OverviewData; 
  const [period,setPeriod] = useState<ChartPeriod>(30);
  const [feedPeriod,setFeedPeriod] = useState<ChartPeriod>(30);
  const [scope,setScope] = useState<'all'|'category'>('all');
+ const [connecting,setConnecting] = useState(false);
+ const [connectError,setConnectError] = useState('');
+ const canConnect = !data.connected && Boolean(data.subject?.naverId);
+ const connectBlog = async () => {
+  const naverId = data.subject?.naverId;
+  if (!naverId || connecting) return;
+  setConnecting(true);
+  setConnectError('');
+  const title = (diagnosis.latestSource?.title || data.subject?.title || naverId).trim().slice(0, 120) || naverId;
+  const counts = new Map<string, number>();
+  for (const post of diagnosis.latestSource?.posts ?? []) {
+   const c = post.category?.trim();
+   if (c) counts.set(c, (counts.get(c) ?? 0) + 1);
+  }
+  const category = ([...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? '').slice(0, 50);
+  try {
+   let blogId: string | null = null;
+   try {
+    const created = await api<{id:string; naverId:string}>('/api/blogs', {method:'POST', body:{naverId, title, category, isPrimary:true}});
+    blogId = created.id;
+   } catch (error) {
+    if (error instanceof ApiError && error.code === 'BLOG_EXISTS') {
+     const existing = await api<{id:string; naverId:string; version:number; isPrimary:boolean}[]>(`/api/blogs?q=${encodeURIComponent(naverId)}`);
+     const match = existing.find(blog => blog.naverId.toLowerCase() === naverId.toLowerCase());
+     if (match) {
+      blogId = match.id;
+      if (!match.isPrimary) await api(`/api/blogs/${match.id}`, {method:'PATCH', body:{isPrimary:true, version:match.version}});
+     }
+    } else {
+     throw error;
+    }
+   }
+   if (blogId) {
+    try { await api('/api/scans', {method:'POST', body:{blogId, idempotencyKey:crypto.randomUUID()}}); } catch { /* 스캔 한도 초과·진행 중이어도 연결은 유지한다. */ }
+   }
+   window.location.assign(`/dashboard?blog=${encodeURIComponent(naverId)}`);
+  } catch (error) {
+   setConnectError(error instanceof Error ? error.message : '블로그를 연결하지 못했습니다. 다시 시도해 주세요.');
+   setConnecting(false);
+  }
+ };
  const selectedRanking = data.rankings.find(ranking => ranking.scope === scope) ?? data.rankings[0];
  const citationRate = data.metrics.checked === null || data.metrics.cited === null ? null : percentage(data.metrics.cited,data.metrics.checked);
  const exposureRate = data.metrics.checked === null || data.metrics.exposed === null ? null : percentage(data.metrics.exposed,data.metrics.checked);
@@ -153,8 +195,8 @@ export default function DashboardOverview({data, diagnosis}:{data:OverviewData; 
  ];
  return <div data-naeo-live="dashboard-overview" className={styles.overview}>
   <header className={styles.intro}><p>블로그 운영 대시보드</p><h1>{heading}</h1></header>
-  <DashboardDiagnosis data={diagnosis}/>
-  <Monitoring data={data}/>
+  <DashboardDiagnosis data={diagnosis} onConnect={canConnect ? () => void connectBlog() : undefined} connecting={connecting} connectError={connectError}/>
+  <Monitoring data={data} onConnect={canConnect ? () => void connectBlog() : undefined} connecting={connecting} connectError={connectError}/>
   <section className={styles.kpis} aria-label="핵심 지표">{kpis.map(kpi => <a key={kpi.title} href={kpi.href} className={styles.kpi}><h2>{kpi.title}</h2><strong className={kpi.tone}>{number(kpi.value)}<small>{kpi.value === null ? '' : kpi.unit}</small></strong><p>{kpi.description}</p></a>)}</section>
   <section className={styles.panel} aria-label="블로그 성장 추세"><div className={styles.sectionHeader}><div><h2>블로그 성장 추세</h2><p>AI 인용과 통합검색 노출 흐름을 함께 봅니다</p></div><PeriodButtons value={period} onChange={setPeriod}/></div><GrowthChart key={period} points={points}/>{points.some(point => point.errors > 0) && <p className={styles.footnote}>확인에 실패한 글은 제외했습니다.</p>}</section>
   <section className={styles.panel} aria-label="AI 랭킹"><div className={styles.sectionHeader}><div><h2>AI 랭킹</h2><p>{selectedRanking?.scope !== 'category' ? '모든 블로그 중 내 순위' : `${selectedRanking.label || '같은 주제'} 블로그 중 내 순위`}</p></div><a className={styles.link} href="/ranking">랭킹 보기 <ArrowRight size={13}/></a></div><div className={styles.rankScopes} role="group" aria-label="랭킹 비교 범위">{data.rankings.map(ranking => <button type="button" key={ranking.scope} aria-pressed={selectedRanking?.scope === ranking.scope} onClick={() => setScope(ranking.scope)}>{ranking.label}</button>)}</div>{selectedRanking?.cards.length ? <div className={styles.rankGrid}>{selectedRanking.cards.map(card => <RankCard key={card.period} card={card}/>)}</div> : <Empty href="/dashboard/settings" action="공개 설정 확인">아직 랭킹 기록이 없습니다.</Empty>}<p className={styles.footnote}>이 서비스에 공개 등록한 블로그의 저장된 진단 점수로 산정한 순위입니다.</p></section>
