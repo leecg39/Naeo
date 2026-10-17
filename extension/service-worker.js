@@ -1,4 +1,7 @@
+import { createAuthController } from './auth.js';
+
 const NAVER_WRITER = 'https://blog.naver.com/GoBlogWrite.naver';
+const auth = createAuthController(chrome, fetch);
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
@@ -196,7 +199,25 @@ async function focusEditor(target) {
   return results.map((item) => item.result).find((item) => item?.ok) || { ok: false, reason: 'EDITOR_NOT_FOUND' };
 }
 
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (['connectNaeo', 'getAuthState', 'waitForAuth', 'resetNaeoAuth'].includes(message?.type)) {
+    // Only our own panel may initiate or observe an account connection.
+    if (sender.id !== chrome.runtime.id || sender.url !== chrome.runtime.getURL('sidepanel.html')) {
+      sendResponse({ ok: false, error: '확장 프로그램 패널에서 로그인해주세요.' });
+      return false;
+    }
+    if (message.type === 'getAuthState') {
+      sendResponse(auth.state());
+      return false;
+    }
+    const pending = message.type === 'connectNaeo' ? auth.connect(message.serviceBase)
+      : message.type === 'resetNaeoAuth' ? auth.reset(message.serviceBase) : auth.wait();
+    pending.then(result => {
+      // Closing the initiating panel must not discard an otherwise valid login.
+      try { sendResponse(result); } catch { /* The response channel was closed. */ }
+    });
+    return true;
+  }
   if (message?.type === 'openNaverWriter') {
     chrome.tabs.create({ url: NAVER_WRITER }).then(() => sendResponse({ ok: true }), (error) => sendResponse({ ok: false, error: error.message }));
     return true;

@@ -19,7 +19,8 @@
       <label for="service-base">NAEO 서비스 주소</label>
       <input id="service-base" type="url" autocomplete="url" spellcheck="false" value="https://www.naeo.kr">
       <p class="hint">확장 ID <code id="extension-id"></code>를 서버의 <code>NAEO_EXTENSION_IDS</code>에 등록해야 합니다.</p>
-      <button id="connect" class="primary" type="button">NAEO로 로그인</button>
+      <button id="connect" class="primary" type="button" disabled>NAEO로 로그인</button>
+      <button id="reset-auth" class="secondary hidden" type="button">이전 로그인 창 닫기</button>
     </section>
 
     <section id="drafts-view" class="hidden">

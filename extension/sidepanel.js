@@ -1,4 +1,4 @@
-import { buildDraftTransfer, createPkce, DEFAULT_SERVICE_BASE, EXTENSION_ID, normalizeServiceBase, parseMcpToolData, permissionOrigin } from './shared.js';
+import { buildDraftTransfer, DEFAULT_SERVICE_BASE, EXTENSION_ID, normalizeServiceBase, parseMcpToolData, permissionOrigin } from './shared.js';
 
 const $ = (selector) => document.querySelector(selector);
 const storage = {
@@ -12,6 +12,7 @@ let selectedDraft = null;
 let transfer = null;
 let applied = new Set();
 let rpcId = 1;
+let connecting = false;
 
 function showStatus(message = '', error = false) {
   const node = $('#status');
@@ -33,9 +34,12 @@ async function withBusy(button, action) {
   finally { button.disabled = false; }
 }
 
-function randomState() {
-  const bytes = crypto.getRandomValues(new Uint8Array(24));
-  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+function setConnecting(busy) {
+  connecting = busy;
+  $('#connect').disabled = busy;
+  $('#service-base').disabled = busy;
+  $('#reset-auth').disabled = busy;
+  $('#connect').textContent = busy ? '로그인 진행 중…' : 'NAEO로 로그인';
 }
 
 async function ensureServicePermission(base) {
@@ -44,27 +48,20 @@ async function ensureServicePermission(base) {
 }
 
 async function connect() {
-  serviceBase = normalizeServiceBase($('#service-base').value);
-  if (!await ensureServicePermission(serviceBase)) throw new Error('NAEO 주소 접근 권한이 필요합니다.');
-  await storage.set({ serviceBase });
-  const { verifier, challenge } = await createPkce();
-  const state = randomState();
-  const redirectUri = chrome.identity.getRedirectURL();
-  const auth = new URL('/auth/extension', serviceBase);
-  auth.search = new URLSearchParams({ extension_id: chrome.runtime.id, code_challenge: challenge, code_challenge_method: 'S256', state, scope: 'naeo:read' });
-  const callback = new URL(await chrome.identity.launchWebAuthFlow({ url: auth.href, interactive: true }));
-  if (callback.searchParams.get('state') !== state) throw new Error('로그인 상태 확인에 실패했습니다. 다시 연결해주세요.');
-  if (callback.searchParams.get('error')) throw new Error(`로그인이 취소되었거나 거절되었습니다: ${callback.searchParams.get('error')}`);
-  const code = callback.searchParams.get('code');
-  if (!code) throw new Error('로그인 코드를 받지 못했습니다.');
-  const response = await fetch(new URL('/api/oauth/token', serviceBase), {
-    method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: redirectUri, client_id: `naeo-extension-${chrome.runtime.id}`, code_verifier: verifier, resource: `${serviceBase}/api/mcp` }),
-  });
-  const tokens = await response.json();
-  if (!response.ok) throw new Error(tokens.error_description || '토큰을 발급받지 못했습니다.');
-  await storage.set({ tokens: { accessToken: tokens.access_token, refreshToken: tokens.refresh_token, expiresAt: Date.now() + (tokens.expires_in * 1000), scope: tokens.scope } });
-  setView('drafts'); showStatus('NAEO 계정을 연결했습니다.'); await loadDrafts();
+  if (connecting) return;
+  setConnecting(true);
+  $('#reset-auth').classList.toggle('hidden', true);
+  try {
+    const base = normalizeServiceBase($('#service-base').value);
+    if (!await ensureServicePermission(base)) throw new Error('NAEO 주소 접근 권한이 필요합니다.');
+    showStatus('열린 NAEO 로그인 창에서 로그인과 연결 승인을 완료해주세요.');
+    const result = await chrome.runtime.sendMessage({ type: 'connectNaeo', serviceBase: base });
+    $('#reset-auth').classList.toggle('hidden', result?.code !== 'AUTH_WINDOW_OPEN');
+    if (!result?.ok) throw new Error(result?.error || '로그인을 완료하지 못했습니다. 확장 프로그램을 새로고침한 뒤 다시 시도해주세요.');
+    serviceBase = result.serviceBase;
+    setView('drafts'); showStatus('NAEO 계정을 연결했습니다.'); await loadDrafts();
+  } catch (error) { showStatus(error.message, true); }
+  finally { setConnecting(false); }
 }
 
 async function refreshTokens(current) {
@@ -187,6 +184,15 @@ async function disconnect() {
 
 async function init() {
   $('#extension-id').textContent = chrome.runtime.id || EXTENSION_ID;
+  const state = await chrome.runtime.sendMessage({ type: 'getAuthState' });
+  if (state?.pending) {
+    $('#service-base').value = state.serviceBase;
+    showStatus('로그인이 진행 중입니다. 열려 있는 NAEO 로그인 창에서 계속해주세요.');
+    const result = await chrome.runtime.sendMessage({ type: 'waitForAuth' });
+    $('#reset-auth').classList.toggle('hidden', result?.code !== 'AUTH_WINDOW_OPEN');
+    if (!result?.ok) showStatus(result?.error || '로그인이 중단되었습니다. 다시 시도해주세요.', true);
+    else if (result.connected) showStatus('NAEO 계정을 연결했습니다.');
+  }
   const saved = await storage.get(['serviceBase', 'tokens']);
   try { serviceBase = normalizeServiceBase(saved.serviceBase || DEFAULT_SERVICE_BASE); } catch { serviceBase = DEFAULT_SERVICE_BASE; }
   $('#service-base').value = serviceBase;
@@ -196,7 +202,13 @@ async function init() {
   } else setView('setup');
 }
 
-$('#connect').addEventListener('click', () => withBusy($('#connect'), connect));
+$('#connect').addEventListener('click', connect);
+$('#reset-auth').addEventListener('click', () => withBusy($('#reset-auth'), async () => {
+  const result = await chrome.runtime.sendMessage({ type: 'resetNaeoAuth', serviceBase: normalizeServiceBase($('#service-base').value) });
+  if (!result?.ok) throw new Error(result?.error || '이전 로그인 창을 닫지 못했습니다. 직접 창을 닫아주세요.');
+  $('#reset-auth').classList.toggle('hidden', true);
+  showStatus('이전 로그인 창을 닫았습니다. NAEO로 로그인을 다시 눌러주세요.');
+}));
 $('#disconnect').addEventListener('click', () => withBusy($('#disconnect'), disconnect));
 $('#refresh-drafts').addEventListener('click', () => withBusy($('#refresh-drafts'), () => loadDrafts($('#draft-search').value.trim())));
 $('#search-form').addEventListener('submit', (event) => { event.preventDefault(); withBusy(event.submitter || $('#refresh-drafts'), () => loadDrafts($('#draft-search').value.trim())); });
@@ -204,4 +216,5 @@ $('#back-to-drafts').addEventListener('click', () => { setView('drafts'); showSt
 $('#open-writer').addEventListener('click', () => chrome.runtime.sendMessage({ type: 'openNaverWriter' }));
 $('#reset-progress').addEventListener('click', async () => { if (!selectedDraft) return; applied.clear(); await storage.remove(`progress:${selectedDraft.id}`); renderTransfer(); showStatus('진행 상태를 초기화했습니다.'); });
 
-init().catch((error) => showStatus(error.message, true));
+setConnecting(true);
+init().catch((error) => showStatus(error.message, true)).finally(() => setConnecting(false));
