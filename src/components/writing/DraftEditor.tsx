@@ -30,7 +30,7 @@ export default function DraftEditor({draft,onChanged,onClosed}:{draft:DraftDetai
  const restore=(revision:number)=>void run(async()=>{await api(`/api/drafts/${draft.id}/restore`,{method:'POST',body:{revision,version:draft.version}});onChanged(await reload(),`${revision}번 버전으로 되돌렸습니다.`);});
  const remove=()=>void run(async()=>{await api(`/api/drafts/${draft.id}`,{method:'DELETE',body:{version:draft.version}});onChanged(null,'초안을 삭제했습니다. 사진은 내 사진함에 남습니다.');});
  const copy=async()=>{try{await navigator.clipboard.writeText(`# ${title}\n\n${body}\n`);setError('');onChanged(draft,'제목과 본문을 마크다운으로 복사했습니다.');}catch{setError('복사 권한을 확인해주세요.');}};
- return <section className="naeo-panel" aria-label="초안 편집" style={{padding:20,display:'grid',gap:14}}>
+ return <section className="naeo-panel" aria-label="초안 편집" tabIndex={-1} style={{padding:20,display:'grid',gap:14,scrollMarginTop:24}}>
   <div style={{display:'flex',justifyContent:'space-between',gap:12,flexWrap:'wrap',alignItems:'center'}}>
    <strong style={{fontSize:18}}>초안 편집</strong>
    <span style={{fontSize:13,color:'#a3a3a3'}}>{STATUS[draft.status]} · 버전 {draft.version} · {fmt(draft.updatedAt)} 저장 · {fmt(draft.expiresAt)} 자동 삭제{dirty?' · 저장하지 않은 변경 있음':''}</span>

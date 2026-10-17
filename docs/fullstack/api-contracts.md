@@ -175,7 +175,7 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 
 | 경로 | 메서드 | 권한 | 입력·규칙 | 오류 |
 |---|---|---|---|---|
-| `/api/mate/diagnose` | POST | 공개(로그인 시 내 기록 연결) | `{blog}`: 블로그 ID 또는 `blog.naver.com`·`m.blog.naver.com` 주소만. RSS 즉시 수집·분석, 공유 토큰(22자) 발급, 30일 보관. 제한: IP 10분 5회, 블로그 시간당 10회, 전체 시간당 300회 | 400 `INVALID_BLOG`, 404 `BLOG_NOT_FOUND`, 502 `FETCH_FAILED`, 429 |
+| `/api/mate/diagnose` | POST | 공개(로그인 시 내 기록 연결) | `{blog}`: 블로그 ID 또는 `blog.naver.com`·`m.blog.naver.com` 주소만. 일반/모바일 글 주소·`PostList.naver`/`PostView.naver?blogId=`도 허용. RSS 즉시 수집·분석, 공유 토큰(22자) 발급, 30일 보관. 응답 `source`에 블로그 제목·정규 URL·최근 글 최대30개의 원문 URL/제목/발행일/분류/태그를 저장한다. 제목이 있는 빈 RSS는 점수 없이 422로 처리. 제한: IP 10분 5회, 블로그 시간당 10회, 전체 시간당 300회 | 400 `INVALID_BLOG`, 404 `BLOG_NOT_FOUND`, 422 `NO_PUBLIC_POSTS`, 502 `FETCH_FAILED`, 429 |
 | `/api/mate/reports/:token` | GET | 공개(공유 링크) | 만료 전 리포트. 작성자 정보 없음 | 404 |
 | `/api/mate/reports` | GET | 회원 | 내 진단 기록(만료 제외) | 401 |
 | `/api/mate/reports/:token` | DELETE | 회원(작성자) | 삭제 후 공유 링크도 404 | 404 |
@@ -199,6 +199,7 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/recommendations/:id` | DELETE | 회원(본인) | 개인 키워드 삭제 `{version}`. 공개 추천 삭제 불가 | 404, 409, 400 `CATALOG_READ_ONLY` |
 | `/api/recommendations/:id/metrics` | POST | 회원(본인) | 개인 키워드 `{version}`. 실제 네이버 검색광고 검색량 + 검색 API 문서수 조회. 시간당 20회. 조회 중 수정·삭제 시 덮어쓰지 않음 | 404, 409, 429, 502, 503 `SEARCHAD_NOT_CONFIGURED` |
 | `/api/recommendations/:keywordId/state` | PUT | 회원 | `{status:'written'|'saved'|null}` 작성 완료 표시·해제(회원별) | 404(숨김·없음) |
+| `/api/recommendations/feed/:id/draft` | POST | 회원(본인) | `{version,titleIndex?:0\|1\|2}` 본인 추천의 제목·목차·출처로 초안 저장. `{data:{draft,reused}}`, 신규 201·기존 재열기 200. 동일 추천의 편집한 초안 보존, 토큰 차감·작성 완료 변경 없음. 15분당 60회 | 400, 401, 403 Origin, 404 소유권, 409 `VERSION_CONFLICT`·`RECOMMENDATION_INACTIVE`, 429 |
 
 분류(새 규칙): 포화도 = 문서수 ÷ (PC+모바일 월 검색량). 황금 = 포화도 1 미만·검색량 1,000 이상, 선점기회 = 황금 아님·포화도 3 미만·검색량 300 이상. 검색량 0 또는 검색량·문서수 미확인이면 기회 등급을 분류하지 않는다. 미확인 값은 `null`/`—`이며 문서수 실패를 0으로 대체하지 않는다. 검색광고 미설정/실패/결과 없음은 기존 지표를 유지하고, 이름을 다른 키워드로 바꾸면 기존 지표를 비운다.
 

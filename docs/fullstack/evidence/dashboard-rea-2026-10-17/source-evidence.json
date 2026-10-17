@@ -1,0 +1,117 @@
+{
+  "source": "https://www.naeo.kr/dashboard",
+  "observedAt": "2026-10-17",
+  "rea": {
+    "evidenceId": "ev_8dc83970c8ea8c0cb57f3fbfa9d28391138bd9dfc28c784a4416a76ab3db5dfa",
+    "operation": "analyze_javascript_application",
+    "statistics": {
+      "findings": 21,
+      "invalid_utf8_files": 0,
+      "modules": 0,
+      "nested_asar_containers": 0,
+      "parse_failures": 0,
+      "parsed_javascript_files": 2,
+      "relevant_files": 2,
+      "text_bytes_read": 473888,
+      "truncated_scopes": 0,
+      "visited_ast_nodes": 151880
+    },
+    "limitations": [
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ],
+    "bundleLocalPath": "/Users/user01/Desktop/NAEO/reverse-engineering/dashboard-rea-2026-10-17/rea-bundle.json",
+    "initialResponse": "resource_constraint; retained complete evidence exported successfully"
+  },
+  "artifacts": [
+    {
+      "name": "0vikp-jk811qz.js",
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/0vikp-jk811qz.js",
+      "bytes": 55986,
+      "sha256": "085b4e4c9e227be2b89e1cf7b875245a4257be0cc8d418da3eb7f8642671f81a",
+      "observedLiteralOffsets": [
+        {
+          "token": "/api/dashboard/trend",
+          "byteOffset": 53718
+        },
+        {
+          "token": "/api/dashboard/weekly-avg",
+          "byteOffset": 53470
+        },
+        {
+          "token": "/api/ranking/history",
+          "byteOffset": 53301
+        },
+        {
+          "token": "/api/ai-check/detail",
+          "byteOffset": 20045
+        }
+      ]
+    },
+    {
+      "name": "15vt27pxkpzea.js",
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/15vt27pxkpzea.js",
+      "bytes": 417902,
+      "sha256": "e065dfd8f208a45cacf51ccb3813f632e304eefcddecb7a3537ae33696659a80",
+      "observedLiteralOffsets": [
+        {
+          "token": "/api/dashboard/change-feed",
+          "byteOffset": 366638
+        },
+        {
+          "token": "AI 브리핑 모니터링",
+          "byteOffset": 373411
+        },
+        {
+          "token": "선점기회 키워드",
+          "byteOffset": 54940
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "method": "authenticated Ego Lite read-only UI observation and same-origin GET",
+    "getContracts": [
+      {
+        "path": "/api/dashboard/trend?period=month",
+        "status": 200,
+        "keys": [
+          "trendData",
+          "lastMeasuredAt"
+        ],
+        "rowKeys": [
+          "date",
+          "통합검색 노출",
+          "AI 추천"
+        ]
+      },
+      {
+        "path": "/api/dashboard/change-feed?period=month",
+        "status": 200,
+        "keys": [
+          "events"
+        ],
+        "rowKeys": [
+          "type",
+          "occurred_at",
+          "payload"
+        ],
+        "observedRankPayloadKeys": [
+          "from",
+          "to",
+          "delta"
+        ]
+      }
+    ],
+    "states": [
+      "desktop 1440×1000",
+      "mobile 390×844",
+      "briefing detail modal",
+      "blog change input with save/cancel"
+    ],
+    "privateSourceData": "Original account values and captures stay outside the repository; never used as runtime fixtures."
+  }
+}

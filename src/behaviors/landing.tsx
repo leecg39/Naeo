@@ -4,6 +4,7 @@ import { installHomeDemo } from "@/components/home/home-demo";
 import type { InstallBehavior } from "@/lib/behavior";
 import { text } from "@/lib/behavior";
 import { api } from "@/lib/api-client";
+import { parseNaverBlog } from "@/lib/naver-blog";
 import MateReportView from "@/components/content/MateReportView";
 import type { MateReport } from "@/server/mate/mate";
 
@@ -27,17 +28,7 @@ const IMPROVE = [
   ["조건·주의사항 요약 박스", "적용 조건을 끝에 정리하면 근거가 한층 단단해져요."],
 ];
 
-/** Accept the same public Naver blog formats, without ever contacting Naver. */
-export function parseBlogId(value: string): string | null {
-  const trimmed = value.trim();
-  if (/^[a-z][a-z0-9_-]{1,29}$/i.test(trimmed)) return trimmed;
-  try {
-    const url = new URL(/^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`);
-    if (!/^(?:m\.)?blog\.naver\.com$/i.test(url.hostname)) return null;
-    const id = /\.naver$/.test(url.pathname) ? url.searchParams.get("blogId") : url.pathname.split("/").filter(Boolean)[0];
-    return id && /^[a-z][a-z0-9_-]{1,29}$/i.test(id) ? id : null;
-  } catch { return null; }
-}
+export const parseBlogId = parseNaverBlog;
 
 export const installLanding: InstallBehavior = (root, tools) => {
   const cleanups: (() => void)[] = [];
@@ -83,7 +74,7 @@ export const installLanding: InstallBehavior = (root, tools) => {
   if (sharedToken && /^[A-Za-z0-9_-]{22}$/.test(sharedToken)) {
     api<MateReport>(`/api/mate/reports/${sharedToken}`).then(showReport).catch(error => tools.toast(error instanceof Error ? error.message : "리포트를 열지 못했습니다."));
   }
-  const blogInputs = [...root.querySelectorAll<HTMLInputElement>('input[placeholder*="blog.naver.com"]')];
+  const blogInputs = [...root.querySelectorAll<HTMLInputElement>('input[placeholder*="blog.naver.com"]')].filter(input=>!input.closest('[data-naeo-live]'));
   let pending = false;
   const runDiagnosis = (input?: HTMLInputElement) => {
     if (pending) return;
@@ -100,8 +91,9 @@ export const installLanding: InstallBehavior = (root, tools) => {
     void (async () => {
       try {
         const report = await api<MateReport>("/api/mate/diagnose", { method: "POST", body: { blog: value } });
-        showReport(report);
+        if (!disposed) showReport(report);
       } catch (error) {
+        if (disposed) return;
         tools.closeDialog();
         tools.toast(error instanceof Error ? error.message : "진단하지 못했습니다. 잠시 후 다시 시도해주세요.");
       } finally { pending = false; }
@@ -114,7 +106,7 @@ export const installLanding: InstallBehavior = (root, tools) => {
   });
   on(root, "submit", event => {
     const form = event.target;
-    if (form instanceof HTMLFormElement && form.querySelector('input[placeholder*="blog.naver.com"]')) {
+    if (form instanceof HTMLFormElement && !form.closest('[data-naeo-live]') && form.querySelector('input[placeholder*="blog.naver.com"]')) {
       event.preventDefault(); runDiagnosis(form.querySelector<HTMLInputElement>("input") || undefined);
     }
   });

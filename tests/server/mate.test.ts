@@ -22,15 +22,42 @@ test('blog input accepts ids and Naver blog URLs only',()=>{
  for(const bad of ['','a','https://evil.example/my_blog','http://169.254.169.254','my blog','../x','javascript:alert(1)'])assert.equal(parseBlogInput(bad),null,bad);
 });
 
+test('home and server accept desktop/mobile article and legacy query URLs consistently',()=>{
+ for(const input of ['https://blog.naver.com/leecg39/224444669929','https://m.blog.naver.com/leecg39/224444669929?ref=home','https://blog.naver.com/PostList.naver?blogId=LEEcg39','https://blog.naver.com/PostView.naver?blogId=leecg39&logNo=224444669929'])assert.equal(parseBlogInput(input),'leecg39');
+ assert.equal(parseBlogInput('123blog'),'123blog');
+ for(const input of ['https://blog.naver.com/PostView.naver?logNo=123','https://blog.naver.com.evil.example/leecg39','https://user:pass@blog.naver.com/leecg39','https://blog.naver.com:8443/leecg39','https://blog.naver.com/%2fetc','x'.repeat(301)])assert.equal(parseBlogInput(input),null,input);
+});
+
 test('anonymous diagnosis returns a real report with a share token and stores it for 30 days',async t=>{
  const {db}=await fixture(t);
  const r=await diagnoseBlog(db,{blog:'blog.naver.com/qa_blog',peer:'1.1.1.1',userId:null},okFetch('qa_blog'),NOW);
  assert.match(r.token,/^[A-Za-z0-9_-]{22}$/);
  assert.equal(r.naverId,'qa_blog');assert.equal(r.report.criteria.length,5);assert.equal(r.postCount,6);
  assert.equal(r.report.aiCitation.status,'not_configured');
+ assert.equal(r.saved,false);
+ assert.equal(r.source?.title,'QA');
+ assert.equal(r.source?.posts[0].url,'https://blog.naver.com/qa_blog/20000');
+ assert.equal(r.source?.posts[0].title,'제주 여행 코스 1편 총정리 가이드');
+ assert.deepEqual(getMateReport(db,r.token,NOW+1000)?.source,r.source,'shared report preserves the original public evidence');
  assert.equal(getMateReport(db,r.token,NOW+1000)?.report.score,r.report.score);
  assert.equal(getMateReport(db,r.token,NOW+REPORT_TTL_MS+1),null,'expired reports are gone');
  assert.equal(getMateReport(db,'nope',NOW),null);
+});
+
+test('an empty but valid blog does not produce a misleading zero-score report',async t=>{
+ const {db}=await fixture(t);
+ await assert.rejects(diagnoseBlog(db,{blog:'empty_blog',peer:'empty',userId:null},okFetch('empty_blog',0),NOW),{status:422,code:'NO_PUBLIC_POSTS'});
+ assert.equal((db.prepare('SELECT count(*) AS n FROM mate_reports').get() as {n:number}).n,0);
+});
+
+test('source snapshots are bounded, retained in owner history, and optional on older reports',async t=>{
+ const {db,a}=await fixture(t);
+ const report=await diagnoseBlog(db,{blog:'qa_blog',peer:'bounded',userId:a},okFetch('qa_blog',40),NOW);
+ assert.equal(report.postCount,40);assert.equal(report.source?.posts.length,30);
+ assert.deepEqual(listMyMateReports(db,a,{},NOW).data[0].source,report.source);
+ db.prepare('UPDATE mate_reports SET source_json=NULL WHERE token=?').run(report.token);
+ assert.equal(getMateReport(db,report.token,NOW)?.source,undefined);
+ assert.equal(getMateReport(db,report.token,NOW)?.report.score,report.report.score);
 });
 
 test('missing blogs and bad input fail clearly; rate limits stop abuse',async t=>{

@@ -18,6 +18,13 @@ function Workspace(){
  const [result,setResult]=useState<PageResult<DraftSummary>|null>(null),[q,setQ]=useState(''),[status,setStatus]=useState(''),[page,setPage]=useState(1);
  const [selected,setSelected]=useState<DraftDetail|null>(null),[jobs,setJobs]=useState<GenerationJob[]>([]),[tokens,setTokens]=useState<number|null>(null);
  const [notice,setNotice]=useState(''),[error,setError]=useState(''),[signedOut,setSignedOut]=useState(false),[templates,setTemplates]=useState<{id:string;name:string}[]>([]);
+ const selectedId=selected?.id,listReady=result!==null;
+ useEffect(()=>{
+  if(!selectedId||!listReady)return;
+  const editor=document.querySelector<HTMLElement>('section[aria-label="초안 편집"]');
+  editor?.scrollIntoView({block:'start'});
+  editor?.focus({preventScroll:true});
+ },[selectedId,listReady]);
  const load=useCallback(async(p=page)=>{
   try{
    const query=new URLSearchParams({page:String(p),pageSize:'10',q,...(status?{status}:{})});

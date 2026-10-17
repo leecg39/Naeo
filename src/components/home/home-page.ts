@@ -61,6 +61,8 @@ function writingDemo(demo:El):El[] {
 export function buildHomePage(page:CapturedPageData,ranking:HomeRanking):CapturedPageData {
  if(page.path!=='/')return page;
  const body=mapTree(page.body,n=>{
+  if(n.tag==='form'&&find(n.children,x=>x.attrs.id==='landing-v2-blog-url'))return[node('div',{'data-naeo-slot':'home-blog-analysis'})];
+  if(cls('mui-c0ei7b')(n))return[withChildren(n,['네이버에 공개된 내 글을 불러와',node('br',{}),'발행·제목·태그·주제 지표와 개선점을 알려드려요.'])];
   if(cls('mui-5o8f48')(n))return mapTree([n],x=>{
    if(cls('mui-wg1uo3')(x))return rankingContent(ranking);
    if(cls('mui-1ydr4p3')(x))return[withChildren(x,['랭킹 공개를 켠 블로그의 진단 점수를 만나보세요.',node('br',{}),'내 블로그도 함께 확인해 보세요.'])];

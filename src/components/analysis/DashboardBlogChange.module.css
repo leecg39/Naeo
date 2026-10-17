@@ -1,0 +1,27 @@
+.root {display:inline-flex;flex-shrink:0;vertical-align:middle}
+.trigger {background:transparent;border:0;color:#969696;padding:4px 5px;font:inherit;font-size:10px;cursor:pointer;white-space:nowrap}
+.trigger:hover {color:#dedede}
+.trigger:focus-visible {outline:2px solid #03c75a;outline-offset:3px;border-radius:3px}
+.panel {--blog-change-bg:#171717;--blog-change-field:#111;--blog-change-border:#343434;--blog-change-text:#dedede;--blog-change-muted:#969696;position:fixed;z-index:100;width:min(380px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow-y:auto;border:1px solid var(--blog-change-border);border-radius:8px;padding:17px;background:var(--blog-change-bg);color:var(--blog-change-text);box-shadow:0 8px 28px #0005;font-family:inherit;font-size:12px;line-height:1.5;box-sizing:border-box}
+.panel * {box-sizing:border-box}
+.panel h2 {font-size:13px;font-weight:750;margin:0 0 13px}
+.field {display:grid;gap:6px;margin:0 0 11px;min-width:0}
+.field>span {font-size:11px;font-weight:600;color:var(--blog-change-muted)}
+.field input,.field select {display:block;width:100%;min-width:0;border:1px solid var(--blog-change-border);border-radius:5px;padding:8px 9px;font:inherit;font-size:12px;line-height:1.5;background:var(--blog-change-field);color:var(--blog-change-text);outline-offset:2px}
+.field input::placeholder {color:var(--blog-change-muted);opacity:.8}
+.field input:focus,.field select:focus {outline:2px solid #03c75a}
+.field input[aria-invalid=true] {border-color:#ef4444}
+.panel .hint {margin:-3px 0 14px;color:var(--blog-change-muted);font-size:10px;line-height:1.6}
+.panel .error {color:#f16b6b;font-size:11px;line-height:1.65;margin:0 0 12px;overflow-wrap:anywhere}
+.error a {color:inherit;text-decoration:underline}
+.actions {display:flex;align-items:center;gap:6px}
+.actions button {font:inherit;font-size:11px;font-weight:650;line-height:1.5;border:1px solid var(--blog-change-border);border-radius:5px;padding:6px 14px;color:var(--blog-change-text);background:transparent;cursor:pointer;min-height:30px}
+.actions .save {background:#03c75a;color:white;border-color:#03c75a}
+.actions button:focus-visible {outline:2px solid #03c75a;outline-offset:3px}
+.panel button:disabled,.panel input:disabled,.panel select:disabled {cursor:wait;opacity:.6}
+:global(html.light) .panel {--blog-change-bg:#fff;--blog-change-field:#fafafa;--blog-change-border:#d4d4d4;--blog-change-text:#262626;--blog-change-muted:#666;box-shadow:0 8px 28px #0002}
+:global(html.light) .trigger {color:#666}
+:global(html.light) .trigger:hover {color:#262626}
+:global(html.light) .panel .error {color:#c52a2a}
+@media(max-width:520px) {.panel {padding:16px}.field input,.field select {font-size:16px}.actions button {min-height:36px;padding:7px 16px}}
+@media(prefers-reduced-motion:reduce) {.panel * {transition:none!important;animation:none!important}}

@@ -34,18 +34,19 @@ test('queued scan is drained in-process end-to-end and the dashboard shows the d
  const {db,user,blog}=await fixture(t);
  const job=enqueueScan(db,user,{blogId:blog});
  let page=await buildDashboardPage(db,user);
- assert.match(text(byClass(page.body,'mui-4ynyf6')[0]),/첫 진단/,'before processing the dashboard asks for a first scan');
+ assert.equal(page.dashboard?.history.length,0,'before processing there is no diagnosis');
+ assert.equal(page.dashboardOverview?.changes.length,0);
  const ran=await drain(db,scanHandler(db,stubFetch));
  assert.equal(ran,job.id,'the queued job ran inside this process');
  const done=getScan(db,user,job.id);
  assert.equal(done.state,'succeeded');
  assert.equal((db.prepare('SELECT COUNT(*) n FROM scan_results WHERE blog_id=?').get(blog) as {n:number}).n,1,'scan_results row persisted');
  page=await buildDashboardPage(db,user);
- const headline=text(byClass(page.body,'mui-4ynyf6')[0]);
- assert.match(headline,/진단 점수/,'dashboard shows the diagnosis result');
- assert.ok(!/첫 진단|블로그를 연결/.test(headline),'no longer shows the empty-state guidance');
+ assert.equal(page.dashboard?.history.length,1,'dashboard shows the persisted diagnosis');
+ assert.equal(page.dashboard?.history[0].score,(done.result as {score:number}).score);
+ assert.match(page.dashboardOverview!.changes[0].title,/블로그 스캔/);
  assert.match(text(byClass(page.body,'mui-zhxvjz')[0]),/마지막 스캔/,'last-scan line shows the measurement');
- assert.match(text(byClass(page.body,'mui-2m8c84')[0]),/분석한 글/,'metrics card renders analyzed-post count');
+ assert.equal(page.dashboard?.history[0].postCount,8,'diagnosis detail includes analyzed-post count');
 });
 
 test('runAllJobsOnce is idle when nothing is queued and a failed job leaves the first-scan state',async t=>{
@@ -55,5 +56,7 @@ test('runAllJobsOnce is idle when nothing is queued and a failed job leaves the 
  await drain(db,async()=>{throw Object.assign(new Error('boom'),{code:'FETCH_FAILED',retryable:false});});
  assert.equal(getScan(db,user,job.id).state,'failed');
  const page=await buildDashboardPage(db,user);
- assert.match(text(byClass(page.body,'mui-4ynyf6')[0]),/첫 진단/,'a failed job leaves the first-scan state, not a stale result');
+ assert.equal(page.dashboard?.history.length,0,'a failed job never creates a stale result');
+ assert.equal(page.dashboardOverview?.metrics.checked,null);
+ assert.equal(page.dashboardOverview?.changes.length,0);
 });

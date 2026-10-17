@@ -7,6 +7,7 @@ import {collectKeywordMetrics} from './collect';
 import {createMemberKeyword,updateMemberKeyword,deleteMemberKeyword,keywordSuggestions,measureMemberKeyword} from './member-keywords';
 import {listRecommendations,setKeywordState} from './recommendations';
 import {getRecommendationFeed,refreshRecommendationFeed,updateRecommendation,loadRecommendationCompetition} from './discovery-feed';
+import {createRecommendationDraft} from './recommendation-writing';
 
 const ID='([a-f0-9-]{36})';
 const anyJson=z.unknown();
@@ -21,6 +22,12 @@ export async function keywordsApi(db:Database,request:Request,user:User):Promise
   return json({data:await refreshRecommendationFeed(db,user.id,await input())});
  }
  const feedItem=path.match(new RegExp(`^/api/recommendations/feed/${ID}$`));
+ const draft=path.match(new RegExp(`^/api/recommendations/feed/${ID}/draft$`));
+ if(draft&&method==='POST'){
+  rateLimit(db,`recommendation-draft:${user.id}`,60,15*60000);
+  const result=createRecommendationDraft(db,user.id,draft[1],await input());
+  return json({data:result},result.reused?200:201);
+ }
  if(feedItem&&method==='PATCH'){
   rateLimit(db,`recommendation-state:${user.id}`,300,15*60000);
   return json({data:updateRecommendation(db,user.id,feedItem[1],await input())});

@@ -1,0 +1,85 @@
+{
+  "token": "R-WfNuYQpuJbtktdLVVKjA",
+  "naverId": "leecg39",
+  "report": {
+    "methodVersion": "rules-v1",
+    "score": 62,
+    "criteria": [
+      {
+        "key": "cadence",
+        "label": "발행 빈도",
+        "max": 20,
+        "score": 2,
+        "evidence": "최근 30일 글 1개 (12개 이상이면 만점)"
+      },
+      {
+        "key": "recency",
+        "label": "최근성",
+        "max": 20,
+        "score": 20,
+        "evidence": "마지막 글이 0일 전 (3일 이내 만점)"
+      },
+      {
+        "key": "titles",
+        "label": "제목 구체성",
+        "max": 20,
+        "score": 0,
+        "evidence": "최근 글 1개 중 제목 15~45자 0%"
+      },
+      {
+        "key": "tags",
+        "label": "태그 활용",
+        "max": 20,
+        "score": 20,
+        "evidence": "최근 글 1개 중 태그 3개 이상 100%"
+      },
+      {
+        "key": "topic",
+        "label": "주제 일관성",
+        "max": 20,
+        "score": 20,
+        "evidence": "최근 글 100%가 '게시판' 분류 (60% 이상이면 만점)"
+      }
+    ],
+    "actions": [
+      {
+        "criterion": "titles",
+        "title": "제목을 15~45자로, 주제와 장소·숫자를 넣어 구체적으로 쓰기"
+      },
+      {
+        "criterion": "cadence",
+        "title": "이번 주에 글 2개 이상 발행하기"
+      }
+    ],
+    "disclosure": "원본 서비스의 점수 가중치는 공개되지 않아 이 복제본의 새 규칙(rules-v1)으로 계산했습니다. 네이버 RSS에 공개된 최근 글만 사용합니다.",
+    "aiCitation": {
+      "status": "not_configured"
+    }
+  },
+  "postCount": 1,
+  "createdAt": 1792216962520,
+  "expiresAt": 1794808962520,
+  "source": {
+    "title": "leecg39님의블로그",
+    "url": "https://blog.naver.com/leecg39",
+    "posts": [
+      {
+        "url": "https://blog.naver.com/leecg39/224444669929",
+        "title": "EvoOntology란? Claude Code·Codex 데이터 분석 플러그인 설치와 활용법",
+        "category": "게시판",
+        "tags": [
+          "첫글",
+          "EvoOntology",
+          "온톨로지",
+          "AI에이전트",
+          "데이터분석",
+          "ClaudeCode",
+          "Codex",
+          "MCP",
+          "AI자동화"
+        ],
+        "publishedAt": 1792214367000
+      }
+    ]
+  }
+}

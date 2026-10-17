@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import AuthForm from '@/components/account/AuthForm';
 
-export type SharedDialog = { kind: 'auth' } | { kind: 'content'; title: string; content: ReactNode } | null;
+export type SharedDialog = { kind: 'auth' } | { kind: 'content'; title: string; content: ReactNode; wide?:boolean } | null;
 export interface SharedDialogsProps {
   dialog: SharedDialog;
   menuOpen: boolean;
@@ -51,7 +51,7 @@ export default function SharedDialogs({ dialog, menuOpen, toast, onClose, onNavi
   if (!mounted) return null;
   return createPortal(<div className="naeo-shared-overlays">
     {open && <div className={`naeo-overlay ${menuOpen ? 'naeo-menu-overlay' : ''}`} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
-      <div ref={container} role="dialog" aria-modal="true" aria-labelledby="naeo-shared-dialog-title" className={menuOpen ? 'naeo-mobile-menu' : 'naeo-shared-dialog'}>
+      <div ref={container} role="dialog" aria-modal="true" aria-labelledby="naeo-shared-dialog-title" className={menuOpen ? 'naeo-mobile-menu' : 'naeo-shared-dialog'} style={dialog?.kind==='content'&&dialog.wide?{width:'min(960px, 100%)'}:undefined}>
         <div className="naeo-dialog-heading">
           <h2 id="naeo-shared-dialog-title">{menuOpen ? 'NAEO' : dialog?.kind === 'auth' ? 'NAEO 시작하기' : dialog?.title}</h2>
           <button type="button" className="naeo-dialog-close" aria-label="닫기" onClick={onClose}>

@@ -1,0 +1,20 @@
+.root{max-width:420px;margin:0 auto;text-align:left;color:var(--foreground,#e0e0e0)}
+.form{display:flex;flex-direction:column;gap:10px}
+.form label{font-size:13px;font-weight:600}
+.form input{width:100%;min-width:0;min-height:48px;box-sizing:border-box;padding:12px 16px;border:1px solid var(--border,#ffffff24);border-radius:8px;background:var(--card,#1a1a1a);color:inherit;font:inherit;font-size:15px}
+.form input::placeholder{color:var(--muted,#a3a3a3)}
+.form input[aria-invalid=true]{border-color:#ef6459}
+.root button{font-family:inherit;cursor:pointer}
+.root button:focus-visible,.form input:focus-visible{outline:2px solid #03c75a;outline-offset:4px}
+.hint,.notice,.progress p{margin:0;font-size:12px;line-height:1.7;color:var(--muted,#a3a3a3)}
+.submit{align-self:center;margin-top:12px;min-height:48px;padding:12px 32px;border:0;border-radius:50px;background:#03c75a;color:#fff;font-size:15px;font-weight:800;box-shadow:0 8px 24px #03c75a40}
+.submit:hover{background:#02b04f}
+.submit:disabled{opacity:.65;cursor:wait;box-shadow:none}
+.progress{margin-top:18px;padding:14px;border:1px solid var(--border,#ffffff24);border-radius:8px}
+.progress progress{width:100%;height:5px;accent-color:#03c75a;margin:10px 0}
+.progress button,.reopen{background:none;border:0;color:var(--foreground,#e0e0e0);text-decoration:underline;text-underline-offset:3px;font-size:12px;padding:5px 0}
+.error{color:#ff8176;font-size:13px;line-height:1.7;margin:16px 0 0}
+.notice:not(:empty){margin-top:16px}
+.reopen{display:block;margin:8px auto 0;color:#03c75a}
+:global(html.light) .error{color:#ba3026}
+:global(html.light) .reopen{color:#07823e}

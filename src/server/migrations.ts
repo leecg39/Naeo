@@ -1131,5 +1131,11 @@ export const migrations = [{
  `},{version:46,name:'ranking_snapshot_metrics',sql:`
  ALTER TABLE ranking_snapshots ADD COLUMN metrics_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(metrics_json) AND json_type(metrics_json)='array');
  ALTER TABLE ranking_snapshots ADD COLUMN mate INTEGER NOT NULL DEFAULT 0 CHECK(mate IN(0,1));
- `},memberKeywordsMigration,recommendationDiscoveryMigration];
+ `},memberKeywordsMigration,recommendationDiscoveryMigration,{
+ version:49,name:'recommendation_writing_drafts',sql:`
+ ALTER TABLE drafts ADD COLUMN recommendation_id TEXT REFERENCES member_recommendations(id) ON DELETE SET NULL;
+ CREATE UNIQUE INDEX drafts_recommendation ON drafts(owner_id,recommendation_id) WHERE recommendation_id IS NOT NULL;
+ `},{version:50,name:'mate_report_sources',sql:`
+ ALTER TABLE mate_reports ADD COLUMN source_json TEXT CHECK(source_json IS NULL OR (json_valid(source_json) AND json_type(source_json)='object'));
+ `}];
 

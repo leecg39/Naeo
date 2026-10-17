@@ -5,24 +5,16 @@ import {rateLimit} from '../http';
 import {paginationInput} from '../validation';
 import {CollectError,fetchRss,type FetchLike} from '../collect/rss';
 import {analyzePosts,type AnalysisReport} from '../analysis/rules';
+import {parseNaverBlog} from '../../lib/naver-blog';
+import type {RssItem} from '../collect/rss-parse';
 
 /** 무료 진단 리포트 보관 기간(공유 링크 유효 기간). */
 export const REPORT_TTL_MS=30*86_400_000;
-export type MateReport={token:string;naverId:string;report:AnalysisReport;postCount:number;createdAt:number;expiresAt:number;saved?:boolean};
-type Row={token:string;naver_id:string;report_json:string;post_count:number;created_at:number;expires_at:number};
-const toReport=(r:Row):MateReport=>({token:r.token,naverId:r.naver_id,report:JSON.parse(r.report_json) as AnalysisReport,postCount:r.post_count,createdAt:r.created_at,expiresAt:r.expires_at});
-const ID=/^[a-z0-9][a-z0-9_-]{1,49}$/;
-
-/** 블로그 ID 또는 네이버 블로그 주소에서 ID만 꺼낸다. 다른 사이트 주소는 받지 않는다. */
-export function parseBlogInput(input:string):string|null{
- const value=input.trim();
- if(ID.test(value.toLowerCase()))return value.toLowerCase();
- let url:URL;
- try{url=new URL(/^https?:\/\//i.test(value)?value:`https://${value}`);}catch{return null;}
- if(url.hostname!=='blog.naver.com'&&url.hostname!=='m.blog.naver.com')return null;
- const id=url.pathname.split('/')[1]?.toLowerCase()??'';
- return ID.test(id)?id:null;
-}
+export type MateSource={title:string;url:string;posts:Pick<RssItem,'url'|'title'|'category'|'tags'|'publishedAt'>[]};
+export type MateReport={token:string;naverId:string;report:AnalysisReport;postCount:number;createdAt:number;expiresAt:number;saved?:boolean;source?:MateSource};
+type Row={token:string;naver_id:string;report_json:string;source_json:string|null;post_count:number;created_at:number;expires_at:number};
+const toReport=(r:Row):MateReport=>({token:r.token,naverId:r.naver_id,report:JSON.parse(r.report_json) as AnalysisReport,postCount:r.post_count,createdAt:r.created_at,expiresAt:r.expires_at,...(r.source_json?{source:JSON.parse(r.source_json) as MateSource}:{})});
+export const parseBlogInput=parseNaverBlog;
 
 function asAppError(e:unknown):never{
  if(e instanceof CollectError){
@@ -41,25 +33,29 @@ export async function diagnoseBlog(db:Database,{blog,peer,userId}:{blog:unknown;
  if(!naverId)throw new AppError(400,'INVALID_BLOG','네이버 블로그 주소 또는 아이디를 입력해주세요.');
  rateLimit(db,`mate:blog:${naverId}`,10,60*60_000,now);
  const feed=await fetchRss(naverId,fetchImpl).catch(asAppError);
+ if(feed.items.length===0)throw new AppError(422,'NO_PUBLIC_POSTS','분석할 공개 글이 없습니다. 블로그 주소와 글의 전체 공개·RSS 공개 설정을 확인한 뒤 다시 시도해주세요.');
  const report=analyzePosts(feed.items.map(i=>({title:i.title,category:i.category,tags:i.tags,publishedAt:i.publishedAt})),now);
+ const source:MateSource={title:feed.title,url:`https://blog.naver.com/${naverId}`,posts:[...feed.items]
+  .sort((a,b)=>(b.publishedAt??0)-(a.publishedAt??0)||a.title.localeCompare(b.title)).slice(0,30)
+  .map(({url,title,category,tags,publishedAt})=>({url,title,category,tags,publishedAt}))};
  const token=randomBytes(16).toString('base64url');
- db.prepare('INSERT INTO mate_reports(token,owner_id,naver_id,score,report_json,post_count,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?)')
-  .run(token,userId,naverId,report.score,JSON.stringify(report),feed.items.length,now,now+REPORT_TTL_MS);
+ db.prepare('INSERT INTO mate_reports(token,owner_id,naver_id,score,report_json,source_json,post_count,created_at,expires_at) VALUES(?,?,?,?,?,?,?,?,?)')
+  .run(token,userId,naverId,report.score,JSON.stringify(report),JSON.stringify(source),feed.items.length,now,now+REPORT_TTL_MS);
  db.prepare('DELETE FROM mate_reports WHERE expires_at<=?').run(now);
- return{token,naverId,report,postCount:feed.items.length,createdAt:now,expiresAt:now+REPORT_TTL_MS,saved:userId!==null};
+ return{token,naverId,report,source,postCount:feed.items.length,createdAt:now,expiresAt:now+REPORT_TTL_MS,saved:userId!==null};
 }
 
 /** 공유 링크로 읽는다(만료되면 없음). 작성자 정보는 돌려주지 않는다. */
 export function getMateReport(db:Database,token:string,now=Date.now()):MateReport|null{
  if(!/^[A-Za-z0-9_-]{22}$/.test(token))return null;
- const r=db.prepare('SELECT token,naver_id,report_json,post_count,created_at,expires_at FROM mate_reports WHERE token=? AND expires_at>?').get(token,now) as Row|undefined;
+ const r=db.prepare('SELECT token,naver_id,report_json,source_json,post_count,created_at,expires_at FROM mate_reports WHERE token=? AND expires_at>?').get(token,now) as Row|undefined;
  return r?toReport(r):null;
 }
 
 export function listMyMateReports(db:Database,userId:string,query:unknown,now=Date.now()){
  const {page,pageSize}=paginationInput.parse(query);
  const {total}=db.prepare('SELECT count(*) AS total FROM mate_reports WHERE owner_id=? AND expires_at>?').get(userId,now) as {total:number};
- const rows=db.prepare('SELECT token,naver_id,report_json,post_count,created_at,expires_at FROM mate_reports WHERE owner_id=? AND expires_at>? ORDER BY created_at DESC,token LIMIT ? OFFSET ?').all(userId,now,pageSize,(page-1)*pageSize) as Row[];
+ const rows=db.prepare('SELECT token,naver_id,report_json,source_json,post_count,created_at,expires_at FROM mate_reports WHERE owner_id=? AND expires_at>? ORDER BY created_at DESC,token LIMIT ? OFFSET ?').all(userId,now,pageSize,(page-1)*pageSize) as Row[];
  return{data:rows.map(toReport),pagination:{page,pageSize,total}};
 }
 

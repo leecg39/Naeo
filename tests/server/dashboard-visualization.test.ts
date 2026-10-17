@@ -59,7 +59,7 @@ test('dashboard charts isolate the member and primary blog, ignore failed runs a
  assert.equal(chosen.citationHref,'/dashboard/ai-picks?blog=secondary_blog');
  const details=await buildAiPicksPage(db,user,NOW,'secondary_blog');
  for(const post of chosen.citedPosts)assert.ok(JSON.stringify(details).includes(post.id),'selected blog citation links resolve to the correct detail rows');
- await diagnoseBlog(db,{blog:'free_blog',peer:'test',userId:user},async()=>new Response('<rss><channel><title>무료 진단</title></channel></rss>'),NOW);
+ await diagnoseBlog(db,{blog:'free_blog',peer:'test',userId:user},async()=>new Response('<rss><channel><title>무료 진단</title><item><title>무료 블로그 진단 근거 글</title><link>https://blog.naver.com/free_blog/1</link></item></channel></rss>'),NOW);
  const free=(await buildDashboardPage(db,user,NOW,'free_blog')).dashboard!;
  assert.equal(free.citations.length,0);assert.equal(free.citedPosts.length,0);assert.notEqual(free.citationState,'failed','unconnected report never inherits primary blog citation status');
 

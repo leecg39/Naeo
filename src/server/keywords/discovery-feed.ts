@@ -53,11 +53,12 @@ function plain(row:Row,published=false):DiscoveredRecommendation{
   written:!!row.written,dismissed:!!row.dismissed,saved:!!row.saved_keyword_id,savedKeywordId:row.saved_keyword_id,
   history:parse(row.history_json,[]),related:parse(row.related_json,[]),competition:parse(row.competition_json,emptyCompetition()),recommendedAt:row.recommended_at,updatedAt:row.updated_at,version:row.version};
 }
-function ownRecommendation(db:Database,ownerId:string,id:string){
+export function getRecommendation(db:Database,ownerId:string,id:string){
  const row=db.prepare(`${ROW_SELECT} WHERE r.owner_id=? AND r.id=?`).get(ownerId,id) as Row|undefined;
  if(!row)throw new AppError(404,'RECOMMENDATION_NOT_FOUND','추천 키워드를 찾을 수 없습니다.');
  return plain(row,publishedKeywords(db,ownerId,row.blog_id)(row.phrase));
 }
+const ownRecommendation=getRecommendation;
 function monthlyUsed(db:Database,ownerId:string,now:number){return(db.prepare("SELECT coalesce(sum(new_count),0) AS n FROM recommendation_builds WHERE owner_id=? AND state='succeeded' AND started_at>=? AND started_at<=?").get(ownerId,kstMonth(now),now) as {n:number}).n;}
 function latestBuild(db:Database,ownerId:string,blogId:string){return db.prepare("SELECT * FROM recommendation_builds WHERE owner_id=? AND blog_id=? AND state='succeeded' ORDER BY completed_at DESC,id DESC LIMIT 1").get(ownerId,blogId) as Build|undefined;}
 

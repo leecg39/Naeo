@@ -37,8 +37,10 @@ test('an actual free diagnosis appears on dashboard without connecting a blog or
  assert.equal(data.history[0].score,report.report.score);assert.deepEqual(data.history[0].criteria,report.report.criteria);
  assert.equal(data.history[0].postCount,1);
  const body=page.body.map(text).join('');
- assert.match(body,new RegExp(`진단 점수${report.report.score}점`));
- assert.match(body,/마지막 진단:/);assert.match(body,/최근 30일 발행-/);
+ assert.equal(page.dashboardOverview?.subject?.naverId,report.naverId);
+ assert.equal(page.dashboardOverview?.metrics.checked,null);
+ assert.equal(page.dashboardOverview?.changes[0].title,`무료 진단 ${report.report.score}점`);
+ assert.match(body,/마지막 진단:/);assert.match(body,/진단 개선 할 일/);
  assert.ok(!body.includes('모든 기준을 충족했습니다'));
  for(const action of report.report.actions)assert.ok(body.includes(action.title));
  assert.equal((db.prepare('SELECT count(*) AS n FROM blogs').get() as {n:number}).n,0,'reading dashboard never creates or modifies blog connections');

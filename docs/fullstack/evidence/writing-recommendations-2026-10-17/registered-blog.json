@@ -1,0 +1,18 @@
+{
+  "blogs": [
+    {
+      "id": "33159079-75e9-43e4-9946-82151253eea4",
+      "naverId": "leecg39",
+      "title": "QA 관리자 블로그",
+      "isPrimary": true
+    }
+  ],
+  "recommendationCount": 15,
+  "sourcePosts": [
+    "https://blog.naver.com/leecg39/224444669929"
+  ],
+  "mobile": {
+    "width": 390,
+    "overflow": false
+  }
+}

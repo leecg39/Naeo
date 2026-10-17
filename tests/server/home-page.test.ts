@@ -13,6 +13,17 @@ import {liveRanking} from '../../src/server/ranking/ranking';
 
 const captured=()=>getCapturedPage('/').then(page=>{assert.ok(page);return page;});
 
+test('home installs the live analysis form and describes the actual RSS scoring scope',async()=>{
+ const template=await captured(),before=JSON.stringify(template);
+ const page=buildHomePage(template,{data:[],participants:0});
+ assert.equal(findAll(page.body,n=>n.attrs['data-naeo-slot']==='home-blog-analysis').length,1);
+ assert.equal(findAll(page.body,n=>n.attrs.id==='landing-v2-blog-url').length,0);
+ const intro=findAll(page.body,hasClass('mui-c0ei7b'))[0];
+ assert.match(textOf(intro),/공개된 내 글을 불러와/);
+ assert.doesNotMatch(textOf(intro),/공식 5기준/);
+ assert.equal(JSON.stringify(template),before);
+});
+
 test('home resolves captured ranking spinner and count to the actual empty state',async()=>{
  const template=await captured(),before=JSON.stringify(template);
  const page=buildHomePage(template,{data:[],participants:0});

@@ -1,0 +1,43 @@
+(node:73981) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ an actual free diagnosis appears on dashboard without connecting a blog or re-scanning (178.287ms)
+✔ same-blog scans and free reports merge chronologically; newest report controls recommendations (142.286542ms)
+✔ selecting a diagnosed blog isolates records, scan controls, recommendations and AI results (131.905125ms)
+✔ an undiagnosed primary does not hide saved free reports, and selection never changes the primary (111.126958ms)
+✔ anonymous, foreign, expired, future and deleted reports never enter the dashboard (112.789459ms)
+(node:73982) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ no measurement differs from checked zero, errors stay unknown, and reads never write (197.895792ms)
+✔ selected blog, owner, successful runs and timestamps bound all evidence; URLs are sanitized (149.483333ms)
+✔ change feed compares only successful checked measurements of the same post and keyword (145.30425ms)
+✔ recommendation summary and links use only the selected blog and do not generate records (120.187375ms)
+✔ cited posts expose real metrics and detail links, ignoring future metric rows (112.916208ms)
+✔ rank cards honor public status, category-relative order, confirmed history and primary labels (153.113ms)
+✔ rank feed uses confirmed prior month/week evidence and suppresses unchanged, equal-time and current-period comparisons (116.972917ms)
+(node:73983) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ no blog connected: guidance instead of captured data, scan points to settings (123.0475ms)
+✔ blog without results shows first-scan state with the real daily quota (137.887708ms)
+✔ results drive the live overview, diagnosis details, actionable to-dos and change feed (106.247584ms)
+✔ running scan is reflected on the scan button for polling (77.31475ms)
+✔ daily scan quota (KST day) is enforced and shown (75.266708ms)
+✔ user-controlled text is never interpreted as HTML (75.47725ms)
+✔ ranking cards show my real rank when I opted into the public ranking (80.119666ms)
+✔ header reflects the active trial and removes D-day after expiry (78.544292ms)
+(node:73984) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ period filters use inclusive Korean calendar dates and keep real time spacing (1.599458ms)
+✔ no measurements is distinct from a real zero, and changes require comparable rules (0.315875ms)
+✔ dashboard charts isolate the member and primary blog, ignore failed runs and count only checked results (232.872125ms)
+(node:73985) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ queued scan is drained in-process end-to-end and the dashboard shows the diagnosis (179.184333ms)
+✔ runAllJobsOnce is idle when nothing is queued and a failed job leaves the first-scan state (126.07325ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1398.647708

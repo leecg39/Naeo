@@ -1,0 +1,77 @@
+{
+  "desktop": {
+    "initial": {
+      "heading": "AI 인용률 33% · 인용된 글 4건을 확인하세요",
+      "kpis": "AI 인용률33%4 / 12 글 AI 인용통합검색 노출률75%9 / 12 글 노출 중재추천 키워드8건다시 주목할 키워드를 확인하세요선점기회 키워드4건먼저 작성할 키워드를 확인하세요",
+      "cards": 10,
+      "overflow": false
+    },
+    "sevenPoints": 8,
+    "allPoints": 10,
+    "categoryRanking": "AI 랭킹여행 블로그 중 내 순위랭킹 보기 모든 블로그여행전체누적1위2명 중 · 상위 50%아직 순위 변화 기록이 없습니다월간이번 달1위▲ 12명 중 · 상위 50%주간이번 주1위▲ 12명 중 · 상위 50%이 서비스에 공개 등록한 블로그의 저장된 진단 점수로 산정한 순위입니다.",
+    "weekChanges": 63,
+    "allChanges": 69,
+    "dialogTitle": "제주 맛집 지도 7",
+    "focus": {
+      "open": false,
+      "focused": "제주 카페 추천 10 AI 브리핑 상세보기"
+    }
+  },
+  "mobile": {
+    "initial": {
+      "width": 390,
+      "scrollWidth": 390,
+      "heading": "AI 인용률 33% · 인용된 글 4건을 확인하세요"
+    },
+    "modal": {
+      "x": 10,
+      "width": 370,
+      "height": 690.28125,
+      "viewportWidth": 390,
+      "viewportHeight": 844
+    }
+  },
+  "blogChange": {
+    "invalidUrlError": "네이버 블로그 주소 또는 올바른 블로그 ID를 입력해 주세요.",
+    "selected": {
+      "title": "일상의 작은 발견",
+      "heading": "AI 인용률 0% · 내 블로그의 성장 흐름을 확인하세요",
+      "url": "http://localhost:3110/dashboard?blog=rea_daily_blog"
+    },
+    "added": {
+      "title": "rea_qa_added_blog",
+      "kpis": "AI 인용률—아직 확인된 글이 없습니다통합검색 노출률—아직 확인된 글이 없습니다재추천 키워드0건재추천된 키워드가 없습니다선점기회 키워드0건지금은 선점기회 키워드가 없습니다",
+      "url": "http://localhost:3110/dashboard?blog=rea_qa_added_blog"
+    },
+    "primaryPreserved": true
+  },
+  "accessibility": {
+    "theme": {
+      "light": true,
+      "card": "rgb(255, 255, 255)"
+    },
+    "keyboard": {
+      "first": "2026. 09. 27. 13:29 · AI 인용 3건 · 통합검색 노출 11건",
+      "last": "2026. 10. 17. 13:00 · AI 인용 4건 · 통합검색 노출 9건"
+    },
+    "mobileLight": {
+      "width": 390,
+      "scrollWidth": 390,
+      "rankBounds": {
+        "x": 16,
+        "y": 342.3359375,
+        "width": 358,
+        "height": 506,
+        "top": 342.3359375,
+        "right": 374,
+        "bottom": 848.3359375,
+        "left": 16
+      }
+    },
+    "shellContrast": {
+      "background": "rgb(247, 247, 247)",
+      "title": "rgb(38, 38, 38)",
+      "header": "rgb(255, 255, 255)"
+    }
+  }
+}
