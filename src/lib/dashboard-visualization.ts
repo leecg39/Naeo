@@ -1,4 +1,5 @@
 import type {AnalysisReport} from '../server/analysis/rules';
+import type {MateSource} from '../server/mate/mate';
 
 export type DiagnosisPoint = AnalysisReport & {id:string;postCount:number;measuredAt:number;source?:'scan'|'mate'};
 export type CitationPoint = {id:string;measuredAt:number;checked:number;errors:number;cited:number;exposed:number};
@@ -6,6 +7,7 @@ export type DashboardSubject = {naverId:string;title:string;connected:boolean;pr
 export type DashboardVisualization = {
  subject:DashboardSubject|null;subjects:DashboardSubject[];citationHref:string;
  now:number;connected:boolean;history:DiagnosisPoint[];citations:CitationPoint[];
+ latestSource?:MateSource|null;
  citationState:'ready'|'running'|'failed'|'not_configured'|'empty';
  citedPosts:{id:string;title:string;keyword:string;textRank:number|null;imageRank:number|null}[];
 };

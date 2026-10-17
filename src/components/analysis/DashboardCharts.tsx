@@ -48,7 +48,7 @@ function TrendChart({series,unit,label}:{series:Series[];unit:string;label:strin
  </>;
 }
 
-export default function DashboardCharts({data}:{data:DashboardVisualization}){
+export default function DashboardCharts({data,showSummary=true}:{data:DashboardVisualization;showSummary?:boolean}){
  const router=useRouter();
  const [period,setPeriod]=useState<ChartPeriod>(30);
  const [metric,setMetric]=useState<'score'|'citation'>('score');
@@ -61,12 +61,12 @@ export default function DashboardCharts({data}:{data:DashboardVisualization}){
   {label:'AI 인용률',color:'var(--viz-green)',values:valid.map(p=>({id:p.id,measuredAt:p.measuredAt,value:percentage(p.cited,p.checked)!,detail:`${p.cited}/${p.checked}개 글`}))},
   {label:'통합검색 노출률',color:'var(--viz-red)',values:valid.map(p=>({id:p.id,measuredAt:p.measuredAt,value:percentage(p.exposed,p.checked)!,detail:`${p.exposed}/${p.checked}개 글`}))}
  ];
- return <div id="dashboard-diagnosis" data-naeo-live="dashboard-charts" className={`${styles.theme} ${styles.stack}`}>
+ return <div id={showSummary?"dashboard-diagnosis":"dashboard-diagnosis-history"} data-naeo-live="dashboard-charts" className={`${styles.theme} ${styles.stack}`}>
   {data.subject&&<section className={`${styles.panel} ${styles.subjectPanel}`} aria-label="분석할 블로그 선택">
    <div className={styles.subjectControl}><label htmlFor={`${headingId}-blog`}>분석 블로그</label><select id={`${headingId}-blog`} value={data.subject.naverId} onChange={e=>router.push(`/dashboard?blog=${encodeURIComponent(e.target.value)}`)}>{data.subjects.map(b=><option value={b.naverId} key={b.naverId}>{b.title}{b.title!==b.naverId?` (@${b.naverId})`:''}{b.primary?' · 대표':''}</option>)}</select></div>
    <div className={styles.subjectInfo}><p>{latest?`${latest.source==='mate'?'무료 진단':'블로그 스캔'} · ${time(latest.measuredAt)}`:'아직 진단 기록이 없습니다.'}</p>{!data.connected&&<span>저장된 무료 진단을 표시합니다. <a className={styles.link} href="/dashboard/settings">블로그 연결하기 →</a></span>}<a href="/dashboard/mate" className={styles.link}>진단 기록 보기 →</a></div>
   </section>}
-  {latest?<AnalysisSummary report={latest} postCount={latest.postCount} change={scoreChange(latest,previous)}/>:<section className={styles.panel}><h2>내 블로그 진단</h2><div className={styles.empty}>{data.connected?'첫 스캔을 완료하면 종합 점수와 5개 기준 분석을 보여드립니다.':'블로그를 연결하고 첫 진단을 시작해 보세요.'}<a href={data.connected?'#dashboard-scan':'/dashboard/settings'}>{data.connected?'블로그 스캔으로 이동':'블로그 연결하기'} →</a></div></section>}
+  {showSummary&&(latest?<AnalysisSummary report={latest} postCount={latest.postCount} change={scoreChange(latest,previous)}/>:<section className={styles.panel}><h2>내 블로그 진단</h2><div className={styles.empty}>{data.connected?'첫 스캔을 완료하면 종합 점수와 5개 기준 분석을 보여드립니다.':'블로그를 연결하고 첫 진단을 시작해 보세요.'}<a href={data.connected?'#dashboard-scan':'/dashboard/settings'}>{data.connected?'블로그 스캔으로 이동':'블로그 연결하기'} →</a></div></section>)}
   <section className={styles.panel} aria-labelledby={headingId}>
    <div className={styles.heading}><div><h2 id={headingId}>블로그 성장 추세</h2><p>실제 분석 기록으로 점수와 검색 성과의 변화를 확인하세요.</p></div><div className={styles.periods} role="group" aria-label="성장 추세 기간">{([7,30,90,'all'] as const).map(p=><button key={p} type="button" aria-pressed={period===p} onClick={()=>setPeriod(p)}>{p==='all'?'전체':`${p}일`}</button>)}</div></div>
    <div className={styles.chartHeader}><div className={styles.metricTabs} role="group" aria-label="성장 추세 지표"><button type="button" aria-pressed={metric==='score'} onClick={()=>setMetric('score')}>진단 점수</button><button type="button" aria-pressed={metric==='citation'} onClick={()=>setMetric('citation')}>AI 인용·검색 노출</button></div><span className={styles.muted}>{period==='all'?'보관 기록':`최근 ${period}일`} · {metric==='score'?points.length:valid.length}회 측정</span></div>

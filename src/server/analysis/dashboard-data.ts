@@ -4,11 +4,12 @@ import type {AnalysisReport} from './rules';
 import type {DashboardSubject} from '../../lib/dashboard-visualization';
 import {listActionItems,type ActionItem} from './action-items';
 import {rankingView} from '../ranking/ranking';
+import type {MateSource} from '../mate/mate';
 
 export type DashboardResult=AnalysisReport&{id:string;postCount:number;measuredAt:number;source:'scan'|'mate'};
 export type DashboardData={
  nickname:string;blog:{id:string;naverId:string;title:string;category:string}|null;
- subject:DashboardSubject|null;subjects:DashboardSubject[];history:DashboardResult[];activeJob:{id:string;state:'queued'|'running';progress:number}|null;
+ subject:DashboardSubject|null;subjects:DashboardSubject[];history:DashboardResult[];latestSource:MateSource|null;activeJob:{id:string;state:'queued'|'running';progress:number}|null;
  remaining:number;posts30:number|null;now:number;actions:ActionItem[];
  /** 전체·월간·주간 순서의 내 순위(공개 여부·참여자 수 포함). */
  rankings:{public:boolean;rank:number|null;participants:number}[];
@@ -38,11 +39,16 @@ export function dashboardData(db:Database,userId:string,now=Date.now(),naverId?:
  const free=subject?db.prepare("SELECT 'mate:'||token AS id,report_json,post_count,created_at AS measured_at,'mate' AS source FROM mate_reports WHERE naver_id=? AND owner_id=? AND expires_at>? AND created_at<=? ORDER BY created_at DESC,token LIMIT 365").all(subject.naverId,userId,now,now) as Row[]:[];
  const history=[...scans,...free].sort((a,b)=>b.measured_at-a.measured_at||a.id.localeCompare(b.id)).slice(0,365)
   .map(r=>({...(JSON.parse(r.report_json) as AnalysisReport),id:r.id,postCount:r.post_count,measuredAt:r.measured_at,source:r.source}));
+ // Only attach evidence from the exact latest owned report; an older free report must not describe a newer scan.
+ const latest=history[0];
+ const sourceRow=latest?.source==='mate'?db.prepare('SELECT source_json FROM mate_reports WHERE token=? AND owner_id=? AND naver_id=? AND expires_at>?')
+  .get(latest.id.slice(5),userId,subject!.naverId,now) as {source_json:string|null}|undefined:undefined;
+ const latestSource=sourceRow?.source_json?JSON.parse(sourceRow.source_json) as MateSource:null;
  const activeJob=blog?db.prepare("SELECT id,state,progress FROM scan_jobs WHERE blog_id=? AND state IN ('queued','running')").get(blog.id) as DashboardData['activeJob']|undefined:null;
- // 무료 진단에는 글별 발행일이 저장되지 않으므로 미측정을 0으로 표시하지 않는다.
+ // 무료 진단 근거는 최대 30개 표본이므로 전체 최근 30일 발행 건수로 집계하지 않는다.
  const posts30=blog&&history[0]?.source==='scan'?(db.prepare('SELECT count(*) AS n FROM blog_posts WHERE blog_id=? AND published_at>=? AND published_at<=?').get(blog.id,now-30*DAY,now) as {n:number}).n:null;
  const actions=history[0]?.source==='scan'?listActionItems(db,userId,history[0].id):[];
- return{nickname,blog,subject,subjects,history,activeJob:activeJob?{...activeJob}:null,remaining,posts30,now,actions,rankings:myRankings(db,userId,now)};
+ return{nickname,blog,subject,subjects,history,latestSource,activeJob:activeJob?{...activeJob}:null,remaining,posts30,now,actions,rankings:myRankings(db,userId,now)};
 }
 
 /** "N분 전 / N시간 전 / N일 전" (변화 피드 기간 필터가 이 형식을 읽는다). */

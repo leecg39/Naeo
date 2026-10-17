@@ -5,6 +5,7 @@ import {ArrowRight, Check, ChevronLeft, ChevronRight, ExternalLink, Sparkles, X}
 import type {DashboardBriefing, DashboardChange, DashboardOverview as OverviewData, DashboardRankCard} from '@/lib/dashboard-overview';
 import {inPeriod, percentage, type ChartPeriod, type CitationPoint, type DashboardVisualization} from '@/lib/dashboard-visualization';
 import DashboardCharts from './DashboardCharts';
+import DashboardDiagnosis from './DashboardDiagnosis';
 import styles from './DashboardOverview.module.css';
 
 const DAY = 86_400_000;
@@ -143,7 +144,7 @@ export default function DashboardOverview({data, diagnosis}:{data:OverviewData; 
  const points = inPeriod(data.citations,period,data.now).filter(point => point.checked > 0);
  const feedStart = feedPeriod === 'all' ? 0 : Math.floor((data.now+9*3600_000)/DAY)*DAY-9*3600_000-(feedPeriod-1)*DAY;
  const changes = data.changes.filter(change => change.at >= feedStart && change.at <= data.now).sort((a,b) => b.at-a.at);
- const heading = citationRate === null ? 'AI 인용과 검색 노출을 한눈에 확인하세요' : `AI 인용률 ${citationRate}% · ${data.metrics.cited ? `인용된 글 ${number(data.metrics.cited)}건을 확인하세요` : '내 블로그의 성장 흐름을 확인하세요'}`;
+ const heading = diagnosis.history.length ? '블로그 분석 결과를 확인하세요' : citationRate === null ? 'AI 인용과 검색 노출을 한눈에 확인하세요' : `AI 인용률 ${citationRate}% · ${data.metrics.cited ? `인용된 글 ${number(data.metrics.cited)}건을 확인하세요` : '내 블로그의 성장 흐름을 확인하세요'}`;
  const kpis = [
   {title:'AI 인용률',value:citationRate,unit:'%',description:citationRate === null ? '아직 확인된 글이 없습니다' : `${number(data.metrics.cited)} / ${number(data.metrics.checked)} 글 AI 인용`,href:data.citationHref,tone:styles.gain},
   {title:'통합검색 노출률',value:exposureRate,unit:'%',description:exposureRate === null ? '아직 확인된 글이 없습니다' : `${number(data.metrics.exposed)} / ${number(data.metrics.checked)} 글 노출 중`,href:data.citationHref,tone:styles.loss},
@@ -152,6 +153,7 @@ export default function DashboardOverview({data, diagnosis}:{data:OverviewData; 
  ];
  return <div data-naeo-live="dashboard-overview" className={styles.overview}>
   <header className={styles.intro}><p>블로그 운영 대시보드</p><h1>{heading}</h1></header>
+  <DashboardDiagnosis data={diagnosis}/>
   <Monitoring data={data}/>
   <section className={styles.kpis} aria-label="핵심 지표">{kpis.map(kpi => <a key={kpi.title} href={kpi.href} className={styles.kpi}><h2>{kpi.title}</h2><strong className={kpi.tone}>{number(kpi.value)}<small>{kpi.value === null ? '' : kpi.unit}</small></strong><p>{kpi.description}</p></a>)}</section>
   <section className={styles.panel} aria-label="블로그 성장 추세"><div className={styles.sectionHeader}><div><h2>블로그 성장 추세</h2><p>AI 인용과 통합검색 노출 흐름을 함께 봅니다</p></div><PeriodButtons value={period} onChange={setPeriod}/></div><GrowthChart key={period} points={points}/>{points.some(point => point.errors > 0) && <p className={styles.footnote}>확인에 실패한 글은 제외했습니다.</p>}</section>
@@ -161,6 +163,6 @@ export default function DashboardOverview({data, diagnosis}:{data:OverviewData; 
    <section className={styles.taskColumn}><h3>추천 키워드 {number(data.metrics.recommendations)}건 확인</h3><p>신규·선점기회·재추천 키워드를 확인하세요.</p>{data.recommendations.length ? <div className={styles.recommendationGrid}>{data.recommendations.map(keyword => <a key={keyword.id} className={styles.keywordRow} href={keyword.href}><div><h4>{keyword.phrase}</h4><span className={styles.signal}>{signals[keyword.signal]}</span><ExternalLink size={12}/></div><p>검색량 <b>{number(keyword.volume)}</b><span>포화도 {number(keyword.saturation)}</span></p></a>)}</div> : <Empty href={data.recommendationHref} action="키워드 추천">아직 추천 키워드가 없습니다.</Empty>}</section>
   </div></section>
   <section className={styles.panel} aria-label="변화 피드"><div className={styles.sectionHeader}><div><h2>변화 피드</h2><p>{feedPeriod === 'all' ? '전체' : `최근 ${feedPeriod}일`} 변화를 시간순으로 보여줍니다</p></div><PeriodButtons value={feedPeriod} onChange={setFeedPeriod} feed/></div>{changes.length ? <ul className={styles.feed}>{changes.map(change => <li key={change.id}><a href={safeUrl(change.href)}><span className={`${styles.changeBadge} ${change.kind.endsWith('_gained') ? styles.badgeGain : change.kind.endsWith('_lost') ? styles.badgeLoss : change.kind === 'rank' ? styles.badgeRank : styles.badgeScan}`}>{changeLabels[change.kind]}</span><div><h3>{change.title}</h3>{change.description && <p>{change.description}</p>}</div><time dateTime={new Date(change.at).toISOString()} title={time(change.at)}>{relativeTime(change.at,data.now)}</time></a></li>)}</ul> : <Empty>선택한 기간에 기록된 변화가 없습니다.</Empty>}</section>
-  <details className={styles.diagnosis}><summary>블로그 진단 상세</summary><div><DashboardCharts data={diagnosis}/></div></details>
+  <details className={styles.diagnosis}><summary>진단 점수 추이·측정 기록</summary><div><DashboardCharts data={diagnosis} showSummary={false}/></div></details>
  </div>;
 }

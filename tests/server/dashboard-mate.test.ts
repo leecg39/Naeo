@@ -36,6 +36,7 @@ test('an actual free diagnosis appears on dashboard without connecting a blog or
  assert.equal(data.history.length,1);assert.equal(data.history[0].source,'mate');
  assert.equal(data.history[0].score,report.report.score);assert.deepEqual(data.history[0].criteria,report.report.criteria);
  assert.equal(data.history[0].postCount,1);
+ assert.deepEqual(data.latestSource,report.source,'dashboard receives the same source snapshot as the home report');
  const body=page.body.map(text).join('');
  assert.equal(page.dashboardOverview?.subject?.naverId,report.naverId);
  assert.equal(page.dashboardOverview?.metrics.checked,null);
@@ -56,12 +57,14 @@ test('same-blog scans and free reports merge chronologically; newest report cont
  let data=dashboardData(db,a,NOW);
  assert.equal(data.blog?.id,blog.id);assert.deepEqual(data.history.map(p=>p.id),[`mate:${report.token}`,old]);
  assert.equal(data.actions.length,0,'older scan actions must not replace the latest free report recommendations');
- assert.equal(data.posts30,null,'free reports have no saved publication timestamps');
+ assert.deepEqual(data.latestSource,report.source);
+ assert.equal(data.posts30,null,'a limited free-report snapshot must not stand in for all posts published within 30 days');
  const newest=scan(db,a,blog.id,NOW);
  data=dashboardData(db,a,NOW);
  assert.deepEqual(data.history.map(p=>p.id),[newest,`mate:${report.token}`,old]);
  assert.ok(data.actions.length>0);assert.ok(data.actions.every(a=>a.resultId===newest));
  assert.equal(data.posts30,0,'a measured empty scan is an actual zero');
+ assert.equal(data.latestSource,null,'old free-report evidence must not appear under a newer scan');
 });
 
 test('selecting a diagnosed blog isolates records, scan controls, recommendations and AI results',async t=>{
@@ -77,6 +80,7 @@ test('selecting a diagnosed blog isolates records, scan controls, recommendation
  assert.ok(secondaryData.actions.every(a=>a.resultId===secondaryId));
  const page=await buildDashboardPage(db,a,NOW,'free_blog');
  assert.equal(page.dashboard?.history[0].id,`mate:${report.token}`);assert.equal(page.dashboard?.connected,false);
+ assert.equal(page.dashboard?.latestSource?.url,'https://blog.naver.com/free_blog');
  assert.equal(page.dashboard?.citations.length,0);assert.equal(page.dashboard?.citedPosts.length,0);
  assert.ok(!JSON.stringify(page.body).includes(`"data-scan-blog":"${primary.id}"`));
  assert.equal(page.dashboard?.subjects.length,3);
@@ -104,4 +108,39 @@ test('anonymous, foreign, expired, future and deleted reports never enter the da
  assert.deepEqual(data.history.map(p=>p.id),[`mate:${mine.token}`]);
  deleteMateReport(db,a,mine.token);
  assert.equal(dashboardData(db,a,NOW).subject,null);assert.equal(dashboardData(db,a,NOW).history.length,0);
+ assert.equal(dashboardData(db,a,NOW).latestSource,null);
+});
+
+test('the latest source follows the selected owned diagnosis, including repeated analyses and reloads',async t=>{
+ const {db,a,b,diagnose}=await fixture(t);
+ createBlog(db,a,{naverId:'primary_blog',title:'대표',isPrimary:true});
+ const old=await diagnose(a,'realtek123',NOW-DAY);
+ const latest=await diagnose(a,'realtek123',NOW);
+ const ownSource={...latest.source!,title:'최신 분석 근거'};
+ db.prepare('UPDATE mate_reports SET source_json=? WHERE token=?').run(JSON.stringify(ownSource),latest.token);
+ await diagnose(a,'another_blog',NOW+1);
+ const foreign=await diagnose(b,'realtek123',NOW+2);
+ db.prepare('UPDATE mate_reports SET source_json=? WHERE token=?').run(JSON.stringify({...foreign.source!,title:'타인 근거'}),foreign.token);
+ const before=db.prepare('SELECT total_changes() AS n').get()!.n;
+ for(let i=0;i<2;i++){
+  const page=await buildDashboardPage(db,a,NOW+10,'realtek123');
+  assert.equal(page.dashboard?.subject?.naverId,'realtek123');
+  assert.deepEqual(page.dashboard?.history.map(r=>r.id),[`mate:${latest.token}`,`mate:${old.token}`]);
+  assert.equal(page.dashboard?.latestSource?.title,'최신 분석 근거');
+  assert.equal(page.dashboard?.latestSource?.posts[0].url,'https://blog.naver.com/realtek123/123456');
+  assert.ok(!JSON.stringify(page).includes('타인 근거'));
+ }
+ assert.equal(db.prepare('SELECT total_changes() AS n').get()!.n,before,'showing a saved report neither connects the blog nor collects again');
+ const other=await buildDashboardPage(db,a,NOW+10,'another_blog');
+ assert.equal(other.dashboard?.latestSource?.url,'https://blog.naver.com/another_blog');
+});
+
+test('legacy free diagnoses remain visible without inventing source evidence',async t=>{
+ const {db,a,diagnose}=await fixture(t);
+ const report=await diagnose(a,'realtek123');
+ db.prepare('UPDATE mate_reports SET source_json=NULL WHERE token=?').run(report.token);
+ const page=await buildDashboardPage(db,a,NOW,'realtek123');
+ assert.equal(page.dashboard?.history[0].score,report.report.score);
+ assert.equal(page.dashboard?.history[0].postCount,1);
+ assert.equal(page.dashboard?.latestSource,null);
 });

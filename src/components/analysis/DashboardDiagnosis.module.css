@@ -1,0 +1,8 @@
+.root{display:grid;gap:12px;min-width:0;scroll-margin-top:24px}
+.header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:4px 0}
+.header h2{font-size:19px!important;font-weight:750;line-height:1.5;overflow-wrap:anywhere}
+.header p,.notice,.empty p{font-size:12px;line-height:1.7;color:var(--muted,#a3a3a3)}
+.header a,.empty a{color:var(--primary,#03c75a)!important;font-size:12px;font-weight:650;white-space:nowrap}
+.notice{padding:10px 14px;border:1px solid var(--border,#333);border-radius:7px;background:var(--surface,#171717)}
+.empty{padding:20px;border:1px solid var(--border,#333);border-radius:10px;display:grid;gap:12px}
+:global(html.light) .header a,:global(html.light) .empty a{color:#04853d!important}
