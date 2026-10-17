@@ -40,3 +40,20 @@ test('URL search, filters, sort and pagination are reflected before rendering',a
  const empty=await buildRecommendationsPage(db,member,{filter:'saved',sort:'total_desc'},NOW);assert.equal(empty.recommendations?.list.pagination.total,0);
  const invalid=await buildRecommendationsPage(db,member,{page:'-1',sort:'bad'},NOW);assert.equal(invalid.recommendations?.list.pagination.page,1);
 });
+
+test('blog selection accepts naver_id or blog id and never crashes on a foreign or stale value',async t=>{
+ const {db,member}=await fixture(t);
+ const {createBlog}=await import('../../src/server/blogs');
+ const primary=createBlog(db,member,{naverId:'main_blog',title:'대표 블로그',category:'',isPrimary:true});
+ const second=createBlog(db,member,{naverId:'sub_blog',title:'보조 블로그',category:'',isPrimary:false});
+ const other=(await register(db,{email:'intruder@example.test',password:'keyword-page-long',nickname:'타인',termsAccepted:true})).user.id;
+ const foreign=createBlog(db,other,{naverId:'foreign_blog',title:'남의 블로그',category:'',isPrimary:true});
+ const byNaver=await buildRecommendationsPage(db,member,{blog:'sub_blog'},NOW);
+ assert.equal(byNaver.recommendationFeed?.selectedBlogId,second.id,'?blog=<naver_id> selects that blog');
+ const byId=await buildRecommendationsPage(db,member,{blogId:second.id},NOW);
+ assert.equal(byId.recommendationFeed?.selectedBlogId,second.id,'?blogId=<uuid> still works');
+ const stale=await buildRecommendationsPage(db,member,{blogId:'00000000-0000-4000-8000-000000000000'},NOW);
+ assert.equal(stale.recommendationFeed?.selectedBlogId,primary.id,'a stale blogId falls back to the primary blog instead of crashing');
+ const hostile=await buildRecommendationsPage(db,member,{blogId:foreign.id,blog:'foreign_blog'},NOW);
+ assert.equal(hostile.recommendationFeed?.selectedBlogId,primary.id,'another member\'s blog is never selected');
+});

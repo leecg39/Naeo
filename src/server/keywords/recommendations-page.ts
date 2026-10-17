@@ -11,9 +11,13 @@ import {getRecommendationFeed,rebuildLocalRecommendations,recommendationFeedQuer
 export async function buildRecommendationsPage(db:Database,userId:string,params:Record<string,string|undefined>,now=Date.now()):Promise<CapturedPageData>{
  const tpl=await getCapturedPage('/dashboard/recommendations');
  if(!tpl)throw new Error('recommendations template missing');
+ // 블로그 선택은 ?blog=<naver_id>(대시보드와 같은 규칙) 또는 ?blogId=<블로그 id>를 받는다.
+ // 본인 소유로 확인되지 않는 값은 무시하고 대표 블로그로 되돌아간다(API의 엄격한 404와 달리 페이지는 깨지지 않는다).
+ const requested=params.blog??params.blogId;
+ const resolved=requested?(db.prepare('SELECT id FROM blogs WHERE owner_id=? AND (id=? OR naver_id=?)').get(userId,requested,requested) as {id:string}|undefined)?.id:undefined;
  const parsed=recommendationQuery.safeParse({...params,pageSize:25});
  const query=parsed.success?parsed.data:recommendationQuery.parse({pageSize:25});
- const parsedFeed=recommendationFeedQuery.safeParse(params);
+ const parsedFeed=recommendationFeedQuery.safeParse({...params,blogId:resolved??''});
  const feedQuery=parsedFeed.success?parsedFeed.data:recommendationFeedQuery.parse({});
  const before=getRecommendationFeed(db,userId,feedQuery,now);
  if(before.selectedBlogId){
