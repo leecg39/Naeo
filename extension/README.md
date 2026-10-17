@@ -6,11 +6,17 @@ NAEO에 저장한 초안을 MCP로 읽어 제목·본문·사진·소제목 단�
 
 1. Chrome/Ego Lite의 확장 프로그램 관리 화면에서 **개발자 모드**를 켭니다.
 2. **압축해제된 확장 프로그램을 로드합니다**를 누르고 이 `extension` 폴더를 선택합니다.
-3. 서버 환경 변수에 `NAEO_EXTENSION_IDS=lacdnccodopejadkbeannbcmbljiodik`를 넣고 서버를 다시 시작합니다.
+3. 프로젝트 루트의 `.env.local`에 `NAEO_EXTENSION_IDS=lacdnccodopejadkbeannbcmbljiodik`를 넣고 서버를 다시 시작합니다. `.env.example`은 설정 예시이므로 Next.js가 읽지 않습니다.
 4. 확장 아이콘을 눌러 사이드 패널을 열고 서비스 주소를 입력한 뒤 **NAEO로 로그인**을 누릅니다.
 5. NAEO 로그인·동의 후 저장한 글을 선택합니다. 네이버 글쓰기 탭을 활성화하고 각 행을 눌러 안내대로 붙여넣습니다.
 
 Manifest의 공개키가 개발용 ID를 고정하므로 같은 폴더를 다시 로드해도 허용 목록 값이 바뀌지 않습니다. Chrome Web Store에 게시할 때는 스토어가 부여한 실제 ID를 서버 허용 목록에 추가해야 합니다.
+
+## 로그인 창에 “유효하지 않은 요청입니다”가 표시될 때
+
+`/auth/extension`은 `extension_id`가 서버의 `NAEO_EXTENSION_IDS` 허용 목록에 있고 `code_challenge`가 전달돼야 로그인·동의 화면으로 이동합니다. 허용 목록이 비어 있거나 설치된 확장 ID가 빠져 있으면 이 오류가 표시됩니다.
+
+위 로컬 설정을 적용한 뒤 오류 창을 닫고 확장 패널의 **NAEO로 로그인**을 다시 누르세요. 허용 ID가 여러 개라면 쉼표로 구분해 기존 값을 보존합니다. 로그인 이후 MCP 요청도 같은 허용 목록을 확인하므로 이 설정은 인증과 초안 조회 모두에 필요합니다.
 
 ## 권한 경계
 
