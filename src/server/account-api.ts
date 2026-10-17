@@ -1,6 +1,6 @@
 import {personalExportApi} from './privacy/api';
 import type {Database} from './database';
-import {requireAdmin,type User} from './auth';
+import {requireAdmin,tokenHash,type User} from './auth';
 import {body,json,sessionCookie,cookieToken,rateLimit} from './http';
 import {changePassword,deleteAccount,listSessions,revokeSession,revokeOtherSessions} from './account-security';
 import {listUsers,managedUser,createUser,updateUser,removeUser,listAudit} from './admin-users';
@@ -16,7 +16,9 @@ export async function accountApi(db:Database,request:Request,user:User):Promise<
     return json({data:{changed:true}},200,{'Set-Cookie':sessionCookie(result.token)});
   }
   if(path==='/api/auth/account'&&method==='DELETE') {
-    securityLimit();const result=await deleteAccount(db,user.id,await body(request,deleteAccountInput));
+    securityLimit();
+    const session=db.prepare('SELECT created_at AS createdAt FROM sessions WHERE token_hash=? AND user_id=?').get(tokenHash(token),user.id) as {createdAt:number}|undefined;
+    const result=await deleteAccount(db,user.id,await body(request,deleteAccountInput),session?.createdAt);
     return json({data:result},200,{'Set-Cookie':sessionCookie('',0)});
   }
   if(path==='/api/auth/sessions') {

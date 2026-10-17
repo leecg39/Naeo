@@ -23,7 +23,7 @@
 | SMS 인증 | Twilio Verify 4종(`NAEO_TWILIO_*`+`NAEO_SMS_PROVIDER`) | — | 인증 미제공 |
 | 휴대폰 보상 | `NAEO_PHONE_REWARD_KEY`(64hex, 별도 보관) | — | 보상 미지급 |
 | 결제 | `NAEO_TOSS_CLIENT_KEY`·`NAEO_TOSS_SECRET_KEY` | 웹훅 `{APP}/api/billing/webhooks/toss` | 결제 미제공 |
-| 소셜 로그인 | Google·Naver 앱 각각 client id/secret | `{APP}/api/auth/oauth/{google,naver}/callback` | 버튼 비활성 |
+| 소셜 로그인 | `NAEO_GOOGLE_CLIENT_ID/SECRET`, `NAEO_NAVER_OAUTH_CLIENT_ID/SECRET` | `{APP}/api/auth/oauth/{google,naver}/callback` | 버튼 비활성 |
 | AI 인용 확인 | `NAEO_CITATION_PROVIDER`+`NAEO_SERPAPI_KEY` | — | 인용 섹션 '미설정' |
 | 키워드 지표(관리자) | `NAEO_SEARCHAD_API_KEY`·`NAEO_SEARCHAD_SECRET`·`NAEO_SEARCHAD_CUSTOMER_ID` | 검색광고 센터 API 라이선스 | '미설정', 수동 입력만 |
 | 키워드 상위 노출·문서 수 | `NAEO_NAVER_CLIENT_ID`·`NAEO_NAVER_CLIENT_SECRET` | developers.naver.com 앱 | '미설정' |

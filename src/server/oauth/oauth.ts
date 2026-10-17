@@ -7,7 +7,7 @@ import {AppError} from '../errors';
 import {appOrigin} from '../http';
 import {password} from '../validation';
 import {safeNext} from '../../lib/safe-next';
-import {authorizeUrl,exchange,oauthConfig,type OAuthProfile,type OAuthProviderName} from './providers';
+import {authorizeUrl,exchange,oauthConfig,type OAuthProfile,type OAuthPrompt,type OAuthProviderName} from './providers';
 
 export const STATE_TTL=10*60_000;
 export const REAUTH_WINDOW=10*60_000;
@@ -22,7 +22,7 @@ export type Connection={provider:OAuthProviderName;email:string;createdAt:number
  * 로그인·연결 시작: 일회 state(해시 저장)·PKCE verifier·nonce를 만들고, state를 이 브라우저 쿠키(binding)에 묶는다.
  * 키가 없으면 아무것도 저장하지 않고 503.
  */
-export function startOAuth(db:Database,provider:OAuthProviderName,opts:{intent:'login'|'link';userId?:string;next?:string},now=Date.now()){
+export function startOAuth(db:Database,provider:OAuthProviderName,opts:{intent:'login'|'link';userId?:string;next?:string;prompt?:OAuthPrompt},now=Date.now()){
  const cfg=oauthConfig(provider);
  if(!cfg)throw new AppError(503,'OAUTH_NOT_CONFIGURED',`${provider==='google'?'Google':'네이버'} 로그인이 아직 설정되지 않았습니다(미설정).`);
  const state=token(),binding=token(),verifier=token(48),nonce=token(16);
@@ -33,7 +33,7 @@ export function startOAuth(db:Database,provider:OAuthProviderName,opts:{intent:'
   db.prepare('INSERT INTO oauth_states(state_hash,provider,intent,user_id,binding_hash,code_verifier,nonce,next,expires_at,created_at) VALUES(?,?,?,?,?,?,?,?,?,?)')
    .run(sha(state),provider,opts.intent,opts.userId??null,sha(binding),verifier,nonce,next,now+STATE_TTL,now);
  });
- return{url:authorizeUrl(cfg,{state,challenge,nonce,redirectUri:redirectUri(provider)}),binding};
+ return{url:authorizeUrl(cfg,{state,challenge,nonce,redirectUri:redirectUri(provider),prompt:opts.prompt}),binding};
 }
 
 type Pending={provider:OAuthProviderName;intent:'login'|'link';userId:string|null;bindingHash:string;verifier:string;nonce:string;next:string;expiresAt:number};
@@ -57,7 +57,9 @@ function linkTo(db:Database,provider:OAuthProviderName,userId:string,profile:OAu
 }
 function createOAuthUser(db:Database,provider:OAuthProviderName,profile:OAuthProfile,now:number):string{
  if(!profile.email)throw new AppError(400,'OAUTH_EMAIL_REQUIRED','이메일 제공에 동의해야 가입할 수 있습니다. 다시 시도해 이메일 제공을 허용해주세요.');
- if(db.prepare('SELECT 1 FROM users WHERE email=?').get(profile.email))throw new AppError(409,'OAUTH_EMAIL_EXISTS','이미 이 이메일로 가입한 계정이 있습니다. 비밀번호로 로그인한 뒤 설정에서 연결해주세요.');
+ // 구글이 소유를 확인하지 않은 이메일로는 계정을 만들지 않는다(남의 이메일 자리를 미리 차지하는 사전 탈취 방지).
+ if(provider==='google'&&!profile.emailVerified)throw new AppError(400,'OAUTH_EMAIL_UNVERIFIED','Google에서 확인되지 않은 이메일이라 가입할 수 없습니다. Google 계정의 이메일을 확인한 뒤 다시 시도해주세요.');
+ if(db.prepare('SELECT 1 FROM users WHERE email=?').get(profile.email))throw new AppError(409,'OAUTH_EMAIL_EXISTS','이미 이 이메일로 가입한 계정이 있습니다. 원래 쓰던 방법(이메일·네이버·구글)으로 로그인한 뒤 설정의 로그인 연결에서 연결해주세요.');
  const id=randomUUID(),nickname=(profile.name.trim()||'NAEO 회원').slice(0,30);
  db.prepare('INSERT INTO users(id,email,password_hash,terms_accepted_at,email_verified_at,created_at,updated_at) VALUES(?,?,?,0,?,?,?)').run(id,profile.email,NO_PASSWORD,profile.emailVerified?now:null,now,now);
  db.prepare('INSERT INTO profiles(user_id,nickname,updated_at) VALUES(?,?,?)').run(id,nickname,now);
@@ -67,34 +69,40 @@ function createOAuthUser(db:Database,provider:OAuthProviderName,profile:OAuthPro
  return id;
 }
 
+/** 콜백 실패에도 원래 가려던 경로를 함께 돌려준다(다시 시도해도 같은 곳으로 이어지게). */
+export class OAuthFlowError extends AppError{constructor(cause:AppError,readonly next:string,readonly intent:'login'|'link'){super(cause.status,cause.code,cause.message);}}
 const callbackInput=z.object({code:z.string().min(1).max(2000).optional(),state:z.string().min(1).max(200),error:z.string().max(100).optional()});
 /**
  * 콜백: state 확인 → 코드 교환(구글 PKCE·nonce) → 연결 또는 로그인/가입.
  * 같은 이메일의 기존 계정에는 자동 연결하지 않는다(계정 탈취 방지). 새 회원은 약관 동의 후 이용.
+ * 연결은 시작한 회원이 지금도 같은 브라우저에 로그인해 있을 때만 완료한다(viewerId).
  */
-export async function completeOAuth(db:Database,provider:OAuthProviderName,input:unknown,binding:string|undefined,now=Date.now()){
+export async function completeOAuth(db:Database,provider:OAuthProviderName,input:unknown,binding:string|undefined,now=Date.now(),viewerId?:string|null){
  const v=callbackInput.parse(input);
  const pending=takeState(db,provider,v.state,binding,now);
- if(v.error||!v.code)throw new AppError(400,'OAUTH_DENIED','로그인을 취소했거나 권한을 허용하지 않았습니다.');
- const cfg=oauthConfig(provider);
- if(!cfg)throw new AppError(503,'OAUTH_NOT_CONFIGURED','로그인 설정이 없습니다(미설정).');
- const profile=await exchange(cfg,{code:v.code,state:v.state,verifier:pending.verifier,redirectUri:redirectUri(provider),nonce:pending.nonce});
- return transaction(db,()=>{
-  if(pending.intent==='link'){
-   const user=userById(db,pending.userId!);
+ try{
+  if(v.error||!v.code)throw new AppError(400,'OAUTH_DENIED','로그인을 취소했거나 권한을 허용하지 않았습니다.');
+  if(pending.intent==='link'&&(viewerId===null||(viewerId!==undefined&&viewerId!==pending.userId)))throw new AppError(401,'OAUTH_SESSION_CHANGED','로그인 상태가 바뀌어 연결을 마치지 못했습니다. 다시 로그인한 뒤 연결해주세요.');
+  const cfg=oauthConfig(provider);
+  if(!cfg)throw new AppError(503,'OAUTH_NOT_CONFIGURED','로그인 설정이 없습니다(미설정).');
+  const profile=await exchange(cfg,{code:v.code,state:v.state,verifier:pending.verifier,redirectUri:redirectUri(provider),nonce:pending.nonce});
+  return transaction(db,()=>{
+   if(pending.intent==='link'){
+    const user=userById(db,pending.userId!);
+    if(user.status!=='active')throw new AppError(403,'ACCOUNT_SUSPENDED','이용이 정지된 계정입니다.');
+    linkTo(db,provider,user.id,profile,now);
+    return{kind:'linked' as const,userId:user.id,next:pending.next,needsTerms:false};
+   }
+   const existing=db.prepare('SELECT user_id AS userId FROM oauth_accounts WHERE provider=? AND subject=?').get(provider,profile.subject) as {userId:string}|undefined;
+   const userId=existing?.userId??createOAuthUser(db,provider,profile,now);
+   const user=userById(db,userId);
    if(user.status!=='active')throw new AppError(403,'ACCOUNT_SUSPENDED','이용이 정지된 계정입니다.');
-   linkTo(db,provider,user.id,profile,now);
-   return{kind:'linked' as const,userId:user.id,next:pending.next,needsTerms:false};
-  }
-  const existing=db.prepare('SELECT user_id AS userId FROM oauth_accounts WHERE provider=? AND subject=?').get(provider,profile.subject) as {userId:string}|undefined;
-  const userId=existing?.userId??createOAuthUser(db,provider,profile,now);
-  const user=userById(db,userId);
-  if(user.status!=='active')throw new AppError(403,'ACCOUNT_SUSPENDED','이용이 정지된 계정입니다.');
-  db.prepare('UPDATE oauth_accounts SET last_login_at=? WHERE provider=? AND subject=?').run(now,provider,profile.subject);
-  const session=createSession(db,userId);
-  audit(db,userId,'account.login','user',userId,{provider});
-  return{kind:'login' as const,userId,next:pending.next,needsTerms:!user.termsAcceptedAt,session};
- });
+   db.prepare('UPDATE oauth_accounts SET last_login_at=? WHERE provider=? AND subject=?').run(now,provider,profile.subject);
+   const session=createSession(db,userId);
+   audit(db,userId,'account.login','user',userId,{provider});
+   return{kind:'login' as const,userId,next:pending.next,needsTerms:!user.termsAcceptedAt,session};
+  });
+ }catch(e){throw e instanceof AppError?new OAuthFlowError(e,pending.next,pending.intent):e;}
 }
 
 export const listConnections=(db:Database,userId:string):Connection[]=>(db.prepare('SELECT provider,email,created_at AS createdAt,last_login_at AS lastLoginAt FROM oauth_accounts WHERE user_id=? ORDER BY provider').all(userId) as Connection[]).map(c=>({...c}));
@@ -119,7 +127,8 @@ export function setInitialPassword(db:Database,userId:string,sessionCreatedAt:nu
  if(hasPassword(db,userId))throw new AppError(409,'PASSWORD_ALREADY_SET','이미 비밀번호가 있습니다. 비밀번호 변경을 이용해주세요.');
  if(now-sessionCreatedAt>REAUTH_WINDOW)throw new AppError(403,'REAUTH_REQUIRED','보안을 위해 다시 로그인한 뒤 10분 안에 설정해주세요.');
  return hashPassword(newPassword).then(hash=>transaction(db,()=>{
-  db.prepare("UPDATE users SET password_hash=?,version=version+1,updated_at=? WHERE id=? AND password_hash NOT LIKE 'scrypt$%'").run(hash,now,userId);
+  const changed=db.prepare("UPDATE users SET password_hash=?,version=version+1,updated_at=? WHERE id=? AND password_hash NOT LIKE 'scrypt$%'").run(hash,now,userId).changes;
+  if(!changed)throw new AppError(409,'PASSWORD_ALREADY_SET','이미 비밀번호가 있습니다. 비밀번호 변경을 이용해주세요.');
   audit(db,userId,'account.password.initial','user',userId);
   return{passwordSet:true};
  }));

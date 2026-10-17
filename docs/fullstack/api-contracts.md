@@ -319,7 +319,7 @@ worker(`npm run worker`)가 진단과 생성 작업을 함께 처리한다. Open
 | `/api/account/oauth/:provider` | DELETE | 회원 | 연결 해제 | 404, 409 `LAST_LOGIN_METHOD` |
 | `/api/account/password/initial` | POST | 회원 | `{newPassword}` OAuth 가입 회원의 첫 비밀번호(세션 생성 10분 안) | 403 `REAUTH_REQUIRED`, 409 `PASSWORD_ALREADY_SET` |
 
-설정: `NAEO_GOOGLE_CLIENT_ID/SECRET`, `NAEO_NAVER_CLIENT_ID/SECRET`(리디렉션 URI `{NAEO_APP_URL}/api/auth/oauth/{google|naver}/callback`). `NAEO_OAUTH_ENDPOINT_BASE`는 로컬 검증 전용(localhost만). `/auth/google`·`/auth/naver`는 시작 주소로 이동.
+설정: `NAEO_GOOGLE_CLIENT_ID/SECRET`, `NAEO_NAVER_OAUTH_CLIENT_ID/SECRET`(리디렉션 URI `{NAEO_APP_URL}/api/auth/oauth/{google|naver}/callback`). `NAEO_OAUTH_ENDPOINT_BASE`는 로컬 검증 전용(localhost만). `/auth/google`·`/auth/naver`는 시작 주소로 이동.
 
 ## P7.2·P7.3 OAuth 인가 서버·MCP (2026-10-14)
 

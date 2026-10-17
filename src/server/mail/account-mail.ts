@@ -38,6 +38,10 @@ export async function resetPassword(db:Database,input:unknown){
  const {token,newPassword}=resetInput.parse(input);validLink(db,token,'reset');const hash=await hashPassword(newPassword);
  return transaction(db,()=>{
   const {userId}=validLink(db,token,'reset'),now=Date.now();
+  // 이메일 소유가 아직 확인되지 않은 계정(예: 네이버 가입)은 다른 사람이 같은 이메일로 먼저 만든 것일 수 있다.
+  // 재설정 메일로 처음 소유가 증명되는 순간 기존 소셜 연결을 끊어, 미리 걸어 둔 연결로 로그인하지 못하게 한다.
+  const unverified=(db.prepare('SELECT email_verified_at AS v FROM users WHERE id=?').get(userId) as {v:number|null}).v===null;
+  if(unverified&&db.prepare('DELETE FROM oauth_accounts WHERE user_id=?').run(userId).changes>0)audit(db,userId,'account.oauth.purge_on_reset','user',userId);
   db.prepare('UPDATE users SET password_hash=?,email_verified_at=coalesce(email_verified_at,?),version=version+1,updated_at=? WHERE id=?').run(hash,now,now,userId);
   db.prepare('DELETE FROM sessions WHERE user_id=?').run(userId);revokeUserGrants(db,userId,now);
   audit(db,userId,'password.reset','user',userId);return{changed:true};

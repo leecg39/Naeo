@@ -42,8 +42,15 @@ export async function changePassword(db:Database,userId:string,input:unknown) {
     return createSession(db,userId);
   });
 }
-export async function deleteAccount(db:Database,userId:string,input:unknown) {
-  const valid=deleteAccountInput.parse(input),previous=await reauthenticate(db,userId,valid.currentPassword);
+/** 비밀번호 회원은 비밀번호로, 간편 로그인(비밀번호 없음) 회원은 로그인한 지 10분 안의 세션으로 본인을 확인한다. */
+export const SOCIAL_REAUTH_WINDOW=10*60_000;
+export async function deleteAccount(db:Database,userId:string,input:unknown,sessionCreatedAt?:number,now=Date.now()) {
+  const valid=deleteAccountInput.parse(input);
+  const row=db.prepare('SELECT password_hash AS h FROM users WHERE id=?').get(userId) as {h:string}|undefined;
+  if(!row) throw new AppError(401,'UNAUTHENTICATED','다시 로그인해주세요.');
+  const social=!row.h.startsWith('scrypt$');
+  if(social&&(sessionCreatedAt===undefined||now-sessionCreatedAt>SOCIAL_REAUTH_WINDOW)) throw new AppError(403,'REAUTH_REQUIRED','보안을 위해 소셜 계정으로 다시 로그인한 뒤 10분 안에 탈퇴해주세요.');
+  const previous=social?row.h:await reauthenticate(db,userId,valid.currentPassword??'');
   return transaction(db,()=>{
     const user=assertReauthenticated(db,userId,previous);
     if(user.version!==valid.version) throw new AppError(409,'VERSION_CONFLICT','계정이 변경되었습니다. 최신 정보를 다시 불러와주세요.');

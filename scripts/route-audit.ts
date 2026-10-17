@@ -19,7 +19,7 @@ const RULES:Rule[]=[
  {match:/^\/admin\/writing$/,tests:t('writing-admin','generation-http'),sections:['P4.5'],access:'admin'},
  {match:/^\/admin$/,tests:t('foundation','account-http'),sections:['기반 구현'],access:'admin'},
  {match:/^\/auth\/extension$/,tests:t('oauth-server','mcp'),sections:['P7.2·P7.3'],access:'public',external:'Chrome Web Store 등록 확장 ID(NAEO_EXTENSION_IDS)와 배포 HTTPS 실환경 검증. 확장 본체·OAuth/MCP·네이버 편집기 전달은 로컬 검증 완료'},
- {match:/^\/auth\/google$/,tests:t('oauth'),sections:['P7.1'],access:'redirect',to:'/api/auth/oauth/google/start',external:'Google·네이버 앱 키(NAEO_GOOGLE_*/NAEO_NAVER_*)'},
+ {match:/^\/auth\/google$/,tests:t('oauth'),sections:['P7.1'],access:'redirect',to:'/api/auth/oauth/google/start',external:'Google·네이버 앱 키(NAEO_GOOGLE_*/NAEO_NAVER_OAUTH_*)'},
  {match:/^\/blog/,tests:t('articles','blog-pages','article-seed','admin-articles'),sections:['P2.1','P2.2·P2.3'],access:'public'},
  {match:/^\/contact$/,tests:t('inquiries','inquiry-http'),sections:['P2.4'],access:'public'},
  {match:/^\/dashboard\/ai-picks$/,tests:t('ai-picks-page','analysis','citations','citations-http'),sections:['P3.3 AI 인용 확인','P3.4 무료 진단'],access:'member',external:'AI 인용 확인 SerpApi 키(NAEO_CITATION_PROVIDER·NAEO_SERPAPI_KEY) 실제 왕복'},

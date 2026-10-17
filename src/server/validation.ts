@@ -24,7 +24,8 @@ export const deleteInput = z.object({version}).strict();
 export const paginationInput = z.object({page:z.coerce.number().int().min(1).max(100000).default(1),pageSize:z.coerce.number().int().min(1).max(100).default(20),q:z.string().trim().max(100).default('')});
 export const reauthenticateInput=z.object({currentPassword:z.string().min(1).max(128)}).strict();
 export const changePasswordInput=reauthenticateInput.extend({newPassword:password}).strict();
-export const deleteAccountInput=reauthenticateInput.extend({confirmEmail:email,version}).strict();
+/** 비밀번호가 없는 간편 로그인 회원은 currentPassword 없이 최근 로그인(10분)으로 확인한다. 비밀번호 회원에게는 서버가 필수로 요구한다. */
+export const deleteAccountInput=z.object({currentPassword:z.string().min(1).max(128).optional(),confirmEmail:email,version}).strict();
 export const acceptTermsInput=z.object({termsAccepted:z.literal(true)}).strict();
 export const createUserInput=z.object({email,nickname,password,role:z.enum(['member','admin']).default('member'),currentPassword:z.string().min(1).max(128)}).strict();
 export const updateUserInput=z.object({role:z.enum(['member','admin']).optional(),status:z.enum(['active','suspended']).optional(),nickname:nickname.optional(),version,currentPassword:z.string().min(1).max(128)}).strict().refine(v=>v.role!==undefined||v.status!==undefined||v.nickname!==undefined,'수정할 항목이 필요합니다.');
