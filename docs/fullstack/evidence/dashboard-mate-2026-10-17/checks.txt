@@ -1,0 +1,6 @@
+npm test: PASS — 12 generic tests + 493 server tests = 505, failures 0
+npm run lint: PASS
+npm run typecheck: PASS
+npm run build: PASS
+git diff --check: PASS
+Ego Lite: actual diagnosis -> report -> dashboard, subject selection, empty subject, 1428x747 and 390x844 PASS

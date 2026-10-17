@@ -141,3 +141,8 @@
 - P11.8 진행: Ego의 실제 운영체제 붙여넣기로 `![wide.jpg](.../api/images/{token})` 문자열을 확인했다. 최신 서버에서 공개 링크200→철회 후404·성공 안내 포커스·재복사 시 새 토큰200을 검증했다. 확장은 공개 사진을 PNG 클립보드 이미지로 변환하고 본문의 사진 표식을 선택하도록 구현했으며 실제 네이버 편집기 붙여넣기는 P7.6과 함께 남긴다. `docs/fullstack/extension-publish-extension.md`.
 - P11.3 포커스 보강: 실제 Ego에서 반복 확인된 “조작 버튼 제거 후 BODY 포커스 손실” 패턴을 나머지 관리자 CRUD 11개 화면에도 공통 `OperationNotice`로 적용하고 typecheck·lint·production build를 통과했다. 목록 대표 경로의 실제 Ego 재검증은 P11.3 완료 근거에 포함했다. `docs/fullstack/admin-operation-focus-2026-10-16.md`.
 - P11.3 포커스 보강: 같은 성공 안내 포커스 규칙을 회원 설정·보안·결제·연결·포인트 및 초안·사진·공유 CRUD 12개 컴포넌트에도 적용하고 typecheck·lint·production build를 통과했다. 회원 포인트·결제/환불·사진·공유 대표 경로는 실제 Ego 기록으로 확인했다.
+
+### 2026-10-17 블로그 진단 도식화 및 대시보드 연결
+
+- [x] 첨부 대시보드 PDF를 참고해 종합 점수 게이지·5개 기준 레이더·진행 막대·실제 측정 추세·인용률 도식 구현. [구현·검증](docs/fullstack/evidence/dashboard-visualization-2026-10-17/README.md).
+- [x] `/dashboard` 피드백 반영: 기존 무료 진단과 스캔을 블로그별로 연결, 최신 개선 항목 표시, 블로그 선택·리포트에서 대시보드 이동. 실제 진단 API와 Ego 데스크톱/모바일 흐름 검증. [연결·검증](docs/fullstack/evidence/dashboard-mate-2026-10-17/README.md).

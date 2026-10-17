@@ -1,0 +1,37 @@
+{
+  "browser": "Ego Lite",
+  "viewports": [
+    [
+      1428,
+      747
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "diagnosisFlow": "/mate -> POST /api/mate/diagnose -> report -> /dashboard?blog=visual_blog",
+  "visualBlog": {
+    "score": 95,
+    "postCount": 9,
+    "measurements": 4
+  },
+  "selectedSecondBlog": {
+    "score": 82,
+    "postCount": 1,
+    "measurements": 1,
+    "recommendations": 1
+  },
+  "emptyPrimary": {
+    "score": null,
+    "measurements": 0
+  },
+  "mobile": {
+    "innerWidth": 390,
+    "scrollWidth": 390,
+    "criteriaCount": 5
+  },
+  "isolatedDatabase": true,
+  "testSessionRemoved": true,
+  "taskSpaceFinished": true
+}

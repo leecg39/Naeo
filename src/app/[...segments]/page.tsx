@@ -100,9 +100,9 @@ export default async function Page({params,searchParams}:Props){
   const user=await pageUser(path);
   const memberView=(data:CapturedPageData)=><><PageExperience data={memberChrome(database(),user.id,data)}/><PageAnnouncements path={path}/></>;
   // 대시보드는 로그인 회원 본인의 블로그·진단 결과로 채운다(원본 계정 데이터 미노출).
-  if(path==='/dashboard')return <>{memberView(await buildDashboardPage(database(),user.id))}<EngagementPanel initialPoints={points(database(),user.id,{pageSize:10})} initialTutorial={tutorial(database(),user.id)} floating/></>;
+  if(path==='/dashboard')return <>{memberView(await buildDashboardPage(database(),user.id,Date.now(),first((await searchParams).blog)))}<EngagementPanel initialPoints={points(database(),user.id,{pageSize:10})} initialTutorial={tutorial(database(),user.id)} floating/></>;
   if(path==='/dashboard/mate')return memberView(await buildMateDashboardPage(database(),user.id));
-  if(path==='/dashboard/ai-picks')return memberView(await buildAiPicksPage(database(),user.id));
+  if(path==='/dashboard/ai-picks')return memberView(await buildAiPicksPage(database(),user.id,Date.now(),first((await searchParams).blog)));
   if(path==='/dashboard/competitors')return memberView(await buildCompetitorsPage(database(),user.id));
   if(path==='/dashboard/events'){const query=eventHistoryQuery.safeParse(flat(await searchParams));if(!query.success)notFound();return memberView(await buildDashboardEventsPage(contentDatabase(),user.id,Date.now(),query.data));}
   const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];

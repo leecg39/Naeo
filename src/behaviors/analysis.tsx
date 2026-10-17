@@ -156,6 +156,11 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
     exposed: element.dataset.exposed === "true", briefing: element.dataset.briefing === "true", recommended: element.dataset.cited === "true",
   }));
   cleanup.push(() => rows.forEach(row => container.append(row.element)));
+  const requestedResult = new URLSearchParams(window.location.search).get("open");
+  if (requestedResult && rows.some(row => row.resultId === requestedResult)) {
+    const timer = setTimeout(() => tools.openDialog("AI 인용 상세", <CitationDetail id={requestedResult} tools={tools} />), 0);
+    cleanup.push(() => clearTimeout(timer));
+  }
   const filters = elements(root, ".mui-5vm3uw > button");
   const active = filters[0]?.className;
   const inactive = filters[1]?.className;
@@ -293,22 +298,8 @@ function installAi(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<t
 }
 
 function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: ReturnType<typeof mutations>, cleanup: Cleanup[]) {
-  // Recharts snapshots retain their measured desktop width. Preserve the SVG
-  // viewBox while letting its real chart DOM fit narrower layouts.
-  elements(root, ".recharts-responsive-container").forEach(container => {
-    const inner = container.firstElementChild;
-    const chart = container.querySelector(".recharts-wrapper");
-    const legend = container.querySelector(".recharts-legend-wrapper");
-    [inner, chart, legend].forEach(el => { if (el) mutate.attr(el, "style", `${el.getAttribute("style") || ""};width:100%;max-width:100%`); });
-  });
-  const chartTabs = elements(root, "[aria-label='성장 추세 기간'] button");
-  const categoryTabs = elements(root, "[aria-label='랭킹 범위'] button");
   const feedTabs = elements(root, ".mui-f4pwje button");
-  const chartActive = chartTabs.find(el => el.getAttribute("aria-selected") === "true")?.className;
-  const chartInactive = chartTabs[0]?.className;
-  const categoryActive = categoryTabs[0]?.className; const categoryInactive = categoryTabs[1]?.className;
   const feedActive = feedTabs[1]?.className; const feedInactive = feedTabs[0]?.className;
-  const rank = root.querySelector<HTMLElement>(".mui-63uc4g");
   // 실제 진단: 서버가 넣어 준 data-scan-blog/data-scan-job으로 작업을 만들고 상태를 폴링한다.
   const scanButton = root.querySelector<HTMLButtonElement>("button[data-scan-blog]") || undefined;
   let polling = false;
@@ -353,41 +344,6 @@ function installDashboard(root: HTMLElement, tools: BehaviorTools, mutate: Retur
   if (scanButton?.dataset.scanJob) poll(scanButton.dataset.scanJob);
   return (target: HTMLElement) => {
     const button = target.closest<HTMLElement>("button");
-    if (button && chartTabs.includes(button)) {
-      selectGroup(chartTabs, button, mutate, chartActive, chartInactive);
-      const days = text(button) === "전체" ? 2 : number(text(button));
-      const subtitle = root.querySelector(".mui-xb6up5 .mui-47u1fc");
-      mutate.content(subtitle, `${text(button) === "전체" ? "전체 기간" : `최근 ${days}일`} · 분석 기록 2회 · AI 추천 1건 / 통합검색 노출 7건`);
-      const svg = root.querySelector<SVGSVGElement>(".mui-xb6up5 svg[role='application']");
-      if (svg) {
-        const startX = 1091 - 1063 / Math.max(1, days - 1);
-        svg.querySelectorAll<SVGPathElement>(".recharts-area-curve, .recharts-area-area").forEach(path => {
-          const curve = path.getAttribute("d") || "";
-          mutate.attr(path, "d", curve.replace(/^M[\d.]+,/, `M${startX},`).replace(/L[\d.]+,184\.805Z$/, `L${startX},184.805Z`));
-        });
-        svg.querySelectorAll<SVGCircleElement>("circle").forEach(circle => { if (Number(circle.getAttribute("cx")) !== 1091) mutate.attr(circle, "cx", String(startX)); });
-        const date = new Date(2026, 9, 13); date.setDate(date.getDate() - days + 1);
-        const startLabel = svg.querySelector(".recharts-xAxis tspan");
-        mutate.content(startLabel, `${date.getMonth() + 1}/${date.getDate()}`);
-        mutate.attr(svg, "aria-label", `${text(button)} 성장 추세. 10월 12일 0건, 10월 13일 AI 추천 1건, 통합검색 노출 7건.`);
-      }
-      return true;
-    }
-    if (button && categoryTabs.includes(button)) {
-      selectGroup(categoryTabs, button, mutate, categoryActive, categoryInactive);
-      const category = text(button);
-      mutate.content(rank?.querySelector(".mui-47u1fc") || null, category === "모든 블로그" ? "모든 블로그 중 내 순위" : "비즈니스·경제 블로그 중 내 순위 · 매일 0시 집계");
-      const categoryMode = category !== "모든 블로그";
-      elements(rank || root, ".mui-tprmff").forEach(card => {
-        const value = card.querySelector(".mui-1c2fwzk");
-        const description = card.querySelector(".mui-qtwa3i");
-        if (!card.dataset.originalRank) { card.dataset.originalRank = text(value); card.dataset.originalPopulation = text(description); }
-        mutate.content(value, categoryMode ? "-" : card.dataset.originalRank);
-        mutate.content(description, categoryMode ? "순위 데이터 없음" : card.dataset.originalPopulation || "");
-        mutate.attr(card.querySelector(".mui-16eue6i"), "style", categoryMode ? "display:none" : null);
-      });
-      return true;
-    }
     if (button && feedTabs.includes(button)) {
       selectGroup(feedTabs, button, mutate, feedActive, feedInactive);
       const days = text(button) === "일주일" ? 7 : text(button) === "한달" ? 30 : Infinity;
@@ -429,12 +385,13 @@ export const installAnalysis: InstallBehavior = (root, tools) => {
   const handle = tools.pathname === "/dashboard/ai-picks" ? installAi(root, tools, mutate, cleanup) : tools.pathname === "/dashboard" ? installDashboard(root, tools, mutate, cleanup) : () => false;
   const click = (event: MouseEvent) => {
     const target = event.target instanceof Element ? event.target.closest<HTMLElement>("*") : null;
-    if (!target || event.defaultPrevented) return;
+    if (!target || event.defaultPrevented || target.closest("[data-naeo-live]")) return;
     if (handle(target)) { event.preventDefault(); return; }
     const search = target.closest<HTMLElement>("[role='link'][aria-label$='네이버 검색']");
     if (search) { event.preventDefault(); window.open(`https://search.naver.com/search.naver?query=${encodeURIComponent(text(search))}`, "_blank", "noopener,noreferrer"); }
   };
   const key = (event: KeyboardEvent) => {
+    if (event.target instanceof Element && event.target.closest("[data-naeo-live]")) return;
     if (event.target instanceof HTMLElement && event.target.matches("[role='tab']") && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
       const group = event.target.closest("[role='tablist']");
       const tabs = group ? elements(group, "[role='tab']") : [];

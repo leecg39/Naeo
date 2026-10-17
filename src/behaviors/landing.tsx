@@ -77,8 +77,8 @@ export const installLanding: InstallBehavior = (root, tools) => {
     const el = document.createElement(tag); el.textContent = content; el.style.cssText = css; parent.append(el); return el;
   };
 
-  // 로그인하지 않았으면 /dashboard/mate가 서버에서 로그인 화면으로 보낸다(세션 쿠키는 HttpOnly라 여기서 읽지 않는다).
-  const showReport = (report: MateReport) => tools.openDialog("내 블로그 진단 리포트", <MateReportView report={report} onContinue={() => { tools.closeDialog(); tools.navigate("/dashboard/mate"); }} />);
+  // 로그인하지 않았으면 /dashboard가 서버에서 로그인 화면으로 보낸다(세션 쿠키는 HttpOnly라 여기서 읽지 않는다).
+  const showReport = (report: MateReport) => tools.openDialog("내 블로그 진단 리포트", <MateReportView report={report} onContinue={() => { tools.closeDialog(); tools.navigate(`/dashboard?blog=${encodeURIComponent(report.naverId)}`); }} />);
   const sharedToken = tools.pathname === "/mate/s" ? new URLSearchParams(window.location.search).get("r") : null;
   if (sharedToken && /^[A-Za-z0-9_-]{22}$/.test(sharedToken)) {
     api<MateReport>(`/api/mate/reports/${sharedToken}`).then(showReport).catch(error => tools.toast(error instanceof Error ? error.message : "리포트를 열지 못했습니다."));

@@ -1,0 +1,12 @@
+{
+  "verifiedAt": "2026-10-17T03:44:48.936Z",
+  "score": 95,
+  "postCount": 9,
+  "checks": [
+    "Actual production POST /api/mate/diagnose with loopback RSS",
+    "Saved report renders on /dashboard?blog=visual_blog with five criteria",
+    "Existing diagnoses are available without scans",
+    "History links to the corresponding dashboard"
+  ],
+  "browserVerified": false
+}

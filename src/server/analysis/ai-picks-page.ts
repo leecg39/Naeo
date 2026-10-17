@@ -103,10 +103,11 @@ function emptyRow(v:CitationOverview):El{
 }
 
 /** /dashboard/ai-picks: 캡처를 틀로 회원 본인의 최근 AI 인용 확인 결과를 채운다(원본 계정 데이터는 남기지 않는다). */
-export async function buildAiPicksPage(db:Database,userId:string,now=Date.now()):Promise<CapturedPageData>{
+export async function buildAiPicksPage(db:Database,userId:string,now=Date.now(),naverId?:string):Promise<CapturedPageData>{
  const tpl=await getCapturedPage('/dashboard/ai-picks');
  if(!tpl)throw new Error('ai-picks template missing');
- const v=citationOverview(db,userId,{config:citationConfig(),now}),r=v.report;
+ const selected=naverId?(db.prepare('SELECT id FROM blogs WHERE owner_id=? AND naver_id=?').get(userId,naverId) as {id:string}|undefined)?.id??null:undefined;
+ const v=citationOverview(db,userId,{blogId:selected,config:citationConfig(),now}),r=v.report;
  const container=mustFind(tpl.body,cls('mui-uien4a'),'ai-picks rows'),t=templates(container);
  const categoryTpl=mustFind(tpl.body,cls('mui-x14t34'),'category row');
  const counts=[`전체 ${r?.total??0}`,`통합검색 노출 ${r?.exposed??0}`,`AI 브리핑 ${r?.briefing??0}`,`AI 추천됨 ${r?.cited??0}`];

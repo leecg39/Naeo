@@ -41,7 +41,7 @@ async function copyText(value: string) {
   if (!copied) throw new Error('clipboard unavailable');
 }
 
-export default function CapturedView({ data, install }: { data: CapturedPageData; install?: InstallBehavior }) {
+export default function CapturedView({ data, install,slots }: { data: CapturedPageData; install?: InstallBehavior;slots?:Record<string,ReactNode> }) {
   const root = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -199,7 +199,7 @@ export default function CapturedView({ data, install }: { data: CapturedPageData
   const css = useMemo(() => theme === 'light' ? lightPalette(data.css) : data.css, [data.css, theme]);
   return <>
     <style data-naeo-captured-styles={data.path}>{css}</style>
-    <div ref={root} data-naeo-captured-root={data.path}><NodeRenderer nodes={data.body} /></div>
+    <div ref={root} data-naeo-captured-root={data.path}><NodeRenderer nodes={data.body} slots={slots}/></div>
     <SharedDialogs dialog={dialog} menuOpen={menuOpen} toast={message} onClose={closeDialog} onNavigate={navigate} onAuth={openAuth} />
   </>;
 }

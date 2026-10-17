@@ -15,9 +15,9 @@ export function createActionItems(db:Database,ownerId:string,resultId:string,rep
  for(const a of report.actions)insert.run(randomUUID(),ownerId,resultId,a.criterion,a.title,now,now);
 }
 
-/** 가장 최근 진단 결과의 할 일(대표 블로그 우선). */
-export function listActionItems(db:Database,ownerId:string):ActionItem[]{
- const latest=db.prepare('SELECT r.id FROM scan_results r JOIN blogs b ON b.id=r.blog_id WHERE r.owner_id=? ORDER BY b.is_primary DESC,r.measured_at DESC LIMIT 1').get(ownerId) as {id:string}|undefined;
+/** 지정한 진단 결과의 할 일. 생략하면 가장 최근 결과(대표 블로그 우선)를 사용한다. */
+export function listActionItems(db:Database,ownerId:string,resultId?:string):ActionItem[]{
+ const latest=resultId?{id:resultId}:db.prepare('SELECT r.id FROM scan_results r JOIN blogs b ON b.id=r.blog_id WHERE r.owner_id=? ORDER BY b.is_primary DESC,r.measured_at DESC LIMIT 1').get(ownerId) as {id:string}|undefined;
  if(!latest)return[];
  return (db.prepare(`${SELECT} WHERE owner_id=? AND result_id=? ORDER BY created_at,id`).all(ownerId,latest.id) as ActionItem[]).map(r=>({...r}));
 }

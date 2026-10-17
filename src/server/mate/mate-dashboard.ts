@@ -14,7 +14,8 @@ function item(r:MateReport):El{
    el('strong',{style:'font-size:15px;overflow-wrap:anywhere'},[`${r.naverId} · ${r.report.score}점`]),
    el('span',{style:'font-size:13px;color:#a3a3a3'},[`${KST.format(new Date(r.createdAt))} · 공개 글 ${r.postCount}개 · 할 일 ${r.report.actions.length}개`])
   ]),
-  el('div',{style:'display:flex;gap:8px'},[
+  el('div',{style:'display:flex;flex-wrap:wrap;gap:8px'},[
+   el('a',{href:`/dashboard?blog=${encodeURIComponent(r.naverId)}`,style:'color:#03c75a;font-weight:700;font-size:14px'},['대시보드에서 보기']),
    el('a',{href:`/mate/s?r=${r.token}`,style:'color:#03c75a;font-weight:700;font-size:14px'},['리포트 보기']),
    el('button',{type:'button','data-mate-delete':r.token,'aria-label':`${r.naverId} 진단 기록 삭제`,style:'background:transparent;border:1px solid rgba(255,255,255,.3);color:inherit;border-radius:8px;padding:4px 10px;cursor:pointer;font:inherit;font-size:13px'},['삭제'])
   ])

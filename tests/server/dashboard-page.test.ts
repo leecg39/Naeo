@@ -71,8 +71,10 @@ test('results drive headline, metrics, chart, to-dos and the change feed',async 
  const metrics=all(page.body,n=>n.attrs['aria-label']==='핵심 지표')[0];
  assert.match(text(metrics),new RegExp(`진단 점수${latest.score}점`));
  assert.match(text(metrics),/분석한 글10개/);
- const chart=all(page.body,n=>n.attrs['data-score-chart']==='true')[0];
- assert.equal(all([chart],n=>n.tag==='circle').length,2,'one point per scan');
+ assert.equal(all(page.body,n=>n.attrs['data-naeo-slot']==='dashboard-charts').length,1);
+ assert.equal(page.dashboard?.history.length,2,'one measurement per scan, for the interactive chart');
+ assert.equal(page.dashboard?.history[0].score,latest.score);
+ assert.equal(all(page.body,n=>(n.attrs.class??'').includes('recharts-surface')).length,0,'no captured chart values remain');
  const feed=byClass(page.body,'mui-hgyhg8')[0];
  assert.equal(feed.children.length,2);
  assert.match(text(feed.children[0]),/2시간 전/);assert.match(text(feed.children[1]),/3일 전/);

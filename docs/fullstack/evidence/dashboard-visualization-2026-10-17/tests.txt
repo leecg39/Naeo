@@ -1,0 +1,9 @@
+npm test
+ℹ tests 12
+ℹ pass 12
+ℹ fail 0
+ℹ duration_ms 323.775333
+ℹ tests 488
+ℹ pass 488
+ℹ fail 0
+ℹ duration_ms 35855.645583

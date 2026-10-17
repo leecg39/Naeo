@@ -81,9 +81,9 @@ export function summarize(rows:CitationRow[]){
   categories:[...categories.values()].sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name))};
 }
 
-/** AI 인용 현황: 대표 블로그(또는 지정 블로그)의 가장 최근 성공한 확인 결과와 진행 중 작업. */
-export function citationOverview(db:Database,ownerId:string,{blogId,config,now=Date.now()}:{blogId?:string;config:CitationConfig|null;now?:number}){
- const blog=(blogId?db.prepare('SELECT id,naver_id AS naverId,title FROM blogs WHERE id=? AND owner_id=?').get(blogId,ownerId):db.prepare('SELECT id,naver_id AS naverId,title FROM blogs WHERE owner_id=? ORDER BY is_primary DESC,created_at LIMIT 1').get(ownerId)) as {id:string;naverId:string;title:string}|undefined;
+/** AI 인용 현황: 대표 블로그 또는 지정 블로그. blogId=null은 미연결 진단으로 결과 없음. */
+export function citationOverview(db:Database,ownerId:string,{blogId,config,now=Date.now()}:{blogId?:string|null;config:CitationConfig|null;now?:number}){
+ const blog=(blogId===null?undefined:blogId?db.prepare('SELECT id,naver_id AS naverId,title FROM blogs WHERE id=? AND owner_id=?').get(blogId,ownerId):db.prepare('SELECT id,naver_id AS naverId,title FROM blogs WHERE owner_id=? ORDER BY is_primary DESC,created_at LIMIT 1').get(ownerId)) as {id:string;naverId:string;title:string}|undefined;
  if(blogId&&!blog)throw new AppError(404,'BLOG_NOT_FOUND','블로그를 찾을 수 없습니다.');
  const base={configured:!!config,remaining:remainingCitationsToday(db,ownerId,now),limit:DAILY_CITATION_LIMIT,postsPerRun:CITATION_POSTS};
  if(!blog)return{...base,blog:null,activeRun:null,lastRun:null,report:null};

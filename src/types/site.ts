@@ -1,4 +1,4 @@
 export type CapturedNode = string | { tag: string; attrs: Record<string,string>; children: CapturedNode[] };
-export interface CapturedPageData { path: string; title: string; description: string; css: string; body: CapturedNode[]; source: string; capturedAt: string; states?: Record<string, CapturedNode[]>; }
+export interface CapturedPageData { path: string; title: string; description: string; css: string; body: CapturedNode[]; source: string; capturedAt: string; states?: Record<string, CapturedNode[]>; dashboard?: import('../lib/dashboard-visualization').DashboardVisualization; }
 export interface RouteRecord { path: string; title: string; kind: "public"|"dashboard"|"admin"|"auth"|"utility"|"redirect"; evidence: "observed"|"static"|"unavailable"; }
 export interface Keyword { id:string; keyword:string; pc:number; mobile:number; documents:number; saturation:number; golden:boolean; status:"new"|"recommended"|"written"; }

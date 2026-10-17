@@ -97,8 +97,10 @@ function imageLoaded(event: SyntheticEvent<HTMLImageElement>) {
   }
 }
 
-function renderNode(node: CapturedNode, key: string): ReactNode {
+function renderNode(node: CapturedNode, key: string, slots?:Record<string,ReactNode>): ReactNode {
   if (typeof node === 'string') return node;
+  const slot=node.attrs['data-naeo-slot'];
+  if(slot&&slots&&Object.hasOwn(slots,slot))return createElement('div',{key},slots[slot]);
   const lowerTag = node.tag.toLowerCase();
   if (blockedTags.has(lowerTag)) return null;
   const tag = svgTags[lowerTag] || lowerTag;
@@ -134,9 +136,9 @@ function renderNode(node: CapturedNode, key: string): ReactNode {
     if (selected && typeof selected !== 'string') props.defaultValue = selected.attrs.value ?? selected.children.join('');
   }
   if (voidTags.has(tag)) return createElement(tag, props);
-  return createElement(tag, props, ...node.children.map((child, index) => renderNode(child, `${key}.${index}`)));
+  return createElement(tag, props, ...node.children.map((child, index) => renderNode(child, `${key}.${index}`,slots)));
 }
 
-export const NodeRenderer = memo(function NodeRenderer({ nodes }: { nodes: CapturedNode[] }) {
-  return <>{nodes.map((node, index) => renderNode(node, String(index)))}</>;
+export const NodeRenderer = memo(function NodeRenderer({ nodes,slots }: { nodes: CapturedNode[];slots?:Record<string,ReactNode> }) {
+  return <>{nodes.map((node, index) => renderNode(node, String(index),slots))}</>;
 });
