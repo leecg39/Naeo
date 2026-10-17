@@ -23,6 +23,19 @@ export function performance(r:Pick<CitationRow,'status'|'briefing'|'textRank'|'i
  return parts.length?parts.join(' · '):r.briefing?'미추천':'-';
 }
 
+const lightShell=`
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-h1pps5 {background:#f7f7f7;color:#262626}
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-1743wks,
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-h2iker,
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-1aa9dm1,
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-5ii4gy {background:#fff;border-color:#e2e8f0;color:#1e293b}
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-1v5qcm9 {background:#f8fafc;border-color:#e2e8f0;color:#475569}
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-ocdnov,
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-q6fgsd,
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-5nlkae {border-color:#e2e8f0;color:#1e293b}
+html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-sa9fe7 {color:#0f172a}
+`;
+
 type Templates={rows:Record<'plain'|'exposed'|'cited',El>;o:El;x:El;plainPerf:El;citedPerf:El};
 function templates(container:El):Templates{
  const rows=container.children.filter(isEl);
@@ -39,15 +52,18 @@ function row(t:Templates,r:CitationRow):El{
  const button=manage.children.filter(isEl)[0],perfText=performance(r);
  const perfNode=r.cited?withChildren(t.citedPerf,[...t.citedPerf.children.filter(isEl),` ${perfText}`]):set(t.plainPerf,perfText);
  const saturation=r.saturation===null?'-':`${(r.saturation*100).toFixed(1)}%`;
+ const satNode=r.saturation!==null&&r.saturation<0.5?withAttrs(set(metricUnit,`/ ${saturation}`),{style:'color:#03c75a;font-weight:600'}):set(metricUnit,`/ ${saturation}`);
+ const titleNodes:CapturedNode[]=r.category?[{tag:'span',attrs:{class:'naeo-post-category',style:'display:block;font-size:11px;color:#94a3b8;font-weight:500;line-height:1.2;margin-bottom:2px'},children:[r.category]},set(withAttrs(link,{href:r.url}),r.title||'(제목 없음)')]:[set(withAttrs(link,{href:r.url}),r.title||'(제목 없음)')];
  return withAttrs(withChildren(tpl,[
   withChildren(dates,[set(checkedSpan,md(r.checkedAt)),set(pubSpan,` / ${published(r.publishedAt,r.checkedAt)}`)]),
-  withChildren(title,[set(withAttrs(link,{href:r.url}),r.title||'(제목 없음)')]),
+  withChildren(title,titleNodes),
   withChildren(withAttrs(keyword,{'aria-label':`${r.keyword} 네이버 검색`,title:SOURCE_LABEL[r.keywordSource]}),[icon,set(keywordText,r.keyword)]),
-  withChildren(metric,[withChildren(metricText,[`${r.volume??'-'} `,set(metricUnit,`/ ${saturation}`)])]),
+  withChildren(metric,[withChildren(metricText,[`${r.volume!==null?r.volume.toLocaleString('ko-KR'):'-'} `,satNode])]),
   withChildren(exposure,[r.status==='error'?set(t.x,'-'):r.exposed?t.o:t.x]),
   withChildren(perf,[perfNode]),
   withChildren(manage,[withAttrs(button,{'data-result-id':r.id,'aria-label':`${r.title||r.keyword} 인용 상세 보기`})])
  ]),{'data-result-id':r.id,'data-post-id':r.postId,'data-category':r.category||'미분류','data-status':r.status,'data-briefing':String(r.briefing),'data-exposed':String(r.exposed),'data-cited':String(r.cited),
+  'data-text-cited':String(r.textRank!==null),'data-image-cited':String(r.imageRank!==null),
   'data-keyword':r.keyword,'data-keyword-source':r.keywordSource,'data-keyword-version':String(r.keywordVersion),'data-volume':String(r.volume??-1),'data-saturation':String(r.saturation??-1),'data-checked-at':String(r.checkedAt),'data-published-at':String(r.publishedAt??0)});
 }
 function categoryRow(tpl:El,c:CategoryShare):El{
@@ -118,8 +134,9 @@ export async function buildAiPicksPage(db:Database,userId:string,now=Date.now(),
   if(n.attrs['aria-label']==='AI 인용 현황 핵심 지표')return[withChildren(n,n.children.map(c=>isEl(c)&&cls('mui-h2iker')(c)?metricCard(c,v):c))];
   if(cls('mui-17xv4e')(n))return[withChildren(n,r&&r.categories.length?r.categories.map(c=>categoryRow(categoryTpl,c)):[{tag:'p',attrs:{style:'color:#a3a3a3;font-size:13px;margin:8px 0 0'},children:['데이터 없음']}])];
   if(cls('mui-5vm3uw')(n)){let i=0;return[withChildren(n,n.children.map(c=>isEl(c)&&c.tag==='button'?set(c,counts[i++]??textOf(c)):c))];}
+  if(cls('mui-1v5qcm9')(n))return[mapTree([n],b=>b.tag==='button'&&!b.attrs['aria-label']?[withAttrs(b,{'aria-label':'AI 성과 설명'})]:undefined)[0]];
   if(n===container)return[withAttrs(withChildren(n,r&&r.rows.length?r.rows.map(x=>row(t,x)):[emptyRow(v)]),{'aria-label':`전체 ${r?.rows.length??0}개 글`})];
   return undefined;
  }) as CapturedNode[];
- return{...tpl,body,source:'database'};
+ return{...tpl,css:tpl.css+lightShell,body,source:'database'};
 }

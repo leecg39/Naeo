@@ -1,0 +1,138 @@
+TAP version 13
+# (node:62842) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: AI picks page shows an honest not-configured state without the captured account data
+ok 1 - AI picks page shows an honest not-configured state without the captured account data
+  ---
+  duration_ms: 96.519917
+  type: 'test'
+  ...
+# Subtest: AI picks page renders the latest successful check of the member own blog
+ok 2 - AI picks page renders the latest successful check of the member own blog
+  ---
+  duration_ms: 87.810375
+  type: 'test'
+  ...
+# (node:62843) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: citation HTTP: authentication, origin, strict input, configuration and isolation
+ok 3 - citation HTTP: authentication, origin, strict input, configuration and isolation
+  ---
+  duration_ms: 182.013083
+  type: 'test'
+  ...
+# (node:62844) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: configuration requires the explicit provider and key; endpoint override is loopback only
+ok 4 - configuration requires the explicit provider and key; endpoint override is loopback only
+  ---
+  duration_ms: 1.190792
+  type: 'test'
+  ...
+# Subtest: naver post references cover desktop, mobile and PostView forms and reject other hosts
+ok 5 - naver post references cover desktop, mobile and PostView forms and reject other hosts
+  ---
+  duration_ms: 0.570917
+  type: 'test'
+  ...
+# Subtest: representative keyword: first usable tag, then the first title clause within 30 characters
+ok 6 - representative keyword: first usable tag, then the first title clause within 30 characters
+  ---
+  duration_ms: 0.663125
+  type: 'test'
+  ...
+# Subtest: SerpApi adapter: fixed endpoint, follow-up briefing by token, bounded fields, ads excluded
+ok 7 - SerpApi adapter: fixed endpoint, follow-up briefing by token, bounded fields, ads excluded
+  ---
+  duration_ms: 28.346667
+  type: 'test'
+  ...
+# Subtest: SerpApi adapter maps provider failures to retryable or terminal errors and keeps the key out of messages
+ok 8 - SerpApi adapter maps provider failures to retryable or terminal errors and keeps the key out of messages
+  ---
+  duration_ms: 9.706583
+  type: 'test'
+  ...
+# Subtest: run lifecycle: one search per distinct keyword, citation matching, overview, detail marks, viewed tutorial reward
+ok 9 - run lifecycle: one search per distinct keyword, citation matching, overview, detail marks, viewed tutorial reward
+  ---
+  duration_ms: 182.602834
+  type: 'test'
+  ...
+# Subtest: a transient provider failure requeues with backoff and the retry skips posts already saved
+ok 10 - a transient provider failure requeues with backoff and the retry skips posts already saved
+  ---
+  duration_ms: 125.106083
+  type: 'test'
+  ...
+# Subtest: terminal failures, query-level errors, configuration removal and cancellation
+ok 11 - terminal failures, query-level errors, configuration removal and cancellation
+  ---
+  duration_ms: 105.132875
+  type: 'test'
+  ...
+# Subtest: a worker whose lease expired cannot write results after another worker recovered the run
+ok 12 - a worker whose lease expired cannot write results after another worker recovered the run
+  ---
+  duration_ms: 93.424042
+  type: 'test'
+  ...
+# Subtest: enqueue validation, ownership isolation and member keyword overrides
+ok 13 - enqueue validation, ownership isolation and member keyword overrides
+  ---
+  duration_ms: 96.022625
+  type: 'test'
+  ...
+# Subtest: scan completion schedules one citation check per scan job when configured
+ok 14 - scan completion schedules one citation check per scan job when configured
+  ---
+  duration_ms: 98.116625
+  type: 'test'
+  ...
+# Subtest: retention keeps five finished runs per blog; export and account deletion cover citation data
+ok 15 - retention keeps five finished runs per blog; export and account deletion cover citation data
+  ---
+  duration_ms: 97.869041
+  type: 'test'
+  ...
+# Subtest: daily quota ignores runs that failed or were canceled before checking any post
+ok 16 - daily quota ignores runs that failed or were canceled before checking any post
+  ---
+  duration_ms: 96.907083
+  type: 'test'
+  ...
+# Subtest: oversized briefings are trimmed to fit storage instead of failing the run
+ok 17 - oversized briefings are trimmed to fit storage instead of failing the run
+  ---
+  duration_ms: 0.581334
+  type: 'test'
+  ...
+# (node:62845) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: period filters use inclusive Korean calendar dates and keep real time spacing
+ok 18 - period filters use inclusive Korean calendar dates and keep real time spacing
+  ---
+  duration_ms: 0.863833
+  type: 'test'
+  ...
+# Subtest: no measurements is distinct from a real zero, and changes require comparable rules
+ok 19 - no measurements is distinct from a real zero, and changes require comparable rules
+  ---
+  duration_ms: 0.291833
+  type: 'test'
+  ...
+# Subtest: dashboard charts isolate the member and primary blog, ignore failed runs and count only checked results
+ok 20 - dashboard charts isolate the member and primary blog, ignore failed runs and count only checked results
+  ---
+  duration_ms: 220.71825
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1402.678833

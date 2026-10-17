@@ -1,0 +1,186 @@
+{
+  "source": "https://www.naeo.kr/dashboard/ai-picks",
+  "observedAt": "2026-10-17",
+  "rea": {
+    "evidenceId": "ev_007174b29741fa7bab05de36b4f629fab43f228132a6165515ce2f8bda5b742c",
+    "operation": "analyze_javascript_application",
+    "statistics": {
+      "findings": 42,
+      "invalid_utf8_files": 0,
+      "modules": 0,
+      "nested_asar_containers": 0,
+      "parse_failures": 0,
+      "parsed_javascript_files": 7,
+      "relevant_files": 7,
+      "text_bytes_read": 271638,
+      "visited_ast_nodes": 71384
+    },
+    "limitations": [
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ],
+    "bundleLocalPath": "/Users/user01/Desktop/NAEO/reverse-engineering/ai-picks-rea-2026-10-17/rea-bundle.json"
+  },
+  "artifacts": [
+    {
+      "name": "2orb4l9cgigm6.js",
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/2orb4l9cgigm6.js",
+      "bytes": 32277,
+      "sha256": "cae4a0d8197b0bc4f814ae04f772f49a6922d310b2f06d50c9c57eba3f1d4262",
+      "observedLiteralOffsets": [
+        {
+          "token": "카테고리별 분포",
+          "byteOffset": 2466
+        },
+        {
+          "token": "통합검색 노출",
+          "byteOffset": 3273
+        },
+        {
+          "token": "AI 인용 현황",
+          "byteOffset": 4745
+        },
+        {
+          "token": "대표 키워드",
+          "byteOffset": 14480
+        },
+        {
+          "token": "메인 키워드",
+          "byteOffset": 15246
+        },
+        {
+          "token": "서브 키워드",
+          "byteOffset": 15321
+        },
+        {
+          "token": "검색량 / 포화도",
+          "byteOffset": 15791
+        },
+        {
+          "token": "AI 성과 (인용)",
+          "byteOffset": 18425
+        },
+        {
+          "token": "내 블로그 글이",
+          "byteOffset": 30188
+        }
+      ]
+    },
+    {
+      "name": "0vikp-jk811qz.js",
+      "url": "https://www.naeo.kr/_next/static/immutable/chunks/0vikp-jk811qz.js",
+      "bytes": 55986,
+      "sha256": "085b4e4c9e227be2b89e1cf7b875245a4257be0cc8d418da3eb7f8642671f81a",
+      "observedLiteralOffsets": [
+        {
+          "token": "이미지 출처",
+          "byteOffset": 7716
+        },
+        {
+          "token": "본문 출처",
+          "byteOffset": 11955
+        },
+        {
+          "token": "관련 질문",
+          "byteOffset": 17489
+        },
+        {
+          "token": "/api/ai-check/detail",
+          "byteOffset": 20045
+        },
+        {
+          "token": "메인 키워드",
+          "byteOffset": 25610
+        },
+        {
+          "token": "대표 키워드",
+          "byteOffset": 26260
+        },
+        {
+          "token": "서브 키워드",
+          "byteOffset": 33259
+        },
+        {
+          "token": "연관 검색어",
+          "byteOffset": 36530
+        },
+        {
+          "token": "통합검색 노출",
+          "byteOffset": 51128
+        },
+        {
+          "token": "/api/ai-check/save",
+          "byteOffset": 52989
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "method": "authenticated Ego Lite read-only UI observation and REA static AST analysis",
+    "getContracts": [
+      {
+        "path": "/api/citations",
+        "originalPath": "/api/ai-check/save",
+        "status": 200,
+        "keys": [
+          "configured",
+          "remaining",
+          "limit",
+          "postsPerRun",
+          "blog",
+          "activeRun",
+          "lastRun",
+          "report"
+        ]
+      },
+      {
+        "path": "/api/citations/results/:id",
+        "originalPath": "/api/ai-check/detail?id=:id",
+        "status": 200,
+        "keys": [
+          "id",
+          "postId",
+          "title",
+          "url",
+          "category",
+          "publishedAt",
+          "checkedAt",
+          "keyword",
+          "keywordSource",
+          "keywordVersion",
+          "status",
+          "briefing",
+          "exposed",
+          "textRank",
+          "imageRank",
+          "cited",
+          "volume",
+          "saturation",
+          "viewedAt",
+          "briefingDetail",
+          "exposure",
+          "error",
+          "searches",
+          "textCitedCount",
+          "samePostCitedCount",
+          "mainKeywordMetric",
+          "subKeywords",
+          "relatedKeywords"
+        ]
+      }
+    ],
+    "states": [
+      "desktop 1440×1000",
+      "mobile 390×844",
+      "citation detail modal (cited & uncited)",
+      "period & category filter",
+      "column header info popovers",
+      "light mode"
+    ],
+    "privateSourceData": "Original account values and captures stay outside the repository in /Users/user01/Desktop/NAEO/reverse-engineering/ai-picks-rea-2026-10-17/; never used as runtime fixtures."
+  }
+}

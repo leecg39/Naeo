@@ -3,7 +3,7 @@ export interface BehaviorTools {
  toast: (message:string)=>void;
  navigate: (href:string)=>void;
  openAuth: ()=>void;
- openDialog: (title:string, content:React.ReactNode)=>void;
+ openDialog: (title:string, content:React.ReactNode, wide?:boolean)=>void;
  closeDialog: ()=>void;
 }
 export type InstallBehavior=(root:HTMLElement,tools:BehaviorTools)=>void|(()=>void);

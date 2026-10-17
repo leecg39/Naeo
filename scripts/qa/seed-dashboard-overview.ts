@@ -41,10 +41,11 @@ function citationRun(db:Database,owner:string,blogId:string,samples:FixturePost[
  db.prepare("INSERT INTO citation_runs(id,owner_id,blog_id,state,source,provider,post_limit,checked,progress,run_after,created_at,updated_at,completed_at) VALUES(?,?,?,'succeeded','member','offline-qa',?,?,100,?,?,?,?)").run(run,owner,blogId,samples.length,samples.length,at,at,at,at);
  samples.forEach((post,i)=>{
   const error=!empty&&step===6&&i>=samples.length-2,cited=!empty&&!error&&(i+step)%3===0,exposed=!empty&&!error&&(i+step)%4!==0,briefing=!empty&&!error&&i<10;
+  const naverUrl=`https://blog.naver.com/rea_travel_blog/${900000+i}`;
   const evidence=error?{briefing:null,exposure:null,searches:0,error:{code:'QA_TIMEOUT',message:'검증용 공급자 오류'}}:{
-   briefing:briefing?{markdown:`## ${post.keyword}\n\n이 내용은 **격리된 QA 데이터**입니다. 실제 검색 공급자를 호출하지 않았습니다.\n\n- 추천 코스를 비교하고 방문 시간을 확인합니다.\n- ${post.keyword}에 필요한 교통과 준비물을 정리합니다.\n\n검증용 설명을 통해 긴 본문과 출처 목록의 배치를 확인합니다.`,
-    references:[{index:1,title:post.title,link:post.url,source:'QA 블로그',snippet:'대시보드 모달의 저장된 출처 표시 검증용 본문입니다.'},{index:2,title:`${post.keyword} 참고 자료`,link:`${ORIGIN}/dashboard?blog=rea_travel_blog`,source:'로컬 검증 자료',snippet:'외부 네트워크를 사용하지 않는 두 번째 출처입니다.'}],
-    media:[{position:1,title:'격리 QA 이미지',link:post.url,thumbnail:`${ORIGIN}/event/review-2026-09/icon-coffee.webp`,platform:'로컬 이미지'}],
+   briefing:briefing?{markdown:`# ${post.keyword} 핵심 요약\n\n이 내용은 격리된 QA 데이터이며 내 블로그 포스팅 출처가 인용된 문장입니다 [1].\n\n- 추천 코스를 비교하고 방문 시간을 확인합니다.\n- ${post.keyword}에 필요한 교통과 준비물을 정리합니다.\n\n| 구분 | 주요 내용 |\n| --- | --- |\n| 일정 | ${post.keyword} 코스와 방문 시간 |\n| 준비 | 교통편 및 필수 준비물 확인 |\n\n검증용 설명을 통해 긴 본문과 출처 목록의 배치를 확인합니다.`,
+    references:[{index:1,title:post.title,link:cited?naverUrl:post.url,source:'네이버 블로그',snippet:'대시보드 모달의 저장된 출처 표시 검증용 본문입니다.'},{index:2,title:`${post.keyword} 참고 자료`,link:`${ORIGIN}/dashboard?blog=rea_travel_blog`,source:'로컬 검증 자료',snippet:'외부 네트워크를 사용하지 않는 두 번째 출처입니다.'}],
+    media:[{position:1,title:post.title,link:cited?naverUrl:post.url,thumbnail:`${ORIGIN}/event/review-2026-09/icon-coffee.webp`,platform:'네이버 블로그'}],
     questions:[`${post.keyword} 준비물은 무엇인가요?`,`${post.keyword} 방문 시 주의할 점은 무엇인가요?`]}:null,
    exposure:exposed?{section:'organic_results',position:i+1}:null,searches:1};
   db.prepare(`INSERT INTO citation_results(id,run_id,owner_id,blog_id,post_id,keyword,keyword_source,status,briefing,exposed,text_rank,image_rank,evidence_json,checked_at)
@@ -83,7 +84,8 @@ async function main(){
   const travel=createBlog(db,peer2.user.id,{naverId:'rea_peer_blog',title:'여행 동료 QA 블로그',category:'여행',isPrimary:true});
   const samples=posts(db,primary.id,primary.naverId,14,'제주'),secondaryPosts=posts(db,secondary.id,secondary.naverId,4,'일상');
   createPlan(db,peer1.user.id,{code:'qa-basic',name:'베이직 QA',price:9900,monthlyTokens:750,trialDays:30});startTrial(db,owner,{planCode:'qa-basic'},now);
-  samples.forEach((sample,i)=>{const keyword=createKeyword(db,peer1.user.id,{phrase:sample.keyword,category:'여행'},now-DAY);addKeywordMetric(db,peer1.user.id,keyword.id,{pcVolume:400+i*50,mobileVolume:1600+i*100,documentCount:1000+i*300},now-DAY);});
+  samples.forEach((sample,i)=>{const keyword=createKeyword(db,peer1.user.id,{phrase:sample.keyword,category:'여행'},now-DAY);addKeywordMetric(db,peer1.user.id,keyword.id,{pcVolume:400+i*50,mobileVolume:1600+i*100,documentCount:i===0?400:1000+i*300},now-DAY);});
+  [['제주',1200,4800,1800],['여행',900,3100,5200],['코스',500,1500,900]].forEach(([phrase,pcVolume,mobileVolume,documentCount])=>{const kw=createKeyword(db,peer1.user.id,{phrase:String(phrase),category:'여행'},now-DAY);addKeywordMetric(db,peer1.user.id,kw.id,{pcVolume:Number(pcVolume),mobileVolume:Number(mobileVolume),documentCount:Number(documentCount)},now-DAY);});
   for(const [step,days] of [85,45,20,6,2,1,0.02].entries()){
    const at=Math.floor(now-days*DAY);scan(db,owner,primary.id,samples.slice(0,Math.min(14,4+step*2)),at,55+step*5);citationRun(db,owner,primary.id,samples,at+10_000,step);
   }

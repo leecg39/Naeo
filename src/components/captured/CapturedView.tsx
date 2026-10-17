@@ -51,7 +51,7 @@ export default function CapturedView({ data, install,slots }: { data: CapturedPa
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeDialog = useCallback(() => { setDialog(null); setMenuOpen(false); }, []);
   const openAuth = useCallback(() => { setMenuOpen(false); setDialog({ kind: 'auth' }); }, []);
-  const openDialog = useCallback((title: string, content: ReactNode) => { setMenuOpen(false); setDialog({ kind: 'content', title, content }); }, []);
+  const openDialog = useCallback((title: string, content: ReactNode, wide?: boolean) => { setMenuOpen(false); setDialog({ kind: 'content', title, content, wide }); }, []);
   const toast = useCallback((text: string) => {
     if (toastTimer.current) clearTimeout(toastTimer.current);
     setMessage(text);

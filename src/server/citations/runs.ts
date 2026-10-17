@@ -62,10 +62,35 @@ export function cancelCitationRun(db:Database,ownerId:string,id:string,now=Date.
 type ResultRow={id:string;post_id:string;keyword:string;keyword_source:KeywordSource;status:'checked'|'error';briefing:number;exposed:number;text_rank:number|null;image_rank:number|null;evidence_json:string;checked_at:number;viewed_at:number|null;title:string;url:string;category:string;published_at:number|null};
 export type CitationRow={id:string;postId:string;title:string;url:string;category:string;publishedAt:number|null;checkedAt:number;keyword:string;keywordSource:KeywordSource;keywordVersion:number;status:'checked'|'error';briefing:boolean;exposed:boolean;textRank:number|null;imageRank:number|null;cited:boolean;volume:number|null;saturation:number|null;viewedAt:number|null};
 const RESULT_SELECT='SELECT r.id,r.post_id,r.keyword,r.keyword_source,r.status,r.briefing,r.exposed,r.text_rank,r.image_rank,r.evidence_json,r.checked_at,r.viewed_at,p.title,p.url,p.category,p.published_at FROM citation_results r JOIN blog_posts p ON p.id=r.post_id';
-function metricOf(db:Database,keyword:string){
+export type KeywordMetricDetail={keyword:string;pcVolume:number|null;mobileVolume:number|null;total:number|null;compIdx:'낮음'|'보통'|'높음'|null;documentCount:number|null;saturation:number|null};
+function keywordMetricDetail(db:Database,keyword:string):KeywordMetricDetail{
  const m=db.prepare("SELECT m.pc_volume AS pcVolume,m.mobile_volume AS mobileVolume,m.document_count AS documentCount FROM keywords k JOIN keyword_metrics m ON m.keyword_id=k.id WHERE k.phrase=? AND k.status='active' ORDER BY m.measured_at DESC,m.created_at DESC LIMIT 1").get(keyword) as {pcVolume:number;mobileVolume:number;documentCount:number}|undefined;
  const c=classify(m?{...m}:null);
- return{volume:c.total,saturation:c.saturation};
+ const compIdx=c.level==='여유'?'낮음':c.level==='보통'?'보통':c.level==='포화'?'높음':null;
+ return{keyword,pcVolume:m?.pcVolume??null,mobileVolume:m?.mobileVolume??null,total:c.total,compIdx,documentCount:m?.documentCount??null,saturation:c.saturation};
+}
+function metricOf(db:Database,keyword:string){
+ const d=keywordMetricDetail(db,keyword);
+ return{volume:d.total,saturation:d.saturation};
+}
+function subKeywordMetrics(db:Database,tagsJson:string|undefined,mainKeyword:string):KeywordMetricDetail[]{
+ let raw:unknown;try{raw=tagsJson?JSON.parse(tagsJson):[];}catch{raw=[];}
+ if(!Array.isArray(raw))return[];
+ const seen=new Set([mainKeyword.trim().toLowerCase()]),out:KeywordMetricDetail[]=[];
+ for(const item of raw){
+  if(typeof item!=='string')continue;
+  const tag=item.replace(/^#+/,'').replace(/\s+/g,' ').trim();
+  if(tag.length<2||seen.has(tag.toLowerCase()))continue;
+  seen.add(tag.toLowerCase());out.push(keywordMetricDetail(db,tag));
+  if(out.length>=5)break;
+ }
+ return out;
+}
+function relatedKeywordMetrics(db:Database,mainKeyword:string,category:string):KeywordMetricDetail[]{
+ const token=mainKeyword.trim().split(/\s+/)[0]??'';
+ const like=token.length>=2?`%${token.replace(/[\\%_]/g,v=>'\\'+v)}%`:'';
+ const rows=db.prepare("SELECT DISTINCT k.phrase FROM keywords k JOIN keyword_metrics m ON m.keyword_id=k.id WHERE k.status='active' AND k.phrase<>? AND ((?<>'' AND k.category=?) OR (?<>'' AND k.phrase LIKE ? ESCAPE '\\')) LIMIT 20").all(mainKeyword,category,category,like,like) as {phrase:string}[];
+ return rows.map(r=>keywordMetricDetail(db,r.phrase)).sort((a,b)=>(b.total??-1)-(a.total??-1)).slice(0,10);
 }
 const toRow=(db:Database,r:ResultRow):CitationRow=>{
  const version=(db.prepare('SELECT version FROM post_keywords WHERE post_id=?').get(r.post_id) as {version:number}|undefined)?.version??0;
@@ -95,17 +120,20 @@ export function citationOverview(db:Database,ownerId:string,{blogId,config,now=D
 }
 export type CitationOverview=ReturnType<typeof citationOverview>;
 
-function ownedResult(db:Database,ownerId:string,id:string):ResultRow&{naver_id:string;external_id:string}{
- const r=/^[a-f0-9-]{36}$/.test(id)?db.prepare(`SELECT r.id,r.post_id,r.keyword,r.keyword_source,r.status,r.briefing,r.exposed,r.text_rank,r.image_rank,r.evidence_json,r.checked_at,r.viewed_at,p.title,p.url,p.category,p.published_at,p.external_id,b.naver_id FROM citation_results r JOIN blog_posts p ON p.id=r.post_id JOIN blogs b ON b.id=r.blog_id WHERE r.id=? AND r.owner_id=? AND b.owner_id=?`).get(id,ownerId,ownerId) as ResultRow&{naver_id:string;external_id:string}|undefined:undefined;
+function ownedResult(db:Database,ownerId:string,id:string):ResultRow&{naver_id:string;external_id:string;tags_json:string}{
+ const r=/^[a-f0-9-]{36}$/.test(id)?db.prepare(`SELECT r.id,r.post_id,r.keyword,r.keyword_source,r.status,r.briefing,r.exposed,r.text_rank,r.image_rank,r.evidence_json,r.checked_at,r.viewed_at,p.title,p.url,p.category,p.published_at,p.external_id,p.tags_json,b.naver_id FROM citation_results r JOIN blog_posts p ON p.id=r.post_id JOIN blogs b ON b.id=r.blog_id WHERE r.id=? AND r.owner_id=? AND b.owner_id=?`).get(id,ownerId,ownerId) as ResultRow&{naver_id:string;external_id:string;tags_json:string}|undefined:undefined;
  if(!r)throw new AppError(404,'NOT_FOUND','AI 인용 확인 결과를 찾을 수 없습니다.');
  return r;
 }
-/** 상세: 저장한 브리핑 본문·본문 출처·이미지 출처·관련 질문. 내 블로그·이 글의 출처에 표시를 붙인다. */
+/** 상세: 저장한 브리핑 본문·본문 출처·이미지 출처·관련 질문·키워드 지표. 내 블로그·이 글의 출처에 표시를 붙인다. */
 export function citationDetail(db:Database,ownerId:string,id:string){
  const r=ownedResult(db,ownerId,id),evidence=JSON.parse(r.evidence_json) as Evidence;
  const mark=(link:string)=>{const ref=naverPostRef(link);const mine=ref?.naverId===r.naver_id.toLowerCase();return{mine,samePost:mine&&ref?.logNo===r.external_id};};
  const briefing=evidence.briefing?{markdown:evidence.briefing.markdown,questions:evidence.briefing.questions,references:evidence.briefing.references.map(x=>({...x,...mark(x.link)})),media:evidence.briefing.media.map(x=>({...x,...mark(x.link)}))}:null;
- return{...toRow(db,r),briefingDetail:briefing,exposure:evidence.exposure,error:evidence.error??null,searches:evidence.searches};
+ const textCitedCount=briefing?briefing.references.filter(x=>x.mine).length:0;
+ const samePostCitedCount=briefing?briefing.references.filter(x=>x.samePost).length:0;
+ return{...toRow(db,r),briefingDetail:briefing,exposure:evidence.exposure,error:evidence.error??null,searches:evidence.searches,
+  textCitedCount,samePostCitedCount,mainKeywordMetric:keywordMetricDetail(db,r.keyword),subKeywords:subKeywordMetrics(db,r.tags_json,r.keyword),relatedKeywords:relatedKeywordMetrics(db,r.keyword,r.category)};
 }
 /** 회원이 상세를 열어 확인한 시각(튜토리얼 'AI 인용 현황' 보상 조건). GET 조회는 상태를 바꾸지 않는다. */
 export function markCitationViewed(db:Database,ownerId:string,id:string,now=Date.now()){
