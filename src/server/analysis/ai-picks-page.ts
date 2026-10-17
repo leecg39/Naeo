@@ -17,11 +17,23 @@ const ymd=(ms:number)=>{const d=new Date(ms+KST);return{y:d.getUTCFullYear(),m:d
 const md=(ms:number)=>{const p=ymd(ms);return`${String(p.m).padStart(2,'0')}.${String(p.d).padStart(2,'0')}`;};
 /** 원본 표기: 확인한 해와 같은 해의 글은 "9.8", 지난해 글은 "24.12.19". */
 const published=(ms:number|null,checked:number)=>{if(ms===null)return'-';const p=ymd(ms),c=ymd(checked);return p.y===c.y?`${p.m}.${p.d}`:`${String(p.y%100).padStart(2,'0')}.${p.m}.${p.d}`;};
-export function performance(r:Pick<CitationRow,'status'|'briefing'|'textRank'|'imageRank'>):string{
+export function performance(r:Pick<CitationRow,'status'|'briefing'|'textRank'|'imageRank'|'bodyCited'>):string{
  if(r.status==='error')return'확인 실패';
- const parts=[r.textRank!==null?`본문 ${r.textRank}위`:'',r.imageRank!==null?`이미지 ${r.imageRank}위`:''].filter(Boolean);
- return parts.length?parts.join(' · '):r.briefing?'미추천':'-';
+ const parts=[r.imageRank!==null?`썸네일 ${r.imageRank}위`:'',r.bodyCited?`본문 ${r.bodyCited}회`:''].filter(Boolean);
+ return parts.length?parts.join(' · '):r.briefing?'미인용':'-';
 }
+/** 원본 drift 반영: 인용 글은 썸네일 순위·본문 인용 횟수 칩을 따로 보여준다(신버전은 필 형태). */
+const CHIP_STYLE='border:1px solid rgba(3,199,90,.45);border-radius:999px;padding:1px 8px;';
+function performanceNodes(t:Templates,r:CitationRow):CapturedNode[]{
+ if(!r.cited)return[set(t.plainPerf,performance(r))];
+ const icon=t.citedPerf.children.filter(isEl)[0],chip=(children:CapturedNode[])=>withAttrs(withChildren(t.citedPerf,children),{style:CHIP_STYLE}),chips:CapturedNode[]=[];
+ if(r.imageRank!==null)chips.push(chip([icon,` 썸네일 ${r.imageRank}위`]));
+ if(r.bodyCited)chips.push(chip([`본문 ${r.bodyCited}회`]));
+ return chips.length?chips:[chip([icon,' 인용됨'])];
+}
+/** 캡처 이후 원본 표기가 추천→인용으로 바뀐 부분만 고친다(내비·타 계정 텍스트는 그대로). */
+const LABEL_DRIFT:Record<string,string>={'AI 추천':'AI 인용','AI 추천률':'AI 인용률','AI 추천됨':'AI 인용됨','AI 성과 (추천)':'AI 성과 (인용)','미추천':'미인용'};
+const drift=(nodes:CapturedNode[]):CapturedNode[]=>nodes.map(n=>typeof n==='string'?(LABEL_DRIFT[n]??n):{...n,children:drift(n.children)});
 
 const lightShell=`
 html.light [data-naeo-captured-root="/dashboard/ai-picks"] .mui-h1pps5 {background:#f7f7f7;color:#262626}
@@ -49,8 +61,8 @@ function row(t:Templates,r:CitationRow):El{
  const [dates,title,keyword,metric,exposure,perf,manage]=tpl.children.filter(isEl);
  const [checkedSpan,pubSpan]=dates.children.filter(isEl),link=title.children.filter(isEl)[0];
  const [icon,keywordText]=keyword.children.filter(isEl),metricText=metric.children.filter(isEl)[0],metricUnit=metricText.children.filter(isEl)[0];
- const button=manage.children.filter(isEl)[0],perfText=performance(r);
- const perfNode=r.cited?withChildren(t.citedPerf,[...t.citedPerf.children.filter(isEl),` ${perfText}`]):set(t.plainPerf,perfText);
+ const button=manage.children.filter(isEl)[0];
+ const perfNodes=performanceNodes(t,r);
  const saturation=r.saturation===null?'-':`${(r.saturation*100).toFixed(1)}%`;
  const satNode=r.saturation!==null&&r.saturation<0.5?withAttrs(set(metricUnit,`/ ${saturation}`),{style:'color:#03c75a;font-weight:600'}):set(metricUnit,`/ ${saturation}`);
  const titleNodes:CapturedNode[]=r.category?[{tag:'span',attrs:{class:'naeo-post-category',style:'display:block;font-size:11px;color:#94a3b8;font-weight:500;line-height:1.2;margin-bottom:2px'},children:[r.category]},set(withAttrs(link,{href:r.url}),r.title||'(제목 없음)')]:[set(withAttrs(link,{href:r.url}),r.title||'(제목 없음)')];
@@ -60,7 +72,7 @@ function row(t:Templates,r:CitationRow):El{
   withChildren(withAttrs(keyword,{'aria-label':`${r.keyword} 네이버 검색`,title:SOURCE_LABEL[r.keywordSource]}),[icon,set(keywordText,r.keyword)]),
   withChildren(metric,[withChildren(metricText,[`${r.volume!==null?r.volume.toLocaleString('ko-KR'):'-'} `,satNode])]),
   withChildren(exposure,[r.status==='error'?set(t.x,'-'):r.exposed?t.o:t.x]),
-  withChildren(perf,[perfNode]),
+  withChildren(perf,perfNodes),
   withChildren(manage,[withAttrs(button,{'data-result-id':r.id,'aria-label':`${r.title||r.keyword} 인용 상세 보기`})])
  ]),{'data-result-id':r.id,'data-post-id':r.postId,'data-category':r.category||'미분류','data-status':r.status,'data-briefing':String(r.briefing),'data-exposed':String(r.exposed),'data-cited':String(r.cited),
   'data-text-cited':String(r.textRank!==null),'data-image-cited':String(r.imageRank!==null),
@@ -85,12 +97,12 @@ function metricCard(card:El,v:CitationOverview):El{
   if(cls('mui-tehul9')(n))return[set(n,value(r?.total??0))];
   if(cls('mui-2g0c0a')(n))return[set(n,value(r?.exposed??0))];
   if(cls('mui-5159gs')(n))return[set(n,value(r?.briefing??0))];
-  if(cls('mui-1cjmsu6')(n))return[set(n,label==='AI 추천률'?r?`${pct(r.cited,r.checked)}%`:'-':value(r?.cited??0))];
+  if(cls('mui-1cjmsu6')(n))return[set(n,label==='AI 추천률'||label==='AI 인용률'?r?`${pct(r.cited,r.checked)}%`:'-':value(r?.cited??0))];
   if(cls('mui-104ntgm')(n))return[set(n,r?`/ ${r.checked}`:'')];
   if(cls('mui-7bnr13')(n))return[set(n,value(split++===0?r?.textCited??0:r?.imageCited??0))];
   if(cls('mui-1we6nek')(n)){
    if(!r)return[set(n,empty)];
-   const caption:Record<string,string>={'전체 글':`최근 글 · 확인한 글 ${r.checked}개${r.errors?` · 실패 ${r.errors}개`:''}`,'통합검색 노출':`${pct(r.exposed,r.checked)}% 노출`,'AI 브리핑 노출':'AI가 답한 키워드','AI 추천률':`${r.cited} / ${r.checked} 추천`};
+   const caption:Record<string,string>={'전체 글':`최근 글 · 확인한 글 ${r.checked}개${r.errors?` · 실패 ${r.errors}개`:''}`,'통합검색 노출':`${pct(r.exposed,r.checked)}% 노출`,'AI 브리핑 노출':'AI가 답한 키워드','AI 추천률':`${r.cited} / ${r.checked} 인용`};
    return[set(n,caption[label]??textOf(n))];
   }
   return undefined;
@@ -126,7 +138,7 @@ export async function buildAiPicksPage(db:Database,userId:string,now=Date.now(),
  const v=citationOverview(db,userId,{blogId:selected,config:citationConfig(),now}),r=v.report;
  const container=mustFind(tpl.body,cls('mui-uien4a'),'ai-picks rows'),t=templates(container);
  const categoryTpl=mustFind(tpl.body,cls('mui-x14t34'),'category row');
- const counts=[`전체 ${r?.total??0}`,`통합검색 노출 ${r?.exposed??0}`,`AI 브리핑 ${r?.briefing??0}`,`AI 추천됨 ${r?.cited??0}`];
+ const counts=[`전체 ${r?.total??0}`,`통합검색 노출 ${r?.exposed??0}`,`AI 브리핑 ${r?.briefing??0}`,`AI 인용됨 ${r?.cited??0}`];
  const body=mapTree(tpl.body.filter(n=>!isTrackingPixel(n)),n=>{
   // 캡처 당시 원본의 고정 이벤트 홍보는 실제 공지가 아니므로 뺀다.
   if(n.attrs.role==='status'&&find(n.children,cls('mui-1a0o2bi')))return[];
@@ -138,5 +150,5 @@ export async function buildAiPicksPage(db:Database,userId:string,now=Date.now(),
   if(n===container)return[withAttrs(withChildren(n,r&&r.rows.length?r.rows.map(x=>row(t,x)):[emptyRow(v)]),{'aria-label':`전체 ${r?.rows.length??0}개 글`})];
   return undefined;
  }) as CapturedNode[];
- return{...tpl,css:tpl.css+lightShell,body,source:'database'};
+ return{...tpl,css:tpl.css+lightShell,body:drift(body),source:'database'};
 }

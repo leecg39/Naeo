@@ -60,7 +60,7 @@ export function cancelCitationRun(db:Database,ownerId:string,id:string,now=Date.
 }
 
 type ResultRow={id:string;post_id:string;keyword:string;keyword_source:KeywordSource;status:'checked'|'error';briefing:number;exposed:number;text_rank:number|null;image_rank:number|null;evidence_json:string;checked_at:number;viewed_at:number|null;title:string;url:string;category:string;published_at:number|null};
-export type CitationRow={id:string;postId:string;title:string;url:string;category:string;publishedAt:number|null;checkedAt:number;keyword:string;keywordSource:KeywordSource;keywordVersion:number;status:'checked'|'error';briefing:boolean;exposed:boolean;textRank:number|null;imageRank:number|null;cited:boolean;volume:number|null;saturation:number|null;viewedAt:number|null};
+export type CitationRow={id:string;postId:string;title:string;url:string;category:string;publishedAt:number|null;checkedAt:number;keyword:string;keywordSource:KeywordSource;keywordVersion:number;status:'checked'|'error';briefing:boolean;exposed:boolean;textRank:number|null;imageRank:number|null;bodyCited:number;cited:boolean;volume:number|null;saturation:number|null;viewedAt:number|null};
 const RESULT_SELECT='SELECT r.id,r.post_id,r.keyword,r.keyword_source,r.status,r.briefing,r.exposed,r.text_rank,r.image_rank,r.evidence_json,r.checked_at,r.viewed_at,p.title,p.url,p.category,p.published_at FROM citation_results r JOIN blog_posts p ON p.id=r.post_id';
 export type KeywordMetricDetail={keyword:string;pcVolume:number|null;mobileVolume:number|null;total:number|null;compIdx:'낮음'|'보통'|'높음'|null;documentCount:number|null;saturation:number|null};
 function keywordMetricDetail(db:Database,keyword:string):KeywordMetricDetail{
@@ -92,9 +92,19 @@ function relatedKeywordMetrics(db:Database,mainKeyword:string,category:string):K
  const rows=db.prepare("SELECT DISTINCT k.phrase FROM keywords k JOIN keyword_metrics m ON m.keyword_id=k.id WHERE k.status='active' AND k.phrase<>? AND ((?<>'' AND k.category=?) OR (?<>'' AND k.phrase LIKE ? ESCAPE '\\')) LIMIT 20").all(mainKeyword,category,category,like,like) as {phrase:string}[];
  return rows.map(r=>keywordMetricDetail(db,r.phrase)).sort((a,b)=>(b.total??-1)-(a.total??-1)).slice(0,10);
 }
+/** 이 글이 브리핑 본문 출처로 인용된 횟수. text_rank는 같은 블로그 다른 글의 출처로도 세므로, 글 번호까지 맞는 참조만 센다. */
+const bodyCited=(r:ResultRow)=>{
+ if(r.text_rank===null)return 0;
+ try{
+  const evidence=JSON.parse(r.evidence_json) as Evidence;
+  const post=naverPostRef(r.url);
+  if(!post)return 0;
+  return(evidence.briefing?.references??[]).filter(x=>{const ref=naverPostRef(x.link);return ref?.naverId===post.naverId&&ref?.logNo===post.logNo;}).length;
+ }catch{return 1;}
+};
 const toRow=(db:Database,r:ResultRow):CitationRow=>{
  const version=(db.prepare('SELECT version FROM post_keywords WHERE post_id=?').get(r.post_id) as {version:number}|undefined)?.version??0;
- return{id:r.id,postId:r.post_id,title:r.title,url:r.url,category:r.category,publishedAt:r.published_at,checkedAt:r.checked_at,keyword:r.keyword,keywordSource:r.keyword_source,keywordVersion:version,status:r.status,briefing:r.briefing===1,exposed:r.exposed===1,textRank:r.text_rank,imageRank:r.image_rank,cited:r.text_rank!==null||r.image_rank!==null,...metricOf(db,r.keyword),viewedAt:r.viewed_at};
+ return{id:r.id,postId:r.post_id,title:r.title,url:r.url,category:r.category,publishedAt:r.published_at,checkedAt:r.checked_at,keyword:r.keyword,keywordSource:r.keyword_source,keywordVersion:version,status:r.status,briefing:r.briefing===1,exposed:r.exposed===1,textRank:r.text_rank,imageRank:r.image_rank,bodyCited:bodyCited(r),cited:r.text_rank!==null||r.image_rank!==null,...metricOf(db,r.keyword),viewedAt:r.viewed_at};
 };
 export type CategoryShare={name:string;total:number;cited:number;exposed:number};
 export function summarize(rows:CitationRow[]){

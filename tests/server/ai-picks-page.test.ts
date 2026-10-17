@@ -62,7 +62,7 @@ test('AI picks page renders the latest successful check of the member own blog',
  const config:CitationConfig={provider:'serpapi',apiKey:'p'.repeat(40),base:'http://127.0.0.1:9',device:'desktop'};
  enqueueCitation(db,id,{blogId:blog},{source:'member',config},now);
  await runCitationOnce(db,'w',async keyword=>({searches:1,links:keyword==='부산 맛집'?[{link:'https://blog.naver.com/picks_blog/2',section:'blog_results',position:1}]:[],
-  briefing:keyword==='서울 카페'?null:{markdown:'제주 여행 요약 [3]',references:keyword==='제주 여행'?[{index:3,title:'내 글',link:'https://m.blog.naver.com/picks_blog/1',source:'블로그',snippet:'문장 요약'}]:[],media:[],questions:['제주 3박 4일 코스는?']}}),()=>now);
+  briefing:keyword==='서울 카페'?null:{markdown:'제주 여행 요약 [3]',references:keyword==='제주 여행'?[{index:3,title:'내 글',link:'https://m.blog.naver.com/picks_blog/1',source:'블로그',snippet:'문장 요약'}]:[],media:keyword==='제주 여행'?[{position:1,title:'내 썸네일',link:'https://blog.naver.com/picks_blog/1',thumbnail:'https://img.example/t.jpg',platform:'블로그'}]:[],questions:['제주 3박 4일 코스는?']}}),()=>now);
  const page=await buildAiPicksPage(db,id,now+3600_000);
  assert.match(page.css,/html\.light \[data-naeo-captured-root="\/dashboard\/ai-picks"\]/);
  const headerHelp=all(page.body,n=>n.tag==='button'&&n.attrs['aria-label']==='AI 성과 설명');
@@ -70,21 +70,21 @@ test('AI picks page renders the latest successful check of the member own blog',
  const rows=all(page.body,n=>!!n.attrs['data-result-id']&&has('MuiBox-root')(n)&&n.tag==='div'&&!!n.attrs['data-post-id']);
  assert.equal(rows.length,3);
  const byKeyword=Object.fromEntries(rows.map(r=>[r.attrs['data-keyword'],r]));
- assert.match(text(byKeyword['제주 여행']),/제주 여행 코스 정리/);assert.match(text(byKeyword['제주 여행']),/본문 3위/);assert.ok(has('mui-5nlkae')(byKeyword['제주 여행']),'cited row style');
+ assert.match(text(byKeyword['제주 여행']),/제주 여행 코스 정리/);assert.match(text(byKeyword['제주 여행']),/본문 1회/);assert.match(text(byKeyword['제주 여행']),/썸네일 1위/);assert.ok(has('mui-5nlkae')(byKeyword['제주 여행']),'cited row style');
  assert.equal(byKeyword['제주 여행'].attrs['data-text-cited'],'true');
  assert.equal(all([byKeyword['제주 여행']],has('naeo-post-category')).map(text)[0],'여행');
  assert.ok(all([byKeyword['제주 여행']],n=>n.tag==='span'&&(n.attrs.style??'').includes('#03c75a')).length===1,'low saturation (<0.5) is highlighted in green');
- assert.match(text(byKeyword['부산 맛집']),/O/);assert.match(text(byKeyword['부산 맛집']),/미추천/);assert.ok(has('mui-q6fgsd')(byKeyword['부산 맛집']),'exposed row style');
+ assert.match(text(byKeyword['부산 맛집']),/O/);assert.match(text(byKeyword['부산 맛집']),/미인용/);assert.ok(has('mui-q6fgsd')(byKeyword['부산 맛집']),'exposed row style');
  assert.equal(byKeyword['서울 카페'].attrs['data-category'],'미분류');assert.match(text(byKeyword['서울 카페']),/-/);
  assert.ok(all([byKeyword['제주 여행']],n=>n.tag==='a')[0].attrs.href==='https://blog.naver.com/picks_blog/1');
  const detail=citationDetail(db,id,byKeyword['제주 여행'].attrs['data-result-id']!);
- assert.equal(detail.textCitedCount,1);assert.equal(detail.samePostCitedCount,1);
+ assert.equal(detail.textCitedCount,1);assert.equal(detail.samePostCitedCount,1);assert.equal(detail.bodyCited,1);
  assert.deepEqual(detail.mainKeywordMetric,{keyword:'제주 여행',pcVolume:400,mobileVolume:1600,total:2000,compIdx:'낮음',documentCount:500,saturation:0.25});
  assert.deepEqual(detail.subKeywords.map(k=>[k.keyword,k.total,k.compIdx]),[['제주 렌트카',1000,'보통'],['제주 숙소',null,null]]);
  assert.deepEqual(detail.relatedKeywords.map(k=>[k.keyword,k.total]),[['제주 항공권',3000],['제주 렌트카',1000]]);
  const metrics=text(all(page.body,n=>n.attrs['aria-label']==='AI 인용 현황 핵심 지표')[0]);
- assert.match(metrics,/전체 글3/);assert.match(metrics,/AI 추천1\/ 3/);assert.match(metrics,/AI 브리핑 노출2/);assert.match(metrics,/AI 추천률33%/);
- assert.deepEqual(all(page.body,has('mui-5vm3uw'))[0].children.filter((c):c is El=>typeof c!=='string'&&c.tag==='button').map(text),['전체 3','통합검색 노출 1','AI 브리핑 2','AI 추천됨 1']);
+ assert.match(metrics,/전체 글3/);assert.match(metrics,/AI 인용1\/ 3/);assert.match(metrics,/AI 브리핑 노출2/);assert.match(metrics,/AI 인용률33%/);
+ assert.deepEqual(all(page.body,has('mui-5vm3uw'))[0].children.filter((c):c is El=>typeof c!=='string'&&c.tag==='button').map(text),['전체 3','통합검색 노출 1','AI 브리핑 2','AI 인용됨 1']);
  assert.deepEqual(all(page.body,has('mui-x14t34')).map(r=>text(r.children.find((c):c is El=>typeof c!=='string')!)),['맛집','미분류','여행']);
  assert.match(text(all(page.body,has('mui-1ptiu1r'))[0]),/마지막 확인: \d{2}-\d{2} \d{2}:\d{2} \(1시간 전\)/);
  const run=all(page.body,n=>'data-citation-blog' in n.attrs)[0];
