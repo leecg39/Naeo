@@ -1,0 +1,13 @@
+{
+  "verifiedAt": "2026-10-17T04:03:08.744Z",
+  "checks": [
+    "SSR query and private keyword API",
+    "53 catalog items, golden filter reaches last item before pagination",
+    "Actual HTTP SearchAd and Naver Search adapters on loopback",
+    "Favorite and written simultaneously persisted",
+    "Owned RSS posts produce suggestions",
+    "Delete clears private keyword"
+  ],
+  "providerRequests": 2,
+  "externalProviderVerified": false
+}

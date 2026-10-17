@@ -1,3 +1,4 @@
+import {memberKeywordsMigration} from './keywords/member-schema';
 import {phoneRewardMigration} from './engagement/phone-reward';
 import {openAIConnectionMigration,openAIGenerationMigration} from './openai/schema';
 import {citationMigration} from './citations/schema';
@@ -1129,5 +1130,5 @@ export const migrations = [{
  `},{version:46,name:'ranking_snapshot_metrics',sql:`
  ALTER TABLE ranking_snapshots ADD COLUMN metrics_json TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(metrics_json) AND json_type(metrics_json)='array');
  ALTER TABLE ranking_snapshots ADD COLUMN mate INTEGER NOT NULL DEFAULT 0 CHECK(mate IN(0,1));
- `}];
+ `},memberKeywordsMigration];
 

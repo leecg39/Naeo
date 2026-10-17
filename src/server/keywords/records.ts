@@ -10,10 +10,10 @@ export type Classification={total:number|null;saturation:number|null;golden:bool
  * 새 규칙(원본 기준 미확인): 포화도 = 문서수 ÷ (PC+모바일 월 검색량).
  * 황금 키워드 = 포화도 1 미만이고 검색량 1,000 이상, 선점기회 = 황금이 아니면서 포화도 3 미만이고 검색량 300 이상.
  */
-export function classify(m:Pick<Metric,'pcVolume'|'mobileVolume'|'documentCount'>|null):Classification{
+export function classify(m:{pcVolume:number;mobileVolume:number;documentCount:number|null}|null):Classification{
  if(!m)return{total:null,saturation:null,golden:false,preempt:false,level:null};
  const total=m.pcVolume+m.mobileVolume;
- if(total===0)return{total,saturation:null,golden:false,preempt:false,level:null};
+ if(total===0||m.documentCount===null)return{total,saturation:null,golden:false,preempt:false,level:null};
  const saturation=Math.round(m.documentCount/total*100)/100;
  const golden=saturation<1&&total>=1000;
  const preempt=!golden&&saturation<3&&total>=300;

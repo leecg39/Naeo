@@ -146,3 +146,9 @@
 
 - [x] 첨부 대시보드 PDF를 참고해 종합 점수 게이지·5개 기준 레이더·진행 막대·실제 측정 추세·인용률 도식 구현. [구현·검증](docs/fullstack/evidence/dashboard-visualization-2026-10-17/README.md).
 - [x] `/dashboard` 피드백 반영: 기존 무료 진단과 스캔을 블로그별로 연결, 최신 개선 항목 표시, 블로그 선택·리포트에서 대시보드 이동. 실제 진단 API와 Ego 데스크톱/모바일 흐름 검증. [연결·검증](docs/fullstack/evidence/dashboard-mate-2026-10-17/README.md).
+
+### 2026-10-17 회원 키워드 기능
+
+- [x] `/dashboard/recommendations` 피드백 반영: 개인 키워드 추가·수정·삭제, 블로그 수집 글 기반 후보, 즐겨찾기·작성 완료 독립 저장, 메모·글쓰기 연결 구현.
+- [x] 전체 목록 검색·분류·기간·기회 필터·정렬·25개 페이지 이동과 URL 조건 복원. 데스크톱 표·모바일 카드와 빈 상태 구현.
+- [x] 회원별 권한·중복·500개 한도·수정 충돌, 실제 검색광고/검색 API 조회와 미측정 상태, 기존 즐겨찾기 마이그레이션·개인정보 내보내기·탈퇴 삭제 검증. 전체 514개 테스트, lint/typecheck/build 및 Ego 실제 UI 검증. 외부 네이버 서비스 실측은 자격 증명 미설정으로 미검증. [구현·검증](docs/fullstack/evidence/keyword-workspace-2026-10-17/README.md).

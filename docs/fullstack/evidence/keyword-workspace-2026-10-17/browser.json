@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-17",
+  "browser": "Ego Lite",
+  "isolatedOrigin": "http://localhost:3107",
+  "desktopViewport": [
+    1428,
+    747
+  ],
+  "mobileViewport": [
+    390,
+    844
+  ],
+  "checks": {
+    "privateKeywordAdded": true,
+    "noteSaved": "혼자 여행 동선과 대중교통 팁을 정리하기",
+    "favoriteAndWrittenPersistedAfterReload": true,
+    "stubMetrics": {
+      "pc": 400,
+      "mobile": 1600,
+      "total": 2000,
+      "documents": 400,
+      "saturation": 0.2,
+      "golden": true
+    },
+    "writingPrefilled": "제주 혼자 여행 3박4일",
+    "rssCandidateAddedAndRemovedFromSuggestions": true,
+    "goldenFilterIncludesCatalogItem53": true,
+    "nextPage": {
+      "page": 2,
+      "pages": 3,
+      "rows": 25,
+      "total": 55
+    },
+    "mobileFavoriteAndDelete": true,
+    "deletedCandidateReturnsToSuggestions": true,
+    "emptySearchState": true,
+    "mobileDocumentWidth": 390,
+    "mainDevServerWorkspaceVisible": true,
+    "mainDevServerMetricsConfigured": false
+  },
+  "externalProviderVerified": false,
+  "userDatabaseTestRecordsAdded": false,
+  "cleanup": {
+    "ownedLocalhostSessionCookieRemoved": true,
+    "egoTaskFinished": true,
+    "isolatedServerStopped": true,
+    "temporaryDatabaseRemoved": true
+  }
+}

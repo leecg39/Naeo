@@ -192,10 +192,17 @@ PATCH/DELETE는 version을 요구한다. 계정 ID, role, 잔액은 클라이언
 | `/api/admin/keywords/metrics-collect` | POST | 관리자 | `{keywordIds?}` 없으면 노출 중 최대 50개를 5개씩 묶어 검색광고 keywordstool로 수집, 문서수는 네이버 검색 총건수(미설정 시 직전 값 유지), 출처 `naver_searchad`. 반환 `{measured,missing,failed,documents}` | 403, 404 `KEYWORD_NOT_FOUND`, 503 `SEARCHAD_NOT_CONFIGURED` |
 | `/api/exposures` | GET·POST | 회원 | 키워드 상위 노출: 네이버 블로그 검색 상위 20개에 내 블로그·등록 경쟁 표시. POST `{keyword≤60}`, 회원당 KST 하루 10회, 실패 호출은 한도 미소비·미기록 | 400, 404, 429 `EXPOSURE_QUOTA_EXCEEDED`, 503 `SEARCH_NOT_CONFIGURED` |
 | `/api/exposures/:id` | GET | 회원 | 본인 확인 결과만 | 404 |
-| `/api/recommendations` | GET | 회원 | 노출 키워드 + 최신 지표 + 내 상태. `filter`(all/golden/preempt/written), `period`(all/week/month), `q`, 페이지, 요약(전체·황금·선점·작성) | 401, 400 |
+| `/api/recommendations` | GET | 회원 | 공개 추천 + 본인 개인 키워드 + 최신 지표. `filter`(all/golden/preempt/saved/written/unwritten/personal), `period`(all/week/month), `q`, `category`, `sort`, 페이지. 전체 데이터에서 필터·정렬 후 페이지 처리 | 401, 400 |
+| `/api/recommendations` | POST | 회원 | `{phrase,category?,note?,favorite?}` 본인에게만 보이는 키워드 추가. 키워드 60자·분류 30자·메모 500자, 회원당 500개·시간당 생성 100회 | 400, 409 `KEYWORD_EXISTS`·`KEYWORD_LIMIT`, 429 |
+| `/api/recommendations/suggestions` | GET | 회원 | 본인 블로그 최근 200개 글의 태그·제목에서 최대 12개 후보. 이미 등록된 키워드 제외. `{phrase,category,postTitle,postCount}` | 401 |
+| `/api/recommendations/:id` | PATCH | 회원 | `{version,phrase?,category?,note?,favorite?,written?}`. 개인 키워드만 이름·분류 수정 가능. 즐겨찾기와 작성 완료는 독립 상태 | 404, 409 `VERSION_CONFLICT`, 400 `CATALOG_READ_ONLY` |
+| `/api/recommendations/:id` | DELETE | 회원(본인) | 개인 키워드 삭제 `{version}`. 공개 추천 삭제 불가 | 404, 409, 400 `CATALOG_READ_ONLY` |
+| `/api/recommendations/:id/metrics` | POST | 회원(본인) | 개인 키워드 `{version}`. 실제 네이버 검색광고 검색량 + 검색 API 문서수 조회. 시간당 20회. 조회 중 수정·삭제 시 덮어쓰지 않음 | 404, 409, 429, 502, 503 `SEARCHAD_NOT_CONFIGURED` |
 | `/api/recommendations/:keywordId/state` | PUT | 회원 | `{status:'written'|'saved'|null}` 작성 완료 표시·해제(회원별) | 404(숨김·없음) |
 
-분류(새 규칙): 포화도 = 문서수 ÷ (PC+모바일 월 검색량). 황금 = 포화도 1 미만·검색량 1,000 이상, 선점기회 = 황금 아님·포화도 3 미만·검색량 300 이상. 지표가 없거나 검색량 0이면 분류하지 않는다. 화면 `/dashboard/recommendations`는 서버가 행·모바일 카드·요약을 DB로 그리고(캡처 계정 키워드 제거), 검색(`?q=`)·페이지(50개)는 서버, 황금·선점·기간 필터와 정렬은 화면에서 처리한다.
+분류(새 규칙): 포화도 = 문서수 ÷ (PC+모바일 월 검색량). 황금 = 포화도 1 미만·검색량 1,000 이상, 선점기회 = 황금 아님·포화도 3 미만·검색량 300 이상. 검색량 0 또는 검색량·문서수 미확인이면 기회 등급을 분류하지 않는다. 미확인 값은 `null`/`—`이며 문서수 실패를 0으로 대체하지 않는다. 검색광고 미설정/실패/결과 없음은 기존 지표를 유지하고, 이름을 다른 키워드로 바꾸면 기존 지표를 비운다.
+
+2026-10-17 갱신: `/dashboard/recommendations`는 SSR 초기 데이터와 회원 API를 사용하는 React 화면이다. 25개씩 페이지를 나누며 검색·분류·기간·기회·작성 상태·정렬을 전체 데이터에 적용한다. 정렬은 `newest/phrase/total_desc/total_asc/documents_asc/saturation_asc`, 미측정은 뒤로 배치한다. 조건은 URL에 보존한다. 개인 키워드와 공개 추천이 같은 문구면 해당 회원에게는 개인 키워드를 우선 표시한다. 개인 중복은 NFKC·공백 제거·소문자 기준이다. 마이그레이션 47은 `member_keywords`와 `saved_keywords.favorite`를 추가하고 기존 saved 상태를 즐겨찾기로 보존한다. 개인 데이터 내보내기·계정 삭제에도 포함된다. [구현·검증 증거](evidence/keyword-workspace-2026-10-17/README.md).
 
 ## P3.6 경쟁 블로그·오늘 할 일 API (2026-10-13)
 

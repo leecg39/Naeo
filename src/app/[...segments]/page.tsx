@@ -108,7 +108,7 @@ export default async function Page({params,searchParams}:Props){
   const dashEvent=path.match(/^\/dashboard\/events\/([a-z0-9][a-z0-9-]{1,59})$/)?.[1];
   if(path.startsWith('/dashboard/events/')){const detail=dashEvent?await buildEventDetailPage(contentDatabase(),dashEvent,{dashboard:true}):null;if(!detail)notFound();return <>{memberView(detail)}<EventEntryPanel/></>;}
   if(path==='/dashboard/write')return <><PageExperience data={await buildWritingPage(database(),user.id)}/><PageAnnouncements path={path}/><DraftsWorkspace/></>;
-  if(path==='/dashboard/recommendations'){const sp=await searchParams;return memberView(await buildRecommendationsPage(database(),user.id,{q:first(sp.q),page:first(sp.page)}));}
+  if(path==='/dashboard/recommendations'){const sp=await searchParams;return memberView(await buildRecommendationsPage(database(),user.id,flat(sp)));}
  }
  if(path.startsWith('/updates/'))permanentRedirect('/updates?focus='+encodeURIComponent(path.slice(9)));
  if(path==='/admin'||path.startsWith('/admin/')){await adminPageUser(path);notFound();}

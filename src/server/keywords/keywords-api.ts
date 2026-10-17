@@ -4,6 +4,7 @@ import {requireAdmin,type User} from '../auth';
 import {body,json,rateLimit} from '../http';
 import {addKeywordMetric,createKeyword,deleteKeyword,deleteKeywordMetric,getAdminKeyword,listAdminKeywords,updateKeyword} from './admin-keywords';
 import {collectKeywordMetrics} from './collect';
+import {createMemberKeyword,updateMemberKeyword,deleteMemberKeyword,keywordSuggestions,measureMemberKeyword} from './member-keywords';
 import {listRecommendations,setKeywordState} from './recommendations';
 
 const ID='([a-f0-9-]{36})';
@@ -14,6 +15,15 @@ export async function keywordsApi(db:Database,request:Request,user:User):Promise
  const {pathname:path,searchParams}=new URL(request.url),method=request.method;
  const input=()=>body(request,anyJson);
  if(path==='/api/recommendations'&&method==='GET')return json(listRecommendations(db,user.id,Object.fromEntries(searchParams)));
+ if(path==='/api/recommendations'&&method==='POST'){rateLimit(db,`member-keyword-create:${user.id}`,100,3600000);return json({data:createMemberKeyword(db,user.id,await input())},201);}
+ if(path==='/api/recommendations/suggestions'&&method==='GET')return json({data:keywordSuggestions(db,user.id)});
+ const member=path.match(new RegExp(`^/api/recommendations/${ID}$`));
+ if(member){
+  if(method==='PATCH')return json({data:updateMemberKeyword(db,user.id,member[1],await input())});
+  if(method==='DELETE')return json({data:deleteMemberKeyword(db,user.id,member[1],await input())});
+ }
+ const measure=path.match(new RegExp(`^/api/recommendations/${ID}/metrics$`));
+ if(measure&&method==='POST')return json({data:await measureMemberKeyword(db,user.id,measure[1],await input())});
  const state=path.match(new RegExp(`^/api/recommendations/${ID}/state$`));
  if(state&&method==='PUT'){rateLimit(db,`keyword-state:${user.id}`,300,15*60_000);return json({data:setKeywordState(db,user.id,state[1],await input())});}
  if(!path.startsWith('/api/admin/keywords'))return null;

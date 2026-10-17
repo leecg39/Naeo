@@ -13,7 +13,7 @@ const el=(tag:string,attrs:Record<string,string>,children:El['children']):El=>({
 const paragraph=(text:string)=>el('p',{},[text]);
 function recommendations(db:Database,userId:string,now:number):El[]{
  const rows=listRecommendations(db,userId,{pageSize:10},now).data;
- return [el('h2',{style:'font-size:18px;margin:0 0 12px'},['추천 키워드']),paragraph('등록된 공개 키워드입니다. 선택하면 글감으로 사용할 수 있습니다.'),
+ return [el('h2',{style:'font-size:18px;margin:0 0 12px'},['추천 키워드']),paragraph('공개 추천과 내가 추가한 키워드입니다. 선택하면 글감으로 사용할 수 있습니다.'),
   ...(rows.length?rows.map(r=>el('a',{href:`/dashboard/write?keyword=${encodeURIComponent(r.phrase)}`,style:'display:block;padding:8px 0;color:#03c75a;overflow-wrap:anywhere'},[r.phrase])):[paragraph('등록된 추천 키워드가 없습니다.')]),
   el('a',{href:'/dashboard/recommendations',style:'display:block;margin-top:12px;color:#03c75a'},['키워드 추천 전체 보기 →'])];
 }
